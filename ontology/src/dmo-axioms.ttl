@@ -1,0 +1,394 @@
+# S2 —— 手写 OWL 公理层。
+#
+# 这个文件是 docs/DESIGN.md「学习价值点」表格的落地处。build_tbox.py 生成的是骨架，
+# 这里写的是 ER 图里根本没有、也不可能机械推导出来的东西。
+#
+# §2.3 决策：双轨制。
+#   方案 B（punning）—— DiabetesType / Complication / ComplicationStage 的实例
+#                       同时被断言为 owl:Class，因此可以写 subClassOf 与 disjointWith。
+#   方案 A（SKOS）  —— LabTest / DrugClass / Symptom / RiskFactor / Device /
+#                       LifestyleIntervention 的实例是 skos:Concept。
+#
+# ⚠️ 验收前提：disjointWith 的一致性检查需要 HermiT（Java 17）。
+#    owlrl 与 GraphDB 的 owl2-rl 都只做物化，不检测不一致——公理写得出来，
+#    但「T1DM ∧ T2DM 患者被抓出来」这条 M2 验收要等 Java 17 到位才能跑。
+
+@prefix dmo:   <https://example.org/dmo#> .
+@prefix dmoid: <https://example.org/dmo/id/> .
+@prefix dmomed: <https://example.org/dmo/id/medication/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# ════════════════════════════════════════════════════════════════════
+# 1. 方案 B —— 分型的类层次与互斥
+#    T1DM 等既是 dmo:DiabetesType 的个体，又是 owl:Class（OWL 2 punning）。
+#    同一个 IRI 两种用法，OWL 2 DL 合法。
+# ════════════════════════════════════════════════════════════════════
+
+dmo:Diabetes a owl:Class ;
+    rdfs:label "Diabetes" ;
+    rdfs:comment "所有糖尿病分型的上位类。Prediabetes 刻意不作为它的子类——前期不是糖尿病。" .
+
+dmo:GlucoseMetabolismDisorder a owl:Class ;
+    rdfs:label "GlucoseMetabolismDisorder" ;
+    rdfs:comment "糖代谢异常的总类，同时涵盖 Diabetes 与 Prediabetes。" .
+
+dmo:Diabetes rdfs:subClassOf dmo:GlucoseMetabolismDisorder .
+
+dmoid:T1DM a dmo:DiabetesType, owl:Class ;
+    rdfs:subClassOf dmo:Diabetes ;
+    rdfs:label "Type 1 Diabetes" ;
+    skos:altLabel "type 1 diabetes", "T1DM", "type-1-diabetes" ;
+    dmo:diabetesTypeCode "T1DM" ;
+    dmo:insulinRequired true .
+
+dmoid:T2DM a dmo:DiabetesType, owl:Class ;
+    rdfs:subClassOf dmo:Diabetes ;
+    rdfs:label "Type 2 Diabetes" ;
+    skos:altLabel "type 2 diabetes", "T2DM", "type-2-diabetes" ;
+    dmo:diabetesTypeCode "T2DM" ;
+    dmo:insulinRequired false .
+
+dmoid:GDM a dmo:DiabetesType, owl:Class ;
+    rdfs:subClassOf dmo:Diabetes ;
+    rdfs:label "Gestational Diabetes" ;
+    skos:altLabel "gestational diabetes", "GDM" ;
+    dmo:diabetesTypeCode "GDM" .
+
+dmoid:MODY a dmo:DiabetesType, owl:Class ;
+    rdfs:subClassOf dmo:Diabetes ;
+    rdfs:label "Monogenic Diabetes" ;
+    skos:altLabel "monogenic diabetes", "MODY", "maturity-onset diabetes of the young" ;
+    dmo:diabetesTypeCode "MODY" .
+
+dmoid:Prediabetes a dmo:DiabetesType, owl:Class ;
+    rdfs:subClassOf dmo:GlucoseMetabolismDisorder ;
+    rdfs:label "Prediabetes" ;
+    skos:altLabel "prediabetes", "insulin resistance" ;
+    dmo:diabetesTypeCode "PREDIABETES" ;
+    rdfs:comment "刻意不是 Diabetes 的子类。把前期归进糖尿病是本领域最常见的建模错误。" .
+
+# ── 互斥：M2 的验收点 ────────────────────────────────────────────────
+# 一个患者同时被断言 T1DM 和 T2DM 时，DL 推理机应报不一致。
+[] a owl:AllDisjointClasses ;
+    owl:members ( dmoid:T1DM dmoid:T2DM dmoid:GDM dmoid:MODY dmoid:Prediabetes ) .
+
+# hasDiabetesType 的函数性由 build_tbox.py 从 many-to-one 基数机械生成，
+# 此处不重复声明。两者叠加：断言两个分型 ⟹ 两个分型被推为 sameAs ⟹ 与互斥矛盾。
+
+
+# ════════════════════════════════════════════════════════════════════
+# 2. owl:equivalentClass —— 自动分类，以及它做不到的地方
+# ════════════════════════════════════════════════════════════════════
+
+dmo:DiabetesPatient a owl:Class ;
+    rdfs:label "DiabetesPatient" ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            dmo:Patient
+            [ a owl:Restriction ;
+              owl:onProperty dmo:hasDiabetesType ;
+              owl:someValuesFrom dmo:Diabetes ]
+        )
+    ] .
+
+dmo:InsulinDependentPatient a owl:Class ;
+    rdfs:label "InsulinDependentPatient" ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            dmo:Patient
+            [ a owl:Restriction ;
+              owl:onProperty dmo:hasDiabetesType ;
+              owl:hasValue dmoid:T1DM ]
+        )
+    ] .
+
+# ⚠️ 做不到的那一半：
+#   「∃hasObservation.(HbA1c ⊓ resultValue ≥ 6.5) ⟹ DiabetesPatient」
+#   属于 datatype range restriction，OWL-RL profile 不支持，GraphDB 的 owl2-rl
+#   同样推不出来（见 SEMANTIC-LAYER-PLAN §1 与 DESIGN.md 陷阱 #3）。
+#   数值分类一律由 ontology/rules/*.rq 的 SPARQL CONSTRUCT 完成，
+#   消费 DiagnosticThreshold 实例，不写进这里。
+
+
+# ════════════════════════════════════════════════════════════════════
+# 3. owl:propertyChainAxiom —— 受累器官
+#    ER 图里 affectedOrgan 是 enum 数据属性，属性链需要对象属性，
+#    因此器官这一层完全是手写引入的。
+# ════════════════════════════════════════════════════════════════════
+
+dmo:Organ a owl:Class ; rdfs:label "Organ" .
+
+dmoid:Kidney a dmo:Organ ; rdfs:label "Kidney" .
+dmoid:Eye    a dmo:Organ ; rdfs:label "Eye" .
+dmoid:Nerve  a dmo:Organ ; rdfs:label "Nerve" .
+dmoid:Heart  a dmo:Organ ; rdfs:label "Heart" .
+dmoid:Vessel a dmo:Organ ; rdfs:label "Vessel" .
+dmoid:Foot   a dmo:Organ ; rdfs:label "Foot" .
+dmoid:Brain  a dmo:Organ ; rdfs:label "Brain" .
+dmoid:Mouth  a dmo:Organ ; rdfs:label "Mouth" .
+
+dmo:affectsOrgan a owl:ObjectProperty ;
+    rdfs:label "affectsOrgan" ;
+    rdfs:domain dmo:Complication ;
+    rdfs:range dmo:Organ .
+
+dmo:hasAffectedOrgan a owl:ObjectProperty ;
+    rdfs:label "hasAffectedOrgan" ;
+    rdfs:domain dmo:Patient ;
+    rdfs:range dmo:Organ ;
+    owl:propertyChainAxiom ( dmo:hasComplication dmo:affectsOrgan ) ;
+    rdfs:comment "属性链：患者有并发症 ∘ 并发症累及器官 ⟹ 患者的受累器官。验收：查所有 hasAffectedOrgan = Kidney 的患者，应命中 DKD 患者。" .
+
+
+# ════════════════════════════════════════════════════════════════════
+# 4. owl:TransitiveProperty —— 并发症分期的严重度序
+# ════════════════════════════════════════════════════════════════════
+
+dmo:worseThan a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "worseThan" ;
+    rdfs:domain dmo:ComplicationStage ;
+    rdfs:range dmo:ComplicationStage ;
+    rdfs:comment "传递闭包：G4 worseThan G3、G3 worseThan G2 ⟹ G4 worseThan G2。" .
+
+dmoid:CKD-G1 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "CKD-G1" ; rdfs:label "CKD G1" ; dmo:stageOrder 1 .
+dmoid:CKD-G2 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "CKD-G2" ; rdfs:label "CKD G2" ; dmo:stageOrder 2 ;
+    dmo:worseThan dmoid:CKD-G1 .
+dmoid:CKD-G3a a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "CKD-G3a" ; rdfs:label "CKD G3a" ; dmo:stageOrder 3 ;
+    dmo:worseThan dmoid:CKD-G2 .
+dmoid:CKD-G3b a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "CKD-G3b" ; rdfs:label "CKD G3b" ; dmo:stageOrder 4 ;
+    dmo:worseThan dmoid:CKD-G3a .
+dmoid:CKD-G4 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "CKD-G4" ; rdfs:label "CKD G4" ; dmo:stageOrder 5 ;
+    dmo:worseThan dmoid:CKD-G3b .
+dmoid:CKD-G5 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "CKD-G5" ; rdfs:label "CKD G5" ; dmo:stageOrder 6 ;
+    dmo:worseThan dmoid:CKD-G4 ;
+    rdfs:comment "肾衰竭：肾功能低于正常的 15%。" .
+
+dmoid:DR-NPDR a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "DR-NPDR" ;
+    rdfs:label "Nonproliferative Diabetic Retinopathy" ;
+    skos:altLabel "NPDR", "nonproliferative diabetic retinopathy" ;
+    dmo:stageOrder 1 .
+dmoid:DR-PDR a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "DR-PDR" ;
+    rdfs:label "Proliferative Diabetic Retinopathy" ;
+    skos:altLabel "PDR", "proliferative diabetic retinopathy" ;
+    dmo:stageOrder 2 ;
+    dmo:worseThan dmoid:DR-NPDR .
+
+dmoid:Hypo-L1 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "HYPO-L1" ; rdfs:label "Hypoglycemia Level 1" ; dmo:stageOrder 1 .
+dmoid:Hypo-L2 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "HYPO-L2" ; rdfs:label "Hypoglycemia Level 2" ; dmo:stageOrder 2 ;
+    dmo:worseThan dmoid:Hypo-L1 .
+dmoid:Hypo-L3 a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "HYPO-L3" ; rdfs:label "Severe Hypoglycemia" ; dmo:stageOrder 3 ;
+    dmo:worseThan dmoid:Hypo-L2 .
+
+
+# ════════════════════════════════════════════════════════════════════
+# 5. 并发症的类层次（方案 B）
+# ════════════════════════════════════════════════════════════════════
+
+dmo:AcuteComplication a owl:Class ; rdfs:subClassOf dmo:Complication ; rdfs:label "AcuteComplication" .
+dmo:ChronicComplication a owl:Class ; rdfs:subClassOf dmo:Complication ; rdfs:label "ChronicComplication" .
+dmo:AcuteComplication owl:disjointWith dmo:ChronicComplication .
+
+dmoid:DKD dmo:complicationCode "DKD" .
+dmoid:DKD a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Diabetic Kidney Disease" ;
+    skos:altLabel "diabetic nephropathy", "DKD", "diabetic kidney disease" ;
+    dmo:affectsOrgan dmoid:Kidney .
+dmoid:DR dmo:complicationCode "DR" .
+dmoid:DR a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Diabetic Retinopathy" ;
+    skos:altLabel "diabetic retinopathy", "DR" ;
+    dmo:affectsOrgan dmoid:Eye .
+dmoid:DME dmo:complicationCode "DME" .
+dmoid:DME a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Diabetic Macular Edema" ;
+    skos:altLabel "diabetic macular edema", "DME", "macular edema" ;
+    dmo:affectsOrgan dmoid:Eye .
+dmoid:DPN dmo:complicationCode "DPN" .
+dmoid:DPN a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Diabetic Peripheral Neuropathy" ;
+    skos:altLabel "peripheral neuropathy", "diabetic neuropathy", "DPN" ;
+    dmo:affectsOrgan dmoid:Nerve .
+dmoid:DFU dmo:complicationCode "DFU" .
+dmoid:DFU a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Diabetic Foot Ulcer" ;
+    skos:altLabel "foot ulcer", "diabetic foot", "DFU" ;
+    dmo:affectsOrgan dmoid:Foot .
+dmoid:CVD dmo:complicationCode "CVD" .
+dmoid:CVD a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Cardiovascular Disease" ;
+    skos:altLabel "heart disease", "cardiovascular disease", "CVD" ;
+    dmo:affectsOrgan dmoid:Heart, dmoid:Vessel .
+
+dmoid:Hypoglycemia dmo:complicationCode "HYPO" .
+dmoid:Hypoglycemia a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:AcuteComplication ;
+    rdfs:label "Hypoglycemia" ;
+    skos:altLabel "low blood sugar", "low blood glucose", "hypoglycemia" .
+dmoid:DKA dmo:complicationCode "DKA" .
+dmoid:DKA a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:AcuteComplication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    skos:altLabel "diabetic ketoacidosis", "DKA" .
+dmoid:HHS dmo:complicationCode "HHS" .
+dmoid:HHS a dmo:Complication, owl:Class ; rdfs:subClassOf dmo:AcuteComplication ;
+    rdfs:label "Hyperosmolar Hyperglycemic State" ;
+    skos:altLabel "HHS", "hyperosmolar hyperglycemic state" .
+
+# 分期挂到对应并发症
+dmoid:DKD dmo:hasStage dmoid:CKD-G1, dmoid:CKD-G2, dmoid:CKD-G3a, dmoid:CKD-G3b, dmoid:CKD-G4, dmoid:CKD-G5 .
+dmoid:DR dmo:hasStage dmoid:DR-NPDR, dmoid:DR-PDR .
+dmoid:Hypoglycemia dmo:hasStage dmoid:Hypo-L1, dmoid:Hypo-L2, dmoid:Hypo-L3 .
+
+
+# ════════════════════════════════════════════════════════════════════
+# 6. 外部术语映射
+#
+# ⚠️ 下面的编码是**人工填写的初稿，尚未经 OLS4 核验**。
+#    imports_fetch.py 落地后必须逐条比对；核验前不要在任何对外输出里引用。
+#    不确定的一律用 skos:closeMatch，只有高置信的才用 skos:exactMatch。
+# ════════════════════════════════════════════════════════════════════
+
+dmoid:T1DM skos:exactMatch <http://purl.obolibrary.org/obo/MONDO_0005147> .
+dmoid:T2DM skos:exactMatch <http://purl.obolibrary.org/obo/MONDO_0005148> .
+dmoid:GDM  skos:closeMatch <http://purl.obolibrary.org/obo/MONDO_0005406> .
+
+# LOINC —— 只存 code + label 的引用，不分发全表（许可要求，见 DESIGN.md）
+dmoid:LabTest-A1C  skos:exactMatch <https://loinc.org/4548-4> ; skos:prefLabel "Hemoglobin A1c" .
+dmoid:LabTest-FPG  skos:closeMatch <https://loinc.org/1558-6> ; skos:prefLabel "Fasting glucose" .
+dmoid:LabTest-UACR skos:closeMatch <https://loinc.org/9318-7> ; skos:prefLabel "Urine albumin/creatinine ratio" .
+
+# ATC —— WHO 版权，同样只存引用
+dmoid:DrugClass-Biguanide skos:closeMatch <https://www.whocc.no/atc_ddd_index/?code=A10BA> .
+dmoid:DrugClass-SGLT2i    skos:closeMatch <https://www.whocc.no/atc_ddd_index/?code=A10BK> .
+dmoid:DrugClass-GLP1RA    skos:closeMatch <https://www.whocc.no/atc_ddd_index/?code=A10BJ> .
+dmoid:DrugClass-SU        skos:closeMatch <https://www.whocc.no/atc_ddd_index/?code=A10BB> .
+dmoid:DrugClass-DPP4i     skos:closeMatch <https://www.whocc.no/atc_ddd_index/?code=A10BH> .
+dmoid:DrugClass-TZD       skos:closeMatch <https://www.whocc.no/atc_ddd_index/?code=A10BG> .
+
+
+# ════════════════════════════════════════════════════════════════════
+# 7. ⚠️ 未解决：抽取产物与规范个体的 URI 对不上
+#
+# semantic_extract.py 按模型给的 canonicalName 铸 URI：
+#     dmoid:diabetesType/type-1-diabetes
+# 本文件按规范编码铸 URI：
+#     dmoid:T1DM
+# 两者是不同的资源，不会自动合并。
+#
+# 上面每个规范个体都带了 skos:altLabel 覆盖常见表面形式，
+# 对齐动作留给 ontology/rules/align-extracted.rq：
+#     以 rdfs:label / skos:altLabel 归一化匹配，CONSTRUCT 出 owl:sameAs，
+#     写进 urn:dmo:inferred 图。
+# 在那条规则写出来之前，抽取图与公理图是两座孤岛。
+# 这就是 ontology/tools/README.md 已知局限 #2（实体消解）的具体代价。
+# ════════════════════════════════════════════════════════════════════
+
+
+# ════════════════════════════════════════════════════════════════════
+# 8. 待办 3 —— 「已确诊但未分型」
+#
+# 诊断切点只说明「是糖尿病」，不说明是哪一型（分型靠自身抗体 / 基因检测）。
+# 之前把 A1C≥6.5 等 4 条结论一律指向 T2DM 是**错的近似**。
+#
+# ⚠️ 刻意**不**放进 AllDisjointClasses：未分型病例日后可能被归为 T1DM 或 T2DM，
+#    断言互斥会让「先记未分型、后补分型」这个正常临床流程推出不一致。
+# ════════════════════════════════════════════════════════════════════
+
+dmoid:DM-Unspecified a dmo:DiabetesType, owl:Class ;
+    rdfs:subClassOf dmo:Diabetes ;
+    rdfs:label "Diabetes, Type Unspecified" ;
+    skos:altLabel "diabetes", "diabetes mellitus", "未分型糖尿病" ;
+    dmo:diabetesTypeCode "DM-UNSPEC" ;
+    rdfs:comment "诊断阈值命中后的默认结论。与 T1DM/T2DM 等不互斥——它表示「还没分型」，不是第六种类型。" .
+
+
+# ════════════════════════════════════════════════════════════════════
+# 9. 待办 5 —— 补齐 seed，提高对齐覆盖率
+#    （补概念，不放宽匹配：错对是数据污染，漏对只是少条边）
+# ════════════════════════════════════════════════════════════════════
+
+dmoid:CKD a dmo:Complication, owl:Class ;
+    dmo:complicationCode "CKD" ;
+    rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Chronic Kidney Disease" ;
+    skos:altLabel "chronic kidney disease", "CKD" ;
+    dmo:affectsOrgan dmoid:Kidney ;
+    dmo:definition "The two key markers for chronic kidney disease (CKD) are urine albumin and estimated glomerular filtration rate (eGFR)." .
+dmoid:DKD rdfs:subClassOf dmoid:CKD .
+
+dmoid:KidneyFailure a dmo:Complication, owl:Class ;
+    dmo:complicationCode "ESRD" ;
+    rdfs:subClassOf dmoid:CKD ;
+    rdfs:label "Kidney Failure" ;
+    skos:altLabel "kidney failure", "ESRD", "end-stage renal disease" ;
+    dmo:affectsOrgan dmoid:Kidney ;
+    dmo:definition "Kidney failure means that your kidneys have lost most of their ability to function—less than 15 percent of normal kidney function." .
+
+# 白蛋白尿分期 —— 抽取时模型把它归成了 ComplicationStage，seed 里原本没有
+dmoid:Microalbuminuria a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "ALB-MICRO" ; rdfs:label "Microalbuminuria" ;
+    skos:altLabel "microalbuminuria" ; dmo:stageOrder 1 ;
+    dmo:stageCriteria "urine albumin levels not detected by a dipstick test, i.e. 30 mg/g–300 mg/g" .
+dmoid:Macroalbuminuria a dmo:ComplicationStage, owl:Class ;
+    dmo:stageCode "ALB-MACRO" ; rdfs:label "Macroalbuminuria" ;
+    skos:altLabel "macroalbuminuria" ; dmo:stageOrder 2 ;
+    dmo:worseThan dmoid:Microalbuminuria ;
+    dmo:stageCriteria "albumin levels more than 300 mg/g" .
+dmoid:CKD dmo:hasStage dmoid:Microalbuminuria, dmoid:Macroalbuminuria .
+
+
+# ════════════════════════════════════════════════════════════════════
+# 10. 药物类别与禁忌（原在 synthetic-patients.ttl，属分层错误，已移来）
+# ════════════════════════════════════════════════════════════════════
+dmoid:DrugClass-SGLT2i a dmo:DrugClass ;
+    dmo:drugClassCode "SGLT2I" ; rdfs:label "SGLT2 Inhibitors" ;
+    dmo:adminRoute "Oral" ; dmo:hypoglycemiaRisk "Low" ; dmo:weightEffect "Loss" ;
+    dmo:mechanism "These pills affect the kidney to increase the amount of sugar that goes out in the urine." .
+
+dmoid:DrugClass-Biguanide a dmo:DrugClass ;
+    dmo:drugClassCode "BIGUANIDE" ; rdfs:label "Biguanides" ;
+    dmo:adminRoute "Oral" ; dmo:hypoglycemiaRisk "Low" ; dmo:weightEffect "Neutral" .
+
+dmomed:empagliflozin a dmo:Medication ;
+    dmo:medicationCode "empagliflozin" ; rdfs:label "empagliflozin" ;
+    dmo:isInsulin false ; dmo:insulinAction "NotApplicable" ;
+    dmo:belongsToDrugClass dmoid:DrugClass-SGLT2i .
+
+dmomed:metformin a dmo:Medication ;
+    dmo:medicationCode "metformin" ; rdfs:label "metformin" ;
+    dmo:isInsulin false ; dmo:insulinAction "NotApplicable" ;
+    dmo:belongsToDrugClass dmoid:DrugClass-Biguanide .
+
+# schema 里 Patient 只能 hasComplication → Complication，接不到 ComplicationStage，
+# 所以「重度肾病/透析」建成独立 Complication 而非 DKD 的一个分期。
+# 这也贴合原文：kidney failure 有自己的定义（肾功能<正常 15%）。
+
+dmoid:contra-SGLT2i-ESRD a dmo:Contraindication ;
+    dmo:contraCode "SGLT2I-SEVERE-CKD" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "severe kidney problems or on dialysis" ;
+    dmo:rationale "Do not take these drugs if you have severe kidney problems or are on dialysis." ;
+    dmo:triggeredByCondition dmoid:KidneyFailure .
+dmoid:DrugClass-SGLT2i dmo:hasContraindication dmoid:contra-SGLT2i-ESRD .
+
+# ⚠️ 二甲双胍**没有**建绝对禁忌：语料原文只有定性表述
+#    「Talk to your doctor about your kidney health」「people with kidney problems
+#     may have a rare side effect called lactic acidosis」，
+#    没有任何 eGFR 数值切点。补 eGFR<30 = 编造出处。
+#    P002 就是用来证明安全形状**不会**在这里误报的。
+

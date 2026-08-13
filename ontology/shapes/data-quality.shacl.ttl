@@ -1,0 +1,70 @@
+# 数据质量约束 —— 闭世界校验，弥补 OWL 的开放世界假设。
+# OWL 永远不会说「这个患者缺 HbA1c」，只会说「未知」；SHACL 才能说「必须有」。
+# 见 docs/DESIGN.md 陷阱 #1。
+
+@prefix dmo:  <https://example.org/dmo#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dqs:  <https://example.org/dmo/shape/dq/> .
+
+dqs:LabResultShape a sh:NodeShape ;
+    sh:targetClass dmo:LabResult ;
+    sh:property [
+        sh:path dmo:resultValue ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "检验结果必须有数值。" ] ;
+    sh:property [
+        sh:path dmo:resultUnit ; sh:minCount 1 ;
+        sh:message "检验结果必须带单位。无单位的数值在临床上没有意义，也无法与阈值比对。" ] ;
+    sh:property [
+        sh:path dmo:measuredByTest ; sh:minCount 1 ;
+        sh:message "检验结果必须指明对应的检验项目，否则无法定位适用阈值。" ] ;
+    # 单位一致性：结果单位必须等于检验项定义的单位
+    sh:sparql [
+        sh:message "resultUnit 与 LabTest.unitOfMeasure 不一致 —— 单位错配会让阈值判断整体失效。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this ?value WHERE {
+              $this <https://example.org/dmo#resultUnit> ?value .
+              $this <https://example.org/dmo#measuredByTest> ?t .
+              ?t <https://example.org/dmo#unitOfMeasure> ?expected .
+              FILTER(?value != ?expected)
+            }""" ] .
+
+dqs:DiagnosticThresholdShape a sh:NodeShape ;
+    sh:targetClass dmo:DiagnosticThreshold ;
+    sh:property [
+        sh:path dmo:boundUnit ; sh:minCount 1 ;
+        sh:message "阈值必须带单位。" ] ;
+    sh:property [
+        sh:path dmo:citation ; sh:minCount 1 ;
+        sh:message "阈值必须带原文引用 —— 无出处的临床数字不可用。" ] ;
+    sh:property [
+        sh:path dmo:populationContext ; sh:minCount 1 ;
+        sh:in ( "NonPregnant" "Pregnant" "Child" "Any" ) ;
+        sh:message "阈值必须声明适用人群：妊娠期与非妊娠期 cutoff 不同。" ] ;
+    sh:sparql [
+        sh:message "阈值既无下界也无上界，等于没有约束。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              FILTER NOT EXISTS { $this <https://example.org/dmo#lowerBound> ?l }
+              FILTER NOT EXISTS { $this <https://example.org/dmo#upperBound> ?u }
+            }""" ] .
+
+dqs:GuidelineSourceShape a sh:NodeShape ;
+    sh:targetClass dmo:GuidelineSource ;
+    sh:property [
+        sh:path dmo:sha256 ; sh:minCount 1 ; sh:pattern "^[0-9a-f]{64}$" ;
+        sh:message "出处必须带 sha256，否则知识文件更新时无法判定下游三元组过期。" ] ;
+    sh:property [
+        sh:path dmo:localFile ; sh:minCount 1 ;
+        sh:message "出处必须指向本仓库的采集副本。" ] .
+
+dqs:PatientShape a sh:NodeShape ;
+    sh:targetClass dmo:Patient ;
+    sh:property [
+        sh:path dmo:patientId ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "患者必须有唯一标识。" ] ;
+    sh:property [
+        sh:path dmo:hasDiabetesType ; sh:maxCount 1 ;
+        sh:message "一个患者同一时点只能有一个分型（T1DM 与 T2DM 互斥）。" ] .

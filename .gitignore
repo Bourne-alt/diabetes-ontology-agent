@@ -1,0 +1,9 @@
+ontology/knowledges/
+demo/
+venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+ontology/dist/extract/

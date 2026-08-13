@@ -1,0 +1,1903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xml:base="http://example.org/ontology/diabetes-care-ontology-v2/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:ont="http://example.org/ontology/diabetes-care-ontology-v2/">
+
+    <owl:Ontology rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/">
+        <rdfs:label>Diabetes Care Ontology V2</rdfs:label>
+        <rdfs:comment>糖尿病领域 Fabric IQ 业务语义图 V2。采用以患者事实事件为中心的 care-chain 模式，串联就诊、临床观察、诊断、检验评估、用药记录、指南推荐与精确出处；复杂 OWL 公理、SHACL 安全约束和 SPARQL 规则仍由独立语义层维护。仅用于技术学习，不构成医疗建议，不含任何剂量信息。</rdfs:comment>
+    </owl:Ontology>
+
+    <!-- ===================== -->
+    <!-- Entity Types (Classes) -->
+    <!-- ===================== -->
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Patient">
+        <rdfs:label>Patient</rdfs:label>
+        <rdfs:comment>接受糖尿病筛查、诊断或管理的个体。只保存稳定人口学属性；会随时间变化的临床事实通过就诊、观察、诊断和用药记录表达。</rdfs:comment>
+        <ont:icon>👤</ont:icon>
+        <ont:color>#0078D4</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType">
+        <rdfs:label>DiabetesType</rdfs:label>
+        <rdfs:comment>糖尿病分型术语节点（T1DM / T2DM / GDM / 单基因 / 前期 / 继发性）。ER 模型中分型是实例而非子类，OWL 子类层次另在 Turtle TBox 中维护。</rdfs:comment>
+        <ont:icon>🩸</ont:icon>
+        <ont:color>#D13438</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter">
+        <rdfs:label>ClinicalEncounter</rdfs:label>
+        <rdfs:comment>一次就诊/接触事件，是检验结果的时间锚点。妊娠相关就诊记录孕周。</rdfs:comment>
+        <ont:icon>🏥</ont:icon>
+        <ont:color>#0078D4</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/LabTest">
+        <rdfs:label>LabTest</rdfs:label>
+        <rdfs:comment>检验项目定义（术语层），如 A1C、FPG、OGTT-2h、随机血糖、UACR、eGFR、尿酮体。</rdfs:comment>
+        <ont:icon>🧪</ont:icon>
+        <ont:color>#008272</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/LabResult">
+        <rdfs:label>LabResult</rdfs:label>
+        <rdfs:comment>患者在特定时间完成的一次检验结果。只保存原始测量事实；诊断或目标解释由独立 Assessment 实体记录。</rdfs:comment>
+        <ont:icon>📊</ont:icon>
+        <ont:color>#008272</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold">
+        <rdfs:label>DiagnosticThreshold</rdfs:label>
+        <rdfs:comment>把数值区间映射到分类结论的阈值节点。这是数值推理的落点——OWL-RL 做不到数值区间推理，因此阈值建模为数据，由 SPARQL CONSTRUCT 消费。</rdfs:comment>
+        <ont:icon>📏</ont:icon>
+        <ont:color>#008272</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget">
+        <rdfs:label>GlycemicTarget</rdfs:label>
+        <rdfs:comment>血糖管理目标区间，仅包含 A1C、餐前/餐后血糖和 TIR；血压与血脂等非血糖目标不在此实体中。</rdfs:comment>
+        <ont:icon>🎯</ont:icon>
+        <ont:color>#FFB900</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Complication">
+        <rdfs:label>Complication</rdfs:label>
+        <rdfs:comment>糖尿病并发症与合并症，含慢性（DKD/DR/DPN/DFU/CVD）与急性（低血糖/DKA/HHS）两类。</rdfs:comment>
+        <ont:icon>⚠️</ont:icon>
+        <ont:color>#D13438</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage">
+        <rdfs:label>ComplicationStage</rdfs:label>
+        <rdfs:comment>并发症分期节点（NPDR→PDR、CKD G1-G5/A1-A3、低血糖 Level 1-3）。stageOrder 支撑 OWL TransitiveProperty worseThan 的传递闭包。</rdfs:comment>
+        <ont:icon>📈</ont:icon>
+        <ont:color>#D13438</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Symptom">
+        <rdfs:label>Symptom</rdfs:label>
+        <rdfs:comment>症状/体征节点，用于「症状 → 可能情形」的多跳检索与急诊分流。</rdfs:comment>
+        <ont:icon>🤒</ont:icon>
+        <ont:color>#D13438</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor">
+        <rdfs:label>RiskFactor</rdfs:label>
+        <rdfs:comment>风险因素节点，区分可干预与不可干预——这是生活方式干预建议能否落地的判据。</rdfs:comment>
+        <ont:icon>⚡</ont:icon>
+        <ont:color>#E67E22</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass">
+        <rdfs:label>DrugClass</rdfs:label>
+        <rdfs:comment>降糖药物类别（二甲双胍/SU/TZD/DPP4i/SGLT2i/GLP-1RA/胰岛素等）。禁忌与不良反应挂在类别层，而非单药层。</rdfs:comment>
+        <ont:icon>💊</ont:icon>
+        <ont:color>#5C2D91</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Medication">
+        <rdfs:label>Medication</rdfs:label>
+        <rdfs:comment>具体药物成分节点（通用名）。胰岛素的时效属性放在这一层，因为同类胰岛素起效时间差异显著。</rdfs:comment>
+        <ont:icon>💉</ont:icon>
+        <ont:color>#5C2D91</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication">
+        <rdfs:label>Contraindication</rdfs:label>
+        <rdfs:comment>禁忌/慎用规则节点。这是「一般用 X，除非 Y」这类默认规则的落点——不进 OWL TBox，作为数据由 SHACL 安全形状消费。</rdfs:comment>
+        <ont:icon>🚫</ont:icon>
+        <ont:color>#5C2D91</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/AdverseEffect">
+        <rdfs:label>AdverseEffect</rdfs:label>
+        <rdfs:comment>药物不良反应节点。与 Complication 分开：不良反应归因于药物，并发症归因于疾病；低血糖两者都可指向，靠边不同区分。</rdfs:comment>
+        <ont:icon>☣️</ont:icon>
+        <ont:color>#5C2D91</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention">
+        <rdfs:label>LifestyleIntervention</rdfs:label>
+        <rdfs:comment>生活方式干预节点（营养、身体活动、体重管理、戒烟、自我管理教育 DSMES）。</rdfs:comment>
+        <ont:icon>🥗</ont:icon>
+        <ont:color>#107C10</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Device">
+        <rdfs:label>Device</rdfs:label>
+        <rdfs:comment>监测与给药设备节点（CGM、胰岛素泵、血糖仪、人工胰腺、尿酮试纸）。</rdfs:comment>
+        <ont:icon>📱</ont:icon>
+        <ont:color>#00A9E0</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule">
+        <rdfs:label>MonitoringSchedule</rdfs:label>
+        <rdfs:comment>随访/筛查频率节点（UACR 与 eGFR 每年、散瞳眼底每年、A1C 每 3 个月、GDM 24-28 周、正常者每 3 年复查）。</rdfs:comment>
+        <ont:icon>🗓️</ont:icon>
+        <ont:color>#FFB900</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation">
+        <rdfs:label>ClinicalObservation</rdfs:label>
+        <rdfs:comment>患者在特定时间的非实验室临床观察，如 BMI、血压、吸烟状态、妊娠状态和孕周。用于替代 Patient 上会随时间变化的属性。</rdfs:comment>
+        <ont:icon>🩺</ont:icon>
+        <ont:color>#0078D4</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis">
+        <rdfs:label>Diagnosis</rdfs:label>
+        <rdfs:comment>患者的一次诊断或临床判断记录，连接患者、就诊、疾病术语和分期；保留诊断状态、确定性与时间。</rdfs:comment>
+        <ont:icon>📝</ont:icon>
+        <ont:color>#D13438</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Assessment">
+        <rdfs:label>Assessment</rdfs:label>
+        <rdfs:comment>基于一个或多个检验结果和版本化规则生成的解释结论；不覆盖原始 LabResult。</rdfs:comment>
+        <ont:icon>🔎</ont:icon>
+        <ont:color>#008272</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse">
+        <rdfs:label>MedicationUse</rdfs:label>
+        <rdfs:comment>患者使用某种药物的一段治疗记录，连接患者、药物、诊断与就诊；刻意不包含剂量字段。</rdfs:comment>
+        <ont:icon>🧾</ont:icon>
+        <ont:color>#5C2D91</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage">
+        <rdfs:label>SourcePassage</rdfs:label>
+        <rdfs:comment>指南中的具体证据片段，记录页码、章节或文本定位，使阈值、推荐与安全规则可精确追溯。</rdfs:comment>
+        <ont:icon>🔖</ont:icon>
+        <ont:color>#8A8886</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation">
+        <rdfs:label>Recommendation</rdfs:label>
+        <rdfs:comment>指南推荐条目。指南逻辑一律建模为数据实例而非 TBox 公理——这是本设计最关键的一条边界。</rdfs:comment>
+        <ont:icon>📋</ont:icon>
+        <ont:color>#E67E22</ont:color>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource">
+        <rdfs:label>GuidelineSource</rdfs:label>
+        <rdfs:comment>出处节点。provenance 是本体 agent 相对纯 RAG 的核心卖点，因此出处是一等公民实体，而不是字符串字段。</rdfs:comment>
+        <ont:icon>📚</ont:icon>
+        <ont:color>#8A8886</ont:color>
+    </owl:Class>
+
+    <!-- ================ -->
+    <!-- Data Properties -->
+    <!-- ================ -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/patient_patientId">
+        <rdfs:label>patientId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>患者唯一标识（假名化）</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/patient_birthYear">
+        <rdfs:label>birthYear</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>出生年份，用于推导年龄相关风险（≥35 岁列为 T2DM 筛查人群）</rdfs:comment>
+        <ont:propertyType>integer</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/patient_sex">
+        <rdfs:label>sex</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>生理性别；CVD 风险与 GDM 相关规则依赖该字段</rdfs:comment>
+        <ont:enumValues>Female,Male,Other,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_diabetesTypeCode">
+        <rdfs:label>diabetesTypeCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>分型编码，如 T1DM / T2DM / GDM / MODY / PREDIABETES</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>分型名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_mondoCode">
+        <rdfs:label>mondoCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>MONDO CURIE，如 MONDO:0005147</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_insulinRequired">
+        <rdfs:label>insulinRequired</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>是否必须依赖外源胰岛素维持生命（T1DM 为真）</rdfs:comment>
+        <ont:propertyType>boolean</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_typicalOnset">
+        <rdfs:label>typicalOnset</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>典型起病阶段</rdfs:comment>
+        <ont:enumValues>Neonatal,Childhood,Adolescence,Adulthood,Pregnancy,AnyAge</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_prevalenceShare">
+        <rdfs:label>prevalenceShare</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>占糖尿病总病例比例（T2DM 约 90-95%）</rdfs:comment>
+        <ont:unit>percent</ont:unit>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diabetesType_definition">
+        <rdfs:label>definition</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>来源原文的定义摘录</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalEncounter_encounterId">
+        <rdfs:label>encounterId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>就诊唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalEncounter_encounterDate">
+        <rdfs:label>encounterDate</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment>就诊日期</rdfs:comment>
+        <ont:propertyType>date</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalEncounter_encounterType">
+        <rdfs:label>encounterType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>就诊类型</rdfs:comment>
+        <ont:enumValues>Routine,Screening,Urgent,Emergency,Prenatal,Postpartum,Telehealth</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalEncounter_gestationalWeek">
+        <rdfs:label>gestationalWeek</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>孕周；GDM 筛查窗口为 24-28 周</rdfs:comment>
+        <ont:unit>week</ont:unit>
+        <ont:propertyType>integer</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_labTestCode">
+        <rdfs:label>labTestCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>检验编码，如 A1C / FPG / OGTT2H / RPG / GCT1H / UACR / EGFR / KETONE</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>检验名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_loincCode">
+        <rdfs:label>loincCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>LOINC 编码引用（仅存 code+label，不分发全表）</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_specimen">
+        <rdfs:label>specimen</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>标本类型</rdfs:comment>
+        <ont:enumValues>Blood,Urine,Breath,Genomic</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_unitOfMeasure">
+        <rdfs:label>unitOfMeasure</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>结果单位，如 percent / mg-per-dL / mg-per-g / mL-per-min</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_fastingRequired">
+        <rdfs:label>fastingRequired</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>是否需要空腹（FPG、OGTT 需空腹≥8 小时）</rdfs:comment>
+        <ont:propertyType>boolean</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labTest_definition">
+        <rdfs:label>definition</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>检验含义摘录</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labResult_labResultId">
+        <rdfs:label>labResultId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>结果唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labResult_resultValue">
+        <rdfs:label>resultValue</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>测量数值</rdfs:comment>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labResult_resultUnit">
+        <rdfs:label>resultUnit</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>结果单位，须与 LabTest.unitOfMeasure 一致（SHACL 校验点）</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/labResult_collectedAt">
+        <rdfs:label>collectedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>采样时间</rdfs:comment>
+        <ont:propertyType>datetime</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_thresholdId">
+        <rdfs:label>thresholdId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>阈值唯一标识，如 A1C-DIABETES-NONPREG</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_lowerBound">
+        <rdfs:label>lowerBound</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>区间下界（含）。无下界时留空</rdfs:comment>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_upperBound">
+        <rdfs:label>upperBound</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>区间上界（含）。无上界时留空</rdfs:comment>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_boundUnit">
+        <rdfs:label>boundUnit</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>边界单位</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_classification">
+        <rdfs:label>classification</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>该区间对应的分类结论</rdfs:comment>
+        <ont:enumValues>Normal,Prediabetes,Diabetes,Albuminuria,Macroalbuminuria,Hypoglycemia,SevereHypoglycemia,Hyperglycemia,KetoneAlert</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_populationContext">
+        <rdfs:label>populationContext</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>适用人群；妊娠期使用不同 cutoff</rdfs:comment>
+        <ont:enumValues>NonPregnant,Pregnant,Child,Any</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_lowerOperator">
+        <rdfs:label>lowerOperator</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>下界比较操作符：大于、大于等于或无下界</rdfs:comment>
+        <ont:enumValues>GT,GTE,None</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_upperOperator">
+        <rdfs:label>upperOperator</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>上界比较操作符：小于、小于等于或无上界</rdfs:comment>
+        <ont:enumValues>LT,LTE,None</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosticThreshold_confirmationRequired">
+        <rdfs:label>confirmationRequired</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>是否需要复测或额外临床证据确认</rdfs:comment>
+        <ont:propertyType>boolean</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/glycemicTarget_targetId">
+        <rdfs:label>targetId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>目标唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/glycemicTarget_targetMetric">
+        <rdfs:label>targetMetric</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>目标指标</rdfs:comment>
+        <ont:enumValues>A1C,PreMealGlucose,PostMealGlucose,TimeInRange</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/glycemicTarget_targetLow">
+        <rdfs:label>targetLow</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>目标下界</rdfs:comment>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/glycemicTarget_targetHigh">
+        <rdfs:label>targetHigh</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>目标上界</rdfs:comment>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/glycemicTarget_targetUnit">
+        <rdfs:label>targetUnit</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>目标单位</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/glycemicTarget_targetPopulation">
+        <rdfs:label>targetPopulation</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>适用人群描述，如「多数成人」「合并心血管疾病者更严格」</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_complicationCode">
+        <rdfs:label>complicationCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>并发症编码，如 DKD / DR / DME / DPN / DFU / CVD / HYPO / DKA</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>并发症名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_mondoCode">
+        <rdfs:label>mondoCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>MONDO CURIE 引用</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_affectedOrgan">
+        <rdfs:label>affectedOrgan</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>受累器官；对应 OWL 属性链 hasComplication ∘ affectsOrgan</rdfs:comment>
+        <ont:enumValues>Kidney,Eye,Nerve,Heart,Vessel,Foot,Brain,Mouth,Systemic</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_onsetPattern">
+        <rdfs:label>onsetPattern</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>起病模式</rdfs:comment>
+        <ont:enumValues>Acute,Chronic</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_isEmergency">
+        <rdfs:label>isEmergency</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>是否属于需急诊处理的情形（DKA、严重低血糖为真）</rdfs:comment>
+        <ont:propertyType>boolean</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complication_definition">
+        <rdfs:label>definition</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>定义摘录</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complicationStage_stageCode">
+        <rdfs:label>stageCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>分期编码，如 CKD-G4 / DR-PDR / HYPO-L2</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complicationStage_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>分期名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complicationStage_stageOrder">
+        <rdfs:label>stageOrder</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>严重度序号，越大越重；传递序关系的基础</rdfs:comment>
+        <ont:propertyType>integer</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/complicationStage_stageCriteria">
+        <rdfs:label>stageCriteria</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>分期判定标准（引用检验区间，不含处置剂量）</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/symptom_symptomCode">
+        <rdfs:label>symptomCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Symptom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>症状编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/symptom_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Symptom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>症状名称，如多饮、多尿、烂苹果味呼吸、颤抖出汗</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/symptom_hpoCode">
+        <rdfs:label>hpoCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Symptom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>HPO CURIE 引用</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/symptom_urgency">
+        <rdfs:label>urgency</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Symptom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>紧急程度；Emergency 触发「立即就医」话术而非解释性回答</rdfs:comment>
+        <ont:enumValues>Routine,Urgent,Emergency</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/riskFactor_riskFactorCode">
+        <rdfs:label>riskFactorCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>风险因素编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/riskFactor_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>名称，如超重、久坐、一级亲属糖尿病史、GDM 史、PCOS</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/riskFactor_riskCategory">
+        <rdfs:label>riskCategory</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>是否可干预</rdfs:comment>
+        <ont:enumValues>Modifiable,NonModifiable,Obstetric,SocioDemographic</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/riskFactor_evidenceNote">
+        <rdfs:label>evidenceNote</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>证据说明与出处</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_drugClassCode">
+        <rdfs:label>drugClassCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>类别编码，如 BIGUANIDE / SGLT2I / GLP1RA / SU / TZD / DPP4I / INSULIN</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>类别名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_atcCode">
+        <rdfs:label>atcCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>ATC 编码引用（WHO 版权，仅存 code+label）</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_adminRoute">
+        <rdfs:label>adminRoute</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>给药途径</rdfs:comment>
+        <ont:enumValues>Oral,Subcutaneous,Inhaled,Intravenous</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_mechanism">
+        <rdfs:label>mechanism</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>作用机制的通俗描述（来自 FDA 原文）</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_hypoglycemiaRisk">
+        <rdfs:label>hypoglycemiaRisk</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>致低血糖风险；SU 与胰岛素为 High</rdfs:comment>
+        <ont:enumValues>Low,Moderate,High</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/drugClass_weightEffect">
+        <rdfs:label>weightEffect</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>体重影响；TZD/SU 增重，GLP-1RA/SGLT2i 减重</rdfs:comment>
+        <ont:enumValues>Loss,Neutral,Gain</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_medicationCode">
+        <rdfs:label>medicationCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>药物编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>通用名，如 metformin / empagliflozin / glimepiride</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_rxNormCode">
+        <rdfs:label>rxNormCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>RxNorm 编码引用</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_isInsulin">
+        <rdfs:label>isInsulin</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>是否为胰岛素制剂</rdfs:comment>
+        <ont:propertyType>boolean</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_insulinAction">
+        <rdfs:label>insulinAction</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>胰岛素时效分类</rdfs:comment>
+        <ont:enumValues>UltraRapid,RapidActing,ShortActing,Intermediate,LongActing,Premixed,NotApplicable</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_onsetMinutes">
+        <rdfs:label>onsetMinutes</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>起效时间（分钟）——描述药代特征，不是给药建议</rdfs:comment>
+        <ont:unit>minute</ont:unit>
+        <ont:propertyType>integer</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medication_durationHours">
+        <rdfs:label>durationHours</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>作用持续时间（小时）</rdfs:comment>
+        <ont:unit>hour</ont:unit>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/contraindication_contraCode">
+        <rdfs:label>contraCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>禁忌规则编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/contraindication_severity">
+        <rdfs:label>severity</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>禁忌强度：绝对禁忌 / 相对禁忌 / 需谨慎评估</rdfs:comment>
+        <ont:enumValues>Absolute,Relative,Caution</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/contraindication_triggerCriteria">
+        <rdfs:label>triggerCriteria</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>触发条件的可判定表述，如「严重肾功能损害或透析」</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/contraindication_rationale">
+        <rdfs:label>rationale</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>机制解释与出处，如二甲双胍与乳酸酸中毒风险</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/adverseEffect_adverseEffectCode">
+        <rdfs:label>adverseEffectCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/AdverseEffect"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>不良反应编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/adverseEffect_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/AdverseEffect"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>名称，如低血糖、体重增加、泌尿生殖道感染、乳酸酸中毒</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/adverseEffect_frequencyCategory">
+        <rdfs:label>frequencyCategory</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/AdverseEffect"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>发生频度分类</rdfs:comment>
+        <ont:enumValues>Common,Uncommon,Rare,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/adverseEffect_severity">
+        <rdfs:label>severity</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/AdverseEffect"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>严重程度，与发生频度分开记录</rdfs:comment>
+        <ont:enumValues>Mild,Moderate,Severe,LifeThreatening,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/lifestyleIntervention_interventionCode">
+        <rdfs:label>interventionCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>干预编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/lifestyleIntervention_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>干预名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/lifestyleIntervention_interventionType">
+        <rdfs:label>interventionType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>干预类别</rdfs:comment>
+        <ont:enumValues>Nutrition,PhysicalActivity,WeightManagement,SmokingCessation,SelfManagementEd</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/lifestyleIntervention_activityTarget">
+        <rdfs:label>activityTarget</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>可量化目标，如「每周 150 分钟中等强度活动」「减重 5%-7%」</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/lifestyleIntervention_expectedBenefit">
+        <rdfs:label>expectedBenefit</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>预期收益，如「T2DM 发病风险降低 58%（60 岁以上 71%）」</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/device_deviceCode">
+        <rdfs:label>deviceCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>设备编码</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/device_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>设备名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/device_deviceType">
+        <rdfs:label>deviceType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>设备类别</rdfs:comment>
+        <ont:enumValues>CGM,InsulinPump,GlucoseMeter,ArtificialPancreas,KetoneTestKit,InsulinPen</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/device_isRealTime">
+        <rdfs:label>isRealTime</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>是否提供连续实时数据（CGM 可在夜间低血糖时报警）</rdfs:comment>
+        <ont:propertyType>boolean</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/monitoringSchedule_scheduleId">
+        <rdfs:label>scheduleId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>计划唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/monitoringSchedule_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>计划名称</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/monitoringSchedule_frequencyMonths">
+        <rdfs:label>frequencyMonths</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>间隔月数；一次性窗口筛查留空并用 triggerWindow 表达</rdfs:comment>
+        <ont:unit>month</ont:unit>
+        <ont:propertyType>integer</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/monitoringSchedule_triggerWindow">
+        <rdfs:label>triggerWindow</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>触发窗口，如「妊娠 24-28 周」「产后 12 周内」「T1DM 病程满 5 年起」</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/monitoringSchedule_appliesTo">
+        <rdfs:label>appliesTo</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>适用人群描述</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_observationId">
+        <rdfs:label>observationId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>临床观察唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_observationType">
+        <rdfs:label>observationType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>观察指标类型</rdfs:comment>
+        <ont:enumValues>BMI,Weight,SystolicBP,DiastolicBP,SmokingStatus,PregnancyStatus,GestationalAge,Other</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_valueDecimal">
+        <rdfs:label>valueDecimal</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>数值型结果；非数值观察留空</rdfs:comment>
+        <ont:propertyType>decimal</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_valueText">
+        <rdfs:label>valueText</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>枚举或文本结果；数值观察可留空</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_unitCode">
+        <rdfs:label>unitCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>UCUM 单位代码</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_observedAt">
+        <rdfs:label>observedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>观察时间</rdfs:comment>
+        <ont:propertyType>datetime</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/clinicalObservation_status">
+        <rdfs:label>status</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>观察记录状态</rdfs:comment>
+        <ont:enumValues>Preliminary,Final,Corrected,Cancelled</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_diagnosisId">
+        <rdfs:label>diagnosisId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>诊断记录唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_diagnosisKind">
+        <rdfs:label>diagnosisKind</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>诊断记录类别</rdfs:comment>
+        <ont:enumValues>Diabetes,Prediabetes,Complication,Comorbidity,AcuteEvent</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_clinicalStatus">
+        <rdfs:label>clinicalStatus</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>当前临床状态</rdfs:comment>
+        <ont:enumValues>Active,Inactive,Resolved,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_verificationStatus">
+        <rdfs:label>verificationStatus</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>诊断确定性</rdfs:comment>
+        <ont:enumValues>Suspected,Provisional,Confirmed,Refuted,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_severity">
+        <rdfs:label>severity</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>该次诊断记录的严重程度</rdfs:comment>
+        <ont:enumValues>Mild,Moderate,Severe,Critical,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_diagnosedDate">
+        <rdfs:label>diagnosedDate</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment>诊断日期</rdfs:comment>
+        <ont:propertyType>date</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_onsetDate">
+        <rdfs:label>onsetDate</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment>估计起病日期</rdfs:comment>
+        <ont:propertyType>date</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_resolvedDate">
+        <rdfs:label>resolvedDate</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment>缓解或结束日期</rdfs:comment>
+        <ont:propertyType>date</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_codeSystem">
+        <rdfs:label>codeSystem</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>该临床记录采用的编码体系，如 ICD-10-CM 或 SNOMED CT</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosis_externalCode">
+        <rdfs:label>externalCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>编码体系中的诊断代码</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/assessment_assessmentId">
+        <rdfs:label>assessmentId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>评估唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/assessment_conclusion">
+        <rdfs:label>conclusion</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>规则得出的解释结论</rdfs:comment>
+        <ont:enumValues>Normal,Prediabetes,DiabetesRange,Low,High,Critical,Indeterminate</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/assessment_assessedAt">
+        <rdfs:label>assessedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>评估生成时间</rdfs:comment>
+        <ont:propertyType>datetime</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/assessment_ruleId">
+        <rdfs:label>ruleId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>执行该评估的 SPARQL/SHACL 规则标识</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/assessment_ruleVersion">
+        <rdfs:label>ruleVersion</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>规则版本</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/assessment_applicableContext">
+        <rdfs:label>applicableContext</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>评估时使用的人群与临床上下文</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationUse_medicationUseId">
+        <rdfs:label>medicationUseId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>用药记录唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationUse_startDate">
+        <rdfs:label>startDate</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment>开始日期</rdfs:comment>
+        <ont:propertyType>date</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationUse_endDate">
+        <rdfs:label>endDate</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment>结束日期</rdfs:comment>
+        <ont:propertyType>date</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationUse_status">
+        <rdfs:label>status</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>用药记录状态</rdfs:comment>
+        <ont:enumValues>Active,Completed,Stopped,OnHold,Unknown</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationUse_regimenRole">
+        <rdfs:label>regimenRole</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>治疗方案中的角色，不包含剂量</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationUse_indicationText">
+        <rdfs:label>indicationText</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>适应证摘要；结构化适应证通过 treatsDiagnosis 关系表达</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/sourcePassage_passageId">
+        <rdfs:label>passageId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>证据片段唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/sourcePassage_locator">
+        <rdfs:label>locator</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>页码、章节、表格或字符区间</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/sourcePassage_quote">
+        <rdfs:label>quote</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>经过逐字验证的支持文本</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/sourcePassage_contentHash">
+        <rdfs:label>contentHash</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>规范化片段 SHA-256</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_recommendationId">
+        <rdfs:label>recommendationId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>推荐唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_statement">
+        <rdfs:label>statement</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>推荐正文（不含任何具体剂量数字）</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_recommendationType">
+        <rdfs:label>recommendationType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>推荐类别</rdfs:comment>
+        <ont:enumValues>Screening,Diagnosis,Treatment,Lifestyle,Monitoring,Referral,Safety</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_populationScope">
+        <rdfs:label>populationScope</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>适用人群限定</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_nativeEvidenceGrade">
+        <rdfs:label>nativeEvidenceGrade</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>来源指南原始证据等级；不得跨分级体系臆造转换</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_gradingSystem">
+        <rdfs:label>gradingSystem</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>证据分级体系，如 ADA、GRADE、VA-DoD</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendation_recommendationStrength">
+        <rdfs:label>recommendationStrength</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>推荐强度；来源未明确时为 Unspecified</rdfs:comment>
+        <ont:enumValues>Strong,Conditional,Unspecified</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_sourceId">
+        <rdfs:label>sourceId</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>出处唯一标识</rdfs:comment>
+        <ont:isIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ont:isIdentifier>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>文档标题</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_publisher">
+        <rdfs:label>publisher</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>发布机构</rdfs:comment>
+        <ont:enumValues>NIDDK,CDC,FDA,NHC,ADA,WHO,Other</ont:enumValues>
+        <ont:propertyType>enum</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_publishedYear">
+        <rdfs:label>publishedYear</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>发布/最后审阅年份</rdfs:comment>
+        <ont:propertyType>integer</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_sourceUrl">
+        <rdfs:label>sourceUrl</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>原文链接</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_localFile">
+        <rdfs:label>localFile</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>本仓库中的采集副本路径，如 ontology/knowledges/niddk-a1c-test.txt</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_documentVersion">
+        <rdfs:label>documentVersion</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>指南或文档版本</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_jurisdiction">
+        <rdfs:label>jurisdiction</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>适用国家、地区或医疗体系</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_languageCode">
+        <rdfs:label>languageCode</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>BCP 47 语言代码，如 en-US、zh-CN</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_retrievedAt">
+        <rdfs:label>retrievedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>本地副本获取时间</rdfs:comment>
+        <ont:propertyType>datetime</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/guidelineSource_contentHash">
+        <rdfs:label>contentHash</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>本地副本 SHA-256，用于来源完整性验证</rdfs:comment>
+        <ont:propertyType>string</ont:propertyType>
+    </owl:DatatypeProperty>
+
+    <!-- ================== -->
+    <!-- Object Properties -->
+    <!-- ================== -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasEncounter">
+        <rdfs:label>hasEncounter</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:comment>患者的历次就诊记录。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>clinicalEncounter</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/producesLabResult">
+        <rdfs:label>producesLabResult</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:comment>一次就诊产生的检验结果。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>clinicalEncounter</ont:fromEntityId>
+        <ont:toEntityId>labResult</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/measuredByTest">
+        <rdfs:label>measuredByTest</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:comment>结果对应的检验项目定义。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>labResult</ont:fromEntityId>
+        <ont:toEntityId>labTest</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasThreshold">
+        <rdfs:label>hasThreshold</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:comment>检验项目的诊断切点集合（正常/前期/糖尿病，妊娠与非妊娠分支）。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>labTest</ont:fromEntityId>
+        <ont:toEntityId>diagnosticThreshold</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/classifiesInto">
+        <rdfs:label>classifiesInto</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:comment>阈值命中后支持的诊断类别术语；不得单凭血糖阈值推断 T1DM 或 T2DM 病因分型。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>diagnosticThreshold</ont:fromEntityId>
+        <ont:toEntityId>diabetesType</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/thresholdCitedFrom">
+        <rdfs:label>thresholdCitedFrom</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:comment>阈值的出处，保证每个数字都能追溯。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>diagnosticThreshold</ont:fromEntityId>
+        <ont:toEntityId>guidelineSource</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasStage">
+        <rdfs:label>hasStage</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage"/>
+        <rdfs:comment>并发症的分期集合。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>complication</ont:fromEntityId>
+        <ont:toEntityId>complicationStage</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/predisposesTo">
+        <rdfs:label>predisposesTo</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:comment>该分型易发生的并发症，例如 T1DM 更易发生 DKA。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>diabetesType</ont:fromEntityId>
+        <ont:toEntityId>complication</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/presentsWith">
+        <rdfs:label>presentsWith</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Symptom"/>
+        <rdfs:comment>并发症的典型症状表现。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>complication</ont:fromEntityId>
+        <ont:toEntityId>symptom</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/screenedByTest">
+        <rdfs:label>screenedByTest</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:comment>并发症的筛查手段，例如 DKD 由 UACR 与 eGFR 双指标筛查。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>complication</ont:fromEntityId>
+        <ont:toEntityId>labTest</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasRiskFactor">
+        <rdfs:label>hasRiskFactor</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:comment>患者具备的风险因素。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>riskFactor</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/increasesRiskOf">
+        <rdfs:label>increasesRiskOf</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:comment>风险因素指向的疾病分型。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>riskFactor</ont:fromEntityId>
+        <ont:toEntityId>diabetesType</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/belongsToDrugClass">
+        <rdfs:label>belongsToDrugClass</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:comment>药物所属类别。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>medication</ont:fromEntityId>
+        <ont:toEntityId>drugClass</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasContraindication">
+        <rdfs:label>hasContraindication</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication"/>
+        <rdfs:comment>该类药物的禁忌规则。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>drugClass</ont:fromEntityId>
+        <ont:toEntityId>contraindication</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/triggeredByCondition">
+        <rdfs:label>triggeredByCondition</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Contraindication"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:comment>触发禁忌的临床情形，例如 SGLT2i 禁用于严重肾功能损害/透析。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>contraindication</ont:fromEntityId>
+        <ont:toEntityId>complication</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/causesAdverseEffect">
+        <rdfs:label>causesAdverseEffect</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/AdverseEffect"/>
+        <rdfs:comment>该类药物的常见不良反应。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>drugClass</ont:fromEntityId>
+        <ont:toEntityId>adverseEffect</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/usesDevice">
+        <rdfs:label>usesDevice</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Device"/>
+        <rdfs:comment>患者使用的监测/给药设备。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>device</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/deviceMeasuresTest">
+        <rdfs:label>deviceMeasuresTest</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Device"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:comment>设备可测量的指标，例如 CGM 对应 TIR 与葡萄糖。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>device</ont:fromEntityId>
+        <ont:toEntityId>labTest</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/followsIntervention">
+        <rdfs:label>followsIntervention</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:comment>患者执行中的生活方式干预。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>lifestyleIntervention</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/mitigatesRiskFactor">
+        <rdfs:label>mitigatesRiskFactor</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/RiskFactor"/>
+        <rdfs:comment>干预针对的可改变风险因素。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>lifestyleIntervention</ont:fromEntityId>
+        <ont:toEntityId>riskFactor</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/appliesToType">
+        <rdfs:label>appliesToType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:comment>推荐适用的分型。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>diabetesType</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/targetsComplication">
+        <rdfs:label>targetsComplication</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:comment>推荐针对的并发症。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>complication</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendsDrugClass">
+        <rdfs:label>recommendsDrugClass</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DrugClass"/>
+        <rdfs:comment>推荐涉及的药物类别（类别级，不到具体剂量）。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>drugClass</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendsLifestyle">
+        <rdfs:label>recommendsLifestyle</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LifestyleIntervention"/>
+        <rdfs:comment>推荐涉及的生活方式干预。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>lifestyleIntervention</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/definesTarget">
+        <rdfs:label>definesTarget</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:comment>推荐所定义的管理目标区间。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>glycemicTarget</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/definesSchedule">
+        <rdfs:label>definesSchedule</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:comment>推荐所定义的随访/筛查频率。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>monitoringSchedule</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/schedulesTest">
+        <rdfs:label>schedulesTest</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MonitoringSchedule"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:comment>随访计划所安排的检验项目。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>monitoringSchedule</ont:fromEntityId>
+        <ont:toEntityId>labTest</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/targetMeasuredBy">
+        <rdfs:label>targetMeasuredBy</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GlycemicTarget"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabTest"/>
+        <rdfs:comment>目标所依据的检验项目。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>glycemicTarget</ont:fromEntityId>
+        <ont:toEntityId>labTest</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/citesSource">
+        <rdfs:label>citesSource</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:comment>推荐的出处。每条回答必须能回溯到这里。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>guidelineSource</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasClinicalObservation">
+        <rdfs:label>hasClinicalObservation</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:comment>患者历次非实验室临床观察。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>clinicalObservation</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/observationRecordedAt">
+        <rdfs:label>observationRecordedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:comment>临床观察记录所在的就诊事件。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>clinicalObservation</ont:fromEntityId>
+        <ont:toEntityId>clinicalEncounter</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/observationOfSymptom">
+        <rdfs:label>observationOfSymptom</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalObservation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Symptom"/>
+        <rdfs:comment>症状类观察对应的症状术语；非症状观察不使用该关系。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>clinicalObservation</ont:fromEntityId>
+        <ont:toEntityId>symptom</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasDiagnosis">
+        <rdfs:label>hasDiagnosis</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:comment>患者历次诊断或临床判断记录。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>diagnosis</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosedAt">
+        <rdfs:label>diagnosedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:comment>诊断作出或记录所在的就诊事件。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>diagnosis</ont:fromEntityId>
+        <ont:toEntityId>clinicalEncounter</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosisType">
+        <rdfs:label>diagnosisType</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiabetesType"/>
+        <rdfs:comment>糖尿病或糖尿病前期诊断对应的术语节点。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>diagnosis</ont:fromEntityId>
+        <ont:toEntityId>diabetesType</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/diagnosisComplication">
+        <rdfs:label>diagnosisComplication</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Complication"/>
+        <rdfs:comment>并发症、合并症或急性事件诊断对应的术语节点。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>diagnosis</ont:fromEntityId>
+        <ont:toEntityId>complication</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/currentStage">
+        <rdfs:label>currentStage</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ComplicationStage"/>
+        <rdfs:comment>该次诊断记录对应的当前分期。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>diagnosis</ont:fromEntityId>
+        <ont:toEntityId>complicationStage</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/basedOnLabResult">
+        <rdfs:label>basedOnLabResult</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/LabResult"/>
+        <rdfs:comment>评估使用的一个或多个检验结果。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>assessment</ont:fromEntityId>
+        <ont:toEntityId>labResult</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/appliesThreshold">
+        <rdfs:label>appliesThreshold</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:comment>评估所应用的版本化诊断阈值。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>assessment</ont:fromEntityId>
+        <ont:toEntityId>diagnosticThreshold</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/supportsDiagnosis">
+        <rdfs:label>supportsDiagnosis</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Assessment"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:comment>评估支持但不单独决定的诊断记录。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>assessment</ont:fromEntityId>
+        <ont:toEntityId>diagnosis</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasMedicationUse">
+        <rdfs:label>hasMedicationUse</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Patient"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:comment>患者历次用药记录。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>patient</ont:fromEntityId>
+        <ont:toEntityId>medicationUse</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/usesMedication">
+        <rdfs:label>usesMedication</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Medication"/>
+        <rdfs:comment>用药记录对应的具体药物成分。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>medicationUse</ont:fromEntityId>
+        <ont:toEntityId>medication</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/treatsDiagnosis">
+        <rdfs:label>treatsDiagnosis</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Diagnosis"/>
+        <rdfs:comment>该用药记录所针对的一个或多个诊断。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>medicationUse</ont:fromEntityId>
+        <ont:toEntityId>diagnosis</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/medicationRecordedAt">
+        <rdfs:label>medicationRecordedAt</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/MedicationUse"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/ClinicalEncounter"/>
+        <rdfs:comment>用药记录创建或更新所在的就诊事件。</rdfs:comment>
+        <ont:cardinality>many-to-one</ont:cardinality>
+        <ont:fromEntityId>medicationUse</ont:fromEntityId>
+        <ont:toEntityId>clinicalEncounter</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/hasPassage">
+        <rdfs:label>hasPassage</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/GuidelineSource"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:comment>指南来源包含的可验证证据片段。</rdfs:comment>
+        <ont:cardinality>one-to-many</ont:cardinality>
+        <ont:fromEntityId>guidelineSource</ont:fromEntityId>
+        <ont:toEntityId>sourcePassage</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/thresholdCitesPassage">
+        <rdfs:label>thresholdCitesPassage</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/DiagnosticThreshold"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:comment>诊断阈值的精确来源片段。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>diagnosticThreshold</ont:fromEntityId>
+        <ont:toEntityId>sourcePassage</ont:toEntityId>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/ontology/diabetes-care-ontology-v2/recommendationCites">
+        <rdfs:label>recommendationCites</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/Recommendation"/>
+        <rdfs:range rdf:resource="http://example.org/ontology/diabetes-care-ontology-v2/SourcePassage"/>
+        <rdfs:comment>推荐条目的精确支持片段。</rdfs:comment>
+        <ont:cardinality>many-to-many</ont:cardinality>
+        <ont:fromEntityId>recommendation</ont:fromEntityId>
+        <ont:toEntityId>sourcePassage</ont:toEntityId>
+    </owl:ObjectProperty>
+
+</rdf:RDF>

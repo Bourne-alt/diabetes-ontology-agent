@@ -1,0 +1,43 @@
+# 临床安全约束 —— 禁忌症违规检测。
+#
+# 「一般用 X，除非 Y」是默认规则，OWL 单调推理表达不了（DESIGN.md 陷阱 #2），
+# 因此 Contraindication 建成**数据**，由这条 SHACL 形状消费。
+#
+# ⚠️ 验收标准的修正
+#   计划 M3/S6 原文写的是「eGFR<30 患者用二甲双胍能被检出」。
+#   实测：eGFR 在 ontology/knowledges/ 全语料中出现 **0 次**，
+#   FDA 药物文件对二甲双胍只有定性表述（"tell your doctor if you have kidney problems"），
+#   没有任何数值切点。补一个 30 进来就是编造出处。
+#   → 改用语料里唯一一条明确禁令做验收：
+#     "Do not take these drugs if you have severe kidney problems or are on dialysis."
+#     （SGLT2 Inhibitors，fda-diabetes-drug-classes.txt:280）
+
+@prefix dmo: <https://example.org/dmo#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix css: <https://example.org/dmo/shape/safety/> .
+
+css:ContraindicatedMedicationShape a sh:NodeShape ;
+    sh:targetClass dmo:Patient ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "临床安全违规：患者存在 {?cond}，而所用药物属于对此有绝对禁忌的类别。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this ?cond WHERE {
+              $this <https://example.org/dmo#takesMedication> ?med .
+              ?med <https://example.org/dmo#belongsToDrugClass> ?cls .
+              ?cls <https://example.org/dmo#hasContraindication> ?contra .
+              ?contra <https://example.org/dmo#severity> "Absolute" .
+              ?contra <https://example.org/dmo#triggeredByCondition> ?cond .
+              $this <https://example.org/dmo#hasComplication> ?cond .
+            }""" ] .
+
+css:ContraindicationProvenanceShape a sh:NodeShape ;
+    sh:targetClass dmo:Contraindication ;
+    sh:property [
+        sh:path dmo:rationale ; sh:minCount 1 ;
+        sh:message "禁忌规则必须带出处原话 —— 无依据的用药禁令比没有更危险。" ] ;
+    sh:property [
+        sh:path dmo:severity ; sh:minCount 1 ;
+        sh:in ( "Absolute" "Relative" "Caution" ) ;
+        sh:message "禁忌必须声明强度：绝对禁忌与需谨慎评估的处置完全不同。" ] .
