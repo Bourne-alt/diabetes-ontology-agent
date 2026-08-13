@@ -111,14 +111,34 @@ python3 ontology/tools/load_graphdb.py --load
 ```bash
 python3 ontology/tools/semantic_extract.py \
     --graph ontology/graph/diabetes-ontology.json \
-    --doc   ontology/knowledges/fda-diabetes-drug-classes.txt \
+    --doc   ontology/knowledges/VADOD-Diabetes-CPG-Patient-Summary_final_508.pdf \
     --out   ontology/dist/extract
 ```
 
-**输入**：一张 ER 图（schema）+ 一个文档路径（文件或目录）
+**输入**：一张 ER 图（schema）+ 一个 UTF-8 TXT/PDF 文档路径（也可传目录，混合扫描两种格式）
 **输出**：带出处、通过逐字校验的 Turtle + 一份可量化的质量报告
 
 工作流由 graph 驱动，不含领域硬编码——换一张 graph、换一批文档，代码不用改。
+
+PDF 使用 `pypdf` 提取文本。文本型 PDF 可直接处理；纯图片扫描件没有可校验的字符文本，
+脚本会明确报错，需先用 OCR 工具生成带文本层的 PDF。安装抽取依赖：
+
+```bash
+uv sync --extra extract
+```
+
+目录模式会读取目录第一层中扩展名不区分大小写的 `.txt` 和 `.pdf` 文件：
+
+```bash
+python3 ontology/tools/semantic_extract.py \
+    --graph ontology/graph/diabetes-ontology.json \
+    --doc ontology/knowledges \
+    --out ontology/dist/extract \
+    --dry-run
+```
+
+目录模式遇到扫描件、加密 PDF 或非 UTF-8 TXT 时会打印警告并跳过，最后汇总跳过数量；
+CI 如需任一文档不可读就失败，增加 `--strict-docs`。传入单个不可读文件时始终直接失败。
 
 ---
 
@@ -140,8 +160,8 @@ python3 ontology/tools/semantic_extract.py \
 | # | 阶段 | 用 LLM | 说明 |
 |---|---|:---:|---|
 | 1 | load | ✗ | 读 graph，按 `extraction.policy` 决定哪些类型参与抽取 |
-| 2 | register | ✗ | 文档 → `GuidelineSource`（含 sha256），零幻觉 |
-| 3 | chunk | ✗ | 切块并保留字符偏移，尽量切在段落边界 |
+| 2 | register | ✗ | TXT 读取/PDF 文本提取；文档 → `GuidelineSource`（含 sha256），零幻觉 |
+| 3 | chunk | ✗ | 对提取文本切块并保留字符偏移，尽量切在段落边界 |
 | 4 | extract | ✓ | 每个 (chunk × entityType) 一次 structured output 调用 |
 | 5 | verify | ✗ | quote 逐字校验 + enum/类型/属性名/谓词校验 |
 | 6 | resolve | ✗ | 跨 chunk 实体消解、URI 铸造、关系连边 |
@@ -213,12 +233,14 @@ python3 ontology/tools/semantic_extract.py \
 | 改了校验规则，重跑第 5–8 阶段 | `--from-raw <path>/raw.jsonl` |
 | 只抽某几类 | `--only drugClass medication contraindication` |
 | 节省第二遍连边调用 | `--no-link` |
+| 目录中任一文档不可读即失败 | `--strict-docs` |
 
 `--dry-run` 会汇总调用次数，超过 200 次时提示收窄。
 
 换模型或端点可用 `--model`、`--base-url`，默认配置见“九、模型配置”。
 
-第 1–3、5–8 阶段只用标准库，装不装 SDK 都能跑。真实调用需要：
+TXT 的第 1–3、5–8 阶段只用标准库；PDF 的离线阶段也需要 `pypdf`。真实 LLM 调用需要完整的
+`extract` 依赖：
 
 ```bash
 uv sync --extra extract   # 或 pip install -r requirements.txt
@@ -271,11 +293,15 @@ curl -X PUT -H 'Content-Type: text/turtle' \
 
 4. **跨 chunk 的关系抽不到。** 关系 target 用 canonicalName 匹配，若目标实体只出现在别的 chunk 且未被抽出，就是悬空。overlap 只能缓解不能消除。
 
-5. **关系依赖第二遍模型连边。** 第一遍按单一实体类型调用，看不到其他类型已解析出的
+5. **PDF 只处理文本层，不做 OCR，也不理解版面图像。** 多栏排版、表格和页眉页脚的读取顺序
+   取决于 PDF 内部结构；扫描件需先 OCR。prompt 与 quote 校验共用同一份提取文本，因此不会因
+   两套提取器不一致而静默误判，但复杂表格仍可能丢失结构语义。
+
+6. **关系依赖第二遍模型连边。** 第一遍按单一实体类型调用，看不到其他类型已解析出的
    候选实例，关系召回天然较弱；当前实现已增加第二遍 `link`，把全文和已消解实体清单交给模型，
    并对谓词、端点和证据 quote 再校验。它提高了可连性，但增加调用成本，且仍可能漏掉隐含或跨文档关系；
    使用 `--no-link` 时关系边很可能仍为 0。
 
-6. **类型边界模糊。** 同一个概念会被塞进多个类型（如 Microalbuminuria 同时进 `symptom` 和
+7. **类型边界模糊。** 同一个概念会被塞进多个类型（如 Microalbuminuria 同时进 `symptom` 和
    `complicationStage`）。加了「不要同时塞进多个类型」的 prompt 约束后有改善（riskFactor 从 3 降到 1，
    剔掉了明显不对的），但没根治；第一遍单类型调用仍看不到全局类型分配。

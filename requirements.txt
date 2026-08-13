@@ -60,6 +60,8 @@ pygments==2.20.0
     # via pytest
 pyparsing==3.3.2
     # via rdflib
+pypdf==6.15.0
+    # via diabetes-ontology-agent (pyproject.toml)
 pyshacl==0.40.1
     # via diabetes-ontology-agent (pyproject.toml)
 pytest==9.1.1

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""schema-guided 语义抽取工作流：graph + 文档 → 可审计的语义文件。
+"""schema-guided 语义抽取工作流：graph + TXT/PDF 文档 → 可审计的语义文件。
 
     python3 ontology/tools/semantic_extract.py \
         --graph ontology/graph/diabetes-ontology.json \
@@ -23,6 +23,8 @@
 离线能力（无 API key 也能跑通确定性部分）：
     --dry-run          跑 1-3 并打印将要发出的 schema 与 prompt，不调用 LLM
     --from-raw FILE    跳过 4，读已有的 raw.jsonl，重跑 5-8（改校验规则不烧 token）
+
+PDF 通过 pypdf 提取文本；扫描件必须先 OCR。本工具不会对图片页静默返回空结果。
 """
 
 from __future__ import annotations
@@ -46,6 +48,7 @@ ENV_FILE = ROOT / ".env"
 DEFAULT_CHUNK_SIZE = 6000
 DEFAULT_OVERLAP = 400
 MIN_QUOTE_LEN = 24  # 太短的 quote 容易蒙对，等于没校验
+SUPPORTED_DOC_SUFFIXES = {".txt", ".pdf"}
 
 # 词汇（TBox）与实例（ABox）分两个命名空间：
 #   dmo:   哈希命名空间，只放类与属性 —— 必须与 docs/DESIGN.md、build_tbox.py 完全一致，
@@ -70,6 +73,10 @@ POLICY_LLM, POLICY_MANUAL, POLICY_REGISTRY, POLICY_DERIVED = (
     "derived",
 )
 DEFAULT_POLICY = POLICY_LLM
+
+
+class DocumentReadError(Exception):
+    """文档存在，但编码、加密或文本层使它无法用于抽取。"""
 
 
 # ─────────────────────────── 数据结构 ────────────────────────────────────────
@@ -222,6 +229,87 @@ def sha256_of(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def read_document(path: Path) -> tuple[str, dict[str, Any]]:
+    """读取 TXT 或提取 PDF 文本，并返回可写入质量报告的文档元数据。
+
+    PDF 文本必须由本函数统一提取：后续 prompt 和 quote 校验共享同一份字符串，
+    避免用不同提取器时因空白/连字符差异导致证据被误拒。
+    """
+    suffix = path.suffix.lower()
+    if suffix == ".txt":
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError as exc:
+            raise DocumentReadError(f"TXT 不是 UTF-8 编码：{path}（{exc}）") from exc
+        if not normalize_ws(text):
+            raise DocumentReadError(f"文档没有可抽取文本：{path}")
+        return text, {"documentFormat": "txt"}
+
+    if suffix == ".pdf":
+        try:
+            from pypdf import PdfReader
+        except ImportError as exc:
+            raise SystemExit(
+                "读取 PDF 需要 pypdf。请运行 `uv sync --extra extract`，"
+                "或 `pip install pypdf`。"
+            ) from exc
+
+        try:
+            reader = PdfReader(path)
+            if reader.is_encrypted and reader.decrypt("") == 0:
+                raise DocumentReadError(f"PDF 已加密且需要密码，无法提取：{path}")
+            page_texts: list[str] = []
+            text_pages = 0
+            for page_no, page in enumerate(reader.pages, 1):
+                try:
+                    page_text = page.extract_text() or ""
+                except Exception as exc:
+                    raise DocumentReadError(
+                        f"PDF 第 {page_no} 页文本提取失败：{path}（{exc}）"
+                    ) from exc
+                if normalize_ws(page_text):
+                    text_pages += 1
+                page_texts.append(page_text)
+        except (SystemExit, DocumentReadError):
+            raise
+        except Exception as exc:
+            raise DocumentReadError(f"PDF 无法读取：{path}（{exc}）") from exc
+
+        # 用空白分隔页面；prompt 与 quote 校验都使用这一个结果。
+        text = "\n\n".join(page_texts).strip()
+        if not normalize_ws(text):
+            raise DocumentReadError(
+                f"PDF 未提取到文本：{path}。它可能是扫描件，请先 OCR 后再运行。"
+            )
+        return text, {
+            "documentFormat": "pdf",
+            "pageCount": len(reader.pages),
+            "textPageCount": text_pages,
+        }
+
+    supported = ", ".join(sorted(SUPPORTED_DOC_SUFFIXES))
+    raise SystemExit(f"不支持的文档格式：{path.suffix or '(无扩展名)'}；支持 {supported}")
+
+
+def discover_documents(path: Path) -> list[Path]:
+    """发现单个文档，或目录第一层中的 TXT/PDF 文档。"""
+    if path.is_dir():
+        return sorted(
+            (
+                p
+                for p in path.iterdir()
+                if p.is_file() and p.suffix.lower() in SUPPORTED_DOC_SUFFIXES
+            ),
+            key=lambda p: p.name.lower(),
+        )
+    if not path.is_file():
+        raise SystemExit(f"文档路径不存在或不是文件：{path}")
+    if path.suffix.lower() not in SUPPORTED_DOC_SUFFIXES:
+        supported = ", ".join(sorted(SUPPORTED_DOC_SUFFIXES))
+        raise SystemExit(f"不支持的文档格式：{path.suffix or '(无扩展名)'}；支持 {supported}")
+    return [path]
+
+
 # ─────────────────────── 1. load：读 graph ───────────────────────────────────
 
 
@@ -272,16 +360,23 @@ class Graph:
 # ──────────────── 2. register：文档 → GuidelineSource ────────────────────────
 
 
-def build_source_record(doc: Path, graph: Graph) -> dict[str, Any]:
+def build_source_record(
+    doc: Path, graph: Graph, document_meta: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """纯机械，不经过 LLM，因此不可能有幻觉。"""
     source_id = slugify(doc.stem)
+    try:
+        local_file = str(doc.resolve().relative_to(ROOT))
+    except ValueError:
+        local_file = str(doc)
     return {
         "sourceId": source_id,
         "uri": f"{BASE_URI}guidelineSource/{source_id}",
-        "localFile": str(doc.relative_to(ROOT)) if doc.is_absolute() else str(doc),
+        "localFile": local_file,
         "sha256": sha256_of(doc),
         "byteSize": doc.stat().st_size,
         "graphUri": GRAPH_URI_TMPL.format(source_id=source_id),
+        **(document_meta or {}),
     }
 
 
@@ -1062,8 +1157,8 @@ def report_markdown(rep: dict[str, Any]) -> str:
 def process_document(
     doc: Path, graph: Graph, out_dir: Path, args: argparse.Namespace
 ) -> dict[str, Any]:
-    text = doc.read_text(encoding="utf-8")
-    source = build_source_record(doc, graph)
+    text, document_meta = read_document(doc)
+    source = build_source_record(doc, graph, document_meta)
     sid = source["sourceId"]
     chunks = chunk_document(text, args.chunk_size, args.overlap)
 
@@ -1072,7 +1167,15 @@ def process_document(
     if unknown:
         raise SystemExit(f"--only 里有 graph 中不存在的实体类型：{unknown}")
 
-    print(f"\n▸ {sid}  ({len(text)} 字符 → {len(chunks)} 块，{len(targets)} 类目标)")
+    detail = (
+        f"，PDF {source['textPageCount']}/{source['pageCount']} 页含文本"
+        if source["documentFormat"] == "pdf"
+        else ""
+    )
+    print(
+        f"\n▸ {sid}  ({len(text)} 字符{detail} → {len(chunks)} 块，"
+        f"{len(targets)} 类目标)"
+    )
 
     doc_out = out_dir / sid
     doc_out.mkdir(parents=True, exist_ok=True)
@@ -1236,7 +1339,7 @@ def main() -> int:
         description="schema-guided 语义抽取：graph + 文档 → 带出处、可审计的 Turtle"
     )
     ap.add_argument("--graph", required=True, type=Path, help="ER 图 JSON（schema 来源）")
-    ap.add_argument("--doc", required=True, type=Path, help="文档文件或目录")
+    ap.add_argument("--doc", required=True, type=Path, help="TXT/PDF 文档文件或目录")
     ap.add_argument("--out", type=Path, default=ROOT / "ontology" / "dist" / "extract")
     ap.add_argument("--model", help="覆盖 .env 的 OPENAI_MODEL_TEXT")
     ap.add_argument("--base-url", help="覆盖 .env 的 OPENAI_BASE_URL")
@@ -1251,6 +1354,11 @@ def main() -> int:
     ap.add_argument("--only", nargs="*", help="只抽这些实体类型（默认所有 policy=llm 的）")
     ap.add_argument("--prompt-version", default="extract-v1")
     ap.add_argument("--no-link", action="store_true", help="跳过第二遍连边（省 token）")
+    ap.add_argument(
+        "--strict-docs",
+        action="store_true",
+        help="目录模式遇到不可读/无文本层文档时立即失败；默认警告并跳过",
+    )
     ap.add_argument("--dry-run", action="store_true", help="不调 LLM，产出 plan.json")
     ap.add_argument("--from-raw", type=Path, help="跳过 LLM，从已有 raw.jsonl 重跑校验之后的阶段")
     ap.add_argument(
@@ -1284,24 +1392,35 @@ def main() -> int:
     for eid, (pol, why) in skipped.items():
         print(f"  - {eid}: policy={pol} —— {why}")
 
-    docs = (
-        sorted(p for p in args.doc.glob("*.txt"))
-        if args.doc.is_dir()
-        else [args.doc]
-    )
+    docs = discover_documents(args.doc)
     if not docs:
-        raise SystemExit(f"{args.doc} 下没有 .txt 文档")
+        raise SystemExit(f"{args.doc} 下没有 .txt 或 .pdf 文档")
     if args.from_raw and len(docs) > 1:
         raise SystemExit("--from-raw 一次只能配一个文档")
 
     args.out.mkdir(parents=True, exist_ok=True)
-    reports = [process_document(d, graph, args.out, args) for d in docs]
+    reports: list[dict[str, Any]] = []
+    skipped_docs: list[tuple[Path, str]] = []
+    for doc in docs:
+        try:
+            reports.append(process_document(doc, graph, args.out, args))
+        except DocumentReadError as exc:
+            if not args.doc.is_dir() or args.strict_docs:
+                raise SystemExit(str(exc)) from exc
+            skipped_docs.append((doc, str(exc)))
+            print(f"\n⚠ 跳过 {doc.name}：{exc}", file=sys.stderr)
+
+    if not reports:
+        raise SystemExit("没有成功读取任何文档")
+    if skipped_docs:
+        print(f"\n⚠ 已跳过 {len(skipped_docs)} 个不可读文档", file=sys.stderr)
 
     if args.dry_run:
         total_calls = sum(r.get("calls", 0) for r in reports)
         print(
-            f"\n合计：{len(docs)} 篇文档 → {total_calls} 次 LLM 调用"
-            f"（{len(docs)} 篇 × 分块数 × {len(args.only or graph.extractable())} 类）"
+            f"\n合计：{len(reports)} 篇文档 → {total_calls} 次 LLM 调用"
+            f"（已跳过 {len(skipped_docs)} 篇；分块数 × "
+            f"{len(args.only or graph.extractable())} 类）"
         )
         if total_calls > 200:
             print(

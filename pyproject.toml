@@ -14,10 +14,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# 语义抽取：semantic_extract.py 的第 4 阶段（唯一用到 LLM 的一步）。
-# 1-3、5-8 阶段是纯 stdlib，装不装这个都能跑 --dry-run / --from-raw。
+# 语义抽取：OpenAI 兼容接口 + PDF 文本提取。
+# TXT 的确定性阶段只用 stdlib；PDF 即使 --dry-run / --from-raw 也需要 pypdf。
 # 走 OpenAI 兼容接口，端点/模型/密钥全部从 .env 读（SiliconFlow / vLLM / Ollama 通用）。
-extract = ["openai>=3.0.0"]
+extract = ["openai>=3.0.0", "pypdf>=6.0.0"]
 
 # 外部术语拉取（OLS4 REST）与 GraphDB 装载。
 net = ["httpx>=0.28.1"]
