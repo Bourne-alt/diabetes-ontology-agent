@@ -1,0 +1,116 @@
+# 20 · LabResult × DiagnosticThreshold → Assessment
+#
+# Assessment 只回答一件事：**这次检验的数值落在哪个区间**。
+# 它绝不下诊断 —— 「是不是糖尿病」由 30-diagnosis-from-assessment.rq 处理，
+# 那里还要考虑 confirmationRequired 与复测。两件事分开，是因为
+# 「A1C 7.4% 落在糖尿病区间」和「这个人是糖尿病」根本不是同一句话。
+#
+# ════════ 五条硬约束 ════════════════════════════════════════════════
+#
+# 1 单位逐字相等。换算已在 ETL（src/dmo/terms/units.py）做完，
+#   进图的 dmo:resultUnit 一律是规范单位。SPARQL 里一次换算都不做 ——
+#   系数是 analyte-specific 的（葡萄糖 ×18.0182、肌酐 ÷88.4），
+#   写进查询就必须在查询里判断"这是哪个分析物"，判断错一次结论就错。
+#
+# 2 可信度门禁。上游 1600 条检验值是 0~25 的随机数（血小板 15.3 而参考范围
+#   100-300），一律 valueTrustLevel="Unverified"，**默认永不参与判定**。
+#   要看它们能推出什么，走 20b-lab-assessment-unreliable.rq，结论强制 Indeterminate。
+#
+# 3 populationContext。妊娠状态取自**同一次就诊**的 ClinicalObservation。
+#   取不到时按 NonPregnant 处理，但 applicableContext 如实写成
+#   "NonPregnant(assumed)" —— OWA 下"没记录"≠"没怀孕"，这是闭世界近似，
+#   不冒充断言事实。S04/S04b 一对就是验这个：同样 142 mg/dL，
+#   妊娠的命中转诊触发点，非妊娠的零命中。
+#
+# 4 开闭区间按 lowerOperator/upperOperator 精确判定。
+#   「below 5.7%」是开区间，用 >= 近似会把 5.7 错判成 Normal（S16 专测）。
+#
+# 5 Assessment IRI 由 SHA1(labResult|thresholdId|ruleVersion) 确定性铸造。
+#   规则重跑得同一 IRI，urn:dmo:inferred 整图 PUT 才真幂等；
+#   用 BNODE() 或 UUID() 的话每次跑都是新 IRI，图永远"有变化"。
+#
+# ⚠️ 两个 GraphDB 特有的坑
+#   · 患者侧写 GRAPH ?pg + STRSTARTS(…,"urn:dmo:patient:")——?pg 本身就是 provenance。
+#   · **知识侧不写 GRAPH**。GraphDB 的 owl2-rl 物化三元组不在任何用户命名图里，
+#     写 GRAPH <urn:dmo:seed> 会**静默丢结果**：查询不报错，只是少一半答案。
+
+PREFIX dmo:  <https://example.org/dmo#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?assessment a dmo:Assessment ;
+      dmo:assessmentId    ?aid ;
+      dmo:conclusion      ?conclusion ;
+      dmo:ruleId          "LAB-THRESHOLD-MATCH" ;
+      dmo:ruleVersion     "1.0.0" ;
+      dmo:applicableContext ?ctxLabel ;
+      dmo:basedOnLabResult ?res ;
+      dmo:appliesThreshold ?th .
+  ?pat dmo:hasAssessment ?assessment .
+}
+WHERE {
+  # ── 患者事实侧：必须限定在患者命名图内 ──────────────────────────
+  GRAPH ?pg {
+    ?pat a dmo:Patient ; dmo:hasEncounter ?enc .
+    ?enc dmo:producesLabResult ?res .
+    ?res dmo:resultValue ?v ;
+         dmo:resultUnit  ?unit ;
+         dmo:measuredByTest ?test .
+  }
+  FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+
+  # 【硬约束 2】可信度门禁 —— 上游随机值默认不参与
+  FILTER NOT EXISTS { GRAPH ?pg { ?res dmo:valueTrustLevel "Unverified" } }
+
+  # ── 知识侧：**不写 GRAPH**，否则丢掉 owl2-rl 物化边 ─────────────
+  ?test dmo:hasThreshold ?th .
+  ?th dmo:thresholdId       ?tid ;
+      dmo:boundUnit         ?bunit ;
+      dmo:classification    ?cls ;
+      dmo:populationContext ?pctx ;
+      dmo:lowerOperator     ?loOp ;
+      dmo:upperOperator     ?upOp .
+  OPTIONAL { ?th dmo:lowerBound ?lo }
+  OPTIONAL { ?th dmo:upperBound ?up }
+
+  # 【硬约束 1】单位逐字相等
+  FILTER(STR(?unit) = STR(?bunit))
+
+  # 【硬约束 3】人群上下文。妊娠状态取自同一次就诊的观察。
+  OPTIONAL {
+    GRAPH ?pg {
+      ?obs dmo:observationType "PregnancyStatus" ;
+           dmo:valueText ?pregText ;
+           dmo:observationRecordedAt ?enc .
+    }
+  }
+  BIND(IF(BOUND(?pregText) && ?pregText = "Pregnant", "Pregnant",
+       IF(BOUND(?pregText), "NonPregnant", "NonPregnant")) AS ?ctxMatch)
+  # 没有妊娠记录时，如实标注这是**假设**而不是事实
+  BIND(IF(BOUND(?pregText),
+          ?ctxMatch,
+          CONCAT(?ctxMatch, "(assumed)")) AS ?ctxLabel)
+  FILTER(?pctx = ?ctxMatch || ?pctx = "Any")
+
+  # 【硬约束 4】开闭区间精确判定
+  FILTER( ?loOp = "None" || (BOUND(?lo) && IF(?loOp = "GTE", ?v >= ?lo, ?v > ?lo)) )
+  FILTER( ?upOp = "None" || (BOUND(?up) && IF(?upOp = "LTE", ?v <= ?up, ?v <  ?up)) )
+
+  # classification 与 conclusion 是两套取值域，必须显式映射。
+  # 映射不上一律 Indeterminate —— **不猜**。
+  BIND(IF(?cls = "Normal",            "Normal",
+       IF(?cls = "Prediabetes",       "Prediabetes",
+       IF(?cls = "Diabetes",          "DiabetesRange",
+       IF(?cls = "Hypoglycemia",      "Low",
+       IF(?cls = "SevereHypoglycemia","Critical",
+       IF(?cls = "Hyperglycemia",     "High",
+       IF(?cls = "KetoneAlert",       "High",
+       IF(?cls = "Albuminuria",       "High",
+       IF(?cls = "Macroalbuminuria",  "Critical",
+          "Indeterminate"))))))))) AS ?conclusion)
+
+  # 【硬约束 5】确定性 IRI
+  BIND(CONCAT(STR(?res), "|", ?tid, "|1.0.0") AS ?seed)
+  BIND(SHA1(?seed) AS ?aid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/assessment/", ?aid)) AS ?assessment)
+}

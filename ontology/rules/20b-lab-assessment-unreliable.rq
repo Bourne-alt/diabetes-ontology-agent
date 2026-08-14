@@ -1,0 +1,66 @@
+# 20b · Unverified 值的变体 —— 结论强制 Indeterminate + caveat
+#
+# 20-lab-assessment.rq 把 valueTrustLevel="Unverified" 的检验挡在门外。
+# 这条规则是那道门的**受控开口**：让不可信值也能走完管线，
+# 但结论一律降级成 Indeterminate，并强制带上 caveat。
+#
+# 为什么要有这条：`dmo sync all --include-unreliable` 和演示 Q4 需要它。
+# 上游 1600 条随机检验值走完全流程之后是什么样子 —— 这本身就是要展示的结论：
+# **系统认得这些项目，但拒绝拿它们下判断**。零结果和"有结果但标注不可信"
+# 传达的信息完全不同，后者才说明系统真的处理过。
+#
+# ⚠️ 这条规则产出的 Assessment **不参与** 30-diagnosis-from-assessment.rq。
+#    那条规则只认 conclusion="DiabetesRange"，而这里的结论永远是 Indeterminate，
+#    所以不可信值不可能推出任何 Diagnosis。这不是靠约定，是靠取值域天然隔离。
+#
+# IRI 的 ruleVersion 段用 "1.0.0-unreliable"，与 20 号规则的产物不会撞。
+
+PREFIX dmo:  <https://example.org/dmo#>
+
+CONSTRUCT {
+  ?assessment a dmo:Assessment ;
+      dmo:assessmentId    ?aid ;
+      dmo:conclusion      "Indeterminate" ;
+      dmo:ruleId          "LAB-THRESHOLD-MATCH-UNRELIABLE" ;
+      dmo:ruleVersion     "1.0.0-unreliable" ;
+      dmo:applicableContext ?ctxLabel ;
+      dmo:caveat          ?caveat ;
+      dmo:basedOnLabResult ?res ;
+      dmo:appliesThreshold ?th .
+  ?pat dmo:hasAssessment ?assessment .
+}
+WHERE {
+  GRAPH ?pg {
+    ?pat a dmo:Patient ; dmo:hasEncounter ?enc .
+    ?enc dmo:producesLabResult ?res .
+    ?res dmo:resultValue ?v ;
+         dmo:resultUnit  ?unit ;
+         dmo:measuredByTest ?test ;
+         dmo:valueTrustLevel "Unverified" .   # ← 只处理被 20 号挡下的那些
+  }
+  FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+
+  ?test dmo:hasThreshold ?th .
+  ?th dmo:thresholdId ?tid ; dmo:boundUnit ?bunit ;
+      dmo:classification ?cls ; dmo:populationContext ?pctx ;
+      dmo:lowerOperator ?loOp ; dmo:upperOperator ?upOp .
+  OPTIONAL { ?th dmo:lowerBound ?lo }
+  OPTIONAL { ?th dmo:upperBound ?up }
+
+  FILTER(STR(?unit) = STR(?bunit))
+  FILTER(?pctx = "Any" || ?pctx = "NonPregnant")
+  BIND("NonPregnant(assumed)" AS ?ctxLabel)
+
+  FILTER( ?loOp = "None" || (BOUND(?lo) && IF(?loOp = "GTE", ?v >= ?lo, ?v > ?lo)) )
+  FILTER( ?upOp = "None" || (BOUND(?up) && IF(?upOp = "LTE", ?v <= ?up, ?v <  ?up)) )
+
+  BIND(CONCAT(
+    "本次判定用了 valueTrustLevel=Unverified 的上游检验值。",
+    "该值在区间上落入「", ?cls, "」，但**不构成任何临床结论** —— ",
+    "上游 cdr_lis_result 的数值与参考范围无关（实测全库集中在 0~25），",
+    "此结论仅用于说明管线走通，不具临床含义。"
+  ) AS ?caveat)
+
+  BIND(SHA1(CONCAT(STR(?res), "|", ?tid, "|1.0.0-unreliable")) AS ?aid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/assessment/", ?aid)) AS ?assessment)
+}

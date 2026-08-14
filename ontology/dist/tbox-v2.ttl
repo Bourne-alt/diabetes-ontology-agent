@@ -30,8 +30,10 @@ dmo:Patient a owl:Class ;
 dmo:DiabetesType a owl:Class ;
     rdfs:label "DiabetesType" ;
     rdfs:comment "糖尿病分型术语节点（T1DM / T2DM / GDM / 单基因 / 前期 / 继发性）。ER 模型中分型是实例而非子类，OWL 子类层次另在 Turtle TBox 中维护。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "class" ;
     .
+# ↑ 方案 B（punning）：DiabetesType 的实例同时被断言为 owl:Class，
+#   子类层次与 disjointWith 在 dmo-axioms.ttl 手写。
 
 dmo:ClinicalEncounter a owl:Class ;
     rdfs:label "ClinicalEncounter" ;
@@ -42,8 +44,10 @@ dmo:ClinicalEncounter a owl:Class ;
 dmo:LabTest a owl:Class ;
     rdfs:label "LabTest" ;
     rdfs:comment "检验项目定义（术语层），如 A1C、FPG、OGTT-2h、随机血糖、UACR、eGFR、尿酮体。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "skos" ;
     .
+dmo:LabTestScheme a skos:ConceptScheme ;
+    rdfs:label "LabTest 术语表" .
 
 dmo:LabResult a owl:Class ;
     rdfs:label "LabResult" ;
@@ -66,32 +70,42 @@ dmo:GlycemicTarget a owl:Class ;
 dmo:Complication a owl:Class ;
     rdfs:label "Complication" ;
     rdfs:comment "糖尿病并发症与合并症，含慢性（DKD/DR/DPN/DFU/CVD）与急性（低血糖/DKA/HHS）两类。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "class" ;
     .
+# ↑ 方案 B（punning）：Complication 的实例同时被断言为 owl:Class，
+#   子类层次与 disjointWith 在 dmo-axioms.ttl 手写。
 
 dmo:ComplicationStage a owl:Class ;
     rdfs:label "ComplicationStage" ;
     rdfs:comment "并发症分期节点（NPDR→PDR、CKD G1-G5/A1-A3、低血糖 Level 1-3）。stageOrder 支撑 OWL TransitiveProperty worseThan 的传递闭包。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "class" ;
     .
+# ↑ 方案 B（punning）：ComplicationStage 的实例同时被断言为 owl:Class，
+#   子类层次与 disjointWith 在 dmo-axioms.ttl 手写。
 
 dmo:Symptom a owl:Class ;
     rdfs:label "Symptom" ;
     rdfs:comment "症状/体征节点，用于「症状 → 可能情形」的多跳检索与急诊分流。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "skos" ;
     .
+dmo:SymptomScheme a skos:ConceptScheme ;
+    rdfs:label "Symptom 术语表" .
 
 dmo:RiskFactor a owl:Class ;
     rdfs:label "RiskFactor" ;
     rdfs:comment "风险因素节点，区分可干预与不可干预——这是生活方式干预建议能否落地的判据。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "skos" ;
     .
+dmo:RiskFactorScheme a skos:ConceptScheme ;
+    rdfs:label "RiskFactor 术语表" .
 
 dmo:DrugClass a owl:Class ;
     rdfs:label "DrugClass" ;
     rdfs:comment "降糖药物类别（二甲双胍/SU/TZD/DPP4i/SGLT2i/GLP-1RA/胰岛素等）。禁忌与不良反应挂在类别层，而非单药层。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "skos" ;
     .
+dmo:DrugClassScheme a skos:ConceptScheme ;
+    rdfs:label "DrugClass 术语表" .
 
 dmo:Medication a owl:Class ;
     rdfs:label "Medication" ;
@@ -114,14 +128,18 @@ dmo:AdverseEffect a owl:Class ;
 dmo:LifestyleIntervention a owl:Class ;
     rdfs:label "LifestyleIntervention" ;
     rdfs:comment "生活方式干预节点（营养、身体活动、体重管理、戒烟、自我管理教育 DSMES）。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "skos" ;
     .
+dmo:LifestyleInterventionScheme a skos:ConceptScheme ;
+    rdfs:label "LifestyleIntervention 术语表" .
 
 dmo:Device a owl:Class ;
     rdfs:label "Device" ;
     rdfs:comment "监测与给药设备节点（CGM、胰岛素泵、血糖仪、人工胰腺、尿酮试纸）。" ;
-    dmo:tboxRoute "individual" ;
+    dmo:tboxRoute "skos" ;
     .
+dmo:DeviceScheme a skos:ConceptScheme ;
+    rdfs:label "Device 术语表" .
 
 dmo:MonitoringSchedule a owl:Class ;
     rdfs:label "MonitoringSchedule" ;
@@ -238,6 +256,12 @@ dmo:boundUnit a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:comment "边界单位" ;
     .
+dmo:caveat a owl:DatatypeProperty ;
+    rdfs:label "caveat" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( dmo:Assessment dmo:Diagnosis ) ] ;
+    rdfs:range xsd:string ;
+    rdfs:comment "对该结论的限定说明，如「单次异常不等于确诊，需另一日复测确认」。" ;
+    .
 dmo:classification a owl:DatatypeProperty ;
     rdfs:label "classification" ;
     rdfs:domain dmo:DiagnosticThreshold ;
@@ -297,6 +321,12 @@ dmo:definition a owl:DatatypeProperty ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( dmo:Complication dmo:DiabetesType dmo:LabTest ) ] ;
     rdfs:range xsd:string ;
     rdfs:comment "来源原文的定义摘录" ;
+    .
+dmo:demoScenario a owl:DatatypeProperty ;
+    rdfs:label "demoScenario" ;
+    rdfs:domain dmo:Patient ;
+    rdfs:range xsd:string ;
+    rdfs:comment "演示场景编号（如 S02）。真实患者留空。" ;
     .
 dmo:deviceCode a owl:DatatypeProperty ;
     rdfs:label "deviceCode" ;
@@ -394,6 +424,12 @@ dmo:externalCode a owl:DatatypeProperty ;
     rdfs:domain dmo:Diagnosis ;
     rdfs:range xsd:string ;
     rdfs:comment "编码体系中的诊断代码" ;
+    .
+dmo:factOrigin a owl:DatatypeProperty ;
+    rdfs:label "factOrigin" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( dmo:ClinicalObservation dmo:Diagnosis dmo:LabResult dmo:MedicationUse dmo:Patient ) ] ;
+    rdfs:range xsd:string ;
+    rdfs:comment "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。" ;
     .
 dmo:fastingRequired a owl:DatatypeProperty ;
     rdfs:label "fastingRequired" ;
@@ -771,11 +807,23 @@ dmo:sourceId a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:comment "出处唯一标识" ;
     .
+dmo:sourceUnit a owl:DatatypeProperty ;
+    rdfs:label "sourceUnit" ;
+    rdfs:domain dmo:LabResult ;
+    rdfs:range xsd:string ;
+    rdfs:comment "单位换算前的原始单位。上游无单位列时为空 —— 空即拒绝数值判定。" ;
+    .
 dmo:sourceUrl a owl:DatatypeProperty ;
     rdfs:label "sourceUrl" ;
     rdfs:domain dmo:GuidelineSource ;
     rdfs:range xsd:string ;
     rdfs:comment "原文链接" ;
+    .
+dmo:sourceValue a owl:DatatypeProperty ;
+    rdfs:label "sourceValue" ;
+    rdfs:domain dmo:LabResult ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "单位换算前的原始数值。换算在 ETL 做，原始值必须保留以便复核。" ;
     .
 dmo:specimen a owl:DatatypeProperty ;
     rdfs:label "specimen" ;
@@ -926,6 +974,12 @@ dmo:valueText a owl:DatatypeProperty ;
     rdfs:domain dmo:ClinicalObservation ;
     rdfs:range xsd:string ;
     rdfs:comment "枚举或文本结果；数值观察可留空" ;
+    .
+dmo:valueTrustLevel a owl:DatatypeProperty ;
+    rdfs:label "valueTrustLevel" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( dmo:ClinicalObservation dmo:LabResult ) ] ;
+    rdfs:range xsd:string ;
+    rdfs:comment "该数值的可信度。Attested=上游真实断言；Curated=人工策展的演示数据；Unverified=上游随机/未经核验的值。Unverified 默认不参与阈值判定。" ;
     .
 dmo:verificationStatus a owl:DatatypeProperty ;
     rdfs:label "verificationStatus" ;
@@ -1117,6 +1171,18 @@ dmo:encounterType-Postpartum a skos:Concept ;
 dmo:encounterType-Telehealth a skos:Concept ;
     skos:inScheme dmo:encounterTypeScheme ;
     skos:prefLabel "Telehealth" .
+
+dmo:factOriginScheme a skos:ConceptScheme ;
+    rdfs:label "factOrigin 取值域" .
+dmo:factOrigin-ehr-legacy a skos:Concept ;
+    skos:inScheme dmo:factOriginScheme ;
+    skos:prefLabel "ehr-legacy" .
+dmo:factOrigin-derived a skos:Concept ;
+    skos:inScheme dmo:factOriginScheme ;
+    skos:prefLabel "derived" .
+dmo:factOrigin-demo-cohort a skos:Concept ;
+    skos:inScheme dmo:factOriginScheme ;
+    skos:prefLabel "demo-cohort" .
 
 dmo:frequencyCategoryScheme a skos:ConceptScheme ;
     rdfs:label "frequencyCategory 取值域" .
@@ -1475,6 +1541,18 @@ dmo:urgency-Emergency a skos:Concept ;
     skos:inScheme dmo:urgencyScheme ;
     skos:prefLabel "Emergency" .
 
+dmo:valueTrustLevelScheme a skos:ConceptScheme ;
+    rdfs:label "valueTrustLevel 取值域" .
+dmo:valueTrustLevel-Attested a skos:Concept ;
+    skos:inScheme dmo:valueTrustLevelScheme ;
+    skos:prefLabel "Attested" .
+dmo:valueTrustLevel-Curated a skos:Concept ;
+    skos:inScheme dmo:valueTrustLevelScheme ;
+    skos:prefLabel "Curated" .
+dmo:valueTrustLevel-Unverified a skos:Concept ;
+    skos:inScheme dmo:valueTrustLevelScheme ;
+    skos:prefLabel "Unverified" .
+
 dmo:verificationStatusScheme a skos:ConceptScheme ;
     rdfs:label "verificationStatus 取值域" .
 dmo:verificationStatus-Suspected a skos:Concept ;
@@ -1698,6 +1776,12 @@ dmo:observationOfSymptom a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:range dmo:Symptom ;
     rdfs:comment "症状类观察对应的症状术语；非症状观察不使用该关系。" ;
     .
+dmo:hasAssessment a owl:ObjectProperty, owl:InverseFunctionalProperty ;
+    rdfs:label "hasAssessment" ;
+    rdfs:domain dmo:Patient ;
+    rdfs:range dmo:Assessment ;
+    rdfs:comment "患者的阈值评估结论。刻意加这条直连边：不加的话从 Assessment 回到 Patient 要走 basedOnLabResult → producesLabResult → hasEncounter 三跳，查询层每个模板都要重复这段 join，写错一处就静默少结果。" ;
+    .
 dmo:hasDiagnosis a owl:ObjectProperty, owl:InverseFunctionalProperty ;
     rdfs:label "hasDiagnosis" ;
     rdfs:domain dmo:Patient ;
@@ -1788,3 +1872,4 @@ dmo:recommendationCites a owl:ObjectProperty ;
     rdfs:range dmo:SourcePassage ;
     rdfs:comment "推荐条目的精确支持片段。" ;
     .
+

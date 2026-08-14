@@ -1,0 +1,30 @@
+icd10code,icd10name,concept_iri,concept_kind,verify_status,note
+E11,2型糖尿病,https://example.org/dmo/id/T2DM,DiabetesType,verified,上游全库 15 例，是唯一一种糖尿病编码。
+E10,1型糖尿病,https://example.org/dmo/id/T1DM,DiabetesType,verified,上游 0 例，仅演示队列使用。
+E13,其他特指的糖尿病,https://example.org/dmo/id/DM-Unspecified,DiabetesType,verified,上游 0 例。映到未分型而非某一具体型。
+E14,未特指的糖尿病,https://example.org/dmo/id/DM-Unspecified,DiabetesType,verified,上游 0 例。
+O24,妊娠期糖尿病,https://example.org/dmo/id/GDM,DiabetesType,verified,上游 0 例，GDM 分支只能靠演示队列。
+R73,血糖升高/糖尿病前期,https://example.org/dmo/id/Prediabetes,DiabetesType,verified,"上游 0 例。⚠️ Prediabetes 刻意不是 Diabetes 的子类 —— 前期不是糖尿病。"
+E66,肥胖,,Comorbidity,verified,"上游 19 例。是真实库里唯一能命中的体重类风险因子（无任何 BMI 观察值）。由 map_risk_rule 的 ICD-OBESITY 消费，故这里不指向 Complication。"
+E78,高脂血症,,Comorbidity,verified,上游 16 例。由 map_risk_rule 的 ICD-DYSLIPIDEMIA 消费。
+I10,原发性高血压,,Comorbidity,verified,上游 14 例。由 map_risk_rule 的 ICD-HYPERTENSION 消费。
+I25,慢性缺血性心脏病,https://example.org/dmo/id/CVD,Complication,verified,"上游 15 例。⚠️ 映到 CVD 是**编码到概念**的对应，语料没说 I25 等价于糖尿病心血管并发症；且上游每个患者只有一个诊断，没有一例与 E11 并存。"
+F41,焦虑障碍,,Unrelated,verified,与糖尿病无关，显式标 Unrelated 而不是留空。
+G43,偏头痛,,Unrelated,verified,
+H66,化脓性中耳炎,,Unrelated,verified,
+J02,急性咽炎,,Unrelated,verified,
+J06,急性上呼吸道感染,,Unrelated,verified,
+J18,肺炎,,Unrelated,verified,
+J32,慢性鼻窦炎,,Unrelated,verified,
+J45,支气管哮喘,,Unrelated,verified,
+K21,胃食管反流病,,Unrelated,verified,
+K29,急性胃炎,,Unrelated,verified,
+K35,急性阑尾炎,,Unrelated,verified,
+K59,肠易激综合征,,Unrelated,verified,
+L23,过敏性皮炎,,Unrelated,verified,
+M17,膝关节病,,Unrelated,verified,
+M25,关节病,,Unrelated,verified,
+M54,背痛,,Unrelated,verified,
+N39,泌尿系感染,,Unrelated,verified,"⚠️ 糖尿病患者泌尿系感染风险升高是常识，但本仓库语料没有收录这条断言；SGLT2i 的不良反应里提到 Urinary Tract Infections，那是药物不良反应不是糖尿病并发症。标 Unrelated。"
+R50,发热,,Unrelated,verified,
+R51,头痛,,Unrelated,verified,

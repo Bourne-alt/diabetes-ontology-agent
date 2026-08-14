@@ -8,9 +8,25 @@
 #   实测：eGFR 在 ontology/knowledges/ 全语料中出现 **0 次**，
 #   FDA 药物文件对二甲双胍只有定性表述（"tell your doctor if you have kidney problems"），
 #   没有任何数值切点。补一个 30 进来就是编造出处。
-#   → 改用语料里唯一一条明确禁令做验收：
+#   → 改用语料里唯一一条可自动判定的禁令做验收：
 #     "Do not take these drugs if you have severe kidney problems or are on dialysis."
-#     （SGLT2 Inhibitors，fda-diabetes-drug-classes.txt:280）
+#     （SGLT2 Inhibitors，fda-diabetes-drug-classes.txt）
+#
+# ════════ V2 改写：五跳 → 七跳 ═════════════════════════════════════
+#
+#   V1: Patient -takesMedication-> Medication -belongsToDrugClass-> DrugClass
+#           -hasContraindication-> Contraindication -triggeredByCondition-> ?cond
+#       Patient -hasComplication-> ?cond
+#
+#   V2: Patient -hasMedicationUse-> MedicationUse -usesMedication-> Medication
+#           -belongsToDrugClass-> DrugClass -hasContraindication-> Contraindication
+#           [severity="Absolute"] -triggeredByCondition-> ?cond
+#       Patient -hasDiagnosis-> Diagnosis[clinicalStatus="Active"]
+#           -diagnosisComplication-> ?cond
+#
+# 多出来的两跳不是形式主义：MedicationUse 带 status（停药的不该报违规），
+# Diagnosis 带 clinicalStatus（已缓解的并发症不该报违规）。V1 的模型里
+# 「三年前停的药」和「现在在吃的药」是同一条边，报出来的违规没法用。
 
 @prefix dmo: <https://example.org/dmo#> .
 @prefix sh:  <http://www.w3.org/ns/shacl#> .
@@ -20,16 +36,32 @@ css:ContraindicatedMedicationShape a sh:NodeShape ;
     sh:targetClass dmo:Patient ;
     sh:sparql [
         sh:severity sh:Violation ;
-        sh:message "临床安全违规：患者存在 {?cond}，而所用药物属于对此有绝对禁忌的类别。" ;
+        sh:message "临床安全违规：患者存在活动性的 {?cond}，而在用药物属于对此有绝对禁忌的类别（{?rationale}）。" ;
         sh:prefixes dmo: ;
         sh:select """
-            SELECT $this ?cond WHERE {
-              $this <https://example.org/dmo#takesMedication> ?med .
+            SELECT $this ?cond ?rationale WHERE {
+              $this <https://example.org/dmo#hasMedicationUse> ?mu .
+              # 只看在用的药。停药/已完成的疗程不构成当下的安全问题。
+              # 刻意用 NOT EXISTS 而不是 status="Active"：没写 status 的记录
+              # 按「可能在用」处理 —— 安全形状宁可多报，不可漏报。
+              FILTER NOT EXISTS {
+                ?mu <https://example.org/dmo#status> ?st .
+                FILTER(?st IN ("Completed", "Stopped"))
+              }
+              ?mu <https://example.org/dmo#usesMedication> ?med .
               ?med <https://example.org/dmo#belongsToDrugClass> ?cls .
               ?cls <https://example.org/dmo#hasContraindication> ?contra .
               ?contra <https://example.org/dmo#severity> "Absolute" .
               ?contra <https://example.org/dmo#triggeredByCondition> ?cond .
-              $this <https://example.org/dmo#hasComplication> ?cond .
+              ?contra <https://example.org/dmo#rationale> ?rationale .
+
+              $this <https://example.org/dmo#hasDiagnosis> ?dx .
+              ?dx <https://example.org/dmo#diagnosisComplication> ?cond .
+              # 同理：没写 clinicalStatus 的按「可能仍活动」处理。
+              FILTER NOT EXISTS {
+                ?dx <https://example.org/dmo#clinicalStatus> ?cs .
+                FILTER(?cs IN ("Resolved", "Inactive"))
+              }
             }""" ] .
 
 css:ContraindicationProvenanceShape a sh:NodeShape ;
@@ -38,6 +70,41 @@ css:ContraindicationProvenanceShape a sh:NodeShape ;
         sh:path dmo:rationale ; sh:minCount 1 ;
         sh:message "禁忌规则必须带出处原话 —— 无依据的用药禁令比没有更危险。" ] ;
     sh:property [
-        sh:path dmo:severity ; sh:minCount 1 ;
+        sh:path dmo:severity ; sh:minCount 1 ; sh:maxCount 1 ;
         sh:in ( "Absolute" "Relative" "Caution" ) ;
         sh:message "禁忌必须声明强度：绝对禁忌与需谨慎评估的处置完全不同。" ] .
+
+# ⚠️ 刻意**没有**「Absolute 必须有 triggeredByCondition」这条约束。
+#    contra-Bromocriptine-Breastfeeding 是绝对禁令（原文 Do not take this medicine
+#    if you are breastfeeding），但触发条件「哺乳」是生理状态不是 Complication，
+#    schema 里的 triggeredByCondition 接不上。加了这条约束就会逼人把哺乳建成
+#    Complication —— 为了让校验通过而制造范畴错误，本末倒置。
+#    这个缺口由 explain_gap() 主动上报，不靠 SHACL 掩盖。
+
+# ── 分型唯一性（V2 新增）────────────────────────────────────────────
+# V1 靠 PatientShape 的 `hasDiabetesType maxCount 1` 保证一个患者至多一个分型。
+# V2 里分型挂在 Diagnosis 上，一个患者可以有多条 Diagnosis，maxCount 管不了。
+# 这条形状是 R-2 那个「FunctionalProperty ⟹ sameAs ⟹ 与 AllDisjointClasses 冲突」
+# 风险的**可执行哨兵**：DL 一致性检查跑不了（Java 8 没有 HermiT），
+# 但「同一患者有两条已确诊、分型不同的糖尿病诊断」这件事 SHACL 抓得住。
+css:SingleConfirmedDiabetesTypeShape a sh:NodeShape ;
+    sh:targetClass dmo:Patient ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "同一患者有两条已确诊且分型不同的糖尿病诊断（{?t1} / {?t2}）——分型互斥公理下这会推出不一致。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this ?t1 ?t2 WHERE {
+              $this <https://example.org/dmo#hasDiagnosis> ?d1, ?d2 .
+              ?d1 <https://example.org/dmo#diagnosisKind> "Diabetes" ;
+                  <https://example.org/dmo#verificationStatus> "Confirmed" ;
+                  <https://example.org/dmo#diagnosisType> ?t1 .
+              ?d2 <https://example.org/dmo#diagnosisKind> "Diabetes" ;
+                  <https://example.org/dmo#verificationStatus> "Confirmed" ;
+                  <https://example.org/dmo#diagnosisType> ?t2 .
+              FILTER(STR(?t1) < STR(?t2))
+              # DM-Unspecified 与任何具体分型并存是合法的：它表示「还没分型」，
+              # 不是第六种类型（dmo-axioms.ttl §8）。
+              FILTER(?t1 != <https://example.org/dmo/id/DM-Unspecified>)
+              FILTER(?t2 != <https://example.org/dmo/id/DM-Unspecified>)
+            }""" ] .

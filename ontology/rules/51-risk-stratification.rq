@@ -1,0 +1,156 @@
+# 51 · 风险分层 —— 本项目里「预测」的全部落点
+#
+# ════════ 先说清楚这不是什么 ════════════════════════════════════════
+#
+# 这**不是**统计或机器学习的风险预测模型。它不输出概率、不输出百分比、
+# 不输出时间窗（"5 年内 23%" 这类话在本管线里从头到尾不存在）。
+#
+# 理由很实在：预测需要特征、结局标签、随访三样东西，`hospital_zd` 一样都没有 ——
+# 15 个 E11 患者、每人 1 次检验、检验值是 0~25 的随机数、零结局标签、零随访。
+# 在这上面训练任何模型，学到的都是随机数的函数，披上"AI 预测"的皮就是编造。
+#
+# 它是**规则式的定性分层**：把已确诊事实、命中的指南风险因子、监测缺口、
+# 用药安全信号四类证据摆出来，按写死的、版本化的规则归到四档之一。
+# 每一条参与判定的因子都必须能指回一段可逐字校验的指南原文。
+#
+# ════════ 四档 ══════════════════════════════════════════════════════
+#
+#   High                   任一绝对禁忌命中，或已确诊活动性慢性并发症，或急性事件
+#   Moderate               已确诊糖尿病 + （≥2 个可改变风险因子 或 存在监测缺口）
+#   Low                    已确诊糖尿病，无上述任一项，且关键监测项齐全
+#   Insufficient-Evidence  没有可用的血糖类证据，或完全没有可用的风险侧事实
+#
+# ════════ 三条硬规矩（写进代码断言与测试，不是文档口号）═══════════
+#
+# 1 **列不出出处的因子不参与判定。** ICD-HYPERTENSION / ICD-DYSLIPIDEMIA
+#   这两条规则的风险因子在抽取产物里有，但本仓库语料没有可逐字引用的
+#   「高血压 ⟹ 2 型糖尿病风险升高」断言，所以它们**产出 Hit 但不计入 tier**。
+#   缺口要可见，不能靠沉默掩盖。
+#
+# 2 **Unverified 事实永不推高 tier**，只能触发 Insufficient-Evidence。
+#
+# 3 **绝对不输出概率、百分比、时间窗。** tier 是有序枚举，不是分数。
+#
+# ════════ 为什么真实患者必然是 Insufficient-Evidence ═══════════════
+#
+# 上游 15 个 E11 患者跑出来一定落在 Insufficient-Evidence，三个独立原因：
+#   · 检验值全部 trust=Unverified（随机数），没有一条可用的血糖证据；
+#   · 每个患者恰好一条诊断，零共病，风险侧无事实可用；
+#   · birthday 有 329/400 在未来，年龄推不出来。
+# 这不是 bug，是本方案要演示的核心结论 —— 系统主动说「我判不了，因为……」，
+# 而不是像对照组那样给一个 confidence 0.9 的假答案。
+
+PREFIX dmo: <https://example.org/dmo#>
+
+CONSTRUCT {
+  ?strat a dmo:RiskStratification ;
+      dmo:stratificationId ?sid ;
+      dmo:riskTier         ?tier ;
+      dmo:ruleId           "RISK-STRATIFICATION" ;
+      dmo:ruleVersion      "1.0.0" ;
+      dmo:insufficientReason ?reason ;
+      dmo:contributingFactorCount ?nCounted ;
+      dmo:monitoringGap    ?gapText ;
+      dmo:caveat           "定性分层，非概率预测：不含发生概率、不含时间窗。规则版本化，每个参与判定的因子都可回溯到指南原文。" .
+  ?pat dmo:hasRiskStratification ?strat .
+}
+WHERE {
+  # 只对「有糖尿病相关诊断」的患者分层。没有诊断的人谈风险分层是另一件事
+  #（那是筛查建议），本管线不做。
+  {
+    SELECT ?pat WHERE {
+      GRAPH ?pg { ?pat a dmo:Patient ; dmo:hasDiagnosis ?d .
+                  ?d dmo:diagnosisKind ?k FILTER(?k IN ("Diabetes","Prediabetes")) }
+      FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+    }
+    GROUP BY ?pat
+  }
+
+  # ── 信号 1：可用的血糖类证据（非 Unverified 且该检验挂了阈值）──────
+  BIND(EXISTS {
+    GRAPH ?pgA { ?pat dmo:hasEncounter ?eA . ?eA dmo:producesLabResult ?rA .
+                 ?rA dmo:measuredByTest ?tA }
+    FILTER(STRSTARTS(STR(?pgA), "urn:dmo:patient:"))
+    FILTER NOT EXISTS { GRAPH ?pgA { ?rA dmo:valueTrustLevel "Unverified" } }
+    ?tA dmo:hasThreshold ?thA .
+  } AS ?usableGlycemic)
+
+  # ── 信号 2：可用的风险侧事实（非 Unverified 的观察，或共病/并发症诊断）─
+  BIND(EXISTS {
+    GRAPH ?pgB { ?pat dmo:hasClinicalObservation ?oB }
+    FILTER(STRSTARTS(STR(?pgB), "urn:dmo:patient:"))
+    FILTER NOT EXISTS { GRAPH ?pgB { ?oB dmo:valueTrustLevel "Unverified" } }
+    # 上游那些「未作数值判定」的说明性观察不算风险事实
+    FILTER NOT EXISTS { GRAPH ?pgB { ?oB dmo:observationType "Other" } }
+  } || EXISTS {
+    GRAPH ?pgC { ?pat dmo:hasDiagnosis ?dC .
+                 ?dC dmo:diagnosisKind ?kC FILTER(?kC IN ("Comorbidity","Complication")) }
+    FILTER(STRSTARTS(STR(?pgC), "urn:dmo:patient:"))
+  } AS ?riskEvidence)
+
+  # ── 信号 3：绝对禁忌命中 ────────────────────────────────────────
+  BIND(EXISTS {
+    ?pat dmo:hasContraindicationFlag ?fl . ?fl dmo:flagSeverity "Absolute" .
+  } AS ?hasAbsolute)
+
+  # ── 信号 4：活动性慢性并发症 / 急性事件 ─────────────────────────
+  BIND(EXISTS {
+    GRAPH ?pgD { ?pat dmo:hasDiagnosis ?dD .
+                 ?dD dmo:diagnosisKind ?kD ; dmo:verificationStatus "Confirmed" .
+                 FILTER(?kD IN ("Complication","AcuteEvent")) }
+    FILTER(STRSTARTS(STR(?pgD), "urn:dmo:patient:"))
+    FILTER NOT EXISTS { GRAPH ?pgD { ?dD dmo:clinicalStatus ?csD
+                                     FILTER(?csD IN ("Resolved","Inactive")) } }
+  } AS ?hasComplication)
+
+  # ── 信号 5：**计入 tier 的**可改变风险因子数 ────────────────────
+  # 只数「有可逐字引用出处」的规则命中。没有出处的照样有 Hit，但不计数。
+  # ⚠️ 必须先在**必选**部分绑定 ?pat，再用 OPTIONAL 数命中。
+  #   只写 OPTIONAL 的话，?pat 仅在有命中时才绑定，于是这个子查询只会
+  #   为「有风险因子的患者」产出分组 —— 没有任何风险因子的患者
+  #   （恰恰是该报 Insufficient-Evidence 的那些）连一行都出不来，
+  #   整条规则对他们静默失效。实测：430 个患者只出了 6 条分层。
+  {
+    SELECT ?pat (COUNT(DISTINCT ?rf5) AS ?nCounted) WHERE {
+      GRAPH ?pgF { ?pat a dmo:Patient }
+      FILTER(STRSTARTS(STR(?pgF), "urn:dmo:patient:"))
+      OPTIONAL {
+        ?pat dmo:hasRiskFactorHit ?h5 .
+        ?h5 dmo:hitsRiskRule ?r5 ; dmo:hitRiskFactor ?rf5 .
+        ?r5 dmo:riskRuleCitesPassage ?p5 .      # ← 没有出处的在这里被过滤掉
+        ?p5 dmo:contentHash ?ph5 .
+        ?rf5 dmo:riskCategory "Modifiable" .
+      }
+    }
+    GROUP BY ?pat
+  }
+
+  # ── 信号 6：监测缺口（语料要求 UACR / eGFR 年检）────────────────
+  BIND(NOT EXISTS {
+    GRAPH ?pgE { ?pat dmo:hasEncounter ?eE . ?eE dmo:producesLabResult ?rE .
+                 ?rE dmo:measuredByTest ?tE }
+    FILTER(STRSTARTS(STR(?pgE), "urn:dmo:patient:"))
+    ?tE dmo:labTestCode "UACR" .
+  } AS ?gapUACR)
+
+  # ── 归档 ────────────────────────────────────────────────────────
+  BIND(IF(!?usableGlycemic || !?riskEvidence, "Insufficient-Evidence",
+       IF(?hasAbsolute || ?hasComplication,   "High",
+       IF(?nCounted >= 2 || ?gapUACR,         "Moderate",
+                                              "Low"))) AS ?tier)
+
+  BIND(IF(?tier != "Insufficient-Evidence", "",
+       CONCAT(
+         IF(!?usableGlycemic,
+            "没有可用于阈值判定的血糖类检验（上游数值均为 valueTrustLevel=Unverified，或该检验项在本仓库语料中无诊断切点）。", ""),
+         IF(!?riskEvidence,
+            "没有任何可用的风险侧事实（无临床观察、无共病或并发症诊断）——无法据此说风险低，只能说不知道。", "")
+       )) AS ?reason)
+
+  BIND(IF(?gapUACR,
+          "缺 UACR（尿白蛋白肌酐比）。语料要求对糖尿病患者定期监测 UACR 与 eGFR。",
+          "") AS ?gapText)
+
+  BIND(SHA1(CONCAT(STR(?pat), "|RISK|1.0.0")) AS ?sid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/riskStratification/", ?sid)) AS ?strat)
+}

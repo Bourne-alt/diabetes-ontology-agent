@@ -31,10 +31,10 @@ IDNS = "https://example.org/dmo/id/"
 PUBLISHERS = {"niddk": "NIDDK", "cdc": "CDC", "fda": "FDA", "nhc": "NHC"}
 
 YEAR_PATTERNS = [
-    re.compile(r"Last Reviewed\s+[A-Za-z]+\s+(\d{4})", re.I),
-    re.compile(r"^[A-Z]{3,10}\s+\d{1,2},\s*(\d{4})\s*$", re.M),
+    re.compile(r"Last Reviewed\s+[A-Za-z]+\s+(\d{4})", re.IGNORECASE),
+    re.compile(r"^[A-Z]{3,10}\s+\d{1,2},\s*(\d{4})\s*$", re.MULTILINE),
     re.compile(r"发布时间[：:\s]*(\d{4})"),
-    re.compile(r"Updated\s+[A-Za-z]+\s+\d{1,2},\s*(\d{4})", re.I),
+    re.compile(r"Updated\s+[A-Za-z]+\s+\d{1,2},\s*(\d{4})", re.IGNORECASE),
 ]
 
 # 正文判定阈值：长句（>60 字符）少于这个数，基本可以断定只抓到了导航壳。
@@ -131,7 +131,7 @@ def main() -> int:
         status = "⚠️ 空壳" if r["isShell"] else "正文"
         yr = r["publishedYear"] or "—"
         print(
-            f"{r['sourceId']:<40} {r['publisher']:<6} {str(yr):<6} "
+            f"{r['sourceId']:<40} {r['publisher']:<6} {yr!s:<6} "
             f"{r['longLines']:<5} {status}"
         )
     print("─" * 74)

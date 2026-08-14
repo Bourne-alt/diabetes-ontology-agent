@@ -7,3 +7,6 @@ venv/
 __pycache__/
 *.pyc
 ontology/dist/extract/
+# 同步管线导出的患者图（430 个文件 / 2.9M），由 `dmo sync all` 幂等重生成。
+# 它是**患者数据的本地副本**，即便已脱敏也不该进版本库。
+ontology/dist/patients/

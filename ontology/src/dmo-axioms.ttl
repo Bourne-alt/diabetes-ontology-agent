@@ -392,3 +392,132 @@ dmoid:DrugClass-SGLT2i dmo:hasContraindication dmoid:contra-SGLT2i-ESRD .
 #    没有任何 eGFR 数值切点。补 eGFR<30 = 编造出处。
 #    P002 就是用来证明安全形状**不会**在这里误报的。
 
+
+# ════════════════════════════════════════════════════════════════════
+# 11. 禁忌覆盖面的扩展 —— 以及一个必须说清楚的事实
+#
+# ⚠️ 全库语料里**只有两条**真正的禁令（"Do not take"）：
+#      1. SGLT2i + severe kidney problems / dialysis   ← 上面 §10 已建
+#      2. bromocriptine (Cycloset) + breastfeeding      ← 本节新建
+#    其余全部是 "Before you start taking these drugs, tell your doctor if …"，
+#    这是**告知义务**不是禁忌。抽取产物里那 55 条 dmo:Contraindication 绝大多数
+#    是模型把这类告知句改写成的，把它们标成 Absolute 就是过度解读原文。
+#
+#    所以本节新建的除 bromocriptine 外一律是 Relative / Caution，
+#    它们**不会**触发 clinical-safety.shacl 的违规（那条形状只看 Absolute），
+#    只在 /patients/{id}/safety 里作为"需要评估"列出。
+#
+#    这个覆盖面的稀薄本身就是要如实呈现的结论：一个诚实的本体，
+#    宁可只有两条能自动判定的禁忌，也不要五十条编出来的。
+# ════════════════════════════════════════════════════════════════════
+
+# ── 触发条件用到的共病概念 ──────────────────────────────────────────
+dmoid:HeartFailure a dmo:Complication, owl:Class ;
+    dmo:complicationCode "HF" ;
+    rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Heart Failure" ;
+    skos:altLabel "heart failure", "心力衰竭", "心衰" ;
+    dmo:affectsOrgan dmoid:Heart ;
+    dmo:onsetPattern "Chronic" ; dmo:isEmergency false ;
+    dmo:definition "TZD 类药物的告知项。原文：Before you start taking these drugs, tell your doctor if you have heart failure." .
+
+dmoid:LiverDisease a dmo:Complication, owl:Class ;
+    dmo:complicationCode "LIVER" ;
+    rdfs:subClassOf dmo:ChronicComplication ;
+    rdfs:label "Liver Problems" ;
+    skos:altLabel "liver problems", "liver disease", "肝功能不全", "肝病" ;
+    dmo:onsetPattern "Chronic" ; dmo:isEmergency false ;
+    dmo:definition "多个药物类别的共同告知项。原文反复出现 tell your doctor if you have heart, liver, or kidney problems。" .
+
+# ── 药物类别 ────────────────────────────────────────────────────────
+dmoid:DrugClass-TZD a dmo:DrugClass ;
+    dmo:drugClassCode "TZD" ; rdfs:label "Thiazolidinediones" ;
+    skos:altLabel "TZD", "thiazolidinediones", "噻唑烷二酮" ;
+    dmo:adminRoute "Oral" ; dmo:hypoglycemiaRisk "Low" ; dmo:weightEffect "Gain" ;
+    dmo:mechanism "These pills help the cells in your body use glucose." .
+
+dmoid:DrugClass-Sulfonylurea a dmo:DrugClass ;
+    dmo:drugClassCode "SU" ; rdfs:label "Sulfonylureas" ;
+    skos:altLabel "sulfonylureas", "SU", "磺脲类" ;
+    dmo:adminRoute "Oral" ; dmo:hypoglycemiaRisk "High" ; dmo:weightEffect "Gain" ;
+    dmo:mechanism "These pills help your body make more insulin." .
+
+dmoid:DrugClass-DopamineAgonist a dmo:DrugClass ;
+    dmo:drugClassCode "DOPA" ; rdfs:label "Dopamine Agonist" ;
+    skos:altLabel "dopamine agonist", "多巴胺激动剂" ;
+    dmo:adminRoute "Oral" ; dmo:hypoglycemiaRisk "Low" ; dmo:weightEffect "Neutral" ;
+    dmo:mechanism "This pill affects a chemical called dopamine in your cells. It is not clear how this pill works for diabetes." .
+
+# ── 药物 ────────────────────────────────────────────────────────────
+dmomed:pioglitazone a dmo:Medication ;
+    dmo:medicationCode "pioglitazone" ; rdfs:label "pioglitazone" ;
+    skos:altLabel "吡格列酮", "Actos" ;
+    dmo:isInsulin false ; dmo:insulinAction "NotApplicable" ;
+    dmo:belongsToDrugClass dmoid:DrugClass-TZD .
+
+dmomed:glimepiride a dmo:Medication ;
+    dmo:medicationCode "glimepiride" ; rdfs:label "glimepiride" ;
+    skos:altLabel "格列美脲", "Amaryl" ;
+    dmo:isInsulin false ; dmo:insulinAction "NotApplicable" ;
+    dmo:belongsToDrugClass dmoid:DrugClass-Sulfonylurea .
+
+dmomed:dapagliflozin a dmo:Medication ;
+    dmo:medicationCode "dapagliflozin" ; rdfs:label "dapagliflozin" ;
+    skos:altLabel "达格列净", "Farxiga" ;
+    dmo:isInsulin false ; dmo:insulinAction "NotApplicable" ;
+    dmo:belongsToDrugClass dmoid:DrugClass-SGLT2i .
+
+dmomed:bromocriptine a dmo:Medication ;
+    dmo:medicationCode "bromocriptine" ; rdfs:label "bromocriptine" ;
+    skos:altLabel "溴隐亭", "Cycloset" ;
+    dmo:isInsulin false ; dmo:insulinAction "NotApplicable" ;
+    dmo:belongsToDrugClass dmoid:DrugClass-DopamineAgonist .
+
+# ── 第二条（也是最后一条）绝对禁令 ──────────────────────────────────
+dmoid:contra-Bromocriptine-Breastfeeding a dmo:Contraindication ;
+    dmo:contraCode "DOPA-BREASTFEEDING" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "you are breastfeeding" ;
+    dmo:rationale "Do not take this medicine if you are breastfeeding." ;
+    rdfs:comment "⚠️ **刻意没有 dmo:triggeredByCondition** —— 哺乳是生理状态，不是并发症。 schema 里 triggeredByCondition 的 range 是 Complication，把『哺乳』建成 Complication 是范畴错误，还会污染『已确诊并发症 ⟹ High risk』那条分层规则。 后果：这条禁忌**无法自动判定**，只能在 /safety 里作为文本列出。 这是 schema 的已知缺口（缺少基于 ClinicalObservation 类型的触发表达），由 explain_gap() 如实上报，不用假的 Complication 掩盖。" .
+dmoid:DrugClass-DopamineAgonist dmo:hasContraindication dmoid:contra-Bromocriptine-Breastfeeding .
+
+# ── 相对禁忌 / 需谨慎评估：原文是「告知义务」，不是禁令 ──────────────
+dmoid:contra-TZD-HeartFailure a dmo:Contraindication ;
+    dmo:contraCode "TZD-HEART-FAILURE" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have heart failure" ;
+    dmo:rationale "Before you start taking these drugs, tell your doctor if you have heart failure." ;
+    dmo:triggeredByCondition dmoid:HeartFailure ;
+    rdfs:comment "⚠️ 原文是 tell your doctor，**不是** Do not take。标成 Absolute 会让 SHACL 报出语料支持不了的违规 —— 这正是原计划里假定为 Absolute 的那一条，实测语料后下调为 Relative。" .
+dmoid:DrugClass-TZD dmo:hasContraindication dmoid:contra-TZD-HeartFailure .
+
+dmoid:contra-SU-RenalHepatic a dmo:Contraindication ;
+    dmo:contraCode "SU-RENAL-HEPATIC" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have heart, liver, or kidney problems" ;
+    dmo:rationale "Older adults and people with kidney or liver problems may be more likely to have low blood sugar when taking these medicines." ;
+    dmo:triggeredByCondition dmoid:CKD .
+dmoid:DrugClass-Sulfonylurea dmo:hasContraindication dmoid:contra-SU-RenalHepatic .
+
+dmoid:contra-SGLT2i-RenalHepatic a dmo:Contraindication ;
+    dmo:contraCode "SGLT2I-RENAL-HEPATIC" ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "you have kidney or liver problems" ;
+    dmo:rationale "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    dmo:triggeredByCondition dmoid:CKD ;
+    rdfs:comment "与 contra-SGLT2i-ESRD 是两条：那条针对『重度肾病或透析』是 Absolute，这条针对一般肾/肝问题是 Caution。原文确实是两句话，粒度不同。" .
+dmoid:DrugClass-SGLT2i dmo:hasContraindication dmoid:contra-SGLT2i-RenalHepatic .
+
+dmoid:contra-Biguanide-Renal a dmo:Contraindication ;
+    dmo:contraCode "BIGUANIDE-RENAL-ALCOHOL" ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "kidney problems, or drinking a lot of alcohol" ;
+    dmo:rationale "People who drink a lot of alcohol and people with kidney problems may have a rare side effect called lactic acidosis (acid to build up in the blood)." ;
+    dmo:triggeredByCondition dmoid:CKD ;
+    rdfs:comment "⚠️ severity=Caution 而非 Absolute —— 这是 S08 反例的关键：ESRD 患者用二甲双胍**不应**报绝对禁忌违规。原文没有任何 eGFR 数值切点，补一个就是编造。" .
+dmoid:DrugClass-Biguanide dmo:hasContraindication dmoid:contra-Biguanide-Renal .
+
+# dmoid:Heart 已在 §上方器官列表里声明，这里只补中英文别名供 align-extracted.rq 命中。
+dmoid:Heart skos:altLabel "heart", "心脏" .
+

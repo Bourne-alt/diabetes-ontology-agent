@@ -22,6 +22,14 @@ extract = ["openai>=3.0.0", "pypdf>=6.0.0"]
 # 外部术语拉取（OLS4 REST）与 GraphDB 装载。
 net = ["httpx>=0.28.1"]
 
+# 患者事实层：连 PostgreSQL（hospital_zd 只读 / onto_db 可写）。
+# psycopg 3 而非 SQLAlchemy —— schema 我们独占、无 ORM 需求，
+# ORM 会让 schema 有两份定义（SQL DDL 一份、模型类一份）。
+db = ["psycopg[binary]>=3.2"]
+
+# 融合查询 API。
+serve = ["fastapi>=0.115", "uvicorn>=0.32"]
+
 # eval 用例是 YAML。
 eval = ["pyyaml>=6.0.3"]
 
@@ -32,6 +40,10 @@ dl = ["owlready2>=0.51"]
 dev = [
     "pytest>=9.1.1",
     "ruff>=0.14.0",
+    "psycopg[binary]>=3.2",
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "httpx>=0.28.1",   # fastapi.testclient 需要
 ]
 
 [project.scripts]

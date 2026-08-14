@@ -1,0 +1,17 @@
+src_name,medication_iri,drug_class_iri,is_antidiabetic,verify_status,note
+二甲双胍,https://example.org/dmo/id/medication/metformin,https://example.org/dmo/id/DrugClass-Biguanide,true,verified,上游 33 条，**全库唯一的降糖药**。15 个 E11 患者里只有 1 人在用。
+恩格列净,https://example.org/dmo/id/medication/empagliflozin,https://example.org/dmo/id/DrugClass-SGLT2i,true,verified,上游 0 条，仅演示队列。SGLT2i 是语料里唯一有绝对禁忌的类别。
+达格列净,https://example.org/dmo/id/medication/dapagliflozin,https://example.org/dmo/id/DrugClass-SGLT2i,true,verified,上游 0 条，仅演示队列。
+吡格列酮,https://example.org/dmo/id/medication/pioglitazone,https://example.org/dmo/id/DrugClass-TZD,true,verified,上游 0 条。TZD + 心衰是 Relative 不是 Absolute（原文 tell your doctor）。
+格列美脲,https://example.org/dmo/id/medication/glimepiride,https://example.org/dmo/id/DrugClass-Sulfonylurea,true,verified,上游 0 条。SU 类低血糖风险 High。
+溴隐亭,https://example.org/dmo/id/medication/bromocriptine,https://example.org/dmo/id/DrugClass-DopamineAgonist,true,verified,"上游 0 条。它的绝对禁忌（哺乳）触发条件是生理状态，schema 表达不了，无法自动判定。"
+阿司匹林,,,false,verified,上游 47 条。非降糖药。语料未收录其在糖尿病中的用法，不做映射。
+氯雷他定,,,false,verified,上游 46 条。非降糖药。
+对乙酰氨基酚,,,false,verified,上游 44 条。非降糖药。
+辛伐他汀,,,false,verified,"上游 41 条。他汀属于 ABCS 里的 Cholesterol 一环，但本仓库语料没有收录具体药物，只有定性表述，不做概念映射。"
+头孢克肟,,,false,verified,上游 35 条。非降糖药。
+布洛芬,,,false,verified,上游 34 条。非降糖药。
+阿莫西林,,,false,verified,上游 33 条。非降糖药。
+氨氯地平,,,false,verified,上游 30 条。降压药；语料对血压只有目标值没有具体药物。
+奥美拉唑,,,false,verified,上游 29 条。非降糖药。
+阿莫西林克拉维酸钾,,,false,verified,上游 28 条。非降糖药。

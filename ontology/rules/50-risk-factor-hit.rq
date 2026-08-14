@@ -1,0 +1,82 @@
+# 50 · 患者事实 × RiskRule → RiskFactorHit
+#
+# 这一步把「BMI=31.2 这个观察」和「Being overweight 这条 CDC 原文」接起来。
+# 没有这一步，抽取出的 146 个 RiskFactor 就是 146 座孤岛 —— 有 label、
+# 有 evidenceNote，但没有任何办法从患者事实命中它们。
+#
+# 三类触发：
+#   observedKind="Diagnosis"  按 ICD-10 外部编码匹配（E66 肥胖 / I10 高血压 …）
+#   observedKind=<观察类型>    按 ClinicalObservation.observationType + 数值区间
+#   观察类型 + matchValue      文本型（吸烟状态 Current、家族史 T2DM）
+#
+# ⚠️ 命中 ≠ 参与判定。triggerBasis="external-standard" 且没有可引用出处的规则
+#   （ICD-HYPERTENSION / ICD-DYSLIPIDEMIA）**照样在这里产出 Hit** ——
+#   让缺口可见，由 51 号规则决定它参不参与 tier。
+#   在这里就过滤掉的话，返回体的 unmapped[] 里也就没东西可说了。
+#
+# ⚠️ Unverified 的观察不参与。S23（全部 trust=Unverified）专测这一条。
+
+PREFIX dmo: <https://example.org/dmo#>
+
+CONSTRUCT {
+  ?hit a dmo:RiskFactorHit ;
+      dmo:hitId          ?hid ;
+      dmo:hitsRiskRule   ?rule ;
+      dmo:hitRiskFactor  ?rf ;
+      dmo:hitFromFact    ?fact ;
+      dmo:ruleId         "RISK-FACTOR-HIT" ;
+      dmo:ruleVersion    "1.0.0" ;
+      dmo:triggerBasis   ?basis .
+  ?pat dmo:hasRiskFactorHit ?hit .
+}
+WHERE {
+  ?rule a dmo:RiskRule ;
+        dmo:riskRuleId ?rid ;
+        dmo:observedKind ?kind ;
+        dmo:triggerBasis ?basis ;
+        dmo:mapsToRiskFactor ?rf .
+
+  {
+    # ── 按诊断编码触发 ────────────────────────────────────────────
+    ?rule dmo:observedCode ?code .
+    FILTER(?kind = "Diagnosis")
+    GRAPH ?pg {
+      ?pat a dmo:Patient ; dmo:hasDiagnosis ?fact .
+      ?fact dmo:externalCode ?code .
+    }
+    FILTER NOT EXISTS {
+      GRAPH ?pg { ?fact dmo:clinicalStatus ?cs FILTER(?cs IN ("Resolved","Inactive")) }
+    }
+  }
+  UNION
+  {
+    # ── 按数值型观察触发（BMI、每周活动次数）───────────────────────
+    ?rule dmo:ruleLowerOperator|dmo:ruleUpperOperator ?anyOp .
+    GRAPH ?pg {
+      ?pat a dmo:Patient ; dmo:hasClinicalObservation ?fact .
+      ?fact dmo:observationType ?kind ; dmo:valueDecimal ?v .
+    }
+    FILTER NOT EXISTS { GRAPH ?pg { ?fact dmo:valueTrustLevel "Unverified" } }
+    OPTIONAL { ?rule dmo:ruleLowerBound ?lo }  OPTIONAL { ?rule dmo:ruleLowerOperator ?loOp }
+    OPTIONAL { ?rule dmo:ruleUpperBound ?up }  OPTIONAL { ?rule dmo:ruleUpperOperator ?upOp }
+    FILTER( !BOUND(?loOp) || ?loOp = "None"
+            || (BOUND(?lo) && IF(?loOp = "GTE", ?v >= ?lo, ?v > ?lo)) )
+    FILTER( !BOUND(?upOp) || ?upOp = "None"
+            || (BOUND(?up) && IF(?upOp = "LTE", ?v <= ?up, ?v <  ?up)) )
+  }
+  UNION
+  {
+    # ── 按文本型观察触发（吸烟状态、家族史）───────────────────────
+    ?rule dmo:matchValue ?mv .
+    GRAPH ?pg {
+      ?pat a dmo:Patient ; dmo:hasClinicalObservation ?fact .
+      ?fact dmo:observationType ?kind ; dmo:valueText ?mv .
+    }
+    FILTER NOT EXISTS { GRAPH ?pg { ?fact dmo:valueTrustLevel "Unverified" } }
+  }
+
+  FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+
+  BIND(SHA1(CONCAT(STR(?pat), "|", ?rid, "|", STR(?fact), "|1.0.0")) AS ?hid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/riskHit/", ?hid)) AS ?hit)
+}

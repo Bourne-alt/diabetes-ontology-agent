@@ -3,200 +3,487 @@
 # 这些数字错一个，整个 agent 就废。LLM 在这一层只做**反向验证**：
 # 给它一条阈值，让它在原文里找支持句；找不到就报警。方向反过来，风险就没了。
 #
-# ⚠️ 区间边界的精度约定（schema 缺陷的绕行方案）
-#   DiagnosticThreshold 只有 lowerBound / upperBound，二者都定义为**含**，
-#   没有开闭区间标志。原文的「below 5.7%」严格来说是开区间，无法精确表达。
-#   ✅ 已修：schema 加了 lowerInclusive / upperInclusive，现在能**精确**表达开区间。
-#   「below 5.7%」= upperBound 5.7 + upperInclusive false，不再需要写成 ≤5.6 近似。
-#   每条仍带 dmo:citation 记录原文措辞。
+# ════════ V2 相对 V1 的三处改动 ════════════════════════════════════
+#
+# 1. 开闭区间：`lowerInclusive true/false` → `lowerOperator "GTE"/"GT"/"None"`。
+#    没有下界就写 "None"，而不是省略属性 —— 省略属性时 SPARQL 里要靠 OPTIONAL +
+#    BOUND 判断，多一层就多一个静默漏判的机会。显式的 "None" 让规则可以无脑三分支。
+#
+# 2. 出处：`dmo:citation "6.5% or above"`（裸字符串）→ `thresholdCitesPassage`
+#    指向 `dmo:SourcePassage`，带 passageId / locator / quote / contentHash。
+#    裸字符串的问题是**没法机器校验**：字符串可以是任何人任何时候敲进去的，
+#    没有定位、没有指纹。现在每条 quote 都能回到具体文件的具体位置并验哈希。
+#    ⚠️ quote 必须是**逐字原文**。V1 里几条 citation 混进了中文解释（GCT1H、UACR），
+#    那些解释已移到 rdfs:comment —— 混在 quote 里等于伪造出处。
+#
+# 3. `confirmationRequired`：诊断级切点（A1C/FPG/OGTT2H/RPG 的 -DIABETES 四条）
+#    置 true。这是「单次异常 ≠ 确诊」的数据基础，由 30-diagnosis-from-assessment.rq
+#    消费：置 true 且只有单日数据 ⟹ Provisional 而非 Confirmed。
+#
+# contentHash 的规范化口径：`sha256(collapse_ws(quote.strip()))`，UTF-8。
+# 与 src/dmo/rdf/canonical.py 的 passage_hash() 逐字一致，改一处必须改两处。
+# ⚠️ 内容相同的 quote 哈希必然相同（OGTT2H-DIABETES 与 RPG-DIABETES 都是
+#    "200 mg/dL or above"）—— 这是内容指纹的定义，不是 bug。区分靠 passageId 与 locator。
 #
 # 出处个体由 source_registry.py 生成，见 ontology/dist/sources.ttl。
 
 @prefix dmo:   <https://example.org/dmo#> .
 @prefix dmoid: <https://example.org/dmo/id/> .
 # Turtle 的 prefixed name 局部名不允许未转义的 "/"，含斜杠的路径要么写全 URI，
-# 要么另立前缀。下面三个必须与 source_registry.py / semantic_extract.py 铸的 URI 逐字一致。
+# 要么另立前缀。下面几个必须与 source_registry.py / semantic_extract.py 铸的 URI 逐字一致。
 @prefix dmoth:  <https://example.org/dmo/id/threshold/> .
 @prefix dmotgt: <https://example.org/dmo/id/target/> .
 @prefix dmosrc: <https://example.org/dmo/id/guidelineSource/> .
+@prefix dmosp:  <https://example.org/dmo/id/sourcePassage/> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
 # ════════════════════════════════════════════════════════════════════
-# 检验项目（方案 A：SKOS 术语）
+# 一、检验项目（方案 A：SKOS 术语）—— 有诊断切点的
 # ════════════════════════════════════════════════════════════════════
 
 dmoid:LabTest-A1C a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "A1C" ; rdfs:label "A1C Test" ;
-    skos:altLabel "A1C", "HbA1c", "hemoglobin A1C", "glycated hemoglobin" ;
+    skos:altLabel "A1C", "HbA1c", "hemoglobin A1C", "glycated hemoglobin",
+                  "糖化血红蛋白", "糖化血红蛋白A1c" ;
     dmo:specimen "Blood" ; dmo:unitOfMeasure "percent" ; dmo:fastingRequired false ;
     dmo:definition "近 3 个月平均血糖水平。" .
 
 dmoid:LabTest-FPG a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "FPG" ; rdfs:label "Fasting Plasma Glucose" ;
-    skos:altLabel "FPG", "fasting plasma glucose", "fasting glucose" ;
+    skos:altLabel "FPG", "fasting plasma glucose", "fasting glucose", "空腹血糖" ;
     dmo:specimen "Blood" ; dmo:unitOfMeasure "mg-per-dL" ; dmo:fastingRequired true .
 
 dmoid:LabTest-OGTT2H a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "OGTT2H" ; rdfs:label "Oral Glucose Tolerance Test 2h" ;
-    skos:altLabel "OGTT", "oral glucose tolerance test" ;
+    skos:altLabel "OGTT", "oral glucose tolerance test", "口服葡萄糖耐量试验" ;
     dmo:specimen "Blood" ; dmo:unitOfMeasure "mg-per-dL" ; dmo:fastingRequired true .
 
 dmoid:LabTest-RPG a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "RPG" ; rdfs:label "Random Plasma Glucose" ;
-    skos:altLabel "random plasma glucose", "random glucose" ;
+    skos:altLabel "random plasma glucose", "random glucose", "随机血糖" ;
     dmo:specimen "Blood" ; dmo:unitOfMeasure "mg-per-dL" ; dmo:fastingRequired false .
 
 dmoid:LabTest-GCT1H a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "GCT1H" ; rdfs:label "Glucose Challenge Test 1h" ;
-    skos:altLabel "glucose challenge test", "glucose screening test" ;
+    skos:altLabel "glucose challenge test", "glucose screening test", "葡萄糖筛查试验", "糖筛" ;
     dmo:specimen "Blood" ; dmo:unitOfMeasure "mg-per-dL" ; dmo:fastingRequired false .
 
 dmoid:LabTest-UACR a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "UACR" ; rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
-    skos:altLabel "UACR", "urine albumin-to-creatinine ratio", "urine albumin" ;
+    skos:altLabel "UACR", "urine albumin-to-creatinine ratio", "urine albumin",
+                  "尿白蛋白肌酐比", "尿微量白蛋白肌酐比" ;
     dmo:specimen "Urine" ; dmo:unitOfMeasure "mg-per-g" ; dmo:fastingRequired false .
 
 dmoid:LabTest-EGFR a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "EGFR" ; rdfs:label "Estimated Glomerular Filtration Rate" ;
-    skos:altLabel "eGFR", "estimated glomerular filtration rate" ;
+    skos:altLabel "eGFR", "estimated glomerular filtration rate", "估算肾小球滤过率" ;
     dmo:specimen "Blood" ; dmo:unitOfMeasure "mL-per-min" ; dmo:fastingRequired false .
 
 dmoid:LabTest-KETONE a dmo:LabTest, skos:Concept ;
     skos:inScheme dmo:LabTestScheme ;
     dmo:labTestCode "KETONE" ; rdfs:label "Ketone Test" ;
-    skos:altLabel "ketones", "urine ketones", "ketone test" ;
+    skos:altLabel "ketones", "urine ketones", "ketone test", "尿酮体", "酮体" ;
     dmo:specimen "Urine" ; dmo:unitOfMeasure "qualitative" ; dmo:fastingRequired false .
 
 # ════════════════════════════════════════════════════════════════════
-# 诊断阈值 —— 非妊娠成人（niddk-tests-diagnosis.txt 诊断表）
+# 二、检验项目 —— 上游真实库有、但本仓库语料**没有诊断切点**的
+#
+# `hospital_zd.patient_analysis.cdr_lis_result` 全库只有 12 种子项名。
+# 它们必须能被识别（否则中文名一律落进 unmapped，术语层等于没用），
+# 但**刻意不挂 dmo:hasThreshold** —— 语料里没有它们的切点，挂了就是编造。
+#
+# 效果：`20-lab-assessment.rq` 对这些项自然返回零结果，不需要任何黑名单，
+# 也不需要在查询层写 if。「能识别 ≠ 能判定」在数据层面就成立了。
+#
+# 对照组 `semantic_link.analyte_concept_map` 的做法是：把「尿蛋白 10.4」
+# 用字符串相似度同时链到「1型糖尿病的糖尿病肾病」和「2型糖尿病的糖尿病肾病」，
+# confidence 都写 0.9，无单位、无阈值、无出处。差别就在这一段。
+#
+# ⚠️ unitOfMeasure 是**从上游参考范围反推的**（血糖 3.9-6.1 ⟹ mmol/L），
+#    是推断不是断言。生效前必须在 diabetes.map_lab_term 里人工置
+#    verify_status='verified'。这里写出来只为术语识别，不参与任何数值判定。
+# ════════════════════════════════════════════════════════════════════
+
+dmoid:LabTest-GLU a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "GLU" ; rdfs:label "Blood Glucose (timing unspecified)" ;
+    skos:altLabel "血糖", "blood glucose", "glucose" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "mg-per-dL" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 采血时点未知。上游 cdr_lis_result 只有项目名『血糖』，没有空腹/餐后/随机的标注。 因此**不能**套用 FPG（≥126）或 OGTT2H（≥200）的诊断切点 —— 那些切点的成立前提正是采血时点。 只挂与时点无关的四条：低血糖、重度低血糖、酮症警戒、急诊阈值。 演示队列若要走 FPG 判定，必须显式记为 LabTest-FPG，而不是复用这个概念。" .
+
+dmoid:LabTest-CREAT a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "CREAT" ; rdfs:label "Serum Creatinine" ;
+    skos:altLabel "肌酐", "血肌酐", "creatinine", "serum creatinine" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "umol-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：本仓库语料未收录肌酐的诊断切点。 肾功能判定走 eGFR / UACR，不走裸肌酐。能识别 ≠ 能判定。 单位由上游参考范围 44-133 反推为 µmol/L。" .
+
+dmoid:LabTest-BUN a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "BUN" ; rdfs:label "Blood Urea Nitrogen" ;
+    skos:altLabel "尿素氮", "血尿素氮", "BUN", "urea nitrogen" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "mmol-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：语料未收录切点。单位由参考范围 2.9-8.2 反推。" .
+
+dmoid:LabTest-URINE-PROTEIN a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "UPRO" ; rdfs:label "Urine Protein (dipstick)" ;
+    skos:altLabel "尿蛋白", "urine protein", "尿蛋白定性" ;
+    dmo:specimen "Urine" ; dmo:unitOfMeasure "qualitative" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 定性项目，且刻意不挂 hasThreshold。上游参考范围写的是『阴性』， 说明这是干化学定性，不是定量 —— 上游那一列里的『10.4』根本不该被当数值读。 要判断白蛋白尿必须用 UACR（mg/g，切点 >30），这是两个不同的检验。 map_lab_term 里该项 value_kind='qualitative' + verify_status='unmappable'， 永不进 LabResult，只进 ClinicalObservation.valueText。" .
+
+dmoid:LabTest-PLT a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "PLT" ; rdfs:label "Platelet Count" ;
+    skos:altLabel "血小板", "血小板计数", "platelet", "PLT" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "10*9-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：与糖尿病诊断无关，语料无切点。 单位由参考范围 100-300 反推为 10⁹/L。" .
+
+dmoid:LabTest-WBC a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "WBC" ; rdfs:label "White Blood Cell Count" ;
+    skos:altLabel "白细胞", "白细胞计数", "WBC", "leukocyte" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "10*9-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：语料无切点。单位由参考范围 4-10 反推。" .
+
+dmoid:LabTest-HGB a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "HGB" ; rdfs:label "Hemoglobin" ;
+    skos:altLabel "血红蛋白", "hemoglobin", "HGB", "Hb" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "g-per-dL" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold。且**单位反推失败**：上游参考范围 10-15 既不匹配 g/dL 的常规区间（约 12-16），也不匹配 g/L（约 120-160）。 map_lab_term 里该项 verify_status 保持 'candidate'，人工核实前不参与任何换算。 ⚠️ 注意别与糖化血红蛋白（A1C）混为一谈 —— 中文名相近，是完全不同的检验。" .
+
+dmoid:LabTest-ALT a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "ALT" ; rdfs:label "Alanine Aminotransferase" ;
+    skos:altLabel "ALT", "谷丙转氨酶", "丙氨酸氨基转移酶", "alanine aminotransferase" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "U-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：语料无切点。 与糖尿病的关联仅在于部分降糖药的肝功能注意事项，那是 Contraindication 的事。" .
+
+dmoid:LabTest-AST a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "AST" ; rdfs:label "Aspartate Aminotransferase" ;
+    skos:altLabel "AST", "谷草转氨酶", "天门冬氨酸氨基转移酶", "aspartate aminotransferase" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "U-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：语料无切点。" .
+
+dmoid:LabTest-CHOL a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "CHOL" ; rdfs:label "Total Cholesterol" ;
+    skos:altLabel "总胆固醇", "胆固醇", "total cholesterol", "TC" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "mmol-per-L" ; dmo:fastingRequired true ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold。语料（niddk-managing-diabetes 的 ABCS）只有 『管理胆固醇』的定性表述，没给数值切点。给它安一个 5.2 就是编造出处。 单位由参考范围 3.0-5.2 反推。" .
+
+dmoid:LabTest-TG a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "TG" ; rdfs:label "Triglycerides" ;
+    skos:altLabel "甘油三酯", "三酰甘油", "triglycerides", "TG" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "mmol-per-L" ; dmo:fastingRequired true ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：语料无数值切点。单位由参考范围 0.56-1.7 反推。" .
+
+dmoid:LabTest-TSH a dmo:LabTest, skos:Concept ;
+    skos:inScheme dmo:LabTestScheme ;
+    dmo:labTestCode "TSH" ; rdfs:label "Thyroid Stimulating Hormone" ;
+    skos:altLabel "TSH", "促甲状腺激素", "thyroid stimulating hormone" ;
+    dmo:specimen "Blood" ; dmo:unitOfMeasure "mIU-per-L" ; dmo:fastingRequired false ;
+    rdfs:comment "⚠️ 刻意不挂 hasThreshold：语料无切点。T1DM 常合并自身免疫性甲状腺病是 常识，但本仓库语料没有收录 TSH 的判读切点，所以不判。" .
+
+# ════════════════════════════════════════════════════════════════════
+# 三、出处片段（SourcePassage）—— 每条 quote 逐字可回溯 + 内容哈希
+# ════════════════════════════════════════════════════════════════════
+
+# ── niddk-tests-diagnosis.txt：诊断表（A1C / FPG / OGTT2H / RPG 四列三行）──
+dmosp:A1C-NORMAL-Q a dmo:SourcePassage ;
+    dmo:passageId "A1C-NORMAL-Q" ; dmo:locator "Diagnosis 表 · A1C 列 · Normal 行" ;
+    dmo:quote "below 5.7%" ;
+    dmo:contentHash "d4d8a96cad1e54f8cc175b4da71a0c4d78f6b1ec08df2cc80710b42cd441e38d" .
+
+dmosp:A1C-PREDIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "A1C-PREDIABETES-Q" ; dmo:locator "Diagnosis 表 · A1C 列 · Prediabetes 行" ;
+    dmo:quote "5.7% to 6.4%" ;
+    dmo:contentHash "5e20cb3de13532673dfcb5c75af4d885e7e8a60fface84d34e9e9d9776955b36" .
+
+dmosp:A1C-DIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "A1C-DIABETES-Q" ; dmo:locator "Diagnosis 表 · A1C 列 · Diabetes 行" ;
+    dmo:quote "6.5% or above" ;
+    dmo:contentHash "96495c7d996a92b5bee7132029744f08e5154be98dd1be7e177399320d7d1447" .
+
+dmosp:FPG-NORMAL-Q a dmo:SourcePassage ;
+    dmo:passageId "FPG-NORMAL-Q" ; dmo:locator "Diagnosis 表 · Fasting Plasma Glucose 列 · Normal 行" ;
+    dmo:quote "99 mg/dL or below" ;
+    dmo:contentHash "f5a55766b01c13df1136a351820a373012e8e217e08f622efa6947140ef2f68d" .
+
+dmosp:FPG-PREDIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "FPG-PREDIABETES-Q" ; dmo:locator "Diagnosis 表 · Fasting Plasma Glucose 列 · Prediabetes 行" ;
+    dmo:quote "100 to 125 mg/dL" ;
+    dmo:contentHash "6789a869ca26d725b924429f41a82391d8ea13f6d9d17f61e0e8b0ae839cb018" .
+
+dmosp:FPG-DIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "FPG-DIABETES-Q" ; dmo:locator "Diagnosis 表 · Fasting Plasma Glucose 列 · Diabetes 行" ;
+    dmo:quote "126 mg/dL or above" ;
+    dmo:contentHash "1ef96abbe78d2ee560afcd343ed877de87e84036b7f0a31401bc45f20a92b668" .
+
+dmosp:OGTT2H-NORMAL-Q a dmo:SourcePassage ;
+    dmo:passageId "OGTT2H-NORMAL-Q" ; dmo:locator "Diagnosis 表 · Oral Glucose Tolerance Test 列 · Normal 行" ;
+    dmo:quote "139 mg/dL or below" ;
+    dmo:contentHash "0baa83e18bd0b16f2565ccec1c79e59cb4df53120e98613273f22e365090783c" .
+
+dmosp:OGTT2H-PREDIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "OGTT2H-PREDIABETES-Q" ; dmo:locator "Diagnosis 表 · Oral Glucose Tolerance Test 列 · Prediabetes 行" ;
+    dmo:quote "140 to 199 mg/dL" ;
+    dmo:contentHash "aae5f6e8cfb8b9e88522187ac944825b0816eb59558e4e88be09a8aa6e8cefa9" .
+
+dmosp:OGTT2H-DIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "OGTT2H-DIABETES-Q" ; dmo:locator "Diagnosis 表 · Oral Glucose Tolerance Test 列 · Diabetes 行" ;
+    dmo:quote "200 mg/dL or above" ;
+    dmo:contentHash "aab49c5be6a3bf84ab5d4dd16a43694ecc1e2a561d280ef3318bb5b894246beb" .
+
+dmosp:OGTT2H-TIMING-Q a dmo:SourcePassage ;
+    dmo:passageId "OGTT2H-TIMING-Q" ; dmo:locator "Diagnosis 表脚注 *" ;
+    dmo:quote "2 hours after glucose intake" ;
+    dmo:contentHash "8bde9ad2f26bd3b698a8f821fa3cdea177492dc97af5d1c87ce8b156586eb1fa" .
+
+dmosp:RPG-DIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "RPG-DIABETES-Q" ; dmo:locator "Diagnosis 表 · Random Plasma Glucose Test 列 · Diabetes 行" ;
+    dmo:quote "200 mg/dL or above" ;
+    dmo:contentHash "aab49c5be6a3bf84ab5d4dd16a43694ecc1e2a561d280ef3318bb5b894246beb" ;
+    rdfs:comment "哈希与 OGTT2H-DIABETES-Q 相同 —— 两处原文逐字一致。内容指纹本就该相同，区分靠 passageId 与 locator。" .
+
+dmosp:RPG-SYMPTOM-Q a dmo:SourcePassage ;
+    dmo:passageId "RPG-SYMPTOM-Q" ; dmo:locator "Diagnosis 表脚注 ‡" ;
+    dmo:quote "Used when there are symptoms" ;
+    dmo:contentHash "5f0a10387527079d9e005471bc1c6886310fe37a602736b50ac08105a102dc9f" ;
+    rdfs:comment "随机血糖切点的**适用前提**。没有症状时这条切点不成立 —— 目前 schema 表达不了这个前提，只能靠这条 passage 让回答里带上它。" .
+
+dmosp:GCT1H-REFER-Q a dmo:SourcePassage ;
+    dmo:passageId "GCT1H-REFER-Q" ; dmo:locator "Gestational Diabetes 章 · glucose challenge test 段" ;
+    dmo:quote "If your blood glucose level is too high—135 mg/dL to 140 mg/dL or higher—you may need to return for an oral glucose tolerance test while fasting." ;
+    dmo:contentHash "1320dfee4cc6f5537b526fd58be0e47014edf5c007517594096725bab6c2f1a6" .
+
+# ── niddk-uacr-egfr.txt ──────────────────────────────────────────────
+dmosp:UACR-ALBUMINURIA-Q a dmo:SourcePassage ;
+    dmo:passageId "UACR-ALBUMINURIA-Q" ; dmo:locator "Albuminuria 段首句" ;
+    dmo:quote "Albuminuria1 is present when UACR is greater than 30 mg/g and is a marker for CKD." ;
+    dmo:contentHash "41d860f35c727ba6648aaa1c8ec5865177ee863468bf40f4319e955d75c4d1d8" .
+
+dmosp:UACR-MICRO-RANGE-Q a dmo:SourcePassage ;
+    dmo:passageId "UACR-MICRO-RANGE-Q" ; dmo:locator "Microalbuminuria 定义句" ;
+    dmo:quote "30 mg/g–300 mg/g" ;
+    dmo:contentHash "3fda08e5f5de9f76ac0a7c384f25cd61d8a4fe08d6bad87b87a6d8e02d1f3b80" ;
+    rdfs:comment "UACR-ALBUMINURIA 的**上界**来自这一句，与下界不是同一句原文，所以分成两条 passage。thresholdCitesPassage 是 many-to-many，正是为这种情形准备的。" .
+
+dmosp:UACR-MACRO-Q a dmo:SourcePassage ;
+    dmo:passageId "UACR-MACRO-Q" ; dmo:locator "Macroalbuminuria 定义句" ;
+    dmo:quote "Macroalbuminuria is sometimes used to describe albumin levels more than 300mg/g." ;
+    dmo:contentHash "8e7af8b61950b3d79e9a7bb05d8e3266ed2bbc28097056e4e89867c888c006fe" ;
+    rdfs:comment "原文是 300mg/g（无空格），逐字保留。" .
+
+# ── cdc-hypoglycemia.txt ────────────────────────────────────────────
+dmosp:GLUCOSE-HYPO-Q a dmo:SourcePassage ;
+    dmo:passageId "GLUCOSE-HYPO-Q" ; dmo:locator "KEY POINTS 段" ;
+    dmo:quote "Blood sugar below 70 mg/dL is considered low." ;
+    dmo:contentHash "af6aac557c78f2fb3f93a813b696770ac2a9761a4850797ff9af7bef7b0bfb51" .
+
+dmosp:GLUCOSE-SEVERE-HYPO-Q a dmo:SourcePassage ;
+    dmo:passageId "GLUCOSE-SEVERE-HYPO-Q" ; dmo:locator "Severe low blood sugar 段" ;
+    dmo:quote "Severe low blood sugar is below 54 mg/dL." ;
+    dmo:contentHash "59beeff27105cbfbae12ca4f63d4d2d8d1ca547cabe2c88f1a0bb606fd6108cc" .
+
+# ── cdc-diabetic-ketoacidosis.txt ───────────────────────────────────
+dmosp:GLUCOSE-KETONE-CHECK-Q a dmo:SourcePassage ;
+    dmo:passageId "GLUCOSE-KETONE-CHECK-Q" ; dmo:locator "Testing · Test for ketones 段" ;
+    dmo:quote "If you have diabetes and you're sick or your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones." ;
+    dmo:contentHash "dd456f15435ff17f04103db12b4f8f6890dc67b87f397b6a2b8516cebc95d7db" .
+
+dmosp:GLUCOSE-EMERGENCY-Q a dmo:SourcePassage ;
+    dmo:passageId "GLUCOSE-EMERGENCY-Q" ; dmo:locator "急诊指征列表首项" ;
+    dmo:quote "Your blood sugar stays at 300 mg/dL or above." ;
+    dmo:contentHash "6d9151b4a2ae45a59b7c00efbf25ae5704309c558d6ecb6388c23ee734a0f520" .
+
+# 片段归属到来源文件
+dmosrc:niddk-tests-diagnosis dmo:hasPassage
+    dmosp:A1C-NORMAL-Q, dmosp:A1C-PREDIABETES-Q, dmosp:A1C-DIABETES-Q,
+    dmosp:FPG-NORMAL-Q, dmosp:FPG-PREDIABETES-Q, dmosp:FPG-DIABETES-Q,
+    dmosp:OGTT2H-NORMAL-Q, dmosp:OGTT2H-PREDIABETES-Q, dmosp:OGTT2H-DIABETES-Q,
+    dmosp:OGTT2H-TIMING-Q, dmosp:RPG-DIABETES-Q, dmosp:RPG-SYMPTOM-Q,
+    dmosp:GCT1H-REFER-Q .
+dmosrc:niddk-uacr-egfr dmo:hasPassage
+    dmosp:UACR-ALBUMINURIA-Q, dmosp:UACR-MICRO-RANGE-Q, dmosp:UACR-MACRO-Q .
+dmosrc:cdc-hypoglycemia dmo:hasPassage
+    dmosp:GLUCOSE-HYPO-Q, dmosp:GLUCOSE-SEVERE-HYPO-Q .
+dmosrc:cdc-diabetic-ketoacidosis dmo:hasPassage
+    dmosp:GLUCOSE-KETONE-CHECK-Q, dmosp:GLUCOSE-EMERGENCY-Q .
+
+# ════════════════════════════════════════════════════════════════════
+# 四、诊断阈值 —— 非妊娠成人（niddk-tests-diagnosis.txt 诊断表）
+#
+# confirmationRequired=true 的四条是「诊断级」切点。原文的诊断表给的是
+# 单次测量落在哪一档，**不等于**一次就能确诊。30-diagnosis-from-assessment.rq
+# 对这四条要求两个不同日期的支撑，否则只出 Provisional + caveat。
 # ════════════════════════════════════════════════════════════════════
 
 dmoth:A1C-NORMAL a dmo:DiagnosticThreshold ;
     dmo:thresholdId "A1C-NORMAL-NONPREG" ;
-    dmo:upperBound 5.7 ; dmo:upperInclusive false ; dmo:boundUnit "percent" ;
+    dmo:lowerOperator "None" ;
+    dmo:upperBound 5.7 ; dmo:upperOperator "LT" ; dmo:boundUnit "percent" ;
     dmo:classification "Normal" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "below 5.7%" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:A1C-NORMAL-Q ;
+    rdfs:comment "「below 5.7%」是**开区间**：5.7 本身不属于 Normal，属于 Prediabetes。用 LTE 近似会把 5.7 错判成正常 —— S16 边界场景专测这一条。" .
 
 dmoth:A1C-PREDIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "A1C-PREDIABETES-NONPREG" ;
-    dmo:lowerBound 5.7 ; dmo:lowerInclusive true ; dmo:upperBound 6.4 ; dmo:upperInclusive true ; dmo:boundUnit "percent" ;
+    dmo:lowerBound 5.7 ; dmo:lowerOperator "GTE" ;
+    dmo:upperBound 6.4 ; dmo:upperOperator "LTE" ; dmo:boundUnit "percent" ;
     dmo:classification "Prediabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "5.7% to 6.4%" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:A1C-PREDIABETES-Q .
 
 dmoth:A1C-DIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "A1C-DIABETES-NONPREG" ;
-    dmo:lowerBound 6.5 ; dmo:lowerInclusive true ; dmo:boundUnit "percent" ;
+    dmo:lowerBound 6.5 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "percent" ;
     dmo:classification "Diabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "6.5% or above" .
+    dmo:confirmationRequired true ;
+    dmo:thresholdCitesPassage dmosp:A1C-DIABETES-Q .
 
 dmoth:FPG-NORMAL a dmo:DiagnosticThreshold ;
     dmo:thresholdId "FPG-NORMAL-NONPREG" ;
-    dmo:upperBound 99 ; dmo:upperInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerOperator "None" ;
+    dmo:upperBound 99 ; dmo:upperOperator "LTE" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Normal" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "99 mg/dL or below" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:FPG-NORMAL-Q .
 
 dmoth:FPG-PREDIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "FPG-PREDIABETES-NONPREG" ;
-    dmo:lowerBound 100 ; dmo:lowerInclusive true ; dmo:upperBound 125 ; dmo:upperInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 100 ; dmo:lowerOperator "GTE" ;
+    dmo:upperBound 125 ; dmo:upperOperator "LTE" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Prediabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "100 to 125 mg/dL" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:FPG-PREDIABETES-Q .
 
 dmoth:FPG-DIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "FPG-DIABETES-NONPREG" ;
-    dmo:lowerBound 126 ; dmo:lowerInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 126 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Diabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "126 mg/dL or above" .
+    dmo:confirmationRequired true ;
+    dmo:thresholdCitesPassage dmosp:FPG-DIABETES-Q .
 
 dmoth:OGTT2H-NORMAL a dmo:DiagnosticThreshold ;
     dmo:thresholdId "OGTT2H-NORMAL-NONPREG" ;
-    dmo:upperBound 139 ; dmo:upperInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerOperator "None" ;
+    dmo:upperBound 139 ; dmo:upperOperator "LTE" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Normal" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "139 mg/dL or below（2 hours after glucose intake）" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:OGTT2H-NORMAL-Q, dmosp:OGTT2H-TIMING-Q .
 
 dmoth:OGTT2H-PREDIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "OGTT2H-PREDIABETES-NONPREG" ;
-    dmo:lowerBound 140 ; dmo:lowerInclusive true ; dmo:upperBound 199 ; dmo:upperInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 140 ; dmo:lowerOperator "GTE" ;
+    dmo:upperBound 199 ; dmo:upperOperator "LTE" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Prediabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "140 to 199 mg/dL" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:OGTT2H-PREDIABETES-Q, dmosp:OGTT2H-TIMING-Q .
 
 dmoth:OGTT2H-DIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "OGTT2H-DIABETES-NONPREG" ;
-    dmo:lowerBound 200 ; dmo:lowerInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 200 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Diabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "200 mg/dL or above" .
+    dmo:confirmationRequired true ;
+    dmo:thresholdCitesPassage dmosp:OGTT2H-DIABETES-Q, dmosp:OGTT2H-TIMING-Q .
 
 dmoth:RPG-DIABETES a dmo:DiagnosticThreshold ;
     dmo:thresholdId "RPG-DIABETES-NONPREG" ;
-    dmo:lowerBound 200 ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 200 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Diabetes" ; dmo:populationContext "NonPregnant" ;
-    dmo:citation "200 mg/dL or above（Used when there are symptoms）" .
+    dmo:confirmationRequired true ;
+    dmo:thresholdCitesPassage dmosp:RPG-DIABETES-Q, dmosp:RPG-SYMPTOM-Q ;
+    rdfs:comment "⚠️ 这条切点的适用前提是**有症状**（见 RPG-SYMPTOM-Q）。schema 表达不了『前提』，所以引这条 passage，让回答里必须带上它。" .
 
 # ── 妊娠人群：糖筛转诊切点 ──────────────────────────────────────────
 dmoth:GCT1H-REFER a dmo:DiagnosticThreshold ;
     dmo:thresholdId "GCT1H-REFER-PREG" ;
-    dmo:lowerBound 135 ; dmo:lowerInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 135 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Hyperglycemia" ; dmo:populationContext "Pregnant" ;
-    dmo:citation "135 mg/dL to 140 mg/dL or higher — 需返回做 OGTT。原文给的是区间不是单点，此处取下界 135。" ;
-    rdfs:comment "⚠️ 这不是 GDM 诊断切点，只是转诊触发点。GDM 诊断需 OGTT 两次以上超标。" .
-
-# ⚠️ GDM 的 **OGTT 诊断切点**仍未收录（见文件末尾说明）。
-#    但妊娠期的**管理目标**语料里有全套，已补在文末。
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:GCT1H-REFER-Q ;
+    rdfs:comment "⚠️ 这**不是** GDM 诊断切点，只是转诊触发点：命中后需返回做空腹 OGTT。原文给的是区间「135 到 140 或更高」而非单点，此处取下界 135（更早触发筛查，漏诊代价高于多做一次 OGTT）。GDM 的 OGTT 诊断切点本仓库语料未收录 —— 见下方说明。" .
 
 # ⚠️ 妊娠期 GDM 的 OGTT 诊断切点未收录：
 #    niddk 原文只说「blood glucose levels are high two or more times during the OGTT」，
 #    没有给具体数值。凭记忆补 ADA/IADPSG 的 92/180/153 属于编造出处，不做。
 #    → 待补抓 ADA Standards of Care 原文。
+#    这个缺口由 explain_gap() 如实回答，不由沉默掩盖。
 
 # ── 肾脏 ────────────────────────────────────────────────────────────
 dmoth:UACR-ALBUMINURIA a dmo:DiagnosticThreshold ;
     dmo:thresholdId "UACR-ALBUMINURIA" ;
-    dmo:lowerBound 30 ; dmo:lowerInclusive false ; dmo:upperBound 300 ; dmo:upperInclusive true ; dmo:boundUnit "mg-per-g" ;
+    dmo:lowerBound 30 ; dmo:lowerOperator "GT" ;
+    dmo:upperBound 300 ; dmo:upperOperator "LTE" ; dmo:boundUnit "mg-per-g" ;
     dmo:classification "Albuminuria" ; dmo:populationContext "Any" ;
-    dmo:citation "Albuminuria is present when UACR is greater than 30 mg/g；microalbuminuria 30 mg/g–300 mg/g" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:UACR-ALBUMINURIA-Q, dmosp:UACR-MICRO-RANGE-Q ;
+    rdfs:comment "下界是**开区间**（greater than 30），上界来自 microalbuminuria 区间的另一句原文，故引两条 passage。" .
 
 dmoth:UACR-MACROALBUMINURIA a dmo:DiagnosticThreshold ;
     dmo:thresholdId "UACR-MACROALBUMINURIA" ;
-    dmo:lowerBound 300 ; dmo:lowerInclusive false ; dmo:boundUnit "mg-per-g" ;
+    dmo:lowerBound 300 ; dmo:lowerOperator "GT" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-g" ;
     dmo:classification "Macroalbuminuria" ; dmo:populationContext "Any" ;
-    dmo:citation "Macroalbuminuria is sometimes used to describe albumin levels more than 300mg/g" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:UACR-MACRO-Q .
 
 # ── 低血糖（cdc-hypoglycemia.txt）────────────────────────────────────
 dmoth:GLUCOSE-HYPO a dmo:DiagnosticThreshold ;
     dmo:thresholdId "GLUCOSE-HYPO" ;
-    dmo:lowerBound 54 ; dmo:lowerInclusive true ; dmo:upperBound 70 ; dmo:upperInclusive false ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 54 ; dmo:lowerOperator "GTE" ;
+    dmo:upperBound 70 ; dmo:upperOperator "LT" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Hypoglycemia" ; dmo:populationContext "Any" ;
-    dmo:citation "Blood sugar below 70 mg/dL is considered low" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:GLUCOSE-HYPO-Q, dmosp:GLUCOSE-SEVERE-HYPO-Q ;
+    rdfs:comment "上界开区间（below 70），下界取自重度低血糖切点（below 54）以免两档重叠 —— 54 本身归重度那一档。S10 专测这个开区间。" .
 
 dmoth:GLUCOSE-SEVERE-HYPO a dmo:DiagnosticThreshold ;
     dmo:thresholdId "GLUCOSE-SEVERE-HYPO" ;
-    dmo:upperBound 54 ; dmo:upperInclusive false ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerOperator "None" ;
+    dmo:upperBound 54 ; dmo:upperOperator "LT" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "SevereHypoglycemia" ; dmo:populationContext "Any" ;
-    dmo:citation "Severe low blood sugar is below 54 mg/dL" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:GLUCOSE-SEVERE-HYPO-Q .
 
 # ── 酮症警戒（cdc-diabetic-ketoacidosis.txt）────────────────────────
 dmoth:GLUCOSE-KETONE-CHECK a dmo:DiagnosticThreshold ;
     dmo:thresholdId "GLUCOSE-KETONE-CHECK" ;
-    dmo:lowerBound 250 ; dmo:lowerInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 250 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "KetoneAlert" ; dmo:populationContext "Any" ;
-    dmo:citation "if your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:GLUCOSE-KETONE-CHECK-Q .
 
 dmoth:GLUCOSE-EMERGENCY a dmo:DiagnosticThreshold ;
     dmo:thresholdId "GLUCOSE-EMERGENCY" ;
-    dmo:lowerBound 300 ; dmo:lowerInclusive true ; dmo:boundUnit "mg-per-dL" ;
+    dmo:lowerBound 300 ; dmo:lowerOperator "GTE" ;
+    dmo:upperOperator "None" ; dmo:boundUnit "mg-per-dL" ;
     dmo:classification "Hyperglycemia" ; dmo:populationContext "Any" ;
-    dmo:citation "Go to the emergency room or call 911 right away if your blood sugar stays at 300 mg/dL or above" .
+    dmo:confirmationRequired false ;
+    dmo:thresholdCitesPassage dmosp:GLUCOSE-EMERGENCY-Q .
 
 # ════════════════════════════════════════════════════════════════════
-# 阈值 → 检验项目 / 分型结论 / 出处
+# 五、阈值 → 检验项目 / 分型结论 / 出处文件
 # ════════════════════════════════════════════════════════════════════
 
 dmoid:LabTest-A1C dmo:hasThreshold
@@ -210,6 +497,15 @@ dmoid:LabTest-GCT1H dmo:hasThreshold dmoth:GCT1H-REFER .
 dmoid:LabTest-UACR dmo:hasThreshold
     dmoth:UACR-ALBUMINURIA, dmoth:UACR-MACROALBUMINURIA .
 
+# ✅ 已修：低血糖 / 酮症 / 急诊四条阈值在 V1 里**没挂到任何 LabTest 上**，
+#    等于永远查不出来（hasThreshold 是 LabTest→Threshold 的唯一入口）。
+#    现在挂到 LabTest-GLU（时点未知的血糖）上 —— 这四条与采血时点无关，
+#    是唯一能安全套用到「血糖」这个笼统项目上的切点。
+#    诊断级的 FPG/OGTT2H/RPG 切点**刻意不挂**，理由见 LabTest-GLU 的注释。
+dmoid:LabTest-GLU dmo:hasThreshold
+    dmoth:GLUCOSE-HYPO, dmoth:GLUCOSE-SEVERE-HYPO,
+    dmoth:GLUCOSE-KETONE-CHECK, dmoth:GLUCOSE-EMERGENCY .
+
 # classifiesInto 是 many-to-one（build_tbox 生成为 FunctionalProperty），一条阈值只指向一个分型
 dmoth:A1C-DIABETES    dmo:classifiesInto dmoid:DM-Unspecified .
 dmoth:FPG-DIABETES    dmo:classifiesInto dmoid:DM-Unspecified .
@@ -222,12 +518,9 @@ dmoth:OGTT2H-PREDIABETES dmo:classifiesInto dmoid:Prediabetes .
 #    分型要靠自身抗体 / 基因检测。现指向 dmoid:DM-Unspecified，
 #    它 ⊑ Diabetes 但刻意不与 T1DM/T2DM 互斥 —— 见 dmo-axioms.ttl §8。
 
-dmoth:A1C-NORMAL dmo:thresholdCitedFrom
-    dmosrc:niddk-tests-diagnosis .
-dmoth:A1C-PREDIABETES dmo:thresholdCitedFrom
-    dmosrc:niddk-tests-diagnosis .
-dmoth:A1C-DIABETES dmo:thresholdCitedFrom
-    dmosrc:niddk-tests-diagnosis .
+dmoth:A1C-NORMAL dmo:thresholdCitedFrom dmosrc:niddk-tests-diagnosis .
+dmoth:A1C-PREDIABETES dmo:thresholdCitedFrom dmosrc:niddk-tests-diagnosis .
+dmoth:A1C-DIABETES dmo:thresholdCitedFrom dmosrc:niddk-tests-diagnosis .
 dmoth:FPG-NORMAL dmo:thresholdCitedFrom dmosrc:niddk-tests-diagnosis .
 dmoth:FPG-PREDIABETES dmo:thresholdCitedFrom dmosrc:niddk-tests-diagnosis .
 dmoth:FPG-DIABETES dmo:thresholdCitedFrom dmosrc:niddk-tests-diagnosis .
@@ -244,75 +537,82 @@ dmoth:GLUCOSE-KETONE-CHECK dmo:thresholdCitedFrom dmosrc:cdc-diabetic-ketoacidos
 dmoth:GLUCOSE-EMERGENCY dmo:thresholdCitedFrom dmosrc:cdc-diabetic-ketoacidosis .
 
 # ════════════════════════════════════════════════════════════════════
-# 管理目标 —— 与诊断阈值严格分开（niddk-managing-diabetes.txt「ABCS」）
+# 六、管理目标 —— 与诊断阈值严格分开（niddk-managing-diabetes.txt「ABCS」）
 # 诊断阈值回答「是不是」，管理目标回答「管得好不好」。
+# 合并成一个节点是常见错误，会让 agent 把「诊断切点」当「治疗目标」答出去。
+#
+# ⚠️ 每条目标必须带 dmo:targetPopulationContext（取值同 DiagnosticThreshold 的
+#   populationContext：NonPregnant / Pregnant / Any）。
+#   targetPopulation 那一列是给人读的自由文本，机器过滤不了 —— 实测漏了这个字段时，
+#   21-target-attainment.rq 会拿「备孕期 A1C ≤6.5%」这条**妊娠期目标**去判定
+#   男性患者是否达标，而且不报任何错。人群上下文必须是结构化字段。
 # ════════════════════════════════════════════════════════════════════
 
 dmotgt:A1C a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-A1C-ADULT" ; dmo:targetMetric "A1C" ;
+    dmo:targetPopulationContext "NonPregnant" ; dmo:targetId "TARGET-A1C-ADULT" ; dmo:targetMetric "A1C" ;
     dmo:targetHigh 7.0 ; dmo:targetUnit "percent" ;
     dmo:targetPopulation "多数糖尿病成人；合并其他健康问题时目标可能不同" ;
     dmo:targetMeasuredBy dmoid:LabTest-A1C ;
     rdfs:comment "原文：For most people with diabetes, their goal is an A1C level below 7%." .
 
 dmotgt:PREMEAL a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-PREMEAL" ; dmo:targetMetric "PreMealGlucose" ;
+    dmo:targetPopulationContext "NonPregnant" ; dmo:targetId "TARGET-PREMEAL" ; dmo:targetMetric "PreMealGlucose" ;
     dmo:targetLow 80 ; dmo:targetHigh 130 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "多数糖尿病成人" ;
     rdfs:comment "原文：Before a meal: 80 to 130 mg/dL" .
 
 dmotgt:POSTMEAL a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-POSTMEAL" ; dmo:targetMetric "PostMealGlucose" ;
+    dmo:targetPopulationContext "NonPregnant" ; dmo:targetId "TARGET-POSTMEAL" ; dmo:targetMetric "PostMealGlucose" ;
     dmo:targetHigh 180 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "多数糖尿病成人，餐后约 2 小时" ;
     rdfs:comment "原文：About 2 hours after a meal starts: less than 180 mg/dL" .
 
 dmotgt:TIR a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-TIR" ; dmo:targetMetric "TimeInRange" ;
+    dmo:targetPopulationContext "NonPregnant" ; dmo:targetId "TARGET-TIR" ; dmo:targetMetric "TimeInRange" ;
     dmo:targetLow 70 ; dmo:targetHigh 180 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "使用 CGM 者；目标为至少 70% 的时间落在该区间内" ;
     rdfs:comment "原文：the target range is between 70 and 180 mg/dL … stay in your target range at least 70% of the time. ⚠️ 区间与占比是两个量，schema 只装得下区间，70% 这个占比目前只在注释里。" .
 
 dmotgt:BP a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-BP" ; dmo:targetMetric "BloodPressure" ;
+    dmo:targetPopulationContext "Any" ; dmo:targetId "TARGET-BP" ; dmo:targetMetric "BloodPressure" ;
     dmo:targetHigh 130 ; dmo:targetUnit "mmHg-systolic" ;
     dmo:targetPopulation "部分糖尿病患者；合并心血管疾病或高风险者目标可能更低" ;
     rdfs:comment "原文：Some people with diabetes have a blood pressure goal below 130/80 mm Hg. ⚠️ 舒张压 80 装不进单值 schema，同上。" .
 
 
 # ════════════════════════════════════════════════════════════════════
-# 待办 4a —— 妊娠期管理目标
+# 七、妊娠期管理目标
 # 出处：niddk-pregnancy-preexisting-diabetes.txt:164-178，逐字可引。
 # 补上之前，populationContext="Pregnant" 的目标一条都没有 —— 而
 # graph README 明写「妊娠期使用不同 cutoff」，这个分支之前是空的。
 # ════════════════════════════════════════════════════════════════════
 
 dmotgt:PREG-FASTING a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-PREG-FASTING" ; dmo:targetMetric "PreMealGlucose" ;
+    dmo:targetPopulationContext "Pregnant" ; dmo:targetId "TARGET-PREG-FASTING" ; dmo:targetMetric "PreMealGlucose" ;
     dmo:targetLow 70 ; dmo:targetHigh 95 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "妊娠期（Pregnant）" ;
     rdfs:comment "原文：fasting, before meals, at bedtime, and overnight: 70 to 95 mg/dL" .
 
 dmotgt:PREG-1H a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-PREG-1H" ; dmo:targetMetric "PostMealGlucose" ;
+    dmo:targetPopulationContext "Pregnant" ; dmo:targetId "TARGET-PREG-1H" ; dmo:targetMetric "PostMealGlucose" ;
     dmo:targetLow 110 ; dmo:targetHigh 140 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "妊娠期，餐后 1 小时" ;
     rdfs:comment "原文：1 hour after eating: 110 to 140 mg/dL" .
 
 dmotgt:PREG-2H a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-PREG-2H" ; dmo:targetMetric "PostMealGlucose" ;
+    dmo:targetPopulationContext "Pregnant" ; dmo:targetId "TARGET-PREG-2H" ; dmo:targetMetric "PostMealGlucose" ;
     dmo:targetLow 100 ; dmo:targetHigh 120 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "妊娠期，餐后 2 小时" ;
     rdfs:comment "原文：2 hours after eating: 100 to 120 mg/dL" .
 
 dmotgt:PREG-TIR a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-PREG-TIR" ; dmo:targetMetric "TimeInRange" ;
+    dmo:targetPopulationContext "Pregnant" ; dmo:targetId "TARGET-PREG-TIR" ; dmo:targetMetric "TimeInRange" ;
     dmo:targetLow 63 ; dmo:targetHigh 140 ; dmo:targetUnit "mg-per-dL" ;
     dmo:targetPopulation "妊娠期且使用 CGM 者" ;
     rdfs:comment "原文：If you are using a CGM, the most often recommended target range for pregnancy is 63 to 140 mg/dL。⚠️ 原文明确说没给固定的达标时间占比：ask your health care team what percentage of time。" .
 
 dmotgt:PREG-A1C a dmo:GlycemicTarget ;
-    dmo:targetId "TARGET-PREG-A1C" ; dmo:targetMetric "A1C" ;
+    dmo:targetPopulationContext "Pregnant" ; dmo:targetId "TARGET-PREG-A1C" ; dmo:targetMetric "A1C" ;
     dmo:targetHigh 6.5 ; dmo:targetUnit "percent" ;
     dmo:targetPopulation "备孕期；妊娠满 3 个月后目标可低至 6%" ;
     dmo:targetMeasuredBy dmoid:LabTest-A1C ;

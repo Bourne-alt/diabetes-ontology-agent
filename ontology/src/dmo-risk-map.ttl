@@ -1,0 +1,296 @@
+# S3 第 3 层 —— 患者可观测事实 → 风险因子 的**人工策展桥**。
+#
+# ════════ 为什么必须有这一层 ════════════════════════════════════════
+#
+# `ontology/dist/extract/` 里抽出了 146 个 dmo:RiskFactor 个体，带 riskCategory
+# 和 evidenceNote，看着挺像回事。但它们**一条都命中不了患者**：
+#
+#   * 没有 dmo:increasesRiskOf 边，接不到分型；
+#   * 没有任何「什么样的患者算命中」的可判定表述 —— 只有一个英文 label；
+#   * 同一个概念被不同文档抽成好几份（Overweight / Obesity / Overweight or
+#     Obesity / Obesity or Overweight / Obesity and Belly Fat 是五个不同 IRI）。
+#
+# 这一层把「BMI=31.2 这个观察」和「Being overweight 这条指南原文」接起来，
+# 是风险分层能跑的唯一前提。**必须人工写**，不能让模型生成 —— 生成的结果
+# 恰恰就是上面那 146 条孤岛。
+#
+# ════════ 一条硬规矩：数值边界的出处必须单独标注 ══════════════════
+#
+# CDC 原文说的是「Being overweight」，**没有给任何 BMI 数值切点**；
+# NIDDK 说的是「have overweight, obesity, or a large waist size」，同样无数值。
+# 所以「BMI ≥ 25」这个边界**不是本仓库语料说的**，是 WHO 的通用定义。
+#
+# 把它当成指南原文写进去，就和 semantic_link 把「尿蛋白 10.4」链到糖尿病肾病
+# 是同一类错误 —— 只是更隐蔽。因此每条规则强制带：
+#
+#   dmo:triggerBasis "corpus-verbatim"    边界（或存在性判断）直接来自所引原文
+#   dmo:triggerBasis "external-standard"  边界来自本仓库语料之外，须配
+#                                         dmo:externalStandardNote 说明来源
+#
+# API 返回的每个 contributingFactor 都要带上这个字段。用户看到的是
+# 「Being overweight（CDC 原文）+ 判定用的 BMI≥25 来自 WHO 定义，非本语料」，
+# 而不是一个假装什么都有出处的结论。
+#
+# 规则本身不做判定 —— 判定在 ontology/rules/50-risk-factor-hit.rq。
+# 这里只是数据。
+
+@prefix dmo:   <https://example.org/dmo#> .
+@prefix dmoid: <https://example.org/dmo/id/> .
+@prefix dmorf:  <https://example.org/dmo/id/riskFactor/> .
+@prefix dmorr:  <https://example.org/dmo/id/riskRule/> .
+@prefix dmosp:  <https://example.org/dmo/id/sourcePassage/> .
+@prefix dmosrc: <https://example.org/dmo/id/guidelineSource/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# ════════════════════════════════════════════════════════════════════
+# 一、词汇 —— ER 图里没有这些，只能手写
+# ════════════════════════════════════════════════════════════════════
+
+dmo:RiskRule a owl:Class ;
+    rdfs:label "RiskRule" ;
+    rdfs:comment "把一条可观测的患者事实映射到一个指南风险因子的可执行规则。刻意不是 owl:Class 层的公理 —— 「BMI≥25 算超重」是默认规则不是必然真理，塞进 TBox 会让本体在遇到反例时不一致（DESIGN.md 陷阱 #2）。" .
+
+dmo:riskRuleId a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "riskRuleId" .
+
+dmo:observedKind a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "observedKind" ;
+    rdfs:comment "该规则读哪一类患者事实：ClinicalObservation.observationType 的取值（BMI / SmokingStatus / …），或 'Diagnosis'（按 ICD-10 码匹配），或 'Age'（由 birthYear 推导）。" .
+
+dmo:observedCode a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "observedCode" ;
+    rdfs:comment "observedKind='Diagnosis' 时要匹配的 ICD-10 码。" .
+
+dmo:matchValue a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "matchValue" ;
+    rdfs:comment "文本型观察要匹配的取值，如吸烟状态的 'Current'。与 ruleLowerBound 二选一。" .
+
+# ⚠️ 数值边界**必须**用这四个独立谓词，不能复用 DiagnosticThreshold 的
+#    lowerBound / lowerOperator / upperBound / upperOperator。
+#
+#    原因（实测踩到的坑）：build_tbox.py 给 dmo:lowerBound 生成了
+#    `rdfs:domain dmo:DiagnosticThreshold`。OWL-RL 的 prp-dom 规则会顺着 domain
+#    **反推类型** —— 于是 4 条带数值边界的 RiskRule 被物化成了 DiagnosticThreshold，
+#    污染了「每条诊断阈值都必须有出处片段」这条验收查询（21 条阈值里冒出 4 条假的）。
+#
+#    没有任何报错。查 DiagnosticThreshold 会多出 4 条本不该在的东西，
+#    而阈值判定规则如果不加过滤就会拿「BMI ≥ 25」去和血糖比大小。
+#    这就是 rdfs:domain 在 OWL 里是**推理规则**而不是类型检查的后果。
+dmo:ruleLowerBound a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:decimal ; rdfs:label "ruleLowerBound" .
+dmo:ruleLowerOperator a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "ruleLowerOperator" ;
+    rdfs:comment "GT / GTE / None，语义与 DiagnosticThreshold 的 lowerOperator 一致。" .
+dmo:ruleUpperBound a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:decimal ; rdfs:label "ruleUpperBound" .
+dmo:ruleUpperOperator a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "ruleUpperOperator" ;
+    rdfs:comment "LT / LTE / None。" .
+
+dmo:mapsToRiskFactor a owl:ObjectProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range dmo:RiskFactor ; rdfs:label "mapsToRiskFactor" ;
+    rdfs:comment "⚠️ 指向 urn:dmo:extract:* 里的抽取个体，是**跨图引用**。抽取产物重跑后 IRI 可能变，load_graphdb.py --verify 有一条检查专门盯这个：每个 mapsToRiskFactor 的目标必须在图里存在，否则该规则静默失效。" .
+
+dmo:triggerBasis a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "triggerBasis" ;
+    rdfs:comment "'corpus-verbatim' = 判定条件直接来自所引原文；'external-standard' = 数值边界来自本仓库语料之外，必须配 externalStandardNote。" .
+
+dmo:externalStandardNote a owl:DatatypeProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range xsd:string ; rdfs:label "externalStandardNote" .
+
+dmo:riskRuleCitesPassage a owl:ObjectProperty ;
+    rdfs:domain dmo:RiskRule ; rdfs:range dmo:SourcePassage ; rdfs:label "riskRuleCitesPassage" .
+
+# 规则层的产出（由 50-risk-factor-hit.rq CONSTRUCT）
+dmo:RiskFactorHit a owl:Class ; rdfs:label "RiskFactorHit" ;
+    rdfs:comment "某患者命中某条 RiskRule 的记录。带回溯到具体那条患者事实的指针。" .
+dmo:hasRiskFactorHit a owl:ObjectProperty ;
+    rdfs:domain dmo:Patient ; rdfs:range dmo:RiskFactorHit ; rdfs:label "hasRiskFactorHit" .
+dmo:hitsRiskRule a owl:ObjectProperty ;
+    rdfs:domain dmo:RiskFactorHit ; rdfs:range dmo:RiskRule ; rdfs:label "hitsRiskRule" .
+dmo:hitRiskFactor a owl:ObjectProperty ;
+    rdfs:domain dmo:RiskFactorHit ; rdfs:range dmo:RiskFactor ; rdfs:label "hitRiskFactor" .
+dmo:hitFromFact a owl:ObjectProperty ;
+    rdfs:domain dmo:RiskFactorHit ; rdfs:label "hitFromFact" ;
+    rdfs:comment "命中所依据的那条患者事实（ClinicalObservation 或 Diagnosis）。API 靠它把结论接回 SQL 原始行。" .
+
+# ════════════════════════════════════════════════════════════════════
+# 二、出处片段
+# ════════════════════════════════════════════════════════════════════
+
+dmosp:RF-OVERWEIGHT-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-OVERWEIGHT-Q" ; dmo:locator "risk factors for prediabetes 列表项 1" ;
+    dmo:quote "Being overweight" ;
+    dmo:contentHash "2d392329d247c0bc3bf9345d21a81229521eb69d8a83afc5590ff429c20fd8c7" .
+
+dmosp:RF-AGE45-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-AGE45-Q" ; dmo:locator "risk factors for prediabetes 列表项 2" ;
+    dmo:quote "Being 45 years or older" ;
+    dmo:contentHash "4f561cda6c0b7034fcb2d4d57e3688134cb31c4d5955a9edf051bd522549d7d5" .
+
+dmosp:RF-FAMILY-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-FAMILY-Q" ; dmo:locator "risk factors for prediabetes 列表项 3" ;
+    dmo:quote "Having a parent, brother, or sister with type 2 diabetes" ;
+    dmo:contentHash "6c75a0a47199340d729c59fcb66be28546615715da08121903e09509e1ed9ed1" .
+
+dmosp:RF-INACTIVE-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-INACTIVE-Q" ; dmo:locator "risk factors for prediabetes 列表项 4" ;
+    dmo:quote "Being physically active less than 3 times a week" ;
+    dmo:contentHash "6f99e6e1ba52ad2887fb8c826225919ceb9d7d18467b8d0799260a13f22e5d91" .
+
+dmosp:RF-GDM-HISTORY-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-GDM-HISTORY-Q" ; dmo:locator "risk factors for prediabetes 列表项 5" ;
+    dmo:quote "Ever having gestational diabetes (diabetes during pregnancy)" ;
+    dmo:contentHash "fcf999a7a76740458b29b4182a83438941c8f27b79fbefa21e665f78c64d3342" .
+
+dmosp:RF-PCOS-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-PCOS-Q" ; dmo:locator "risk factors for prediabetes 列表项 7" ;
+    dmo:quote "Having polycystic ovary syndrome" ;
+    dmo:contentHash "3c9e04999834dc8975474b69a2fe1f00307b5c66e248cacb738573e92fefe078" .
+
+dmosp:RF-PREDIABETES-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-PREDIABETES-Q" ; dmo:locator "KEY POINTS 段" ;
+    dmo:quote "Prediabetes raises the risk of type 2 diabetes and other health problems." ;
+    dmo:contentHash "7b11a2036e12795537f4cc6e448058895ccc1b801f5fac282bb6c6442e9fe0db" .
+
+dmosp:RF-AGE35-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-AGE35-Q" ; dmo:locator "Who should be tested 段" ;
+    dmo:quote "You may have a higher risk of developing type 2 diabetes if you are age 35 or older" ;
+    dmo:contentHash "7482e746002081b0d1f58493460e349846476cafdcfe29352f69f285d172c7a2" ;
+    rdfs:comment "⚠️ 与 RF-AGE45-Q 冲突：CDC 说 45 岁，NIDDK 说 35 岁。两条都是本仓库收录的原文，不是谁抄错。本规则取 35（更敏感，漏筛代价高于多筛一次），两条 passage 都引，让分歧对用户可见 —— 静默取一个才是问题。" .
+
+dmosp:RF-OBESITY-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-OBESITY-Q" ; dmo:locator "Risk factors 段" ;
+    dmo:quote "However, people are more likely to develop type 2 diabetes if they have overweight, obesity, or a large waist size." ;
+    dmo:contentHash "9449c5863f9c534b8e8ca36cef03f3977929d1dd2df2dc4076280bcd9009456f" .
+
+dmosp:RF-SMOKING-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-SMOKING-Q" ; dmo:locator "Risk factors · 可改变因素段" ;
+    dmo:quote "you may be able to change some risk factors and prevent or delay type 2 diabetes by maintaining a healthy weight, being physically active, and stopping smoking" ;
+    dmo:contentHash "3c00b150548241539314867cdc7fd6621c5a439f8936df2ec4e9b2ca0a0aff7a" .
+
+dmosp:RF-SEDENTARY-Q a dmo:SourcePassage ;
+    dmo:passageId "RF-SEDENTARY-Q" ; dmo:locator "Risk factors · 体力活动段" ;
+    dmo:quote "are not physically active, because of a job that requires sitting for long periods of time or because of difficulty moving their body" ;
+    dmo:contentHash "56b4d60400d7775ef237a81a9ef80d7d796cd919f189b55c7cab8c7445d84a0f" .
+
+dmosrc:cdc-prediabetes-prevention dmo:hasPassage
+    dmosp:RF-OVERWEIGHT-Q, dmosp:RF-AGE45-Q, dmosp:RF-FAMILY-Q, dmosp:RF-INACTIVE-Q,
+    dmosp:RF-GDM-HISTORY-Q, dmosp:RF-PCOS-Q, dmosp:RF-PREDIABETES-Q .
+dmosrc:niddk-tests-diagnosis dmo:hasPassage dmosp:RF-AGE35-Q .
+dmosrc:niddk-symptoms-causes dmo:hasPassage
+    dmosp:RF-OBESITY-Q, dmosp:RF-SMOKING-Q, dmosp:RF-SEDENTARY-Q .
+
+# ════════════════════════════════════════════════════════════════════
+# 三、规则 —— 边界来自语料的（triggerBasis = corpus-verbatim）
+# ════════════════════════════════════════════════════════════════════
+
+dmorr:AGE-35 a dmo:RiskRule ;
+    dmo:riskRuleId "AGE-35" ; rdfs:label "年龄 ≥ 35 岁" ;
+    dmo:observedKind "Age" ;
+    dmo:ruleLowerBound 35 ; dmo:ruleLowerOperator "GTE" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:age-35-or-older ;
+    dmo:riskRuleCitesPassage dmosp:RF-AGE35-Q, dmosp:RF-AGE45-Q ;
+    rdfs:comment "⚠️ 对 hospital_zd 的真实数据**不可用**：patient_basic_info.birthday 的取值范围是 2020-02-24 到 2063-09-14，400 人里 329 人出生日期在未来。年龄推不出来，这条规则对真实患者永远不命中，并在 pred_ 层记为 insufficient_reason='birthday-implausible'。" .
+
+dmorr:FAMILY-HISTORY-T2DM a dmo:RiskRule ;
+    dmo:riskRuleId "FAMILY-HISTORY-T2DM" ; rdfs:label "一级亲属患 2 型糖尿病" ;
+    dmo:observedKind "FamilyHistory" ; dmo:matchValue "T2DM" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:family-history-of-type-2-diabetes ;
+    dmo:riskRuleCitesPassage dmosp:RF-FAMILY-Q ;
+    rdfs:comment "原文把范围限定在 parent / brother / sister（一级亲属），不是泛指『家族史』。上游 patient_analysis 无此字段，只有演示队列能命中。" .
+
+dmorr:PHYSICAL-INACTIVITY a dmo:RiskRule ;
+    dmo:riskRuleId "PHYSICAL-INACTIVITY" ; rdfs:label "每周体力活动少于 3 次" ;
+    dmo:observedKind "PhysicalActivityPerWeek" ;
+    dmo:ruleUpperBound 3 ; dmo:ruleUpperOperator "LT" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:physical-inactivity-less-than-3-times-a-week ;
+    dmo:riskRuleCitesPassage dmosp:RF-INACTIVE-Q, dmosp:RF-SEDENTARY-Q ;
+    rdfs:comment "边界 3 次/周直接来自原文，是少数几条数值边界有出处的规则之一。" .
+
+dmorr:GDM-HISTORY a dmo:RiskRule ;
+    dmo:riskRuleId "GDM-HISTORY" ; rdfs:label "既往妊娠期糖尿病史" ;
+    dmo:observedKind "Diagnosis" ; dmo:observedCode "O24" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:gestational-diabetes ;
+    dmo:riskRuleCitesPassage dmosp:RF-GDM-HISTORY-Q ;
+    rdfs:comment "上游全库 O24 为零条，只能靠演示队列。" .
+
+dmorr:PCOS a dmo:RiskRule ;
+    dmo:riskRuleId "PCOS" ; rdfs:label "多囊卵巢综合征" ;
+    dmo:observedKind "Diagnosis" ; dmo:observedCode "E28" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:polycystic-ovary-syndrome ;
+    dmo:riskRuleCitesPassage dmosp:RF-PCOS-Q .
+
+dmorr:SMOKING a dmo:RiskRule ;
+    dmo:riskRuleId "SMOKING" ; rdfs:label "当前吸烟" ;
+    dmo:observedKind "SmokingStatus" ; dmo:matchValue "Current" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:smoking ;
+    dmo:riskRuleCitesPassage dmosp:RF-SMOKING-Q ;
+    rdfs:comment "原文是从『可改变因素』的角度提到戒烟，把它读成『吸烟是风险因素』是合理推断但不是逐字断言 —— 保留 corpus-verbatim 的边界判断（Current 是二值，无数值边界），但这条的证据强度弱于 CDC 的显式列表项。" .
+
+dmorr:PREDIABETES a dmo:RiskRule ;
+    dmo:riskRuleId "PREDIABETES" ; rdfs:label "已诊断糖尿病前期" ;
+    dmo:observedKind "Diagnosis" ; dmo:observedCode "R73" ;
+    dmo:triggerBasis "corpus-verbatim" ;
+    dmo:mapsToRiskFactor dmorf:prediabetes ;
+    dmo:riskRuleCitesPassage dmosp:RF-PREDIABETES-Q .
+
+# ════════════════════════════════════════════════════════════════════
+# 四、规则 —— 数值边界**不在**本仓库语料里的（triggerBasis = external-standard）
+#
+# 这几条一定要单独看：风险因子本身有原文（「Being overweight」），
+# 但「多少算 overweight」原文一个字都没说。API 必须把这个区别展示出来。
+# ════════════════════════════════════════════════════════════════════
+
+dmorr:BMI-OVERWEIGHT a dmo:RiskRule ;
+    dmo:riskRuleId "BMI-OVERWEIGHT" ; rdfs:label "BMI ≥ 25（超重）" ;
+    dmo:observedKind "BMI" ;
+    dmo:ruleLowerBound 25 ; dmo:ruleLowerOperator "GTE" ;
+    dmo:ruleUpperBound 30 ; dmo:ruleUpperOperator "LT" ;
+    dmo:triggerBasis "external-standard" ;
+    dmo:externalStandardNote "BMI 25 kg/m² 的超重切点来自 WHO 通用定义，**不在**本仓库任何语料中。CDC 与 NIDDK 原文只说 overweight / obesity，未给数值。亚洲人群另有 23 的建议切点，本仓库同样未收录。" ;
+    dmo:mapsToRiskFactor dmorf:overweight ;
+    dmo:riskRuleCitesPassage dmosp:RF-OVERWEIGHT-Q, dmosp:RF-OBESITY-Q .
+
+dmorr:BMI-OBESITY a dmo:RiskRule ;
+    dmo:riskRuleId "BMI-OBESITY" ; rdfs:label "BMI ≥ 30（肥胖）" ;
+    dmo:observedKind "BMI" ;
+    dmo:ruleLowerBound 30 ; dmo:ruleLowerOperator "GTE" ;
+    dmo:triggerBasis "external-standard" ;
+    dmo:externalStandardNote "BMI 30 kg/m² 的肥胖切点来自 WHO 通用定义，不在本仓库语料中。" ;
+    dmo:mapsToRiskFactor dmorf:obesity ;
+    dmo:riskRuleCitesPassage dmosp:RF-OBESITY-Q .
+
+dmorr:ICD-OBESITY a dmo:RiskRule ;
+    dmo:riskRuleId "ICD-OBESITY" ; rdfs:label "ICD-10 E66 肥胖" ;
+    dmo:observedKind "Diagnosis" ; dmo:observedCode "E66" ;
+    dmo:triggerBasis "external-standard" ;
+    dmo:externalStandardNote "用 ICD-10 E66 代替 BMI 判定肥胖：编码本身是上游真实断言（trust=Attested），但『E66 等价于指南所说的 obesity』是编码体系与指南文本之间的对应关系，本仓库语料未做此声明。" ;
+    dmo:mapsToRiskFactor dmorf:obesity ;
+    dmo:riskRuleCitesPassage dmosp:RF-OBESITY-Q ;
+    rdfs:comment "这是真实库里**唯一**能命中的体重类风险因子 —— 上游有 19 个 E66，但没有一个 BMI 观察值。" .
+
+dmorr:ICD-HYPERTENSION a dmo:RiskRule ;
+    dmo:riskRuleId "ICD-HYPERTENSION" ; rdfs:label "ICD-10 I10 原发性高血压" ;
+    dmo:observedKind "Diagnosis" ; dmo:observedCode "I10" ;
+    dmo:triggerBasis "external-standard" ;
+    dmo:externalStandardNote "高血压作为糖尿病风险因子在抽取产物里有（riskFactor/high-blood-pressure），但该条目的 evidenceNote 出自 ADA-KDIGO 共识报告的上下文，本仓库未收录『高血压 ⟹ 2 型糖尿病风险升高』的逐字断言。ICD-10 I10 与该风险因子的对应同样是外部映射。" ;
+    dmo:mapsToRiskFactor dmorf:high-blood-pressure ;
+    rdfs:comment "⚠️ 这条**没有** riskRuleCitesPassage —— 因为找不到可逐字引用的原文。51-risk-stratification.rq 会因此拒绝让它参与 tier 判定（「列不出出处的因子不参与判定」），只在返回体的 unmapped 里说明。留着它是为了让这个缺口可见、可被 explain_gap 报出来，而不是假装这个风险因子不存在。" .
+
+dmorr:ICD-DYSLIPIDEMIA a dmo:RiskRule ;
+    dmo:riskRuleId "ICD-DYSLIPIDEMIA" ; rdfs:label "ICD-10 E78 高脂血症" ;
+    dmo:observedKind "Diagnosis" ; dmo:observedCode "E78" ;
+    dmo:triggerBasis "external-standard" ;
+    dmo:externalStandardNote "同 ICD-HYPERTENSION：抽取产物有 abnormal-cholesterol-levels，但本仓库无逐字断言。" ;
+    dmo:mapsToRiskFactor dmorf:abnormal-cholesterol-levels ;
+    rdfs:comment "⚠️ 同样没有 riskRuleCitesPassage，同样不参与 tier 判定。" .

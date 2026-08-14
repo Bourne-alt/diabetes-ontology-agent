@@ -37,10 +37,11 @@ import re
 import sys
 import time
 import unicodedata
+from collections.abc import Iterable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 ENV_FILE = ROOT / ".env"
@@ -114,7 +115,7 @@ class RawRecord:
         }
 
     @staticmethod
-    def from_json(d: dict[str, Any]) -> "RawRecord":
+    def from_json(d: dict[str, Any]) -> RawRecord:
         return RawRecord(
             entity_type=d.get("entityType", ""),
             canonical_name=d.get("canonicalName", ""),
@@ -326,7 +327,7 @@ class Graph:
         self.relationships: list[dict[str, Any]] = data.get("relationships", [])
 
     @staticmethod
-    def load(path: Path) -> "Graph":
+    def load(path: Path) -> Graph:
         return Graph(json.loads(path.read_text(encoding="utf-8")), path)
 
     def policy(self, entity_id: str) -> str:
@@ -633,7 +634,7 @@ def call_llm(
 # 第二遍把本文档已消解的实体清单喂回去，只问关系，不再抽实体。
 
 
-def build_link_tool(graph: "Graph", entity_id: str, predicates: list[str]) -> dict[str, Any]:
+def build_link_tool(graph: Graph, entity_id: str, predicates: list[str]) -> dict[str, Any]:
     entity = graph.entities[entity_id]
     return {
         "type": "function",
@@ -702,9 +703,9 @@ def call_link_llm(
     *,
     client,
     model: str,
-    graph: "Graph",
+    graph: Graph,
     entity_id: str,
-    entities: dict[str, "ResolvedEntity"],
+    entities: dict[str, ResolvedEntity],
     doc_text: str,
     source_id: str,
     temperature: float,
@@ -759,8 +760,8 @@ def call_link_llm(
 
 def verify_links(
     raw_edges: list[dict[str, str]],
-    entities: dict[str, "ResolvedEntity"],
-    graph: "Graph",
+    entities: dict[str, ResolvedEntity],
+    graph: Graph,
     doc_text: str,
 ) -> tuple[list[dict[str, str]], dict[str, int]]:
     """连边同样要过 quote 逐字校验，且两端必须落在已消解实体上。"""
@@ -966,11 +967,11 @@ def emit_turtle(
     model: str,
     prompt_version: str,
 ) -> str:
-    now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    now = datetime.now(UTC).replace(microsecond=0).isoformat()
     lines: list[str] = [
         f"# 由 semantic_extract.py 生成，不要手改。源：{source['localFile']}",
         f"# 目标 named graph：{source['graphUri']}",
-        f"# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \\",
+        "# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \\",
         f"#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph={source['graphUri']}'",
         "",
         f"@prefix dmo:   <{VOCAB_URI}> .   # 词汇：类与属性",

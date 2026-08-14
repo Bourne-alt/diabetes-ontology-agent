@@ -27,8 +27,14 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SRC = ROOT / "ontology" / "graph" / "diabetes-ontology.json"
-DEFAULT_OUT = ROOT / "ontology" / "dist" / "tbox-generated.ttl"
+# V2（care-chain）是当前唯一在用的图。默认输出直接就是 load_graphdb.py 装载的那个文件，
+# 让「无参跑一遍 build_tbox.py」和「装进 GraphDB 的东西」不可能不一致 ——
+# 之前默认输出是 tbox-generated.ttl 而装载读的是 tbox-v2.ttl，两边可以各自陈旧而不报错。
+DEFAULT_SRC = ROOT / "ontology" / "graph" / "diabetes-ontology-v2.json"
+DEFAULT_OUT = ROOT / "ontology" / "dist" / "tbox-v2.ttl"
+# V1 产物 dist/tbox-generated.ttl 保留只为 diff 对照，不再由默认调用刷新：
+#   python3 ontology/tools/build_tbox.py \
+#     --src ontology/graph/diabetes-ontology.json --out ontology/dist/tbox-generated.ttl
 
 # 必须与 semantic_extract.py 的 VOCAB_URI / docs/DESIGN.md 完全一致。
 # 对不上 = TBox 和 ABox 各说各话，SPARQL 静默返回空集。
@@ -148,7 +154,7 @@ def build(graph: dict[str, Any], src_name: str, with_haskey: bool = False) -> tu
         a("    .")
         if route == ROUTE_CLASS:
             a(f"# ↑ 方案 B（punning）：{cls} 的实例同时被断言为 owl:Class，")
-            a(f"#   子类层次与 disjointWith 在 dmo-axioms.ttl 手写。")
+            a("#   子类层次与 disjointWith 在 dmo-axioms.ttl 手写。")
         elif route == ROUTE_SKOS:
             a(f"dmo:{cls}Scheme a skos:ConceptScheme ;")
             a(f'    rdfs:label "{esc(e["name"])} 术语表" .')

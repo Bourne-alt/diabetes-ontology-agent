@@ -34,6 +34,21 @@
             "Unknown"
           ],
           "description": "生理性别；CVD 风险与 GDM 相关规则依赖该字段"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        },
+        {
+          "name": "demoScenario",
+          "type": "string",
+          "description": "演示场景编号（如 S02）。真实患者留空。"
         }
       ]
     },
@@ -89,7 +104,11 @@
           "type": "string",
           "description": "来源原文的定义摘录"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "class",
+        "reason": "分型/并发症/分期需要子类层次与 disjointWith，只有 punning 成 owl:Class 才表达得了"
+      }
     },
     {
       "id": "clinicalEncounter",
@@ -184,7 +203,11 @@
           "type": "string",
           "description": "检验含义摘录"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
     },
     {
       "id": "labResult",
@@ -217,6 +240,36 @@
           "name": "collectedAt",
           "type": "datetime",
           "description": "采样时间"
+        },
+        {
+          "name": "valueTrustLevel",
+          "type": "enum",
+          "values": [
+            "Attested",
+            "Curated",
+            "Unverified"
+          ],
+          "description": "该数值的可信度。Attested=上游真实断言；Curated=人工策展的演示数据；Unverified=上游随机/未经核验的值。Unverified 默认不参与阈值判定。"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        },
+        {
+          "name": "sourceValue",
+          "type": "decimal",
+          "description": "单位换算前的原始数值。换算在 ETL 做，原始值必须保留以便复核。"
+        },
+        {
+          "name": "sourceUnit",
+          "type": "string",
+          "description": "单位换算前的原始单位。上游无单位列时为空 —— 空即拒绝数值判定。"
         }
       ]
     },
@@ -414,7 +467,11 @@
           "type": "string",
           "description": "定义摘录"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "class",
+        "reason": "分型/并发症/分期需要子类层次与 disjointWith，只有 punning 成 owl:Class 才表达得了"
+      }
     },
     {
       "id": "complicationStage",
@@ -444,7 +501,11 @@
           "type": "string",
           "description": "分期判定标准（引用检验区间，不含处置剂量）"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "class",
+        "reason": "分型/并发症/分期需要子类层次与 disjointWith，只有 punning 成 owl:Class 才表达得了"
+      }
     },
     {
       "id": "symptom",
@@ -479,7 +540,11 @@
           ],
           "description": "紧急程度；Emergency 触发「立即就医」话术而非解释性回答"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
     },
     {
       "id": "riskFactor",
@@ -515,7 +580,11 @@
           "type": "string",
           "description": "证据说明与出处"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
     },
     {
       "id": "drugClass",
@@ -576,7 +645,11 @@
           ],
           "description": "体重影响；TZD/SU 增重，GLP-1RA/SGLT2i 减重"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
     },
     {
       "id": "medication",
@@ -752,7 +825,11 @@
           "type": "string",
           "description": "预期收益，如「T2DM 发病风险降低 58%（60 岁以上 71%）」"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
     },
     {
       "id": "device",
@@ -790,7 +867,11 @@
           "type": "boolean",
           "description": "是否提供连续实时数据（CGM 可在夜间低血糖时报警）"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
     },
     {
       "id": "monitoringSchedule",
@@ -890,8 +971,32 @@
             "Cancelled"
           ],
           "description": "观察记录状态"
+        },
+        {
+          "name": "valueTrustLevel",
+          "type": "enum",
+          "values": [
+            "Attested",
+            "Curated",
+            "Unverified"
+          ],
+          "description": "该数值的可信度。Attested=上游真实断言；Curated=人工策展的演示数据；Unverified=上游随机/未经核验的值。Unverified 默认不参与阈值判定。"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
     },
     {
       "id": "diagnosis",
@@ -981,8 +1086,27 @@
           "name": "externalCode",
           "type": "string",
           "description": "编码体系中的诊断代码"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        },
+        {
+          "name": "caveat",
+          "type": "string",
+          "description": "对该结论的限定说明，如「单次异常不等于确诊，需另一日复测确认」。"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
     },
     {
       "id": "assessment",
@@ -1034,8 +1158,17 @@
           "name": "applicableContext",
           "type": "string",
           "description": "评估时使用的人群与临床上下文"
+        },
+        {
+          "name": "caveat",
+          "type": "string",
+          "description": "对该结论的限定说明。Unverified 值参与时强制写入。"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
     },
     {
       "id": "medicationUse",
@@ -1085,8 +1218,22 @@
           "name": "indicationText",
           "type": "string",
           "description": "适应证摘要；结构化适应证通过 treatsDiagnosis 关系表达"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
     },
     {
       "id": "sourcePassage",
@@ -1120,7 +1267,11 @@
           "type": "string",
           "description": "规范化片段 SHA-256"
         }
-      ]
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
     },
     {
       "id": "recommendation",
@@ -1516,6 +1667,14 @@
       "to": "symptom",
       "cardinality": "many-to-one",
       "description": "症状类观察对应的症状术语；非症状观察不使用该关系。"
+    },
+    {
+      "id": "hasAssessment",
+      "name": "hasAssessment",
+      "from": "patient",
+      "to": "assessment",
+      "cardinality": "one-to-many",
+      "description": "患者的阈值评估结论。刻意加这条直连边：不加的话从 Assessment 回到 Patient 要走 basedOnLabResult → producesLabResult → hasEncounter 三跳，查询层每个模板都要重复这段 join，写错一处就静默少结果。"
     },
     {
       "id": "hasDiagnosis",
