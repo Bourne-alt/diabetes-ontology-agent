@@ -151,6 +151,7 @@ src/*.ttl + imports/*-slim.ttl + data/*.ttl
 
 **关键设计原则**：
 1. **不让 LLM 自由写 SPARQL**。LLM 写 SPARQL 出错率高（URI 拼错、prefix 缺失、语法错）。流程强制为 `search_concept` → 拿到准确 URI → 参数化模板。`raw_sparql` 只作逃生口。
+   > ⚠️ **这一条已被 [AGENT-INVESTIGATE-PLAN.md](AGENT-INVESTIGATE-PLAN.md) 有意推翻**（2026-08-17）：`/patients/{pid}/investigate` 端点把自由 SPARQL/SQL 当主力路径之一，代价用 `agent/guard/` 的静态检查器补。推翻的前提是把本条论证里最严重的两个理由（知识侧写死具名图 → 静默少返；患者侧缺 `STRSTARTS` 守卫 → 扫到反例夹具）从"靠人自觉"变成"机械可检测"。理由逐条对账见该文档「决策记录」一节。**本条对其余所有代码路径继续有效** —— `dmo query`、`POST /query/{template}` 仍然只走模板白名单。
 2. **每个回答必须带 provenance**：用到了哪些三元组、哪条指南、哪条规则。这是 ontology agent 相对纯 RAG 的核心卖点，不是加分项，是必做项。
 3. **Schema 注入而非数据注入**：类层次 + 属性签名摘要进 system prompt（用 prompt caching），实例数据一律走工具取。
 
