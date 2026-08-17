@@ -93,3 +93,17 @@ scripts/dmo-get.sh /patients/P00016/risk
 15 个真实 E11 患者**全部**是 `Insufficient-Evidence`，`insufficientReason` 说清三个原因：检验值均为 `Unverified`、无任何可用风险侧事实、年龄推不出来。
 
 **这是本仓库最重要的一条基线。** 如果你对某个 `ehr-legacy` 患者给出了比这更"完整"的结论，先怀疑自己。
+
+---
+
+## 推演的自测用例
+
+上表的 S02 / S03 一对（单次 ⟹ Provisional、两日 ⟹ Confirmed）与 S16 三个边界例
+（5.7 / 6.4 / 6.5），在推演里可以**在同一个患者身上**当场复现，不必换患者：
+
+```bash
+uv run dmo simulate P90002 --assume A1C 7.9 percent 2026-02-20  # ⟹ Provisional → Confirmed
+uv run dmo simulate P90002 --assume A1C 5.7 percent 2026-02-20  # ⟹ Prediabetes（开区间下界）
+```
+
+完整清单见 [simulation.md](simulation.md#自测用例)。

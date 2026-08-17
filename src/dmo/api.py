@@ -106,6 +106,40 @@ def full(pid: str) -> dict[str, Any]:
     return _bundle(pid, ())
 
 
+@app.post("/patients/{pid}/simulate")
+def simulate_patient(pid: str, body: dict[str, Any]) -> dict[str, Any]:
+    """确定性病程推演：注入假设检验结果，看结论怎么变、每一步凭什么。
+
+        curl -X POST localhost:8000/patients/P90002/simulate \\
+             -H 'Content-Type: application/json' \\
+             -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
+
+    ⚠️ 这是**条件推演**（若 X 则 Y），不是预测：假设值必须由调用方显式给出，
+    系统不生成、不推荐、不外推任何数值。
+
+    推演全程在内存里跑，对 GraphDB 只发 CONSTRUCT —— 调多少次，
+    库里三元组数一条都不会变。
+    """
+    from .simulate import HypothesisError, SandboxError, simulate
+
+    assume = body.get("assume")
+    if not isinstance(assume, list):
+        raise HTTPException(
+            400, "body 必须是 {\"assume\": [{term, value, unit, date}, ...]}")
+    try:
+        return simulate(
+            _cfg(), pid, assume,
+            include_unreliable=bool(body.get("includeUnreliable")),
+            refresh=bool(body.get("refresh")),
+        )
+    except HypothesisError as e:
+        # 400 而不是 422：这些拒绝都是**有意的业务判断**（不猜术语、不默认单位），
+        # 消息本身就是给用户看的答案，不是参数格式错误。
+        raise HTTPException(400, str(e)) from None
+    except SandboxError as e:
+        raise HTTPException(404, str(e)) from None
+
+
 @app.get("/query/templates")
 def list_templates() -> list[dict[str, str]]:
     return [{"name": t.name, "description": t.description}

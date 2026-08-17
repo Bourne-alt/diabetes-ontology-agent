@@ -58,6 +58,7 @@ uvicorn dmo.api:app --host 127.0.0.1 --port 8000 --reload
 | GET | `/patients/{pid}/assessment` | SPARQL | 阈值判定 + 出处 |
 | GET | `/patients/{pid}/risk` | SQL（读物化结果） | 风险分层 |
 | GET | `/patients/{pid}/safety` | SPARQL | 用药安全信号 |
+| POST | `/patients/{pid}/simulate` | **内存推演** | 确定性病程推演 + 推导树 |
 | GET | `/query/templates` | — | 列出模板白名单 |
 | POST | `/query/{template}` | SPARQL | 跑参数化模板 |
 | GET | `/terms/unmapped` | SQL | 全部未命中/不可用术语 |
@@ -472,6 +473,78 @@ FastAPI 标准形状：
 
 ---
 
+## 12.5 `POST /patients/{pid}/simulate` — 确定性病程推演
+
+回答「**若** 补一条检验，结论**则**变成什么」，并把每一步的依据摊开。
+
+```bash
+curl -X POST localhost:8000/patients/P90002/simulate \
+  -H 'Content-Type: application/json' \
+  -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
+```
+
+P90002 现有一次 A1C 7.4%（S02，单次异常 ⟹ `Provisional`）。补一个**不同日期**的
+7.9% 之后：
+
+```
+Diagnosis.verificationStatus: Provisional → Confirmed
+```
+
+两次结论的差别**只有测了几天** —— 30 号规则数的是 `COUNT(DISTINCT ?day)`。
+
+### 这不是预测
+
+| 允许 | 禁止 |
+|---|---|
+| 「**若** A1C = 7.9%，**则** 触发 R30，结论 Confirmed」 | 「该患者 A1C 可能升到 7.9%」 |
+| 条件蕴含 | 状态外推 |
+
+假设值**只能由调用方显式给出**。系统没有任何生成候选值的代码路径 ——
+`hypotheticalFacts[].hypothetical` 恒为 `true`，`factOrigin` 恒为 `simulated`。
+
+### 返回体要点
+
+| 字段 | 说明 |
+|---|---|
+| `derivationHash` | = f(pid, graphVersion, 知识快照, 规则集哈希, 假设集)。**同输入必同哈希** |
+| `delta` | 结论级 diff：`changed` / `added` / `removed`，不是三元组级噪声 |
+| `derivationTree` | 推导树。每个 `LabResult` 节点标 `measured` 或 `hypothetical` |
+| `before` / `after` | 两轮规则跑完的结论快照 |
+| `unchanged` | 假设没改变任何结论时为 `true` —— 这是结论，不是故障 |
+
+### 确定性可当场验证
+
+```bash
+for i in 1 2 3 4 5; do
+  curl -s -X POST localhost:8000/patients/P90002/simulate \
+    -H 'Content-Type: application/json' \
+    -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}' \
+  | python3 -c 'import sys,json; print(json.load(sys.stdin)["derivationHash"])'
+done
+```
+
+五行输出完全相同。同一个问题问 LLM 五遍，答案会飘 —— 这是本体最硬的一条差异。
+
+### 两条拒绝（400），和能推出结论同等重要
+
+| 请求 | 拒绝理由 |
+|---|---|
+| `term: "糖化血红蛋白"` / `"hba1c"` | 只有挂了阈值的 7 项可推演：`A1C FPG GCT1H GLU OGTT2H RPG UACR`。库里上百个从指南抽取的同名检验项**没有阈值**，接受它们只会推出空集 —— 而空集看起来和「结论没变」一模一样 |
+| `unit` 缺失或无已核实换算系数 | 148 是 mg/dL 还是 mmol/L，结论天差地别。`mmol-per-L → mg-per-dL` 有已核实系数（×18.0182），会换算并保留 `sourceValue`/`sourceUnit`；A1C 的 `mmol-per-mol` 没有，直接拒 |
+
+### 不写 GraphDB 一个字节
+
+推演全程在内存 rdflib Dataset 里跑，对 GraphDB 只发 `CONSTRUCT`。
+调多少次，库里三元组数一条都不变 —— `tests/test_simulate.py::test_simulation_never_writes_to_graphdb`
+用前后 `size()` 相等盯着这件事。
+
+不在 GraphDB 里建临时图的三个理由见 `src/dmo/simulate/sandbox.py` 开头，
+核心一条：规则的患者侧写死了 `STRSTARTS(?pg, "urn:dmo:patient:")`，
+sandbox 图想被规则看见就得用这个前缀，那它同时会被全库扫描扫到，
+假设数据当场变成「真患者」。
+
+---
+
 ## 13. 对应的 CLI
 
 每个端点都有等价的命令行入口，走**同一条代码路径**（薄 HTTP 门面，逻辑全在 `query/hybrid.py`）：
@@ -482,6 +555,9 @@ uv run dmo explain 糖化血红蛋白       # ≈ GET /terms/explain
 uv run dmo demo compare --term 尿蛋白 # ≈ GET /demo/compare
 uv run dmo query care_chain --patient P90002   # ≈ POST /query/care_chain
 uv run dmo query                    # 列模板
+
+# 确定性病程推演 ≈ POST /patients/P90002/simulate
+uv run dmo simulate P90002 --assume A1C 7.9 percent 2026-02-20
 ```
 
 CLI 与 API 必须走同一条路径，否则两边的答案会慢慢分叉，而演示时用的是哪一条谁也说不清。

@@ -153,6 +153,29 @@
 
 ---
 
+## `POST /patients/{pid}/simulate`
+
+确定性病程推演。body 是**对象**不是数组（与 `/query/{template}` 不同）：
+
+```json
+{"assume": [{"term": "A1C", "value": 7.9, "unit": "percent", "date": "2026-02-20"}]}
+```
+
+| 返回字段 | 语义 |
+|---|---|
+| `hypotheticalFacts[]` | 这次假设了什么。`hypothetical` 恒 true，`factOrigin` 恒 `simulated` |
+| `unchanged` | 假设没改变任何结论。**是结论不是故障** |
+| `delta[]` | 结论级 diff：`changed` / `added` / `removed` |
+| `derivationTree` | 推导树。`LabResult.provenance` = `measured` \| `hypothetical` |
+| `derivationHash` | f(pid, graphVersion, 知识快照, 规则集, 假设集)。同输入必同哈希 |
+| `before` / `after` | 两轮规则跑完的结论快照 |
+
+400 的两类拒绝（**照抄 detail 给用户，不要改名重试**）：术语没挂阈值、单位缺失或无已核实换算系数。
+
+全部细节见 [simulation.md](simulation.md)。
+
+---
+
 ## `GET /terms/explain?term=X`
 
 四类归宿（`verify_status`）：

@@ -43,6 +43,21 @@ DEFAULT_ENDPOINT = "http://124.223.18.44:7200"
 REPO_ID = "dmo"
 VOCAB = "https://example.org/dmo#"
 
+# GraphDB 约定的 SHACL shapes 图。
+#
+# ⚠️ 2026-08-16 实测：`validationEnabled` 这个开关在 GraphDB 11 上**关不掉**。
+#    建仓时 repo_config() 传 "false" 会被忽略（建完读回来仍是 true）；
+#    事后 PUT /rest/repositories/dmo 改它返回 200，值却纹丝不动。
+#    所以 §4.2 坑 2 说的"先关校验灌数据，灌完再开"这条路**在本实例上走不通**，
+#    而脚本原来还会打印一句"SHACL 暂关"——那是假的。
+#
+#    改用不依赖开关的办法：**SHACL 校验只在 shapes 图非空时才触发**，
+#    因此把 shapes 图排到装载序列的最末尾，前面 54 个图写入时 shapes 图还是空的，
+#    校验无从触发。效果等价于"先关后开"，而且不依赖任何配置项。
+#    collect() 会强制这个次序，不要靠 GRAPH_SOURCES 的字面顺序——
+#    抽取图是动态发现后追加的，字面顺序保证不了。
+SHACL_GRAPH = "http://rdf4j.org/schema/rdf4j#SHACLShapeGraph"
+
 # 命名图 → 源文件列表。多个文件先合并再整图 PUT。
 GRAPH_SOURCES: dict[str, list[Path]] = {
     "urn:dmo:tbox": [
@@ -57,8 +72,9 @@ GRAPH_SOURCES: dict[str, list[Path]] = {
     ],
     "urn:dmo:sources": [ROOT / "ontology" / "dist" / "sources.ttl"],
     "urn:dmo:data": [ROOT / "ontology" / "data" / "synthetic-patients.ttl"],
-    # GraphDB 约定的 SHACL shapes 图。灌完数据再把 validationEnabled 打开。
-    "http://rdf4j.org/schema/rdf4j#SHACLShapeGraph": [
+    # GraphDB 约定的 SHACL shapes 图。
+    # ⚠️ 必须**最后**装载，由 collect() 强制排到末尾 —— 原因见 SHACL_GRAPH 处的注释。
+    SHACL_GRAPH: [
         ROOT / "ontology" / "shapes" / "data-quality.shacl.ttl",
         ROOT / "ontology" / "shapes" / "clinical-safety.shacl.ttl",
     ],
@@ -130,7 +146,16 @@ def create_repo(endpoint: str, repo_id: str, dry: bool) -> None:
     )
     if code not in (200, 201, 204):
         raise SystemExit(f"建仓失败 HTTP {code}：{body[:400]}")
-    print(f"✓ 已建仓 {repo_id}（ruleset=owl2-rl-optimized, SHACL 暂关）")
+    # ⚠️ 不要再声称"SHACL 暂关"——实测 GraphDB 11 忽略建仓时的 validationEnabled=false，
+    #    建完读回来仍是 true。装载安全靠的是 collect() 把 shapes 图排到最后，不是这个参数。
+    print(f"✓ 已建仓 {repo_id}（ruleset=owl2-rl-optimized）")
+    got = json.loads(request("GET", f"{endpoint}/rest/repositories/{repo_id}")[1])
+    actual = got.get("params", {}).get("ruleset", {}).get("value")
+    if actual != "owl2-rl-optimized":
+        raise SystemExit(
+            f"✗ 建仓后 ruleset 实际是 {actual!r}，不是 owl2-rl-optimized。"
+            "ruleset 建仓时定死，继续装载只会得到一个推理能力不符预期的库。"
+        )
 
 
 # ─────────────────────────── 装载 ────────────────────────────────────
@@ -166,11 +191,26 @@ def collect() -> dict[str, list[Path]]:
                 print(f"⚠️  抽取目录 {d.name} 下没有 {d.name}.ttl，跳过", file=sys.stderr)
     else:
         print(f"⚠️  抽取目录不存在：{EXTRACT_DIR.relative_to(ROOT)}", file=sys.stderr)
+
+    # SHACL shapes 图强制排到最后 —— 见文件头 SHACL_GRAPH 的注释。
+    # dict 保序，pop 再塞回去就等于移到末尾。
+    if SHACL_GRAPH in plan:
+        plan[SHACL_GRAPH] = plan.pop(SHACL_GRAPH)
     return plan
 
 
 def merge(paths: list[Path]) -> str:
     return _merge(paths, ROOT)
+
+
+def _graph_size(endpoint: str, repo_id: str, graph: str) -> int:
+    """命名图当前三元组数。用于按增量报告每条规则的真实产出。"""
+    raw = sparql(
+        endpoint, repo_id,
+        f"SELECT (COUNT(*) AS ?n) WHERE {{ GRAPH <{graph}> {{ ?s ?p ?o }} }}",
+        accept="application/sparql-results+json",
+    )
+    return int(json.loads(raw)["results"]["bindings"][0]["n"]["value"])
 
 
 def run_rules(endpoint: str, repo_id: str, dry: bool, include_unreliable: bool = False) -> None:
@@ -208,15 +248,38 @@ def run_rules(endpoint: str, repo_id: str, dry: bool, include_unreliable: bool =
     #   做法：先清空整图，然后每跑完一条就 POST 追加。先清空保证幂等
     #   （不会留上一版残渣），逐条追加保证后面的规则看得见前面的结果。
     clear_graph(endpoint, repo_id, INFERRED_GRAPH)
-    total = 0
+    prev = 0
     for rq in rqs:
         ttl = sparql(endpoint, repo_id, rq.read_text(encoding="utf-8"), accept="text/turtle")
-        n = sum(1 for line in ttl.splitlines() if line.strip().endswith("."))
-        total += n
-        print(f"  {rq.name}: CONSTRUCT 出 ~{n} 条")
-        if n:
-            append_graph(endpoint, repo_id, INFERRED_GRAPH, ttl)
-    print(f"✓ {INFERRED_GRAPH} 共 ~{total} 条（逐条物化，后续规则可见前序结果）")
+        append_graph(endpoint, repo_id, INFERRED_GRAPH, ttl)
+        # ⚠️ 2026-08-16：原来按「Turtle 里以 . 结尾的行数」估条数，是错的 ——
+        #    **@prefix 声明行也以 . 结尾**。于是零产出的规则被报成"CONSTRUCT 出 ~8 条"
+        #    （那 8 条是 8 行前缀声明），6 条规则全部空转却看起来都在干活。
+        #    改成查图的**实际增量**：准确，而且顺带验证了写入真的落库。
+        now = _graph_size(endpoint, repo_id, INFERRED_GRAPH)
+        n = now - prev
+        prev = now
+        flag = "" if n else "   ← 零产出"
+        print(f"  {rq.name}: +{n} 条{flag}")
+    print(f"✓ {INFERRED_GRAPH} 共 {prev} 条（逐条物化，后续规则可见前序结果）")
+
+    # 除 10-align 外的规则患者侧都写死 STRSTARTS(?pg, "urn:dmo:patient:")，
+    # 那是**刻意的**：urn:dmo:data 里的 6 例合成患者是故意造错的 SHACL 反例夹具
+    # （P005 缺单位、P006 单位不一致…），不能让它们喂进结论层。
+    # 所以没同步真实患者时，20/21/30/40/50/51 必然全零 —— 这是对的，不是坏了。
+    # 不说清楚的话，下一个人会照着"零产出"去改规则，把夹具放进结论里。
+    raw = sparql(
+        endpoint, repo_id,
+        'SELECT (COUNT(DISTINCT ?g) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } '
+        'FILTER(STRSTARTS(STR(?g), "urn:dmo:patient:")) }',
+        accept="application/sparql-results+json",
+    )
+    n_pg = int(json.loads(raw)["results"]["bindings"][0]["n"]["value"])
+    if n_pg == 0:
+        print("\n  ℹ️  库里没有 urn:dmo:patient:* 图（真实患者未同步）。")
+        print("     患者侧规则（20/21/30/40/50/51）因此零产出，这是**预期行为**：")
+        print("     urn:dmo:data 的 6 例是故意造错的反例夹具，规则刻意用前缀守卫排除它们。")
+        print("     要让这些规则出结果，先跑 `dmo rdf sync` 把真实患者同步成每患者一图。")
 
 
 # ─────────────────────────── 验收 ────────────────────────────────────
@@ -224,27 +287,61 @@ def run_rules(endpoint: str, repo_id: str, dry: bool, include_unreliable: bool =
 PREFIXES = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
 
 # 每项：(标题, 查询, 说明[, 断言])
-#   断言 = (变量名, 期望整数)。给了就必须相等，否则计入失败。
-#   不给就只打印结果 —— 用于「看一眼」型的检查（如各图三元组数）。
+#   断言 = (变量名, 运算符, 期望整数)，运算符取 "==" / ">=" / ">"。
+#   不给断言就只打印结果 —— **仅限真正的多行转储**（如各图三元组数）。
 # ASK 查询不需要断言：期望值由标题是否以「⚠️ 反例」开头决定。
+#
+# ⚠️ 2026-08-16 收紧：此前除 ASK 外几乎全是「只打印」，
+#    于是「对齐条数 = 0」「S6 禁忌查不到患者」这类**核心能力没上线**的信号
+#    混在一堆正常输出里被滑过去，--verify 照样报「全部验收通过」。
+#    一个不会失败的检查不是检查，是装饰。除转储外一律带断言。
 CHECKS: list[tuple] = [
+    # ── 规模转储（唯一允许无断言的一项）────────────────────────────
     (
         "各命名图三元组数",
         "SELECT ?g (COUNT(*) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } } GROUP BY ?g ORDER BY DESC(?n)",
-        "",
+        "转储，不参与判定。下面的具名断言才是关口",
     ),
     (
         "TBox 类数量",
         "PREFIX owl: <http://www.w3.org/2002/07/owl#> "
         "SELECT (COUNT(DISTINCT ?c) AS ?n) WHERE { GRAPH <urn:dmo:tbox> { ?c a owl:Class } }",
-        "",
+        "实测 75。掉到 70 以下说明装的是残缺 TBox",
+        ("n", ">=", 70),
     ),
+    # ── 推理机 ────────────────────────────────────────────────────
     (
-        "推理机是否真的开着：传递闭包 CKD-G5 worseThan CKD-G2",
+        # ⚠️ 这条**证明不了 ruleset 是 owl2-rl**：rdfs-plus 同样支持
+        #    TransitiveProperty，两种 ruleset 都通过。它只能说明「推理机没关」。
+        #    真正的 ruleset 探针是下一条。
+        "推理机没关：传递闭包 CKD-G5 worseThan CKD-G2",
         "PREFIX dmo: <https://example.org/dmo#> "
         "PREFIX dmoid: <https://example.org/dmo/id/> "
         "ASK { dmoid:CKD-G5 dmo:worseThan dmoid:CKD-G2 }",
-        "该三元组未被显式断言，只能由 owl2-rl 的 TransitiveProperty 推出",
+        "该三元组未被显式断言，需推理推出。但 rdfs-plus 也能推出它，"
+        "所以这条区分不了 ruleset —— 别拿它当 owl2-rl 的证据",
+    ),
+    (
+        # owl2-rl 独有：rdfsplus-optimized 不支持 propertyChainAxiom。
+        # 这条同时验三件事：ruleset 是 owl2-rl、属性链的谓词对齐了 V2 care-chain、
+        # 患者事实真的走得通 Patient → Diagnosis → Complication → Organ。
+        # 实测 owlrl 本地闭包下 P001/P002 均推出 Kidney。
+        "⚙️ ruleset 探针：属性链 hasAffectedOrgan 是否被物化",
+        "PREFIX dmo: <https://example.org/dmo#> "
+        "SELECT (COUNT(*) AS ?n) WHERE { ?p dmo:hasAffectedOrgan ?o }",
+        "0 = 仓库不是 owl2-rl 建的（rdfsplus 不支持 propertyChainAxiom），"
+        "或属性链谓词还停在 V1。ruleset 建仓时定死，改它要重灌全库",
+        ("n", ">=", 1),
+    ),
+    (
+        "⚙️ V1 废弃谓词零使用（hasComplication / hasDiabetesType / takesMedication）",
+        "PREFIX dmo: <https://example.org/dmo#> "
+        "SELECT (COUNT(*) AS ?n_legacy) WHERE { "
+        " { ?s dmo:hasComplication ?o } UNION { ?s dmo:hasDiabetesType ?o } "
+        " UNION { ?s dmo:takesMedication ?o } }",
+        "V2 已用 care-chain 取代这三个谓词。非 0 说明有文件回退到 V1 建模；"
+        "沿用它们的查询会永远返回空，而空结果和「没有违规」长得一模一样",
+        ("n_legacy", "==", 0),
     ),
     (
         "子类闭包 T1DM ⊑ Diabetes",
@@ -254,11 +351,21 @@ CHECKS: list[tuple] = [
         "ASK { dmoid:T1DM rdfs:subClassOf dmo:Diabetes }",
         "",
     ),
+    # ── 规则层是否真的跑过 ────────────────────────────────────────
+    (
+        "⚙️ urn:dmo:inferred 非空（规则层已物化）",
+        "SELECT (COUNT(*) AS ?n) WHERE { GRAPH <urn:dmo:inferred> { ?s ?p ?o } }",
+        "0 = 只跑了 --load 没跑 --rules。对齐、诊断、风险分层、禁忌标记全部不存在于图中",
+        ("n", ">=", 1),
+    ),
     (
         "抽取实体对齐到规范个体的条数",
         "PREFIX dmo: <https://example.org/dmo#> "
         "SELECT (COUNT(DISTINCT ?e) AS ?n) WHERE { GRAPH <urn:dmo:inferred> { ?e dmo:alignedTo ?c } }",
-        "0 表示抽取图与公理图仍是孤岛（§8.1）",
+        "0 表示抽取图与公理图仍是孤岛（§8.1）。实测 10-align 在当前语料上应命中 87 个实体；"
+        "这个上限由 canonical 侧仅 42 个规范个体决定，要提高得补 seed 词表（见 dmo-axioms §9），"
+        "**不是**放宽匹配口径",
+        ("n", ">=", 80),
     ),
     (
         "跨图连通：从抽取的 T2DM 走到公理层的 Diabetes",
@@ -282,7 +389,9 @@ CHECKS: list[tuple] = [
         " ?dx dmo:clinicalStatus 'Active' ; dmo:diagnosisComplication ?cond } ",
         "语料里唯一可自动判定的禁令：SGLT2i + 重度肾病/透析。"
         "二甲双胍的 eGFR<30 无出处未采纳；bromocriptine+哺乳有原文但触发条件是生理状态，"
-        "schema 表达不了，故不在此列",
+        "schema 表达不了，故不在此列。应命中 P001（FIXTURE-SAFETY-POSITIVE）；"
+        "0 行说明七跳里断了一环 —— 而 0 行和「没有违规」长得一模一样",
+        ("*", ">=", 1),  # "*" = 断言结果**行数**，用于非 COUNT 的 SELECT
     ),
     (
         "⚠️ 反例：Prediabetes ⋢ Diabetes（应为 false）",
@@ -302,7 +411,7 @@ CHECKS: list[tuple] = [
         "             dmo:ClinicalObservation dmo:SourcePassage } "
         " GRAPH <urn:dmo:tbox> { ?c a owl:Class } }",
         "少于 5 说明装的还是 V1 TBox，患者事实无处落地",
-        ("n", 5),
+        ("n", "==", 5),
     ),
     (
         "每条诊断阈值都有出处片段（缺出处的应为 0）",
@@ -310,8 +419,10 @@ CHECKS: list[tuple] = [
         "SELECT (COUNT(DISTINCT ?t) AS ?n_missing) WHERE { "
         " ?t a dmo:DiagnosticThreshold . "
         " FILTER NOT EXISTS { ?t dmo:thresholdCitesPassage ?p . ?p dmo:contentHash ?h } }",
-        "非 0 说明有阈值的出处链断了 —— 这类阈值不该参与任何判定",
-        ("n_missing", 0),
+        "非 0 说明有阈值的出处链断了 —— 这类阈值不该参与任何判定。"
+        "⚠️ 覆盖面仅限 seed 的 17 条阈值：抽取层的 Recommendation / Contraindication "
+        "只有 evidenceQuote 字符串，无 contentHash、无 span，这条**管不到它们**",
+        ("n_missing", "==", 0),
     ),
     (
         "⚠️ 风险规则指向的抽取个体是否都还在（悬空的应为 0）",
@@ -321,13 +432,62 @@ CHECKS: list[tuple] = [
         " FILTER NOT EXISTS { ?rf a dmo:RiskFactor } }",
         "dmo-risk-map.ttl 跨图引用 urn:dmo:extract:* 的 IRI。抽取产物重跑后 IRI 会变，"
         "悬空引用不报错、只是规则静默失效 —— 这条检查就是盯这个",
-        ("n_dangling", 0),
+        ("n_dangling", "==", 0),
+    ),
+    # ── 2026-08-16 新增：三类「空结果长得像正常」的静默失败 ────────
+    (
+        "⚠️ source registry 是否覆盖全部 GuidelineSource（未登记的应为 0）",
+        "PREFIX dmo: <https://example.org/dmo#> "
+        "SELECT (COUNT(DISTINCT ?s) AS ?n_unregistered) WHERE { "
+        " ?s a dmo:GuidelineSource . "
+        " FILTER NOT EXISTS { GRAPH <urn:dmo:sources> { ?s dmo:publisher ?pub } } }",
+        "抽取脚本会为每份文档自铸一个只有 localFile/sha256/byteSize 的 GuidelineSource 骨架。"
+        "registry 落后于抽取时，按 publisher / publishedYear 的筛选会静默漏掉这些源",
+        ("n_unregistered", "==", 0),
+    ),
+    (
+        "⚠️ 抽取图里「有源无事实」的空壳图（应为 0）",
+        "PREFIX dmo: <https://example.org/dmo#> "
+        "SELECT (COUNT(DISTINCT ?g) AS ?n_empty) WHERE { "
+        " GRAPH ?g { ?s ?p ?o } "
+        " FILTER(STRSTARTS(STR(?g), 'urn:dmo:extract:')) "
+        " FILTER NOT EXISTS { GRAPH ?g { ?e a ?t . "
+        "   FILTER(STRSTARTS(STR(?t), 'https://example.org/dmo#')) "
+        "   FILTER(?t != dmo:GuidelineSource) } } }",
+        "抽出 0 条记录的文档仍会装载 PROV 骨架。查 GuidelineSource 时它「在」、"
+        "查事实时它「空」—— 图里「有这份指南」的表象是假的。"
+        "当前已知：nhc-gdm-nutrition-2018 等中文 PDF 抽取全失败",
+        ("n_empty", "==", 0),
+    ),
+    (
+        "⚠️ 阈值边界算子齐全（缺 operator 的应为 0）",
+        "PREFIX dmo: <https://example.org/dmo#> "
+        "SELECT (COUNT(DISTINCT ?t) AS ?n_bad) WHERE { "
+        " ?t a dmo:DiagnosticThreshold . "
+        " { ?t dmo:lowerBound ?lb FILTER NOT EXISTS { ?t dmo:lowerOperator ?lo } } "
+        " UNION "
+        " { ?t dmo:upperBound ?ub FILTER NOT EXISTS { ?t dmo:upperOperator ?uo } } }",
+        "有界无算子的阈值会被下游按闭区间近似 —— A1C-NORMAL 的 upperOperator=LT"
+        "（5.7 属于 Prediabetes）一旦丢失就会把 5.7 判成正常",
+        ("n_bad", "==", 0),
     ),
 ]
 
 
+_OPS = {
+    "==": (lambda got, want: got == want, "期望 == {}"),
+    ">=": (lambda got, want: got >= want, "期望 >= {}"),
+    ">": (lambda got, want: got > want, "期望 > {}"),
+}
+
+
 def verify(endpoint: str, repo_id: str) -> int:
-    failed = 0
+    """跑 CHECKS，返回失败项数。
+
+    断言格式 (变量名, 运算符, 期望值)；变量名为 "*" 时断言的是结果**行数**，
+    用于 S6 那种返回明细行、没有 COUNT 变量的 SELECT。
+    """
+    failures: list[str] = []
     for check in CHECKS:
         title, q, note = check[0], check[1], check[2]
         assertion = check[3] if len(check) > 3 else None
@@ -340,25 +500,36 @@ def verify(endpoint: str, repo_id: str) -> int:
             value = bool(json.loads(raw).get("boolean"))
             expected = not title.startswith("⚠️ 反例")
             ok = value is expected
-            failed += 0 if ok else 1
             print(f"  {'✓' if ok else '✗'} {title} → {value}")
         elif assertion:
-            # 有断言的 SELECT：结果必须等于期望值，否则算失败。
-            # 之前所有 SELECT 都只打印，于是「数量对不对」这类检查形同虚设。
-            var, want = assertion
+            var, op, want = assertion
             raw = sparql(endpoint, repo_id, q, accept="application/sparql-results+json")
             bindings = json.loads(raw).get("results", {}).get("bindings", [])
-            got = int(bindings[0][var]["value"]) if bindings and var in bindings[0] else 0
-            ok = got == want
-            failed += 0 if ok else 1
-            print(f"  {'✓' if ok else '✗'} {title} → {var}={got}（期望 {want}）")
+            if var == "*":
+                got, shown = len(bindings), "行数"
+            else:
+                got = int(bindings[0][var]["value"]) if bindings and var in bindings[0] else 0
+                shown = var
+            cmp_fn, want_txt = _OPS[op]
+            ok = cmp_fn(got, want)
+            print(f"  {'✓' if ok else '✗'} {title} → {shown}={got}（{want_txt.format(want)}）")
         else:
+            # 无断言 = 纯转储。只有真正的多行明细才允许走这条分支。
+            ok = True
             print(f"  • {title}")
             for line in sparql(endpoint, repo_id, q).strip().splitlines():
                 print(f"      {line}")
         if note:
             print(f"      ({note})")
-    return failed
+        if not ok:
+            failures.append(title)
+
+    if failures:
+        # 逐条列出来，别让失败项淹没在几十行转储里 —— 这正是上一版的毛病。
+        print("\n未通过的检查：", file=sys.stderr)
+        for t in failures:
+            print(f"  ✗ {t}", file=sys.stderr)
+    return len(failures)
 
 
 def main() -> int:

@@ -282,6 +282,94 @@ def cmd_show(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_simulate(args: argparse.Namespace) -> int:
+    """确定性病程推演。输出刻意做成人能读的报告 —— 演示时看的就是这一屏。"""
+    from .simulate import HypothesisError, SandboxError, simulate
+
+    assume = [
+        {"term": t, "value": v, "unit": u, "date": d}
+        for t, v, u, d in (args.assume or [])
+    ]
+    if not assume:
+        raise SystemExit(
+            "至少给一条 --assume TERM VALUE UNIT DATE，例如：\n"
+            "    uv run dmo simulate P90002 --assume A1C 7.9 percent 2026-02-20")
+    try:
+        out = simulate(config_mod.load(), args.patient, assume, refresh=args.refresh)
+    except (HypothesisError, SandboxError) as e:
+        raise SystemExit(f"✗ {e}") from None
+
+    if args.json:
+        _dump(out)
+        return 0
+
+    print(f"═══ 推演 {out['patientId']} ═══")
+    print(f"  derivationHash {out['derivationHash'][:32]}")
+    print(f"  graphVersion   {out['graphVersion']}   规则 {len(out['rulesApplied'])} 条")
+
+    print("\n【假设事实】（由调用方给出，系统不生成任何数值）")
+    for h in out["hypotheticalFacts"]:
+        line = f"  + {h['test']} {h['value']} {h['unit']} @{h['collectedDate']}"
+        if h.get("conversionNote"):
+            line += f"\n      换算：{h['conversionNote']}"
+        print(line)
+
+    if out["unchanged"]:
+        print("\n【结论变化】无。假设事实没有改变任何结论 —— "
+              "这本身是结论，不是故障。")
+    else:
+        print("\n【结论变化】")
+        for d in out["delta"]:
+            if d["change"] == "changed":
+                for f, ba in d["fields"].items():
+                    if f == "caveat":
+                        continue
+                    print(f"  ~ {d['type']}.{f}: {ba['before']} → {ba['after']}")
+                if "caveat" in d["fields"]:
+                    print(f"      变更后 caveat：{d['fields']['caveat']['after']}")
+            elif d["change"] == "added":
+                a = d["after"]
+                print(f"  + {d['type']} {a.get('conclusion') or a.get('tier') or ''} "
+                      f"{a.get('thresholdId') or ''}".rstrip())
+            else:
+                b = d["before"]
+                print(f"  - {d['type']} {b.get('conclusion') or b.get('tier') or ''}".rstrip())
+
+    print("\n【推理依据】")
+    _print_tree(out["derivationTree"], 1)
+
+    print(f"\n{out['hypotheticalNote']}")
+    print(out["disclaimer"])
+    return 0
+
+
+def _print_tree(nodes: list, depth: int) -> None:
+    """推导树。[实测]/[假设] 必须一眼可分 —— 这是整个推演最不能含糊的一处。"""
+    pad = "  " * depth
+    for n in nodes:
+        kind = n["node"]
+        if kind == "Diagnosis":
+            print(f"{pad}◆ Diagnosis {n['diagnosisKind']} / {n['verificationStatus']} "
+                  f"（{n['supportedByCount']} 条评估支撑）")
+            if n.get("gapToConfirmed"):
+                print(f"{pad}  ⤷ 差什么：{n['gapToConfirmed']}")
+        elif kind == "Assessment":
+            print(f"{pad}▸ Assessment {n['conclusion']}  [{n['rule']}]  "
+                  f"上下文 {n['applicableContext']}")
+        elif kind == "DiagnosticThreshold":
+            confirm = "，需另一日复测确认" if n["confirmationRequired"] else ""
+            print(f"{pad}· 阈值 {n['thresholdId']}  区间 {n['interval']}{confirm}")
+            for s in n["sources"]:
+                print(f"{pad}    出处「{s['quote']}」 sha256 {s['sha256'][:8]}")
+            if n.get("sourceWarning"):
+                print(f"{pad}    ⚠️ {n['sourceWarning']}")
+        elif kind == "LabResult":
+            tag = "[假设]" if n["provenance"] == "hypothetical" else "[实测]"
+            print(f"{pad}· {tag} {n['value']} {n['unit']} @{n['collectedDate']}")
+        for child in n.get("children", []):
+            _print_tree([child], depth + 1)
+
+
 def cmd_demo_compare(args: argparse.Namespace) -> int:
     from .terms import wfs
 
@@ -445,6 +533,19 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("show", help="一个患者的完整返回体（七段）")
     p.add_argument("patient")
     p.set_defaults(fn=cmd_show)
+
+    p = sub.add_parser(
+        "simulate",
+        help="确定性病程推演：注入假设检验，看结论怎么变",
+        description="若 X 则 Y 的条件推演，不是预测。假设值必须显式给出，"
+                    "系统不生成候选值。全程内存运算，不写 GraphDB。")
+    p.add_argument("patient")
+    p.add_argument("--assume", nargs=4, action="append",
+                   metavar=("TERM", "VALUE", "UNIT", "DATE"),
+                   help="可多次给，如：--assume A1C 7.9 percent 2026-02-20")
+    p.add_argument("--json", action="store_true", help="输出原始返回体")
+    p.add_argument("--refresh", action="store_true", help="强制重取知识层快照")
+    p.set_defaults(fn=cmd_simulate)
 
     d = sub.add_parser("demo", help="对照演示").add_subparsers(dest="action", required=True)
     p = d.add_parser("compare", help="同一术语：字符串匹配 vs 本体")

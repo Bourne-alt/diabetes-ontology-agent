@@ -115,13 +115,13 @@ def load(env_file: Path | None = None) -> Config:
     repo = _get(env, "DMO_GRAPHDB_REPOSITORY")
     if not endpoint or not repo:
         # 兼容既有的 GRAPHDB_SPARQL_ENDPOINT=http://host:7200/repositories/<repo>
-        legacy = _get(env, "GRAPHDB_SPARQL_ENDPOINT", default="http://localhost:7200/repositories/dmo")
+        legacy = _get(env, "DMO_GRAPHDB_ENDPOINT", default="http://localhost:7200/repositories/dmo")
         assert legacy is not None
         base, _, tail = legacy.partition("/repositories/")
         endpoint = endpoint or base
         repo = repo or (tail.strip("/") or "dmo")
 
-    timeout_raw = _get(env, "DMO_GRAPHDB_TIMEOUT", "GRAPHDB_TIMEOUT", default="30")
+    timeout_raw = _get(env, "DMO_GRAPHDB_TIMEOUT", default="30")
     assert timeout_raw is not None
 
     return Config(

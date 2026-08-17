@@ -66,9 +66,9 @@
 |---|---|---|
 | `owl:disjointWith` | `T1DM ⊥ T2DM` | 造一个同时断言两型的患者，一致性检查必须报错 |
 | `owl:equivalentClass` | `DiabetesPatient ≡ Patient ⊓ ∃hasObservation.(...)` | 见 §2.4：数值部分退到 SPARQL |
-| `owl:propertyChainAxiom` | `hasComplication ∘ affectsOrgan ⊑ hasAffectedOrgan` | 查「所有肾脏受累患者」应命中 DKD 患者 |
+| `owl:propertyChainAxiom` | `hasDiagnosis ∘ diagnosisComplication ∘ affectsOrgan ⊑ hasAffectedOrgan` | 查「所有肾脏受累患者」应命中 P001/P002。⚠️ V2 起是三段链；需 owl2-rl |
 | `owl:TransitiveProperty` | `ComplicationStage worseThan` | CKD G4 worseThan G2 应被推出 |
-| `owl:FunctionalProperty` | `hasDiabetesType` | 断言两个分型触发推理冲突 |
+| `owl:FunctionalProperty` | `diagnosisType` | ⚠️ V2 起挂在 `Diagnosis` 上，跨 Diagnosis 不合并，**推不出**分型冲突；改由 SHACL 分型唯一性形状负责 |
 | `skos:exactMatch` / `closeMatch` | 自建概念 ↔ MONDO / LOINC / ATC | 术语映射层，全项目最实用的部分 |
 
 **机械生成的是骨架，学习价值全在手写的这 6 条。**

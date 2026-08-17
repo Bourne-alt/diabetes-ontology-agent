@@ -76,13 +76,52 @@ dmoid:Prediabetes a dmo:DiabetesType, owl:Class ;
 [] a owl:AllDisjointClasses ;
     owl:members ( dmoid:T1DM dmoid:T2DM dmoid:GDM dmoid:MODY dmoid:Prediabetes ) .
 
-# hasDiabetesType 的函数性由 build_tbox.py 从 many-to-one 基数机械生成，
-# 此处不重复声明。两者叠加：断言两个分型 ⟹ 两个分型被推为 sameAs ⟹ 与互斥矛盾。
+# ⚠️ V2 修正：原注释说「hasDiabetesType 的函数性 + 互斥 ⟹ 断言两个分型推出不一致」。
+#    V2 改 care-chain 之后这条链**已经断了**：分型挂在 Diagnosis 上
+#    （dmo:diagnosisType，函数性），而一个 Patient 可以有多个 Diagnosis，
+#    每个各自函数性成立，跨 Diagnosis 不会被合并 —— 同时确诊 E10 与 E11 推不出任何矛盾。
+#    上面的 AllDisjointClasses 保留（换 DL 推理机后仍有意义），但 M2 在本仓库的
+#    **可执行**替代品是 clinical-safety.shacl.ttl 的分型唯一性形状，不是这条公理。
+#    见 shapes/known-violations.tsv 里 S15（P90016）那条。
+
+
+# ════════════════════════════════════════════════════════════════════
+# 1a. punning 补丁 —— 让分型个体同时是 dmo:Diabetes 的实例
+#
+# 上面每个分型 IRI 有两副面孔：
+#   作为**类**：dmoid:T1DM rdfs:subClassOf dmo:Diabetes —— "1 型糖尿病病例都是糖尿病病例"
+#   作为**个体**：dmoid:T1DM a dmo:DiabetesType      —— "T1DM 是一个分型概念"
+# dmo:diagnosisType 指向的是**个体**那一面。所以 §2 里
+# `∃diagnosisType.Diabetes` 要成立，需要个体 dmoid:T1DM 有 `a dmo:Diabetes`，
+# 而 subClassOf **不蕴含**这一点。二者是不同的断言，OWL 2 punning 下互不推导。
+#
+# ⚠️ Prediabetes 刻意不在此列 —— 它连 subClassOf dmo:Diabetes 都不是（§1）。
+#    加进来会让「前期患者被判为 DiabetesPatient」，是本领域最常见的建模错误。
+#    验收里那条「反例：Prediabetes ⋢ Diabetes 应为 false」盯的就是这个。
+# ⚠️ DM-Unspecified 在此列：它是诊断阈值命中后的默认结论（§8），
+#    "已确诊糖尿病但未分型"仍然是糖尿病患者。
+# ════════════════════════════════════════════════════════════════════
+
+dmoid:T1DM a dmo:Diabetes .
+dmoid:T2DM a dmo:Diabetes .
+dmoid:GDM  a dmo:Diabetes .
+dmoid:MODY a dmo:Diabetes .
+dmoid:DM-Unspecified a dmo:Diabetes .   # 个体定义见 §8
 
 
 # ════════════════════════════════════════════════════════════════════
 # 2. owl:equivalentClass —— 自动分类，以及它做不到的地方
 # ════════════════════════════════════════════════════════════════════
+
+# ⚠️ V2 对齐（2026-08-16）：原公理走的是 dmo:hasDiabetesType，患者一跳直接挂分型。
+#    V2 改成 care-chain 之后该谓词**全库使用次数为 0**，这两条公理因此长期推出 0 个实例
+#    —— 公理写得漂亮、实际是死代码，而且不报错，只是"这个类没有实例"。
+#    现改为走 Patient → Diagnosis → DiabetesType 两跳。
+#
+# ⚠️ 前提：下面 §1a 的 punning 补丁。`someValuesFrom dmo:Diabetes` 检查的是
+#    **个体的 rdf:type**，而 dmoid:T1DM 只有 `rdfs:subClassOf dmo:Diabetes`
+#    （它作为类是 Diabetes 的子类），没有 `a dmo:Diabetes`。缺了那条断言，
+#    这个 restriction 依然推不出任何东西 —— 这是 punning 最容易踩空的地方。
 
 dmo:DiabetesPatient a owl:Class ;
     rdfs:label "DiabetesPatient" ;
@@ -91,8 +130,11 @@ dmo:DiabetesPatient a owl:Class ;
         owl:intersectionOf (
             dmo:Patient
             [ a owl:Restriction ;
-              owl:onProperty dmo:hasDiabetesType ;
-              owl:someValuesFrom dmo:Diabetes ]
+              owl:onProperty dmo:hasDiagnosis ;
+              owl:someValuesFrom [
+                  a owl:Restriction ;
+                  owl:onProperty dmo:diagnosisType ;
+                  owl:someValuesFrom dmo:Diabetes ] ]
         )
     ] .
 
@@ -103,8 +145,11 @@ dmo:InsulinDependentPatient a owl:Class ;
         owl:intersectionOf (
             dmo:Patient
             [ a owl:Restriction ;
-              owl:onProperty dmo:hasDiabetesType ;
-              owl:hasValue dmoid:T1DM ]
+              owl:onProperty dmo:hasDiagnosis ;
+              owl:someValuesFrom [
+                  a owl:Restriction ;
+                  owl:onProperty dmo:diagnosisType ;
+                  owl:hasValue dmoid:T1DM ] ]
         )
     ] .
 
@@ -138,12 +183,15 @@ dmo:affectsOrgan a owl:ObjectProperty ;
     rdfs:domain dmo:Complication ;
     rdfs:range dmo:Organ .
 
+# ⚠️ V2 对齐（2026-08-16）：链首原本是 dmo:hasComplication，患者一跳直接挂并发症。
+#    V2 改 care-chain 后该谓词**全库使用次数为 0**，这条链推出 0 条。
+#    现改为三段：Patient → Diagnosis → Complication → Organ。
 dmo:hasAffectedOrgan a owl:ObjectProperty ;
     rdfs:label "hasAffectedOrgan" ;
     rdfs:domain dmo:Patient ;
     rdfs:range dmo:Organ ;
-    owl:propertyChainAxiom ( dmo:hasComplication dmo:affectsOrgan ) ;
-    rdfs:comment "属性链：患者有并发症 ∘ 并发症累及器官 ⟹ 患者的受累器官。验收：查所有 hasAffectedOrgan = Kidney 的患者，应命中 DKD 患者。" .
+    owl:propertyChainAxiom ( dmo:hasDiagnosis dmo:diagnosisComplication dmo:affectsOrgan ) ;
+    rdfs:comment "属性链：患者有诊断 ∘ 诊断指向并发症 ∘ 并发症累及器官 ⟹ 患者的受累器官。验收：P001（ESRD 诊断 → KidneyFailure → Kidney）应推出 hasAffectedOrgan = Kidney。⚠️ 这条链需要 owl2-rl ruleset —— rdfsplus 不支持 propertyChainAxiom，仓库若是 rdfs-plus 建的，这里永远是 0 条。" .
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -291,9 +339,12 @@ dmoid:DrugClass-TZD       skos:closeMatch <https://www.whocc.no/atc_ddd_index/?c
 # 两者是不同的资源，不会自动合并。
 #
 # 上面每个规范个体都带了 skos:altLabel 覆盖常见表面形式，
-# 对齐动作留给 ontology/rules/align-extracted.rq：
-#     以 rdfs:label / skos:altLabel 归一化匹配，CONSTRUCT 出 owl:sameAs，
-#     写进 urn:dmo:inferred 图。
+# 对齐动作留给 ontology/rules/10-align-extracted.rq：
+#     以 rdfs:label / skos:altLabel 归一化匹配，CONSTRUCT 出 dmo:alignedTo
+#     （**不是** owl:sameAs —— 见该文件开头对这个取舍的说明），写进 urn:dmo:inferred 图。
+# 实测覆盖率（2026-08-16）：命中 87 个抽取实体 / 42 个规范个体，
+#     仅 LabTest(31) / Complication(27) / DiabetesType(21) / DrugClass(8) 四类。
+#     瓶颈在 canonical 一侧词表只有 42 个个体，不在匹配口径 —— 见 §9。
 # 在那条规则写出来之前，抽取图与公理图是两座孤岛。
 # 这就是 ontology/tools/README.md 已知局限 #2（实体消解）的具体代价。
 # ════════════════════════════════════════════════════════════════════

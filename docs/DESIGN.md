@@ -117,9 +117,9 @@ diabetes-ontology-agent/
 |---|---|---|
 | `owl:equivalentClass` + datatype restriction | `DiabetesPatient ≡ Patient ⊓ ∃hasObservation.(HbA1c ⊓ hasValue ≥ 6.5)` | 自动分类；也是踩坑点 3 的现场 |
 | `owl:disjointWith` | `T1DM ⊥ T2DM` | 一致性检查能抓到什么错 |
-| `owl:propertyChainAxiom` | `hasComplication ∘ affectsOrgan ⊑ hasAffectedOrgan` | 属性链推理 |
+| `owl:propertyChainAxiom` | `hasDiagnosis ∘ diagnosisComplication ∘ affectsOrgan ⊑ hasAffectedOrgan` | 属性链推理。⚠️ V2 起是三段链；需 owl2-rl，rdfs-plus 不支持 |
 | `owl:TransitiveProperty` | CKD 分期的 `worseThan` | 传递闭包 |
-| `owl:FunctionalProperty` | `hasDiabetesType` | 函数性约束触发的推理 |
+| `owl:FunctionalProperty` | `diagnosisType` | 函数性约束触发的推理。⚠️ V2 起挂在 `Diagnosis` 上，不再是 `hasDiabetesType`；因此它**不再**能抓出「一个患者两个分型」（跨 Diagnosis 不合并），那件事改由 `clinical-safety.shacl.ttl` 的分型唯一性形状负责 |
 | `skos:exactMatch` / `closeMatch` | 自建概念 ↔ MONDO/LOINC | 术语映射层，本项目最实用的部分 |
 
 **先写问题、再建本体。** 第一步不是画类图，是在 `evals/cases/` 里写 30-50 条真实问题（"HbA1c 7.2% + eGFR 45 该怎么调方案？"、"这个患者能不能用 SGLT2i？"），从问题倒推需要哪些概念和关系。自顶向下建本体的项目大多死在"建完发现回答不了任何实际问题"。这套问题集同时就是 eval 集。
