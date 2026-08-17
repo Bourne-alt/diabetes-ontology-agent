@@ -23,7 +23,7 @@ docker compose logs -f api
 验证服务和三个后端的连接：
 
 ```bash
-curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8100/health
 docker compose exec api dmo db status
 docker compose exec api dmo db guard-test
 ```
@@ -43,7 +43,7 @@ docker compose exec api dmo db guard-test
 
 ## 对外提供 HTTPS
 
-Compose 默认把 API 映射到宿主机 `127.0.0.1:8000`，公网无法直接访问。将
+Compose 默认把 API 映射到宿主机 `127.0.0.1:8100`，公网无法直接访问。将
 `deploy/nginx.conf.example` 复制到 Nginx 配置目录，替换域名后启用：
 
 ```bash
@@ -55,7 +55,7 @@ sudo certbot --nginx -d api.example.com
 ```
 
 当前 API 没有身份认证，并会返回患者相关信息。生产环境应在 Nginx、VPN 或零信任
-网关处增加访问控制；云安全组只开放 80/443，不要开放 8000、5432 或 7200。
+网关处增加访问控制；云安全组只开放 80/443，不要开放 8100、5432 或 7200。
 
 ## 更新与运维
 
@@ -83,8 +83,8 @@ worker 只会在 `docker compose restart api` 后重新加载模块。
 DMO_API_WORKERS=1 docker compose up -d
 ```
 
-如需使用其他环境文件或宿主机端口：
+如需使用其他环境文件：
 
 ```bash
-DMO_ENV_FILE=/secure/path/dmo.env DMO_API_PORT=8080 docker compose up -d
+DMO_ENV_FILE=/secure/path/dmo.env docker compose up -d
 ```

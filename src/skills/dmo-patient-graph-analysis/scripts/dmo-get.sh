@@ -12,10 +12,10 @@
 #   dmo-get.sh -X POST /patients/P90002/simulate \
 #     '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
 #
-# 基址：DMO_BASE，默认 http://localhost:8000（服务仅绑 127.0.0.1）
+# 基址：DMO_BASE，默认 http://localhost:8100（服务仅绑 127.0.0.1）
 set -uo pipefail
 
-BASE="${DMO_BASE:-http://localhost:8000}"
+BASE="${DMO_BASE:-http://localhost:8100}"
 
 usage() { sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'; exit "${1:-2}"; }
 
@@ -65,7 +65,7 @@ fi
 
 if [[ "$CODE" == "000" ]]; then
   echo "连不上 $BASE —— 先确认服务在跑：" >&2
-  echo "  uv run dmo serve --port 8000" >&2
+  echo "  uv run dmo serve --port 8100" >&2
   echo "或全程改用 CLI（同一条代码路径）：uv run dmo show <患者号>" >&2
   [[ -s "$TMP.err" ]] && sed 's/^/  curl: /' "$TMP.err" >&2
   rm -f "$TMP.err"; exit 1

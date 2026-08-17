@@ -15,7 +15,7 @@ services:
       - --host
       - 0.0.0.0
       - --port
-      - "8000"
+      - "8100"
       - --workers
       - ${DMO_API_WORKERS:-2}
       - --proxy-headers
@@ -23,7 +23,7 @@ services:
       - "*"
     ports:
       # 只暴露给宿主机 Nginx，不直接开放到公网。
-      - "127.0.0.1:${DMO_API_PORT:-8000}:8000"
+      - "127.0.0.1:8100:8100"
     volumes:
       # 运行时直接读取服务器本地代码；更新代码后重启容器即可生效。
       - type: bind
@@ -48,7 +48,7 @@ services:
         - -c
         - >-
           import json, urllib.request;
-          data = json.load(urllib.request.urlopen("http://127.0.0.1:8000/health", timeout=10));
+          data = json.load(urllib.request.urlopen("http://127.0.0.1:8100/health", timeout=10));
           raise SystemExit(0 if data.get("ok") else 1)
       interval: 30s
       timeout: 12s

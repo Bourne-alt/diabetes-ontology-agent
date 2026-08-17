@@ -553,7 +553,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.set_defaults(fn=cmd_demo_compare)
 
     p = sub.add_parser("serve", help="FastAPI")
-    p.add_argument("--port", type=int, default=8000)
+    p.add_argument("--port", type=int, default=8100)
     p.set_defaults(fn=cmd_serve)
 
     return ap

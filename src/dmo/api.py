@@ -4,13 +4,13 @@
 薄是刻意的 —— CLI 与 API 必须走同一条代码路径，否则两边的答案会慢慢分叉，
 而演示时用的是哪一条谁也说不清。
 
-    uv run dmo serve --port 8000
-    curl 'http://localhost:8000/patients?icd10=E11&size=5'
-    curl 'http://localhost:8000/patients/P90002/assessment'
-    curl 'http://localhost:8000/patients/P90008/safety'
-    curl 'http://localhost:8000/patients/P00016/risk'
-    curl 'http://localhost:8000/terms/explain?term=糖化血红蛋白'
-    curl 'http://localhost:8000/demo/compare?term=尿蛋白'
+    uv run dmo serve --port 8100
+    curl 'http://localhost:8100/patients?icd10=E11&size=5'
+    curl 'http://localhost:8100/patients/P90002/assessment'
+    curl 'http://localhost:8100/patients/P90008/safety'
+    curl 'http://localhost:8100/patients/P00016/risk'
+    curl 'http://localhost:8100/terms/explain?term=糖化血红蛋白'
+    curl 'http://localhost:8100/demo/compare?term=尿蛋白'
 """
 
 from __future__ import annotations
@@ -110,7 +110,7 @@ def full(pid: str) -> dict[str, Any]:
 def simulate_patient(pid: str, body: dict[str, Any]) -> dict[str, Any]:
     """确定性病程推演：注入假设检验结果，看结论怎么变、每一步凭什么。
 
-        curl -X POST localhost:8000/patients/P90002/simulate \\
+        curl -X POST localhost:8100/patients/P90002/simulate \\
              -H 'Content-Type: application/json' \\
              -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
 
@@ -192,7 +192,7 @@ def demo_compare(term: str = "尿蛋白") -> dict[str, Any]:
     return out
 
 
-def serve(port: int = 8000) -> int:
+def serve(port: int = 8100) -> int:
     import uvicorn
 
     uvicorn.run(app, host="127.0.0.1", port=port, log_level="info")

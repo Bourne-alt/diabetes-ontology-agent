@@ -86,7 +86,7 @@ python3 ontology/tools/validate_shacl.py
 
 # ── 验收与服务 ────────────────────────────────────────────────────
 uv run pytest
-uv run dmo serve --port 8000
+uv run dmo serve --port 8100
 ```
 
 幂等性可自证：`dmo etl pull`、`dmo db seed`、`dmo sync all` 跑两遍，
@@ -106,7 +106,7 @@ dmo query   [template] --patient P …          # 白名单模板，不接受自
 dmo explain <术语>                             # 为什么查不到
 dmo show    <患者号>                            # 完整返回体（七段）
 dmo demo    compare [--term 尿蛋白]
-dmo serve   [--port 8000]
+dmo serve   [--port 8100]
 ```
 
 ## HTTP

@@ -2,7 +2,7 @@
 name: dmo-patient-graph-analysis
 description: 用糖尿病本体图知识库（dmo 融合查询 API）深度分析患者病情，并做确定性病程推演。当用户问某个患者的诊断依据、阈值判定、风险分层、用药安全、"凭什么这么说"、"为什么查不到某个检验/术语"，或问"如果补一次检验结论会怎样""差什么才能确诊"这类 what-if，或需要跨 SQL 事实层与 SPARQL 语义层做证据溯源时使用。本 skill 规定了端点路由决策表、证据链读法、推演与预测的分界线，以及硬性禁令（不输出剂量、不输出概率、不猜术语、不把 Provisional 当确诊、不把假设结论当实际情况）。Use when analyzing a diabetes patient's condition, running what-if simulations over their care chain, tracing a clinical conclusion back to guideline provenance, or explaining why a term is unmappable in this repository's ontology + patient fact graph.
 license: 与本仓库同许可
-compatibility: 需要本仓库的 dmo 服务在 127.0.0.1:8000 可达（uv run dmo serve），或可用 uv run dmo CLI；依赖 PostgreSQL 与 GraphDB 已就绪（端点见 .env 的 GRAPHDB_SPARQL_ENDPOINT，仓库须为装了本体的那个）
+compatibility: 需要本仓库的 dmo 服务在 127.0.0.1:8100 可达（uv run dmo serve），或可用 uv run dmo CLI；依赖 PostgreSQL 与 GraphDB 已就绪（端点见 .env 的 GRAPHDB_SPARQL_ENDPOINT，仓库须为装了本体的那个）
 allowed-tools: Bash(scripts/dmo-get.sh:*) Bash(curl:*) Bash(uv:*) Read
 metadata:
   repo: diabetes-ontology-agent
@@ -43,7 +43,7 @@ scripts/dmo-get.sh /health
 
 - `ok: false` → **停下**，报告是 `postgres` 还是 `graphdb` 断了，不要继续猜。
 - 记住 `graphVersion`。它是知识层四个文件的内容哈希；同一轮对话里若它变了，说明本体被改过，此前所有术语映射与分层结论都必须重新查一遍。
-- 服务没起 → `uv run dmo serve --port 8000`，或全程改用 CLI（见文末对照表）。
+- 服务没起 → `uv run dmo serve --port 8100`，或全程改用 CLI（见文末对照表）。
 
 ### 阶段 1 · 定位患者，并先判真假
 
