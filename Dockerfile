@@ -26,6 +26,6 @@ RUN mkdir -p /app/ontology/dist/.sandbox-cache \
 
 USER dmo
 
-EXPOSE 8000
+EXPOSE 8100
 
-CMD ["uvicorn", "dmo.api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2", "--proxy-headers", "--forwarded-allow-ips", "*"]
+CMD ["uvicorn", "dmo.api:app", "--host", "0.0.0.0", "--port", "8100", "--workers", "2", "--proxy-headers", "--forwarded-allow-ips", "*"]

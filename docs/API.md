@@ -30,20 +30,20 @@
 
 ```bash
 # uv（推荐）
-uv run dmo serve --port 8000
+uv run dmo serve --port 8100
 
 # python（已 pip/uv sync 安装 dmo 包时）
-python -m dmo.cli serve --port 8000
+python -m dmo.cli serve --port 8100
 
 # uvicorn（直接挂载 FastAPI app，便于热重载）
-uvicorn dmo.api:app --host 127.0.0.1 --port 8000 --reload
+uvicorn dmo.api:app --host 127.0.0.1 --port 8100 --reload
 ```
 
 前置：PG 可达、GraphDB 在 `localhost:7200`、数据管线已跑过一轮（见 [README](../README.md) 端到端复现）。
 
 无鉴权、无限流，**仅绑定 `127.0.0.1`**。这是技术验证服务，不要暴露到公网。
 
-交互式文档：`http://localhost:8000/docs`（FastAPI 自带 Swagger UI）。
+交互式文档：`http://localhost:8100/docs`（FastAPI 自带 Swagger UI）。
 
 ---
 
@@ -73,7 +73,7 @@ uvicorn dmo.api:app --host 127.0.0.1 --port 8000 --reload
 ## 3. `GET /health`
 
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:8100/health
 ```
 
 ```json
@@ -105,7 +105,7 @@ curl http://localhost:8000/health
 | `page` / `size` | 默认 1 / 20，`size` 上限 200 | |
 
 ```bash
-curl 'http://localhost:8000/patients?icd10=E11&size=2'
+curl 'http://localhost:8100/patients?icd10=E11&size=2'
 ```
 
 ```json
@@ -142,7 +142,7 @@ curl 'http://localhost:8000/patients?icd10=E11&size=2'
 这是最能说明问题的端点。
 
 ```bash
-curl http://localhost:8000/patients/P90002/assessment
+curl http://localhost:8100/patients/P90002/assessment
 ```
 
 ```json
@@ -225,7 +225,7 @@ A1C 7.4% 确实落在糖尿病区间，但指南的诊断表说的是「单次�
 在这上面训练任何模型，学到的都是随机数的函数。
 
 ```bash
-curl http://localhost:8000/patients/P90020/risk
+curl http://localhost:8100/patients/P90020/risk
 ```
 
 ```json
@@ -301,7 +301,7 @@ CDC 原文只说 "Being overweight"，**没有给任何 BMI 数值切点**。所
 ### `Insufficient-Evidence` 才是常态
 
 ```bash
-curl http://localhost:8000/patients/P00016/risk
+curl http://localhost:8100/patients/P00016/risk
 ```
 
 15 个真实 E11 患者**全部**落在这一档，`insufficientReason` 说清三个原因：
@@ -314,7 +314,7 @@ curl http://localhost:8000/patients/P00016/risk
 ## 7. `GET /patients/{pid}/safety` — 用药安全
 
 ```bash
-curl http://localhost:8000/patients/P90008/safety
+curl http://localhost:8100/patients/P90008/safety
 ```
 
 `sources` 里会出现绝对禁忌的原文：
@@ -351,8 +351,8 @@ SGLT2i + 重度肾病/透析、bromocriptine + 哺乳。
 3. 全库扫描 430 个患者图，在演示里看不出问题，上量就是灾难
 
 ```bash
-curl http://localhost:8000/query/templates
-curl -X POST http://localhost:8000/query/care_chain \
+curl http://localhost:8100/query/templates
+curl -X POST http://localhost:8100/query/care_chain \
      -H 'Content-Type: application/json' -d '["P90002"]'
 ```
 
@@ -386,7 +386,7 @@ curl -X POST http://localhost:8000/query/care_chain \
 ## 9. `GET /terms/explain` — 为什么查不到
 
 ```bash
-curl 'http://localhost:8000/terms/explain?term=糖化血红蛋白'
+curl 'http://localhost:8100/terms/explain?term=糖化血红蛋白'
 ```
 
 ```json
@@ -424,7 +424,7 @@ curl 'http://localhost:8000/terms/explain?term=糖化血红蛋白'
 ## 10. `GET /demo/compare` — 两种做法并排
 
 ```bash
-curl 'http://localhost:8000/demo/compare?term=尿蛋白'
+curl 'http://localhost:8100/demo/compare?term=尿蛋白'
 ```
 
 同一条上游数据「尿蛋白 = 10.4，参考范围『阴性』」：
@@ -478,7 +478,7 @@ FastAPI 标准形状：
 回答「**若** 补一条检验，结论**则**变成什么」，并把每一步的依据摊开。
 
 ```bash
-curl -X POST localhost:8000/patients/P90002/simulate \
+curl -X POST localhost:8100/patients/P90002/simulate \
   -H 'Content-Type: application/json' \
   -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
 ```
@@ -516,7 +516,7 @@ Diagnosis.verificationStatus: Provisional → Confirmed
 
 ```bash
 for i in 1 2 3 4 5; do
-  curl -s -X POST localhost:8000/patients/P90002/simulate \
+  curl -s -X POST localhost:8100/patients/P90002/simulate \
     -H 'Content-Type: application/json' \
     -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}' \
   | python3 -c 'import sys,json; print(json.load(sys.stdin)["derivationHash"])'

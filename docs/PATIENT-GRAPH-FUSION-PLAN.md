@@ -338,7 +338,7 @@ dmo graph status | load | rules | verify
 dmo query <template> --param k=v
 dmo ask "…"
 dmo demo compare --scenario S11
-dmo serve --port 8000          # FastAPI
+dmo serve --port 8100          # FastAPI
 ```
 
 ---
