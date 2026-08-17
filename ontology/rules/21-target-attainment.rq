@@ -1,0 +1,96 @@
+# 21 · 管理目标达标判定 —— 与诊断判定**严格分开**
+#
+# 诊断阈值回答「是不是糖尿病」（A1C ≥ 6.5 ⟹ 是）；
+# 管理目标回答「管得好不好」（多数成人 A1C < 7%）。
+#
+# 合并成一件事是最常见的错误，会让 agent 把「诊断切点」当「治疗目标」答出去：
+# 一个 A1C 6.8% 的已确诊患者，按诊断切点看是"超标"（≥6.5），
+# 按管理目标看是"达标"（<7%）—— 同一个数，两个相反的结论，
+# 因为它们回答的根本不是同一个问题。
+#
+# ⚠️ 取**最新一次**检验。S14（A1C 8.9 → 7.6 → 6.8）专测这一条：
+#    取最早那次会得出"未达标"，取平均值会得出 7.77 也是"未达标"，
+#    只有取最新才是对的 —— 达标与否说的是**当下**的控制水平。
+#    GraphDB 支持内联子查询求 MAX(?collectedAt)。
+
+PREFIX dmo:  <https://example.org/dmo#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?assessment a dmo:Assessment ;
+      dmo:assessmentId    ?aid ;
+      dmo:conclusion      ?conclusion ;
+      dmo:ruleId          "TARGET-ATTAINMENT" ;
+      dmo:ruleVersion     "1.0.0" ;
+      dmo:applicableContext ?ctxLabel ;
+      dmo:caveat          ?caveat ;
+      dmo:basedOnLabResult ?res .
+  ?pat dmo:hasAssessment ?assessment .
+}
+WHERE {
+  # 先取每个患者在该检验项目上的最新采样时间
+  {
+    SELECT ?pat ?test (MAX(?t) AS ?latest) WHERE {
+      GRAPH ?pg {
+        ?pat a dmo:Patient ; dmo:hasEncounter ?e .
+        ?e dmo:producesLabResult ?r .
+        ?r dmo:collectedAt ?t ; dmo:measuredByTest ?test .
+      }
+      FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+      FILTER NOT EXISTS { GRAPH ?pg { ?r dmo:valueTrustLevel "Unverified" } }
+    }
+    GROUP BY ?pat ?test
+  }
+
+  GRAPH ?pg2 {
+    ?pat dmo:hasEncounter ?enc .
+    ?enc dmo:producesLabResult ?res .
+    ?res dmo:collectedAt ?latest ;
+         dmo:resultValue ?v ;
+         dmo:resultUnit  ?unit ;
+         dmo:measuredByTest ?test .
+  }
+  FILTER(STRSTARTS(STR(?pg2), "urn:dmo:patient:"))
+  FILTER NOT EXISTS { GRAPH ?pg2 { ?res dmo:valueTrustLevel "Unverified" } }
+
+  # 知识侧不写 GRAPH
+  ?target a dmo:GlycemicTarget ;
+          dmo:targetMeasuredBy ?test ;
+          dmo:targetHigh ?high ;
+          dmo:targetUnit ?tunit ;
+          dmo:targetPopulation ?tpop ;
+          dmo:targetPopulationContext ?tctx .
+  FILTER(STR(?unit) = STR(?tunit))
+
+  # ⚠️ 人群上下文过滤 —— 与 20-lab-assessment.rq 同一套口径。
+  #   漏了这一段的后果实测过：男性患者被拿「备孕期 A1C ≤6.5%」这条**妊娠期目标**
+  #   判定是否达标，而且不报任何错。targetPopulation 那一列是自由文本，
+  #   机器过滤不了，必须靠结构化的 targetPopulationContext。
+  OPTIONAL {
+    GRAPH ?pg3 {
+      ?pobs dmo:observationType "PregnancyStatus" ; dmo:valueText ?pregText .
+      ?pat dmo:hasClinicalObservation ?pobs .
+    }
+    FILTER(STRSTARTS(STR(?pg3), "urn:dmo:patient:"))
+  }
+  BIND(IF(BOUND(?pregText) && ?pregText = "Pregnant", "Pregnant", "NonPregnant") AS ?ctxMatch)
+  FILTER(?tctx = ?ctxMatch || ?tctx = "Any")
+
+  # 只对**已确诊糖尿病**的患者谈达标。没确诊的人谈"血糖控制得好不好"没有意义，
+  # 那是筛查问题不是管理问题。
+  GRAPH ?pg2 {
+    ?pat dmo:hasDiagnosis ?dx .
+    ?dx dmo:diagnosisKind "Diabetes" ; dmo:clinicalStatus "Active" .
+  }
+
+  BIND(IF(?v < ?high, "Normal", "High") AS ?conclusion)
+  BIND(CONCAT("管理目标（", ?tpop, "）") AS ?ctxLabel)
+  BIND(CONCAT(
+    "这是**管理目标**达标判定，不是诊断。目标上限 ", STR(?high), " ", STR(?tunit),
+    "；取的是最新一次检验（", STR(?latest), "）。",
+    "目标因人而异，合并其他健康问题时可能不同。"
+  ) AS ?caveat)
+
+  BIND(SHA1(CONCAT(STR(?res), "|TARGET|", STR(?target), "|1.0.0")) AS ?aid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/assessment/", ?aid)) AS ?assessment)
+}

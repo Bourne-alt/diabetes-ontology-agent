@@ -1,0 +1,228 @@
+# 合成患者 ABox —— 纯虚构，用于验证 SHACL 形状与规则层。
+# 只放患者事实。药物类别、禁忌规则、并发症概念等**规范概念**在
+# ontology/src/dmo-axioms.ttl —— 它们不是患者数据，而且留在这里的话
+# align-extracted.rq（只扫 tbox / seed）永远对齐不到。
+#
+# ⚠️ 不是真实病历。每个患者都是为触发（或刻意不触发）某条约束而造的。
+# ⚠️ 这**不是**演示队列。演示队列在 onto_db.diabetes.sim_*，由 CSV 种子生成，
+#    走完整的 ETL → RDF 同步链路。这里的 6 例是 SHACL 的**反例夹具**，
+#    刻意含错误数据，混进患者链路会污染结果，所以两者物理分开。
+#
+# ════════ V2 改写对照 ══════════════════════════════════════════════
+#   hasDiabetesType  → hasDiagnosis + diagnosisType
+#   hasComplication  → hasDiagnosis + diagnosisComplication
+#   takesMedication  → hasMedicationUse + usesMedication
+#   bmi/smokingStatus/isPregnant → ClinicalObservation（它们会随时间变，
+#                                   挂在 Patient 上表达不了"什么时候测的"）
+#
+# 四个刻意违规点**原样保留**：
+#   P001 触发绝对禁忌 · P002 反例不触发 · P005 缺单位 · P006 单位不一致
+
+@prefix dmo:   <https://example.org/dmo#> .
+@prefix dmoid: <https://example.org/dmo/id/> .
+@prefix dmop:  <https://example.org/dmo/id/patient/> .
+@prefix dmoenc: <https://example.org/dmo/id/encounter/> .
+@prefix dmores: <https://example.org/dmo/id/labResult/> .
+@prefix dmomed: <https://example.org/dmo/id/medication/> .
+@prefix dmodx:  <https://example.org/dmo/id/diagnosis/> .
+@prefix dmomu:  <https://example.org/dmo/id/medicationUse/> .
+@prefix dmoobs: <https://example.org/dmo/id/observation/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# ════════ P001：应触发临床安全违规 —— 肾衰竭 + SGLT2i ════════════
+dmop:P001 a dmo:Patient ;
+    dmo:patientId "P001" ; dmo:birthYear 1958 ; dmo:sex "Male" ;
+    dmo:factOrigin "demo-cohort" ; dmo:demoScenario "FIXTURE-SAFETY-POSITIVE" ;
+    dmo:hasClinicalObservation dmoobs:P001-BMI, dmoobs:P001-SMOKE ;
+    dmo:hasDiagnosis dmodx:P001-DM, dmodx:P001-ESRD ;
+    dmo:hasMedicationUse dmomu:P001-EMPA .
+
+dmoobs:P001-BMI a dmo:ClinicalObservation ;
+    dmo:observationId "P001-BMI" ; dmo:observationType "BMI" ;
+    dmo:valueDecimal 31.2 ; dmo:unitCode "kg-per-m2" ;
+    dmo:observedAt "2026-01-15T09:00:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" .
+dmoobs:P001-SMOKE a dmo:ClinicalObservation ;
+    dmo:observationId "P001-SMOKE" ; dmo:observationType "SmokingStatus" ;
+    dmo:valueText "Former" ;
+    dmo:observedAt "2026-01-15T09:00:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" .
+
+dmodx:P001-DM a dmo:Diagnosis ;
+    dmo:diagnosisId "P001-DM" ; dmo:diagnosisKind "Diabetes" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:diagnosedDate "2015-06-01"^^xsd:date ;
+    dmo:codeSystem "ICD-10" ; dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisType dmoid:T2DM .
+dmodx:P001-ESRD a dmo:Diagnosis ;
+    dmo:diagnosisId "P001-ESRD" ; dmo:diagnosisKind "Complication" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:diagnosedDate "2024-11-20"^^xsd:date ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisComplication dmoid:KidneyFailure .
+
+dmomu:P001-EMPA a dmo:MedicationUse ;
+    dmo:medicationUseId "P001-EMPA" ; dmo:startDate "2025-03-01"^^xsd:date ;
+    dmo:status "Active" ; dmo:regimenRole "口服降糖" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:usesMedication dmomed:empagliflozin ;
+    dmo:treatsDiagnosis dmodx:P001-DM .
+
+# ════════ P002：肾衰竭 + 二甲双胍 —— **不应**触发 ════════════════
+# 语料对二甲双胍只有 Caution 级表述（乳酸酸中毒风险），没有绝对禁忌。
+# 这一例存在的唯一目的就是证明安全形状**不会**在这里误报。
+dmop:P002 a dmo:Patient ;
+    dmo:patientId "P002" ; dmo:birthYear 1962 ; dmo:sex "Female" ;
+    dmo:factOrigin "demo-cohort" ; dmo:demoScenario "FIXTURE-SAFETY-NEGATIVE" ;
+    dmo:hasClinicalObservation dmoobs:P002-BMI ;
+    dmo:hasDiagnosis dmodx:P002-DM, dmodx:P002-ESRD ;
+    dmo:hasMedicationUse dmomu:P002-MET .
+
+dmoobs:P002-BMI a dmo:ClinicalObservation ;
+    dmo:observationId "P002-BMI" ; dmo:observationType "BMI" ;
+    dmo:valueDecimal 28.4 ; dmo:unitCode "kg-per-m2" ;
+    dmo:observedAt "2026-01-20T09:00:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" .
+
+dmodx:P002-DM a dmo:Diagnosis ;
+    dmo:diagnosisId "P002-DM" ; dmo:diagnosisKind "Diabetes" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:codeSystem "ICD-10" ; dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisType dmoid:T2DM .
+dmodx:P002-ESRD a dmo:Diagnosis ;
+    dmo:diagnosisId "P002-ESRD" ; dmo:diagnosisKind "Complication" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisComplication dmoid:KidneyFailure .
+
+dmomu:P002-MET a dmo:MedicationUse ;
+    dmo:medicationUseId "P002-MET" ; dmo:startDate "2020-05-01"^^xsd:date ;
+    dmo:status "Active" ; dmo:regimenRole "口服降糖" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:usesMedication dmomed:metformin ;
+    dmo:treatsDiagnosis dmodx:P002-DM .
+
+# ════════ P003：无肾病 + SGLT2i —— 不应触发 ══════════════════════
+dmop:P003 a dmo:Patient ;
+    dmo:patientId "P003" ; dmo:birthYear 1975 ; dmo:sex "Female" ;
+    dmo:factOrigin "demo-cohort" ; dmo:demoScenario "FIXTURE-SAFETY-NEGATIVE" ;
+    dmo:hasClinicalObservation dmoobs:P003-BMI ;
+    dmo:hasDiagnosis dmodx:P003-DM ;
+    dmo:hasMedicationUse dmomu:P003-EMPA .
+
+dmoobs:P003-BMI a dmo:ClinicalObservation ;
+    dmo:observationId "P003-BMI" ; dmo:observationType "BMI" ;
+    dmo:valueDecimal 26.8 ; dmo:unitCode "kg-per-m2" ;
+    dmo:observedAt "2026-01-22T09:00:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" .
+
+dmodx:P003-DM a dmo:Diagnosis ;
+    dmo:diagnosisId "P003-DM" ; dmo:diagnosisKind "Diabetes" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:codeSystem "ICD-10" ; dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisType dmoid:T2DM .
+
+dmomu:P003-EMPA a dmo:MedicationUse ;
+    dmo:medicationUseId "P003-EMPA" ; dmo:startDate "2025-08-01"^^xsd:date ;
+    dmo:status "Active" ; dmo:factOrigin "demo-cohort" ;
+    dmo:usesMedication dmomed:empagliflozin ;
+    dmo:treatsDiagnosis dmodx:P003-DM .
+
+# ════════ P004：T1DM，无异常 ═════════════════════════════════════
+dmop:P004 a dmo:Patient ;
+    dmo:patientId "P004" ; dmo:birthYear 2004 ; dmo:sex "Male" ;
+    dmo:factOrigin "demo-cohort" ; dmo:demoScenario "FIXTURE-CLEAN" ;
+    dmo:hasClinicalObservation dmoobs:P004-BMI ;
+    dmo:hasDiagnosis dmodx:P004-DM .
+
+dmoobs:P004-BMI a dmo:ClinicalObservation ;
+    dmo:observationId "P004-BMI" ; dmo:observationType "BMI" ;
+    dmo:valueDecimal 21.5 ; dmo:unitCode "kg-per-m2" ;
+    dmo:observedAt "2026-01-05T09:00:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" .
+
+dmodx:P004-DM a dmo:Diagnosis ;
+    dmo:diagnosisId "P004-DM" ; dmo:diagnosisKind "Diabetes" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:codeSystem "ICD-10" ; dmo:externalCode "E10" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisType dmoid:T1DM .
+
+# ════════ P005：数据质量缺陷 —— 检验结果缺单位 ═══════════════════
+dmop:P005 a dmo:Patient ;
+    dmo:patientId "P005" ; dmo:birthYear 1980 ; dmo:sex "Female" ;
+    dmo:factOrigin "demo-cohort" ; dmo:demoScenario "FIXTURE-DQ-MISSING-UNIT" ;
+    dmo:hasClinicalObservation dmoobs:P005-PREG ;
+    dmo:hasDiagnosis dmodx:P005-GDM ;
+    dmo:hasEncounter dmoenc:E005 .
+
+dmoobs:P005-PREG a dmo:ClinicalObservation ;
+    dmo:observationId "P005-PREG" ; dmo:observationType "PregnancyStatus" ;
+    dmo:valueText "Pregnant" ;
+    dmo:observedAt "2026-03-10T09:00:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" ;
+    dmo:observationRecordedAt dmoenc:E005 .
+
+dmodx:P005-GDM a dmo:Diagnosis ;
+    dmo:diagnosisId "P005-GDM" ; dmo:diagnosisKind "Diabetes" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:codeSystem "ICD-10" ; dmo:externalCode "O24" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisType dmoid:GDM ;
+    dmo:diagnosedAt dmoenc:E005 .
+
+dmoenc:E005 a dmo:ClinicalEncounter ;
+    dmo:encounterId "E005" ; dmo:encounterDate "2026-03-10"^^xsd:date ;
+    dmo:encounterType "Prenatal" ; dmo:gestationalWeek 26 ;
+    dmo:producesLabResult dmores:R005 .
+dmores:R005 a dmo:LabResult ;
+    dmo:labResultId "R005" ; dmo:resultValue 148 ;
+    dmo:collectedAt "2026-03-10T09:00:00"^^xsd:dateTime ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" ;
+    dmo:measuredByTest dmoid:LabTest-GCT1H .
+    # ⚠️ 故意缺 dmo:resultUnit —— 触发 dqs:LabResultShape。
+    #    缺单位的数值绝不能进阈值判定：148 是 mg/dL 还是 mmol/L，结论天差地别。
+
+# ════════ P006：数据质量缺陷 —— 单位与检验项定义不一致 ═══════════
+dmop:P006 a dmo:Patient ;
+    dmo:patientId "P006" ; dmo:birthYear 1969 ; dmo:sex "Male" ;
+    dmo:factOrigin "demo-cohort" ; dmo:demoScenario "FIXTURE-DQ-UNIT-MISMATCH" ;
+    dmo:hasClinicalObservation dmoobs:P006-BMI, dmoobs:P006-SMOKE ;
+    dmo:hasDiagnosis dmodx:P006-DM ;
+    dmo:hasEncounter dmoenc:E006 .
+
+dmoobs:P006-BMI a dmo:ClinicalObservation ;
+    dmo:observationId "P006-BMI" ; dmo:observationType "BMI" ;
+    dmo:valueDecimal 29.9 ; dmo:unitCode "kg-per-m2" ;
+    dmo:observedAt "2026-02-14T10:30:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" ;
+    dmo:observationRecordedAt dmoenc:E006 .
+dmoobs:P006-SMOKE a dmo:ClinicalObservation ;
+    dmo:observationId "P006-SMOKE" ; dmo:observationType "SmokingStatus" ;
+    dmo:valueText "Current" ;
+    dmo:observedAt "2026-02-14T10:30:00"^^xsd:dateTime ; dmo:status "Final" ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" ;
+    dmo:observationRecordedAt dmoenc:E006 .
+
+dmodx:P006-DM a dmo:Diagnosis ;
+    dmo:diagnosisId "P006-DM" ; dmo:diagnosisKind "Diabetes" ;
+    dmo:clinicalStatus "Active" ; dmo:verificationStatus "Confirmed" ;
+    dmo:codeSystem "ICD-10" ; dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:diagnosisType dmoid:T2DM ;
+    dmo:diagnosedAt dmoenc:E006 .
+
+dmoenc:E006 a dmo:ClinicalEncounter ;
+    dmo:encounterId "E006" ; dmo:encounterDate "2026-02-14"^^xsd:date ;
+    dmo:encounterType "Routine" ;
+    dmo:producesLabResult dmores:R006 .
+dmores:R006 a dmo:LabResult ;
+    dmo:labResultId "R006" ; dmo:resultValue 7.8 ;
+    dmo:resultUnit "mg-per-dL" ;          # ⚠️ A1C 的单位应是 percent
+    dmo:collectedAt "2026-02-14T10:30:00"^^xsd:dateTime ;
+    dmo:valueTrustLevel "Curated" ; dmo:factOrigin "demo-cohort" ;
+    dmo:measuredByTest dmoid:LabTest-A1C .

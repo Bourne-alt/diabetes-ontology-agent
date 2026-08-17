@@ -1,0 +1,24 @@
+.git
+.gitignore
+.DS_Store
+
+.env
+.env.*
+.venv
+venv
+
+__pycache__
+*.py[cod]
+.pytest_cache
+.ruff_cache
+
+demo
+docs
+tests
+
+# 原始资料、患者图导出和运行缓存不应进入镜像。
+ontology/knowledges
+ontology/dist/patients
+ontology/dist/.sandbox-cache
+
+src/skills

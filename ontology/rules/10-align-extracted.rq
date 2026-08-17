@@ -1,0 +1,56 @@
+# §8.1 —— 把抽取产物对齐到规范个体。
+#
+# 问题：semantic_extract.py 按模型给的 canonicalName 铸 URI
+#           <.../id/diabetesType/type-1-diabetes>
+#       手写公理 / 阈值 seed 按规范编码铸 URI
+#           <.../id/T1DM>
+#       两者是不同资源，图是两座孤岛。
+#
+# ⚠️ 刻意不用 owl:sameAs，用自定义谓词 dmo:alignedTo。两个原因：
+#   1. 仓库建仓时设了 disableSameAs=true（§4.2），sameAs 存得进去但不参与推理，
+#      写了也没用；
+#   2. 更重要的是，label 匹配是**启发式**。sameAs 是不可逆的强断言，一旦对错，
+#      两个本不相同的实体会被永久合并且难以追查。alignedTo 是显式的一跳，
+#      查询多写一个 OPTIONAL，但错了看得见、改得掉。
+#
+# 匹配口径：rdf:type 相同，且规范化后的 label 精确相等。规范化 = 小写 +
+#   去掉结尾的括号补注。模型很爱写「Urine Albumin-to-Creatinine Ratio (UACR)」，
+#   两边都对不上——去括号得主名，取括号内得缩写，任一命中即可。
+#
+# ⚠️ 刻意**不做模糊/编辑距离匹配**。这里错一个就是把两个不同实体永久合并，
+#   而假阴性只是少一条边、看得见、补得上。宁可漏对，不可错对。
+
+PREFIX dmo:  <https://example.org/dmo#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+  ?extracted dmo:alignedTo ?canonical .
+}
+WHERE {
+  GRAPH ?eg {
+    ?extracted a ?type ; rdfs:label ?elabel .
+  }
+  FILTER(STRSTARTS(STR(?eg), "urn:dmo:extract:"))
+
+  GRAPH ?cg {
+    ?canonical a ?type .
+    { ?canonical rdfs:label ?clabel } UNION { ?canonical skos:altLabel ?clabel }
+  }
+  FILTER(STR(?cg) IN ("urn:dmo:tbox", "urn:dmo:seed"))
+
+  FILTER(?extracted != ?canonical)
+
+  # 三层归一化，**每层都仍是精确相等**，不是编辑距离：
+  #   1) 去掉结尾括号补注 → 主名；2) 抓括号内内容 → 缩写；
+  #   3) 抹掉全部非字母数字 → 抗大小写/空格/连字符/下划线差异。
+  # 第 3 层是必需的：模型两次跑同一篇文档，可能给 "Type 1 Diabetes"，
+  # 也可能给 "Type1Diabetes"，抽取产物的 URI 因此不稳定。
+  BIND(LCASE(REPLACE(STR(?elabel), "\\s*\\([^)]*\\)\\s*$", "")) AS ?eMain)
+  BIND(LCASE(REPLACE(STR(?elabel), "^.*\\(([^)]*)\\)\\s*$", "$1")) AS ?eAbbr)
+  BIND(LCASE(REPLACE(STR(?clabel), "\\s*\\([^)]*\\)\\s*$", "")) AS ?cMain)
+  BIND(REPLACE(?eMain, "[^a-z0-9]", "") AS ?eFlat)
+  BIND(REPLACE(?eAbbr, "[^a-z0-9]", "") AS ?eAbbrFlat)
+  BIND(REPLACE(?cMain, "[^a-z0-9]", "") AS ?cFlat)
+  FILTER(?eFlat = ?cFlat || ?eAbbrFlat = ?cFlat)
+}

@@ -1,0 +1,211 @@
+# 数据质量约束 —— 闭世界校验，弥补 OWL 的开放世界假设。
+# OWL 永远不会说「这个患者缺 HbA1c」，只会说「未知」；SHACL 才能说「必须有」。
+# 见 docs/DESIGN.md 陷阱 #1。
+#
+# ════════ V2 的三处改写 ════════════════════════════════════════════
+#  1. DiagnosticThreshold 的 `citation minCount 1` → `thresholdCitesPassage`，
+#     且要求指向的 passage 有 contentHash（裸字符串出处没法机器校验）。
+#  2. 上下界互斥检查改用 lowerOperator/upperOperator：V2 里「没有下界」是
+#     `lowerOperator "None"` 而不是「没有 lowerBound 属性」。
+#  3. PatientShape 的 `hasDiabetesType maxCount 1` 已失效（V2 分型挂在
+#     Diagnosis 上），替代约束搬到 clinical-safety.shacl 的
+#     SingleConfirmedDiabetesTypeShape —— 它是安全哨兵，和安全形状放一起更合适。
+
+@prefix dmo:  <https://example.org/dmo#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dqs:  <https://example.org/dmo/shape/dq/> .
+
+dqs:LabResultShape a sh:NodeShape ;
+    sh:targetClass dmo:LabResult ;
+    sh:property [
+        sh:path dmo:resultValue ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "检验结果必须有数值。" ] ;
+    sh:property [
+        sh:path dmo:resultUnit ; sh:minCount 1 ;
+        sh:message "检验结果必须带单位。无单位的数值在临床上没有意义，也无法与阈值比对。" ] ;
+    sh:property [
+        sh:path dmo:measuredByTest ; sh:minCount 1 ;
+        sh:message "检验结果必须指明对应的检验项目，否则无法定位适用阈值。" ] ;
+    sh:property [
+        sh:path dmo:valueTrustLevel ; sh:maxCount 1 ;
+        sh:in ( "Attested" "Curated" "Unverified" ) ;
+        sh:message "可信度只能是 Attested / Curated / Unverified 之一。" ] ;
+    # 单位一致性：结果单位必须等于检验项定义的单位
+    sh:sparql [
+        sh:message "resultUnit 与 LabTest.unitOfMeasure 不一致 —— 单位错配会让阈值判断整体失效。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this ?value WHERE {
+              $this <https://example.org/dmo#resultUnit> ?value .
+              $this <https://example.org/dmo#measuredByTest> ?t .
+              ?t <https://example.org/dmo#unitOfMeasure> ?expected .
+              FILTER(?value != ?expected)
+            }""" ] ;
+    # 换算过的结果必须留下原始值：只留换算后的数，出了问题无从复核。
+    sh:sparql [
+        sh:severity sh:Warning ;
+        sh:message "有 sourceUnit 却没有 sourceValue（或反之）—— 单位换算的原始值必须成对保留。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              { $this <https://example.org/dmo#sourceUnit> ?su .
+                FILTER NOT EXISTS { $this <https://example.org/dmo#sourceValue> ?sv } }
+              UNION
+              { $this <https://example.org/dmo#sourceValue> ?sv .
+                FILTER NOT EXISTS { $this <https://example.org/dmo#sourceUnit> ?su } }
+            }""" ] .
+
+dqs:DiagnosticThresholdShape a sh:NodeShape ;
+    sh:targetClass dmo:DiagnosticThreshold ;
+    sh:property [
+        sh:path dmo:boundUnit ; sh:minCount 1 ;
+        sh:message "阈值必须带单位。" ] ;
+    sh:property [
+        sh:path dmo:populationContext ; sh:minCount 1 ;
+        sh:in ( "NonPregnant" "Pregnant" "Child" "Any" ) ;
+        sh:message "阈值必须声明适用人群：妊娠期与非妊娠期 cutoff 不同。" ] ;
+    sh:property [
+        sh:path dmo:lowerOperator ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "GT" "GTE" "None" ) ;
+        sh:message "必须显式声明下界比较符。省略它会逼查询层用 OPTIONAL+BOUND 猜，多一层就多一个静默漏判。" ] ;
+    sh:property [
+        sh:path dmo:upperOperator ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "LT" "LTE" "None" ) ;
+        sh:message "必须显式声明上界比较符。" ] ;
+    sh:property [
+        sh:path dmo:confirmationRequired ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:message "必须声明是否需要复测确认 —— 这是「单次异常 ≠ 确诊」的数据基础。" ] ;
+    # 出处：必须指向带内容哈希的 SourcePassage，而不是一段裸字符串
+    sh:sparql [
+        sh:message "阈值没有可校验的出处片段（thresholdCitesPassage → SourcePassage.contentHash）——无出处的临床数字不可用。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              FILTER NOT EXISTS {
+                $this <https://example.org/dmo#thresholdCitesPassage> ?p .
+                ?p <https://example.org/dmo#contentHash> ?h .
+              }
+            }""" ] ;
+    # 上下界互斥检查（V2 口径：看 operator 而不是看属性在不在）
+    sh:sparql [
+        sh:message "阈值上下界都声明为 None，等于没有约束。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              $this <https://example.org/dmo#lowerOperator> "None" .
+              $this <https://example.org/dmo#upperOperator> "None" .
+            }""" ] ;
+    # operator 与 bound 必须配套：有 GTE 却没有 lowerBound，规则会静默跳过这条阈值
+    sh:sparql [
+        sh:message "声明了下界比较符却没有 lowerBound（或声明 None 却给了 lowerBound）——两者必须配套。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              { $this <https://example.org/dmo#lowerOperator> ?op .
+                FILTER(?op != "None")
+                FILTER NOT EXISTS { $this <https://example.org/dmo#lowerBound> ?b } }
+              UNION
+              { $this <https://example.org/dmo#lowerOperator> "None" .
+                $this <https://example.org/dmo#lowerBound> ?b }
+            }""" ] ;
+    sh:sparql [
+        sh:message "声明了上界比较符却没有 upperBound（或声明 None 却给了 upperBound）——两者必须配套。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              { $this <https://example.org/dmo#upperOperator> ?op .
+                FILTER(?op != "None")
+                FILTER NOT EXISTS { $this <https://example.org/dmo#upperBound> ?b } }
+              UNION
+              { $this <https://example.org/dmo#upperOperator> "None" .
+                $this <https://example.org/dmo#upperBound> ?b }
+            }""" ] .
+
+dqs:SourcePassageShape a sh:NodeShape ;
+    sh:targetClass dmo:SourcePassage ;
+    sh:property [
+        sh:path dmo:quote ; sh:minCount 1 ;
+        sh:message "出处片段必须有逐字原文。" ] ;
+    sh:property [
+        sh:path dmo:contentHash ; sh:minCount 1 ; sh:pattern "^[0-9a-f]{64}$" ;
+        sh:message "出处片段必须有 sha256 内容哈希 —— 原文改了而哈希没改，靠 verify_passages.py 抓出来。" ] ;
+    sh:property [
+        sh:path dmo:passageId ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "出处片段必须有稳定 ID：内容相同的片段哈希也相同，只能靠 ID 区分。" ] .
+
+dqs:RiskRuleShape a sh:NodeShape ;
+    sh:targetClass dmo:RiskRule ;
+    sh:property [
+        sh:path dmo:triggerBasis ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "corpus-verbatim" "external-standard" ) ;
+        sh:message "风险规则必须声明判定依据的来源。这是区分「指南说的」和「我们补的」的唯一手段。" ] ;
+    sh:property [
+        sh:path dmo:mapsToRiskFactor ; sh:minCount 1 ;
+        sh:message "风险规则必须指向一个具体的风险因子概念。" ] ;
+    # external-standard 必须说明数值边界从哪来，否则和编造无异
+    sh:sparql [
+        sh:message "triggerBasis=external-standard 却没有 externalStandardNote —— 边界来自语料之外时必须说明出处，否则用户无从判断可信度。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              $this <https://example.org/dmo#triggerBasis> "external-standard" .
+              FILTER NOT EXISTS { $this <https://example.org/dmo#externalStandardNote> ?n }
+            }""" ] .
+
+dqs:GuidelineSourceShape a sh:NodeShape ;
+    sh:targetClass dmo:GuidelineSource ;
+    sh:property [
+        sh:path dmo:sha256 ; sh:minCount 1 ; sh:pattern "^[0-9a-f]{64}$" ;
+        sh:message "出处必须带 sha256，否则知识文件更新时无法判定下游三元组过期。" ] ;
+    sh:property [
+        sh:path dmo:localFile ; sh:minCount 1 ;
+        sh:message "出处必须指向本仓库的采集副本。" ] .
+
+dqs:PatientShape a sh:NodeShape ;
+    sh:targetClass dmo:Patient ;
+    sh:property [
+        sh:path dmo:patientId ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "患者必须有唯一标识。" ] ;
+    sh:property [
+        sh:path dmo:factOrigin ; sh:maxCount 1 ;
+        sh:in ( "ehr-legacy" "derived" "demo-cohort" ) ;
+        sh:message "事实来源层只能是 ehr-legacy / derived / demo-cohort 之一 —— 演示数据必须能和真实数据区分开。" ] .
+# ⚠️ V1 的 `hasDiabetesType maxCount 1` 已删除：V2 里分型挂在 Diagnosis 上，
+#    一个患者可以有多条 Diagnosis，maxCount 管不到。替代约束见
+#    clinical-safety.shacl.ttl 的 SingleConfirmedDiabetesTypeShape。
+
+dqs:AssessmentShape a sh:NodeShape ;
+    sh:targetClass dmo:Assessment ;
+    sh:property [
+        sh:path dmo:ruleId ; sh:minCount 1 ;
+        sh:message "评估必须记录是哪条规则得出的 —— 结论不可归因就无法复核。" ] ;
+    sh:property [
+        sh:path dmo:ruleVersion ; sh:minCount 1 ;
+        sh:message "评估必须记录规则版本：规则改了以后，旧结论要能被识别出来。" ] ;
+    sh:property [
+        sh:path dmo:appliesThreshold ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "评估必须指明用了哪条阈值。" ] ;
+    sh:property [
+        sh:path dmo:basedOnLabResult ; sh:minCount 1 ;
+        sh:message "评估必须挂到至少一条检验结果上。凭空的结论不可用。" ] .
+
+dqs:DiagnosisShape a sh:NodeShape ;
+    sh:targetClass dmo:Diagnosis ;
+    sh:property [
+        sh:path dmo:diagnosisKind ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "Diabetes" "Prediabetes" "Complication" "Comorbidity" "AcuteEvent" ) ;
+        sh:message "诊断记录必须声明类别。" ] ;
+    sh:property [
+        sh:path dmo:diagnosisType ; sh:maxCount 1 ;
+        sh:message "一条 Diagnosis 至多指向一个分型。多于一个会让 owl2-rl 沿 FunctionalProperty 推出两个分型 owl:sameAs，与 AllDisjointClasses 冲突 —— 整个本体不一致且不报错（plan R-2）。" ] ;
+    # 由阈值推出的 Provisional 诊断必须带 caveat，否则读的人会当成确诊
+    sh:sparql [
+        sh:message "verificationStatus=Provisional 却没有 caveat —— 「单次异常不等于确诊」这句话必须写出来，不能指望读的人自己想到。" ;
+        sh:prefixes dmo: ;
+        sh:select """
+            SELECT $this WHERE {
+              $this <https://example.org/dmo#verificationStatus> "Provisional" .
+              FILTER NOT EXISTS { $this <https://example.org/dmo#caveat> ?c }
+            }""" ] .

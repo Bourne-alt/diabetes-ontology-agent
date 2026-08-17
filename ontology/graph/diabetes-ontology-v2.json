@@ -1,0 +1,1800 @@
+{
+  "name": "Diabetes Care Ontology V2",
+  "description": "糖尿病领域 Fabric IQ 业务语义图 V2。采用以患者事实事件为中心的 care-chain 模式，串联就诊、临床观察、诊断、检验评估、用药记录、指南推荐与精确出处；复杂 OWL 公理、SHACL 安全约束和 SPARQL 规则仍由独立语义层维护。仅用于技术学习，不构成医疗建议，不含任何剂量信息。",
+  "entityTypes": [
+    {
+      "id": "patient",
+      "name": "Patient",
+      "description": "接受糖尿病筛查、诊断或管理的个体。只保存稳定人口学属性；会随时间变化的临床事实通过就诊、观察、诊断和用药记录表达。",
+      "icon": "👤",
+      "color": "#0078D4",
+      "extraction": {
+        "policy": "derived",
+        "reason": "实例来自患者数据，不从指南文档抽取"
+      },
+      "properties": [
+        {
+          "name": "patientId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "患者唯一标识（假名化）"
+        },
+        {
+          "name": "birthYear",
+          "type": "integer",
+          "description": "出生年份，用于推导年龄相关风险（≥35 岁列为 T2DM 筛查人群）"
+        },
+        {
+          "name": "sex",
+          "type": "enum",
+          "values": [
+            "Female",
+            "Male",
+            "Other",
+            "Unknown"
+          ],
+          "description": "生理性别；CVD 风险与 GDM 相关规则依赖该字段"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        },
+        {
+          "name": "demoScenario",
+          "type": "string",
+          "description": "演示场景编号（如 S02）。真实患者留空。"
+        }
+      ]
+    },
+    {
+      "id": "diabetesType",
+      "name": "DiabetesType",
+      "description": "糖尿病分型术语节点（T1DM / T2DM / GDM / 单基因 / 前期 / 继发性）。ER 模型中分型是实例而非子类，OWL 子类层次另在 Turtle TBox 中维护。",
+      "icon": "🩸",
+      "color": "#D13438",
+      "properties": [
+        {
+          "name": "diabetesTypeCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "分型编码，如 T1DM / T2DM / GDM / MODY / PREDIABETES"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "分型名称"
+        },
+        {
+          "name": "mondoCode",
+          "type": "string",
+          "description": "MONDO CURIE，如 MONDO:0005147"
+        },
+        {
+          "name": "insulinRequired",
+          "type": "boolean",
+          "description": "是否必须依赖外源胰岛素维持生命（T1DM 为真）"
+        },
+        {
+          "name": "typicalOnset",
+          "type": "enum",
+          "values": [
+            "Neonatal",
+            "Childhood",
+            "Adolescence",
+            "Adulthood",
+            "Pregnancy",
+            "AnyAge"
+          ],
+          "description": "典型起病阶段"
+        },
+        {
+          "name": "prevalenceShare",
+          "type": "decimal",
+          "unit": "percent",
+          "description": "占糖尿病总病例比例（T2DM 约 90-95%）"
+        },
+        {
+          "name": "definition",
+          "type": "string",
+          "description": "来源原文的定义摘录"
+        }
+      ],
+      "tbox": {
+        "route": "class",
+        "reason": "分型/并发症/分期需要子类层次与 disjointWith，只有 punning 成 owl:Class 才表达得了"
+      }
+    },
+    {
+      "id": "clinicalEncounter",
+      "name": "ClinicalEncounter",
+      "description": "一次就诊/接触事件，是检验结果的时间锚点。妊娠相关就诊记录孕周。",
+      "icon": "🏥",
+      "color": "#0078D4",
+      "extraction": {
+        "policy": "derived",
+        "reason": "实例来自患者数据，不从指南文档抽取"
+      },
+      "properties": [
+        {
+          "name": "encounterId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "就诊唯一标识"
+        },
+        {
+          "name": "encounterDate",
+          "type": "date",
+          "description": "就诊日期"
+        },
+        {
+          "name": "encounterType",
+          "type": "enum",
+          "values": [
+            "Routine",
+            "Screening",
+            "Urgent",
+            "Emergency",
+            "Prenatal",
+            "Postpartum",
+            "Telehealth"
+          ],
+          "description": "就诊类型"
+        },
+        {
+          "name": "gestationalWeek",
+          "type": "integer",
+          "unit": "week",
+          "description": "孕周；GDM 筛查窗口为 24-28 周"
+        }
+      ]
+    },
+    {
+      "id": "labTest",
+      "name": "LabTest",
+      "description": "检验项目定义（术语层），如 A1C、FPG、OGTT-2h、随机血糖、UACR、eGFR、尿酮体。",
+      "icon": "🧪",
+      "color": "#008272",
+      "properties": [
+        {
+          "name": "labTestCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "检验编码，如 A1C / FPG / OGTT2H / RPG / GCT1H / UACR / EGFR / KETONE"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "检验名称"
+        },
+        {
+          "name": "loincCode",
+          "type": "string",
+          "description": "LOINC 编码引用（仅存 code+label，不分发全表）"
+        },
+        {
+          "name": "specimen",
+          "type": "enum",
+          "values": [
+            "Blood",
+            "Urine",
+            "Breath",
+            "Genomic"
+          ],
+          "description": "标本类型"
+        },
+        {
+          "name": "unitOfMeasure",
+          "type": "string",
+          "description": "结果单位，如 percent / mg-per-dL / mg-per-g / mL-per-min"
+        },
+        {
+          "name": "fastingRequired",
+          "type": "boolean",
+          "description": "是否需要空腹（FPG、OGTT 需空腹≥8 小时）"
+        },
+        {
+          "name": "definition",
+          "type": "string",
+          "description": "检验含义摘录"
+        }
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
+    },
+    {
+      "id": "labResult",
+      "name": "LabResult",
+      "description": "患者在特定时间完成的一次检验结果。只保存原始测量事实；诊断或目标解释由独立 Assessment 实体记录。",
+      "icon": "📊",
+      "color": "#008272",
+      "extraction": {
+        "policy": "derived",
+        "reason": "实例来自患者数据，不从指南文档抽取"
+      },
+      "properties": [
+        {
+          "name": "labResultId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "结果唯一标识"
+        },
+        {
+          "name": "resultValue",
+          "type": "decimal",
+          "description": "测量数值"
+        },
+        {
+          "name": "resultUnit",
+          "type": "string",
+          "description": "结果单位，须与 LabTest.unitOfMeasure 一致（SHACL 校验点）"
+        },
+        {
+          "name": "collectedAt",
+          "type": "datetime",
+          "description": "采样时间"
+        },
+        {
+          "name": "valueTrustLevel",
+          "type": "enum",
+          "values": [
+            "Attested",
+            "Curated",
+            "Unverified"
+          ],
+          "description": "该数值的可信度。Attested=上游真实断言；Curated=人工策展的演示数据；Unverified=上游随机/未经核验的值。Unverified 默认不参与阈值判定。"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        },
+        {
+          "name": "sourceValue",
+          "type": "decimal",
+          "description": "单位换算前的原始数值。换算在 ETL 做，原始值必须保留以便复核。"
+        },
+        {
+          "name": "sourceUnit",
+          "type": "string",
+          "description": "单位换算前的原始单位。上游无单位列时为空 —— 空即拒绝数值判定。"
+        }
+      ]
+    },
+    {
+      "id": "diagnosticThreshold",
+      "name": "DiagnosticThreshold",
+      "description": "把数值区间映射到分类结论的阈值节点。这是数值推理的落点——OWL-RL 做不到数值区间推理，因此阈值建模为数据，由 SPARQL CONSTRUCT 消费。",
+      "icon": "📏",
+      "color": "#008272",
+      "extraction": {
+        "policy": "manual",
+        "reason": "诊断切点是高危常量，手写 seed；LLM 只做反向验证（在原文中找支持句），不得生成"
+      },
+      "properties": [
+        {
+          "name": "thresholdId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "阈值唯一标识，如 A1C-DIABETES-NONPREG"
+        },
+        {
+          "name": "lowerBound",
+          "type": "decimal",
+          "description": "区间下界（含）。无下界时留空"
+        },
+        {
+          "name": "upperBound",
+          "type": "decimal",
+          "description": "区间上界（含）。无上界时留空"
+        },
+        {
+          "name": "boundUnit",
+          "type": "string",
+          "description": "边界单位"
+        },
+        {
+          "name": "classification",
+          "type": "enum",
+          "values": [
+            "Normal",
+            "Prediabetes",
+            "Diabetes",
+            "Albuminuria",
+            "Macroalbuminuria",
+            "Hypoglycemia",
+            "SevereHypoglycemia",
+            "Hyperglycemia",
+            "KetoneAlert"
+          ],
+          "description": "该区间对应的分类结论"
+        },
+        {
+          "name": "populationContext",
+          "type": "enum",
+          "values": [
+            "NonPregnant",
+            "Pregnant",
+            "Child",
+            "Any"
+          ],
+          "description": "适用人群；妊娠期使用不同 cutoff"
+        },
+        {
+          "name": "lowerOperator",
+          "type": "enum",
+          "values": [
+            "GT",
+            "GTE",
+            "None"
+          ],
+          "description": "下界比较操作符：大于、大于等于或无下界"
+        },
+        {
+          "name": "upperOperator",
+          "type": "enum",
+          "values": [
+            "LT",
+            "LTE",
+            "None"
+          ],
+          "description": "上界比较操作符：小于、小于等于或无上界"
+        },
+        {
+          "name": "confirmationRequired",
+          "type": "boolean",
+          "description": "是否需要复测或额外临床证据确认"
+        }
+      ]
+    },
+    {
+      "id": "glycemicTarget",
+      "name": "GlycemicTarget",
+      "description": "血糖管理目标区间，仅包含 A1C、餐前/餐后血糖和 TIR；血压与血脂等非血糖目标不在此实体中。",
+      "icon": "🎯",
+      "color": "#FFB900",
+      "extraction": {
+        "policy": "manual",
+        "reason": "管理目标是高危常量，手写 seed；LLM 只做反向验证，不得生成"
+      },
+      "properties": [
+        {
+          "name": "targetId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "目标唯一标识"
+        },
+        {
+          "name": "targetMetric",
+          "type": "enum",
+          "values": [
+            "A1C",
+            "PreMealGlucose",
+            "PostMealGlucose",
+            "TimeInRange"
+          ],
+          "description": "目标指标"
+        },
+        {
+          "name": "targetLow",
+          "type": "decimal",
+          "description": "目标下界"
+        },
+        {
+          "name": "targetHigh",
+          "type": "decimal",
+          "description": "目标上界"
+        },
+        {
+          "name": "targetUnit",
+          "type": "string",
+          "description": "目标单位"
+        },
+        {
+          "name": "targetPopulation",
+          "type": "string",
+          "description": "适用人群描述，如「多数成人」「合并心血管疾病者更严格」"
+        }
+      ]
+    },
+    {
+      "id": "complication",
+      "name": "Complication",
+      "description": "糖尿病并发症与合并症，含慢性（DKD/DR/DPN/DFU/CVD）与急性（低血糖/DKA/HHS）两类。",
+      "icon": "⚠️",
+      "color": "#D13438",
+      "properties": [
+        {
+          "name": "complicationCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "并发症编码，如 DKD / DR / DME / DPN / DFU / CVD / HYPO / DKA"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "并发症名称"
+        },
+        {
+          "name": "mondoCode",
+          "type": "string",
+          "description": "MONDO CURIE 引用"
+        },
+        {
+          "name": "affectedOrgan",
+          "type": "enum",
+          "values": [
+            "Kidney",
+            "Eye",
+            "Nerve",
+            "Heart",
+            "Vessel",
+            "Foot",
+            "Brain",
+            "Mouth",
+            "Systemic"
+          ],
+          "description": "受累器官；对应 OWL 属性链 hasComplication ∘ affectsOrgan"
+        },
+        {
+          "name": "onsetPattern",
+          "type": "enum",
+          "values": [
+            "Acute",
+            "Chronic"
+          ],
+          "description": "起病模式"
+        },
+        {
+          "name": "isEmergency",
+          "type": "boolean",
+          "description": "是否属于需急诊处理的情形（DKA、严重低血糖为真）"
+        },
+        {
+          "name": "definition",
+          "type": "string",
+          "description": "定义摘录"
+        }
+      ],
+      "tbox": {
+        "route": "class",
+        "reason": "分型/并发症/分期需要子类层次与 disjointWith，只有 punning 成 owl:Class 才表达得了"
+      }
+    },
+    {
+      "id": "complicationStage",
+      "name": "ComplicationStage",
+      "description": "并发症分期节点（NPDR→PDR、CKD G1-G5/A1-A3、低血糖 Level 1-3）。stageOrder 支撑 OWL TransitiveProperty worseThan 的传递闭包。",
+      "icon": "📈",
+      "color": "#D13438",
+      "properties": [
+        {
+          "name": "stageCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "分期编码，如 CKD-G4 / DR-PDR / HYPO-L2"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "分期名称"
+        },
+        {
+          "name": "stageOrder",
+          "type": "integer",
+          "description": "严重度序号，越大越重；传递序关系的基础"
+        },
+        {
+          "name": "stageCriteria",
+          "type": "string",
+          "description": "分期判定标准（引用检验区间，不含处置剂量）"
+        }
+      ],
+      "tbox": {
+        "route": "class",
+        "reason": "分型/并发症/分期需要子类层次与 disjointWith，只有 punning 成 owl:Class 才表达得了"
+      }
+    },
+    {
+      "id": "symptom",
+      "name": "Symptom",
+      "description": "症状/体征节点，用于「症状 → 可能情形」的多跳检索与急诊分流。",
+      "icon": "🤒",
+      "color": "#D13438",
+      "properties": [
+        {
+          "name": "symptomCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "症状编码"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "症状名称，如多饮、多尿、烂苹果味呼吸、颤抖出汗"
+        },
+        {
+          "name": "hpoCode",
+          "type": "string",
+          "description": "HPO CURIE 引用"
+        },
+        {
+          "name": "urgency",
+          "type": "enum",
+          "values": [
+            "Routine",
+            "Urgent",
+            "Emergency"
+          ],
+          "description": "紧急程度；Emergency 触发「立即就医」话术而非解释性回答"
+        }
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
+    },
+    {
+      "id": "riskFactor",
+      "name": "RiskFactor",
+      "description": "风险因素节点，区分可干预与不可干预——这是生活方式干预建议能否落地的判据。",
+      "icon": "⚡",
+      "color": "#E67E22",
+      "properties": [
+        {
+          "name": "riskFactorCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "风险因素编码"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "名称，如超重、久坐、一级亲属糖尿病史、GDM 史、PCOS"
+        },
+        {
+          "name": "riskCategory",
+          "type": "enum",
+          "values": [
+            "Modifiable",
+            "NonModifiable",
+            "Obstetric",
+            "SocioDemographic"
+          ],
+          "description": "是否可干预"
+        },
+        {
+          "name": "evidenceNote",
+          "type": "string",
+          "description": "证据说明与出处"
+        }
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
+    },
+    {
+      "id": "drugClass",
+      "name": "DrugClass",
+      "description": "降糖药物类别（二甲双胍/SU/TZD/DPP4i/SGLT2i/GLP-1RA/胰岛素等）。禁忌与不良反应挂在类别层，而非单药层。",
+      "icon": "💊",
+      "color": "#5C2D91",
+      "properties": [
+        {
+          "name": "drugClassCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "类别编码，如 BIGUANIDE / SGLT2I / GLP1RA / SU / TZD / DPP4I / INSULIN"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "类别名称"
+        },
+        {
+          "name": "atcCode",
+          "type": "string",
+          "description": "ATC 编码引用（WHO 版权，仅存 code+label）"
+        },
+        {
+          "name": "adminRoute",
+          "type": "enum",
+          "values": [
+            "Oral",
+            "Subcutaneous",
+            "Inhaled",
+            "Intravenous"
+          ],
+          "description": "给药途径"
+        },
+        {
+          "name": "mechanism",
+          "type": "string",
+          "description": "作用机制的通俗描述（来自 FDA 原文）"
+        },
+        {
+          "name": "hypoglycemiaRisk",
+          "type": "enum",
+          "values": [
+            "Low",
+            "Moderate",
+            "High"
+          ],
+          "description": "致低血糖风险；SU 与胰岛素为 High"
+        },
+        {
+          "name": "weightEffect",
+          "type": "enum",
+          "values": [
+            "Loss",
+            "Neutral",
+            "Gain"
+          ],
+          "description": "体重影响；TZD/SU 增重，GLP-1RA/SGLT2i 减重"
+        }
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
+    },
+    {
+      "id": "medication",
+      "name": "Medication",
+      "description": "具体药物成分节点（通用名）。胰岛素的时效属性放在这一层，因为同类胰岛素起效时间差异显著。",
+      "icon": "💉",
+      "color": "#5C2D91",
+      "properties": [
+        {
+          "name": "medicationCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "药物编码"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "通用名，如 metformin / empagliflozin / glimepiride"
+        },
+        {
+          "name": "rxNormCode",
+          "type": "string",
+          "description": "RxNorm 编码引用"
+        },
+        {
+          "name": "isInsulin",
+          "type": "boolean",
+          "description": "是否为胰岛素制剂"
+        },
+        {
+          "name": "insulinAction",
+          "type": "enum",
+          "values": [
+            "UltraRapid",
+            "RapidActing",
+            "ShortActing",
+            "Intermediate",
+            "LongActing",
+            "Premixed",
+            "NotApplicable"
+          ],
+          "description": "胰岛素时效分类"
+        },
+        {
+          "name": "onsetMinutes",
+          "type": "integer",
+          "unit": "minute",
+          "description": "起效时间（分钟）——描述药代特征，不是给药建议"
+        },
+        {
+          "name": "durationHours",
+          "type": "decimal",
+          "unit": "hour",
+          "description": "作用持续时间（小时）"
+        }
+      ]
+    },
+    {
+      "id": "contraindication",
+      "name": "Contraindication",
+      "description": "禁忌/慎用规则节点。这是「一般用 X，除非 Y」这类默认规则的落点——不进 OWL TBox，作为数据由 SHACL 安全形状消费。",
+      "icon": "🚫",
+      "color": "#5C2D91",
+      "properties": [
+        {
+          "name": "contraCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "禁忌规则编码"
+        },
+        {
+          "name": "severity",
+          "type": "enum",
+          "values": [
+            "Absolute",
+            "Relative",
+            "Caution"
+          ],
+          "description": "禁忌强度：绝对禁忌 / 相对禁忌 / 需谨慎评估"
+        },
+        {
+          "name": "triggerCriteria",
+          "type": "string",
+          "description": "触发条件的可判定表述，如「严重肾功能损害或透析」"
+        },
+        {
+          "name": "rationale",
+          "type": "string",
+          "description": "机制解释与出处，如二甲双胍与乳酸酸中毒风险"
+        }
+      ]
+    },
+    {
+      "id": "adverseEffect",
+      "name": "AdverseEffect",
+      "description": "药物不良反应节点。与 Complication 分开：不良反应归因于药物，并发症归因于疾病；低血糖两者都可指向，靠边不同区分。",
+      "icon": "☣️",
+      "color": "#5C2D91",
+      "properties": [
+        {
+          "name": "adverseEffectCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "不良反应编码"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "名称，如低血糖、体重增加、泌尿生殖道感染、乳酸酸中毒"
+        },
+        {
+          "name": "frequencyCategory",
+          "type": "enum",
+          "values": [
+            "Common",
+            "Uncommon",
+            "Rare",
+            "Unknown"
+          ],
+          "description": "发生频度分类"
+        },
+        {
+          "name": "severity",
+          "type": "enum",
+          "values": [
+            "Mild",
+            "Moderate",
+            "Severe",
+            "LifeThreatening",
+            "Unknown"
+          ],
+          "description": "严重程度，与发生频度分开记录"
+        }
+      ]
+    },
+    {
+      "id": "lifestyleIntervention",
+      "name": "LifestyleIntervention",
+      "description": "生活方式干预节点（营养、身体活动、体重管理、戒烟、自我管理教育 DSMES）。",
+      "icon": "🥗",
+      "color": "#107C10",
+      "properties": [
+        {
+          "name": "interventionCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "干预编码"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "干预名称"
+        },
+        {
+          "name": "interventionType",
+          "type": "enum",
+          "values": [
+            "Nutrition",
+            "PhysicalActivity",
+            "WeightManagement",
+            "SmokingCessation",
+            "SelfManagementEd"
+          ],
+          "description": "干预类别"
+        },
+        {
+          "name": "activityTarget",
+          "type": "string",
+          "description": "可量化目标，如「每周 150 分钟中等强度活动」「减重 5%-7%」"
+        },
+        {
+          "name": "expectedBenefit",
+          "type": "string",
+          "description": "预期收益，如「T2DM 发病风险降低 58%（60 岁以上 71%）」"
+        }
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
+    },
+    {
+      "id": "device",
+      "name": "Device",
+      "description": "监测与给药设备节点（CGM、胰岛素泵、血糖仪、人工胰腺、尿酮试纸）。",
+      "icon": "📱",
+      "color": "#00A9E0",
+      "properties": [
+        {
+          "name": "deviceCode",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "设备编码"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "设备名称"
+        },
+        {
+          "name": "deviceType",
+          "type": "enum",
+          "values": [
+            "CGM",
+            "InsulinPump",
+            "GlucoseMeter",
+            "ArtificialPancreas",
+            "KetoneTestKit",
+            "InsulinPen"
+          ],
+          "description": "设备类别"
+        },
+        {
+          "name": "isRealTime",
+          "type": "boolean",
+          "description": "是否提供连续实时数据（CGM 可在夜间低血糖时报警）"
+        }
+      ],
+      "tbox": {
+        "route": "skos",
+        "reason": "术语表实例，靠 skos:altLabel 承载中文与缩写的表面形式"
+      }
+    },
+    {
+      "id": "monitoringSchedule",
+      "name": "MonitoringSchedule",
+      "description": "随访/筛查频率节点（UACR 与 eGFR 每年、散瞳眼底每年、A1C 每 3 个月、GDM 24-28 周、正常者每 3 年复查）。",
+      "icon": "🗓️",
+      "color": "#FFB900",
+      "properties": [
+        {
+          "name": "scheduleId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "计划唯一标识"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "计划名称"
+        },
+        {
+          "name": "frequencyMonths",
+          "type": "integer",
+          "unit": "month",
+          "description": "间隔月数；一次性窗口筛查留空并用 triggerWindow 表达"
+        },
+        {
+          "name": "triggerWindow",
+          "type": "string",
+          "description": "触发窗口，如「妊娠 24-28 周」「产后 12 周内」「T1DM 病程满 5 年起」"
+        },
+        {
+          "name": "appliesTo",
+          "type": "string",
+          "description": "适用人群描述"
+        }
+      ]
+    },
+    {
+      "id": "clinicalObservation",
+      "name": "ClinicalObservation",
+      "description": "患者在特定时间的非实验室临床观察，如 BMI、血压、吸烟状态、妊娠状态和孕周。用于替代 Patient 上会随时间变化的属性。",
+      "icon": "🩺",
+      "color": "#0078D4",
+      "extraction": {
+        "policy": "derived",
+        "reason": "实例来自患者或就诊数据，不从指南文档抽取"
+      },
+      "properties": [
+        {
+          "name": "observationId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "临床观察唯一标识"
+        },
+        {
+          "name": "observationType",
+          "type": "enum",
+          "values": [
+            "BMI",
+            "Weight",
+            "SystolicBP",
+            "DiastolicBP",
+            "SmokingStatus",
+            "PregnancyStatus",
+            "GestationalAge",
+            "Other"
+          ],
+          "description": "观察指标类型"
+        },
+        {
+          "name": "valueDecimal",
+          "type": "decimal",
+          "description": "数值型结果；非数值观察留空"
+        },
+        {
+          "name": "valueText",
+          "type": "string",
+          "description": "枚举或文本结果；数值观察可留空"
+        },
+        {
+          "name": "unitCode",
+          "type": "string",
+          "description": "UCUM 单位代码"
+        },
+        {
+          "name": "observedAt",
+          "type": "datetime",
+          "description": "观察时间"
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "Preliminary",
+            "Final",
+            "Corrected",
+            "Cancelled"
+          ],
+          "description": "观察记录状态"
+        },
+        {
+          "name": "valueTrustLevel",
+          "type": "enum",
+          "values": [
+            "Attested",
+            "Curated",
+            "Unverified"
+          ],
+          "description": "该数值的可信度。Attested=上游真实断言；Curated=人工策展的演示数据；Unverified=上游随机/未经核验的值。Unverified 默认不参与阈值判定。"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        }
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
+    },
+    {
+      "id": "diagnosis",
+      "name": "Diagnosis",
+      "description": "患者的一次诊断或临床判断记录，连接患者、就诊、疾病术语和分期；保留诊断状态、确定性与时间。",
+      "icon": "📝",
+      "color": "#D13438",
+      "extraction": {
+        "policy": "derived",
+        "reason": "实例来自患者或就诊数据，不从指南文档抽取"
+      },
+      "properties": [
+        {
+          "name": "diagnosisId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "诊断记录唯一标识"
+        },
+        {
+          "name": "diagnosisKind",
+          "type": "enum",
+          "values": [
+            "Diabetes",
+            "Prediabetes",
+            "Complication",
+            "Comorbidity",
+            "AcuteEvent"
+          ],
+          "description": "诊断记录类别"
+        },
+        {
+          "name": "clinicalStatus",
+          "type": "enum",
+          "values": [
+            "Active",
+            "Inactive",
+            "Resolved",
+            "Unknown"
+          ],
+          "description": "当前临床状态"
+        },
+        {
+          "name": "verificationStatus",
+          "type": "enum",
+          "values": [
+            "Suspected",
+            "Provisional",
+            "Confirmed",
+            "Refuted",
+            "Unknown"
+          ],
+          "description": "诊断确定性"
+        },
+        {
+          "name": "severity",
+          "type": "enum",
+          "values": [
+            "Mild",
+            "Moderate",
+            "Severe",
+            "Critical",
+            "Unknown"
+          ],
+          "description": "该次诊断记录的严重程度"
+        },
+        {
+          "name": "diagnosedDate",
+          "type": "date",
+          "description": "诊断日期"
+        },
+        {
+          "name": "onsetDate",
+          "type": "date",
+          "description": "估计起病日期"
+        },
+        {
+          "name": "resolvedDate",
+          "type": "date",
+          "description": "缓解或结束日期"
+        },
+        {
+          "name": "codeSystem",
+          "type": "string",
+          "description": "该临床记录采用的编码体系，如 ICD-10-CM 或 SNOMED CT"
+        },
+        {
+          "name": "externalCode",
+          "type": "string",
+          "description": "编码体系中的诊断代码"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        },
+        {
+          "name": "caveat",
+          "type": "string",
+          "description": "对该结论的限定说明，如「单次异常不等于确诊，需另一日复测确认」。"
+        }
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
+    },
+    {
+      "id": "assessment",
+      "name": "Assessment",
+      "description": "基于一个或多个检验结果和版本化规则生成的解释结论；不覆盖原始 LabResult。",
+      "icon": "🔎",
+      "color": "#008272",
+      "extraction": {
+        "policy": "derived",
+        "reason": "由规则层基于患者结果和上下文生成"
+      },
+      "properties": [
+        {
+          "name": "assessmentId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "评估唯一标识"
+        },
+        {
+          "name": "conclusion",
+          "type": "enum",
+          "values": [
+            "Normal",
+            "Prediabetes",
+            "DiabetesRange",
+            "Low",
+            "High",
+            "Critical",
+            "Indeterminate"
+          ],
+          "description": "规则得出的解释结论"
+        },
+        {
+          "name": "assessedAt",
+          "type": "datetime",
+          "description": "评估生成时间"
+        },
+        {
+          "name": "ruleId",
+          "type": "string",
+          "description": "执行该评估的 SPARQL/SHACL 规则标识"
+        },
+        {
+          "name": "ruleVersion",
+          "type": "string",
+          "description": "规则版本"
+        },
+        {
+          "name": "applicableContext",
+          "type": "string",
+          "description": "评估时使用的人群与临床上下文"
+        },
+        {
+          "name": "caveat",
+          "type": "string",
+          "description": "对该结论的限定说明。Unverified 值参与时强制写入。"
+        }
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
+    },
+    {
+      "id": "medicationUse",
+      "name": "MedicationUse",
+      "description": "患者使用某种药物的一段治疗记录，连接患者、药物、诊断与就诊；刻意不包含剂量字段。",
+      "icon": "🧾",
+      "color": "#5C2D91",
+      "extraction": {
+        "policy": "derived",
+        "reason": "实例来自患者处方或用药数据，不从指南文档抽取"
+      },
+      "properties": [
+        {
+          "name": "medicationUseId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "用药记录唯一标识"
+        },
+        {
+          "name": "startDate",
+          "type": "date",
+          "description": "开始日期"
+        },
+        {
+          "name": "endDate",
+          "type": "date",
+          "description": "结束日期"
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "Active",
+            "Completed",
+            "Stopped",
+            "OnHold",
+            "Unknown"
+          ],
+          "description": "用药记录状态"
+        },
+        {
+          "name": "regimenRole",
+          "type": "string",
+          "description": "治疗方案中的角色，不包含剂量"
+        },
+        {
+          "name": "indicationText",
+          "type": "string",
+          "description": "适应证摘要；结构化适应证通过 treatsDiagnosis 关系表达"
+        },
+        {
+          "name": "factOrigin",
+          "type": "enum",
+          "values": [
+            "ehr-legacy",
+            "derived",
+            "demo-cohort"
+          ],
+          "description": "事实来源层。ehr-legacy=真实上游库；derived=ETL 推导；demo-cohort=演示队列。演示数据永远带得上这个标记，不会被误当真实病历。"
+        }
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
+    },
+    {
+      "id": "sourcePassage",
+      "name": "SourcePassage",
+      "description": "指南中的具体证据片段，记录页码、章节或文本定位，使阈值、推荐与安全规则可精确追溯。",
+      "icon": "🔖",
+      "color": "#8A8886",
+      "extraction": {
+        "policy": "verified",
+        "reason": "quote 必须能在来源副本中逐字验证"
+      },
+      "properties": [
+        {
+          "name": "passageId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "证据片段唯一标识"
+        },
+        {
+          "name": "locator",
+          "type": "string",
+          "description": "页码、章节、表格或字符区间"
+        },
+        {
+          "name": "quote",
+          "type": "string",
+          "description": "经过逐字验证的支持文本"
+        },
+        {
+          "name": "contentHash",
+          "type": "string",
+          "description": "规范化片段 SHA-256"
+        }
+      ],
+      "tbox": {
+        "route": "individual",
+        "reason": "患者事实事件，无需层次，普通个体即可"
+      }
+    },
+    {
+      "id": "recommendation",
+      "name": "Recommendation",
+      "description": "指南推荐条目。指南逻辑一律建模为数据实例而非 TBox 公理——这是本设计最关键的一条边界。",
+      "icon": "📋",
+      "color": "#E67E22",
+      "properties": [
+        {
+          "name": "recommendationId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "推荐唯一标识"
+        },
+        {
+          "name": "statement",
+          "type": "string",
+          "description": "推荐正文（不含任何具体剂量数字）"
+        },
+        {
+          "name": "recommendationType",
+          "type": "enum",
+          "values": [
+            "Screening",
+            "Diagnosis",
+            "Treatment",
+            "Lifestyle",
+            "Monitoring",
+            "Referral",
+            "Safety"
+          ],
+          "description": "推荐类别"
+        },
+        {
+          "name": "populationScope",
+          "type": "string",
+          "description": "适用人群限定"
+        },
+        {
+          "name": "nativeEvidenceGrade",
+          "type": "string",
+          "description": "来源指南原始证据等级；不得跨分级体系臆造转换"
+        },
+        {
+          "name": "gradingSystem",
+          "type": "string",
+          "description": "证据分级体系，如 ADA、GRADE、VA-DoD"
+        },
+        {
+          "name": "recommendationStrength",
+          "type": "enum",
+          "values": [
+            "Strong",
+            "Conditional",
+            "Unspecified"
+          ],
+          "description": "推荐强度；来源未明确时为 Unspecified"
+        }
+      ]
+    },
+    {
+      "id": "guidelineSource",
+      "name": "GuidelineSource",
+      "description": "出处节点。provenance 是本体 agent 相对纯 RAG 的核心卖点，因此出处是一等公民实体，而不是字符串字段。",
+      "icon": "📚",
+      "color": "#8A8886",
+      "extraction": {
+        "policy": "registry",
+        "reason": "由 source registry 机械生成（路径 + sha256），零幻觉"
+      },
+      "properties": [
+        {
+          "name": "sourceId",
+          "type": "string",
+          "isIdentifier": true,
+          "description": "出处唯一标识"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "文档标题"
+        },
+        {
+          "name": "publisher",
+          "type": "enum",
+          "values": [
+            "NIDDK",
+            "CDC",
+            "FDA",
+            "NHC",
+            "ADA",
+            "WHO",
+            "Other"
+          ],
+          "description": "发布机构"
+        },
+        {
+          "name": "publishedYear",
+          "type": "integer",
+          "description": "发布/最后审阅年份"
+        },
+        {
+          "name": "sourceUrl",
+          "type": "string",
+          "description": "原文链接"
+        },
+        {
+          "name": "localFile",
+          "type": "string",
+          "description": "本仓库中的采集副本路径，如 ontology/knowledges/niddk-a1c-test.txt"
+        },
+        {
+          "name": "documentVersion",
+          "type": "string",
+          "description": "指南或文档版本"
+        },
+        {
+          "name": "jurisdiction",
+          "type": "string",
+          "description": "适用国家、地区或医疗体系"
+        },
+        {
+          "name": "languageCode",
+          "type": "string",
+          "description": "BCP 47 语言代码，如 en-US、zh-CN"
+        },
+        {
+          "name": "retrievedAt",
+          "type": "datetime",
+          "description": "本地副本获取时间"
+        },
+        {
+          "name": "contentHash",
+          "type": "string",
+          "description": "本地副本 SHA-256，用于来源完整性验证"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "hasEncounter",
+      "name": "hasEncounter",
+      "from": "patient",
+      "to": "clinicalEncounter",
+      "cardinality": "one-to-many",
+      "description": "患者的历次就诊记录。"
+    },
+    {
+      "id": "producesLabResult",
+      "name": "producesLabResult",
+      "from": "clinicalEncounter",
+      "to": "labResult",
+      "cardinality": "one-to-many",
+      "description": "一次就诊产生的检验结果。"
+    },
+    {
+      "id": "measuredByTest",
+      "name": "measuredByTest",
+      "from": "labResult",
+      "to": "labTest",
+      "cardinality": "many-to-one",
+      "description": "结果对应的检验项目定义。"
+    },
+    {
+      "id": "hasThreshold",
+      "name": "hasThreshold",
+      "from": "labTest",
+      "to": "diagnosticThreshold",
+      "cardinality": "one-to-many",
+      "description": "检验项目的诊断切点集合（正常/前期/糖尿病，妊娠与非妊娠分支）。"
+    },
+    {
+      "id": "classifiesInto",
+      "name": "classifiesInto",
+      "from": "diagnosticThreshold",
+      "to": "diabetesType",
+      "cardinality": "many-to-one",
+      "description": "阈值命中后支持的诊断类别术语；不得单凭血糖阈值推断 T1DM 或 T2DM 病因分型。"
+    },
+    {
+      "id": "thresholdCitedFrom",
+      "name": "thresholdCitedFrom",
+      "from": "diagnosticThreshold",
+      "to": "guidelineSource",
+      "cardinality": "many-to-many",
+      "description": "阈值的出处，保证每个数字都能追溯。"
+    },
+    {
+      "id": "hasStage",
+      "name": "hasStage",
+      "from": "complication",
+      "to": "complicationStage",
+      "cardinality": "one-to-many",
+      "description": "并发症的分期集合。"
+    },
+    {
+      "id": "predisposesTo",
+      "name": "predisposesTo",
+      "from": "diabetesType",
+      "to": "complication",
+      "cardinality": "many-to-many",
+      "description": "该分型易发生的并发症，例如 T1DM 更易发生 DKA。"
+    },
+    {
+      "id": "presentsWith",
+      "name": "presentsWith",
+      "from": "complication",
+      "to": "symptom",
+      "cardinality": "many-to-many",
+      "description": "并发症的典型症状表现。"
+    },
+    {
+      "id": "screenedByTest",
+      "name": "screenedByTest",
+      "from": "complication",
+      "to": "labTest",
+      "cardinality": "many-to-many",
+      "description": "并发症的筛查手段，例如 DKD 由 UACR 与 eGFR 双指标筛查。"
+    },
+    {
+      "id": "hasRiskFactor",
+      "name": "hasRiskFactor",
+      "from": "patient",
+      "to": "riskFactor",
+      "cardinality": "many-to-many",
+      "description": "患者具备的风险因素。"
+    },
+    {
+      "id": "increasesRiskOf",
+      "name": "increasesRiskOf",
+      "from": "riskFactor",
+      "to": "diabetesType",
+      "cardinality": "many-to-many",
+      "description": "风险因素指向的疾病分型。"
+    },
+    {
+      "id": "belongsToDrugClass",
+      "name": "belongsToDrugClass",
+      "from": "medication",
+      "to": "drugClass",
+      "cardinality": "many-to-one",
+      "description": "药物所属类别。"
+    },
+    {
+      "id": "hasContraindication",
+      "name": "hasContraindication",
+      "from": "drugClass",
+      "to": "contraindication",
+      "cardinality": "one-to-many",
+      "description": "该类药物的禁忌规则。"
+    },
+    {
+      "id": "triggeredByCondition",
+      "name": "triggeredByCondition",
+      "from": "contraindication",
+      "to": "complication",
+      "cardinality": "many-to-one",
+      "description": "触发禁忌的临床情形，例如 SGLT2i 禁用于严重肾功能损害/透析。"
+    },
+    {
+      "id": "causesAdverseEffect",
+      "name": "causesAdverseEffect",
+      "from": "drugClass",
+      "to": "adverseEffect",
+      "cardinality": "many-to-many",
+      "description": "该类药物的常见不良反应。"
+    },
+    {
+      "id": "usesDevice",
+      "name": "usesDevice",
+      "from": "patient",
+      "to": "device",
+      "cardinality": "many-to-many",
+      "description": "患者使用的监测/给药设备。"
+    },
+    {
+      "id": "deviceMeasuresTest",
+      "name": "deviceMeasuresTest",
+      "from": "device",
+      "to": "labTest",
+      "cardinality": "many-to-many",
+      "description": "设备可测量的指标，例如 CGM 对应 TIR 与葡萄糖。"
+    },
+    {
+      "id": "followsIntervention",
+      "name": "followsIntervention",
+      "from": "patient",
+      "to": "lifestyleIntervention",
+      "cardinality": "many-to-many",
+      "description": "患者执行中的生活方式干预。"
+    },
+    {
+      "id": "mitigatesRiskFactor",
+      "name": "mitigatesRiskFactor",
+      "from": "lifestyleIntervention",
+      "to": "riskFactor",
+      "cardinality": "many-to-many",
+      "description": "干预针对的可改变风险因素。"
+    },
+    {
+      "id": "appliesToType",
+      "name": "appliesToType",
+      "from": "recommendation",
+      "to": "diabetesType",
+      "cardinality": "many-to-many",
+      "description": "推荐适用的分型。"
+    },
+    {
+      "id": "targetsComplication",
+      "name": "targetsComplication",
+      "from": "recommendation",
+      "to": "complication",
+      "cardinality": "many-to-many",
+      "description": "推荐针对的并发症。"
+    },
+    {
+      "id": "recommendsDrugClass",
+      "name": "recommendsDrugClass",
+      "from": "recommendation",
+      "to": "drugClass",
+      "cardinality": "many-to-many",
+      "description": "推荐涉及的药物类别（类别级，不到具体剂量）。"
+    },
+    {
+      "id": "recommendsLifestyle",
+      "name": "recommendsLifestyle",
+      "from": "recommendation",
+      "to": "lifestyleIntervention",
+      "cardinality": "many-to-many",
+      "description": "推荐涉及的生活方式干预。"
+    },
+    {
+      "id": "definesTarget",
+      "name": "definesTarget",
+      "from": "recommendation",
+      "to": "glycemicTarget",
+      "cardinality": "one-to-many",
+      "description": "推荐所定义的管理目标区间。"
+    },
+    {
+      "id": "definesSchedule",
+      "name": "definesSchedule",
+      "from": "recommendation",
+      "to": "monitoringSchedule",
+      "cardinality": "one-to-many",
+      "description": "推荐所定义的随访/筛查频率。"
+    },
+    {
+      "id": "schedulesTest",
+      "name": "schedulesTest",
+      "from": "monitoringSchedule",
+      "to": "labTest",
+      "cardinality": "many-to-many",
+      "description": "随访计划所安排的检验项目。"
+    },
+    {
+      "id": "targetMeasuredBy",
+      "name": "targetMeasuredBy",
+      "from": "glycemicTarget",
+      "to": "labTest",
+      "cardinality": "many-to-one",
+      "description": "目标所依据的检验项目。"
+    },
+    {
+      "id": "citesSource",
+      "name": "citesSource",
+      "from": "recommendation",
+      "to": "guidelineSource",
+      "cardinality": "many-to-many",
+      "description": "推荐的出处。每条回答必须能回溯到这里。"
+    },
+    {
+      "id": "hasClinicalObservation",
+      "name": "hasClinicalObservation",
+      "from": "patient",
+      "to": "clinicalObservation",
+      "cardinality": "one-to-many",
+      "description": "患者历次非实验室临床观察。"
+    },
+    {
+      "id": "observationRecordedAt",
+      "name": "observationRecordedAt",
+      "from": "clinicalObservation",
+      "to": "clinicalEncounter",
+      "cardinality": "many-to-one",
+      "description": "临床观察记录所在的就诊事件。"
+    },
+    {
+      "id": "observationOfSymptom",
+      "name": "observationOfSymptom",
+      "from": "clinicalObservation",
+      "to": "symptom",
+      "cardinality": "many-to-one",
+      "description": "症状类观察对应的症状术语；非症状观察不使用该关系。"
+    },
+    {
+      "id": "hasAssessment",
+      "name": "hasAssessment",
+      "from": "patient",
+      "to": "assessment",
+      "cardinality": "one-to-many",
+      "description": "患者的阈值评估结论。刻意加这条直连边：不加的话从 Assessment 回到 Patient 要走 basedOnLabResult → producesLabResult → hasEncounter 三跳，查询层每个模板都要重复这段 join，写错一处就静默少结果。"
+    },
+    {
+      "id": "hasDiagnosis",
+      "name": "hasDiagnosis",
+      "from": "patient",
+      "to": "diagnosis",
+      "cardinality": "one-to-many",
+      "description": "患者历次诊断或临床判断记录。"
+    },
+    {
+      "id": "diagnosedAt",
+      "name": "diagnosedAt",
+      "from": "diagnosis",
+      "to": "clinicalEncounter",
+      "cardinality": "many-to-one",
+      "description": "诊断作出或记录所在的就诊事件。"
+    },
+    {
+      "id": "diagnosisType",
+      "name": "diagnosisType",
+      "from": "diagnosis",
+      "to": "diabetesType",
+      "cardinality": "many-to-one",
+      "description": "糖尿病或糖尿病前期诊断对应的术语节点。"
+    },
+    {
+      "id": "diagnosisComplication",
+      "name": "diagnosisComplication",
+      "from": "diagnosis",
+      "to": "complication",
+      "cardinality": "many-to-one",
+      "description": "并发症、合并症或急性事件诊断对应的术语节点。"
+    },
+    {
+      "id": "currentStage",
+      "name": "currentStage",
+      "from": "diagnosis",
+      "to": "complicationStage",
+      "cardinality": "many-to-one",
+      "description": "该次诊断记录对应的当前分期。"
+    },
+    {
+      "id": "basedOnLabResult",
+      "name": "basedOnLabResult",
+      "from": "assessment",
+      "to": "labResult",
+      "cardinality": "many-to-many",
+      "description": "评估使用的一个或多个检验结果。"
+    },
+    {
+      "id": "appliesThreshold",
+      "name": "appliesThreshold",
+      "from": "assessment",
+      "to": "diagnosticThreshold",
+      "cardinality": "many-to-one",
+      "description": "评估所应用的版本化诊断阈值。"
+    },
+    {
+      "id": "supportsDiagnosis",
+      "name": "supportsDiagnosis",
+      "from": "assessment",
+      "to": "diagnosis",
+      "cardinality": "many-to-one",
+      "description": "评估支持但不单独决定的诊断记录。"
+    },
+    {
+      "id": "hasMedicationUse",
+      "name": "hasMedicationUse",
+      "from": "patient",
+      "to": "medicationUse",
+      "cardinality": "one-to-many",
+      "description": "患者历次用药记录。"
+    },
+    {
+      "id": "usesMedication",
+      "name": "usesMedication",
+      "from": "medicationUse",
+      "to": "medication",
+      "cardinality": "many-to-one",
+      "description": "用药记录对应的具体药物成分。"
+    },
+    {
+      "id": "treatsDiagnosis",
+      "name": "treatsDiagnosis",
+      "from": "medicationUse",
+      "to": "diagnosis",
+      "cardinality": "many-to-many",
+      "description": "该用药记录所针对的一个或多个诊断。"
+    },
+    {
+      "id": "medicationRecordedAt",
+      "name": "medicationRecordedAt",
+      "from": "medicationUse",
+      "to": "clinicalEncounter",
+      "cardinality": "many-to-one",
+      "description": "用药记录创建或更新所在的就诊事件。"
+    },
+    {
+      "id": "hasPassage",
+      "name": "hasPassage",
+      "from": "guidelineSource",
+      "to": "sourcePassage",
+      "cardinality": "one-to-many",
+      "description": "指南来源包含的可验证证据片段。"
+    },
+    {
+      "id": "thresholdCitesPassage",
+      "name": "thresholdCitesPassage",
+      "from": "diagnosticThreshold",
+      "to": "sourcePassage",
+      "cardinality": "many-to-many",
+      "description": "诊断阈值的精确来源片段。"
+    },
+    {
+      "id": "recommendationCites",
+      "name": "recommendationCites",
+      "from": "recommendation",
+      "to": "sourcePassage",
+      "cardinality": "many-to-many",
+      "description": "推荐条目的精确支持片段。"
+    }
+  ]
+}

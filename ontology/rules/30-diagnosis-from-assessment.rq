@@ -1,0 +1,77 @@
+# 30 · Assessment → Diagnosis，处理 confirmationRequired
+#
+# 这条规则是整个项目最有说服力的一条。
+#
+# 一个 A1C 7.4% 的患者，纯 LLM 会说「是糖尿病」，字符串匹配也会说「是糖尿病」。
+# 但指南的诊断表给的是**单次测量落在哪一档**，不等于确诊 —— A1C/FPG/OGTT2H/RPG
+# 这四条诊断级切点在 seed 里都标了 confirmationRequired=true，
+# 意思是需要另一日复测确认。
+#
+#   confirmationRequired = false  ⟹ Confirmed
+#   confirmationRequired = true：
+#       COUNT(DISTINCT ?day) ≥ 2  ⟹ Confirmed，supportsDiagnosis 连回全部支撑
+#       否则                       ⟹ **Provisional** + caveat
+#
+# S02（单次 7.4%）出 Provisional，S03（两日 7.1/7.3）出 Confirmed。
+# 两个场景的差别只有"测了几天"，结论却不同 —— 这是本体带来的、
+# 纯语言模型给不出的区分。
+#
+# diagnosisType 一律 dmoid:DM-Unspecified：阈值只说明「是糖尿病」，
+# 不说明哪一型（分型靠自身抗体/基因检测）。患者另有 ICD-10 断言的分型时，
+# 那条 Diagnosis 独立存在于患者图里，查询层两条都能看到。
+#
+# ⚠️ 一条 Diagnosis 至多一个 diagnosisType。它是 FunctionalProperty，
+#    挂两个会推出 owl:sameAs，与 AllDisjointClasses 冲突，
+#    **整个本体不一致且不报错**。这里只发一条，天然满足。
+
+PREFIX dmo:  <https://example.org/dmo#>
+PREFIX dmoid: <https://example.org/dmo/id/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?dx a dmo:Diagnosis ;
+      dmo:diagnosisId        ?did ;
+      dmo:diagnosisKind      "Diabetes" ;
+      dmo:clinicalStatus     "Active" ;
+      dmo:verificationStatus ?status ;
+      dmo:diagnosisType      dmoid:DM-Unspecified ;
+      dmo:factOrigin         "derived" ;
+      dmo:caveat             ?caveat .
+  ?pat dmo:hasDiagnosis ?dx .
+  ?a dmo:supportsDiagnosis ?dx .
+}
+WHERE {
+  # 每个患者在每条阈值上，命中了几个**不同日期**
+  {
+    SELECT ?pat ?th (COUNT(DISTINCT ?day) AS ?nDays) WHERE {
+      ?pat dmo:hasAssessment ?a2 .
+      ?a2 dmo:conclusion "DiabetesRange" ;
+          dmo:appliesThreshold ?th ;
+          dmo:basedOnLabResult ?r2 .
+      GRAPH ?pg2 { ?r2 dmo:collectedAt ?t2 }
+      FILTER(STRSTARTS(STR(?pg2), "urn:dmo:patient:"))
+      BIND(SUBSTR(STR(?t2), 1, 10) AS ?day)
+    }
+    GROUP BY ?pat ?th
+  }
+
+  ?pat dmo:hasAssessment ?a .
+  ?a dmo:conclusion "DiabetesRange" ;
+     dmo:appliesThreshold ?th .
+  ?th dmo:thresholdId ?tid ; dmo:confirmationRequired ?needConfirm .
+
+  BIND(IF(!?needConfirm || ?nDays >= 2, "Confirmed", "Provisional") AS ?status)
+  BIND(IF(?status = "Confirmed",
+          CONCAT("由阈值 ", ?tid, " 推出，", STR(?nDays), " 个不同日期的检验支撑。",
+                 "诊断分型未定（DM-Unspecified）——阈值只说明是糖尿病，不说明哪一型。"),
+          CONCAT("⚠️ **单次异常不等于确诊**：阈值 ", ?tid,
+                 " 标注 confirmationRequired=true，而目前只有 ", STR(?nDays),
+                 " 个日期的检验支撑。需另一日复测确认后才能定为 Confirmed。")
+       ) AS ?caveat)
+
+  # Diagnosis IRI 只由「患者 + 阈值 + 规则版本」决定，**不含 status** ——
+  # 含了的话，从 Provisional 变 Confirmed 会铸出一个新 IRI，
+  # 图里就同时存在两条诊断，旧的那条永远不会消失。
+  BIND(SHA1(CONCAT(STR(?pat), "|", ?tid, "|DX|1.0.0")) AS ?did)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/diagnosis/derived-", ?did)) AS ?dx)
+}

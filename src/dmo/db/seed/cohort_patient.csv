@@ -1,0 +1,31 @@
+patientid,sexcode,birth_year,demo_scenario,demo_note
+P90001,M,1972,S01,三项检验全在正常区间，应零 Diagnosis
+P90002,F,1968,S02,A1C 7.4% 单次 —— confirmationRequired=true 且只一天 ⟹ Provisional 而非 Confirmed
+P90003,M,1965,S03,两个不同日期各一次 A1C 超标 ⟹ Confirmed，supportsDiagnosis 连回两条 Assessment
+P90004,F,1994,S04,孕 26 周糖筛 142 mg/dL ⟹ 命中妊娠期转诊触发点
+P90005,F,1994,S04b,非妊娠同值 142 mg/dL 对照 ⟹ 零命中（GCT1H 阈值 populationContext=Pregnant）
+P90006,M,1958,S05,DKD + 白蛋白尿分期，UACR 420 mg/g ⟹ Macroalbuminuria
+P90007,F,1960,S06,一条二甲双胍用药同时 treats 糖尿病与糖尿病肾病两条诊断
+P90008,M,1955,S07,ESRD/透析 + 恩格列净 ⟹ 绝对禁忌违规，带 FDA 原文
+P90009,F,1957,S08,ESRD + 二甲双胍 ⟹ **零违规**（语料对二甲双胍只有 Caution 级表述）
+P90010,M,1980,S09,A1C 6.0% ⟹ Prediabetes，**不得**推出 Diabetes
+P90011,F,1975,S10,血糖 62 mg/dL ⟹ 落在 GLUCOSE-HYPO 的 [54,70) 开区间
+P90012,M,1970,S11,空腹血糖 7.8 **mmol/L** ⟹ 换算后 140.5 mg/dL 判 Diabetes；不换算会误判 Normal
+P90013,F,1966,S12,A1C 结果**缺单位** ⟹ 拒绝进 LabResult，进 unmapped[]
+P90014,M,1962,S13,仅有阈值证据、无 ICD-10 分型 ⟹ diagnosisType 落到 DM-Unspecified
+P90015,F,1959,S14,纵向随访 A1C 8.9 → 7.6 → 6.8，达标判定取**最新**一次
+P90016,M,1990,S15,同时有 E10 与 E11 两条已确诊分型 ⟹ SHACL 分型唯一性违规
+P90017,F,1973,S16,A1C 恰好 5.7 ⟹ 归 Prediabetes 不归 Normal（开区间边界）
+P90018,M,1974,S16,A1C 恰好 6.4 ⟹ 归 Prediabetes 上界（闭区间）
+P90019,F,1971,S16,A1C 恰好 6.5 ⟹ 归 Diabetes 下界（闭区间）
+P90020,M,1969,S17,BMI 31.2 + 家族史 + 每周活动 1 次 + 已确诊糖尿病 ⟹ 风险分层 High/Moderate 的多因子样本
+P90021,F,1978,S18,仅 BMI 26.4（超重档）+ 已确诊糖尿病 ⟹ 单一可改变因子
+P90022,M,1985,S19,已确诊糖尿病但**无任何可观测事实** ⟹ Insufficient-Evidence
+P90023,F,1967,S20,已确诊糖尿病 + 已确诊 DKD ⟹ 慢性并发症在身 ⟹ High
+P90024,M,1961,S21,已确诊糖尿病 + 完整监测（UACR/eGFR 齐全）+ 无风险因子 ⟹ Low
+P90025,F,1964,S22,已确诊糖尿病 + 缺 UACR 年检 ⟹ 监测缺口
+P90026,M,1976,S23,全部检验 trust=Unverified ⟹ 零 Assessment + dataQualityNotice
+P90027,F,1982,S24,用药名在 map_drug_term 里未映射 ⟹ 记入 unmapped，不猜
+P90028,M,1988,S25,有就诊记录但一条检验都没有 ⟹ 优雅降级，不报错
+P90029,F,1955,S26,DKA 急性事件 + 血糖 320 mg/dL ⟹ 同时命中酮症警戒与急诊阈值
+P90030,M,1953,S27,高血压 I10 + 高脂血症 E78 ⟹ 两条 external-standard 且**无出处**的风险规则，不参与 tier

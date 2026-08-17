@@ -1,0 +1,33 @@
+# SHACL 已知违规基线。每行 focusNode<TAB>消息。
+#
+# ════ 一、刻意造的反例：形状**报出来才是对的** ════════════════════
+#   P001          反例夹具：肾衰竭 + SGLT2i，必须触发绝对禁忌
+#   R005          反例夹具：GCT1H 结果故意缺单位
+#   R006          反例夹具：A1C 结果单位写成 mg-per-dL（应为 percent）
+#   40698bdb-…    演示场景 S07（P90008）：ESRD/透析 + 恩格列净 ⟹ 绝对禁忌
+#   0f005671-…    演示场景 S15（P90016）：同时确诊 E10 与 E11 ⟹ 分型唯一性违规
+#                 ⚠️ 这条尤其重要：Java 8 跑不了 HermiT，DL 一致性检查无法验收，
+#                 这个 SHACL 形状是那件事**可执行的替代品**（见 plan R-10）。
+#
+# ════ 二、抽取产物的真实缺陷：不是刻意的，待修 ════════════════════
+#   discontinue-* / do-not-omit-*  （jbds-21 减重手术指南）
+#       4 条 Contraindication 没带 rationale。它们 severity 不是 Absolute、
+#       也没有 triggeredByCondition，因此不会造成安全形状误报；
+#       但「无出处的用药禁令」本身就不该存在于图里。
+#   hypoglycaemia
+#       一条 Contraindication 连 severity 都没有。同上。
+#   → 待办：重跑该文档抽取并要求模型补 rationale/severity，
+#          或确认原文没有对应禁令后从抽取产物中剔除。**不要**补一个编造的 rationale。
+#
+# ⚠️ 加新行之前必须回答：这条是刻意造的反例，还是真缺陷？真缺陷该修数据。
+# 用 `validate_shacl.py --update-baseline` 重新生成后，把这段说明补回来。
+0f005671-5cd0-5314-a8bf-024b53622ec9	同一患者有两条已确诊且分型不同的糖尿病诊断（https://example.org/dmo/id/T1DM / https://example.org/dmo/id/T2DM）——分型互斥公理下这会推出不一致。
+40698bdb-a453-5648-85c6-40dd2b091eeb	临床安全违规：患者存在活动性的 https://example.org/dmo/id/KidneyFailure，而在用药物属于对此有绝对禁忌的类别（Do not take these drugs if you have severe kidney problems or are on dialysis.）。
+P001	临床安全违规：患者存在活动性的 https://example.org/dmo/id/KidneyFailure，而在用药物属于对此有绝对禁忌的类别（Do not take these drugs if you have severe kidney problems or are on dialysis.）。
+R005	检验结果必须带单位。无单位的数值在临床上没有意义，也无法与阈值比对。
+R006	resultUnit 与 LabTest.unitOfMeasure 不一致 —— 单位错配会让阈值判断整体失效。
+discontinue-glp-1-based-therapies	禁忌规则必须带出处原话 —— 无依据的用药禁令比没有更危险。
+discontinue-sulfonylureas-meglitinides	禁忌规则必须带出处原话 —— 无依据的用药禁令比没有更危险。
+discontinue-thiazolidinediones	禁忌规则必须带出处原话 —— 无依据的用药禁令比没有更危险。
+do-not-omit-basal-insulin-in-the-perioperative-phase	禁忌规则必须带出处原话 —— 无依据的用药禁令比没有更危险。
+hypoglycaemia	禁忌必须声明强度：绝对禁忌与需谨慎评估的处置完全不同。

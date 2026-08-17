@@ -1,0 +1,64 @@
+# 40 · 禁忌命中的 SPARQL 版
+#
+# SHACL 的 clinical-safety 形状只在**校验入口**跑（validate_shacl.py / GraphDB 写入时），
+# 查询层需要能直接查「这个患者有哪些用药安全问题」，所以同一套判断要有 SPARQL 版本。
+#
+# 两者的差别是刻意的：
+#   SHACL 只报 severity="Absolute" 的**违规**（那是门禁，误报代价高）；
+#   这条规则把 Absolute / Relative / Caution 三级**全部**产出，
+#   由查询层按级别分开展示 —— /safety 端点要回答的是"需要注意什么"，
+#   不只是"有没有硬性禁令"。
+#
+# ⚠️ 全库语料里只有**两条**真正的禁令（"Do not take"）：
+#     SGLT2i + 重度肾病/透析，bromocriptine + 哺乳。
+#   其余 Relative/Caution 全部来自 "tell your doctor if…" 这类**告知义务**。
+#   把告知义务标成绝对禁忌，就是过度解读原文 —— S08 那一例（ESRD + 二甲双胍
+#   必须零违规）就是防这个的回归哨兵。
+#
+# 停药的不报：MedicationUse.status ∈ {Completed, Stopped} 排除。
+# 没写 status 的按"可能在用"处理 —— 安全侧宁可多报不可漏报。
+
+PREFIX dmo: <https://example.org/dmo#>
+
+CONSTRUCT {
+  ?flag a dmo:ContraindicationFlag ;
+      dmo:flagId            ?fid ;
+      dmo:flagSeverity      ?sev ;
+      dmo:ruleId            "CONTRAINDICATION-MATCH" ;
+      dmo:ruleVersion       "1.0.0" ;
+      dmo:flagMedicationUse ?mu ;
+      dmo:flagContraindication ?contra ;
+      dmo:flagCondition     ?cond ;
+      dmo:rationale         ?rationale .
+  ?pat dmo:hasContraindicationFlag ?flag .
+}
+WHERE {
+  GRAPH ?pg {
+    ?pat a dmo:Patient ;
+         dmo:hasMedicationUse ?mu ;
+         dmo:hasDiagnosis ?dx .
+    ?mu dmo:usesMedication ?med .
+    ?dx dmo:diagnosisComplication ?cond .
+  }
+  FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+
+  # 停药的不构成当下的安全问题
+  FILTER NOT EXISTS {
+    GRAPH ?pg { ?mu dmo:status ?st FILTER(?st IN ("Completed", "Stopped")) }
+  }
+  # 已缓解的并发症同理
+  FILTER NOT EXISTS {
+    GRAPH ?pg { ?dx dmo:clinicalStatus ?cs FILTER(?cs IN ("Resolved", "Inactive")) }
+  }
+
+  # 知识侧不写 GRAPH —— owl2-rl 沿 subClassOf 物化的 KidneyFailure ⊑ CKD
+  # 就靠这个：患者记的是 KidneyFailure，禁忌挂在 CKD 上时也能命中。
+  ?med dmo:belongsToDrugClass ?cls .
+  ?cls dmo:hasContraindication ?contra .
+  ?contra dmo:severity ?sev ;
+          dmo:triggeredByCondition ?cond ;
+          dmo:rationale ?rationale .
+
+  BIND(SHA1(CONCAT(STR(?mu), "|", STR(?contra), "|", STR(?cond), "|1.0.0")) AS ?fid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/contraFlag/", ?fid)) AS ?flag)
+}

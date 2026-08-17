@@ -1,0 +1,294 @@
+# 由 source_registry.py 生成，不要手改。全程无 LLM 参与。
+# 目标 named graph：urn:dmo:sources
+
+@prefix dmo:   <https://example.org/dmo#> .
+@prefix dmoid: <https://example.org/dmo/id/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# publisher 是 enum 数据属性（见 graph JSON），此处按字面量写入。
+# sourceUrl 刻意留空 —— 原文无链接，猜链接等于编造出处。
+
+<https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> a dmo:GuidelineSource ;
+    rdfs:label "cdc-diabetic-ketoacidosis" ;
+    dmo:sourceId "cdc-diabetic-ketoacidosis" ;
+    dmo:publisher "CDC" ;
+    dmo:localFile "ontology/knowledges/cdc-diabetic-ketoacidosis.txt" ;
+    dmo:sha256 "cc31c4bd559df1b6f15593ac2d31060edbff76770be631e3f75bcee1374751dc" ;
+    dmo:byteSize "4310"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> a dmo:GuidelineSource ;
+    rdfs:label "cdc-hypoglycemia" ;
+    dmo:sourceId "cdc-hypoglycemia" ;
+    dmo:publisher "CDC" ;
+    dmo:localFile "ontology/knowledges/cdc-hypoglycemia.txt" ;
+    dmo:sha256 "78367648b51015f62bf558a29fdd7546899452d639220bb5b48c4e4925b4d9fa" ;
+    dmo:byteSize "3618"^^xsd:integer ;
+    dmo:publishedYear "2024"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> a dmo:GuidelineSource ;
+    rdfs:label "cdc-prediabetes-prevention" ;
+    dmo:sourceId "cdc-prediabetes-prevention" ;
+    dmo:publisher "CDC" ;
+    dmo:localFile "ontology/knowledges/cdc-prediabetes-prevention.txt" ;
+    dmo:sha256 "8536e3864367d332294f6bafe58b847c9b22e18290ca638fc99f980fb5a96971" ;
+    dmo:byteSize "3139"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> a dmo:GuidelineSource ;
+    rdfs:label "fda-diabetes-drug-classes" ;
+    dmo:sourceId "fda-diabetes-drug-classes" ;
+    dmo:publisher "FDA" ;
+    dmo:localFile "ontology/knowledges/fda-diabetes-drug-classes.txt" ;
+    dmo:sha256 "38f4accfbefe8fe3d4d11c9b72c61df31131bf60bca97ee976c4021969ab2b90" ;
+    dmo:byteSize "12998"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/nhc-diabetes-action-plan-2024> a dmo:GuidelineSource ;
+    rdfs:label "nhc-diabetes-action-plan-2024" ;
+    dmo:sourceId "nhc-diabetes-action-plan-2024" ;
+    dmo:publisher "NHC" ;
+    dmo:localFile "ontology/knowledges/nhc-diabetes-action-plan-2024.txt" ;
+    dmo:sha256 "0be4e2c4ac6eb4a360e0831ee8a21998b217815916851c74d9be95991dd5e714" ;
+    dmo:byteSize "18806"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> a dmo:GuidelineSource ;
+    rdfs:label "nhc-diabetes-day-2025" ;
+    dmo:sourceId "nhc-diabetes-day-2025" ;
+    dmo:publisher "NHC" ;
+    dmo:localFile "ontology/knowledges/nhc-diabetes-day-2025.txt" ;
+    dmo:sha256 "aa943eba2bc366d98ca963f55fb8029055138ec929fcff2606f8471ee2e8dcba" ;
+    dmo:byteSize "11807"^^xsd:integer ;
+    dmo:publishedYear "2025"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/nhc-gdm-nutrition-2018> a dmo:GuidelineSource ;
+    rdfs:label "nhc-gdm-nutrition-2018" ;
+    dmo:sourceId "nhc-gdm-nutrition-2018" ;
+    dmo:publisher "NHC" ;
+    dmo:localFile "ontology/knowledges/nhc-gdm-nutrition-2018.txt" ;
+    dmo:sha256 "196059255611cf370b443a4acb71f624a19195768478c5a1a33d51eb03e08636" ;
+    dmo:byteSize "775"^^xsd:integer ;
+    dmo:publishedYear "2018"^^xsd:integer ;
+    dmo:contentStatus "shell" ;  # ⚠️ 只抓到网页导航，无正文
+    rdfs:comment "正文缺失，不参与抽取。见 SEMANTIC-LAYER-PLAN §7 风险 1。" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/nhc-gdm-weight-standard-2023> a dmo:GuidelineSource ;
+    rdfs:label "nhc-gdm-weight-standard-2023" ;
+    dmo:sourceId "nhc-gdm-weight-standard-2023" ;
+    dmo:publisher "NHC" ;
+    dmo:localFile "ontology/knowledges/nhc-gdm-weight-standard-2023.txt" ;
+    dmo:sha256 "d8fe705773c27e76ca207341c608661c979de76dfffdc53e7dc2333f7e255b9d" ;
+    dmo:byteSize "829"^^xsd:integer ;
+    dmo:publishedYear "2023"^^xsd:integer ;
+    dmo:contentStatus "shell" ;  # ⚠️ 只抓到网页导航，无正文
+    rdfs:comment "正文缺失，不参与抽取。见 SEMANTIC-LAYER-PLAN §7 风险 1。" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-a1c-test> a dmo:GuidelineSource ;
+    rdfs:label "niddk-a1c-test" ;
+    dmo:sourceId "niddk-a1c-test" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-a1c-test.txt" ;
+    dmo:sha256 "25ea9d16380f54d1d57371a32c42b2c6e0e6207e0724cdd8ec2fc804bdb26eea" ;
+    dmo:byteSize "15732"^^xsd:integer ;
+    dmo:publishedYear "2018"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-cardiovascular-disease> a dmo:GuidelineSource ;
+    rdfs:label "niddk-cardiovascular-disease" ;
+    dmo:sourceId "niddk-cardiovascular-disease" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-cardiovascular-disease.txt" ;
+    dmo:sha256 "ec34f8889d2d0662ad8913b7e4da22b03b140d4268f4d7927c62e9f2323994e2" ;
+    dmo:byteSize "18174"^^xsd:integer ;
+    dmo:publishedYear "2021"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> a dmo:GuidelineSource ;
+    rdfs:label "niddk-diabetes-overview" ;
+    dmo:sourceId "niddk-diabetes-overview" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-diabetes-overview.txt" ;
+    dmo:sha256 "f399dbc57da184d6ff76336fa6c999db3f008202dfa0166f8bcb639c0962f827" ;
+    dmo:byteSize "6134"^^xsd:integer ;
+    dmo:publishedYear "2023"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> a dmo:GuidelineSource ;
+    rdfs:label "niddk-diabetes-prediabetes-tests" ;
+    dmo:sourceId "niddk-diabetes-prediabetes-tests" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-diabetes-prediabetes-tests.txt" ;
+    dmo:sha256 "9a3b9cdc52c8fce00d1facab1734426193f4a3569cab41dde45da2fc041e1f93" ;
+    dmo:byteSize "10846"^^xsd:integer ;
+    dmo:publishedYear "2020"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> a dmo:GuidelineSource ;
+    rdfs:label "niddk-diabetic-eye-disease" ;
+    dmo:sourceId "niddk-diabetic-eye-disease" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-eye-disease.txt" ;
+    dmo:sha256 "b7986310bc704c60300726189bd9f316c3e80cab494131eb8bc22c299fe9ae72" ;
+    dmo:byteSize "15554"^^xsd:integer ;
+    dmo:publishedYear "2017"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> a dmo:GuidelineSource ;
+    rdfs:label "niddk-diabetic-foot-problems" ;
+    dmo:sourceId "niddk-diabetic-foot-problems" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-foot-problems.txt" ;
+    dmo:sha256 "9775da439bd65cd8de871539b3743ba9d34d0e14f6eb2acc926d1db18249edc9" ;
+    dmo:byteSize "12046"^^xsd:integer ;
+    dmo:publishedYear "2017"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> a dmo:GuidelineSource ;
+    rdfs:label "niddk-diabetic-kidney-disease" ;
+    dmo:sourceId "niddk-diabetic-kidney-disease" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-kidney-disease.txt" ;
+    dmo:sha256 "4ae81fcb052899f65ac9de769d40690e888b9335b755c8bbeb61f8dac9a16b04" ;
+    dmo:byteSize "8779"^^xsd:integer ;
+    dmo:publishedYear "2017"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> a dmo:GuidelineSource ;
+    rdfs:label "niddk-diabetic-neuropathy" ;
+    dmo:sourceId "niddk-diabetic-neuropathy" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-neuropathy.txt" ;
+    dmo:sha256 "a0957384924b930c3210586494624a5bc7b99eee4118fbced220c7908a8e240c" ;
+    dmo:byteSize "7121"^^xsd:integer ;
+    dmo:publishedYear "2018"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> a dmo:GuidelineSource ;
+    rdfs:label "niddk-gestational-diabetes" ;
+    dmo:sourceId "niddk-gestational-diabetes" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-gestational-diabetes.txt" ;
+    dmo:sha256 "d06560c0e6bf5225cace6845b184ff6ad3c3cbc8377ce4bb5d6415ff689127de" ;
+    dmo:byteSize "3141"^^xsd:integer ;
+    dmo:publishedYear "2017"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> a dmo:GuidelineSource ;
+    rdfs:label "niddk-healthy-living-with-diabetes" ;
+    dmo:sourceId "niddk-healthy-living-with-diabetes" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-healthy-living-with-diabetes.txt" ;
+    dmo:sha256 "f8169016f7637f71a7976afc7db187b426d18bce6e58942e460e8d5742d9ee13" ;
+    dmo:byteSize "19848"^^xsd:integer ;
+    dmo:publishedYear "2023"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> a dmo:GuidelineSource ;
+    rdfs:label "niddk-insulin-medicines-treatments" ;
+    dmo:sourceId "niddk-insulin-medicines-treatments" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-insulin-medicines-treatments.txt" ;
+    dmo:sha256 "9bc64702ec75fb79790e7a108c6cd7cd525cc6a3cb1802cac8362fa75cd65534" ;
+    dmo:byteSize "18735"^^xsd:integer ;
+    dmo:publishedYear "2022"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> a dmo:GuidelineSource ;
+    rdfs:label "niddk-managing-diabetes" ;
+    dmo:sourceId "niddk-managing-diabetes" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-managing-diabetes.txt" ;
+    dmo:sha256 "b4c9ee1844691b7781b7de94e42d47bf14c2e2820036351627fe4e3d5d6de6f0" ;
+    dmo:byteSize "21485"^^xsd:integer ;
+    dmo:publishedYear "2023"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> a dmo:GuidelineSource ;
+    rdfs:label "niddk-monogenic-diabetes" ;
+    dmo:sourceId "niddk-monogenic-diabetes" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-monogenic-diabetes.txt" ;
+    dmo:sha256 "2ac3b612770c1b1347cad2a338efea332d0409dfb2252b4addc627aa2bce70d7" ;
+    dmo:byteSize "14534"^^xsd:integer ;
+    dmo:publishedYear "2024"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-pregnancy-preexisting-diabetes> a dmo:GuidelineSource ;
+    rdfs:label "niddk-pregnancy-preexisting-diabetes" ;
+    dmo:sourceId "niddk-pregnancy-preexisting-diabetes" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-pregnancy-preexisting-diabetes.txt" ;
+    dmo:sha256 "0717b4f58acd4293e734953f3d4bef13ee121defd9dda0ddab8fbeb4a5f7febb" ;
+    dmo:byteSize "21461"^^xsd:integer ;
+    dmo:publishedYear "2024"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> a dmo:GuidelineSource ;
+    rdfs:label "niddk-preventing-diabetes-problems" ;
+    dmo:sourceId "niddk-preventing-diabetes-problems" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-preventing-diabetes-problems.txt" ;
+    dmo:sha256 "48dc8bd409f88678f69e194025f23446bd068ef55c86b9da4be4ad97676cd518" ;
+    dmo:byteSize "4397"^^xsd:integer ;
+    dmo:publishedYear "2016"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> a dmo:GuidelineSource ;
+    rdfs:label "niddk-symptoms-causes" ;
+    dmo:sourceId "niddk-symptoms-causes" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-symptoms-causes.txt" ;
+    dmo:sha256 "644724a0516b7670a298f0c0b1de29be78643f33c81a55707dd52e3ec85369bb" ;
+    dmo:byteSize "15893"^^xsd:integer ;
+    dmo:publishedYear "2024"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> a dmo:GuidelineSource ;
+    rdfs:label "niddk-tests-diagnosis" ;
+    dmo:sourceId "niddk-tests-diagnosis" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-tests-diagnosis.txt" ;
+    dmo:sha256 "122009a36c702dd16fd6ec7517ed7688d85de3154c6468fdeeff38960d52261d" ;
+    dmo:byteSize "10527"^^xsd:integer ;
+    dmo:publishedYear "2022"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .
+
+<https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> a dmo:GuidelineSource ;
+    rdfs:label "niddk-uacr-egfr" ;
+    dmo:sourceId "niddk-uacr-egfr" ;
+    dmo:publisher "NIDDK" ;
+    dmo:localFile "ontology/knowledges/niddk-uacr-egfr.txt" ;
+    dmo:sha256 "196ec62270a6517e4084c9d1821a35bc97133ba1d133666176351f2f4adf0d0d" ;
+    dmo:byteSize "3022"^^xsd:integer ;
+    dmo:publishedYear "2012"^^xsd:integer ;
+    dmo:contentStatus "substantive" ;
+    .

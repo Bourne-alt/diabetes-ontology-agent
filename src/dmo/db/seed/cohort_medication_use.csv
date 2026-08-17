@@ -1,0 +1,11 @@
+medication_use_id,patientid,medication_name,start_date,end_date,status,regimen_role,treats_diagnosis,demo_scenario
+M90007-MET,P90007,二甲双胍,2016-04-01,,Active,口服降糖,D90007-DM;D90007-DKD,S06
+M90008-EMPA,P90008,恩格列净,2025-06-01,,Active,口服降糖,D90008-DM,S07
+M90009-MET,P90009,二甲双胍,2012-01-15,,Active,口服降糖,D90009-DM,S08
+M90015-MET,P90015,二甲双胍,2019-03-01,,Active,口服降糖,D90015-DM,S14
+M90020-MET,P90020,二甲双胍,2020-02-01,,Active,口服降糖,D90020-DM,S17
+M90023-MET,P90023,二甲双胍,2015-01-10,,Active,口服降糖,D90023-DM,S20
+M90024-MET,P90024,二甲双胍,2021-03-01,,Active,口服降糖,D90024-DM,S21
+M90027-XYZ,P90027,某未知降糖药,2024-05-01,,Active,口服降糖,D90027-DM,S24
+M90030-PIO,P90030,吡格列酮,2024-08-01,,Active,口服降糖,D90030-DM,S27
+M90008-MET-OLD,P90008,二甲双胍,2010-07-01,2025-05-20,Stopped,口服降糖,D90008-DM,S07

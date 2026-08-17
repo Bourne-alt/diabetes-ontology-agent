@@ -1,0 +1,64 @@
+[project]
+name = "diabetes-ontology-agent"
+version = "0.1.0"
+description = "基于 OWL 本体的糖尿病领域智能体 —— 技术验证 / 学习项目"
+readme = "README.md"
+requires-python = ">=3.11"
+
+# 构建层：build.py 的合并 / 实体化 / 规则 / 校验流水线。
+# 这一层必须能进 CI，且不依赖 Java —— 见 docs/DESIGN.md 技术栈表。
+dependencies = [
+    "rdflib>=7.6.0",   # SPARQL 1.1 完整支持
+    "owlrl>=7.6.2",    # RDFS + OWL-RL 实体化，纯 Python
+    "pyshacl>=0.40.1", # 闭世界约束，弥补 OWA
+]
+
+[project.optional-dependencies]
+# 语义抽取：OpenAI 兼容接口 + PDF 文本提取。
+# TXT 的确定性阶段只用 stdlib；PDF 即使 --dry-run / --from-raw 也需要 pypdf。
+# 走 OpenAI 兼容接口，端点/模型/密钥全部从 .env 读（SiliconFlow / vLLM / Ollama 通用）。
+extract = ["openai>=3.0.0", "pypdf>=6.0.0"]
+
+# 外部术语拉取（OLS4 REST）与 GraphDB 装载。
+net = ["httpx>=0.28.1"]
+
+# 患者事实层：连 PostgreSQL（hospital_zd 只读 / onto_db 可写）。
+# psycopg 3 而非 SQLAlchemy —— schema 我们独占、无 ORM 需求，
+# ORM 会让 schema 有两份定义（SQL DDL 一份、模型类一份）。
+db = ["psycopg[binary]>=3.2"]
+
+# 融合查询 API。
+serve = ["fastapi>=0.115", "uvicorn>=0.32"]
+
+# eval 用例是 YAML。
+eval = ["pyyaml>=6.0.3"]
+
+# DL 推理：一致性检查与完整分类。需要 Java 17，当前开发机是 Java 8，跑不了。
+# 刻意隔离在 optional，保证默认构建零 Java 依赖。
+dl = ["owlready2>=0.51"]
+
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.14.0",
+    "psycopg[binary]>=3.2",
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "httpx>=0.28.1",   # fastapi.testclient 需要
+]
+
+[project.scripts]
+dmo = "dmo.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dmo"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
