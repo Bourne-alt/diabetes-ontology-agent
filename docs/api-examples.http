@@ -1,0 +1,215 @@
+# API 调试样例
+# 可用 VS Code REST Client、JetBrains HTTP Client 或兼容工具直接执行。
+# 数据来自演示队列、ontology seed 和自动化回归测试。
+# 默认请求远程服务：http://124.223.18.44:8100
+
+@baseUrl = http://124.223.18.44:8100
+
+###
+# 01. 服务入口
+GET {{baseUrl}}/
+Accept: application/json
+
+###
+# 02. 检查两侧依赖与数据量
+GET {{baseUrl}}/health
+Accept: application/json
+
+###
+# 03. 检索 E11 患者并返回前两条
+GET {{baseUrl}}/patients?icd10=E11&page=1&size=2
+Accept: application/json
+
+###
+# 04. 查询 P90002 的照护链
+GET {{baseUrl}}/patients/P90002/care-chain
+Accept: application/json
+
+###
+# 05. 查询单次 A1C 7.4% 的阈值判定
+GET {{baseUrl}}/patients/P90002/assessment
+Accept: application/json
+
+###
+# 06. 查询有多个可改变风险因子的患者
+GET {{baseUrl}}/patients/P90020/risk
+Accept: application/json
+
+###
+# 07. 查询 ESRD 加恩格列净的绝对禁忌信号
+GET {{baseUrl}}/patients/P90008/safety
+Accept: application/json
+
+###
+# 08. 查询 P90002 的完整七段返回体
+GET {{baseUrl}}/patients/P90002
+Accept: application/json
+
+###
+# 09. 通过静态路径执行确定性复测推演
+POST {{baseUrl}}/simulate
+Accept: application/json
+Content-Type: application/json
+
+{
+  "patientId": "P90002",
+  "assume": [
+    {
+      "term": "A1C",
+      "value": 7.9,
+      "unit": "percent",
+      "date": "2026-02-20"
+    }
+  ]
+}
+
+###
+# 10. 通过患者路径执行确定性复测推演
+POST {{baseUrl}}/patients/P90002/simulate
+Accept: application/json
+Content-Type: application/json
+
+{
+  "assume": [
+    {
+      "term": "A1C",
+      "value": 7.9,
+      "unit": "percent",
+      "date": "2026-02-20"
+    }
+  ]
+}
+
+###
+# 11. 列出查询模板白名单
+GET {{baseUrl}}/query/templates
+Accept: application/json
+
+###
+# 12. 运行照护链模板
+POST {{baseUrl}}/query/care_chain
+Accept: application/json
+Content-Type: application/json
+
+[
+  "P90002"
+]
+
+###
+# 13. 获取智能体能力清单
+GET {{baseUrl}}/agent/manifest
+Accept: application/json
+
+###
+# 14. 把中文表面形式解析为准确 IRI
+GET {{baseUrl}}/graph/concepts?q=%E7%B3%96%E5%8C%96%E8%A1%80%E7%BA%A2%E8%9B%8B%E7%99%BD&kind=LabTest&limit=5
+Accept: application/json
+
+###
+# 15. 查看 A1C 糖尿病阈值节点
+GET {{baseUrl}}/graph/node?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fthreshold%2FA1C-DIABETES
+Accept: application/json
+
+###
+# 16. 展开阈值指向的逐字出处
+GET {{baseUrl}}/graph/neighbors?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fthreshold%2FA1C-DIABETES&predicate=https%3A%2F%2Fexample.org%2Fdmo%23thresholdCitesPassage&direction=out&limit=10
+Accept: application/json
+
+###
+# 17. 查看 CKD 的上位概念与推理边
+GET {{baseUrl}}/graph/taxonomy?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FCKD&direction=up&depth=2
+Accept: application/json
+
+###
+# 18. 查找检验结果到指南出处的支撑路径
+GET {{baseUrl}}/graph/path?from=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FlabResult%2FL90002-A1C&to=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FsourcePassage%2FA1C-DIABETES-Q&maxHops=4
+Accept: application/json
+
+###
+# 19. 获取 SQL 列到 RDF 谓词的桥接表
+GET {{baseUrl}}/graph/schema?section=bridge
+Accept: application/json
+
+###
+# 20. 追踪 P90002 的 A1C 评估至指南原文和 SQL 行
+GET {{baseUrl}}/graph/provenance?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fassessment%2F72d5c0144bdb81cd7d6bc88dd20f121742f9f9bd
+Accept: application/json
+
+###
+# 21. 执行通过 guard 的只读阈值查询
+POST {{baseUrl}}/graph/sparql
+Accept: application/json
+Content-Type: application/json
+
+{
+  "query": "PREFIX dmo: <https://example.org/dmo#>\nSELECT ?id WHERE { ?threshold dmo:thresholdId ?id } LIMIT 20"
+}
+
+###
+# 22. 查询 A1C 糖尿病阈值引用的出处
+GET {{baseUrl}}/graph/passages?citedBy=A1C-DIABETES-NONPREG&limit=10
+Accept: application/json
+
+###
+# 23. 列出不参与 tier 计分的风险规则
+GET {{baseUrl}}/graph/rules?kind=risk&countsInTier=False&limit=20
+Accept: application/json
+
+###
+# 24. 查看 A1C 糖尿病阈值规则及出处
+GET {{baseUrl}}/graph/rules/A1C-DIABETES-NONPREG
+Accept: application/json
+
+###
+# 25. 裁决单次 A1C 是否足以确诊
+POST {{baseUrl}}/adjudicate/claim
+Accept: application/json
+Content-Type: application/json
+
+{
+  "patientId": "P90002",
+  "claim": {
+    "type": "Diagnosis",
+    "value": {
+      "kind": "Diabetes",
+      "verificationStatus": "Confirmed"
+    }
+  },
+  "assertedBy": "api-debug-example"
+}
+
+###
+# 26. 查询系统可裁决范围
+GET {{baseUrl}}/adjudicate/scope
+Accept: application/json
+
+###
+# 27. 核对真实 A1C 逐字引文及哈希
+POST {{baseUrl}}/adjudicate/citations
+Accept: application/json
+Content-Type: application/json
+
+{
+  "citations": [
+    {
+      "quote": "6.5% or above",
+      "sha256": "96495c7d996a92b5bee7132029744f08e5154be98dd1be7e177399320d7d1447"
+    }
+  ],
+  "assertedBy": "api-debug-example"
+}
+
+###
+# 28. 列出所有未映射与不可用术语
+GET {{baseUrl}}/terms/unmapped
+Accept: application/json
+
+###
+# 29. 解释糖化血红蛋白为何不可用于上游判定
+GET {{baseUrl}}/terms/explain?term=%E7%B3%96%E5%8C%96%E8%A1%80%E7%BA%A2%E8%9B%8B%E7%99%BD
+Accept: application/json
+
+###
+# 30. 比较尿蛋白的字符串匹配与本体结果
+GET {{baseUrl}}/demo/compare?term=%E5%B0%BF%E8%9B%8B%E7%99%BD
+Accept: application/json

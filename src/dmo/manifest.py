@@ -30,7 +30,7 @@ ORDER = (
     "调之前先读 GET /adjudicate/scope。"
     ),
     (
-    "7. 需要「若 X 则 Y」：POST /simulate。**假设值必须由调用方显式给出**，"
+    "7. 需要「若 X 则 Y」：POST /patients/{pid}/simulate。**假设值必须由调用方显式给出**，"
     "系统不生成、不推荐、不外推任何数值。"
     ),
 )
@@ -69,6 +69,76 @@ DETERMINISM = {
     },
 }
 
+
+
+def _ontology_overview(cfg: Any, ridx: Any) -> dict[str, Any]:
+    """本体覆盖面概览 —— 让调用方**提前**知道这个库判得了什么。
+
+    没有这一段时，问「血酮高不高」的正确路径是 /graph/concepts → 查到概念 →
+    /patients/{pid}/assessment → 空集 → /terms/explain，四轮才知道「判不了」。
+    先给出可判定检验项白名单，一轮就能说清楚。
+
+    **只给边界和量级，不给本体内容。** 类层次、属性、IRI 命名规则一概不进返回体：
+    调用方看见 IRI 样例就会开始照着拼，而拼错的 IRI 查出来是空集，
+    和「没有数据」长得一模一样。要 IRI 只有一条路 —— GET /graph/concepts。
+    """
+    tests: dict[str, dict[str, Any]] = {}
+    for rule in ridx.rules:
+        if rule.kind != "threshold":
+            continue
+        for code in rule.fields.get("measuredByTest") or []:
+            entry = tests.setdefault(code, {
+                "test": code, "thresholds": 0, "units": [],
+                "confirmationRequired": False, "executable": False,
+            })
+            entry["thresholds"] += 1
+            unit = rule.fields.get("boundUnit")
+            if unit and unit not in entry["units"]:
+                entry["units"].append(unit)
+            entry["confirmationRequired"] |= bool(rule.fields.get("confirmationRequired"))
+            entry["executable"] |= bool(rule.executable)
+
+    overview: dict[str, Any] = {
+        "assessableLabTests": [tests[k] for k in sorted(tests)],
+        "assessableNote": (
+            "这张表就是可判定边界：挂了 dmo:hasThreshold 的检验项才有阈值可判，"
+            "**也正是 POST /patients/{pid}/simulate 接受的全部检验项**。"
+            "不在表里的检验项，本库判不了 —— 直接说明判不了并给出 GET /terms/explain 的理由，"
+            "不要逐个去试 /graph/concepts + /patients/{pid}/assessment。"
+            "confirmationRequired=true 表示单次落在区间内只能出 Provisional，不是确诊。"
+        ),
+    }
+
+    # 概念计数与术语缺口在 SQL 侧。PG 挂了不该把整个能力清单一起拖垮 ——
+    # 端点、调用顺序、禁令这些是常量，没有它们调用方连怎么问都不知道。
+    try:
+        from .db.engine import onto_conn
+
+        with onto_conn(cfg) as conn:
+            kinds = conn.fetchall(
+                "SELECT concept_kind, count(*) AS n FROM diabetes.map_concept_ref "
+                "GROUP BY concept_kind ORDER BY concept_kind"
+            )
+            gaps = conn.fetchall(
+                "SELECT (SELECT count(*) FROM diabetes.map_unmapped_term) AS unmapped, "
+                "(SELECT count(*) FROM diabetes.map_lab_term "
+                " WHERE verify_status <> 'verified') AS not_usable"
+            )[0]
+        overview["conceptKinds"] = {r["concept_kind"]: r["n"] for r in kinds}
+        overview["terminologyGaps"] = {
+            "unmappedTerms": gaps["unmapped"],
+            "labTermsNotUsable": gaps["not_usable"],
+            "note": ("查得到 ≠ 判得了：verify_status <> 'verified' 的映射存在但不参与判定。"
+                     "明细见 GET /terms/unmapped，单个术语的原因见 GET /terms/explain。"),
+        }
+    except Exception as e:  # noqa: BLE001 —— 降级要说清楚缺了哪一段，不能静默省略
+        overview["conceptKinds"] = None
+        overview["terminologyGaps"] = None
+        overview["degraded"] = (
+            f"概念计数与术语缺口不可用（{type(e).__name__}）：PostgreSQL 侧读取失败。"
+            "assessableLabTests 来自 GraphDB，仍然有效。"
+        )
+    return overview
 
 def build(app: Any, cfg: Any) -> dict[str, Any]:
     from .graph.passages import load as load_passages
@@ -111,6 +181,7 @@ def build(app: Any, cfg: Any) -> dict[str, Any]:
             "sparqlTemplates": sorted(TEMPLATES),
             # 覆盖面必须和端点清单一起给。只给能力不给边界，等于鼓励越界使用。
             "boundaries": "GET /adjudicate/scope 给出可裁决与不可裁决的完整清单。",
+            "ontology": _ontology_overview(cfg, ridx),
         },
         "graphVersion": graph_version(),
         "rulesFingerprint": rules_fingerprint(),

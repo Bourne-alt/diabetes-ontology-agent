@@ -1,0 +1,2542 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "糖尿病本体 × 患者事实库 融合查询",
+    "description": "糖尿病本体与患者事实库融合查询 API。技术验证用途，不是医疗器械，不构成医疗建议。无鉴权、无限流，仅应部署在可信内网或本机。",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "summary": "服务信息与关键入口导航",
+        "operationId": "getServiceInfo",
+        "responses": {
+          "200": {
+            "description": "服务名称、版本和关键入口。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "description": "服务入口导航：服务名、版本和关键端点。\n\n【不要用于】查两侧依赖是否连通（用「检查 PostgreSQL 与 GraphDB 连通性」）；查有哪些能力、按什么顺序调用、什么不许做（用「获取智能体能力清单与调用顺序」）。",
+        "x-test-example-title": "服务入口"
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "检查 PostgreSQL 与 GraphDB 连通性",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Service"
+        ],
+        "description": "PostgreSQL 与 GraphDB 连通性、两侧数据量、当前 graphVersion。\n\n会话内第一次做业务分析前先调一次。`ok=false` 时停止依赖故障侧的分析，如实报出是 postgres 还是 graphdb 出错，**不要用常识生成替代结论**。\n同一会话内 graphVersion 若发生变化，此前拿到的术语映射、规则和结论全部作废，必须重查。\n\n【不要用于】查端点清单、调用顺序与禁令（用「获取智能体能力清单与调用顺序」）。",
+        "x-test-example-title": "检查两侧依赖与数据量"
+      }
+    },
+    "/patients": {
+      "get": {
+        "summary": "检索并分页列出患者",
+        "description": "SQL 侧检索。分页与筛选都在这里做完 —— SPARQL 只处理收敛后的小集合。\n\n【用于】不知道患者编号，或需要按 ICD-10、事实来源、风险档位筛选和分页。\n【不要用于】在图里扫患者；已知单个编号问病情（直接用患者族对应工具）。",
+        "operationId": "list_patients_patients_get",
+        "parameters": [
+          {
+            "name": "icd10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Icd10"
+            },
+            "description": "按 ICD-10 外部诊断编码前缀筛选，例如 E11。可不传。",
+            "example": "E11"
+          },
+          {
+            "name": "origin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "ehr-legacy / derived / demo-cohort",
+              "title": "Origin",
+              "enum": [
+                "ehr-legacy",
+                "derived",
+                "demo-cohort"
+              ]
+            },
+            "description": "按事实来源筛选：ehr-legacy 为真实上游数据，derived 为规则推导数据，demo-cohort 为演示队列。可不传。"
+          },
+          {
+            "name": "scenario",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Scenario"
+            },
+            "description": "按演示场景编号筛选，例如 S02；主要用于调试演示队列。可不传。"
+          },
+          {
+            "name": "tier",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "High / Moderate / Low / Insufficient-Evidence",
+              "title": "Tier",
+              "enum": [
+                "High",
+                "Moderate",
+                "Low",
+                "Insufficient-Evidence"
+              ]
+            },
+            "description": "按规则式风险档位筛选；档位是有序枚举，不是概率或分数。可不传。"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page",
+              "minimum": 1
+            },
+            "description": "页码，从 1 开始。",
+            "example": 1
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Size",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "description": "每页记录数，范围 1–200。",
+            "example": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response List Patients Patients Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "x-test-example-title": "检索 E11 患者并返回前两条"
+      }
+    },
+    "/patients/{pid}/care-chain": {
+      "get": {
+        "summary": "获取患者完整照护链",
+        "operationId": "care_chain_patients__pid__care_chain_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90002。",
+            "example": "P90002"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Care Chain Patients  Pid  Care Chain Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "description": "单个患者的照护链：就诊 → 检验 → 诊断 → 用药的时间线与关联关系。\n\n【用于】「这个患者经历了什么」「什么时候查的」「在用什么药」。\n【不要用于】阈值判定（用「获取阈值判定与逐字出处」）、风险档位（用「获取规则式定性风险分层」）、用药安全信号（用「获取用药安全信号」）。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "x-test-example-title": "查询 P90002 的照护链"
+      }
+    },
+    "/patients/{pid}/assessment": {
+      "get": {
+        "summary": "获取阈值判定与逐字出处",
+        "description": "阈值判定 + 所用阈值区间 + 逐字出处 + sha256。\n\n⚠️ 诊断级切点 `confirmationRequired=true` 时，单次检验落在区间内 **≠ 确诊**；`verificationStatus=\"Provisional\"` 和 `caveat` 必须原样保留，不得升级成确诊。\n【不要用于】风险档位（用「获取规则式定性风险分层」）、时间线（用「获取患者完整照护链」）。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "operationId": "assessment_patients__pid__assessment_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90002。",
+            "example": "P90002"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Assessment Patients  Pid  Assessment Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "x-test-example-title": "查询单次 A1C 7.4% 的阈值判定"
+      }
+    },
+    "/patients/{pid}/risk": {
+      "get": {
+        "summary": "获取规则式定性风险分层",
+        "description": "风险分层。⚠️ 规则式定性分层，不含概率、不含发生率、不含时间窗；`tier` 是有序枚举，不是分数，也不是模型置信度。\n\n`Insufficient-Evidence` 既不是 Low，也不是「无风险」，更不是系统故障 —— 必须连同 `insufficientReason` 一起说明。`countedInTier=false` 的因子可以列出，但要讲明它不参与档位计算及其出处缺口。\n【不要用于】阈值判定或诊断依据（用「获取阈值判定与逐字出处」）、用药安全（用「获取用药安全信号」）。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "operationId": "risk_patients__pid__risk_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90020。",
+            "example": "P90020"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Risk Patients  Pid  Risk Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "x-test-example-title": "查询有多个可改变风险因子的患者"
+      }
+    },
+    "/patients/{pid}/safety": {
+      "get": {
+        "summary": "获取用药安全信号",
+        "operationId": "safety_patients__pid__safety_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90008。",
+            "example": "P90008"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Safety Patients  Pid  Safety Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "description": "用药安全信号：禁忌、肾功能相关警示等，附规则号与逐字出处。\n\n⚠️ 只输出信号，**不输出剂量、不推荐药物、不做个体化治疗决策** —— schema 层面就没有剂量字段。\n【不要用于】回答「该用什么药」「用多少」（本服务不回答）；阈值判定（用「获取阈值判定与逐字出处」）。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "x-test-example-title": "查询 ESRD 加恩格列净的绝对禁忌信号"
+      }
+    },
+    "/patients/{pid}": {
+      "get": {
+        "summary": "获取患者完整七段返回体",
+        "operationId": "full_patients__pid__get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90002。",
+            "example": "P90002"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Full Patients  Pid  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "description": "患者七段完整融合返回体：患者与事实来源、数据质量提示、断言事实、推断事实、逐字出处、未映射术语、风险分层与照护链。\n\n【用于】用户问「整体情况」「这个患者怎么样」，且不确定需要哪一段。\n【不要用于】只问时间线（用「获取患者完整照护链」）、只问阈值判定或诊断依据（用「获取阈值判定与逐字出处」）、只问风险档位（用「获取规则式定性风险分层」）、只问用药安全（用「获取用药安全信号」）—— 本工具返回体积最大，会淹没重点。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "x-test-example-title": "查询 P90002 的完整七段返回体"
+      }
+    },
+    "/patients/{pid}/simulate": {
+      "post": {
+        "summary": "按路径患者号执行确定性病程推演",
+        "description": "同上，患者号走路径。保留给既有调用方（CLI 文档、skills 脚本、部署测试）。\n\ncurl -X POST localhost:8100/patients/P90002/simulate \\\n     -H 'Content-Type: application/json' \\\n     -d '{\"assume\":[{\"term\":\"A1C\",\"value\":7.9,\"unit\":\"percent\",\"date\":\"2026-02-20\"}]}'",
+        "operationId": "simulate_patient_patients__pid__simulate_post",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "要执行条件推演的患者业务编号，例如 P90002。",
+            "example": "P90002"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationRequest"
+              },
+              "example": {
+                "assume": [
+                  {
+                    "term": "A1C",
+                    "value": 7.9,
+                    "unit": "percent",
+                    "date": "2026-02-20"
+                  }
+                ]
+              }
+            }
+          },
+          "description": "要注入内存沙箱的假设检验事实列表。"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Simulate Patient Patients  Pid  Simulate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Simulation"
+        ],
+        "x-test-example-title": "通过患者路径执行确定性复测推演"
+      }
+    },
+    "/query/templates": {
+      "get": {
+        "summary": "列出参数化查询模板白名单",
+        "operationId": "list_templates_query_templates_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Response List Templates Query Templates Get"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Query templates"
+        ],
+        "description": "参数化查询模板白名单。\n\n【前置】执行模板前必须先读本清单 —— **不要猜模板名**，不在白名单内的模板会被拒绝。\n【用于】跨患者对照、最新检验、诊断证据、风险因子、照护链明细等行级结构化查询的前一步。",
+        "x-test-example-title": "列出查询模板白名单"
+      }
+    },
+    "/query/{template}": {
+      "post": {
+        "summary": "对指定患者运行参数化模板",
+        "description": "参数化模板白名单。**不接受自由 SPARQL** —— 理由见 query/templates.py。",
+        "operationId": "run_template_query__template__post",
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Template"
+            },
+            "description": "参数化查询模板名称。可用值通过 GET /query/templates 获取；例如 care_chain、assessment_evidence。",
+            "example": "care_chain"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "title": "Patients"
+              },
+              "example": [
+                "P90002"
+              ]
+            }
+          },
+          "description": "非空患者业务编号数组；模板不会执行无患者约束的全库扫描。"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Run Template Query  Template  Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Query templates"
+        ],
+        "x-test-example-title": "运行照护链模板"
+      }
+    },
+    "/agent/manifest": {
+      "get": {
+        "summary": "获取智能体能力清单与调用顺序",
+        "description": "给智能体的能力清单：端点 + 调用顺序 + 图层铁律 + 硬禁令 + 覆盖面。\n\n端点清单从 app.routes 现场生成，不可能与实际服务分叉。",
+        "operationId": "agent_manifest_agent_manifest_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Agent Manifest Agent Manifest Get"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent discovery"
+        ],
+        "x-test-example-title": "获取智能体能力清单"
+      }
+    },
+    "/graph/concepts": {
+      "get": {
+        "summary": "将表面形式解析为准确 IRI",
+        "description": "中文表面形式 → 准确 IRI。**所有图探索的唯一入口。**\n\n并集是核心：本体的 label/altLabel ∪ 三张人工映射表里的上游中文名。\n返回体的 `usable` 字段说明这个映射到底参不参与判定 —— 查得到 ≠ 判得了。",
+        "operationId": "graph_concepts_graph_concepts_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "中文表面形式 / 编码 / 英文 label",
+              "title": "Q"
+            },
+            "description": "待解析的中文表面形式、规范编码或英文标签，例如“糖化血红蛋白”。",
+            "example": "糖化血红蛋白"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "LabTest / Medication / RiskFactor …",
+              "title": "Kind"
+            },
+            "description": "可选的概念类型过滤，例如 LabTest、Medication、RiskFactor。",
+            "example": "LabTest"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            },
+            "description": "最多返回的候选概念数。",
+            "example": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Concepts Graph Concepts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "把中文表面形式解析为准确 IRI"
+      }
+    },
+    "/graph/node": {
+      "get": {
+        "summary": "获取图节点邻接摘要",
+        "description": "节点邻接摘要：类型（标出哪些是推理机推的）、所在图、出边/入边 + 计数。\n\n⚠️ 拒绝 `urn:dmo:data` 里的反例夹具，并说明原因 —— 悄悄过滤等于静默少返。\n【用于】拿到 IRI 之后的第一跳：看清类型和有哪些谓词可走，再决定下一步。\n【不要用于】展开某个具体关系的全部邻居（用「展开图节点一跳邻居」）、查上位/下位类（用「查询概念的上位或下位层次」）。\n【前置】必须已有准确 IRI —— 先用「将表面形式解析为准确 IRI」，**不要自己拼 IRI**。",
+        "operationId": "graph_node_graph_node_get",
+        "parameters": [
+          {
+            "name": "iri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Iri"
+            },
+            "description": "要查看的完整节点 IRI；必须先通过 /graph/concepts 获得准确 IRI，不接受自然语言术语。",
+            "example": "https://example.org/dmo/id/threshold/A1C-DIABETES"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Node Graph Node Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "查看 A1C 糖尿病阈值节点"
+      }
+    },
+    "/graph/neighbors": {
+      "get": {
+        "summary": "展开图节点一跳邻居",
+        "operationId": "graph_neighbors_graph_neighbors_get",
+        "parameters": [
+          {
+            "name": "iri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Iri"
+            },
+            "description": "作为一跳展开起点的完整节点 IRI。",
+            "example": "https://example.org/dmo/id/threshold/A1C-DIABETES"
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Predicate"
+            },
+            "description": "可选的完整 RDF 谓词 IRI；传入后只返回该关系。",
+            "example": "https://example.org/dmo#thresholdCitesPassage"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "out 取对象 / in 取主语",
+              "default": "out",
+              "title": "Direction",
+              "enum": [
+                "out",
+                "in"
+              ]
+            },
+            "description": "遍历方向：out 返回当前节点指向的对象，in 返回指向当前节点的主语。",
+            "example": "out"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "最多返回的一跳邻居数。",
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Neighbors Graph Neighbors Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "description": "沿一个明确谓词展开一跳邻居，可指定方向 out/in。\n\n【不要用于】查上位/下位类（用「查询概念的上位或下位层次」）、查两个节点如何连通（用「在两个节点间执行受控 BFS」）、只想看节点类型和邻接概览（用「获取图节点邻接摘要」，更省）。\n【前置】必须已有准确 IRI —— 先用「将表面形式解析为准确 IRI」；不接受自然语言术语，**不要自己拼 IRI**（拼错查出来是空集，和「没有数据」长得一模一样）。",
+        "x-test-example-title": "展开阈值指向的逐字出处"
+      }
+    },
+    "/graph/taxonomy": {
+      "get": {
+        "summary": "查询概念的上位或下位层次",
+        "description": "类层次 —— 同时是 owl2-rl 推理产物的展示面。\n\n`inferenceNotice` 会指出哪几条边不在任何文件里写着、是推出来的。\n【不要用于】展开非层次关系（用「展开图节点一跳邻居」）、任意两点之间的连通性（用「在两个节点间执行受控 BFS」）。\n【前置】必须已有准确 IRI —— 先用「将表面形式解析为准确 IRI」。",
+        "operationId": "graph_taxonomy_graph_taxonomy_get",
+        "parameters": [
+          {
+            "name": "iri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Iri"
+            },
+            "description": "要查询类层次的完整概念 IRI。",
+            "example": "https://example.org/dmo/id/CKD"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "up 上位 / down 下位",
+              "default": "up",
+              "title": "Direction",
+              "enum": [
+                "up",
+                "down"
+              ]
+            },
+            "description": "层次方向：up 查询上位类，down 查询下位类。",
+            "example": "up"
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 3,
+              "title": "Depth"
+            },
+            "description": "最大层次深度；服务端会限制可接受范围。",
+            "example": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Taxonomy Graph Taxonomy Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "查看 CKD 的上位概念与推理边"
+      }
+    },
+    "/graph/path": {
+      "get": {
+        "summary": "在两个节点间执行受控 BFS",
+        "description": "两个节点之间怎么连上的。服务端做双向受控 BFS，不放任意长度属性路径出去。\n\n【不要用于】只想看某个节点周边（用「获取图节点邻接摘要」或「展开图节点一跳邻居」）；结论的证据溯源（用「反向追踪结论的支撑链与原始行」，那条路径是专用的）。\n【前置】**起点和终点都**必须是已确认的准确 IRI。",
+        "operationId": "graph_path_graph_path_get",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "From"
+            },
+            "description": "路径起点的完整节点 IRI。",
+            "example": "https://example.org/dmo/id/labResult/L90002-A1C"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "To"
+            },
+            "description": "路径终点的完整节点 IRI。",
+            "example": "https://example.org/dmo/id/sourcePassage/A1C-DIABETES-Q"
+          },
+          {
+            "name": "maxHops",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 3,
+              "title": "Maxhops"
+            },
+            "description": "受控 BFS 的最大跳数；用于限制图遍历开销。",
+            "example": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Path Graph Path Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "查找检验结果到指南出处的支撑路径"
+      }
+    },
+    "/graph/schema": {
+      "get": {
+        "summary": "获取 RDF、SQL 与桥接 schema 卡片",
+        "description": "schema 卡片：RDF 侧 + SQL 侧 + 两侧的列↔谓词桥接表。\n\n桥接表由 `rdf/emit.py` 的 AST 静态解析得到 —— 不可能与实际发射逻辑分叉。",
+        "operationId": "graph_schema_graph_schema_get",
+        "parameters": [
+          {
+            "name": "section",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "rdf / sql / bridge，不给则全给",
+              "title": "Section",
+              "enum": [
+                "rdf",
+                "sql",
+                "bridge"
+              ]
+            },
+            "description": "只返回指定 schema 区段：rdf、sql 或 bridge；不传则返回全部。",
+            "example": "bridge"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Schema Graph Schema Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "获取 SQL 列到 RDF 谓词的桥接表"
+      }
+    },
+    "/graph/provenance": {
+      "get": {
+        "summary": "反向追踪结论的支撑链与原始行",
+        "description": "反向溯源：推断产物 → 支撑链 → 指南原文 → SQL 原始行。\n\n「推理」与「可核查」两个亮点在这里合流。`brokenLinks` 与 `chain` 同等重要 ——\n只报走通的环节等于在暗示「这条结论有出处」。\n【用于】用户追问某条结论「凭什么」。\n【前置】需要**真实的结论 IRI**（Assessment / Diagnosis / RiskFactorHit）。患者摘要接口不一定返回结论 IRI；拿不到时用「执行通过静态检查的只读 SPARQL」查出来，**绝不能根据患者号、规则号或哈希算法自行猜造 IRI**。",
+        "operationId": "graph_provenance_graph_provenance_get",
+        "parameters": [
+          {
+            "name": "iri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Iri"
+            },
+            "description": "要反向溯源的推断结论完整 IRI，例如 Assessment、Diagnosis 或 RiskFactorHit 的 IRI。",
+            "example": "https://example.org/dmo/id/assessment/72d5c0144bdb81cd7d6bc88dd20f121742f9f9bd"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Provenance Graph Provenance Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "追踪 P90002 的 A1C 评估至指南原文和 SQL 行"
+      }
+    },
+    "/graph/sparql": {
+      "post": {
+        "summary": "执行通过静态检查的只读 SPARQL",
+        "description": "自由 SPARQL 逃生口 —— 静态检查通过才执行，0 行会自动跑降级探针。\n\n⚠️ **这是第 13 个工具，不是第 1 个。** `/graph/{concepts,node,neighbors,taxonomy,\npath,provenance}` 能答的别自己拼图模式：那一族的 GRAPH 子句由服务端拼，\n永远不会踩「知识侧写具名图 → 静默少返」和「患者侧缺守卫 → 扫到反例夹具」这两脚。",
+        "operationId": "graph_sparql_graph_sparql_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SparqlRequest"
+              },
+              "example": {
+                "query": "PREFIX dmo: <https://example.org/dmo#>\nSELECT ?id WHERE { ?threshold dmo:thresholdId ?id } LIMIT 20"
+              }
+            }
+          },
+          "description": "只读 SPARQL 查询对象；执行前必须通过静态安全检查。"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Graph Sparql Graph Sparql Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "执行通过 guard 的只读阈值查询"
+      }
+    },
+    "/graph/passages": {
+      "get": {
+        "summary": "检索可逐字引用的出处",
+        "description": "可引用出处检索。图探索族的第一个原语，与 /adjudicate/citations 共用底表。\n\n返回体带 nextHops（可继续展开的端点）与 emptyReason（空集是哪一种空）。",
+        "operationId": "graph_passages_graph_passages_get",
+        "parameters": [
+          {
+            "name": "sha256",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按内容哈希精确查",
+              "title": "Sha256"
+            },
+            "description": "按 64 位十六进制内容哈希精确查找出处。可不传。"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "引文子串（规范化后、大小写不敏感）",
+              "title": "Q"
+            },
+            "description": "按规范化后的引文子串进行大小写不敏感检索。可不传。"
+          },
+          {
+            "name": "passageId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Passageid"
+            },
+            "description": "按出处业务编号精确筛选，例如 A1C-DIABETES-Q。可不传。"
+          },
+          {
+            "name": "citedBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "thresholdId 或 riskRuleId",
+              "title": "Citedby"
+            },
+            "description": "筛选被指定 thresholdId 或 riskRuleId 引用的出处。可不传。",
+            "example": "A1C-DIABETES-NONPREG"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "最多返回的出处数量。",
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Passages Graph Passages Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "查询 A1C 糖尿病阈值引用的出处"
+      }
+    },
+    "/graph/rules": {
+      "get": {
+        "summary": "检索并内省规则",
+        "description": "规则内省 —— 先读懂规则，再决定查什么。\n\n`counts` 段如实报出三个落差（阈值 17/17、风险规则 73→12→10）。\n藏起来就等于夸大覆盖面。",
+        "operationId": "graph_rules_graph_rules_get",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "threshold / target / risk",
+              "title": "Kind",
+              "enum": [
+                "threshold",
+                "target",
+                "risk"
+              ]
+            },
+            "description": "按规则类别筛选：threshold、target 或 risk。可不传。",
+            "example": "risk"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            },
+            "description": "按规则编号或标签关键字检索。可不传。"
+          },
+          {
+            "name": "executable",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "规则链的 WHERE 真的匹配得上吗",
+              "title": "Executable"
+            },
+            "description": "筛选规则链 WHERE 是否能够实际匹配；true 只返回可执行规则。"
+          },
+          {
+            "name": "countsInTier",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "风险规则：有逐字出处、真正计分吗",
+              "title": "Countsintier"
+            },
+            "description": "风险规则过滤条件：是否有逐字出处并实际参与 tier 计算。",
+            "example": false
+          },
+          {
+            "name": "concept",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按检验项/指标筛，如 A1C / FPG",
+              "title": "Concept"
+            },
+            "description": "按检验项或指标筛选，例如 A1C、FPG。可不传。"
+          },
+          {
+            "name": "context",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "人群语境：NonPregnant / Pregnant / Any",
+              "title": "Context"
+            },
+            "description": "按适用人群语境筛选，例如 NonPregnant、Pregnant、Any。可不传。"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "最多返回的规则数量。",
+            "example": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Rules Graph Rules Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "列出不参与 tier 计分的风险规则"
+      }
+    },
+    "/graph/rules/{rule_id}": {
+      "get": {
+        "summary": "获取单条规则及完整出处",
+        "description": "单条规则全貌，出处展开成完整 passage（含 quote 与 sha256）。",
+        "operationId": "graph_rule_graph_rules__rule_id__get",
+        "parameters": [
+          {
+            "name": "rule_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Rule Id"
+            },
+            "description": "规则业务编号，例如 A1C-DIABETES-NONPREG；可先通过 GET /graph/rules 查询。",
+            "example": "A1C-DIABETES-NONPREG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Graph Rule Graph Rules  Rule Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Graph exploration"
+        ],
+        "x-test-example-title": "查看 A1C 糖尿病阈值规则及出处"
+      }
+    },
+    "/adjudicate/claim": {
+      "post": {
+        "summary": "裁决结构化患者结论",
+        "description": "裁决一条**已经给出的结论**：和本体自己推出来的那条并排比对。\n\n    curl -X POST localhost:8100/adjudicate/claim \\\n         -H 'Content-Type: application/json' \\\n         -d '{\"patientId\":\"P90002\",\n              \"claim\":{\"type\":\"Diagnosis\",\n                       \"value\":{\"kind\":\"Diabetes\",\"verificationStatus\":\"Confirmed\"}},\n              \"assertedBy\":\"external-llm/some-model\"}'\n\n四个判定值：supported / contradicted / unsupported / not-adjudicable。\n⚠️ 永远不返回布尔。`supported` 的含义严格限定为「与本仓库当前版本知识层的规则和\n阈值一致」，不是任何形式的诊疗背书。",
+        "operationId": "adjudicate_claim_endpoint_adjudicate_claim_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaimAdjudicationRequest"
+              },
+              "example": {
+                "patientId": "P90002",
+                "claim": {
+                  "type": "Diagnosis",
+                  "value": {
+                    "kind": "Diabetes",
+                    "verificationStatus": "Confirmed"
+                  }
+                },
+                "assertedBy": "api-debug-example"
+              }
+            }
+          },
+          "description": "需要裁决的患者、结构化断言及可选引用。"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Adjudicate Claim Endpoint Adjudicate Claim Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Adjudication"
+        ],
+        "x-test-example-title": "裁决单次 A1C 是否足以确诊"
+      }
+    },
+    "/adjudicate/scope": {
+      "get": {
+        "summary": "获取可裁决与不可裁决范围",
+        "description": "我能裁决什么、不能裁决什么。**调用裁决族之前先读这个。**",
+        "operationId": "adjudicate_scope_adjudicate_scope_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Adjudicate Scope Adjudicate Scope Get"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Adjudication"
+        ],
+        "x-test-example-title": "查询系统可裁决范围"
+      }
+    },
+    "/adjudicate/citations": {
+      "post": {
+        "summary": "裁决引用是否逐字成立",
+        "description": "裁决一批引用是否逐字成立。**不需要患者，完全确定性。**\n\n    curl -X POST localhost:8100/adjudicate/citations \\\n         -H 'Content-Type: application/json' \\\n         -d '{\"citations\":[{\"quote\":\"6.5% or above\",\n                            \"sha256\":\"96495c7d996a92b5bee7132029744f08e5154be98dd1be7e177399320d7d1447\"}]}'\n\n五个判定值：verbatim / hash-only / quote-only / not-verbatim / fabricated。\n⚠️ 永远不返回布尔 —— 「通过校验」这种印章本系统不发，理由见\ndocs/ADJUDICATE-EXPLORE-API-PLAN.md §0.1。",
+        "operationId": "adjudicate_citations_adjudicate_citations_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CitationsRequest"
+              },
+              "example": {
+                "citations": [
+                  {
+                    "quote": "6.5% or above",
+                    "sha256": "96495c7d996a92b5bee7132029744f08e5154be98dd1be7e177399320d7d1447"
+                  }
+                ],
+                "assertedBy": "api-debug-example"
+              }
+            }
+          },
+          "description": "需要逐字核对的一组引文或内容哈希。"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Adjudicate Citations Adjudicate Citations Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Adjudication"
+        ],
+        "x-test-example-title": "核对真实 A1C 逐字引文及哈希"
+      }
+    },
+    "/terms/unmapped": {
+      "get": {
+        "summary": "列出未映射或不可用术语",
+        "operationId": "unmapped_terms_unmapped_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Unmapped Terms Unmapped Get"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Terminology"
+        ],
+        "description": "全库未映射与不可用术语总表 —— 系统主动记账的覆盖面缺口，不是错误日志。\n\n【用于】盘点「哪些术语这个系统判不了」。\n【不要用于】解释某一个具体术语为什么查不到或判不了（用「解释术语为何查不到或不可判定」）。",
+        "x-test-example-title": "列出所有未映射与不可用术语"
+      }
+    },
+    "/terms/explain": {
+      "get": {
+        "summary": "解释术语为何查不到或不可判定",
+        "description": "诚实回答「为什么查不到」。返回空集与「有但判不了」是两回事。",
+        "operationId": "explain_terms_explain_get",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Term"
+            },
+            "description": "需要解释映射状态或不可判定原因的原始术语。",
+            "example": "糖化血红蛋白"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Explain Terms Explain Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Terminology"
+        ],
+        "x-test-example-title": "解释糖化血红蛋白为何不可用于上游判定"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Error": {
+        "type": "object",
+        "description": "标准错误响应。400 也可能表示有意的业务拒绝。",
+        "required": [
+          "detail"
+        ],
+        "properties": {
+          "detail": {
+            "description": "错误或业务拒绝原因。部分端点可能返回结构化对象。",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": true
+              }
+            ]
+          },
+          "hint": {
+            "type": "string",
+            "description": "可选的排障建议。"
+          }
+        }
+      },
+      "Hypothesis": {
+        "type": "object",
+        "required": [
+          "term",
+          "value",
+          "unit",
+          "date"
+        ],
+        "properties": {
+          "term": {
+            "type": "string",
+            "enum": [
+              "A1C",
+              "FPG",
+              "GCT1H",
+              "GLU",
+              "OGTT2H",
+              "RPG",
+              "UACR"
+            ],
+            "description": "只接受已挂接阈值的规范术语，不做模糊匹配。"
+          },
+          "value": {
+            "type": "number",
+            "description": "由调用方显式提供的假设数值。"
+          },
+          "unit": {
+            "type": "string",
+            "description": "单位必填；仅接受规范单位或已核实换算。"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "假设检验日期。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulationRequest": {
+        "type": "object",
+        "required": [
+          "assume"
+        ],
+        "properties": {
+          "assume": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "$ref": "#/components/schemas/Hypothesis"
+            },
+            "description": "要注入内存沙箱的假设检验事实，至少 1 条、最多 10 条。"
+          },
+          "includeUnreliable": {
+            "type": "boolean",
+            "default": false,
+            "description": "是否把 trust=Unverified 的既有患者事实纳入推演基线。"
+          },
+          "refresh": {
+            "type": "boolean",
+            "default": false,
+            "description": "是否绕过知识快照缓存并重新从 GraphDB 读取。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SparqlRequest": {
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "只读 SELECT / ASK / CONSTRUCT / DESCRIBE；执行前经过静态检查。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CitationInput": {
+        "type": "object",
+        "description": "quote 与 sha256 至少提供一项。",
+        "properties": {
+          "quote": {
+            "type": "string",
+            "description": "调用方声称逐字引用的原文。"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$",
+            "description": "调用方声称的引文内容哈希。"
+          },
+          "contentHash": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$",
+            "deprecated": true,
+            "description": "sha256 的兼容别名。"
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "quote"
+            ]
+          },
+          {
+            "required": [
+              "sha256"
+            ]
+          },
+          {
+            "required": [
+              "contentHash"
+            ]
+          }
+        ],
+        "additionalProperties": false
+      },
+      "CitationsRequest": {
+        "type": "object",
+        "required": [
+          "citations"
+        ],
+        "properties": {
+          "citations": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 200,
+            "items": {
+              "$ref": "#/components/schemas/CitationInput"
+            },
+            "description": "待核对的引文列表，至少 1 条、最多 200 条。"
+          },
+          "assertedBy": {
+            "type": "string",
+            "description": "仅记账，不参与判定。"
+          },
+          "refresh": {
+            "type": "boolean",
+            "default": false,
+            "description": "是否绕过出处索引缓存并重新从 GraphDB 读取。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Claim": {
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "结构化断言类型；不同类型对应不同的 value 语义键。",
+            "enum": [
+              "Assessment",
+              "TargetAttainment",
+              "Diagnosis",
+              "RiskTier",
+              "MedicationSafety"
+            ]
+          },
+          "value": {
+            "type": "object",
+            "description": "随 claim.type 变化的结构化断言；不接受自然语言断言。",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaimAdjudicationRequest": {
+        "type": "object",
+        "required": [
+          "patientId",
+          "claim"
+        ],
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "description": "断言所针对的患者业务编号。",
+            "example": "P90002"
+          },
+          "claim": {
+            "$ref": "#/components/schemas/Claim"
+          },
+          "assertedBy": {
+            "type": "string",
+            "description": "仅记账，不参与判定。"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CitationInput"
+            },
+            "description": "可选的支撑引文；用于检查引文是否真实且是否张冠李戴。"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://124.223.18.44:8100",
+      "description": "远程调试服务"
+    }
+  ],
+  "security": [],
+  "tags": [
+    {
+      "name": "Service",
+      "description": "服务入口与健康状态。"
+    },
+    {
+      "name": "Patients",
+      "description": "患者检索及融合查询。"
+    },
+    {
+      "name": "Simulation",
+      "description": "确定性条件推演，不是概率预测。"
+    },
+    {
+      "name": "Query templates",
+      "description": "受控参数化 SPARQL 模板。"
+    },
+    {
+      "name": "Agent discovery",
+      "description": "供智能体自举的能力清单。"
+    },
+    {
+      "name": "Graph exploration",
+      "description": "受控图探索、规则与溯源。"
+    },
+    {
+      "name": "Adjudication",
+      "description": "引用和结构化结论裁决。"
+    },
+    {
+      "name": "Terminology",
+      "description": "术语缺口与映射状态。"
+    },
+    {
+      "name": "Demo",
+      "description": "方法对照演示。"
+    }
+  ]
+}

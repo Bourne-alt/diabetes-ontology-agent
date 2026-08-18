@@ -433,6 +433,29 @@ def test_manifest_gives_boundaries_with_capabilities(client):
     assert "/adjudicate/scope" in cov["boundaries"]
 
 
+def test_manifest_states_what_is_assessable_before_being_asked(client):
+    """可判定边界必须在能力清单里先给出来，不能让调用方一个个试出来。
+
+    「血酮高不高」如果不先说判不了，正确路径是 concepts → assessment → 空集 →
+    explain，四轮；而空集和「结论没变」长得一模一样。
+    """
+    onto = client.get("/agent/manifest").json()["coverage"]["ontology"]
+    tests = {t["test"] for t in onto["assessableLabTests"]}
+    # 挂了 dmo:hasThreshold 的那 7 个，也正是 /simulate 接受的全部检验项。
+    assert tests == {"A1C", "FPG", "GCT1H", "GLU", "OGTT2H", "RPG", "UACR"}
+
+    a1c = next(t for t in onto["assessableLabTests"] if t["test"] == "A1C")
+    assert a1c["confirmationRequired"] is True, "单次 A1C 落在诊断区间内不等于确诊"
+    assert a1c["units"] and a1c["executable"]
+
+    # 查得到 ≠ 判得了：LabTest 概念远多于可判定项，这个落差必须自己报出来。
+    assert onto["conceptKinds"]["LabTest"] > len(tests)
+    assert "labTermsNotUsable" in onto["terminologyGaps"]
+
+    # 只给边界和量级，不给本体内容 —— 给了 IRI 样例调用方就会照着拼。
+    assert "iri" not in {k.lower() for k in onto}
+
+
 # ───────────────────────── POST /graph/sparql ─────────────────────────
 
 
