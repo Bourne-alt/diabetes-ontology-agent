@@ -50,6 +50,22 @@ uvicorn dmo.api:app --host 127.0.0.1 --port 8100 --reload
 
 交互式文档：`http://localhost:8100/docs`（FastAPI 自带 Swagger UI）。
 
+供其他平台导入的 OpenAPI 3.1 文档：[openapi.json](openapi.json)。路由与查询参数从
+FastAPI 应用现场导出，请求体约束补自本文；API 变更后执行以下命令重新生成：
+
+每个 API 的可执行调试请求见 [api-examples.http](api-examples.http)，默认服务器为
+`http://124.223.18.44:8100`。可用 VS Code REST Client 或 JetBrains HTTP Client
+逐条直接运行；相同请求样例也已嵌入 OpenAPI 的参数和请求体中。
+
+将这些 OpenAPI 工具交给智能体时，建议使用 [AGENT-PROMPT.md](AGENT-PROMPT.md)
+作为系统提示词。该提示词包含工具路由、证据解释、错误处理、硬禁令和回答格式。
+典型测试问题及评测断言见 [AGENT-TEST-QUERIES.md](AGENT-TEST-QUERIES.md) 和
+[agent-test-queries.json](agent-test-queries.json)。
+
+```bash
+PYTHONPATH=src python scripts/export_openapi.py
+```
+
 ---
 
 ## 2. 端点总览
