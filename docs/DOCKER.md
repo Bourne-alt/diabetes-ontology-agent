@@ -31,6 +31,41 @@ docker compose exec api dmo db guard-test
 `/health` 返回体中的 `ok` 应为 `true`。该端点同时检查目标 PostgreSQL 和 GraphDB，
 因此容器已经启动不代表业务依赖一定可用。
 
+## 停止与重新启动
+
+仅停止 API 容器，并保留容器、镜像和推演缓存：
+
+```bash
+docker compose stop api
+```
+
+之后可以直接重新启动：
+
+```bash
+docker compose start api
+```
+
+停止并删除 API 容器及 Compose 网络，但保留镜像和 `sandbox-cache` 缓存卷：
+
+```bash
+docker compose down
+```
+
+再次启动时执行：
+
+```bash
+docker compose up -d
+```
+
+只有明确需要清空可重新生成的推演缓存时才使用 `-v`：
+
+```bash
+docker compose down -v
+```
+
+`down -v` 会删除 `sandbox-cache` volume；不会删除服务器本地的 `src/`、`ontology/`
+或数据库数据，但下次条件推演需要重新从 GraphDB 拉取知识层快照。
+
 ## 地址填写规则
 
 - 数据库在其他云主机：使用 VPC 内网 IP，不要绕公网。

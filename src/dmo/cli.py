@@ -272,6 +272,70 @@ def cmd_explain(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_adjudicate(args: argparse.Namespace) -> int:
+    """裁决引用是不是逐字成立。人能读的一屏 —— 演示时看的就是这个。
+
+    与 POST /adjudicate/citations 走同一条代码路径。
+    """
+    from .adjudicate import CitationError, check_citations
+
+    citations = [
+        {"quote": q, "sha256": h}
+        for q, h in ((c[0], c[1] if len(c) > 1 else None) for c in (args.cite or []))
+    ]
+    try:
+        out = check_citations(config_mod.load(), citations, asserted_by=args.asserted_by)
+    except CitationError as e:
+        raise SystemExit(f"✗ {e}") from None
+
+    if args.json:
+        _dump(out)
+        return 0
+
+    mark = {"verbatim": "✓", "hash-only": "✗", "quote-only": "✗",
+            "not-verbatim": "·", "fabricated": "✗"}
+    print(f"═══ 对着 {out['checkedAgainst']['passages']} 条逐字核验过的出处裁决 ═══")
+    for r in out["results"]:
+        print(f"\n  {mark.get(r['verdict'], '?')} [{r['verdict']}] {r['quote'] or '(只给了哈希)'}")
+        print(f"      {r['reason']}")
+        for m in r.get("matched", []):
+            print(f"      ↳ {m['passageId']}  {m['sourceId']}  «{m['quote']}»")
+        for n in r.get("nearest", []):
+            print(f"      ≈ {n['relation']}  {n['passage']['passageId']}  «{n['passage']['quote']}»")
+    print("\n  " + "  ".join(f"{k}={v}" for k, v in sorted(out["summary"].items())))
+    print(f"\n{out['disclaimer']}")
+    return 0 if out["summary"].get("verbatim", 0) == len(out["results"]) else 1
+
+
+def cmd_rules(args: argparse.Namespace) -> int:
+    """规则内省。默认打印三个落差 —— 那才是这条命令最该被看到的东西。"""
+    from .graph import rules
+
+    cfg = config_mod.load()
+    if args.rule_id:
+        _dump(rules.get(cfg, args.rule_id))
+        return 0
+    out = rules.search(cfg, kind=args.kind, q=args.q, limit=args.limit)
+    if args.json:
+        _dump(out)
+        return 0
+    c = out["counts"]
+    print("═══ 规则覆盖 ═══")
+    print(f"  诊断阈值      {c['threshold']['total']:>3} 条，可执行 {c['threshold']['executable']}")
+    print(f"  管理目标      {c['target']['total']:>3} 条 —— {c['target']['note']}")
+    print(f"  风险规则      {c['risk']['declared']:>3} 条声明，"
+          f"可执行 {c['risk']['executable']}，计入 tier {c['risk']['countsInTier']}")
+    print(f"  ⚠️ {c['risk']['classAssertionCaveat']}")
+    print(f"\n═══ 清单（{out['total']} 条）═══")
+    for r in out["rules"]:
+        flag = "✓" if r.get("countsInTier", r["executable"]) else "·"
+        print(f"  {flag} [{r['kind']:<9}] {r['ruleId'] or r['iri']:<28} "
+              f"{r.get('interval') or r.get('observedCode') or r.get('matchValue') or ''}")
+        if r["notExecutableReason"]:
+            print(f"        ↳ {r['notExecutableReason']}")
+    return 0
+
+
 def cmd_show(args: argparse.Namespace) -> int:
     from .query import hybrid
 
@@ -546,6 +610,25 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--json", action="store_true", help="输出原始返回体")
     p.add_argument("--refresh", action="store_true", help="强制重取知识层快照")
     p.set_defaults(fn=cmd_simulate)
+
+    p = sub.add_parser(
+        "adjudicate",
+        help="裁决引用是不是逐字成立（≈ POST /adjudicate/citations）",
+        description="用本库 31 条逐字核验过的出处，核对别人给出的引用。\n"
+                    "永远不返回「通过 / 合理」，只给五个判定值之一。")
+    p.add_argument("--cite", nargs="+", action="append", metavar=("QUOTE", "SHA256"),
+                   help="引文 [哈希]，可多次给")
+    p.add_argument("--asserted-by", help="谁说的。只记账，绝不参与判定")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(fn=cmd_adjudicate)
+
+    p = sub.add_parser("rules", help="规则内省（≈ GET /graph/rules）")
+    p.add_argument("rule_id", nargs="?", help="给了就打印单条全貌 + 展开的出处")
+    p.add_argument("--kind", choices=("threshold", "target", "risk"))
+    p.add_argument("--q", help="子串筛选")
+    p.add_argument("--limit", type=int, default=200)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(fn=cmd_rules)
 
     d = sub.add_parser("demo", help="对照演示").add_subparsers(dest="action", required=True)
     p = d.add_parser("compare", help="同一术语：字符串匹配 vs 本体")
