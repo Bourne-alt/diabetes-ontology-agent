@@ -35,6 +35,19 @@ def test_health(client):
     assert body["patients"] > 0 and body["graphdbTriples"] > 0
 
 
+def test_root_is_service_entrypoint(client):
+    r = client.get("/")
+    assert r.status_code == 200
+    assert r.json() == {
+        "name": "糖尿病本体 × 患者事实库 融合查询",
+        "version": "0.1.0",
+        "status": "running",
+        "health": "/health",
+        "docs": "/docs",
+        "openapi": "/openapi.json",
+    }
+
+
 def test_list_patients_filters_and_paginates(client):
     r = client.get("/patients", params={"icd10": "E11", "size": 5})
     assert r.status_code == 200
