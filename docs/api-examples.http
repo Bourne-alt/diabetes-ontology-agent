@@ -41,7 +41,7 @@ GET {{baseUrl}}/patients/P90008/safety
 Accept: application/json
 
 ###
-# 08. 查询 P90002 的完整七段返回体
+# 08. 查询 P90002 的全景数据返回体
 GET {{baseUrl}}/patients/P90002
 Accept: application/json
 

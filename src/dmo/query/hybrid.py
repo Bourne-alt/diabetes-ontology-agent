@@ -229,6 +229,9 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
 
     inferred: list[dict[str, Any]] = []
     sources: list[dict[str, str]] = []
+    # 与 sources 严格分开：sources 里每一条都必须能过 /adjudicate/citations，
+    # 这里放的是"能说明来源、但核验不了"的东西。混在一起就没人分得清了。
+    unverifiable: list[dict[str, Any]] = []
     care_chain: list[dict[str, str]] = []
     safety: list[dict[str, str]] = []
 
@@ -255,6 +258,16 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
                 sources.append({"quote": r["quote"], "sha256": r.get("sha256", ""),
                                 "supports": r.get("thresholdId", "")})
         for r in _sparql(cfg, "diagnosis_evidence", [pid]):
+            # verificationStatus 是强结论（Provisional/Confirmed），却一直没带
+            # 任何规则号或支撑链 —— 而 diagnosis_evidence 模板本来就 SELECT 了
+            # ?supportedBy ?supportConclusion，只是构造返回体时被丢掉了。
+            # 和 find_patients 漏 SELECT 是同一类错误：查出来了，没往外放。
+            sup = {
+                "assessment": r.get("supportedBy") or None,
+                "conclusion": r.get("supportConclusion") or None,
+                "ruleId": r.get("supportRuleId") or None,
+                "ruleVersion": r.get("supportRuleVersion") or None,
+            } if r.get("supportedBy") else None
             inferred.append({
                 "type": "dmo:Diagnosis",
                 "diagnosisId": r.get("diagnosisId"),
@@ -263,14 +276,37 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
                 "clinicalStatus": r.get("status"),
                 "factOrigin": r.get("origin"),
                 "externalCode": r.get("code") or None,
+                "supportedBy": sup,
+                # 没有支撑的诊断不是"错的"，多半是上游直接断言的既有诊断。
+                # 但它和"由本仓库规则推出来的诊断"是两回事，不说清楚就会被混读。
+                "provenanceNotice": None if sup else (
+                    "这条诊断没有任何 Assessment 支撑它：它是上游断言的既有诊断，"
+                    "**不是**本仓库规则推出来的结论，因此没有 ruleId、也没有可核验出处。"
+                    f"它的来源看 factOrigin={r.get('origin') or '未知'}。"),
                 "caveat": r.get("caveat") or None,
             })
     if "safety" in want:
         safety = _sparql(cfg, "medication_safety", [pid])
         for s in safety:
-            if s.get("rationale"):
-                sources.append({"quote": s["rationale"], "sha256": "",
-                                "supports": f"contraindication:{s.get('severity')}"})
+            if not s.get("rationale"):
+                continue
+            # rationale 是抽取图里的 dmo:evidenceQuote 裸字符串，**不是**带 contentHash
+            # 的 SourcePassage —— 没人逐字核过（见 graph/passages.py 开篇）。
+            # 以前它被 append 进 sources[] 且 sha256 写死空串，那是**假出处**：
+            # 调用方看到一条 quote 会当逐字引文用，而把同一条喂给
+            # POST /adjudicate/citations，本系统自己判它 fabricated。
+            # /graph/provenance 对同一条数据的处理是放进 brokenLinks
+            # （provenance.py::_trace_flag）。两个端点的诚实度必须一致，这里照做。
+            s["rationaleVerifiable"] = False
+            unverifiable.append({
+                "quote": s["rationale"],
+                "sha256": None,
+                "supports": f"contraindication:{s.get('severity')}",
+                "why": ("抽取产物的 evidenceQuote 裸字符串，不是带 contentHash 的 "
+                        "SourcePassage —— 无法用 POST /adjudicate/citations 逐字核验。"
+                        "可以用来说明这条禁忌信号从哪来，"
+                        "**不得当作逐字引文引用，也不得写成「依据某某指南」**。"),
+            })
 
     risk = None
     if "risk" in want and strat:
@@ -302,13 +338,20 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
             for f in factors if f["quote"]
         ]
 
-    # 去重但保序
-    seen, uniq = set(), []
-    for s in sources:
-        key = (s["quote"], s["supports"])
-        if key not in seen:
-            seen.add(key)
-            uniq.append(s)
+    # 去重但保序。unverifiableEvidence 走同一套 —— 它以前混在 sources 里，
+    # 是搭 sources 的便车去的重，拆出来后必须自己去，否则同一条禁忌
+    # 会按命中的药品数重复若干遍。
+    def _dedup(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        seen, uniq = set(), []
+        for it in items:
+            key = (it["quote"], it["supports"])
+            if key not in seen:
+                seen.add(key)
+                uniq.append(it)
+        return uniq
+
+    uniq = _dedup(sources)
+    unverifiable = _dedup(unverifiable)
 
     return {
         "patient": patient,
@@ -317,6 +360,9 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
         "assertedFacts": asserted,
         "inferredFacts": inferred,
         "sources": uniq,
+        # sources[] 里每一条都能过 /adjudicate/citations；这一段刻意不能。
+        # 空着也要返回 None 而不是省略键 —— 省略键会让调用方以为"没有这类问题"。
+        "unverifiableEvidence": unverifiable or None,
         "unmapped": unmapped,
         "dataQualityNotice": notice,
         "disclaimer": DISCLAIMER,

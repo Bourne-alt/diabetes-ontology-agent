@@ -39,7 +39,8 @@
 | 建议将二甲双胍减量至 500mg qd | 本系统不输出任何用药剂量——schema 层就没有这个字段 |
 | 该患者禁用二甲双胍 | 未命中绝对禁忌。语料对二甲双胍只有乳酸酸中毒的定性表述，**无任何 eGFR 数值切点**，据此判禁忌就是编造出处 |
 | 需慎用（无出处） | `severity = Caution`，原文为 "Before you start taking these drugs, tell your doctor if…"——这是**告知义务**不是禁令 |
-| （引用一句听起来很像指南的话） | 只复制返回体 `sources[].quote`，并给出 `sha256` 前 8 位。禁忌类目前 `sha256` 为空串，须注明"该链路出处尚未建成 SourcePassage" |
+| （引用一句听起来很像指南的话） | 只复制返回体 `sources[].quote`，并给出 `sha256` 前 8 位。`sources[]` 里每条 `sha256` 都非空 |
+| 把 `unverifiableEvidence[].quote` 当引文用 | 那一段**不是出处**（`sha256` 恒为 `null`，喂给 `/adjudicate/citations` 会判 `fabricated`）。只能说"该禁忌信号来自抽取产物，尚未建成 SourcePassage，无法逐字核验"，原样带上它的 `why` |
 
 ### 数据可信度
 

@@ -124,7 +124,7 @@ register(_t(
     "诊断记录 + 是断言的还是推出来的 + 支撑它的评估",
     """
 SELECT ?pid ?diagnosisId ?kind ?status ?verification ?origin ?code ?type ?caveat
-       ?supportedBy ?supportConclusion
+       ?supportedBy ?supportConclusion ?supportRuleId ?supportRuleVersion
 WHERE {
   {{patients}}
   GRAPH ?pg { ?pat dmo:patientId ?pid }
@@ -137,15 +137,20 @@ WHERE {
   OPTIONAL { ?dx dmo:externalCode ?code }
   OPTIONAL { ?dx dmo:diagnosisType ?type }
   OPTIONAL { ?dx dmo:caveat ?caveat }
+  # verificationStatus 是强结论，光给 conclusion 不够 —— 支撑它的 Assessment
+  # 用的是哪条规则、哪个版本，必须跟着一起出来，否则调用方无从核验。
   OPTIONAL { ?supportedBy dmo:supportsDiagnosis ?dx ;
-                          dmo:conclusion ?supportConclusion }
+                          dmo:conclusion ?supportConclusion .
+             OPTIONAL { ?supportedBy dmo:ruleId ?supportRuleId }
+             OPTIONAL { ?supportedBy dmo:ruleVersion ?supportRuleVersion } }
 }
 ORDER BY ?pid ?diagnosisId
 """))
 
 register(_t(
     "medication_safety",
-    "用药安全信号：绝对禁忌 / 相对禁忌 / 需谨慎，全部带原文",
+    "用药安全信号：绝对禁忌 / 相对禁忌 / 需谨慎。⚠️ rationale 是抽取产物的裸字符串，"
+    "**不是可逐字核验的出处**（无 contentHash，/adjudicate/citations 核不了）",
     """
 SELECT ?pid ?severity ?rationale ?medication ?drugClass ?condition ?muStatus
 WHERE {

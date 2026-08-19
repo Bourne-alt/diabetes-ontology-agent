@@ -47,7 +47,7 @@ REQUEST_EXAMPLES: dict[tuple[str, str], dict[str, Any]] = {
         "path": {"pid": "P90008"},
     },
     ("get", "/patients/{pid}"): {
-        "title": "查询 P90002 的完整七段返回体",
+        "title": "查询 P90002 的全景数据返回体",
         "path": {"pid": "P90002"},
     },
     ("post", "/simulate"): {
@@ -441,7 +441,7 @@ SUMMARIES = {
     ("get", "/"): "服务信息与关键入口导航",
     ("get", "/health"): "检查 PostgreSQL 与 GraphDB 连通性",
     ("get", "/patients"): "检索并分页列出患者",
-    ("get", "/patients/{pid}"): "获取患者完整七段返回体",
+    ("get", "/patients/{pid}"): "获取患者全景数据返回体",
     ("get", "/patients/{pid}/care-chain"): "获取患者完整照护链",
     ("get", "/patients/{pid}/assessment"): "获取阈值判定与逐字出处",
     ("get", "/patients/{pid}/risk"): "获取规则式定性风险分层",
@@ -498,7 +498,7 @@ DESCRIPTIONS: dict[tuple[str, str], str] = {
         "【不要用于】在图里扫患者；已知单个编号问病情（直接用患者族对应工具）。"
     ),
     ("get", "/patients/{pid}"): (
-        "患者七段完整融合返回体：患者与事实来源、数据质量提示、断言事实、推断事实、"
+        "患者全景数据返回体：患者与事实来源、数据质量提示、断言事实、推断事实、"
         "逐字出处、未映射术语、风险分层与照护链。\n\n"
         "【用于】用户问「整体情况」「这个患者怎么样」，且不确定需要哪一段。\n"
         "【不要用于】只问时间线（用「获取患者完整照护链」）、只问阈值判定或诊断依据"

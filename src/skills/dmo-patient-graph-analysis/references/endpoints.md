@@ -77,9 +77,11 @@
 
 | 字段 | 读法 |
 |---|---|
-| `verificationStatus` | `Provisional` = 只有一个日期的检验支撑，**不是确诊**；`Confirmed` = 另一日复测已确认 |
+| `verificationStatus` | `Provisional` = 只有一个日期的检验支撑，**不是确诊**；`Confirmed` = 另一日复测已确认。**必须连同 `supportedBy` 一起读**，见下一行 |
+| `supportedBy` | 支撑它的 Assessment：`{assessment, conclusion, ruleId, ruleVersion}`。非 null ⟹ 这条诊断是本仓库规则推出来的，可回溯 |
+| `provenanceNotice` | 只在 `supportedBy=null` 时出现。**含义是这条诊断由上游直接断言，不是本仓库推出来的，没有 ruleId 也没有可核验出处**。⚠️ 上游的 `Confirmed` 就是这一类——它不代表本仓库确认过任何事，转述时不得写成「系统确诊」 |
 | `clinicalStatus` | `Active` / `Resolved` |
-| `factOrigin` | `derived` = 系统推出来的；`asserted` = 上游本来就有 |
+| `factOrigin` | `ehr-legacy` 真实上游 / `demo-cohort` 演示队列 / `derived` 系统推出来的。（旧文档写的 `asserted` 不是实际取值） |
 | `externalCode` | ICD-10，如 `E11`。无分型信息时诊断落到 `DM-Unspecified` |
 
 ### `sources[]`
@@ -87,8 +89,23 @@
 | 字段 | 读法 |
 |---|---|
 | `quote` | 指南**逐字原文**。31 条引文由 `verify_passages.py` 逐字回原文校验 |
-| `sha256` | 原文内容哈希。**已知缺口**：禁忌类的 `sha256` 目前为空串（rationale 还是 `dmo-axioms.ttl` 里的直引字符串，尚未建成 `SourcePassage`）。阈值那条链是完整的 |
-| `supports` | 这条引文支撑谁：阈值 ID / `contraindication:<severity>` / `riskRule:<id>` |
+| `sha256` | 原文内容哈希。**这一段里每条都非空**，每条都能过 `POST /adjudicate/citations`。禁忌类的 rationale 曾经带空串混在这里，现已移入 `unverifiableEvidence[]` |
+| `supports` | 这条引文支撑谁：阈值 ID / `riskRule:<id>` |
+
+### `unverifiableEvidence[]` — 能说明来源、但核验不了的东西
+
+**和 `sources[]` 严格分开**：`sources` 里每条都能逐字核验，这一段刻意不能。
+目前只有禁忌类的 `rationale`——它是抽取图里的 `dmo:evidenceQuote` 裸字符串，
+不是带 `contentHash` 的 `SourcePassage`，没人逐字核过。
+把它当引文喂给 `POST /adjudicate/citations`，本系统会判 **`fabricated`**。
+
+| 字段 | 读法 |
+|---|---|
+| `quote` | ⚠️ **不是逐字引文**。可以说明这条禁忌信号从哪来，**不得写成「依据某某指南」** |
+| `sha256` | 恒为 `null`。这不是缺失，是"本来就没有" |
+| `why` | 为什么核不了。原样转述 |
+
+与 `GET /graph/provenance` 的 `brokenLinks` 是同一件事的两种呈现，口径一致。
 
 ### `unmapped[]`
 
