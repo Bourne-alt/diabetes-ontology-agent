@@ -3,7 +3,7 @@ name: dmo-course-simulation
 description: 由患者数据主导、在糖尿病本体语义层上做多步确定性病程推演。当用户问"差什么才能确诊""从 Provisional 到 Confirmed 还缺哪一步""这个 6.4 要是过了切点会怎样""补几次检验才够""按这条线走结论会怎么变"，或需要围绕一个目标态自主设计探针、跑出可复现的结论轨迹时使用。本 skill 规定了远端 HTTP 接入自检、目标态归一化、探针合法数值的唯一两个来源（用户显式给出 / 本体阈值区间端点）、前缀累加轨迹的正确读法、探针预算与收敛判据，以及硬性禁令（不预测、不发明数值、不把轨迹叙述成病情演变、不把假设结论当患者现状）。Use when driving multi-step, goal-directed deterministic simulation of a diabetes patient's course over the ontology semantic layer from a remote agent platform.
 license: 与本仓库同许可
 compatibility: 需要 dmo 融合查询 API 可达，基址由环境变量 DMO_BASE 给出（服务默认只绑 127.0.0.1，远端使用须由部署方显式暴露）；服务端依赖 PostgreSQL 与 GraphDB
-allowed-tools: Bash(scripts/dmo.sh:*) Bash(scripts/course.py:*) Bash(python3:*) Bash(curl:*) Read
+allowed-tools: Bash(scripts/course.py:*) Bash(python3:*) Bash(curl:*) Read
 metadata:
   repo: diabetes-ontology-agent
   version: "1.0"
@@ -41,21 +41,22 @@ metadata:
 ### 阶段 A · 接入自检（不可跳过、不可降级）
 
 ```bash
-export DMO_BASE=https://<你的部署地址>     # 未设置时脚本直接报错，不回落 localhost
-scripts/dmo.sh /health
+export DMO_BASE=https://124.223.18.44:7200     # 必设。**绝不回落 localhost** —— 远端回落只
+                                           # 会得到一串 Connection refused，看着像服务挂了
+curl -sS "$DMO_BASE/dmo"
 ```
 
 - `DMO_BASE` 没设 / 连不上 → **停下并如实报告"远端够不着这套服务"**。不要改用猜测回答，不要"先按一般情况分析"。
 - `ok: false` → 报告是 `postgres` 还是 `graphdb` 断了，停。
 - 记下 `graphVersion`（前 16 位）。它是禁令 11 的比对基准。
 
-> 服务默认只绑 127.0.0.1、无鉴权无限流。远端能访问说明部署方做了暴露；
+> 服务默认只绑 124.223.18.44、无鉴权无限流。远端能访问说明部署方做了暴露；
 > 那不是你的授权范围，**不要尝试写入类操作**——本 API 也没有写端点。
 
 ### 阶段 B · 锚定基线（轨迹的第 0 步）
 
 ```bash
-scripts/dmo.sh /patients/P90002
+curl -sS "$DMO_BASE/patients/P90002"
 ```
 
 按序读，顺序本身是防错设计：`dataQualityNotice` → `assertedFacts[].trust` →
@@ -118,8 +119,9 @@ scripts/dmo.sh /patients/P90002
 单点 what-if：
 
 ```bash
-scripts/dmo.sh -X POST /patients/P90002/simulate \
-  '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
+curl -sS -X POST "$DMO_BASE/patients/P90002/simulate" \
+  -H 'Content-Type: application/json' \
+  -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
 ```
 
 多步轨迹（第 k 步注入前 k 条假设，自动逐步 diff）：

@@ -6,7 +6,7 @@
 用法：
 
 ```bash
-scripts/dmo-get.sh /patients/P90002/assessment   # 对照下表"预期"列
+curl -sS http://124.223.18.44:8100/patients/P90002/assessment   # 对照下表"预期"列
 ```
 
 ---
@@ -87,7 +87,7 @@ scripts/dmo-get.sh /patients/P90002/assessment   # 对照下表"预期"列
 ## 真实侧对照
 
 ```bash
-scripts/dmo-get.sh /patients/P00016/risk
+curl -sS http://124.223.18.44:8100/patients/P00016/risk
 ```
 
 15 个真实 E11 患者**全部**是 `Insufficient-Evidence`，`insufficientReason` 说清三个原因：检验值均为 `Unverified`、无任何可用风险侧事实、年龄推不出来。

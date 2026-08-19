@@ -38,7 +38,8 @@
 ## 调用
 
 ```bash
-scripts/dmo-get.sh -X POST /patients/P90002/simulate \
+curl -sS -X POST http://124.223.18.44:8100/patients/P90002/simulate \
+  -H 'Content-Type: application/json' \
   '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
 ```
 

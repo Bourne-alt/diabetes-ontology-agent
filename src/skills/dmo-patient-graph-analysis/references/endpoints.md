@@ -1,6 +1,6 @@
 # 端点与字段语义
 
-基址默认 `http://localhost:8100`（仅绑 127.0.0.1，无鉴权、无限流）。
+基址默认 `http://124.223.18.44:8100`（仅绑 127.0.0.1，无鉴权、无限流）。
 完整叙述见 [docs/API.md](../../../../docs/API.md)；本文只保留**做判断时必须知道的字段含义**。
 
 ---
@@ -38,7 +38,11 @@
 | `fact_origin` | **唯一可信的真假判据**。`ehr-legacy` 真实上游 / `derived` 投影推出 / `demo-cohort` 演示队列。ID 前缀故意做成不可区分 |
 | `birth_year` | `null` = 拒绝用错数据（上游 400 人中 329 人生日在未来，最晚 2063-09-14），**不是缺失** |
 | `source_table` / `source_pk` | 回查原始行的坐标 |
-| `tier` / `insufficient_reason` | LEFT JOIN 自 `pred_risk_stratification`，可能为 null（尚未分层） |
+| `riskStratification.tier` | 档位。**必须连同同一对象里的 `ruleId` / `ruleVersion` 一起转述**，单独说档位就是裸断言 |
+| `riskStratification.notComputedReason` | 只在 `tier=null` 时出现。含义是**分层规则没跑过**（系统状态），与 `Insufficient-Evidence`（跑了、判定证据不足）方向相反，不许混说 |
+| `riskStratification.evidenceEndpoint` | 只在 tier 为 High/Moderate/Low 时出现。逐字引文不在本端点，走这一跳取（`/patients/{pid}/risk` 的 `contributingFactors[]`） |
+| `riskStratification.evidenceNotice` | 只在 `tier=Insufficient-Evidence` 时出现。**该档位没有逐字引文是正确的**；`insufficientReason` 是自由文本说明，不是可核验出处，不得转述成「依据某某指南」 |
+| `provenanceNotice` | 顶层字段。说明本端点为什么不带引文、引文在哪 |
 
 ---
 

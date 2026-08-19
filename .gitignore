@@ -12,4 +12,4 @@ ontology/dist/extract/
 ontology/dist/patients/
 ontology/rules/
 ontology/shapes/
-src/skills/dmo-course-simulation.zip
+src/skills/*.zip

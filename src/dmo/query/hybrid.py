@@ -71,7 +71,7 @@ def find_patients(
             f"""
             SELECT p.patientid, p.sex, p.birth_year, p.fact_origin, p.demo_scenario,
                    p.source_table, p.source_pk,
-                   r.tier, r.insufficient_reason
+                   r.tier, r.insufficient_reason, r.rule_id, r.rule_version, r.caveat
             FROM diabetes.core_patient p
             LEFT JOIN diabetes.pred_risk_stratification r ON r.patientid = p.patientid
             WHERE {clause}
@@ -80,7 +80,68 @@ def find_patients(
             """,
             (*params, size, offset),
         )
-    return {"total": total, "page": page, "size": size, "patients": rows}
+    return {
+        "total": total, "page": page, "size": size,
+        "patients": [_row_out(r) for r in rows],
+        # 列表端点**不**返回逐字引文。说清楚它在哪，比让调用方以为「这里没有出处」好。
+        "provenanceNotice": (
+            "本端点返回的 tier 带 ruleId@ruleVersion，但不含逐字引文。"
+            "tier 为 High/Moderate/Low 时，支撑它的 quote + sha256 在 "
+            "GET /patients/{pid}/risk 的 contributingFactors[] 里；"
+            "tier 为 Insufficient-Evidence 时**本来就没有引文**，见该行的 "
+            "evidenceNotice。判定规则原文一律见 GET /graph/rules/{ruleId}。"),
+    }
+
+
+def _row_out(r: dict[str, Any]) -> dict[str, Any]:
+    """把患者事实与风险档位分开摆。
+
+    档位是**语义规则层的结论**，只是被 007_pred.sql 物化到了 SQL 侧。它和
+    rule_id / rule_version / caveat 同出一张表，之前这个 SELECT 只取了 tier 和
+    insufficient_reason —— 调用方拿到一个无从核验的档位，转述出去就是裸断言。
+    本仓库「结论必须与 ruleId@ruleVersion 同时出现」这条要求，在列表端点上同样成立。
+    """
+    out = {k: r[k] for k in ("patientid", "sex", "birth_year", "fact_origin",
+                             "demo_scenario", "source_table", "source_pk")}
+    out["riskStratification"] = _row_risk(r["patientid"], r)
+    return out
+
+
+def _row_risk(pid: str, r: dict[str, Any]) -> dict[str, Any]:
+    # LEFT JOIN 落空 ≠ Insufficient-Evidence。前者是分层规则**没跑过**（系统状态），
+    # 后者是规则跑了、判定为证据不足（业务结论）。都压成 tier=null 会让调用方把
+    # 「没算」读成「算了但判不了」—— 方向正好相反，而且不会有任何报错。
+    if not r.get("tier"):
+        return {
+            "tier": None,
+            "notComputedReason": (
+                f"{pid} 不在 pred_risk_stratification 里：分层规则没有为它跑过"
+                "（`python3 -m dmo predict`）。这是**系统状态**，"
+                "不是判定结果，更不等于 Insufficient-Evidence。"),
+        }
+    out = {
+        "tier": r["tier"],
+        "ruleId": r["rule_id"],
+        "ruleVersion": r["rule_version"],
+        "insufficientReason": r["insufficient_reason"],
+        "note": r["caveat"],
+    }
+    if r["tier"] == "Insufficient-Evidence":
+        # 判定为证据不足 ⟹ 没有任何风险因子命中 ⟹ contributingFactors 必然是空的。
+        # 这时给一个 evidenceEndpoint 是空头支票：调用方跳过去只会拿到空数组，
+        # 然后把 insufficientReason 那段自由文本当成"依据"复述。它不是出处 ——
+        # 它是一句描述系统为什么判不了的话，没有 quote、没有 sha256、核不了。
+        out["evidenceNotice"] = (
+            "本档位没有逐字引文，且这是**正确**的：Insufficient-Evidence 意味着"
+            "没有任何风险因子命中，自然没有可引用的指南原文。"
+            "`insufficientReason` 是规则给出的自由文本说明，**不是可核验出处**，"
+            "转述时不得写成「依据某某指南」。判定规则本身的原文见 "
+            f"GET /graph/rules/{r['rule_id']}。")
+    else:
+        # 列表端点刻意不展开 contributingFactors —— 每条都带 quote + sha256，
+        # 一页 20 人会把出处淹成噪声。要逐字原文就走这一跳。
+        out["evidenceEndpoint"] = f"GET /patients/{pid}/risk"
+    return out
 
 
 def _sparql(cfg: Config, template: str, pids: list[str]) -> list[dict[str, str]]:

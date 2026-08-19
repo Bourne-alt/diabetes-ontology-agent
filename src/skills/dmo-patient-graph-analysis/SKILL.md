@@ -3,7 +3,7 @@ name: dmo-patient-graph-analysis
 description: 用糖尿病本体图知识库（dmo 融合查询 API）深度分析患者病情，并做确定性病程推演。当用户问某个患者的诊断依据、阈值判定、风险分层、用药安全、"凭什么这么说"、"为什么查不到某个检验/术语"，或问"如果补一次检验结论会怎样""差什么才能确诊"这类 what-if，或需要跨 SQL 事实层与 SPARQL 语义层做证据溯源时使用。本 skill 规定了端点路由决策表、证据链读法、推演与预测的分界线，以及硬性禁令（不输出剂量、不输出概率、不猜术语、不把 Provisional 当确诊、不把假设结论当实际情况）。Use when analyzing a diabetes patient's condition, running what-if simulations over their care chain, tracing a clinical conclusion back to guideline provenance, or explaining why a term is unmappable in this repository's ontology + patient fact graph.
 license: 与本仓库同许可
 compatibility: 需要本仓库的 dmo 服务在 127.0.0.1:8100 可达（uv run dmo serve），或可用 uv run dmo CLI；依赖 PostgreSQL 与 GraphDB 已就绪（端点见 .env 的 GRAPHDB_SPARQL_ENDPOINT，仓库须为装了本体的那个）
-allowed-tools: Bash(scripts/dmo-get.sh:*) Bash(curl:*) Bash(uv:*) Read
+allowed-tools: Bash(curl:*) Bash(uv:*) Read
 metadata:
   repo: diabetes-ontology-agent
   version: "1.1"
@@ -33,12 +33,33 @@ metadata:
 10. **推演结论必须带「若…则…」。** `/simulate` 的 `after` 是**假设成立时**的结论，不是该患者的实际情况。脱掉条件句转述（"该患者已确诊"）就是拿假设冒充事实。同理，下一轮回答"他现在什么情况"时重新查 `GET /patients/{pid}`，不引用上一轮推演的 `after`。
 11. **不自己发明假设值。** 用户说"再高一点会怎样"而没给数字，**问他要**。可以从规则前件读出**区间**（"需要一条落在 `[6.5,+∞) percent` 的 A1C"），但不能编一个具体数值——编了就从推演退化成预测。
 
+## 调用约定
+
+服务基址 `http://localhost:8100`（`uv run dmo serve --port 8100` 启动，只绑 127.0.0.1）。
+**本 skill 不带封装脚本** —— 下面每条都是可直接粘贴的完整 curl，因此这四件事由你自己负责：
+
+1. **连不上 ≠ 没有数据。** curl 报 `Connection refused` ⟹ 服务没起，先启动它，或全程
+   改用 `uv run dmo …` CLI（**与 API 走同一份 `query/hybrid.py`，答案必然一致**）。
+   **绝不因为够不着服务就改用常识作答。**
+2. **必须看 HTTP 状态码**，别把 `{"detail":"…"}` 当数据读。排查时加
+   `-w '\n-- HTTP %{http_code} --\n'`。
+3. **POST 必须带 `-H 'Content-Type: application/json'`**，body 形状见各阶段示例。
+4. 状态码分支：
+
+   | 码 | 含义与处置 |
+   |---|---|
+   | **400** | 多数是**有意的业务拒绝**，`detail` 里的理由**就是答案**，照抄给用户。推演被拒的两类常见原因：术语没挂阈值（不猜术语）、单位缺失或无已核实换算系数 —— **不要换个名字或换个单位重试**。模板拿到空患者数组也会 400 |
+   | **404** | 患者不存在，或模板名不在白名单。`GET /query/templates` 看可用模板，**不要猜另一个 ID** |
+   | **422** | 参数类型不合法（FastAPI 校验） |
+   | **503** | GraphDB 依赖不可用 ⟹ **停止图侧结论** |
+   | **500** | PG / GraphDB 可能断连。先 `curl -sS http://localhost:8100/health` |
+
 ## 四阶段流程
 
 ### 阶段 0 · 连通性（不可跳过）
 
 ```bash
-scripts/dmo-get.sh /health
+curl -sS http://localhost:8100/health
 ```
 
 - `ok: false` → **停下**，报告是 `postgres` 还是 `graphdb` 断了，不要继续猜。
@@ -48,7 +69,7 @@ scripts/dmo-get.sh /health
 ### 阶段 1 · 定位患者，并先判真假
 
 ```bash
-scripts/dmo-get.sh '/patients?icd10=E11&size=20'
+curl -sS 'http://localhost:8100/patients?icd10=E11&size=20'
 ```
 
 拿到人之后，**在写任何一句结论之前**先落两件事：
@@ -60,7 +81,7 @@ scripts/dmo-get.sh '/patients?icd10=E11&size=20'
 ### 阶段 2 · 一次性取骨架
 
 ```bash
-scripts/dmo-get.sh /patients/P90002
+curl -sS http://localhost:8100/patients/P90002
 ```
 
 七段返回体，**按这个顺序读，顺序本身就是防错设计**：
@@ -105,7 +126,8 @@ scripts/dmo-get.sh /patients/P90002
 跨患者对比、或需要单一维度的行级数据时用模板：
 
 ```bash
-scripts/dmo-get.sh -X POST /query/care_chain '["P90002","P90003"]'
+curl -sS -X POST http://localhost:8100/query/care_chain \
+  -H 'Content-Type: application/json' -d '["P90002","P90003"]'
 ```
 
 可用模板：`care_chain` `assessment_evidence` `diagnosis_evidence` `medication_safety` `risk_stratification` `latest_lab_result`。**空患者数组返回 400**——这是刻意的，空结果和"没给患者"长得一模一样。
@@ -115,8 +137,9 @@ scripts/dmo-get.sh -X POST /query/care_chain '["P90002","P90003"]'
 ### 阶段 3.5 · 确定性病程推演（问到 what-if 才走）
 
 ```bash
-scripts/dmo-get.sh -X POST /patients/P90002/simulate \
-  '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
+curl -sS -X POST http://localhost:8100/patients/P90002/simulate \
+  -H 'Content-Type: application/json' \
+  -d '{"assume":[{"term":"A1C","value":7.9,"unit":"percent","date":"2026-02-20"}]}'
 ```
 
 只能推挂了阈值的 7 项：`A1C FPG GCT1H GLU OGTT2H RPG UACR`。
