@@ -81,12 +81,27 @@ Content-Type: application/json
 }
 
 ###
-# 11. 列出查询模板白名单
+# 11. 查询 E11 合并 DKD 患者命中的指南推荐
+GET {{baseUrl}}/patients/P90023/recommendations
+Accept: application/json
+
+###
+# 12. 查询监测齐全患者的下次检验到期日
+GET {{baseUrl}}/patients/P90024/monitoring-due
+Accept: application/json
+
+###
+# 13. 对照 A1C 复查频率的四档指南说法
+GET {{baseUrl}}/guidelines/divergence?term=A1C&limit=5
+Accept: application/json
+
+###
+# 14. 列出查询模板白名单
 GET {{baseUrl}}/query/templates
 Accept: application/json
 
 ###
-# 12. 运行照护链模板
+# 15. 运行照护链模板
 POST {{baseUrl}}/query/care_chain
 Accept: application/json
 Content-Type: application/json
@@ -96,47 +111,47 @@ Content-Type: application/json
 ]
 
 ###
-# 13. 获取智能体能力清单
+# 16. 获取智能体能力清单
 GET {{baseUrl}}/agent/manifest
 Accept: application/json
 
 ###
-# 14. 把中文表面形式解析为准确 IRI
+# 17. 把中文表面形式解析为准确 IRI
 GET {{baseUrl}}/graph/concepts?q=%E7%B3%96%E5%8C%96%E8%A1%80%E7%BA%A2%E8%9B%8B%E7%99%BD&kind=LabTest&limit=5
 Accept: application/json
 
 ###
-# 15. 查看 A1C 糖尿病阈值节点
+# 18. 查看 A1C 糖尿病阈值节点
 GET {{baseUrl}}/graph/node?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fthreshold%2FA1C-DIABETES
 Accept: application/json
 
 ###
-# 16. 展开阈值指向的逐字出处
+# 19. 展开阈值指向的逐字出处
 GET {{baseUrl}}/graph/neighbors?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fthreshold%2FA1C-DIABETES&predicate=https%3A%2F%2Fexample.org%2Fdmo%23thresholdCitesPassage&direction=out&limit=10
 Accept: application/json
 
 ###
-# 17. 查看 CKD 的上位概念与推理边
+# 20. 查看 CKD 的上位概念与推理边
 GET {{baseUrl}}/graph/taxonomy?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FCKD&direction=up&depth=2
 Accept: application/json
 
 ###
-# 18. 查找检验结果到指南出处的支撑路径
+# 21. 查找检验结果到指南出处的支撑路径
 GET {{baseUrl}}/graph/path?from=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FlabResult%2FL90002-A1C&to=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FsourcePassage%2FA1C-DIABETES-Q&maxHops=4
 Accept: application/json
 
 ###
-# 19. 获取 SQL 列到 RDF 谓词的桥接表
+# 22. 获取 SQL 列到 RDF 谓词的桥接表
 GET {{baseUrl}}/graph/schema?section=bridge
 Accept: application/json
 
 ###
-# 20. 追踪 P90002 的 A1C 评估至指南原文和 SQL 行
+# 23. 追踪 P90002 的 A1C 评估至指南原文和 SQL 行
 GET {{baseUrl}}/graph/provenance?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fassessment%2F72d5c0144bdb81cd7d6bc88dd20f121742f9f9bd
 Accept: application/json
 
 ###
-# 21. 执行通过 guard 的只读阈值查询
+# 24. 执行通过 guard 的只读阈值查询
 POST {{baseUrl}}/graph/sparql
 Accept: application/json
 Content-Type: application/json
@@ -146,22 +161,22 @@ Content-Type: application/json
 }
 
 ###
-# 22. 查询 A1C 糖尿病阈值引用的出处
+# 25. 查询 A1C 糖尿病阈值引用的出处
 GET {{baseUrl}}/graph/passages?citedBy=A1C-DIABETES-NONPREG&limit=10
 Accept: application/json
 
 ###
-# 23. 列出不参与 tier 计分的风险规则
+# 26. 列出不参与 tier 计分的风险规则
 GET {{baseUrl}}/graph/rules?kind=risk&countsInTier=False&limit=20
 Accept: application/json
 
 ###
-# 24. 查看 A1C 糖尿病阈值规则及出处
+# 27. 查看 A1C 糖尿病阈值规则及出处
 GET {{baseUrl}}/graph/rules/A1C-DIABETES-NONPREG
 Accept: application/json
 
 ###
-# 25. 裁决单次 A1C 是否足以确诊
+# 28. 裁决单次 A1C 是否足以确诊
 POST {{baseUrl}}/adjudicate/claim
 Accept: application/json
 Content-Type: application/json
@@ -179,12 +194,12 @@ Content-Type: application/json
 }
 
 ###
-# 26. 查询系统可裁决范围
+# 29. 查询系统可裁决范围
 GET {{baseUrl}}/adjudicate/scope
 Accept: application/json
 
 ###
-# 27. 核对真实 A1C 逐字引文及哈希
+# 30. 核对真实 A1C 逐字引文及哈希
 POST {{baseUrl}}/adjudicate/citations
 Accept: application/json
 Content-Type: application/json
@@ -200,16 +215,16 @@ Content-Type: application/json
 }
 
 ###
-# 28. 列出所有未映射与不可用术语
+# 31. 列出所有未映射与不可用术语
 GET {{baseUrl}}/terms/unmapped
 Accept: application/json
 
 ###
-# 29. 解释糖化血红蛋白为何不可用于上游判定
+# 32. 解释糖化血红蛋白为何不可用于上游判定
 GET {{baseUrl}}/terms/explain?term=%E7%B3%96%E5%8C%96%E8%A1%80%E7%BA%A2%E8%9B%8B%E7%99%BD
 Accept: application/json
 
 ###
-# 30. 比较尿蛋白的字符串匹配与本体结果
+# 33. 比较尿蛋白的字符串匹配与本体结果
 GET {{baseUrl}}/demo/compare?term=%E5%B0%BF%E8%9B%8B%E7%99%BD
 Accept: application/json

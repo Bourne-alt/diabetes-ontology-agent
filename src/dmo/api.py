@@ -132,6 +132,29 @@ def risk(pid: str) -> dict[str, Any]:
     return _bundle(pid, ("risk",))
 
 
+@app.get("/patients/{pid}/recommendations")
+def recommendations(pid: str) -> dict[str, Any]:
+    """患者诊断命中的指南推荐条目，按 recommendationType 分组。
+
+    ⚠️ **不排序、不取 top-N** —— 语料的分级体系互不可比。命中即列出。
+    """
+    from .query import guidance
+
+    return guidance.recommendations(_cfg(), pid)
+
+
+@app.get("/patients/{pid}/monitoring-due")
+def monitoring_due(pid: str) -> dict[str, Any]:
+    """按指南频率推出的下次检验到期日 + 当下逾期天数。
+
+    ⚠️ status 三态含义不同：scheduled / never-recorded（从没做过，不是逾期）/
+    frequency-unusable（语料没写频率）。同一检验的多档频率并列呈现，不取最严。
+    """
+    from .query import guidance
+
+    return guidance.monitoring_due(_cfg(), pid)
+
+
 @app.get("/patients/{pid}/safety")
 def safety(pid: str) -> dict[str, Any]:
     return _bundle(pid, ("safety",))
@@ -432,6 +455,27 @@ def graph_rule(rule_id: str) -> dict[str, Any]:
         return rules.get(_cfg(), rule_id)
     except KeyError:
         raise HTTPException(404, f"没有 id 为 {rule_id} 的规则。用 GET /graph/rules 看全量清单。") from None
+
+
+@app.get("/guidelines/divergence")
+def guidelines_divergence(
+    term: str = Query(..., description="术语，如 A1C / UACR / eGFR / metformin"),
+    limit: int = Query(40, ge=1, le=200),
+) -> dict[str, Any]:
+    """同一件事，50 部指南分别怎么说。
+
+    **只呈现分歧，不裁决分歧。** 各来源分级体系互不可比（VA-DoD / KDIGO / ADA /
+    GRADE / NICE），归一化打分排序等于凭空造答案。频率不同多半是人群不同 ——
+    每条都带 populationScope 原文，由读的人判断适用性。
+
+        curl 'http://localhost:8100/guidelines/divergence?term=A1C'
+    """
+    from .graph import divergence
+
+    try:
+        return divergence.explain(_cfg(), term, limit=limit)
+    except ValueError as e:
+        raise HTTPException(400, str(e)) from None
 
 
 @app.post("/adjudicate/claim")

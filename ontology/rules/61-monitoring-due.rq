@@ -1,0 +1,103 @@
+# 61 · RecommendationMatch × MonitoringSchedule × 患者检验史 → MonitoringDue
+#
+# 回答"这个患者下一次该做什么检验、什么时候到期"。
+# 依赖 60 的产出（规则逐条物化，数字前缀保证 60 先跑）。
+#
+# 路径：
+#   患者 → hasRecommendationMatch → Recommendation
+#        → definesSchedule → MonitoringSchedule (frequencyMonths + schedulesTest)
+#        → alignedTo → 规范 LabTest
+#   患者 → hasEncounter → producesLabResult → LabResult (measuredByTest = 同一 LabTest)
+#        → MAX(collectedAt) = 末次采样
+#
+# ⚠️ **只产出到期日，不产出"逾期几天"**。这不是偷懒，是正确性问题：
+#   逾期天数是 NOW() 的函数，物化进 urn:dmo:inferred 的那一刻就开始过期，
+#   第二天再查就是错的，而且错得看不出来。
+#   到期日 = 末次采样 + 指南频率，是**从指南确定性推出的事实**，可以物化、可以溯源。
+#   "今天逾期了多少天"是展示层的算术，归 API 层做。
+#
+# ⚠️ 用 xsd:yearMonthDuration 加月份，不是 ×30 天。
+#   "12 个月后"在语义上是同月同日，不是 365 天后。差几天不影响临床判断，
+#   但一个说"每年一次"的规则算出 2027-04-16 而不是 2027-04-21，看的人会怀疑整套东西。
+#
+# ⚠️ frequencyMonths = 0 的有 **77 条**（181 条里占 43%，是最大的一档）。
+#   这不是"每 0 个月一次"，是抽取时频率没抽出来的默认填充。
+#   照样产出记录，标 dueStatus="frequency-unusable" —— 让缺口可见。
+#   跳过它们的话，"UACR 该多久查一次"会静默地没有答案，而不是明确地说"语料没写"。
+#   这 77 条是下一轮语料抽取的需求单。
+#
+# ⚠️ 从没做过这项检验的，标 dueStatus="never-recorded"，**不算作逾期**。
+#   "没做过"和"做过但过期"在临床上是两件事，混成一个红色告警就没人看了。
+#
+# Unverified 的检验照样计入末次日期 —— 这里只用**采样时间**，不碰结果值。
+#   值不可信不代表这次抽血没发生。这条规则因此是全仓库唯一一条对上游
+#   3200 条随机值仍然成立的规则。
+
+PREFIX dmo: <https://example.org/dmo#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?due a dmo:MonitoringDue ;
+      dmo:dueForTest            ?test ;
+      dmo:dueFromSchedule       ?sched ;
+      dmo:dueViaRecommendation  ?rec ;
+      dmo:dueFrequencyMonths    ?freq ;
+      dmo:dueLastCollectedAt    ?last ;
+      dmo:dueNextDueAt          ?nextDue ;
+      dmo:dueStatus             ?status .
+  ?pat dmo:hasMonitoringDue ?due .
+
+  # 规则级信息挂单例，不在每个实例上重复一遍 —— 同 60 号。
+  <https://example.org/dmo/id/rule/MONITORING-DUE>
+      a dmo:DerivationRule ;
+      dmo:ruleId      "MONITORING-DUE" ;
+      dmo:ruleVersion "1.0.0" ;
+      dmo:caveat      "到期日 = 末次采样 + 指南规定频率。不含逾期天数（那是查询时刻的算术，物化即过期）。同一检验可能有多条不同频率的到期日，分属不同指南/人群，规则不做取舍。" .
+}
+WHERE {
+  GRAPH ?pg { ?pat a dmo:Patient }
+  FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+
+  ?pat dmo:hasRecommendationMatch ?m .
+  ?m dmo:matchesRecommendation ?rec .
+  ?rec dmo:definesSchedule ?sched .
+  ?sched dmo:frequencyMonths ?freq ;
+         dmo:schedulesTest ?extTest .
+
+  # 抽取侧检验名 → 规范 LabTest。没对齐上的检验在这里自然消失 ——
+  # 那是 10-align 的覆盖度问题，不在这条规则里兜底。
+  ?extTest dmo:alignedTo ?test .
+
+  # 该患者这项检验的末次采样。没有就是没有，不补默认值。
+  OPTIONAL {
+    SELECT ?pat ?test (MAX(?c) AS ?last) WHERE {
+      GRAPH ?pg2 {
+        ?pat dmo:hasEncounter ?enc .
+        ?enc dmo:producesLabResult ?lab .
+        ?lab dmo:measuredByTest ?test ; dmo:collectedAt ?c .
+      }
+      FILTER(STRSTARTS(STR(?pg2), "urn:dmo:patient:"))
+    }
+    GROUP BY ?pat ?test
+  }
+
+  # 三种归宿，互斥。CONSTRUCT 里未绑定的变量自动省略对应三元组。
+  {
+    FILTER(?freq > 0 && BOUND(?last))
+    BIND(?last + STRDT(CONCAT("P", STR(?freq), "M"), xsd:yearMonthDuration) AS ?nextDue)
+    BIND("scheduled" AS ?status)
+  }
+  UNION
+  {
+    FILTER(?freq > 0 && !BOUND(?last))
+    BIND("never-recorded" AS ?status)
+  }
+  UNION
+  {
+    FILTER(?freq <= 0)
+    BIND("frequency-unusable" AS ?status)
+  }
+
+  BIND(SHA1(CONCAT(STR(?pat), "|", STR(?sched), "|", STR(?test), "|1.0.0")) AS ?did)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/monitoringDue/", ?did)) AS ?due)
+}

@@ -19,10 +19,40 @@ from urllib.parse import urlsplit, urlunsplit
 ROOT = Path(__file__).resolve().parents[2]
 ENV_FILE = ROOT / ".env"
 
+
+def _bootstrap_env() -> dict[str, str]:
+    """schema 常量在模块加载时就要定，那时 _parse_env_file 还没定义 —— 极简重读一遍。
+
+    只读 KEY=VALUE，够用。真正的解析仍以 _parse_env_file 为准。
+    """
+    out: dict[str, str] = {}
+    if not ENV_FILE.exists():
+        return out
+    for raw in ENV_FILE.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, _, v = line.partition("=")
+        v = v.strip()
+        if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'":
+            v = v[1:-1]
+        out[k.strip()] = v
+    return out
+
 # 上游患者库里我们唯一关心的 schema。
-UPSTREAM_SCHEMA = "patient_analysis"
+# ⚠️ 允许被 .env 的 PATIENT_INFO_ORIGINAL_SCHEMA 覆盖，但**在模块加载时就定死**：
+#   engine.py 的只读守卫按这个值校验，运行中途变更等于守卫失效。
+UPSTREAM_SCHEMA = (
+    os.environ.get("PATIENT_INFO_ORIGINAL_SCHEMA")
+    or _bootstrap_env().get("PATIENT_INFO_ORIGINAL_SCHEMA")
+    or "patient_analysis"
+)
 # 我们独占、且是唯一允许写入的 schema。engine.py 的守卫按这个值校验。
-ONTO_SCHEMA = "diabetes"
+ONTO_SCHEMA = (
+    os.environ.get("PATIENT_INFO_ONTOLOGY_SCHEMA")
+    or _bootstrap_env().get("PATIENT_INFO_ONTOLOGY_SCHEMA")
+    or "diabetes"
+)
 
 
 def _parse_env_file(path: Path) -> dict[str, str]:
@@ -100,13 +130,21 @@ class Config:
 def load(env_file: Path | None = None) -> Config:
     env = _parse_env_file(env_file or ENV_FILE)
 
-    upstream = _get(env, "DMO_UPSTREAM_DSN", "AGENT_PATIENT_PG_DSN", "PG_DSN")
+    # 名字按「新 → 旧」排。PATIENT_INFO_* 是现行命名，语义比 DMO_UPSTREAM_DSN 清楚
+    # （ORIGINAL=上游原始病历库，ONTOLOGY=我们独占的本体库）；旧名保留是因为
+    # 部署环境里可能还有没改的，删掉就是让别人的环境静默变砖。
+    upstream = _get(
+        env,
+        "PATIENT_INFO_ORIGINAL_PG_DSN",
+        "DMO_UPSTREAM_DSN", "AGENT_PATIENT_PG_DSN", "PG_DSN",
+    )
     if not upstream:
         raise SystemExit(
-            "缺少上游患者库 DSN。请在 .env 里设 PG_DSN（或 DMO_UPSTREAM_DSN）。"
+            "缺少上游患者库 DSN。请在 .env 里设 PATIENT_INFO_ORIGINAL_PG_DSN"
+            "（旧名 DMO_UPSTREAM_DSN / PG_DSN 也认）。"
         )
 
-    onto = _get(env, "DMO_ONTO_DSN")
+    onto = _get(env, "PATIENT_INFO_ONTOLOGY_PG_DSN", "DMO_ONTO_DSN")
     if not onto:
         # 兜底：与上游同实例、库名换成 onto_db。
         onto = _swap_database(upstream, "onto_db")

@@ -223,6 +223,64 @@ ORDER BY ?pid ?testCode
 """))
 
 
+register(_t(
+    "recommendation_match",
+    "患者诊断命中的指南推荐条目 + 命中路径 + 该推荐的原文出处。"
+    "⚠️ **不排序**：语料的 gradingSystem 跨五套互不可比的体系（VA-DoD / KDIGO / ADA / "
+    "GRADE / NICE），且 2615 条里 555 条未标注。按 recommendationType 分组由人取舍",
+    """
+SELECT ?pid ?via ?verification ?recType ?strength ?grade ?gradingSystem
+       ?scope ?statement ?quote ?src WHERE {
+  {{patients}}
+  GRAPH ?pg { ?pat dmo:patientId ?pid }
+  """ + PG_GUARD + """
+  ?pat dmo:hasRecommendationMatch ?m .
+  ?m dmo:matchesRecommendation ?rec ;
+     dmo:matchVia ?via ;
+     dmo:matchVerification ?verification .
+  OPTIONAL { ?rec dmo:recommendationType     ?recType }
+  OPTIONAL { ?rec dmo:recommendationStrength ?strength }
+  OPTIONAL { ?rec dmo:nativeEvidenceGrade    ?grade }
+  OPTIONAL { ?rec dmo:gradingSystem          ?gradingSystem }
+  OPTIONAL { ?rec dmo:populationScope        ?scope }
+  OPTIONAL { ?rec dmo:statement              ?statement }
+  OPTIONAL { ?rec dmo:evidenceQuote          ?quote }
+  OPTIONAL { ?rec <http://www.w3.org/ns/prov#wasDerivedFrom> ?src }
+}
+ORDER BY ?pid ?recType
+"""))
+
+
+register(_t(
+    "monitoring_due",
+    "按指南频率推出的下次检验到期日。"
+    "⚠️ 三种 dueStatus 含义不同，**不要合并成一个告警**："
+    "scheduled=有末次记录、算得出到期日；never-recorded=从没做过（不是逾期）；"
+    "frequency-unusable=语料没写频率（181 条监测计划里有 77 条如此）。"
+    "逾期天数不在图里，由调用方拿 dueNextDueAt 与当前时刻相减 —— "
+    "那是查询时刻的算术，物化进图第二天就是错的",
+    """
+SELECT ?pid ?testLabel ?freqMonths ?dueStatus ?lastCollectedAt ?nextDueAt
+       ?recLabel ?scope ?quote WHERE {
+  {{patients}}
+  GRAPH ?pg { ?pat dmo:patientId ?pid }
+  """ + PG_GUARD + """
+  ?pat dmo:hasMonitoringDue ?d .
+  ?d dmo:dueForTest ?test ;
+     dmo:dueFrequencyMonths ?freqMonths ;
+     dmo:dueStatus ?dueStatus ;
+     dmo:dueViaRecommendation ?rec .
+  OPTIONAL { ?d dmo:dueLastCollectedAt ?lastCollectedAt }
+  OPTIONAL { ?d dmo:dueNextDueAt       ?nextDueAt }
+  OPTIONAL { ?test rdfs:label ?testLabel }
+  OPTIONAL { ?rec  rdfs:label ?recLabel }
+  OPTIONAL { ?rec  dmo:populationScope ?scope }
+  OPTIONAL { ?rec  dmo:evidenceQuote   ?quote }
+}
+ORDER BY ?pid ?testLabel ?freqMonths
+"""))
+
+
 def render(name: str, patient_iris: list[str]) -> str:
     if name not in TEMPLATES:
         raise KeyError(

@@ -1,0 +1,80 @@
+# 60 · 患者诊断 × Recommendation → RecommendationMatch
+#
+# 语料里 2615 条 Recommendation 此前**一条都到不了患者**。它们不是孤岛 ——
+# 抽取时就带上了结构化挂载点：
+#     dmo:appliesToType       230 条 → 糖尿病分型
+#     dmo:targetsComplication 111 条 → 并发症
+# 缺的只是从患者事实走过去的那一跳。这条规则就是那一跳。
+#
+# ⚠️ 走 dmo:alignedTo，**方向是反的**。10-align 产出的是
+#     <extract 侧> dmo:alignedTo <canonical 侧>
+#   而患者诊断记的是 canonical 侧（id/T2DM），推荐挂在 extract 侧
+#   （id/diabetesType/type-2-diabetes）。所以这里写 ?ext dmo:alignedTo ?canon，
+#   不是 ?canon dmo:alignedTo ?ext。写反了零产出且不报错。
+#
+# ⚠️ **不排序、不打分、不取 top-N**。命中 106 条就是 106 条。
+#   gradingSystem 在 2615 条里有 493 条是 "Unspecified"、62 条 "Not specified"，
+#   且跨 VA-DoD / KDIGO / ADA / GRADE / NICE 五套互不可比的体系。
+#   任何"按强度排序"都是拿不可比的东西比大小 —— 那是造数据，不是推理。
+#   排序权留给查询层按 recommendationType 分组，由人看。
+#
+# ⚠️ Provisional 诊断**照样产出**，但把 verificationStatus 原样带出来。
+#   理由同 40 号规则：让缺口可见，由查询层决定怎么展示。
+#   在这里就滤掉的话，"疑似 T2DM 的人该看哪些建议"这个问题就永远没有答案，
+#   而临床上这恰恰是最需要建议的时候。**但它必须标着 Provisional 出现。**
+#
+# 已缓解 / 非活动的诊断不产出 —— 与 40 号规则口径一致。
+
+PREFIX dmo: <https://example.org/dmo#>
+
+# ⚠️ 字段刻意压到最小。这条规则产出 3433 个 match 实例（47 个患者 ×
+#   平均 73 条推荐），每多一个字段就是 ×3433。ruleId/ruleVersion/caveat 是
+#   **规则级**信息不是实例级事实，挂在下面那个单例节点上，查一次就够。
+#   matchId 也去掉了 —— IRI 末段就是那个 SHA1，存两遍没有意义。
+CONSTRUCT {
+  ?match a dmo:RecommendationMatch ;
+      dmo:matchesRecommendation  ?rec ;
+      dmo:matchVia               ?via ;
+      dmo:matchOnConcept         ?canon ;
+      dmo:matchVerification      ?vs .
+  ?pat dmo:hasRecommendationMatch ?match .
+
+  <https://example.org/dmo/id/rule/RECOMMENDATION-MATCH>
+      a dmo:DerivationRule ;
+      dmo:ruleId      "RECOMMENDATION-MATCH" ;
+      dmo:ruleVersion "1.0.0" ;
+      dmo:caveat      "按诊断挂载点匹配的指南条目，未按强度排序：本语料的 gradingSystem 跨五套互不可比的体系，且近两成未标注。命中即列出，取舍由人做。" .
+}
+WHERE {
+  GRAPH ?pg {
+    ?pat a dmo:Patient ; dmo:hasDiagnosis ?dx .
+    ?dx dmo:verificationStatus ?vs .
+  }
+  FILTER(STRSTARTS(STR(?pg), "urn:dmo:patient:"))
+
+  FILTER NOT EXISTS {
+    GRAPH ?pg { ?dx dmo:clinicalStatus ?cs FILTER(?cs IN ("Resolved", "Inactive")) }
+  }
+
+  {
+    # ── 按糖尿病分型 ──────────────────────────────────────────────
+    GRAPH ?pg { ?dx dmo:diagnosisType ?canon }
+    ?ext dmo:alignedTo ?canon .
+    ?rec a dmo:Recommendation ; dmo:appliesToType ?ext .
+    BIND("diabetesType" AS ?via)
+  }
+  UNION
+  {
+    # ── 按并发症 ──────────────────────────────────────────────────
+    # 患者记 DKD，推荐可能挂在 CKD 上：靠 owl2-rl 沿 subClassOf 的物化命中，
+    # 与 40 号规则同一个机制。这里不额外放宽 —— DKD ≠ CKD 是**正确的**语义区分，
+    # 硬把两者当同一个概念，等于把肾病专属建议发给所有 CKD 患者。
+    GRAPH ?pg { ?dx dmo:diagnosisComplication ?canon }
+    ?ext dmo:alignedTo ?canon .
+    ?rec a dmo:Recommendation ; dmo:targetsComplication ?ext .
+    BIND("complication" AS ?via)
+  }
+
+  BIND(SHA1(CONCAT(STR(?pat), "|", STR(?rec), "|", ?via, "|1.0.0")) AS ?mid)
+  BIND(IRI(CONCAT("https://example.org/dmo/id/recMatch/", ?mid)) AS ?match)
+}
