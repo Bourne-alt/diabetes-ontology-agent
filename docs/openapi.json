@@ -444,6 +444,162 @@
         "x-test-example-title": "查询有多个可改变风险因子的患者"
       }
     },
+    "/patients/{pid}/recommendations": {
+      "get": {
+        "summary": "获取患者命中的指南推荐条目",
+        "description": "患者诊断命中的指南推荐条目，按 recommendationType（Treatment / Monitoring / Lifestyle / Referral / Screening / Safety / Diagnosis）分组，每条带 populationScope、分级体系与逐字出处。\n\n⚠️ **不排序、不取 top-N、不选最佳答案** —— 语料的 gradingSystem 跨 VA-DoD / KDIGO / ADA / GRADE / NICE 等互不可比的体系，且 2615 条推荐中 555 条未标注分级。命中即列出。\n⚠️ `populationScope` 是**自由文本，无法结构化过滤**。按分型匹配到的条目里可能混着妊娠、儿童、住院、透析等不适用人群 —— 必须逐条读 scope 再采信，不要整段转述给用户。\n⚠️ `fromDiagnosisVerification=\"Provisional\"` 的条目由**疑似未确诊**诊断带出，不得当成确诊患者的医嘱。\n【不要用于】回答「该用什么药、用多少」（本服务不输出剂量）；阈值判定（用「获取阈值判定与逐字出处」）；风险档位（用「获取规则式定性风险分层」）；禁忌信号（用「获取用药安全信号」）；下次该查什么（用「获取按指南频率推出的检验到期日」）。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "operationId": "recommendations_patients__pid__recommendations_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90023。",
+            "example": "P90023"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Recommendations Patients  Pid  Recommendations Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "x-test-example-title": "查询 E11 合并 DKD 患者命中的指南推荐"
+      }
+    },
+    "/patients/{pid}/monitoring-due": {
+      "get": {
+        "summary": "获取按指南频率推出的检验到期日",
+        "description": "按指南规定频率推出的下次检验到期日。到期日 = 末次采样 + frequencyMonths，从指南确定性推出、可溯源；`overdueDays` 是本次查询时刻的算术，不在图里。\n\n⚠️ **三种 status 含义不同，不可合并成一个告警**：`scheduled`（有末次记录，到期日已算出）／`never-recorded`（该患者从无此项检验 —— **这不是逾期，是从没做过**）／`frequency-unusable`（语料未写明频率，全库 181 条监测计划中 77 条如此）。\n⚠️ 同一检验可能有多档频率，分属不同指南或人群（`multiFrequencyTests` 会点名），已并列呈现且**不取最严、不做取舍** —— 读 populationScope 判断哪一档适用。\n⚠️ 只用采样时间、不碰结果值，因此对 valueTrustLevel=\"Unverified\" 的上游数据同样成立；但这也意味着它**不判断结果是否达标**。\n【不要用于】判断检验结果是否异常（用「获取阈值判定与逐字出处」）；该做什么处置（用「获取患者命中的指南推荐条目」）；查某项检验各指南频率为何不同（用「对照多部指南的分歧说法」，那条不需要患者号）。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "operationId": "monitoring_due_patients__pid__monitoring_due_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "患者业务编号，例如 P90024。",
+            "example": "P90024"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Monitoring Due Patients  Pid  Monitoring Due Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "x-test-example-title": "查询监测齐全患者的下次检验到期日"
+      }
+    },
     "/patients/{pid}/safety": {
       "get": {
         "summary": "获取用药安全信号",
@@ -596,7 +752,7 @@
         "tags": [
           "Patients"
         ],
-        "description": "患者七段完整融合返回体：患者与事实来源、数据质量提示、断言事实、推断事实、逐字出处、未映射术语、风险分层与照护链。\n\n【用于】用户问「整体情况」「这个患者怎么样」，且不确定需要哪一段。\n【不要用于】只问时间线（用「获取患者完整照护链」）、只问阈值判定或诊断依据（用「获取阈值判定与逐字出处」）、只问风险档位（用「获取规则式定性风险分层」）、只问用药安全（用「获取用药安全信号」）—— 本工具返回体积最大，会淹没重点。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
+        "description": "患者全景数据返回体：患者与事实来源、数据质量提示、断言事实、推断事实、逐字出处、未映射术语、风险分层与照护链。\n\n【用于】用户问「整体情况」「这个患者怎么样」，且不确定需要哪一段。\n【不要用于】只问时间线（用「获取患者完整照护链」）、只问阈值判定或诊断依据（用「获取阈值判定与逐字出处」）、只问风险档位（用「获取规则式定性风险分层」）、只问用药安全（用「获取用药安全信号」）—— 本工具返回体积最大，会淹没重点。\n【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。",
         "x-test-example-title": "查询 P90002 的全景数据返回体"
       }
     },
@@ -1931,6 +2087,89 @@
         "x-test-example-title": "查看 A1C 糖尿病阈值规则及出处"
       }
     },
+    "/guidelines/divergence": {
+      "get": {
+        "summary": "对照多部指南的分歧说法",
+        "description": "同一个术语，50 部指南分别怎么说：按频率分档聚合的监测周期 + 多来源推荐条目，每条带来源文档、populationScope 与逐字出处。**纯知识侧，不需要患者号。**\n\n⚠️ **只呈现分歧，不裁决分歧。** 不归一化分级、不排序、不给最佳答案 —— 各来源分级体系互不可比，归一化打分等于凭空造答案。\n⚠️ **频率不同通常是人群不同，不是矛盾**：糖尿病前期 12 个月、确诊 T2DM 3 个月、检验正常者 36 个月是分层不是冲突。只有人群重叠才构成真冲突（如 T2DM 合并 CKD：NIDDK 3 个月 vs KDIGO 6 个月）。必须逐条读 populationScope 后再下结论。\n⚠️ `unusableTiers` 里 frequencyMonths=0 不是「每 0 个月一次」，是抽取时频率缺失的默认填充。\n【用于】用户问「这项检查该多久做一次」「不同指南说法为什么不一样」「哪些指南提到了 X」。\n【不要用于】某个患者该什么时候复查（用「获取按指南频率推出的检验到期日」）；查阈值切点与规则落差（用「检索并内省规则」）；按哈希或子串核验单条引用（用「检索可逐字引用的出处」）。\n【前置】无。term 支持全称与缩写，不必先解析 IRI。",
+        "operationId": "guidelines_divergence_guidelines_divergence_get",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "术语，如 A1C / UACR / eGFR / metformin",
+              "title": "Term"
+            },
+            "description": "要对照的术语，支持全称与缩写（A1C / HbA1c / UACR / eGFR / metformin）。缩写走规范侧 skos:altLabel 匹配。必填。",
+            "example": "A1C"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "default": 40,
+              "title": "Limit"
+            },
+            "description": "推荐条目最多返回条数，范围 1–200。",
+            "example": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Guidelines Divergence Guidelines Divergence Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Guidelines"
+        ],
+        "x-test-example-title": "对照 A1C 复查频率的四档指南说法"
+      }
+    },
     "/adjudicate/claim": {
       "post": {
         "summary": "裁决结构化患者结论",
@@ -2525,6 +2764,10 @@
     {
       "name": "Graph exploration",
       "description": "受控图探索、规则与溯源。"
+    },
+    {
+      "name": "Guidelines",
+      "description": "跨指南对照：只呈现分歧，不裁决分歧。"
     },
     {
       "name": "Adjudication",

@@ -168,7 +168,50 @@ def test_verified_conversion_keeps_source_value(sim):
     assert fact["value"] == pytest.approx(140.54, abs=0.01)
 
 
-# ── 6. 边界情形 ────────────────────────────────────────────────────────
+# ── 6. 风险档位与监测缺口必须分开解释 ─────────────────────────────
+
+
+def test_uacr_closes_monitoring_gap_but_does_not_force_tier_transition(cfg, graph, db):
+    """补 UACR 可新增白蛋白尿评估、关闭监测缺口，但不保证风险档位跃迁。
+
+    P90022 已有可用 A1C，却没有临床观察、共病或并发症诊断。风险规则因此仍缺
+    `riskEvidence`。这条回归测试防止智能体把 monitoringGap 当成
+    Insufficient-Evidence 的唯一原因，进而错误承诺“补 UACR 就会升档”。
+    """
+    out = simulate(cfg, "P90022", [{
+        "term": "UACR",
+        "value": "180",
+        "unit": "mg-per-g",
+        "date": "2026-08-20",
+    }])
+
+    before = out["before"]["riskTier"]
+    after = out["after"]["riskTier"]
+    assert before["tier"] == "Insufficient-Evidence"
+    assert after["tier"] == "Insufficient-Evidence"
+    assert "缺 UACR" in before["monitoringGap"]
+    assert after["monitoringGap"] == ""
+    assert "没有任何可用的风险侧事实" in after["insufficientReason"]
+
+    added = [d for d in out["delta"]
+             if d["change"] == "added" and d["type"] == "Assessment"]
+    assert any(d["after"]["thresholdId"] == "UACR-ALBUMINURIA" for d in added)
+
+
+def test_egfr_cannot_be_used_as_numeric_simulation_input(cfg, graph, db):
+    """当前语料没有 eGFR 数值切点，不能承诺补 eGFR 会改变风险档位。"""
+    with pytest.raises(HypothesisError) as e:
+        simulate(cfg, "P90022", [{
+            "term": "eGFR",
+            "value": "52",
+            "unit": "mL-per-min",
+            "date": "2026-08-20",
+        }])
+    assert "A1C" in str(e.value)
+    assert "UACR" in str(e.value)
+
+
+# ── 7. 边界情形 ────────────────────────────────────────────────────────
 
 def test_empty_assume_is_rejected(sim):
     with pytest.raises(HypothesisError):

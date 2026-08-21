@@ -13,3 +13,5 @@ ontology/dist/patients/
 ontology/rules/
 ontology/shapes/
 src/skills/*.zip
+.codex-build/
+outputs/

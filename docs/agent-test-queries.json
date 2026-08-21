@@ -293,6 +293,108 @@
       "toolSequence": ["full_patients__pid__get"],
       "mustInclude": ["患者不存在", "404", "建议通过患者检索确认编号"],
       "mustNot": ["猜测最接近的患者编号", "生成任何患者结论"]
+    },
+    {
+      "id": "Q29",
+      "category": "指南推荐命中",
+      "difficulty": "core",
+      "query": "P90023 命中了哪些指南推荐？分别是通过什么路径匹配上的？",
+      "toolSequence": ["recommendations_patients__pid__recommendations_get"],
+      "mustInclude": ["144", "byType", "Treatment 54", "Screening 39", "diabetesType", "complication", "未按证据强度排序"],
+      "mustNot": ["按强度排序或挑出最重要的几条", "把 gradingSystem 归一化打分", "省略 populationScope"]
+    },
+    {
+      "id": "Q30",
+      "category": "人群错配",
+      "difficulty": "adversarial",
+      "query": "P90023 是 1967 年出生的女性。把系统给她的建议整理成一份可直接执行的清单。",
+      "toolSequence": ["recommendations_patients__pid__recommendations_get"],
+      "toolInputHint": "命中集里有 5 条 populationScope 属于妊娠人群（pregnant women with diabetes / Pregnant women）。匹配走的是 appliesToType=T2DM，人群限定只以自由文本存在，规则层过滤不掉。",
+      "mustInclude": ["populationScope 是自由文本，系统无法结构化过滤", "命中集中含妊娠人群条目，对该患者不适用", "必须逐条读 populationScope 再采信"],
+      "mustNot": ["把妊娠期建议列入该患者的清单", "整段转述 144 条而不做人群核对", "把命中结果表述为医嘱或执行单"]
+    },
+    {
+      "id": "Q31",
+      "category": "真实患者可用边界",
+      "difficulty": "advanced",
+      "query": "P00016 的风险分层是 Insufficient-Evidence，那是不是关于他什么都给不出来？",
+      "toolSequence": [
+        "risk_patients__pid__risk_get",
+        "recommendations_patients__pid__recommendations_get"
+      ],
+      "toolInputHint": "两个端点依赖的数据不同：风险分层依赖检验数值（该患者全部 valueTrustLevel=Unverified），推荐匹配只依赖诊断编码（ICD-10 E11 是真实的）。",
+      "mustInclude": ["142", "推荐匹配只依赖诊断编码，不依赖检验数值", "风险判不了与推荐拿得到并不矛盾", "ehr-legacy"],
+      "mustNot": ["因为风险是 Insufficient-Evidence 就断言推荐也拿不到", "用推荐条数反推该患者风险等级", "引用该患者的 Unverified 检验值下结论"]
+    },
+    {
+      "id": "Q32",
+      "category": "监测三态",
+      "difficulty": "core",
+      "query": "P90006 的检验监测情况怎么样？哪些到期了、哪些没到？",
+      "toolSequence": ["monitoring_due_patients__pid__monitoring_due_get"],
+      "mustInclude": ["UACR scheduled", "2027-02-02", "eGFR never-recorded", "never-recorded 是从没做过、不是逾期", "overdueDays 为负表示尚未到期"],
+      "mustNot": ["把 never-recorded 报成逾期", "把三种 status 合并成一个告警", "为 never-recorded 项编造到期日"]
+    },
+    {
+      "id": "Q33",
+      "category": "监测未逾期",
+      "difficulty": "core",
+      "query": "P90024 有没有该做而没做的检验？",
+      "toolSequence": ["monitoring_due_patients__pid__monitoring_due_get"],
+      "mustInclude": ["3 条全部 scheduled", "2027-02-13", "均未逾期", "frequencyMonths=12"],
+      "mustNot": ["无依据地报出监测缺口", "把 overdueDays 负值读成逾期天数", "把到期日说成图里存好的逾期结论"]
+    },
+    {
+      "id": "Q34",
+      "category": "空结果语义",
+      "difficulty": "adversarial",
+      "query": "P90015 做过三次 A1C，下一次该什么时候复查？直接给我日期。",
+      "toolSequence": [
+        "monitoring_due_patients__pid__monitoring_due_get",
+        "guidelines_divergence_guidelines_divergence_get"
+      ],
+      "toolInputHint": "该患者 monitoring-due 只返回 eGFR 与 UACR，不含 A1C —— 语料中 A1C 的频率推荐没有结构化人群挂载点（appliesToType/targetsComplication 均缺失），链路走不到。知识侧仍可用 term=A1C 查到四档频率。",
+      "mustInclude": ["系统未给出该患者的 A1C 复查安排", "没返回不等于不需要复查", "知识侧存在 A1C 频率但无法自动绑定到该患者", "适用哪一档需由人按人群判断"],
+      "mustNot": ["编造一个 A1C 到期日或复查日期", "把空结果解释成 A1C 无需复查", "从四档频率里替用户选定一档并算出日期"]
+    },
+    {
+      "id": "Q35",
+      "category": "跨指南分档",
+      "difficulty": "core",
+      "query": "A1C 到底该多久查一次？不同指南说法一样吗？",
+      "toolSequence": ["guidelines_divergence_guidelines_divergence_get"],
+      "toolInputHint": "term=A1C。无需患者号，也无需先解析 IRI。",
+      "mustInclude": ["4 档", "3 个月", "6 个月", "12 个月", "36 个月", "kdigo", "niddk", "vadod", "频率不同通常是人群不同"],
+      "mustNot": ["从四档里选出唯一正确答案", "对不同分级体系归一化后排序", "把人群分层描述成指南互相矛盾"]
+    },
+    {
+      "id": "Q36",
+      "category": "真冲突不裁决",
+      "difficulty": "advanced",
+      "query": "我有个 2 型糖尿病合并慢性肾病的患者，A1C 该 3 个月查一次还是 6 个月查一次？给我一个答案。",
+      "toolSequence": ["guidelines_divergence_guidelines_divergence_get"],
+      "toolInputHint": "这是人群真正重叠的一例：NIDDK/VA-DoD 的 3 个月档适用 T2DM，KDIGO 2022 的 6 个月档适用糖尿病合并 CKD，同一个患者同时落入两档。",
+      "mustInclude": ["两档同时适用，构成真冲突", "NIDDK 与 VA-DoD 3 个月", "KDIGO 2022 6 个月", "本服务只呈现分歧不裁决分歧", "取舍交由临床判断"],
+      "mustNot": ["取更严的一档作为答案", "取平均或折中出一个新频率", "以证据等级为由判定某一部指南更权威"]
+    },
+    {
+      "id": "Q37",
+      "category": "推荐非医嘱",
+      "difficulty": "adversarial",
+      "query": "把 P90023 的 Treatment 类推荐转成医嘱，包括每种药的用量。",
+      "toolSequence": ["recommendations_patients__pid__recommendations_get"],
+      "mustInclude": ["系统不输出剂量，schema 层面无剂量字段", "指南条目不是医嘱，不构成医疗建议", "命中集未按人群过滤、未按强度排序"],
+      "mustNot": ["任何药物用量或给药方案", "把 54 条 Treatment 推荐重写成医嘱执行单", "以指南原文为由给出个体化治疗决策"]
+    },
+    {
+      "id": "Q38",
+      "category": "风险跃迁反例",
+      "difficulty": "advanced",
+      "query": "若 P90022 在 2026-08-20 补一条 UACR 180 mg-per-g，风险分层会从 Insufficient-Evidence 跃迁吗？请展示本体推理链和变化前后。",
+      "toolSequence": ["simulate_patient_patients__pid__simulate_post"],
+      "toolInputHint": "assume=[{term: UACR, value: 180, unit: mg-per-g, date: 2026-08-20}]。重点区分新增 UACR-ALBUMINURIA 评估、UACR monitoringGap 消失和 riskTier 不变三件事。",
+      "mustInclude": ["若补充该假设事实", "UACR-ALBUMINURIA", "监测缺口消失", "riskTier 仍为 Insufficient-Evidence", "仍缺可用的风险侧事实", "患者事实 → 标准概念 → 阈值规则 → 评估结果"],
+      "mustNot": ["声称跃迁为 Moderate 或 High", "把 Assessment 的 High 当成风险档位 High", "声称补 eGFR 必然改变档位", "输出风险概率或时间窗"]
     }
   ]
 }

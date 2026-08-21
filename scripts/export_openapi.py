@@ -64,6 +64,18 @@ REQUEST_EXAMPLES: dict[tuple[str, str], dict[str, Any]] = {
             "assume": [{"term": "A1C", "value": 7.9, "unit": "percent", "date": "2026-02-20"}],
         },
     },
+    ("get", "/patients/{pid}/recommendations"): {
+        "title": "查询 E11 合并 DKD 患者命中的指南推荐",
+        "path": {"pid": "P90023"},
+    },
+    ("get", "/patients/{pid}/monitoring-due"): {
+        "title": "查询监测齐全患者的下次检验到期日",
+        "path": {"pid": "P90024"},
+    },
+    ("get", "/guidelines/divergence"): {
+        "title": "对照 A1C 复查频率的四档指南说法",
+        "query": {"term": "A1C", "limit": 5},
+    },
     ("get", "/query/templates"): {"title": "列出查询模板白名单"},
     ("post", "/query/{template}"): {
         "title": "运行照护链模板",
@@ -177,6 +189,13 @@ PARAMETER_DESCRIPTIONS: dict[tuple[str, str], str] = {
     ("/patients", "tier"): "按规则式风险档位筛选；档位是有序枚举，不是概率或分数。可不传。",
     ("/patients", "page"): "页码，从 1 开始。",
     ("/patients", "size"): "每页记录数，范围 1–200。",
+    ("/patients/{pid}/recommendations", "pid"): "患者业务编号，例如 P90023。",
+    ("/patients/{pid}/monitoring-due", "pid"): "患者业务编号，例如 P90024。",
+    ("/guidelines/divergence", "term"): (
+        "要对照的术语，支持全称与缩写（A1C / HbA1c / UACR / eGFR / metformin）。"
+        "缩写走规范侧 skos:altLabel 匹配。必填。"
+    ),
+    ("/guidelines/divergence", "limit"): "推荐条目最多返回条数，范围 1–200。",
     ("/patients/{pid}/care-chain", "pid"): "患者业务编号，例如 P90002。",
     ("/patients/{pid}/assessment", "pid"): "患者业务编号，例如 P90002。",
     ("/patients/{pid}/risk", "pid"): "患者业务编号，例如 P90020。",
@@ -431,6 +450,7 @@ TAG_BY_PREFIX = {
     "/query": "Query templates",
     "/agent": "Agent discovery",
     "/graph": "Graph exploration",
+    "/guidelines": "Guidelines",
     "/adjudicate": "Adjudication",
     "/terms": "Terminology",
     "/demo": "Demo",
@@ -446,6 +466,9 @@ SUMMARIES = {
     ("get", "/patients/{pid}/assessment"): "获取阈值判定与逐字出处",
     ("get", "/patients/{pid}/risk"): "获取规则式定性风险分层",
     ("get", "/patients/{pid}/safety"): "获取用药安全信号",
+    ("get", "/patients/{pid}/recommendations"): "获取患者命中的指南推荐条目",
+    ("get", "/patients/{pid}/monitoring-due"): "获取按指南频率推出的检验到期日",
+    ("get", "/guidelines/divergence"): "对照多部指南的分歧说法",
     ("post", "/patients/{pid}/simulate"): "按路径患者号执行确定性病程推演",
     ("post", "/simulate"): "按请求体患者号执行确定性病程推演",
     ("get", "/query/templates"): "列出参数化查询模板白名单",
@@ -538,6 +561,51 @@ DESCRIPTIONS: dict[tuple[str, str], str] = {
         "阈值判定（用「获取阈值判定与逐字出处」）。\n"
         "【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。"
     ),
+    ("get", "/patients/{pid}/recommendations"): (
+        "患者诊断命中的指南推荐条目，按 recommendationType（Treatment / Monitoring / "
+        "Lifestyle / Referral / Screening / Safety / Diagnosis）分组，每条带 "
+        "populationScope、分级体系与逐字出处。\n\n"
+        "⚠️ **不排序、不取 top-N、不选最佳答案** —— 语料的 gradingSystem 跨 VA-DoD / KDIGO / "
+        "ADA / GRADE / NICE 等互不可比的体系，且 2615 条推荐中 555 条未标注分级。命中即列出。\n"
+        "⚠️ `populationScope` 是**自由文本，无法结构化过滤**。按分型匹配到的条目里可能混着"
+        "妊娠、儿童、住院、透析等不适用人群 —— 必须逐条读 scope 再采信，不要整段转述给用户。\n"
+        "⚠️ `fromDiagnosisVerification=\"Provisional\"` 的条目由**疑似未确诊**诊断带出，"
+        "不得当成确诊患者的医嘱。\n"
+        "【不要用于】回答「该用什么药、用多少」（本服务不输出剂量）；"
+        "阈值判定（用「获取阈值判定与逐字出处」）；风险档位（用「获取规则式定性风险分层」）；"
+        "禁忌信号（用「获取用药安全信号」）；下次该查什么（用「获取按指南频率推出的检验到期日」）。\n"
+        "【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。"
+    ),
+    ("get", "/patients/{pid}/monitoring-due"): (
+        "按指南规定频率推出的下次检验到期日。到期日 = 末次采样 + frequencyMonths，"
+        "从指南确定性推出、可溯源；`overdueDays` 是本次查询时刻的算术，不在图里。\n\n"
+        "⚠️ **三种 status 含义不同，不可合并成一个告警**："
+        "`scheduled`（有末次记录，到期日已算出）／"
+        "`never-recorded`（该患者从无此项检验 —— **这不是逾期，是从没做过**）／"
+        "`frequency-unusable`（语料未写明频率，全库 181 条监测计划中 77 条如此）。\n"
+        "⚠️ 同一检验可能有多档频率，分属不同指南或人群（`multiFrequencyTests` 会点名），"
+        "已并列呈现且**不取最严、不做取舍** —— 读 populationScope 判断哪一档适用。\n"
+        "⚠️ 只用采样时间、不碰结果值，因此对 valueTrustLevel=\"Unverified\" 的上游数据同样成立；"
+        "但这也意味着它**不判断结果是否达标**。\n"
+        "【不要用于】判断检验结果是否异常（用「获取阈值判定与逐字出处」）；"
+        "该做什么处置（用「获取患者命中的指南推荐条目」）；"
+        "查某项检验各指南频率为何不同（用「对照多部指南的分歧说法」，那条不需要患者号）。\n"
+        "【前置】需要患者业务编号；不知道编号先用「检索并分页列出患者」。"
+    ),
+    ("get", "/guidelines/divergence"): (
+        "同一个术语，50 部指南分别怎么说：按频率分档聚合的监测周期 + 多来源推荐条目，"
+        "每条带来源文档、populationScope 与逐字出处。**纯知识侧，不需要患者号。**\n\n"
+        "⚠️ **只呈现分歧，不裁决分歧。** 不归一化分级、不排序、不给最佳答案 —— "
+        "各来源分级体系互不可比，归一化打分等于凭空造答案。\n"
+        "⚠️ **频率不同通常是人群不同，不是矛盾**：糖尿病前期 12 个月、确诊 T2DM 3 个月、"
+        "检验正常者 36 个月是分层不是冲突。只有人群重叠才构成真冲突（如 T2DM 合并 CKD："
+        "NIDDK 3 个月 vs KDIGO 6 个月）。必须逐条读 populationScope 后再下结论。\n"
+        "⚠️ `unusableTiers` 里 frequencyMonths=0 不是「每 0 个月一次」，是抽取时频率缺失的默认填充。\n"
+        "【用于】用户问「这项检查该多久做一次」「不同指南说法为什么不一样」「哪些指南提到了 X」。\n"
+        "【不要用于】某个患者该什么时候复查（用「获取按指南频率推出的检验到期日」）；"
+        "查阈值切点与规则落差（用「检索并内省规则」）；按哈希或子串核验单条引用（用「检索可逐字引用的出处」）。\n"
+        "【前置】无。term 支持全称与缩写，不必先解析 IRI。"
+    ),
     ("get", "/query/templates"): (
         "参数化查询模板白名单。\n\n"
         "【前置】执行模板前必须先读本清单 —— **不要猜模板名**，不在白名单内的模板会被拒绝。\n"
@@ -625,6 +693,7 @@ def build_schema() -> dict[str, Any]:
         {"name": "Query templates", "description": "受控参数化 SPARQL 模板。"},
         {"name": "Agent discovery", "description": "供智能体自举的能力清单。"},
         {"name": "Graph exploration", "description": "受控图探索、规则与溯源。"},
+        {"name": "Guidelines", "description": "跨指南对照：只呈现分歧，不裁决分歧。"},
         {"name": "Adjudication", "description": "引用和结构化结论裁决。"},
         {"name": "Terminology", "description": "术语缺口与映射状态。"},
         {"name": "Demo", "description": "方法对照演示。"},
@@ -670,7 +739,7 @@ def build_schema() -> dict[str, Any]:
                 if description:
                     operation["requestBody"]["description"] = description
             responses = operation.setdefault("responses", {})
-            if path.startswith(("/patients/", "/graph", "/adjudicate")) or path in {
+            if path.startswith(("/patients/", "/graph", "/adjudicate", "/guidelines")) or path in {
                 "/simulate",
                 "/query/{template}",
             }:
@@ -691,7 +760,7 @@ def build_schema() -> dict[str, Any]:
                     "description": "患者、模板或资源不存在。",
                     "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
                 })
-            if path.startswith(("/graph", "/patients", "/adjudicate")):
+            if path.startswith(("/graph", "/patients", "/adjudicate", "/guidelines")):
                 responses.setdefault("503", {
                     "description": "GraphDB 暂时不可用。",
                     "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},

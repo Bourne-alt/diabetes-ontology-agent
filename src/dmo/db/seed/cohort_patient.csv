@@ -29,3 +29,13 @@ P90027,F,1982,S24,用药名在 map_drug_term 里未映射 ⟹ 记入 unmapped，
 P90028,M,1988,S25,有就诊记录但一条检验都没有 ⟹ 优雅降级，不报错
 P90029,F,1955,S26,DKA 急性事件 + 血糖 320 mg/dL ⟹ 同时命中酮症警戒与急诊阈值
 P90030,M,1953,S27,高血压 I10 + 高脂血症 E78 ⟹ 两条 external-standard 且**无出处**的风险规则，不参与 tier
+P90031,M,1979,S28,糖尿病前期确诊 + FPG 112 ⟹ 点亮 FPG-PREDIABETES 阈值与 Prediabetes 分型的 30 条推荐
+P90032,F,1984,S29a,OGTT2H 120 ⟹ OGTT2H-NORMAL（≤139），筛查阴性应零诊断
+P90033,M,1981,S29b,"OGTT2H 165 ⟹ OGTT2H-PREDIABETES [140,199]"
+P90034,F,1977,S29c,OGTT2H 215 ⟹ OGTT2H-DIABETES（≥200）；单次单日 ⟹ 应为 Provisional
+P90035,M,1968,S30,随机血糖 240 ⟹ RPG-DIABETES（≥200），全库唯一使用 RPG 的患者
+P90036,F,1962,S31,"血糖 48 ⟹ 落 GLUCOSE-SEVERE-HYPO（<54）而**不**落 GLUCOSE-HYPO [54,70]；并挂 Hypoglycemia 并发症"
+P90037,M,1956,S32,T2DM + CKD（**不是** DKD）⟹ 点亮 CKD 的 9 条推荐；eGFR 52 有值但全库无 eGFR 切点 ⟹ 判不了
+P90038,F,1959,S33,T2DM + 糖尿病神经病变 DPN ⟹ 点亮 4 条零挂载推荐
+P90039,M,1964,S34,T2DM + 糖尿病黄斑水肿 DME ⟹ 点亮 3 条零挂载推荐
+P90040,F,1970,S35,UACR 采于 2024-06-15 ⟹ 全库**首个**监测逾期患者（年检到期 2025-06-15）
