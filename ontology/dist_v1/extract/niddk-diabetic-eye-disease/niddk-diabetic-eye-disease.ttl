@@ -1,0 +1,699 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-diabetic-eye-disease.txt
+# 目标 named graph：urn:dmo:extract:niddk-diabetic-eye-disease
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-diabetic-eye-disease'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-eye-disease.txt" ;
+    dmo:sha256 "b7986310bc704c60300726189bd9f316c3e80cab494131eb8bc22c299fe9ae72" ;
+    dmo:byteSize "15554"^^xsd:integer .
+
+<urn:dmo:extract:niddk-diabetic-eye-disease> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:43:39+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/cataract> a dmo:Complication ;
+    rdfs:label "Cataract" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "cataract" ;
+    dmo:definition "A condition in which the lens of the eye becomes cloudy, leading to vision impairment." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005118" ;
+    dmo:name "Cataract" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "In a surgery center or hospital visit, your doctor can remove the cloudy lens in your eye, where the cataract has grown, and replace it with an artificial lens." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/cataracts> a dmo:Complication ;
+    rdfs:label "Cataracts" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "cataracts" ;
+    dmo:definition "The lenses within our eyes are clear structures that help provide sharp vision—but they tend to become cloudy as we age. People with diabetes are more likely to develop cloudy lenses, called cataracts." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005153" ;
+    dmo:name "Cataracts" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "The lenses within our eyes are clear structures that help provide sharp vision—but they tend to become cloudy as we age. People with diabetes are more likely to develop cloudy lenses, called cataracts." ;
+    dmo:evidenceQuote "Your chances of developing glaucoma or cataracts are about twice that of someone without diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/detached-retina> a dmo:Complication ;
+    rdfs:label "Detached Retina" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "detached-retina" ;
+    dmo:definition "These changes in your sight can be symptoms of a detached retina NIH external link, which is a medical emergency." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Detached Retina" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "These changes in your sight can be symptoms of a detached retina NIH external link, which is a medical emergency." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/diabetic-macular-edema> a dmo:Complication ;
+    rdfs:label "Diabetic Macular Edema" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "diabetic-macular-edema" ;
+    dmo:definition "The part of your retina that you need for reading, driving, and seeing faces is called the macula. Diabetes can lead to swelling in the macula, which is called diabetic macular edema." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Diabetic Macular Edema" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "The part of your retina that you need for reading, driving, and seeing faces is called the macula. Diabetes can lead to swelling in the macula, which is called diabetic macular edema." ;
+    dmo:evidenceQuote "Focal/grid laser treatment works on a small area of the retina to treat diabetic macular edema." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/diabetic-retinopathy> a dmo:Complication ;
+    rdfs:label "Diabetic Retinopathy" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "diabetic-retinopathy" ;
+    dmo:definition "Damaged blood vessels can harm the retina, causing a disease called diabetic retinopathy." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Diabetic Retinopathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Damaged blood vessels can harm the retina, causing a disease called diabetic retinopathy." ;
+    dmo:evidenceQuote "Diabetic retinopathy is the most common cause of vision loss in people with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/glaucoma> a dmo:Complication ;
+    rdfs:label "Glaucoma" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "glaucoma" ;
+    dmo:definition "Glaucoma is a group of eye diseases that can damage the optic nerve—the bundle of nerves that connects the eye to the brain." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005152" ;
+    dmo:name "Glaucoma" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Glaucoma is a group of eye diseases that can damage the optic nerve—the bundle of nerves that connects the eye to the brain." ;
+    dmo:evidenceQuote "Your chances of developing glaucoma or cataracts are about twice that of someone without diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/nonproliferative-diabetic-retinopathy> a dmo:Complication ;
+    rdfs:label "Nonproliferative Diabetic Retinopathy" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "nonproliferative-diabetic-retinopathy" ;
+    dmo:definition "In early diabetic retinopathy, blood vessels can weaken, bulge, or leak into the retina. This stage is called nonproliferative diabetic retinopathy." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Nonproliferative Diabetic Retinopathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "In early diabetic retinopathy, blood vessels can weaken, bulge, or leak into the retina. This stage is called nonproliferative diabetic retinopathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/proliferative-diabetic-retinopathy> a dmo:Complication ;
+    rdfs:label "Proliferative Diabetic Retinopathy" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "proliferative-diabetic-retinopathy" ;
+    dmo:definition "If the disease gets worse, some blood vessels close off, which causes new blood vessels to grow, or proliferate, on the surface of the retina. This stage is called proliferative diabetic retinopathy." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Proliferative Diabetic Retinopathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "If the disease gets worse, some blood vessels close off, which causes new blood vessels to grow, or proliferate, on the surface of the retina. This stage is called proliferative diabetic retinopathy." ;
+    dmo:evidenceQuote "Scatter laser treatment, also called panretinal photocoagulation (PRP), covers a larger area of the retina. This method treats the growth of abnormal blood vessels, called proliferative diabetic retinopathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/complication/retinal-detachment> a dmo:Complication ;
+    rdfs:label "Retinal Detachment" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "retinal-detachment" ;
+    dmo:definition "A condition in which the retina peels away from the tissue beneath it, which can cause blindness." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005117" ;
+    dmo:name "Retinal Detachment" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Scar tissue can force the retina to peel away from the tissue beneath it, like wallpaper peeling away from a wall. A retina that comes completely loose, or detaches, can cause blindness." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "gestational diabetes" ;
+    dmo:definition "Diabetes that occurs only during pregnancy, called gestational diabetes, does not usually cause eye problems." ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "gestational diabetes" ;
+    dmo:prevalenceShare "0.02"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "Diabetes that occurs only during pregnancy, called gestational diabetes, does not usually cause eye problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "prediabetes" ;
+    dmo:definition "Prediabetes is when blood glucose is higher than normal, but not high enough for you to be diagnosed with diabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "prediabetes" ;
+    dmo:prevalenceShare "0.0"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "Damaged blood vessels may leak fluid and cause swelling. New, weak blood vessels may also begin to grow. These blood vessels can bleed into the middle part of the eye, lead to scarring, or cause dangerously high pressure inside your eye. Most serious diabetic eye diseases begin with blood vessel problems. The four eye diseases that can threaten your sight are Diabetic retinopathy The retina NIH external link is the inner lining at the back of each eye. The retina senses light and turns it into signals that your brain decodes, so you can see the world around you. Damaged blood vessels can harm the retina, causing a disease called diabetic retinopathy. In early diabetic retinopathy, blood vessels can weaken, bulge, or leak into the retina. This stage is called nonproliferative diabetic retinopathy. If the disease gets worse, some blood vessels close off, which causes new blood vessels to grow, or proliferate, on the surface of the retina. This stage is called proliferative diabetic retinopathy. These abnormal new blood vessels can lead to serious vision problems. Photo courtesy of the National Eye Institute, NIH. Normal vision of two boys playing. Photo courtesy of the National Eye Institute, NIH. Same scene, as viewed by a person with diabetic retinopathy. Diabetic macular edema The part of your retina that you need for reading, driving, and seeing faces is called the macula. Diabetes can lead to swelling in the macula, which is called diabetic macular edema. Over time, this disease can destroy the sharp vision in this part of the eye, leading to partial vision loss or blindness. Macular edema usually develops in people who already have other signs of diabetic retinopathy. Glaucoma Glaucoma is a group of eye diseases that can damage the optic nerve—the bundle of nerves that connects the eye to the brain. Diabetes doubles the chances of having glaucoma, which can lead to vision loss and blindness if not treated early. Symptoms depend on which type of glaucoma you have. Learn more about glaucoma NIH external link. Photo courtesy of the National Eye Institute, NIH. People with glaucoma slowly lose side vision. Cataracts The lenses within our eyes are clear structures that help provide sharp vision—but they tend to become cloudy as we age. People with diabetes are more likely to develop cloudy lenses, called cataracts. People with diabetes can develop cataracts at an earlier age than people without diabetes. Researchers think that high glucose levels cause deposits to build up in the lenses of your eyes. Photo courtesy of the National Eye Institute, NIH. Cloudy vision and faded colors are symptoms of cataracts. How common is diabetic eye disease? Diabetic retinopathy About one in three people with diabetes who are older than age 40 already have some signs of diabetic retinopathy.1 Diabetic retinopathy is the most common cause of vision loss in people with diabetes. Each person’s outlook for the future, however, depends in large part on regular care. Finding and treating diabetic retinopathy early can reduce the risk of blindness by 95 percent. Glaucoma and cataracts Your chances of developing glaucoma or cataracts are about twice that of someone without diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/diabetesType/type-1> a dmo:DiabetesType ;
+    rdfs:label "Type 1" ;
+    dmo:definition "Type 1 diabetes is a condition in which the body does not produce insulin, and people with this type of diabetes must take insulin to survive." ;
+    dmo:diabetesTypeCode "type-1" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "Type 1: Yearly eye exams should start within 5 years of diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/diabetesType/type-2> a dmo:DiabetesType ;
+    rdfs:label "Type 2" ;
+    dmo:definition "Type 2 diabetes is a condition in which the body does not use insulin properly, and people with this type of diabetes may or may not require insulin." ;
+    dmo:diabetesTypeCode "type-2" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Type 2: Yearly eye exams should start right after diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/labTest/a1c> a dmo:LabTest ;
+    rdfs:label "A1c" ;
+    dmo:definition "A1c is a measure of average blood glucose levels over the past 2 to 3 months. It is used to monitor diabetes control and is part of the diabetes ABCs, which include A1c, blood pressure, and cholesterol." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1c" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "Your doctor may recommend having eye exams more often than once a year, along with management of your diabetes. This means managing your diabetes ABCs, which include your A1c, blood pressure, and cholesterol; and quitting smoking." ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/get-help-to-quit-smoking> a dmo:LifestyleIntervention ;
+    rdfs:label "get help to quit smoking" ;
+    dmo:interventionCode "get-help-to-quit-smoking" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "get help to quit smoking" ;
+    dmo:evidenceQuote "If you smoke, get help to quit smoking External link" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/quit-smoking> a dmo:LifestyleIntervention ;
+    rdfs:label "Quit smoking" ;
+    dmo:interventionCode "quit-smoking" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Quit smoking" ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/medication/aflibercept> a dmo:Medication ;
+    rdfs:label "aflibercept" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "aflibercept" ;
+    dmo:name "aflibercept" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Your doctor may treat your eyes with anti-VEGF medicine, such as aflibercept, bevacizumab, or ranibizumab." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/medication/bevacizumab> a dmo:Medication ;
+    rdfs:label "bevacizumab" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "bevacizumab" ;
+    dmo:name "bevacizumab" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Your doctor may treat your eyes with anti-VEGF medicine, such as aflibercept, bevacizumab, or ranibizumab." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/medication/ranibizumab> a dmo:Medication ;
+    rdfs:label "ranibizumab" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ranibizumab" ;
+    dmo:name "ranibizumab" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Your doctor may treat your eyes with anti-VEGF medicine, such as aflibercept, bevacizumab, or ranibizumab." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/monitoringSchedule/dilated-eye-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Dilated Eye Exam" ;
+    dmo:appliesTo "people with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Dilated Eye Exam" ;
+    dmo:scheduleId "dilated-eye-exam" ;
+    dmo:evidenceQuote "have a dilated eye exam once a year" ;
+    dmo:evidenceQuote "Most people with diabetes should see an eye care professional once a year for a complete eye exam." ;
+    dmo:evidenceQuote "Also, have a dilated eye exam NIH external link at least once a year—or more often if recommended by your eye care professional." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/monitoringSchedule/eye-exam-during-pregnancy> a dmo:MonitoringSchedule ;
+    rdfs:label "Eye Exam During Pregnancy" ;
+    dmo:appliesTo "Women with type 1 and type 2 diabetes" ;
+    dmo:name "Eye Exam During Pregnancy" ;
+    dmo:scheduleId "eye-exam-during-pregnancy" ;
+    dmo:triggerWindow "before pregnancy or within the first 3 months" ;
+    dmo:evidenceQuote "Women with type 1 and type 2 diabetes need an eye exam before pregnancy or within the first 3 months. Your doctor may want you to repeat the exam later in your pregnancy and until your baby is 1 year old." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/monitoringSchedule/eye-exam-for-type-1-diabetes> a dmo:MonitoringSchedule ;
+    rdfs:label "Eye Exam for Type 1 Diabetes" ;
+    dmo:appliesTo "People with Type 1 Diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Eye Exam for Type 1 Diabetes" ;
+    dmo:scheduleId "eye-exam-for-type-1-diabetes" ;
+    dmo:triggerWindow "within 5 years of diagnosis" ;
+    dmo:evidenceQuote "Type 1: Yearly eye exams should start within 5 years of diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/monitoringSchedule/eye-exam-for-type-2-diabetes> a dmo:MonitoringSchedule ;
+    rdfs:label "Eye Exam for Type 2 Diabetes" ;
+    dmo:appliesTo "People with Type 2 Diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Eye Exam for Type 2 Diabetes" ;
+    dmo:scheduleId "eye-exam-for-type-2-diabetes" ;
+    dmo:triggerWindow "right after diagnosis" ;
+    dmo:evidenceQuote "Type 2: Yearly eye exams should start right after diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/anti-vegf-medicine-for-diabetic-macular-edema> a dmo:Recommendation ;
+    rdfs:label "Anti-VEGF medicine for diabetic macular edema" ;
+    dmo:populationScope "People with diabetic macular edema" ;
+    dmo:recommendationId "anti-vegf-medicine-for-diabetic-macular-edema" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Your doctor may treat your eyes with anti-VEGF medicine, such as aflibercept, bevacizumab, or ranibizumab. These medicines block the growth of abnormal blood vessels in the eye. Anti-VEGF medicines can also stop fluid leaks, which can help treat diabetic macular edema." ;
+    dmo:evidenceQuote "Your doctor may treat your eyes with anti-VEGF medicine, such as aflibercept, bevacizumab, or ranibizumab. These medicines block the growth of abnormal blood vessels in the eye. Anti-VEGF medicines can also stop fluid leaks, which can help treat diabetic macular edema." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/cataract-lens-surgery> a dmo:Recommendation ;
+    rdfs:label "Cataract lens surgery" ;
+    dmo:recommendationId "cataract-lens-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "In a surgery center or hospital visit, your doctor can remove the cloudy lens in your eye, where the cataract has grown, and replace it with an artificial lens. People who have cataract surgery generally have better vision afterward." ;
+    dmo:evidenceQuote "In a surgery center or hospital visit, your doctor can remove the cloudy lens in your eye, where the cataract has grown, and replace it with an artificial lens. People who have cataract surgery generally have better vision afterward." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/dilated-eye-exam-once-a-year> a dmo:Recommendation ;
+    rdfs:label "Dilated Eye Exam Once a Year" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "dilated-eye-exam-once-a-year" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "have a dilated eye exam once a year" ;
+    dmo:evidenceQuote "have a dilated eye exam once a year" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/eye-exam-before-pregnancy-for-women-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "Eye exam before pregnancy for women with diabetes" ;
+    dmo:populationScope "Women with type 1 and type 2 diabetes who are planning or undergoing pregnancy" ;
+    dmo:recommendationId "eye-exam-before-pregnancy-for-women-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Women with type 1 and type 2 diabetes need an eye exam before pregnancy or within the first 3 months." ;
+    dmo:evidenceQuote "Women with type 1 and type 2 diabetes need an eye exam before pregnancy or within the first 3 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/focal-grid-laser-treatment> a dmo:Recommendation ;
+    rdfs:label "Focal/grid laser treatment" ;
+    dmo:recommendationId "focal-grid-laser-treatment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Focal/grid laser treatment works on a small area of the retina to treat diabetic macular edema." ;
+    dmo:evidenceQuote "Focal/grid laser treatment works on a small area of the retina to treat diabetic macular edema." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/get-help-to-quit-smoking> a dmo:Recommendation ;
+    rdfs:label "Get Help to Quit Smoking" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes who smoke" ;
+    dmo:recommendationId "get-help-to-quit-smoking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you smoke, get help to quit smoking" ;
+    dmo:evidenceQuote "If you smoke, get help to quit smoking" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/laser-treatment-for-leaky-blood-vessels-and-edema> a dmo:Recommendation ;
+    rdfs:label "Laser treatment for leaky blood vessels and edema" ;
+    dmo:populationScope "People with leaky blood vessels or edema due to diabetic eye disease" ;
+    dmo:recommendationId "laser-treatment-for-leaky-blood-vessels-and-edema" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Laser treatment, also called photocoagulation, creates tiny burns inside the eye with a beam of light. This method treats leaky blood vessels and extra fluid, called edema." ;
+    dmo:evidenceQuote "Laser treatment, also called photocoagulation, creates tiny burns inside the eye with a beam of light. This method treats leaky blood vessels and extra fluid, called edema." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-blood-pressure-and-cholesterol> a dmo:Recommendation ;
+    rdfs:label "Manage Blood Glucose Blood Pressure and Cholesterol" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "manage-blood-glucose-blood-pressure-and-cholesterol" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "manage your blood glucose, blood pressure, and cholesterol, sometimes called the diabetes ABCs" ;
+    dmo:evidenceQuote "manage your blood glucose, blood pressure, and cholesterol, sometimes called the diabetes ABCs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/manage-diabetes-abcs> a dmo:Recommendation ;
+    rdfs:label "Manage diabetes ABCs" ;
+    dmo:recommendationId "manage-diabetes-abcs" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/repeat-eye-exam-during-pregnancy-for-women-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "Repeat eye exam during pregnancy for women with diabetes" ;
+    dmo:populationScope "Women with type 1 and type 2 diabetes during and after pregnancy" ;
+    dmo:recommendationId "repeat-eye-exam-during-pregnancy-for-women-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Your doctor may want you to repeat the exam later in your pregnancy and until your baby is 1 year old." ;
+    dmo:evidenceQuote "Your doctor may want you to repeat the exam later in your pregnancy and until your baby is 1 year old." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/scatter-laser-treatment> a dmo:Recommendation ;
+    rdfs:label "Scatter laser treatment" ;
+    dmo:recommendationId "scatter-laser-treatment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Scatter laser treatment, also called panretinal photocoagulation (PRP), covers a larger area of the retina. This method treats the growth of abnormal blood vessels, called proliferative diabetic retinopathy." ;
+    dmo:evidenceQuote "Scatter laser treatment, also called panretinal photocoagulation (PRP), covers a larger area of the retina. This method treats the growth of abnormal blood vessels, called proliferative diabetic retinopathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/vitrectomy> a dmo:Recommendation ;
+    rdfs:label "Vitrectomy" ;
+    dmo:recommendationId "vitrectomy" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Vitrectomy is a surgery to remove the clear gel that fills the center of the eye, called the vitreous gel. The procedure treats problems with severe bleeding or scar tissue caused by proliferative diabetic retinopathy." ;
+    dmo:evidenceQuote "Vitrectomy is a surgery to remove the clear gel that fills the center of the eye, called the vitreous gel. The procedure treats problems with severe bleeding or scar tissue caused by proliferative diabetic retinopathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/yearly-eye-exams-for-type-1-diabetes> a dmo:Recommendation ;
+    rdfs:label "Yearly eye exams for Type 1 diabetes" ;
+    dmo:populationScope "People with Type 1 diabetes" ;
+    dmo:recommendationId "yearly-eye-exams-for-type-1-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Yearly eye exams should start within 5 years of diagnosis." ;
+    dmo:evidenceQuote "Type 1: Yearly eye exams should start within 5 years of diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/recommendation/yearly-eye-exams-for-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Yearly eye exams for Type 2 diabetes" ;
+    dmo:populationScope "People with Type 2 diabetes" ;
+    dmo:recommendationId "yearly-eye-exams-for-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Yearly eye exams should start right after diagnosis." ;
+    dmo:evidenceQuote "Type 2: Yearly eye exams should start right after diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/african-americans> a dmo:RiskFactor ;
+    rdfs:label "African Americans" ;
+    dmo:evidenceNote "非裔美国人等特定人群患糖尿病致盲风险更高。" ;
+    dmo:name "African Americans" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "african-americans" ;
+    dmo:evidenceQuote "African Americans, American Indians and Alaska Natives, Hispanics/Latinos, Pacific Islanders, and older adults are at greater risk of losing vision or going blind from diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/age-over-40> a dmo:RiskFactor ;
+    rdfs:label "Age Over 40" ;
+    dmo:evidenceNote "文档指出约三分之一40岁以上糖尿病患者已有糖尿病视网膜病变迹象，说明年龄是不可干预的危险因素。" ;
+    dmo:name "Age Over 40" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "age-over-40" ;
+    dmo:evidenceQuote "About one in three people with diabetes who are older than age 40 already have some signs of diabetic retinopathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/american-indians-and-alaska-natives> a dmo:RiskFactor ;
+    rdfs:label "American Indians and Alaska Natives" ;
+    dmo:evidenceNote "美洲印第安人和阿拉斯加原住民等特定人群患糖尿病致盲风险更高。" ;
+    dmo:name "American Indians and Alaska Natives" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "american-indians-and-alaska-natives" ;
+    dmo:evidenceQuote "African Americans, American Indians and Alaska Natives, Hispanics/Latinos, Pacific Islanders, and older adults are at greater risk of losing vision or going blind from diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/diabetes> a dmo:RiskFactor ;
+    rdfs:label "Diabetes" ;
+    dmo:evidenceNote "Managing diabetes ABCs (A1c, blood pressure, cholesterol) is recommended to prevent or slow diabetic eye disease." ;
+    dmo:name "Diabetes" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "diabetes" ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/diabetes-duration> a dmo:RiskFactor ;
+    rdfs:label "Diabetes Duration" ;
+    dmo:evidenceNote "文档虽未直接使用“病程”一词，但提到糖尿病视网膜病变随时间发展，暗示病程越长风险越高，属于不可干预因素。" ;
+    dmo:name "Diabetes Duration" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "diabetes-duration" ;
+    dmo:evidenceQuote "Over time, diabetes can cause damage to your eyes that can lead to poor vision or even blindness." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/duration-of-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Duration of Diabetes" ;
+    dmo:evidenceNote "患糖尿病时间越长，患糖尿病眼病的风险越高。" ;
+    dmo:name "Duration of Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "duration-of-diabetes" ;
+    dmo:evidenceQuote "Your chances of developing diabetic eye disease increase the longer you have diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-cholesterol> a dmo:RiskFactor ;
+    rdfs:label "High Blood Cholesterol" ;
+    dmo:evidenceNote "高血脂可能增加糖尿病眼病的风险。" ;
+    dmo:name "High Blood Cholesterol" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-cholesterol" ;
+    dmo:evidenceQuote "High blood cholesterol and smoking may also raise your risk for diabetic eye disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-glucose> a dmo:RiskFactor ;
+    rdfs:label "High Blood Glucose" ;
+    dmo:evidenceNote "高血糖是糖尿病影响眼睛的主要原因，长期高血糖会损害视网膜的微小血管。" ;
+    dmo:name "High Blood Glucose" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-glucose" ;
+    dmo:evidenceQuote "Diabetes affects your eyes when your blood glucose, also called blood sugar, is too high." ;
+    dmo:evidenceQuote "high blood glucose that is not treated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> a dmo:RiskFactor ;
+    rdfs:label "High Blood Pressure" ;
+    dmo:evidenceNote "文档提到管理血压是糖尿病ABC管理的一部分，与血糖、胆固醇并列，暗示其为可干预风险因素。" ;
+    dmo:name "High Blood Pressure" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-pressure" ;
+    dmo:evidenceQuote "manage your blood glucose, blood pressure, and cholesterol, sometimes called the diabetes ABCs" ;
+    dmo:evidenceQuote "high blood pressure that is not treated" ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-cholesterol> a dmo:RiskFactor ;
+    rdfs:label "High Cholesterol" ;
+    dmo:evidenceNote "文档提到管理胆固醇是糖尿病ABC管理的一部分，与血糖、血压并列，暗示其为可干预风险因素。" ;
+    dmo:name "High Cholesterol" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-cholesterol" ;
+    dmo:evidenceQuote "manage your blood glucose, blood pressure, and cholesterol, sometimes called the diabetes ABCs" ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/hispanics-latinos> a dmo:RiskFactor ;
+    rdfs:label "Hispanics/Latinos" ;
+    dmo:evidenceNote "西班牙裔/拉丁裔等特定人群患糖尿病致盲风险更高。" ;
+    dmo:name "Hispanics/Latinos" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "hispanics-latinos" ;
+    dmo:evidenceQuote "African Americans, American Indians and Alaska Natives, Hispanics/Latinos, Pacific Islanders, and older adults are at greater risk of losing vision or going blind from diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/older-adults> a dmo:RiskFactor ;
+    rdfs:label "Older Adults" ;
+    dmo:evidenceNote "老年人患糖尿病致盲风险更高。" ;
+    dmo:name "Older Adults" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "older-adults" ;
+    dmo:evidenceQuote "African Americans, American Indians and Alaska Natives, Hispanics/Latinos, Pacific Islanders, and older adults are at greater risk of losing vision or going blind from diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/pacific-islanders> a dmo:RiskFactor ;
+    rdfs:label "Pacific Islanders" ;
+    dmo:evidenceNote "太平洋岛民等特定人群患糖尿病致盲风险更高。" ;
+    dmo:name "Pacific Islanders" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "pacific-islanders" ;
+    dmo:evidenceQuote "African Americans, American Indians and Alaska Natives, Hispanics/Latinos, Pacific Islanders, and older adults are at greater risk of losing vision or going blind from diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/prediabetes> a dmo:RiskFactor ;
+    rdfs:label "Prediabetes" ;
+    dmo:evidenceNote "糖尿病前期时血糖水平高于正常但未达到糖尿病诊断标准，也可能开始出现视网膜血管损伤。" ;
+    dmo:name "Prediabetes" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "prediabetes" ;
+    dmo:evidenceQuote "This damage can begin during prediabetes, when blood glucose is higher than normal, but not high enough for you to be diagnosed with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/pregnancy-with-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Pregnancy with Diabetes" ;
+    dmo:evidenceNote "糖尿病患者在怀孕期间可能迅速出现眼病，原有视网膜病变可能加重。" ;
+    dmo:name "Pregnancy with Diabetes" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "pregnancy-with-diabetes" ;
+    dmo:evidenceQuote "If you have diabetes and become pregnant, you can develop eye problems very quickly during your pregnancy. If you already have some diabetic retinopathy, it can get worse during pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/riskFactor/smoking> a dmo:RiskFactor ;
+    rdfs:label "Smoking" ;
+    dmo:evidenceNote "文档建议吸烟者应寻求帮助戒烟，暗示吸烟是可干预的风险因素。" ;
+    dmo:name "Smoking" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "smoking" ;
+    dmo:evidenceQuote "If you smoke, get help to quit smoking External link" ;
+    dmo:evidenceQuote "High blood cholesterol and smoking may also raise your risk for diabetic eye disease." ;
+    dmo:evidenceQuote "To prevent diabetic eye disease, or to keep it from getting worse, manage your diabetes ABCs: your A1c, blood pressure, and cholesterol; and quit smoking if you smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/blurry-or-wavy-vision> a dmo:Symptom ;
+    rdfs:label "Blurry or wavy vision" ;
+    dmo:name "Blurry or wavy vision" ;
+    dmo:symptomCode "blurry-or-wavy-vision" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "When symptoms do occur, they may include blurry or wavy vision" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/blurry-vision> a dmo:Symptom ;
+    rdfs:label "Blurry Vision" ;
+    dmo:name "Blurry Vision" ;
+    dmo:symptomCode "blurry-vision" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "People sometimes have blurry vision for a few days or weeks when they’re changing their diabetes care plan or medicines. High glucose can change fluid levels or cause swelling in the tissues of your eyes NIH external link that help you to focus, causing blurred vision." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/cloudy-vision> a dmo:Symptom ;
+    rdfs:label "Cloudy Vision" ;
+    dmo:name "Cloudy Vision" ;
+    dmo:symptomCode "cloudy-vision" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Cloudy vision and faded colors are symptoms of cataracts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/curtain-over-eyes> a dmo:Symptom ;
+    rdfs:label "Curtain over eyes" ;
+    dmo:name "Curtain over eyes" ;
+    dmo:symptomCode "curtain-over-eyes" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "it looks like a curtain is pulled over your eyes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/dark-areas-or-vision-loss> a dmo:Symptom ;
+    rdfs:label "Dark areas or vision loss" ;
+    dmo:name "Dark areas or vision loss" ;
+    dmo:symptomCode "dark-areas-or-vision-loss" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "dark areas or vision loss" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/faded-colors> a dmo:Symptom ;
+    rdfs:label "Faded Colors" ;
+    dmo:name "Faded Colors" ;
+    dmo:symptomCode "faded-colors" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Cloudy vision and faded colors are symptoms of cataracts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/frequently-changing-vision> a dmo:Symptom ;
+    rdfs:label "Frequently changing vision" ;
+    dmo:name "Frequently changing vision" ;
+    dmo:symptomCode "frequently-changing-vision" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "frequently changing vision—sometimes from day to day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/loss-of-side-vision> a dmo:Symptom ;
+    rdfs:label "Loss of Side Vision" ;
+    dmo:name "Loss of Side Vision" ;
+    dmo:symptomCode "loss-of-side-vision" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "People with glaucoma slowly lose side vision." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+<https://example.org/dmo/id/symptom/spots-or-dark-strings> a dmo:Symptom ;
+    rdfs:label "Spots or dark strings" ;
+    dmo:name "Spots or dark strings" ;
+    dmo:symptomCode "spots-or-dark-strings" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "spots or dark strings (also called floaters)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/prediabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/proliferative-diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/proliferative-diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-macular-edema> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-macular-edema> .
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/glaucoma> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/glaucoma> .
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/cataracts> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/cataracts> .
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/cataracts> .
+<https://example.org/dmo/id/diabetesType/prediabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/cataracts> .
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/detached-retina> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/detached-retina> .
+<https://example.org/dmo/id/diabetesType/type-1> dmo:predisposesTo <https://example.org/dmo/id/complication/retinal-detachment> .
+<https://example.org/dmo/id/diabetesType/type-2> dmo:predisposesTo <https://example.org/dmo/id/complication/retinal-detachment> .
+<https://example.org/dmo/id/complication/diabetic-retinopathy> dmo:presentsWith <https://example.org/dmo/id/symptom/blurry-or-wavy-vision> .
+<https://example.org/dmo/id/complication/diabetic-macular-edema> dmo:presentsWith <https://example.org/dmo/id/symptom/blurry-or-wavy-vision> .
+<https://example.org/dmo/id/complication/glaucoma> dmo:presentsWith <https://example.org/dmo/id/symptom/loss-of-side-vision> .
+<https://example.org/dmo/id/complication/cataracts> dmo:presentsWith <https://example.org/dmo/id/symptom/cloudy-vision> .
+<https://example.org/dmo/id/complication/cataracts> dmo:presentsWith <https://example.org/dmo/id/symptom/faded-colors> .
+<https://example.org/dmo/id/complication/detached-retina> dmo:presentsWith <https://example.org/dmo/id/symptom/curtain-over-eyes> .
+<https://example.org/dmo/id/complication/nonproliferative-diabetic-retinopathy> dmo:presentsWith <https://example.org/dmo/id/symptom/blurry-or-wavy-vision> .
+<https://example.org/dmo/id/complication/retinal-detachment> dmo:presentsWith <https://example.org/dmo/id/symptom/curtain-over-eyes> .
+<https://example.org/dmo/id/lifestyleIntervention/get-help-to-quit-smoking> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/smoking> .
+<https://example.org/dmo/id/recommendation/dilated-eye-exam-once-a-year> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1> .
+<https://example.org/dmo/id/recommendation/dilated-eye-exam-once-a-year> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2> .
+<https://example.org/dmo/id/recommendation/dilated-eye-exam-once-a-year> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/dilated-eye-exam-once-a-year> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/manage-diabetes-abcs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/quit-smoking> .
+<https://example.org/dmo/id/recommendation/manage-diabetes-abcs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-help-to-quit-smoking> .
+<https://example.org/dmo/id/recommendation/anti-vegf-medicine-for-diabetic-macular-edema> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-macular-edema> .
+<https://example.org/dmo/id/recommendation/focal-grid-laser-treatment> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-macular-edema> .
+<https://example.org/dmo/id/recommendation/scatter-laser-treatment> dmo:targetsComplication <https://example.org/dmo/id/complication/proliferative-diabetic-retinopathy> .
+<https://example.org/dmo/id/recommendation/laser-treatment-for-leaky-blood-vessels-and-edema> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-macular-edema> .
+<https://example.org/dmo/id/recommendation/vitrectomy> dmo:targetsComplication <https://example.org/dmo/id/complication/retinal-detachment> .
+<https://example.org/dmo/id/recommendation/cataract-lens-surgery> dmo:targetsComplication <https://example.org/dmo/id/complication/cataract> .
+<https://example.org/dmo/id/recommendation/eye-exam-before-pregnancy-for-women-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1> .
+<https://example.org/dmo/id/recommendation/eye-exam-before-pregnancy-for-women-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2> .
+<https://example.org/dmo/id/recommendation/repeat-eye-exam-during-pregnancy-for-women-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1> .
+<https://example.org/dmo/id/recommendation/repeat-eye-exam-during-pregnancy-for-women-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2> .
+<https://example.org/dmo/id/recommendation/yearly-eye-exams-for-type-1-diabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/eye-exam-for-type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/yearly-eye-exams-for-type-2-diabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/eye-exam-for-type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/dilated-eye-exam-once-a-year> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/dilated-eye-exam> .

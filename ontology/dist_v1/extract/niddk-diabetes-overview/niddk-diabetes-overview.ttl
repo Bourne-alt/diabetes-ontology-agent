@@ -1,0 +1,264 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-diabetes-overview.txt
+# 目标 named graph：urn:dmo:extract:niddk-diabetes-overview
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-diabetes-overview'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-diabetes-overview.txt" ;
+    dmo:sha256 "f399dbc57da184d6ff76336fa6c999db3f008202dfa0166f8bcb639c0962f827" ;
+    dmo:byteSize "6134"^^xsd:integer .
+
+<urn:dmo:extract:niddk-diabetes-overview> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:31:09+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/damage-to-the-eyes> a dmo:Complication ;
+    rdfs:label "Damage to the eyes" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "damage-to-the-eyes" ;
+    dmo:definition "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Damage to the eyes" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/complication/damage-to-the-feet> a dmo:Complication ;
+    rdfs:label "Damage to the feet" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "damage-to-the-feet" ;
+    dmo:definition "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Damage to the feet" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/complication/damage-to-the-heart> a dmo:Complication ;
+    rdfs:label "Damage to the heart" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "damage-to-the-heart" ;
+    dmo:definition "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005146" ;
+    dmo:name "Damage to the heart" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/complication/damage-to-the-kidneys> a dmo:Complication ;
+    rdfs:label "Damage to the kidneys" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "damage-to-the-kidneys" ;
+    dmo:definition "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Damage to the kidneys" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/complication/damage-to-the-nerves> a dmo:Complication ;
+    rdfs:label "Damage to the nerves" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "damage-to-the-nerves" ;
+    dmo:definition "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Damage to the nerves" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Over time, high blood glucose can damage your heart, kidneys, feet, and eyes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/complication/heart-disease> a dmo:Complication ;
+    rdfs:label "Heart disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "heart-disease" ;
+    dmo:definition "You also have a higher risk for heart disease than people with normal glucose levels." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005146" ;
+    dmo:name "Heart disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "You also have a higher risk for heart disease than people with normal glucose levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Gestational Diabetes" ;
+    dmo:definition "Gestational diabetes is a type of diabetes that develops during pregnancy." ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Gestational Diabetes" ;
+    dmo:prevalenceShare "0.01"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "Gestational diabetes is a type of diabetes that develops during pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Monogenic Diabetes" ;
+    dmo:definition "A less common type of diabetes, called monogenic diabetes, is caused by a change in a single gene." ;
+    dmo:diabetesTypeCode "monogenic-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Monogenic Diabetes" ;
+    dmo:prevalenceShare "0.0001"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "A less common type of diabetes, called monogenic diabetes, is caused by a change in a single gene." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "People with prediabetes have blood glucose levels that are higher than normal but not high enough to be diagnosed with type 2 diabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0.38"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "People with prediabetes have blood glucose levels that are higher than normal but not high enough to be diagnosed with type 2 diabetes. If you have prediabetes, you have a higher risk of developing type 2 diabetes in the future." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "If you have type 1 diabetes, your body makes little or no insulin. Your immune system attacks and destroys the cells in your pancreas that make insulin." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001117" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "If you have type 1 diabetes, your body makes little or no insulin. Your immune system attacks and destroys the cells in your pancreas that make insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "If you have type 2 diabetes, the cells in your body don’t use insulin properly. The pancreas may be making insulin but is not making enough insulin to keep your blood glucose level in the normal range." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "If you have type 2 diabetes, the cells in your body don’t use insulin properly. The pancreas may be making insulin but is not making enough insulin to keep your blood glucose level in the normal range." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/lifestyleIntervention/losing-weight-or-preventing-weight-gain> a dmo:LifestyleIntervention ;
+    rdfs:label "losing weight or preventing weight gain" ;
+    dmo:interventionCode "losing-weight-or-preventing-weight-gain" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "losing weight or preventing weight gain" ;
+    dmo:evidenceQuote "You can help delay or prevent type 2 diabetes by knowing the risk factors and taking steps toward a healthier lifestyle, such as losing weight or preventing weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/recommendation/managing-diabetes> a dmo:Recommendation ;
+    rdfs:label "Managing Diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "managing-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Managing your blood glucose, blood pressure, and cholesterol levels can help prevent future health problems." ;
+    dmo:evidenceQuote "Managing your blood glucose, blood pressure, and cholesterol levels can help prevent future health problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/recommendation/preventing-diabetes-health-problems> a dmo:Recommendation ;
+    rdfs:label "Preventing Diabetes Health Problems" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "preventing-diabetes-health-problems" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you have diabetes, you can take steps to lower your chances of developing diabetes health problems by taking steps to improve your health and learning how to manage the disease." ;
+    dmo:evidenceQuote "If you have diabetes, you can take steps to lower your chances of developing diabetes health problems by taking steps to improve your health and learning how to manage the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/recommendation/preventing-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Preventing Type 2 Diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with risk factors for type 2 diabetes, such as overweight or obesity, and a family history of the disease" ;
+    dmo:recommendationId "preventing-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You can help delay or prevent type 2 diabetes by knowing the risk factors and taking steps toward a healthier lifestyle, such as losing weight or preventing weight gain." ;
+    dmo:evidenceQuote "You can help delay or prevent type 2 diabetes by knowing the risk factors and taking steps toward a healthier lifestyle, such as losing weight or preventing weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Type 2 Diabetes" ;
+    dmo:evidenceNote "文档中明确指出，如果您有2型糖尿病的家族史，您更有可能患上2型糖尿病。" ;
+    dmo:name "Family History of Type 2 Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-type-2-diabetes" ;
+    dmo:evidenceQuote "You are more likely to develop type 2 diabetes if you have risk factors, such as overweight or obesity, and a family history of the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/riskFactor/gestational-diabetes-history> a dmo:RiskFactor ;
+    rdfs:label "Gestational Diabetes History" ;
+    dmo:evidenceNote "文档中明确指出，如果曾患有妊娠期糖尿病，未来患2型糖尿病的风险更高。" ;
+    dmo:name "Gestational Diabetes History" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "gestational-diabetes-history" ;
+    dmo:evidenceQuote "However, if you’ve had gestational diabetes, you have a higher chance of developing type 2 diabetes later in life." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/riskFactor/overweight-or-obesity> a dmo:RiskFactor ;
+    rdfs:label "Overweight or Obesity" ;
+    dmo:evidenceNote "文档中明确指出，如果您有超重或肥胖等风险因素，您更有可能患上2型糖尿病。" ;
+    dmo:name "Overweight or Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "overweight-or-obesity" ;
+    dmo:evidenceQuote "You are more likely to develop type 2 diabetes if you have risk factors, such as overweight or obesity, and a family history of the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+<https://example.org/dmo/id/riskFactor/prediabetes> a dmo:RiskFactor ;
+    rdfs:label "Prediabetes" ;
+    dmo:evidenceNote "文档中明确指出，患有前期糖尿病的人未来患2型糖尿病的风险更高。" ;
+    dmo:name "Prediabetes" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "prediabetes" ;
+    dmo:evidenceQuote "If you have prediabetes, you have a higher risk of developing type 2 diabetes in the future." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-overview> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/overweight-or-obesity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/gestational-diabetes-history> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/prediabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/preventing-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/damage-to-the-eyes> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/damage-to-the-feet> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/damage-to-the-heart> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/damage-to-the-kidneys> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/damage-to-the-nerves> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/heart-disease> .
+<https://example.org/dmo/id/diabetesType/prediabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/heart-disease> .
+<https://example.org/dmo/id/lifestyleIntervention/losing-weight-or-preventing-weight-gain> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight-or-obesity> .
+<https://example.org/dmo/id/recommendation/preventing-type-2-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/losing-weight-or-preventing-weight-gain> .
+<https://example.org/dmo/id/recommendation/managing-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/damage-to-the-eyes> .
+<https://example.org/dmo/id/recommendation/managing-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/damage-to-the-feet> .
+<https://example.org/dmo/id/recommendation/managing-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/damage-to-the-heart> .
+<https://example.org/dmo/id/recommendation/managing-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/damage-to-the-kidneys> .
+<https://example.org/dmo/id/recommendation/managing-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/damage-to-the-nerves> .
+<https://example.org/dmo/id/recommendation/managing-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/heart-disease> .
+<https://example.org/dmo/id/recommendation/preventing-diabetes-health-problems> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/preventing-diabetes-health-problems> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/preventing-diabetes-health-problems> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/preventing-diabetes-health-problems> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/preventing-diabetes-health-problems> dmo:appliesToType <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .

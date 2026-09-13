@@ -1,0 +1,26 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/nhc-gdm-nutrition-2018.txt
+# 目标 named graph：urn:dmo:extract:nhc-gdm-nutrition-2018
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:nhc-gdm-nutrition-2018'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/nhc-gdm-nutrition-2018> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/nhc-gdm-nutrition-2018.txt" ;
+    dmo:sha256 "196059255611cf370b443a4acb71f624a19195768478c5a1a33d51eb03e08636" ;
+    dmo:byteSize "775"^^xsd:integer .
+
+<urn:dmo:extract:nhc-gdm-nutrition-2018> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-gdm-nutrition-2018> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:09:28+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────

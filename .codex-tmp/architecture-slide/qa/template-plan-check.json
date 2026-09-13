@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-08-24T13:37:29.231Z",
+  "workspace": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide",
+  "mapPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-frame-map.json",
+  "inspectPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/plain-inspect/template-inspect/template-inspect.ndjson",
+  "sourceSlideCount": 10,
+  "issueCount": 0,
+  "issues": []
+}

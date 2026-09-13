@@ -1,0 +1,29 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/d40da8e5-cf80-5ac9-8359-03cd1d26e15a> a dmo:Patient ;
+    dmo:birthYear 1966 ;
+    dmo:demoScenario "S12" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/L90013-A1C> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90013-1> ;
+    dmo:patientId "P90013" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/observation/L90013-A1C> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S12" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "L90013-A1C" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90013-1> ;
+    dmo:observationType "Other" ;
+    dmo:observedAt "2026-01-28T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "A1C = 7.7 (无单位)（未作数值判定：缺单位）" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90013-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-01-28"^^xsd:date ;
+    dmo:encounterId "E90013-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" .
+

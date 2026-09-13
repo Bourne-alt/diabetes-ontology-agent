@@ -1,0 +1,768 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/fda-diabetes-drug-classes.txt
+# 目标 named graph：urn:dmo:extract:fda-diabetes-drug-classes
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:fda-diabetes-drug-classes'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/fda-diabetes-drug-classes.txt" ;
+    dmo:sha256 "38f4accfbefe8fe3d4d11c9b72c61df31131bf60bca97ee976c4021969ab2b90" ;
+    dmo:byteSize "12998"^^xsd:integer .
+
+<urn:dmo:extract:fda-diabetes-drug-classes> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T01:52:35+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/constipation> a dmo:AdverseEffect ;
+    rdfs:label "Constipation" ;
+    dmo:adverseEffectCode "constipation" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Constipation" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nConstipation" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/diarrhea> a dmo:AdverseEffect ;
+    rdfs:label "Diarrhea" ;
+    dmo:adverseEffectCode "diarrhea" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Diarrhea" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nDiarrhea" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/fluid-retention> a dmo:AdverseEffect ;
+    rdfs:label "Fluid Retention" ;
+    dmo:adverseEffectCode "fluid-retention" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Fluid Retention" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nFluid Retention" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/hypoglycemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:adverseEffectCode "hypoglycemia" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nHypoglycemia (blood sugar that is too low)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/hypoglycemia-blood-sugar-that-is-too-low> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycemia (blood sugar that is too low)" ;
+    dmo:adverseEffectCode "hypoglycemia-blood-sugar-that-is-too-low" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Hypoglycemia (blood sugar that is too low)" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nHypoglycemia (blood sugar that is too low)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/nausea> a dmo:AdverseEffect ;
+    rdfs:label "Nausea" ;
+    dmo:adverseEffectCode "nausea" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Nausea" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nNausea" ;
+    dmo:evidenceQuote "Some people feel nauseous when they first start taking this medicine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/stomach-pain> a dmo:AdverseEffect ;
+    rdfs:label "Stomach Pain" ;
+    dmo:adverseEffectCode "stomach-pain" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Stomach Pain" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nStomach Pain" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/upper-respiratory-infection> a dmo:AdverseEffect ;
+    rdfs:label "Upper Respiratory Infection" ;
+    dmo:adverseEffectCode "upper-respiratory-infection" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Upper Respiratory Infection" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nUpper Respiratory Infection" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/adverseEffect/vaginal-yeast-infections> a dmo:AdverseEffect ;
+    rdfs:label "Vaginal Yeast Infections" ;
+    dmo:adverseEffectCode "vaginal-yeast-infections" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Vaginal Yeast Infections" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Common Side Effects\n\nVaginal Yeast Infections" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/complication/hypoglycemia> a dmo:Complication ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "hypoglycemia" ;
+    dmo:definition "blood sugar that is too low" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005005" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Common Side Effects\n\nHypoglycemia (blood sugar that is too low)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/alcohol-use> a dmo:Contraindication ;
+    rdfs:label "Alcohol Use" ;
+    dmo:contraCode "alcohol-use" ;
+    dmo:rationale "People who drink a lot of alcohol and people with kidney problems may have a rare side effect called lactic acidosis (acid to build up in the blood)." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "People who drink a lot of alcohol" ;
+    dmo:evidenceQuote "People who drink a lot of alcohol and people with kidney problems may have a rare side effect called lactic acidosis (acid to build up in the blood)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/breastfeeding> a dmo:Contraindication ;
+    rdfs:label "Breastfeeding" ;
+    dmo:contraCode "breastfeeding" ;
+    dmo:rationale "Do not take this medicine if you are breastfeeding." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "you are breastfeeding" ;
+    dmo:evidenceQuote "Do not take this medicine if you are breastfeeding." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/heart-failure> a dmo:Contraindication ;
+    rdfs:label "Heart Failure" ;
+    dmo:contraCode "heart-failure" ;
+    dmo:rationale "Before you start taking these drugs, tell your doctor if you have heart failure." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "you have heart failure" ;
+    dmo:evidenceQuote "Before you start taking these drugs, tell your doctor if you have heart failure." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/kidney-problems> a dmo:Contraindication ;
+    rdfs:label "Kidney Problems" ;
+    dmo:contraCode "kidney-problems" ;
+    dmo:rationale "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have kidney problems" ;
+    dmo:evidenceQuote "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/liver-problems> a dmo:Contraindication ;
+    rdfs:label "Liver Problems" ;
+    dmo:contraCode "liver-problems" ;
+    dmo:rationale "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have liver problems" ;
+    dmo:evidenceQuote "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/pregnancy> a dmo:Contraindication ;
+    rdfs:label "Pregnancy" ;
+    dmo:contraCode "pregnancy" ;
+    dmo:rationale "Before you start taking these medicines, tell your health provider if: you have liver or kidney problems you are pregnant or breastfeeding" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "you are pregnant or breastfeeding" ;
+    dmo:evidenceQuote "Before you start taking these medicines, tell your health provider if: you have liver or kidney problems you are pregnant or breastfeeding" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/contraindication/severe-kidney-problems-or-dialysis> a dmo:Contraindication ;
+    rdfs:label "Severe Kidney Problems or Dialysis" ;
+    dmo:contraCode "severe-kidney-problems-or-dialysis" ;
+    dmo:rationale "Do not take these drugs if you have severe kidney problems or are on dialysis." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "severe kidney problems or are on dialysis" ;
+    dmo:evidenceQuote "Do not take these drugs if you have severe kidney problems or are on dialysis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "People with type 1 diabetes must use insulin." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "People with type 1 diabetes must use insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "These medicines are most often used to treat type 2 diabetes." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001513" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "These medicines are most often used to treat type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> a dmo:DrugClass ;
+    rdfs:label "Alpha-glucosidase Inhibitors" ;
+    dmo:drugClassCode "alpha-glucosidase-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "These pills help your body digest sugar more slowly." ;
+    dmo:name "Alpha-glucosidase Inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Some Things To Think About\n\nThese medicines are not likely to cause weight gain or blood sugar that is too low\nBefore you start taking this drug, tell your doctor if:\nyou have heart, liver, or kidney problems\nyou are pregnant or breastfeeding\n\nCommon Side Effects\n\nStomach Pain\nDiarrhea\nGas\nAbnormal Liver Tests" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/amylin-analog> a dmo:DrugClass ;
+    rdfs:label "Amylin Analog" ;
+    dmo:drugClassCode "amylin-analog" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "This is a medicine that you inject under your skin. This medicine should not be used instead of insulin." ;
+    dmo:name "Amylin Analog" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "This is a medicine that you inject under your skin. This medicine should not be used instead of insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/biguanides> a dmo:DrugClass ;
+    rdfs:label "Biguanides" ;
+    dmo:drugClassCode "biguanides" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "These pills stop your liver from making too much sugar (glucose). They also help the sugar get into your cells." ;
+    dmo:name "Biguanides" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "How do they work? These pills stop your liver from making too much sugar (glucose). They also help the sugar get into your cells." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/bile-acid-sequestrants> a dmo:DrugClass ;
+    rdfs:label "Bile Acid Sequestrants" ;
+    dmo:drugClassCode "bile-acid-sequestrants" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "It is not clear how this pill works for diabetes." ;
+    dmo:name "Bile Acid Sequestrants" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "How do they work? It is not clear how this pill works for diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/dopamine-receptor-agonists> a dmo:DrugClass ;
+    rdfs:label "Dopamine Receptor Agonists" ;
+    dmo:drugClassCode "dopamine-receptor-agonists" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "This pill affects a chemical called dopamine in your cells. It is not clear how this pill works for diabetes." ;
+    dmo:name "Dopamine Receptor Agonists" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "How do they work? This pill affects a chemical called dopamine in your cells. It is not clear how this pill works for diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/dpp-4-inhibitors> a dmo:DrugClass ;
+    rdfs:label "DPP-4 Inhibitors" ;
+    dmo:drugClassCode "dpp-4-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "These pills help your body release more insulin." ;
+    dmo:name "DPP-4 Inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "How do they work? These pills help your body release more insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/glp-1-receptor-agonists> a dmo:DrugClass ;
+    rdfs:label "GLP-1 Receptor Agonists" ;
+    dmo:drugClassCode "glp-1-receptor-agonists" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "These are medicines that you inject under your skin. These medicines should not be used instead of insulin." ;
+    dmo:name "GLP-1 Receptor Agonists" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "These are medicines that you inject under your skin. These medicines should not be used instead of insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/meglitinides> a dmo:DrugClass ;
+    rdfs:label "Meglitinides" ;
+    dmo:drugClassCode "meglitinides" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "These pills help your body make more insulin around mealtime." ;
+    dmo:name "Meglitinides" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Some Things To Think About\n\nBefore you start taking these medicines, tell your health provider if:\nyou have liver or kidney problems\nyou are pregnant or breastfeeding\n\nCommon Side Effects\n\nHypoglycemia (blood sugar that is too low)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> a dmo:DrugClass ;
+    rdfs:label "SGLT2 Inhibitors" ;
+    dmo:drugClassCode "sglt2-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "These pills affect the kidney to increase the amount of sugar that goes out in the urine." ;
+    dmo:name "SGLT2 Inhibitors" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "How do they work? These pills affect the kidney to increase the amount of sugar that goes out in the urine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:drugClassCode "sulfonylureas" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "These pills help your body make more insulin." ;
+    dmo:name "Sulfonylureas" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "How do they work? These pills help your body make more insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/chlorpropamide> a dmo:Medication ;
+    rdfs:label "chlorpropamide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "chlorpropamide" ;
+    dmo:name "chlorpropamide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Diabinese chlorpropamide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/glipizide> a dmo:Medication ;
+    rdfs:label "glipizide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glipizide" ;
+    dmo:name "glipizide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Glucotrol Glucotrol XL (extended release) glipizide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/pioglitazone> a dmo:Medication ;
+    rdfs:label "pioglitazone" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "pioglitazone" ;
+    dmo:name "pioglitazone" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "ActoPlus Met ActoPlus Met XR (extended release) pioglitazone and metformin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/pramlintide-acetate> a dmo:Medication ;
+    rdfs:label "pramlintide acetate" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "pramlintide-acetate" ;
+    dmo:name "pramlintide acetate" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Symlin pramlintide acetate" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/rosiglitazone> a dmo:Medication ;
+    rdfs:label "rosiglitazone" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "rosiglitazone" ;
+    dmo:name "rosiglitazone" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Avandamet rosiglitazone and metformin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/tolazamide> a dmo:Medication ;
+    rdfs:label "tolazamide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "tolazamide" ;
+    dmo:name "tolazamide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "No brand name tolazamide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/medication/tolbutamide> a dmo:Medication ;
+    rdfs:label "tolbutamide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "tolbutamide" ;
+    dmo:name "tolbutamide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "No brand name tolbutamide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-your-target-blood-sugar-level> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor about your target blood sugar level" ;
+    dmo:recommendationId "ask-your-doctor-about-your-target-blood-sugar-level" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ask your doctor about your target blood sugar level." ;
+    dmo:evidenceQuote "Ask your doctor about your target blood sugar level." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-if-your-diabetes-medicines-will-affect-your-other-medicines-including-your-birth-control> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor if your diabetes medicines will affect your other medicines including your birth control" ;
+    dmo:recommendationId "ask-your-doctor-if-your-diabetes-medicines-will-affect-your-other-medicines-including-your-birth-control" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Ask your doctor if your diabetes medicines will affect your other medicines including your birth control." ;
+    dmo:evidenceQuote "Ask your doctor if your diabetes medicines will affect your other medicines including your birth control." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/ask-your-healthcare-provider-for-the-facts-about-the-combination-drug-you-are-taking> a dmo:Recommendation ;
+    rdfs:label "Ask your healthcare provider for the facts about the combination drug you are taking" ;
+    dmo:recommendationId "ask-your-healthcare-provider-for-the-facts-about-the-combination-drug-you-are-taking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ask your healthcare provider for the facts about the combination drug you are taking." ;
+    dmo:evidenceQuote "Ask your healthcare provider for the facts about the combination drug you are taking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/before-you-start-taking-these-drugs-tell-your-doctor-if-you-have-heart-failure> a dmo:Recommendation ;
+    rdfs:label "Before you start taking these drugs, tell your doctor if you have heart failure" ;
+    dmo:recommendationId "before-you-start-taking-these-drugs-tell-your-doctor-if-you-have-heart-failure" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Before you start taking these drugs, tell your doctor if you have heart failure." ;
+    dmo:evidenceQuote "Before you start taking these drugs, tell your doctor if you have heart failure." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/before-you-start-taking-this-drug-tell-your-health-care-provider-if-you-have-heart-liver-or-kidney-problems> a dmo:Recommendation ;
+    rdfs:label "Before you start taking this drug, tell your health care provider if you have heart, liver, or kidney problems" ;
+    dmo:recommendationId "before-you-start-taking-this-drug-tell-your-health-care-provider-if-you-have-heart-liver-or-kidney-problems" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Before you start taking this drug, tell your health care provider if you have heart, liver, or kidney problems." ;
+    dmo:evidenceQuote "Before you start taking this drug, tell your health care provider if you have heart, liver, or kidney problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/before-you-take-these-drugs-tell-your-doctor-if-you-have-kidney-or-liver-problems> a dmo:Recommendation ;
+    rdfs:label "Before you take these drugs, tell your doctor if you have kidney or liver problems" ;
+    dmo:recommendationId "before-you-take-these-drugs-tell-your-doctor-if-you-have-kidney-or-liver-problems" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    dmo:evidenceQuote "Before you take these drugs, tell your doctor if you have kidney or liver problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/call-your-doctor-right-away-if-you-have-severe-stomach-pain-with-or-without-nausea-or-vomiting> a dmo:Recommendation ;
+    rdfs:label "Call your doctor right away if you have severe stomach pain with or without nausea or vomiting" ;
+    dmo:recommendationId "call-your-doctor-right-away-if-you-have-severe-stomach-pain-with-or-without-nausea-or-vomiting" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Call your doctor right away if you have severe stomach pain with or without nausea or vomiting." ;
+    dmo:evidenceQuote "Call your doctor right away if you have severe stomach pain with or without nausea or vomiting. This may be a sign of a serious side effect." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/check-the-fda-website-for-the-latest-facts-on-each-product> a dmo:Recommendation ;
+    rdfs:label "Check the FDA website for the latest facts on each product" ;
+    dmo:recommendationId "check-the-fda-website-for-the-latest-facts-on-each-product" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check the FDA website for the latest facts on each product." ;
+    dmo:evidenceQuote "Check the FDA website for the latest facts on each product." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/do-not-take-these-drugs-if-you-have-severe-kidney-problems-or-are-on-dialysis> a dmo:Recommendation ;
+    rdfs:label "Do not take these drugs if you have severe kidney problems or are on dialysis" ;
+    dmo:recommendationId "do-not-take-these-drugs-if-you-have-severe-kidney-problems-or-are-on-dialysis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Do not take these drugs if you have severe kidney problems or are on dialysis." ;
+    dmo:evidenceQuote "Do not take these drugs if you have severe kidney problems or are on dialysis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/do-not-take-this-medicine-if-you-are-breastfeeding> a dmo:Recommendation ;
+    rdfs:label "Do not take this medicine if you are breastfeeding" ;
+    dmo:recommendationId "do-not-take-this-medicine-if-you-are-breastfeeding" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Do not take this medicine if you are breastfeeding." ;
+    dmo:evidenceQuote "Do not take this medicine if you are breastfeeding." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/get-the-facts-ask-your-healthcare-provider-for-the-side-effects-warnings-and-other-facts-for-the-medicines-you-are-taking> a dmo:Recommendation ;
+    rdfs:label "Get the facts. Ask your healthcare provider for the side effects, warnings, and other facts for the medicines you are taking" ;
+    dmo:recommendationId "get-the-facts-ask-your-healthcare-provider-for-the-side-effects-warnings-and-other-facts-for-the-medicines-you-are-taking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Get the facts. Ask your healthcare provider for the side effects, warnings, and other facts for the medicines you are taking." ;
+    dmo:evidenceQuote "Get the facts. Ask your healthcare provider for the side effects, warnings, and other facts for the medicines you are taking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/people-who-use-insulin-can-also-use-symlin> a dmo:Recommendation ;
+    rdfs:label "People who use insulin can also use Symlin" ;
+    dmo:recommendationId "people-who-use-insulin-can-also-use-symlin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "People who use insulin can also use Symlin." ;
+    dmo:evidenceQuote "People who use insulin can also use Symlin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/people-with-type-1-diabetes-can-also-use-symlin> a dmo:Recommendation ;
+    rdfs:label "People with type 1 diabetes can also use Symlin" ;
+    dmo:recommendationId "people-with-type-1-diabetes-can-also-use-symlin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "People with type 1 diabetes can also use Symlin." ;
+    dmo:evidenceQuote "People with type 1 diabetes can also use Symlin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/some-people-feel-nauseous-when-they-first-start-taking-these-medicines> a dmo:Recommendation ;
+    rdfs:label "Some people feel nauseous when they first start taking these medicines" ;
+    dmo:recommendationId "some-people-feel-nauseous-when-they-first-start-taking-these-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Some people feel nauseous when they first start taking these medicines." ;
+    dmo:evidenceQuote "Some people feel nauseous when they first start taking these medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/some-people-feel-nauseous-when-they-first-start-taking-this-medicine> a dmo:Recommendation ;
+    rdfs:label "Some people feel nauseous when they first start taking this medicine" ;
+    dmo:recommendationId "some-people-feel-nauseous-when-they-first-start-taking-this-medicine" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Some people feel nauseous when they first start taking this medicine." ;
+    dmo:evidenceQuote "Some people feel nauseous when they first start taking this medicine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/speak-up-tell-someone-about-any-problems-you-may-be-having-with-your-medicines> a dmo:Recommendation ;
+    rdfs:label "Speak up. Tell someone about any problems you may be having with your medicines" ;
+    dmo:recommendationId "speak-up-tell-someone-about-any-problems-you-may-be-having-with-your-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Speak up. Tell someone about any problems you may be having with your medicines." ;
+    dmo:evidenceQuote "Speak up. Tell someone about any problems you may be having with your medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/talk-to-your-doctor-about-your-kidney-health-before-you-start-and-while-you-are-taking-this-type-of-medicine> a dmo:Recommendation ;
+    rdfs:label "Talk to your doctor about your kidney health before you start and while you are taking this type of medicine" ;
+    dmo:recommendationId "talk-to-your-doctor-about-your-kidney-health-before-you-start-and-while-you-are-taking-this-type-of-medicine" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Talk to your doctor about your kidney health before you start and while you are taking this type of medicine." ;
+    dmo:evidenceQuote "Talk to your doctor about your kidney health before you start and while you are taking this type of medicine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/talk-to-your-doctor-before-you-change-or-stop-taking-your-diabetes-medicines> a dmo:Recommendation ;
+    rdfs:label "Talk to your doctor before you change or stop taking your diabetes medicines" ;
+    dmo:recommendationId "talk-to-your-doctor-before-you-change-or-stop-taking-your-diabetes-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Talk to your doctor before you change or stop taking your diabetes medicines." ;
+    dmo:evidenceQuote "Talk to your doctor before you change or stop taking your diabetes medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/talk-to-your-doctor-or-nurse-about-what-you-should-do-if-your-blood-sugar-gets-too-low-or-too-high> a dmo:Recommendation ;
+    rdfs:label "Talk to your doctor or nurse about what you should do if your blood sugar gets too low or too high" ;
+    dmo:recommendationId "talk-to-your-doctor-or-nurse-about-what-you-should-do-if-your-blood-sugar-gets-too-low-or-too-high" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Talk to your doctor or nurse about what you should do if your blood sugar gets too low or too high." ;
+    dmo:evidenceQuote "Talk to your doctor or nurse about what you should do if your blood sugar gets too low or too high." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/recommendation/this-medicine-is-usually-taken-before-meals> a dmo:Recommendation ;
+    rdfs:label "This medicine is usually taken before meals" ;
+    dmo:recommendationId "this-medicine-is-usually-taken-before-meals" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "This medicine is usually taken before meals." ;
+    dmo:evidenceQuote "This medicine is usually taken before meals." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/alcohol-use> a dmo:RiskFactor ;
+    rdfs:label "Alcohol Use" ;
+    dmo:evidenceNote "Document states 'People who drink a lot of alcohol and people with kidney problems may have a rare side effect called lactic acidosis', indicating alcohol use is a modifiable risk factor." ;
+    dmo:name "Alcohol Use" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "alcohol-use" ;
+    dmo:evidenceQuote "People who drink a lot of alcohol" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/anemia> a dmo:RiskFactor ;
+    rdfs:label "Anemia" ;
+    dmo:evidenceNote "Document lists 'Anemia (low red blood cell counts)' as a potential side effect or condition relevant to medication use." ;
+    dmo:name "Anemia" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "anemia" ;
+    dmo:evidenceQuote "Anemia (low red blood cell counts)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/breastfeeding> a dmo:RiskFactor ;
+    rdfs:label "Breastfeeding" ;
+    dmo:evidenceNote "文档中提到在使用某些糖尿病药物（如Actos）前需告知医生是否哺乳，且药物可能影响哺乳期。" ;
+    dmo:name "Breastfeeding" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "breastfeeding" ;
+    dmo:evidenceQuote "Before you start taking these medicines, tell your health provider if: you have liver or kidney problems you are pregnant or breastfeeding" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/heart-failure> a dmo:RiskFactor ;
+    rdfs:label "Heart Failure" ;
+    dmo:evidenceNote "文档中提到Thiazolidinediones类药物可能引起心力衰竭，且使用前需告知医生是否有心衰。" ;
+    dmo:name "Heart Failure" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "heart-failure" ;
+    dmo:evidenceQuote "Before you start taking these drugs, tell your doctor if you have heart failure." ;
+    dmo:evidenceQuote "Heart Failure (heart cannot pump blood well)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/kidney-problems> a dmo:RiskFactor ;
+    rdfs:label "Kidney Problems" ;
+    dmo:evidenceNote "文档中提到在使用某些糖尿病药物（如Meglitinides、Alpha-glucosidase Inhibitors、Thiazolidinediones）前需告知医生是否有肾病。" ;
+    dmo:name "Kidney Problems" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "kidney-problems" ;
+    dmo:evidenceQuote "Before you start taking these medicines, tell your health provider if: you have liver or kidney problems" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/liver-problems> a dmo:RiskFactor ;
+    rdfs:label "Liver Problems" ;
+    dmo:evidenceNote "文档中提到在使用某些糖尿病药物（如Meglitinides、Alpha-glucosidase Inhibitors、Thiazolidinediones）前需告知医生是否有肝病。" ;
+    dmo:name "Liver Problems" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "liver-problems" ;
+    dmo:evidenceQuote "Before you start taking these medicines, tell your health provider if: you have liver or kidney problems" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/pregnancy> a dmo:RiskFactor ;
+    rdfs:label "Pregnancy" ;
+    dmo:evidenceNote "文档中提到在使用某些糖尿病药物（如Actos）前需告知医生是否怀孕或哺乳，且药物可能影响生育能力。" ;
+    dmo:name "Pregnancy" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "pregnancy" ;
+    dmo:evidenceQuote "Before you start taking these medicines, tell your health provider if: you have liver or kidney problems you are pregnant or breastfeeding" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/riskFactor/upper-respiratory-tract-infection> a dmo:RiskFactor ;
+    rdfs:label "Upper Respiratory Tract Infection" ;
+    dmo:evidenceNote "Document lists 'Upper Respiratory Tract Infection' as a common side effect of DPP-4 inhibitors and other drugs, indicating it is a condition that may occur regardless of modifiable factors." ;
+    dmo:name "Upper Respiratory Tract Infection" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "upper-respiratory-tract-infection" ;
+    dmo:evidenceQuote "Upper Respiratory Tract Infection" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/diarrhea> a dmo:Symptom ;
+    rdfs:label "Diarrhea" ;
+    dmo:name "Diarrhea" ;
+    dmo:symptomCode "diarrhea" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Common Side Effects\n\nDiarrhea" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/dyspepsia> a dmo:Symptom ;
+    rdfs:label "Dyspepsia" ;
+    dmo:name "Dyspepsia" ;
+    dmo:symptomCode "dyspepsia" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Dyspepsia (upset stomach/indigestion)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/fluid-retention> a dmo:Symptom ;
+    rdfs:label "Fluid Retention" ;
+    dmo:name "Fluid Retention" ;
+    dmo:symptomCode "fluid-retention" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "Common Side Effects\n\nFluid Retention" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/hypoglycemia> a dmo:Symptom ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:symptomCode "hypoglycemia" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "Common Side Effects\n\nHypoglycemia (blood sugar that is too low)" ;
+    dmo:evidenceQuote "Hypoglycemia (blood sugar that is too low)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/nausea> a dmo:Symptom ;
+    rdfs:label "Nausea" ;
+    dmo:name "Nausea" ;
+    dmo:symptomCode "nausea" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people feel nauseous when they first start taking these medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/severe-stomach-pain> a dmo:Symptom ;
+    rdfs:label "Severe Stomach Pain" ;
+    dmo:name "Severe Stomach Pain" ;
+    dmo:symptomCode "severe-stomach-pain" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Call your doctor right away if you have severe stomach pain with or without nausea or vomiting. This may be a sign of a serious side effect." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/stomach-pain> a dmo:Symptom ;
+    rdfs:label "Stomach Pain" ;
+    dmo:name "Stomach Pain" ;
+    dmo:symptomCode "stomach-pain" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Common Side Effects\n\nStomach Pain" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/urinary-tract-infections> a dmo:Symptom ;
+    rdfs:label "Urinary Tract Infections" ;
+    dmo:name "Urinary Tract Infections" ;
+    dmo:symptomCode "urinary-tract-infections" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Urinary Tract Infections" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/vaginal-yeast-infections> a dmo:Symptom ;
+    rdfs:label "Vaginal Yeast Infections" ;
+    dmo:name "Vaginal Yeast Infections" ;
+    dmo:symptomCode "vaginal-yeast-infections" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Vaginal Yeast Infections" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+<https://example.org/dmo/id/symptom/vomiting> a dmo:Symptom ;
+    rdfs:label "Vomiting" ;
+    dmo:name "Vomiting" ;
+    dmo:symptomCode "vomiting" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people feel nauseous when they first start taking these medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/pregnancy> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/breastfeeding> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/liver-problems> .
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/kidney-problems> .
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/pregnancy> .
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/breastfeeding> .
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/stomach-pain> .
+<https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/diarrhea> .
+<https://example.org/dmo/id/medication/chlorpropamide> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/medication/glipizide> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/medication/tolbutamide> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/medication/tolazamide> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/medication/pramlintide-acetate> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/amylin-analog> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/diarrhea> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/dyspepsia> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/fluid-retention> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/nausea> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/severe-stomach-pain> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/stomach-pain> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/urinary-tract-infections> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/vaginal-yeast-infections> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/vomiting> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia-blood-sugar-that-is-too-low> .
+<https://example.org/dmo/id/drugClass/dpp-4-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/upper-respiratory-infection> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia-blood-sugar-that-is-too-low> .
+<https://example.org/dmo/id/drugClass/biguanides> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/diarrhea> .
+<https://example.org/dmo/id/drugClass/dopamine-receptor-agonists> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/nausea> .
+<https://example.org/dmo/id/drugClass/bile-acid-sequestrants> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/constipation> .
+<https://example.org/dmo/id/drugClass/bile-acid-sequestrants> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/nausea> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/vaginal-yeast-infections> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/severe-kidney-problems-or-dialysis> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/kidney-problems> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/liver-problems> .
+<https://example.org/dmo/id/drugClass/biguanides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/kidney-problems> .
+<https://example.org/dmo/id/drugClass/biguanides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/alcohol-use> .
+<https://example.org/dmo/id/drugClass/dpp-4-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/pregnancy> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:hasContraindication <https://example.org/dmo/id/contraindication/liver-problems> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:hasContraindication <https://example.org/dmo/id/contraindication/kidney-problems> .
+<https://example.org/dmo/id/drugClass/dopamine-receptor-agonists> dmo:hasContraindication <https://example.org/dmo/id/contraindication/breastfeeding> .
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-your-target-blood-sugar-level> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/ask-your-doctor-if-your-diabetes-medicines-will-affect-your-other-medicines-including-your-birth-control> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/get-the-facts-ask-your-healthcare-provider-for-the-side-effects-warnings-and-other-facts-for-the-medicines-you-are-taking> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/people-who-use-insulin-can-also-use-symlin> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/people-with-type-1-diabetes-can-also-use-symlin> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/speak-up-tell-someone-about-any-problems-you-may-be-having-with-your-medicines> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-to-your-doctor-before-you-change-or-stop-taking-your-diabetes-medicines> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-to-your-doctor-or-nurse-about-what-you-should-do-if-your-blood-sugar-gets-too-low-or-too-high> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .

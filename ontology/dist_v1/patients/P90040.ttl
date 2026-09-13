@@ -1,0 +1,60 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/a7e6bf8e-bffd-5cf1-a686-fe41ef066d35> a dmo:Patient ;
+    dmo:birthYear 1970 ;
+    dmo:demoScenario "S35" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90040-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90040-1>,
+        <https://example.org/dmo/id/encounter/E90040-2> ;
+    dmo:patientId "P90040" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/diagnosis/D90040-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S35" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90040-1> ;
+    dmo:diagnosedDate "2015-01-19"^^xsd:date ;
+    dmo:diagnosisId "D90040-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/E90040-2> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-06-18"^^xsd:date ;
+    dmo:encounterId "E90040-2" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90040-A1C> .
+
+<https://example.org/dmo/id/labResult/L90040-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-06-18T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S35" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90040-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 7.1 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90040-UACR> a dmo:LabResult ;
+    dmo:collectedAt "2024-06-15T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S35" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90040-UACR" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-UACR> ;
+    dmo:resultUnit "mg-per-g" ;
+    dmo:resultValue 22.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90040-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2024-06-15"^^xsd:date ;
+    dmo:encounterId "E90040-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90040-UACR> .
+

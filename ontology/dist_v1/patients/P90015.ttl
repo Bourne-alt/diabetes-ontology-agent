@@ -1,0 +1,89 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/cf38f6d5-e033-51f4-b0b3-3b7afabe64cc> a dmo:Patient ;
+    dmo:birthYear 1959 ;
+    dmo:demoScenario "S14" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90015-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90015-1>,
+        <https://example.org/dmo/id/encounter/E90015-2>,
+        <https://example.org/dmo/id/encounter/E90015-3> ;
+    dmo:hasMedicationUse <https://example.org/dmo/id/medicationUse/M90015-MET> ;
+    dmo:patientId "P90015" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/encounter/E90015-2> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2025-10-16"^^xsd:date ;
+    dmo:encounterId "E90015-2" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90015-A1C-2> .
+
+<https://example.org/dmo/id/encounter/E90015-3> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-04-21"^^xsd:date ;
+    dmo:encounterId "E90015-3" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90015-A1C-3> .
+
+<https://example.org/dmo/id/labResult/L90015-A1C-1> a dmo:LabResult ;
+    dmo:collectedAt "2025-04-10T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S14" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90015-A1C-1" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 8.9 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90015-A1C-2> a dmo:LabResult ;
+    dmo:collectedAt "2025-10-16T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S14" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90015-A1C-2" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 7.6 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90015-A1C-3> a dmo:LabResult ;
+    dmo:collectedAt "2026-04-21T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S14" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90015-A1C-3" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 6.8 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/medicationUse/M90015-MET> a dmo:MedicationUse ;
+    dmo:demoScenario "S14" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:medicationUseId "M90015-MET" ;
+    dmo:regimenRole "口服降糖" ;
+    dmo:startDate "2019-03-01"^^xsd:date ;
+    dmo:status "Active" ;
+    dmo:treatsDiagnosis <https://example.org/dmo/id/diagnosis/D90015-DM> ;
+    dmo:usesMedication <https://example.org/dmo/id/medication/metformin> .
+
+<https://example.org/dmo/id/diagnosis/D90015-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S14" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90015-1> ;
+    dmo:diagnosedDate "2019-02-11"^^xsd:date ;
+    dmo:diagnosisId "D90015-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/E90015-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2025-04-10"^^xsd:date ;
+    dmo:encounterId "E90015-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90015-A1C-1> .
+

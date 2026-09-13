@@ -1,0 +1,28 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/99cc2a10-8440-5b95-9b2e-57aa5dd1f31c> a dmo:Patient ;
+    dmo:birthYear 1968 ;
+    dmo:demoScenario "S30" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90035-1> ;
+    dmo:patientId "P90035" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/encounter/E90035-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-05-20"^^xsd:date ;
+    dmo:encounterId "E90035-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90035-RPG> .
+
+<https://example.org/dmo/id/labResult/L90035-RPG> a dmo:LabResult ;
+    dmo:collectedAt "2026-05-20T14:20:00"^^xsd:dateTime ;
+    dmo:demoScenario "S30" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90035-RPG" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-RPG> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 240.0 ;
+    dmo:valueTrustLevel "Curated" .
+

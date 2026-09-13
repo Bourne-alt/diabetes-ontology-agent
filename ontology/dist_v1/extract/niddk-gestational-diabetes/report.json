@@ -1,0 +1,91 @@
+{
+  "source": {
+    "sourceId": "niddk-gestational-diabetes",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes",
+    "localFile": "ontology/knowledges/niddk-gestational-diabetes.txt",
+    "sha256": "d06560c0e6bf5225cace6845b184ff6ad3c3cbc8377ce4bb5d6415ff689127de",
+    "byteSize": 3141,
+    "graphUri": "urn:dmo:extract:niddk-gestational-diabetes"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 20,
+    "accepted": 20,
+    "rejected": 0,
+    "entities": 20,
+    "edges": 19,
+    "danglingRelations": 3,
+    "mergeConflicts": 11
+  },
+  "quality": {
+    "quoteHitRate": 1.0,
+    "schemaSlotCoverage": 0.5161,
+    "danglingRelationRate": 0.1364,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {},
+  "linkPass": {
+    "candidates": 18,
+    "accepted": 18,
+    "rejectedByReason": {}
+  },
+  "entitiesByType": {
+    "lifestyleIntervention": 5,
+    "riskFactor": 4,
+    "recommendation": 4,
+    "labTest": 2,
+    "symptom": 2,
+    "diabetesType": 1,
+    "medication": 1,
+    "monitoringSchedule": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/diabetesType/gestational-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/glucose-challenge-test",
+      "predicate": "hasThreshold",
+      "target": "Oral Glucose Tolerance Test"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/oral-glucose-tolerance-test",
+      "predicate": "hasThreshold",
+      "target": "Glucose Challenge Test"
+    }
+  ],
+  "conflictSamples": [
+    "symptom/thirstiness: name: 'Thirstiness' vs 'thirstier than normal'",
+    "symptom/frequent-urination: name: 'Frequent Urination' vs 'having to urinate more often'",
+    "riskFactor/extra-weight: name: 'Extra Weight' vs 'extra weight'",
+    "riskFactor/being-physically-active-before-and-during-pregnancy: name: 'Being Physically Active Before and During Pregnancy' vs 'Being physically active before and during pregnancy'",
+    "riskFactor/losing-extra-weight-before-pregnancy: name: 'Losing Extra Weight Before Pregnancy' vs 'Losing extra weight before pregnancy'",
+    "medication/insulin: name: 'Insulin' vs 'insulin'",
+    "lifestyleIntervention/healthy-eating-plan: name: 'Healthy Eating Plan' vs 'Healthy eating plan'",
+    "lifestyleIntervention/being-physically-active: name: 'Being Physically Active' vs 'Being physically active'",
+    "lifestyleIntervention/losing-extra-weight-before-pregnancy: name: 'Losing Extra Weight Before Pregnancy' vs 'Losing extra weight before pregnancy'",
+    "lifestyleIntervention/making-healthy-food-choices: name: 'Making Healthy Food Choices' vs 'Making healthy food choices'",
+    "lifestyleIntervention/being-physically-active-after-pregnancy: name: 'Being Physically Active After Pregnancy' vs 'Being physically active'"
+  ]
+}

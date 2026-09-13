@@ -1,0 +1,452 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-monogenic-diabetes.txt
+# 目标 named graph：urn:dmo:extract:niddk-monogenic-diabetes
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-monogenic-diabetes'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-monogenic-diabetes.txt" ;
+    dmo:sha256 "2ac3b612770c1b1347cad2a338efea332d0409dfb2252b4addc627aa2bce70d7" ;
+    dmo:byteSize "14534"^^xsd:integer .
+
+<urn:dmo:extract:niddk-monogenic-diabetes> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T03:53:21+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/cancer> a dmo:Complication ;
+    rdfs:label "Cancer" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "cancer" ;
+    dmo:definition "Diabetes is also linked to some types of cancer." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0000001" ;
+    dmo:name "Cancer" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes is also linked to some types of cancer." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/complication/eye-damage> a dmo:Complication ;
+    rdfs:label "Eye Damage" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "eye-damage" ;
+    dmo:definition "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Eye Damage" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/complication/foot-damage> a dmo:Complication ;
+    rdfs:label "Foot Damage" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "foot-damage" ;
+    dmo:definition "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Foot Damage" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/complication/heart-damage> a dmo:Complication ;
+    rdfs:label "Heart Damage" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "heart-damage" ;
+    dmo:definition "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Heart Damage" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/complication/kidney-damage> a dmo:Complication ;
+    rdfs:label "Kidney Damage" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "kidney-damage" ;
+    dmo:definition "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Kidney Damage" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/complication/nerve-damage> a dmo:Complication ;
+    rdfs:label "Nerve Damage" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "nerve-damage" ;
+    dmo:definition "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Nerve Damage" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/complication/tooth-damage> a dmo:Complication ;
+    rdfs:label "Tooth Damage" ;
+    dmo:affectedOrgan "Mouth" ;
+    dmo:complicationCode "tooth-damage" ;
+    dmo:definition "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005152" ;
+    dmo:name "Tooth Damage" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes may raise your risk of eye, kidney, nerve, and heart damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/maturity-onset-diabetes-of-the-young-mody> a dmo:DiabetesType ;
+    rdfs:label "Maturity-onset diabetes of the young (MODY)" ;
+    dmo:definition "MODY forms of diabetes usually develop in teens or young adults." ;
+    dmo:diabetesTypeCode "maturity-onset-diabetes-of-the-young-mody" ;
+    dmo:name "Maturity-onset diabetes of the young (MODY)" ;
+    dmo:evidenceQuote "MODY forms of diabetes usually develop in teens or young adults." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/mody> a dmo:DiabetesType ;
+    rdfs:label "MODY" ;
+    dmo:definition "Most people with MODY forms of diabetes have inherited a gene for the disease from a parent who also had the disease." ;
+    dmo:diabetesTypeCode "mody" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "MODY" ;
+    dmo:prevalenceShare "0.028"^^xsd:decimal ;
+    dmo:typicalOnset "Adolescence" ;
+    dmo:evidenceQuote "Most people with MODY forms of diabetes have inherited a gene for the disease from a parent who also had the disease." ;
+    dmo:evidenceQuote "The study found that 2.8% of the participants had MODY." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Monogenic Diabetes" ;
+    dmo:definition "Monogenic diabetes is a group of uncommon forms of diabetes that are caused by a variant NIH external link, or change, in a single gene." ;
+    dmo:diabetesTypeCode "monogenic-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Monogenic Diabetes" ;
+    dmo:prevalenceShare "0.01"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "Monogenic diabetes is a group of uncommon forms of diabetes that are caused by a variant NIH external link, or change, in a single gene." ;
+    dmo:evidenceQuote "Researchers are studying different aspects of monogenic diabetes, such as ways to improve diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/ndm> a dmo:DiabetesType ;
+    rdfs:label "NDM" ;
+    dmo:definition "Some forms of NDM or MODY occur only if a child inherits a gene for the disease from both parents." ;
+    dmo:diabetesTypeCode "ndm" ;
+    dmo:name "NDM" ;
+    dmo:evidenceQuote "Some forms of NDM or MODY occur only if a child inherits a gene for the disease from both parents." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/neonatal-diabetes-mellitus-ndm> a dmo:DiabetesType ;
+    rdfs:label "Neonatal diabetes mellitus (NDM)" ;
+    dmo:definition "NDM forms of diabetes develop in the first 6 to 12 months of life." ;
+    dmo:diabetesTypeCode "neonatal-diabetes-mellitus-ndm" ;
+    dmo:name "Neonatal diabetes mellitus (NDM)" ;
+    dmo:evidenceQuote "NDM forms of diabetes develop in the first 6 to 12 months of life." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "Your health care professional will order a test for autoantibodies to find out if you have type 1 diabetes." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:evidenceQuote "Your health care professional will order a test for autoantibodies to find out if you have type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "Health care professionals will diagnose diabetes using your symptoms, medical and family history, and diabetes tests. Your health care professional may also order tests to find out if your diabetes is type 1, type 2, or monogenic." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:evidenceQuote "Health care professionals will diagnose diabetes using your symptoms, medical and family history, and diabetes tests. Your health care professional may also order tests to find out if your diabetes is type 1, type 2, or monogenic." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> a dmo:DrugClass ;
+    rdfs:label "Glucagon-Like Peptide-1 Receptor Agonists" ;
+    dmo:drugClassCode "glucagon-like-peptide-1-receptor-agonists" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "increase insulin production and decrease your appetite" ;
+    dmo:name "Glucagon-Like Peptide-1 Receptor Agonists" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "Other medicines, called glucagon-like peptide-1 receptor (GLP-1) agonists, increase insulin production and decrease your appetite." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "helps your body make more insulin" ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "insulin. Some people with monogenic diabetes need to take insulin all their lives. Others may need to take insulin early in life and may be able to switch to sulfonylureas later in life." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:drugClassCode "sulfonylureas" ;
+    dmo:hypoglycemiaRisk "Moderate" ;
+    dmo:mechanism "oral diabetes medicines that help your body make more insulin" ;
+    dmo:name "Sulfonylureas" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "sulfonylureas, oral diabetes medicines that help your body make more insulin. These medicines can treat certain forms of MODY and NDM." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/labTest/autoantibodies> a dmo:LabTest ;
+    rdfs:label "Autoantibodies" ;
+    dmo:definition "Proteins made by your immune system that attack your healthy tissues and cells by mistake." ;
+    dmo:labTestCode "autoantibodies" ;
+    dmo:name "Autoantibodies" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Your health care professional will order a test for autoantibodies to find out if you have type 1 diabetes. Autoantibodies are proteins made by your immune system that attack your healthy tissues and cells by mistake." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/labTest/genetic-testing> a dmo:LabTest ;
+    rdfs:label "Genetic testing" ;
+    dmo:definition "Looks for gene variants." ;
+    dmo:labTestCode "genetic-testing" ;
+    dmo:name "Genetic testing" ;
+    dmo:specimen "Genomic" ;
+    dmo:evidenceQuote "Genetic testing NIH external link looks for gene variants. Health care professionals use genetic tests to diagnose monogenic diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/medication/glucagon-like-peptide-1-receptor-glp-1-agonists> a dmo:Medication ;
+    rdfs:label "glucagon-like peptide-1 receptor (GLP-1) agonists" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glucagon-like-peptide-1-receptor-glp-1-agonists" ;
+    dmo:name "glucagon-like peptide-1 receptor (GLP-1) agonists" ;
+    dmo:evidenceQuote "Other medicines, called glucagon-like peptide-1 receptor (GLP-1) agonists, increase insulin production and decrease your appetite." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "insulin" ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "insulin" ;
+    dmo:evidenceQuote "insulin. Some people with monogenic diabetes need to take insulin all their lives. Others may need to take insulin early in life and may be able to switch to sulfonylureas later in life." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/medication/sulfonylureas> a dmo:Medication ;
+    rdfs:label "sulfonylureas" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sulfonylureas" ;
+    dmo:name "sulfonylureas" ;
+    dmo:evidenceQuote "sulfonylureas, oral diabetes medicines that help your body make more insulin. These medicines can treat certain forms of MODY and NDM." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/genetic-counseling-for-monogenic-diabetes> a dmo:Recommendation ;
+    rdfs:label "Genetic counseling for monogenic diabetes" ;
+    dmo:populationScope "People, partners, or family members who have monogenic diabetes" ;
+    dmo:recommendationId "genetic-counseling-for-monogenic-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you, your partner, or family members have monogenic diabetes, you may want to consider genetic counseling. Genetic counseling can help you decide if you should get tested for monogenic diabetes. Genetic counseling can also help you understand the risk of your children developing this disease." ;
+    dmo:evidenceQuote "If you, your partner, or family members have monogenic diabetes, you may want to consider genetic counseling NIH external link. Genetic counseling can help you decide if you should get tested for monogenic diabetes. Genetic counseling can also help you understand the risk of your children developing this disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> a dmo:Recommendation ;
+    rdfs:label "Manage Monogenic Diabetes" ;
+    dmo:populationScope "People with monogenic diabetes" ;
+    dmo:recommendationId "manage-monogenic-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Work with your primary health care professional, who may be a doctor, physician assistant, or nurse practitioner, to manage your diabetes. Your health care team can help you lower your chances of developing other health problems." ;
+    dmo:evidenceQuote "If you have a form of monogenic diabetes, work with your primary health care professional, who may be a doctor, physician assistant, or nurse practitioner, to manage your diabetes. Your health care team can help you lower your chances of developing other health problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/referral-to-medical-center-specializing-in-monogenic-diabetes> a dmo:Recommendation ;
+    rdfs:label "Referral to medical center specializing in monogenic diabetes" ;
+    dmo:populationScope "People with monogenic diabetes" ;
+    dmo:recommendationId "referral-to-medical-center-specializing-in-monogenic-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Your health care professional may refer you to, or work with, a medical center that focuses on monogenic diabetes to help manage the disease." ;
+    dmo:evidenceQuote "Your health care professional may refer you to, or work with, a medical center that focuses on monogenic diabetes to help manage the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-about-financial-help-for-diabetes-care> a dmo:Recommendation ;
+    rdfs:label "Talk with health care professional about financial help for diabetes care" ;
+    dmo:populationScope "People having trouble affording diabetes care" ;
+    dmo:recommendationId "talk-with-health-care-professional-about-financial-help-for-diabetes-care" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Diabetes medicines and office visits can be expensive. Talk with your health care professional or health care team if you are having trouble affording diabetes care. A health care professional, diabetes educator, or social worker may be able to tell you about resources that provide financial help for diabetes care." ;
+    dmo:evidenceQuote "Diabetes medicines and office visits can be expensive. Talk with your health care professional or health care team if you are having trouble affording diabetes care. A health care professional, diabetes educator, or social worker may be able to tell you about resources that provide financial help for diabetes care." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-of-glp-1-agonists-for-monogenic-diabetes> a dmo:Recommendation ;
+    rdfs:label "Use of GLP-1 agonists for monogenic diabetes" ;
+    dmo:recommendationId "use-of-glp-1-agonists-for-monogenic-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Other medicines, called glucagon-like peptide-1 receptor (GLP-1) agonists, increase insulin production and decrease your appetite." ;
+    dmo:evidenceQuote "Other medicines, called glucagon-like peptide-1 receptor (GLP-1) agonists, increase insulin production and decrease your appetite." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-of-insulin-for-some-people-with-monogenic-diabetes> a dmo:Recommendation ;
+    rdfs:label "Use of insulin for some people with monogenic diabetes" ;
+    dmo:populationScope "Some people with monogenic diabetes" ;
+    dmo:recommendationId "use-of-insulin-for-some-people-with-monogenic-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Some people with monogenic diabetes need to take insulin all their lives. Others may need to take insulin early in life and may be able to switch to sulfonylureas later in life." ;
+    dmo:evidenceQuote "Some people with monogenic diabetes need to take insulin all their lives. Others may need to take insulin early in life and may be able to switch to sulfonylureas later in life." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-of-sulfonylureas-for-certain-forms-of-mody-and-ndm> a dmo:Recommendation ;
+    rdfs:label "Use of sulfonylureas for certain forms of MODY and NDM" ;
+    dmo:populationScope "People with certain forms of MODY and NDM" ;
+    dmo:recommendationId "use-of-sulfonylureas-for-certain-forms-of-mody-and-ndm" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Sulfonylureas, oral diabetes medicines that help your body make more insulin, can treat certain forms of MODY and NDM." ;
+    dmo:evidenceQuote "sulfonylureas, oral diabetes medicines that help your body make more insulin. These medicines can treat certain forms of MODY and NDM." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/absence-of-overweight-or-obesity-in-diabetes-patients> a dmo:RiskFactor ;
+    rdfs:label "Absence of Overweight or Obesity in Diabetes Patients" ;
+    dmo:evidenceNote "Health care professionals test for monogenic diabetes in people who do not have overweight or obesity." ;
+    dmo:name "Absence of Overweight or Obesity in Diabetes Patients" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "absence-of-overweight-or-obesity-in-diabetes-patients" ;
+    dmo:evidenceQuote "people who have diabetes at a young age, do not have overweight or obesity, and have a strong family history of diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/autosomal-dominant-inheritance> a dmo:RiskFactor ;
+    rdfs:label "Autosomal Dominant Inheritance" ;
+    dmo:evidenceNote "如果患有常染色体显性遗传的NDM或MODY，孩子有50%的几率患病。" ;
+    dmo:name "Autosomal Dominant Inheritance" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "autosomal-dominant-inheritance" ;
+    dmo:evidenceQuote "If you have a form of NDM or MODY that is autosomal dominant, your child has a 50% chance of having the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/autosomal-dominant-inheritance-of-monogenic-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Autosomal Dominant Inheritance of Monogenic Diabetes" ;
+    dmo:evidenceNote "Inherits a gene for the disease from a parent who also had the disease; child has a 50% chance of having the disease." ;
+    dmo:name "Autosomal Dominant Inheritance of Monogenic Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "autosomal-dominant-inheritance-of-monogenic-diabetes" ;
+    dmo:evidenceQuote "If you have a form of NDM or MODY that is autosomal dominant, your child has a 50% chance of having the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/autosomal-recessive-inheritance-of-monogenic-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Autosomal Recessive Inheritance of Monogenic Diabetes" ;
+    dmo:evidenceNote "Occurs only if a child inherits a gene for the disease from both parents; neither parent has the disease." ;
+    dmo:name "Autosomal Recessive Inheritance of Monogenic Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "autosomal-recessive-inheritance-of-monogenic-diabetes" ;
+    dmo:evidenceQuote "Some forms of NDM or MODY occur only if a child inherits a gene for the disease from both parents. In most cases, neither of the child’s parents had the disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Diabetes" ;
+    dmo:evidenceNote "MODY形式的糖尿病通常发生在有其他家庭成员患有糖尿病的人身上。" ;
+    dmo:name "Family History of Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-diabetes" ;
+    dmo:evidenceQuote "People with MODY forms of diabetes usually have other family members with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-monogenic-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Monogenic Diabetes" ;
+    dmo:evidenceNote "Health care professionals test for monogenic diabetes if the patient has family members with these forms of diabetes." ;
+    dmo:name "Family History of Monogenic Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-monogenic-diabetes" ;
+    dmo:evidenceQuote "Your health care professional will usually test you for forms of monogenic diabetes if you have diabetes, are younger than 30 years old, don’t have overweight or obesity, and have family members with these forms of diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/gene-variant-in-a-single-gene> a dmo:RiskFactor ;
+    rdfs:label "Gene Variant in a Single Gene" ;
+    dmo:evidenceNote "单基因糖尿病是由单个基因的变异或改变引起的。" ;
+    dmo:name "Gene Variant in a Single Gene" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "gene-variant-in-a-single-gene" ;
+    dmo:evidenceQuote "A variant, or change, in a single gene causes monogenic diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/young-age-at-onset-of-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Young Age at Onset of Diabetes" ;
+    dmo:evidenceNote "Health care professionals test for monogenic diabetes in people who have diabetes at a young age." ;
+    dmo:name "Young Age at Onset of Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "young-age-at-onset-of-diabetes" ;
+    dmo:evidenceQuote "people who have diabetes at a young age, do not have overweight or obesity, and have a strong family history of diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/symptom/feeling-very-hungry-even-after-eating> a dmo:Symptom ;
+    rdfs:label "Feeling Very Hungry Even After Eating" ;
+    dmo:name "Feeling Very Hungry Even After Eating" ;
+    dmo:symptomCode "feeling-very-hungry-even-after-eating" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "feeling very hungry, even after you have eaten" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+<https://example.org/dmo/id/symptom/numbness-or-tingling-in-the-feet-or-hands> a dmo:Symptom ;
+    rdfs:label "Numbness or Tingling in the Feet or Hands" ;
+    dmo:name "Numbness or Tingling in the Feet or Hands" ;
+    dmo:symptomCode "numbness-or-tingling-in-the-feet-or-hands" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "numbness or tingling in the feet or hands" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-monogenic-diabetes> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/gene-variant-in-a-single-gene> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/autosomal-dominant-inheritance-of-monogenic-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/autosomal-recessive-inheritance-of-monogenic-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/family-history-of-monogenic-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/young-age-at-onset-of-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/absence-of-overweight-or-obesity-in-diabetes-patients> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-sulfonylureas-for-certain-forms-of-mody-and-ndm> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/recommendation/use-of-insulin-for-some-people-with-monogenic-diabetes> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/insulin> .
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/cancer> .
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/eye-damage> .
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/kidney-damage> .
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/nerve-damage> .
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/heart-damage> .
+<https://example.org/dmo/id/diabetesType/mody> dmo:predisposesTo <https://example.org/dmo/id/complication/cancer> .
+<https://example.org/dmo/id/diabetesType/mody> dmo:predisposesTo <https://example.org/dmo/id/complication/eye-damage> .
+<https://example.org/dmo/id/diabetesType/mody> dmo:predisposesTo <https://example.org/dmo/id/complication/kidney-damage> .
+<https://example.org/dmo/id/diabetesType/mody> dmo:predisposesTo <https://example.org/dmo/id/complication/nerve-damage> .
+<https://example.org/dmo/id/diabetesType/mody> dmo:predisposesTo <https://example.org/dmo/id/complication/heart-damage> .
+<https://example.org/dmo/id/diabetesType/ndm> dmo:predisposesTo <https://example.org/dmo/id/complication/cancer> .
+<https://example.org/dmo/id/diabetesType/ndm> dmo:predisposesTo <https://example.org/dmo/id/complication/eye-damage> .
+<https://example.org/dmo/id/diabetesType/ndm> dmo:predisposesTo <https://example.org/dmo/id/complication/kidney-damage> .
+<https://example.org/dmo/id/diabetesType/ndm> dmo:predisposesTo <https://example.org/dmo/id/complication/nerve-damage> .
+<https://example.org/dmo/id/diabetesType/ndm> dmo:predisposesTo <https://example.org/dmo/id/complication/heart-damage> .
+<https://example.org/dmo/id/complication/nerve-damage> dmo:presentsWith <https://example.org/dmo/id/symptom/numbness-or-tingling-in-the-feet-or-hands> .
+<https://example.org/dmo/id/riskFactor/absence-of-overweight-or-obesity-in-diabetes-patients> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/mody> .
+<https://example.org/dmo/id/riskFactor/family-history-of-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/mody> .
+<https://example.org/dmo/id/riskFactor/family-history-of-monogenic-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/mody> .
+<https://example.org/dmo/id/riskFactor/young-age-at-onset-of-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/mody> .
+<https://example.org/dmo/id/riskFactor/autosomal-dominant-inheritance-of-monogenic-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/mody> .
+<https://example.org/dmo/id/riskFactor/autosomal-recessive-inheritance-of-monogenic-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/ndm> .
+<https://example.org/dmo/id/medication/sulfonylureas> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/medication/insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/insulin> .
+<https://example.org/dmo/id/recommendation/genetic-counseling-for-monogenic-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/recommendation/referral-to-medical-center-specializing-in-monogenic-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-about-financial-help-for-diabetes-care> dmo:appliesToType <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-glp-1-agonists-for-monogenic-diabetes> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/eye-damage> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/foot-damage> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/heart-damage> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/kidney-damage> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/nerve-damage> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/tooth-damage> .
+<https://example.org/dmo/id/recommendation/manage-monogenic-diabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/cancer> .

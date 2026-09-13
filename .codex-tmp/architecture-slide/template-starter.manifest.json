@@ -1,0 +1,133 @@
+{
+  "sourcePptx": "/Users/fabivs/myfile/code/diabetes-ontology-agent/output-claude/project-presentation-plain.pptx",
+  "mapPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-frame-map.json",
+  "output": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter.pptx",
+  "outputBytes": 73458,
+  "sourceSlideCount": 10,
+  "slideCount": 11,
+  "previewDir": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview",
+  "layoutDir": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout",
+  "slides": [
+    {
+      "outputSlide": 1,
+      "sourceSlide": 1,
+      "narrativeRole": "opening brand preserve-only",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 0,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-01.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-01.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-01.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-01.layout.json"
+    },
+    {
+      "outputSlide": 2,
+      "sourceSlide": 2,
+      "narrativeRole": "project definition",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-02.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-02.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-02.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-02.layout.json"
+    },
+    {
+      "outputSlide": 3,
+      "sourceSlide": 3,
+      "narrativeRole": "overall architecture map",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-03.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-03.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-03.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-03.layout.json"
+    },
+    {
+      "outputSlide": 4,
+      "sourceSlide": 3,
+      "narrativeRole": "knowledge construction",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-04.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-04.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-04.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-04.layout.json"
+    },
+    {
+      "outputSlide": 5,
+      "sourceSlide": 4,
+      "narrativeRole": "data stores",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-05.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-05.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-05.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-05.layout.json"
+    },
+    {
+      "outputSlide": 6,
+      "sourceSlide": 5,
+      "narrativeRole": "answer flow",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-06.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-06.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-06.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-06.layout.json"
+    },
+    {
+      "outputSlide": 7,
+      "sourceSlide": 6,
+      "narrativeRole": "capability flow",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-07.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-07.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-07.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-07.layout.json"
+    },
+    {
+      "outputSlide": 8,
+      "sourceSlide": 7,
+      "narrativeRole": "case evidence",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-08.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-08.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-08.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-08.layout.json"
+    },
+    {
+      "outputSlide": 9,
+      "sourceSlide": 8,
+      "narrativeRole": "disease inference",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-09.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-09.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-09.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-09.layout.json"
+    },
+    {
+      "outputSlide": 10,
+      "sourceSlide": 9,
+      "narrativeRole": "safety conclusion",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-10.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-10.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-10.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-10.layout.json"
+    },
+    {
+      "outputSlide": 11,
+      "sourceSlide": 10,
+      "narrativeRole": "closing boundaries",
+      "reuseMode": "duplicate-slide",
+      "editTargetCount": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-preview/starter-slide-11.png",
+      "previewRelativePath": "template-starter-preview/starter-slide-11.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/architecture-slide/template-starter-layout/starter-slide-11.layout.json",
+      "layoutRelativePath": "template-starter-layout/starter-slide-11.layout.json"
+    }
+  ]
+}

@@ -1,0 +1,584 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/ihs-diabetes-recommendations-at-a-glance.pdf
+# 目标 named graph：urn:dmo:extract:ihs-diabetes-recommendations-at-a-glance
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:ihs-diabetes-recommendations-at-a-glance'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/ihs-diabetes-recommendations-at-a-glance.pdf" ;
+    dmo:sha256 "300c57433bf29e0b17241fe3524b509d6dd9803c2274b17cd7c9db348a7d9f08" ;
+    dmo:byteSize "343660"^^xsd:integer .
+
+<urn:dmo:extract:ihs-diabetes-recommendations-at-a-glance> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T06:57:41+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/ace-inhibitor-or-arb> a dmo:Contraindication ;
+    rdfs:label "ACE Inhibitor or ARB" ;
+    dmo:contraCode "ace-inhibitor-or-arb" ;
+    dmo:rationale "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "unless contraindicated" ;
+    dmo:evidenceQuote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/contraindication/aspirin-therapy-75-162-mg-day> a dmo:Contraindication ;
+    rdfs:label "Aspirin therapy 75-162 mg/day" ;
+    dmo:contraCode "aspirin-therapy-75-162-mg-day" ;
+    dmo:rationale "Aspirin therapy 75-162 mg/day (unless contraindicated, or at increased risk of bleeding)" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "unless contraindicated, or at increased risk of bleeding" ;
+    dmo:evidenceQuote "Aspirin therapy 75-162 mg/day (unless contraindicated, or at increased risk of bleeding)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/device/blood-glucose-monitoring> a dmo:Device ;
+    rdfs:label "Blood Glucose Monitoring" ;
+    dmo:deviceCode "blood-glucose-monitoring" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Blood Glucose Monitoring" ;
+    dmo:evidenceQuote "Review BGM and/or CGM results, if prescribed" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/device/continuous-glucose-monitoring> a dmo:Device ;
+    rdfs:label "Continuous Glucose Monitoring" ;
+    dmo:deviceCode "continuous-glucose-monitoring" ;
+    dmo:deviceType "CGM" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Continuous Glucose Monitoring" ;
+    dmo:evidenceQuote "Review BGM and/or CGM results, if prescribed" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Gestational Diabetes" ;
+    dmo:definition "Screen for GDM in all women not known to have diabetes" ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Gestational Diabetes" ;
+    dmo:prevalenceShare "0.02"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "Screen for GDM in all women not known to have diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "Screen for type 2 diabetes in women who had GDM" ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Screen for type 2 diabetes in women who had GDM" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/labTest/a1c> a dmo:LabTest ;
+    rdfs:label "A1C" ;
+    dmo:definition "Glycemic control test to set/review individualized goal" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "Check A1C, set/review individualized goal" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/labTest/estimated-gfr> a dmo:LabTest ;
+    rdfs:label "Estimated GFR" ;
+    dmo:definition "Estimate of kidney function based on serum creatinine" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "estimated-gfr" ;
+    dmo:loincCode "60686-4" ;
+    dmo:name "Estimated GFR" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mL-per-min" ;
+    dmo:evidenceQuote "Check serum creatinine and estimated GFR" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/labTest/fasting-lipid-profile> a dmo:LabTest ;
+    rdfs:label "Fasting Lipid Profile" ;
+    dmo:definition "Lipid test to assess cardiovascular risk" ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-lipid-profile" ;
+    dmo:loincCode "13457-7" ;
+    dmo:name "Fasting Lipid Profile" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Check fasting lipid profile" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/labTest/serum-creatinine> a dmo:LabTest ;
+    rdfs:label "Serum Creatinine" ;
+    dmo:definition "Test to assess kidney function" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "serum-creatinine" ;
+    dmo:loincCode "2160-0" ;
+    dmo:name "Serum Creatinine" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Check serum creatinine and estimated GFR" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/lifestyleIntervention/nutrition-education-and-support> a dmo:LifestyleIntervention ;
+    rdfs:label "Nutrition Education and Support" ;
+    dmo:interventionCode "nutrition-education-and-support" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Nutrition Education and Support" ;
+    dmo:evidenceQuote "Provide nutrition education and support (health care team)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/lifestyleIntervention/provide-cessation-counseling> a dmo:LifestyleIntervention ;
+    rdfs:label "Provide cessation counseling" ;
+    dmo:interventionCode "provide-cessation-counseling" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Provide cessation counseling" ;
+    dmo:evidenceQuote "For tobacco users, provide cessation counseling" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/lifestyleIntervention/refer-to-rd-for-mnt> a dmo:LifestyleIntervention ;
+    rdfs:label "Refer to RD for MNT" ;
+    dmo:interventionCode "refer-to-rd-for-mnt" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Refer to RD for MNT" ;
+    dmo:evidenceQuote "Refer to RD for MNT, if available" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/medication/ace-inhibitor-or-arb> a dmo:Medication ;
+    rdfs:label "ACE Inhibitor or ARB" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ace-inhibitor-or-arb" ;
+    dmo:name "ACE Inhibitor or ARB" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/medication/aspirin-therapy-75-162-mg-day> a dmo:Medication ;
+    rdfs:label "Aspirin therapy 75-162 mg/day" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "aspirin-therapy-75-162-mg-day" ;
+    dmo:name "Aspirin therapy 75-162 mg/day" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Aspirin therapy 75-162 mg/day (unless contraindicated, or at increased risk of bleeding)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/aspirin-or-other-antiplatelet-therapy> a dmo:Recommendation ;
+    rdfs:label "Aspirin or Other Antiplatelet Therapy" ;
+    dmo:populationScope "Patients with known ASCVD or patients aged 50-70 with no known ASCVD but with 1 or more risk factors for ASCVD" ;
+    dmo:recommendationId "aspirin-or-other-antiplatelet-therapy" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Aspirin therapy 75-162 mg/day (unless contraindicated, or at increased risk of bleeding) Prescribe if known ASCVD Consider in patients aged 50-70 with no known ASCVD but with 1 or more risk factors for ASCVD" ;
+    dmo:evidenceQuote "Aspirin therapy 75-162 mg/day (unless contraindicated, or at increased risk of bleeding) Prescribe if known ASCVD Consider in patients aged 50-70 with no known ASCVD but with 1 or more risk factors for ASCVD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/autonomic-neuropathy-assess-cv-symptoms> a dmo:Recommendation ;
+    rdfs:label "Autonomic Neuropathy Assess CV symptoms" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "autonomic-neuropathy-assess-cv-symptoms" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Assess CV symptoms; resting tachycardia, exercise intolerance, orthostatic hypotension" ;
+    dmo:evidenceQuote "Assess CV symptoms; resting tachycardia, exercise intolerance, orthostatic hypotension" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/autonomic-neuropathy-assess-gi-symptoms> a dmo:Recommendation ;
+    rdfs:label "Autonomic Neuropathy Assess GI symptoms" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "autonomic-neuropathy-assess-gi-symptoms" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Assess GI symptoms; gastroparesis, constipation, diarrhea" ;
+    dmo:evidenceQuote "Assess GI symptoms; gastroparesis, constipation, diarrhea" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/autonomic-neuropathy-assess-sexual-health-function> a dmo:Recommendation ;
+    rdfs:label "Autonomic Neuropathy Assess sexual health/function" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "autonomic-neuropathy-assess-sexual-health-function" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Assess sexual health/function for men and women" ;
+    dmo:evidenceQuote "Assess sexual health/function for men and women" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/behavioral-health-assess-emotional-health> a dmo:Recommendation ;
+    rdfs:label "Behavioral Health Assess emotional health" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "behavioral-health-assess-emotional-health" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Assess emotional health (e.g., depression, substance abuse)" ;
+    dmo:evidenceQuote "Assess emotional health (e.g., depression, substance abuse)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/blood-pressure-check-blood-pressure> a dmo:Recommendation ;
+    rdfs:label "Blood Pressure Check blood pressure" ;
+    dmo:populationScope "Adult and Adolescents aged ≥ 13 years; Children aged < 13 years" ;
+    dmo:recommendationId "blood-pressure-check-blood-pressure" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check blood pressure Adult and Adolescents aged ≥ 13 years goal: <130/<80 mmHg Children aged < 13 years goal: varies with age" ;
+    dmo:evidenceQuote "Check blood pressure Adult and Adolescents aged ≥ 13 years goal: <130/<80 mmHg Children aged < 13 years goal: varies with age" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/eye-care-comprehensive-dilated-eye-exam> a dmo:Recommendation ;
+    rdfs:label "Eye Care Comprehensive dilated eye exam" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "eye-care-comprehensive-dilated-eye-exam" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Comprehensive dilated eye exam by an eye care professional or retinal imaging" ;
+    dmo:evidenceQuote "Comprehensive dilated eye exam by an eye care professional or retinal imaging" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/foot-care-perform-comprehensive-lower-extremity-foot-exam> a dmo:Recommendation ;
+    rdfs:label "Foot Care Perform comprehensive lower extremity/foot exam" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "foot-care-perform-comprehensive-lower-extremity-foot-exam" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Perform comprehensive lower extremity/foot exam" ;
+    dmo:evidenceQuote "Perform comprehensive lower extremity/foot exam" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/foot-care-screen-for-pad> a dmo:Recommendation ;
+    rdfs:label "Foot Care Screen for PAD" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "foot-care-screen-for-pad" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screen for PAD (consider ABI)" ;
+    dmo:evidenceQuote "Screen for PAD (consider ABI)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/foot-care-visual-inspection-of-feet> a dmo:Recommendation ;
+    rdfs:label "Foot Care Visual inspection of feet" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "foot-care-visual-inspection-of-feet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Visual inspection of feet with shoes and socks off" ;
+    dmo:evidenceQuote "Visual inspection of feet with shoes and socks off" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/glycemic-control-check-a1c> a dmo:Recommendation ;
+    rdfs:label "Glycemic Control Check A1C" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "glycemic-control-check-a1c" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check A1C, set/review individualized goal Address medication adherence, hypoglycemia Review BGM and/or CGM results, if prescribed" ;
+    dmo:evidenceQuote "Check A1C, set/review individualized goal Address medication adherence, hypoglycemia Review BGM and/or CGM results, if prescribed" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/hepatitis-c-screening> a dmo:Recommendation ;
+    rdfs:label "Hepatitis C Screening" ;
+    dmo:populationScope "Persons ≥ 18 years" ;
+    dmo:recommendationId "hepatitis-c-screening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screen for hepatitis C with a hepatitis C antibody test" ;
+    dmo:evidenceQuote "Screen for hepatitis C with a hepatitis C antibody test" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/immunizations> a dmo:Recommendation ;
+    rdfs:label "Immunizations" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "immunizations" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Hepatitis B, influenza, pneumococcus, shingles, tetanus/diphtheria/pertussis" ;
+    dmo:evidenceQuote "Hepatitis B, influenza, pneumococcus, shingles, tetanus/diphtheria/pertussis" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/kidney-care-check-serum-creatinine-and-estimated-gfr> a dmo:Recommendation ;
+    rdfs:label "Kidney Care Check serum creatinine and estimated GFR" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "kidney-care-check-serum-creatinine-and-estimated-gfr" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Check serum creatinine and estimated GFR" ;
+    dmo:evidenceQuote "Check serum creatinine and estimated GFR" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/kidney-care-if-htn-ckd-prescribe-ace-inhibitor-or-arb> a dmo:Recommendation ;
+    rdfs:label "Kidney Care If HTN/CKD, prescribe ACE Inhibitor or ARB" ;
+    dmo:populationScope "Patients with HTN or CKD" ;
+    dmo:recommendationId "kidney-care-if-htn-ckd-prescribe-ace-inhibitor-or-arb" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    dmo:evidenceQuote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/lipid-management-check-fasting-lipid-profile> a dmo:Recommendation ;
+    rdfs:label "Lipid Management Check fasting lipid profile" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "lipid-management-check-fasting-lipid-profile" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Check fasting lipid profile" ;
+    dmo:evidenceQuote "Check fasting lipid profile" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/nutrition-provide-nutrition-education-and-support> a dmo:Recommendation ;
+    rdfs:label "Nutrition Provide nutrition education and support" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "nutrition-provide-nutrition-education-and-support" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Provide nutrition education and support (health care team) Refer to RD for MNT, if available" ;
+    dmo:evidenceQuote "Provide nutrition education and support (health care team) Refer to RD for MNT, if available" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/oral-care-dental-exam-by-dental-professional> a dmo:Recommendation ;
+    rdfs:label "Oral Care Dental exam by dental professional" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "oral-care-dental-exam-by-dental-professional" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Dental exam by dental professional" ;
+    dmo:evidenceQuote "Dental exam by dental professional" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/oral-care-inspection-of-gums-teeth> a dmo:Recommendation ;
+    rdfs:label "Oral Care Inspection of gums/teeth" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "oral-care-inspection-of-gums-teeth" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Inspection of gums/teeth" ;
+    dmo:evidenceQuote "Inspection of gums/teeth" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-ask-about-reproductive-intentions> a dmo:Recommendation ;
+    rdfs:label "Preconception, Pregnancy, and Postpartum Care Ask about reproductive intentions" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "preconception-pregnancy-and-postpartum-care-ask-about-reproductive-intentions" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Ask about reproductive intentions/assess contraception" ;
+    dmo:evidenceQuote "Ask about reproductive intentions/assess contraception" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-provide-preconception-counseling> a dmo:Recommendation ;
+    rdfs:label "Preconception, Pregnancy, and Postpartum Care Provide preconception counseling" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "preconception-pregnancy-and-postpartum-care-provide-preconception-counseling" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Provide preconception counseling" ;
+    dmo:evidenceQuote "Provide preconception counseling" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-screen-for-gdm-in-all-women-not-known-to-have-diabetes> a dmo:Recommendation ;
+    rdfs:label "Preconception, Pregnancy, and Postpartum Care Screen for GDM in all women not known to have diabetes" ;
+    dmo:populationScope "All women not known to have diabetes" ;
+    dmo:recommendationId "preconception-pregnancy-and-postpartum-care-screen-for-gdm-in-all-women-not-known-to-have-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screen for GDM in all women not known to have diabetes" ;
+    dmo:evidenceQuote "Screen for GDM in all women not known to have diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-screen-for-type-2-diabetes-in-women-who-had-gdm> a dmo:Recommendation ;
+    rdfs:label "Preconception, Pregnancy, and Postpartum Care Screen for type 2 diabetes in women who had GDM" ;
+    dmo:populationScope "Women who had GDM" ;
+    dmo:recommendationId "preconception-pregnancy-and-postpartum-care-screen-for-type-2-diabetes-in-women-who-had-gdm" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screen for type 2 diabetes in women who had GDM" ;
+    dmo:evidenceQuote "Screen for type 2 diabetes in women who had GDM" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-screen-for-undiagnosed-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Preconception, Pregnancy, and Postpartum Care Screen for undiagnosed type 2 diabetes" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "preconception-pregnancy-and-postpartum-care-screen-for-undiagnosed-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screen for undiagnosed type 2 diabetes" ;
+    dmo:evidenceQuote "Screen for undiagnosed type 2 diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/tobacco-use-assess-smoking> a dmo:Recommendation ;
+    rdfs:label "Tobacco Use Assess smoking" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "tobacco-use-assess-smoking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Assess smoking, oral tobacco use, e-cigarette use, and exposure to secondhand smoke" ;
+    dmo:evidenceQuote "Assess smoking, oral tobacco use, e-cigarette use, and exposure to secondhand smoke" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/tobacco-use-for-tobacco-users-provide-cessation-counseling> a dmo:Recommendation ;
+    rdfs:label "Tobacco Use For tobacco users, provide cessation counseling" ;
+    dmo:populationScope "Tobacco users" ;
+    dmo:recommendationId "tobacco-use-for-tobacco-users-provide-cessation-counseling" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For tobacco users, provide cessation counseling" ;
+    dmo:evidenceQuote "For tobacco users, provide cessation counseling" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/recommendation/tuberculosis-screening> a dmo:Recommendation ;
+    rdfs:label "Tuberculosis Screening" ;
+    dmo:populationScope "All patients with diabetes" ;
+    dmo:recommendationId "tuberculosis-screening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screen for TB with a skin or blood test" ;
+    dmo:evidenceQuote "Screen for TB with a skin or blood test" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/riskFactor/age-50-70-with-1-or-more-risk-factors-for-ascvd> a dmo:RiskFactor ;
+    rdfs:label "Age 50-70 with 1 or more risk factors for ASCVD" ;
+    dmo:evidenceNote "Consider in patients aged 50-70 with no known ASCVD but with 1 or more risk factors for ASCVD" ;
+    dmo:name "Age 50-70 with 1 or more risk factors for ASCVD" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "age-50-70-with-1-or-more-risk-factors-for-ascvd" ;
+    dmo:evidenceQuote "Consider in patients aged 50-70 with no known ASCVD but with 1 or more risk factors for ASCVD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/riskFactor/aspirin-therapy-75-162-mg-day> a dmo:RiskFactor ;
+    rdfs:label "Aspirin therapy 75-162 mg/day" ;
+    dmo:evidenceNote "Prescribe if known ASCVD" ;
+    dmo:name "Aspirin therapy 75-162 mg/day" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "aspirin-therapy-75-162-mg-day" ;
+    dmo:evidenceQuote "Prescribe if known ASCVD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/riskFactor/chronic-kidney-disease> a dmo:RiskFactor ;
+    rdfs:label "Chronic Kidney Disease" ;
+    dmo:evidenceNote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    dmo:name "Chronic Kidney Disease" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "chronic-kidney-disease" ;
+    dmo:evidenceQuote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/riskFactor/gestational-diabetes-mellitus> a dmo:RiskFactor ;
+    rdfs:label "Gestational Diabetes Mellitus" ;
+    dmo:evidenceNote "Screen for type 2 diabetes in women who had GDM" ;
+    dmo:name "Gestational Diabetes Mellitus" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "gestational-diabetes-mellitus" ;
+    dmo:evidenceQuote "Screen for type 2 diabetes in women who had GDM" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/riskFactor/hypertension> a dmo:RiskFactor ;
+    rdfs:label "Hypertension" ;
+    dmo:evidenceNote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    dmo:name "Hypertension" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "hypertension" ;
+    dmo:evidenceQuote "If HTN/CKD, prescribe ACE Inhibitor or ARB unless contraindicated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/riskFactor/tobacco-use> a dmo:RiskFactor ;
+    rdfs:label "Tobacco use" ;
+    dmo:evidenceNote "For tobacco users, provide cessation counseling" ;
+    dmo:name "Tobacco use" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "tobacco-use" ;
+    dmo:evidenceQuote "For tobacco users, provide cessation counseling" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/symptom/constipation> a dmo:Symptom ;
+    rdfs:label "Constipation" ;
+    dmo:name "Constipation" ;
+    dmo:symptomCode "constipation" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Assess GI symptoms; gastroparesis, constipation, diarrhea" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/symptom/diarrhea> a dmo:Symptom ;
+    rdfs:label "Diarrhea" ;
+    dmo:name "Diarrhea" ;
+    dmo:symptomCode "diarrhea" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Assess GI symptoms; gastroparesis, constipation, diarrhea" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/symptom/exercise-intolerance> a dmo:Symptom ;
+    rdfs:label "Exercise Intolerance" ;
+    dmo:name "Exercise Intolerance" ;
+    dmo:symptomCode "exercise-intolerance" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Assess CV symptoms; resting tachycardia, exercise intolerance, orthostatic hypotension" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/symptom/gastroparesis> a dmo:Symptom ;
+    rdfs:label "Gastroparesis" ;
+    dmo:name "Gastroparesis" ;
+    dmo:symptomCode "gastroparesis" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Assess GI symptoms; gastroparesis, constipation, diarrhea" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/symptom/orthostatic-hypotension> a dmo:Symptom ;
+    rdfs:label "Orthostatic Hypotension" ;
+    dmo:name "Orthostatic Hypotension" ;
+    dmo:symptomCode "orthostatic-hypotension" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Assess CV symptoms; resting tachycardia, exercise intolerance, orthostatic hypotension" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+<https://example.org/dmo/id/symptom/resting-tachycardia> a dmo:Symptom ;
+    rdfs:label "Resting Tachycardia" ;
+    dmo:name "Resting Tachycardia" ;
+    dmo:symptomCode "resting-tachycardia" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Assess CV symptoms; resting tachycardia, exercise intolerance, orthostatic hypotension" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ihs-diabetes-recommendations-at-a-glance> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/gestational-diabetes-mellitus> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/nutrition-education-and-support> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/tobacco-use> .
+<https://example.org/dmo/id/lifestyleIntervention/refer-to-rd-for-mnt> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/tobacco-use> .
+<https://example.org/dmo/id/lifestyleIntervention/provide-cessation-counseling> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/tobacco-use> .
+<https://example.org/dmo/id/device/blood-glucose-monitoring> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/a1c> .
+<https://example.org/dmo/id/device/continuous-glucose-monitoring> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/a1c> .
+<https://example.org/dmo/id/recommendation/aspirin-or-other-antiplatelet-therapy> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/autonomic-neuropathy-assess-cv-symptoms> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/autonomic-neuropathy-assess-gi-symptoms> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/autonomic-neuropathy-assess-sexual-health-function> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/behavioral-health-assess-emotional-health> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/blood-pressure-check-blood-pressure> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/eye-care-comprehensive-dilated-eye-exam> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/foot-care-perform-comprehensive-lower-extremity-foot-exam> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/foot-care-screen-for-pad> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/foot-care-visual-inspection-of-feet> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/hepatitis-c-screening> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/immunizations> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/kidney-care-check-serum-creatinine-and-estimated-gfr> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/kidney-care-if-htn-ckd-prescribe-ace-inhibitor-or-arb> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/lipid-management-check-fasting-lipid-profile> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/nutrition-provide-nutrition-education-and-support> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/nutrition-education-and-support> .
+<https://example.org/dmo/id/recommendation/nutrition-provide-nutrition-education-and-support> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/refer-to-rd-for-mnt> .
+<https://example.org/dmo/id/recommendation/oral-care-dental-exam-by-dental-professional> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/oral-care-inspection-of-gums-teeth> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-ask-about-reproductive-intentions> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-provide-preconception-counseling> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-screen-for-gdm-in-all-women-not-known-to-have-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/preconception-pregnancy-and-postpartum-care-screen-for-type-2-diabetes-in-women-who-had-gdm> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/tobacco-use-for-tobacco-users-provide-cessation-counseling> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/provide-cessation-counseling> .
+<https://example.org/dmo/id/recommendation/tuberculosis-screening> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .

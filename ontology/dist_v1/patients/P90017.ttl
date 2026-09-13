@@ -1,0 +1,28 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/19203998-4101-52f7-84ec-66e9a5e3a245> a dmo:Patient ;
+    dmo:birthYear 1973 ;
+    dmo:demoScenario "S16" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90017-1> ;
+    dmo:patientId "P90017" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/encounter/E90017-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-06"^^xsd:date ;
+    dmo:encounterId "E90017-1" ;
+    dmo:encounterType "Screening" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90017-A1C> .
+
+<https://example.org/dmo/id/labResult/L90017-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-06T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S16" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90017-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 5.7 ;
+    dmo:valueTrustLevel "Curated" .
+

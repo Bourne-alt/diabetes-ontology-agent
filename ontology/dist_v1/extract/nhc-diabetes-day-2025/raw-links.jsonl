@@ -1,0 +1,37 @@
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Diabetic Ketoacidosis", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Hyperosmolar Hyperglycemic State", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Diabetic Nephropathy", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Diabetic Neuropathy", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Diabetic Retinopathy", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Cardiovascular Disease", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "糖尿病前期", "predicate": "predisposesTo", "target": "Diabetic Foot Ulcer", "quote": "当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。", "sourceType": "diabetesType"}
+{"source": "Diabetic Ketoacidosis", "predicate": "presentsWith", "target": "烂苹果味呼吸", "quote": "糖尿病的危害主要表现为两方面：一是因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。", "sourceType": "complication"}
+{"source": "Hyperosmolar Hyperglycemic State", "predicate": "presentsWith", "target": "烂苹果味呼吸", "quote": "糖尿病的危害主要表现为两方面：一是因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。", "sourceType": "complication"}
+{"source": "Cardiovascular Disease", "predicate": "presentsWith", "target": "进行性加重的气短或呼吸困难", "quote": "大血管病变主要是指动脉粥样硬化性心血管疾病和心力衰竭，其中动脉粥样硬化性心血管疾病包括冠心病、脑血管疾病和周围血管疾病。", "sourceType": "complication"}
+{"source": "Diabetic Nephropathy", "predicate": "presentsWith", "target": "多尿", "quote": "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。", "sourceType": "complication"}
+{"source": "Diabetic Retinopathy", "predicate": "presentsWith", "target": "多饮", "quote": "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。", "sourceType": "complication"}
+{"source": "Diabetic Neuropathy", "predicate": "presentsWith", "target": "颤抖出汗", "quote": "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。", "sourceType": "complication"}
+{"source": "Diabetic Foot Ulcer", "predicate": "presentsWith", "target": "截肢", "quote": "上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。", "sourceType": "complication"}
+{"source": "吸烟", "predicate": "increasesRiskOf", "target": "慢性阻塞性肺疾病", "quote": "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。", "sourceType": "riskFactor"}
+{"source": "室内外空气污染", "predicate": "increasesRiskOf", "target": "慢性阻塞性肺疾病", "quote": "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。", "sourceType": "riskFactor"}
+{"source": "职业暴露", "predicate": "increasesRiskOf", "target": "慢性阻塞性肺疾病", "quote": "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。", "sourceType": "riskFactor"}
+{"source": "超重与肥胖", "predicate": "increasesRiskOf", "target": "糖尿病前期", "quote": "具备下列任意一个及以上者为糖尿病高危人群：1.有糖尿病前期史（空腹血糖受损IFG或糖尿病异常IGT）；2.年龄≥40岁；3.超重与肥胖[体重指数（BMI）≥24kg/m2和（或）中心型肥胖（男性腰围≥90cm,女性腰围≥85cm）]；", "sourceType": "riskFactor"}
+{"source": "有巨大儿（出生体重≥4Kg）分娩史或妊娠糖尿病史", "predicate": "increasesRiskOf", "target": "糖尿病前期", "quote": "具备下列任意一个及以上者为糖尿病高危人群：1.有糖尿病前期史（空腹血糖受损IFG或糖尿病异常IGT）；2.年龄≥40岁；3.超重与肥胖[体重指数（BMI）≥24kg/m2和（或）中心型肥胖（男性腰围≥90cm,女性腰围≥85cm）]；4.有糖尿病家族史；5.缺乏体力活动；6.高血压；7.血脂异常；8.动脉粥样硬化性心血管疾病（ASCVD）；9.有巨大儿（出生体重≥4Kg）分娩史或妊娠糖尿病史。", "sourceType": "riskFactor"}
+{"source": "遗传因素", "predicate": "increasesRiskOf", "target": "慢性阻塞性肺疾病", "quote": "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。", "sourceType": "riskFactor"}
+{"source": "幼年时期的呼吸道感染", "predicate": "increasesRiskOf", "target": "慢性阻塞性肺疾病", "quote": "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。", "sourceType": "riskFactor"}
+{"source": "主动利用基本公共卫生服务", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "主动利用基本公共卫生服务，配合医生做好健康管理。", "sourceType": "lifestyleIntervention"}
+{"source": "减少室内外空气污染", "predicate": "mitigatesRiskFactor", "target": "室内外空气污染", "quote": "要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；", "sourceType": "lifestyleIntervention"}
+{"source": "及时接种流感疫苗、肺炎球菌疫苗", "predicate": "mitigatesRiskFactor", "target": "幼年时期的呼吸道感染", "quote": "对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；", "sourceType": "lifestyleIntervention"}
+{"source": "合理膳食", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。", "sourceType": "lifestyleIntervention"}
+{"source": "呼吸功能锻炼（如缩唇呼吸、腹式呼吸）", "predicate": "mitigatesRiskFactor", "target": "吸烟", "quote": "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。", "sourceType": "lifestyleIntervention"}
+{"source": "在职业环境中做好防护", "predicate": "mitigatesRiskFactor", "target": "职业暴露", "quote": "在职业环境中做好防护，减少职业暴露；", "sourceType": "lifestyleIntervention"}
+{"source": "平衡心理状态", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。", "sourceType": "lifestyleIntervention"}
+{"source": "戒烟限酒", "predicate": "mitigatesRiskFactor", "target": "吸烟", "quote": "控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。", "sourceType": "lifestyleIntervention"}
+{"source": "掌握正确的吸入药物使用方法", "predicate": "mitigatesRiskFactor", "target": "职业暴露", "quote": "患者需在医务人员指导下掌握正确的使用方法，长期、规律使用。", "sourceType": "lifestyleIntervention"}
+{"source": "控制体重", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。", "sourceType": "lifestyleIntervention"}
+{"source": "科学运动与合理膳食", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；", "sourceType": "lifestyleIntervention"}
+{"source": "积极戒烟", "predicate": "mitigatesRiskFactor", "target": "吸烟", "quote": "提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；", "sourceType": "lifestyleIntervention"}
+{"source": "营养支持", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。", "sourceType": "lifestyleIntervention"}
+{"source": "运动训练", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。", "sourceType": "lifestyleIntervention"}
+{"source": "适量运动", "predicate": "mitigatesRiskFactor", "target": "超重与肥胖", "quote": "控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。", "sourceType": "lifestyleIntervention"}
+{"source": "MonitoringSchedule", "predicate": "schedulesTest", "target": "每年进行慢性并发症筛查", "quote": "每年进行慢性并发症筛查，包括足病、视网膜病变及肾脏病等。", "sourceType": "monitoringSchedule"}

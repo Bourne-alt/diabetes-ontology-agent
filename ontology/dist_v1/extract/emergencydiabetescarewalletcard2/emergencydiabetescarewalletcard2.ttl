@@ -1,0 +1,244 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/EmergencyDiabetesCareWalletCard2.pdf
+# 目标 named graph：urn:dmo:extract:emergencydiabetescarewalletcard2
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:emergencydiabetescarewalletcard2'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/EmergencyDiabetesCareWalletCard2.pdf" ;
+    dmo:sha256 "1ad39dfd324e06fb50a8340d2221691782aae903bcbbd12f1c46383151737d2c" ;
+    dmo:byteSize "402360"^^xsd:integer .
+
+<urn:dmo:extract:emergencydiabetescarewalletcard2> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T06:52:31+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/low-blood-sugar> a dmo:Complication ;
+    rdfs:label "Low Blood Sugar" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "low-blood-sugar" ;
+    dmo:definition "If I am acting strangely or cannot be awakened, my blood sugar may be low." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Low Blood Sugar" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "If I am acting strangely or cannot be awakened, my blood sugar may be low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/labTest/blood-pressure> a dmo:LabTest ;
+    rdfs:label "Blood Pressure" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-pressure" ;
+    dmo:name "Blood Pressure" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Blood Pressure \n(Every visit)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/labTest/dental-exam> a dmo:LabTest ;
+    rdfs:label "Dental Exam" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "dental-exam" ;
+    dmo:name "Dental Exam" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Dental Exam \n(Every 6 months)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/labTest/dilated-eye-exam> a dmo:LabTest ;
+    rdfs:label "Dilated Eye Exam" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "dilated-eye-exam" ;
+    dmo:name "Dilated Eye Exam" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Dilated Eye Exam \n(Annually) *" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/labTest/lipid-profile> a dmo:LabTest ;
+    rdfs:label "Lipid Profile" ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "lipid-profile" ;
+    dmo:name "Lipid Profile" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Lipid Profile  (Annually)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/labTest/microalbuminuria> a dmo:LabTest ;
+    rdfs:label "Microalbuminuria" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "microalbuminuria" ;
+    dmo:name "Microalbuminuria" ;
+    dmo:specimen "Urine" ;
+    dmo:evidenceQuote "Microalbuminuria \n(Annually)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/labTest/self-management-education> a dmo:LabTest ;
+    rdfs:label "Self-Management Education" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "self-management-education" ;
+    dmo:name "Self-Management Education" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Self-Management Education" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/lifestyleIntervention/self-management-education> a dmo:LifestyleIntervention ;
+    rdfs:label "Self-Management Education" ;
+    dmo:interventionCode "self-management-education" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Self-Management Education" ;
+    dmo:evidenceQuote "Self-Management Education   " ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/monitoringSchedule/dental-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Dental Exam" ;
+    dmo:frequencyMonths "6"^^xsd:integer ;
+    dmo:name "Dental Exam" ;
+    dmo:scheduleId "dental-exam" ;
+    dmo:triggerWindow "Every 6 months" ;
+    dmo:evidenceQuote "Dental Exam (Every 6 months)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/monitoringSchedule/lipid-profile> a dmo:MonitoringSchedule ;
+    rdfs:label "Lipid Profile" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Lipid Profile" ;
+    dmo:scheduleId "lipid-profile" ;
+    dmo:triggerWindow "Annually" ;
+    dmo:evidenceQuote "Lipid Profile (Annually)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/monitoringSchedule/microalbuminuria> a dmo:MonitoringSchedule ;
+    rdfs:label "Microalbuminuria" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Microalbuminuria" ;
+    dmo:scheduleId "microalbuminuria" ;
+    dmo:triggerWindow "Annually" ;
+    dmo:evidenceQuote "Microalbuminuria (Annually)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/monitoringSchedule/self-management-education> a dmo:MonitoringSchedule ;
+    rdfs:label "Self-Management Education" ;
+    dmo:name "Self-Management Education" ;
+    dmo:scheduleId "self-management-education" ;
+    dmo:evidenceQuote "Self-Management Education" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/recommendation/blood-pressure-monitoring-frequency> a dmo:Recommendation ;
+    rdfs:label "Blood Pressure Monitoring Frequency" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "blood-pressure-monitoring-frequency" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Blood Pressure (Every visit)" ;
+    dmo:evidenceQuote "Blood Pressure (Every visit)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/recommendation/dental-exam-frequency> a dmo:Recommendation ;
+    rdfs:label "Dental Exam Frequency" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "dental-exam-frequency" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Dental Exam (Every 6 months)" ;
+    dmo:evidenceQuote "Dental Exam (Every 6 months)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/recommendation/lipid-profile-testing-frequency> a dmo:Recommendation ;
+    rdfs:label "Lipid Profile Testing Frequency" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "lipid-profile-testing-frequency" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Lipid Profile (Annually)" ;
+    dmo:evidenceQuote "Lipid Profile (Annually)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/recommendation/low-blood-sugar-emergency-response> a dmo:Recommendation ;
+    rdfs:label "Low Blood Sugar Emergency Response" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes who are experiencing symptoms of low blood sugar" ;
+    dmo:recommendationId "low-blood-sugar-emergency-response" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "If I am acting strangely or cannot be awakened, my blood sugar may be low. If I cannot be awakened or cannot swallow, do not try to give me anything by mouth. Please contact Emergency Medical Services (911) immediately. If I can swallow, give me 4 to 6 ounces of fruit juice, sweetened soft drink, or other sugar source. If I am not better within 10-15 minutes, contact Emergency Medical Services (911) immediately." ;
+    dmo:evidenceQuote "If I am acting strangely or cannot be awakened, my blood sugar may be low.  If I cannot be awakened or cannot swallow, do not try to give me anything by mouth. Please contact Emergency Medical Services (911) immediately.  If I can swallow, give me 4 to 6 ounces of fruit juice, sweetened soft drink, or other sugar source. If I am not better within 10-15 minutes, contact Emergency Medical Services (911) immediately." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/recommendation/microalbuminuria-testing-frequency> a dmo:Recommendation ;
+    rdfs:label "Microalbuminuria Testing Frequency" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "microalbuminuria-testing-frequency" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Microalbuminuria (Annually)" ;
+    dmo:evidenceQuote "Microalbuminuria (Annually)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/recommendation/self-management-education> a dmo:Recommendation ;
+    rdfs:label "Self-Management Education" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "self-management-education" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Self-Management Education" ;
+    dmo:evidenceQuote "Self-Management Education" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/symptom/acting-strangely> a dmo:Symptom ;
+    rdfs:label "Acting Strangely" ;
+    dmo:name "Acting Strangely" ;
+    dmo:symptomCode "acting-strangely" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "If I am acting strangely or cannot be awakened, my blood sugar may be low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/symptom/cannot-be-awakened> a dmo:Symptom ;
+    rdfs:label "Cannot Be Awakened" ;
+    dmo:name "Cannot Be Awakened" ;
+    dmo:symptomCode "cannot-be-awakened" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "If I am acting strangely or cannot be awakened, my blood sugar may be low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+<https://example.org/dmo/id/symptom/cannot-swallow> a dmo:Symptom ;
+    rdfs:label "Cannot Swallow" ;
+    dmo:name "Cannot Swallow" ;
+    dmo:symptomCode "cannot-swallow" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "If I cannot be awakened or cannot swallow, do not try to give me anything by mouth. Please contact Emergency Medical Services (911) immediately." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/low-blood-sugar> dmo:presentsWith <https://example.org/dmo/id/symptom/acting-strangely> .
+<https://example.org/dmo/id/complication/low-blood-sugar> dmo:presentsWith <https://example.org/dmo/id/symptom/cannot-be-awakened> .
+<https://example.org/dmo/id/complication/low-blood-sugar> dmo:presentsWith <https://example.org/dmo/id/symptom/cannot-swallow> .
+<https://example.org/dmo/id/monitoringSchedule/dental-exam> dmo:schedulesTest <https://example.org/dmo/id/labTest/dental-exam> .
+<https://example.org/dmo/id/monitoringSchedule/lipid-profile> dmo:schedulesTest <https://example.org/dmo/id/labTest/lipid-profile> .
+<https://example.org/dmo/id/monitoringSchedule/microalbuminuria> dmo:schedulesTest <https://example.org/dmo/id/labTest/microalbuminuria> .
+<https://example.org/dmo/id/monitoringSchedule/self-management-education> dmo:schedulesTest <https://example.org/dmo/id/labTest/self-management-education> .
+<https://example.org/dmo/id/recommendation/low-blood-sugar-emergency-response> dmo:targetsComplication <https://example.org/dmo/id/complication/low-blood-sugar> .
+<https://example.org/dmo/id/recommendation/low-blood-sugar-emergency-response> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/self-management-education> .
+<https://example.org/dmo/id/recommendation/self-management-education> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/self-management-education> .
+<https://example.org/dmo/id/recommendation/dental-exam-frequency> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/dental-exam> .
+<https://example.org/dmo/id/recommendation/lipid-profile-testing-frequency> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/lipid-profile> .
+<https://example.org/dmo/id/recommendation/microalbuminuria-testing-frequency> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/microalbuminuria> .

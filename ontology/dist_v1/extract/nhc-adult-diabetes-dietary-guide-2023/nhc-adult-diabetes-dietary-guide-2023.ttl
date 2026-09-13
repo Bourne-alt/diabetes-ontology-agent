@@ -1,0 +1,200 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/nhc-adult-diabetes-dietary-guide-2023.pdf
+# 目标 named graph：urn:dmo:extract:nhc-adult-diabetes-dietary-guide-2023
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:nhc-adult-diabetes-dietary-guide-2023'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/nhc-adult-diabetes-dietary-guide-2023.pdf" ;
+    dmo:sha256 "2e03cd9e06b1a1faf67298647a01c5e5d2be9cd99aacb527732c51f1ee378d87" ;
+    dmo:byteSize "2080383"^^xsd:integer .
+
+<urn:dmo:extract:nhc-adult-diabetes-dietary-guide-2023> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T12:29:51+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/labTest/ogtt-2h> a dmo:LabTest ;
+    rdfs:label "OGTT-2h" ;
+    dmo:definition "口服葡萄糖耐量试验2小时血糖。" ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "ogtt-2h" ;
+    dmo:loincCode "15578-0" ;
+    dmo:name "OGTT-2h" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "或加上 OGTT 2h 血糖 ≥11.1mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/冬季食谱3> a dmo:LifestyleIntervention ;
+    rdfs:label "冬季食谱3" ;
+    dmo:interventionCode "冬季食谱3" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "冬季食谱3" ;
+    dmo:evidenceQuote "冬季食谱 3 \n早餐 \n鲜虾苕粉（苕粉 100g，海虾 50g） \n纯牛奶（250ml） \n煮鸡蛋（鸡蛋 50g） \n腰果（20g） \n中餐 \n糙米饭（糙米 100g） \n冬笋炒牛肉（冬笋 60g，牛肉 100g） \n炒奶白菜（奶白菜 100g） \n西洋菜豆腐汤（西洋菜 100g，豆腐 60g） \n加餐 苹果（200g） \n晚餐 煲仔饭（大米 60g，羊肉 45g，菜心 100g） \n西兰花炒肉片（西兰花 100g，猪瘦肉 50g） \n油、盐 全天总用量：植物油 23g，盐 5g" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/归参炖母鸡> a dmo:LifestyleIntervention ;
+    rdfs:label "归参炖母鸡" ;
+    dmo:interventionCode "归参炖母鸡" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "归参炖母鸡" ;
+    dmo:evidenceQuote "一、归参炖母鸡 \n主要材料：当归 12g， 党参20g， 母鸡1 只， 生姜、 葱、 \n料酒、食盐适量。 \n制作方法：将母鸡去掉内脏，洗净。再将洗净的当归和 \n党参放入鸡腹内，置砂锅中，再加入葱、姜、料酒等，加适 \n量清水，大火煮沸后，改小火煨炖，至鸡肉烂熟骨肉分离即 \n成。佐餐分次食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/抗阻运动> a dmo:LifestyleIntervention ;
+    rdfs:label "抗阻运动" ;
+    dmo:activityTarget "每周2次，如哑铃、俯卧撑、器械类运动等，提高肌肉力量和耐力" ;
+    dmo:expectedBenefit "提高肌肉力量和耐力" ;
+    dmo:interventionCode "抗阻运动" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "抗阻运动" ;
+    dmo:evidenceQuote "如无禁忌， 最好一周2 次抗阻运动，如哑铃、 俯卧撑、 器械类运动等，提高肌肉力量和耐力。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/灵芝山药猪骨汤> a dmo:LifestyleIntervention ;
+    rdfs:label "灵芝山药猪骨汤" ;
+    dmo:interventionCode "灵芝山药猪骨汤" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "灵芝山药猪骨汤" ;
+    dmo:evidenceQuote "六、灵芝山药猪骨汤 \n主要材料：猪骨 150g，灵芝 10g，山药 30g，生姜 3g， \n盐适量。灵芝，非试点地区限执业医师使用。 \n制作方法：灵芝和去皮的山药切小块，猪骨洗净焯水后 \n捞起备用。所有材料一起放入锅中，加入清水，大火烧开后 \n转小火 1 小时。佐餐食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/猪胰汤> a dmo:LifestyleIntervention ;
+    rdfs:label "猪胰汤" ;
+    dmo:interventionCode "猪胰汤" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "猪胰汤" ;
+    dmo:evidenceQuote "二、猪胰汤 \n主要材料：猪胰 1 条，薏苡仁30g，黄芪30g，山药120 \n克。黄芪，非试点地区限执业医师使用。 \n制作方法：将黄芪、山药煎取浓汁，与猪胰、薏苡仁共 \n煮汤分次食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/石斛西洋参瘦肉汤> a dmo:LifestyleIntervention ;
+    rdfs:label "石斛西洋参瘦肉汤" ;
+    dmo:interventionCode "石斛西洋参瘦肉汤" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "石斛西洋参瘦肉汤" ;
+    dmo:evidenceQuote "五、石斛西洋参瘦肉汤 \n主要材料：猪瘦肉 50g，铁皮石斛5g，西洋参2g，大枣 \n8g，盐适量。铁皮石斛、西洋参，非试点地区限执业医师使 \n用。 \n制作方法： 全部食材放入 锅内，加清水， 大火煮沸后， \n小火煮 1～2 小时。佐餐食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/秋季食谱3> a dmo:LifestyleIntervention ;
+    rdfs:label "秋季食谱3" ;
+    dmo:interventionCode "秋季食谱3" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "秋季食谱3" ;
+    dmo:evidenceQuote "秋季食谱 3 \n早餐 \n菜肉包子（面粉 70g，白菜 30g，玉米粒 20g，猪瘦肉 30g） \n玉米面花卷（25g） \n纯牛奶（250ml） \n中餐 \n牛蛙焖米饭（牛蛙 30g，大米 100g） \n菜花炒鸡蛋（菜花 30g，鸡蛋 60g） \n盐水生菜（生菜 150g） \n土豆鸡汤（土豆 90g，鸡肉 50g） \n加餐 石榴（150g） \n晚餐 \n杂粮饭（大米 70g，黑米 30g） \n南瓜豆豉蒸排骨（猪排骨 45g，南瓜 100g） \n扁豆炒肉末（扁豆 120g，猪瘦肉 35g） \n油、盐 全天总用量：植物油 25g，盐 5g" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/胡桃肉炒韭菜> a dmo:LifestyleIntervention ;
+    rdfs:label "胡桃肉炒韭菜" ;
+    dmo:interventionCode "胡桃肉炒韭菜" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "胡桃肉炒韭菜" ;
+    dmo:evidenceQuote "三、胡桃肉炒韭菜 \n主要材料：胡桃仁 60g，韭菜 150g。 \n制作方法：先将胡桃仁用麻油炒熟， 然后放入韭菜翻炒， \n待韭菜熟后加盐即可食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/蛋白质15-20-碳水化合物45-60-脂肪20-35> a dmo:LifestyleIntervention ;
+    rdfs:label "蛋白质15%～20% 碳水化合物45%～60% 脂肪20%～35%" ;
+    dmo:activityTarget "蛋白质15%～20%，碳水化合物45%～60%，脂肪20%～35%" ;
+    dmo:interventionCode "蛋白质15-20-碳水化合物45-60-脂肪20-35" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "蛋白质15%～20% 碳水化合物45%～60% 脂肪20%～35%" ;
+    dmo:evidenceQuote "宏量营养素占总能量比为： 蛋白质15%～20%， 碳水化合 物45%～60%，脂肪 20%～35%。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/鸽肉山药玉竹汤> a dmo:LifestyleIntervention ;
+    rdfs:label "鸽肉山药玉竹汤" ;
+    dmo:interventionCode "鸽肉山药玉竹汤" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "鸽肉山药玉竹汤" ;
+    dmo:evidenceQuote "九、鸽肉山药玉竹汤 \n主要材料：鸽肉 50g，山药 30g，玉竹 12g， 生姜3g，盐 \n适量。 \n制作方法：鸽肉焯水，洗净入锅，加山药、玉竹、生姜 \n和清水，煮至鸽肉烂熟。佐餐食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/lifestyleIntervention/黑豆黄杞子汤> a dmo:LifestyleIntervention ;
+    rdfs:label "黑豆黄杞子汤" ;
+    dmo:interventionCode "黑豆黄杞子汤" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "黑豆黄杞子汤" ;
+    dmo:evidenceQuote "四、黑豆黄杞子汤 \n主要材料：黄芪 10g， 黑豆10g， 枸杞子 10g， 生姜3g， \n盐适量。黄芪，非试点地区限执业医师使用。 \n制作方法：黑豆泡发与其他食材一起，加清水，小火煮 \n至熟透。佐餐食用。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/carbohydrate-intake-range> a dmo:Recommendation ;
+    rdfs:label "Carbohydrate Intake Range" ;
+    dmo:recommendationId "carbohydrate-intake-range" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "碳水化合物45%～60%" ;
+    dmo:evidenceQuote "碳水化合 物45%～60%，脂肪 20%～35%。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/definition-of-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Definition of Prediabetes" ;
+    dmo:recommendationId "definition-of-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "空腹血糖受损和糖耐量减低统称为糖调节受损，也称糖尿病前期。" ;
+    dmo:evidenceQuote "空腹血糖受损和糖耐量减低统称为糖调节受损， 也称糖尿病前期；" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/drink-water-and-limit-sugary-beverages> a dmo:Recommendation ;
+    rdfs:label "Drink Water and Limit Sugary Beverages" ;
+    dmo:populationScope "所有 diabetes patients" ;
+    dmo:recommendationId "drink-water-and-limit-sugary-beverages" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "足量饮用白水，也可适量饮用淡茶或咖啡，不喝含糖饮料。" ;
+    dmo:evidenceQuote "足量饮用白水，也可适量饮用淡茶或咖啡，不喝含糖饮料。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/energy-intake-range> a dmo:Recommendation ;
+    rdfs:label "Energy Intake Range" ;
+    dmo:recommendationId "energy-intake-range" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "本食谱可提供能量 1600～2000kcal。" ;
+    dmo:evidenceQuote "注:1.本食谱可提供能量 1600～2000kcal。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/fat-intake-amount> a dmo:Recommendation ;
+    rdfs:label "Fat Intake Amount" ;
+    dmo:recommendationId "fat-intake-amount" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "脂肪 56～65g" ;
+    dmo:evidenceQuote "脂肪 56～65g；宏量营养素占总能量比为： 蛋白质15%～20%， 碳水化合" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/fat-intake-amount-for-winter-recipes> a dmo:Recommendation ;
+    rdfs:label "Fat Intake Amount for Winter Recipes" ;
+    dmo:recommendationId "fat-intake-amount-for-winter-recipes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "脂肪 61～74g" ;
+    dmo:evidenceQuote "脂肪 61～74g；宏量营养素占总能量比为： 蛋白质15%～20%， 碳水化合" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/recommendation/fat-intake-range> a dmo:Recommendation ;
+    rdfs:label "Fat Intake Range" ;
+    dmo:recommendationId "fat-intake-range" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "脂肪 20%～35%" ;
+    dmo:evidenceQuote "脂肪 20%～35%。 2.*为食谱中用到的食药物质" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .
+
+<https://example.org/dmo/id/riskFactor/sedentary-lifestyle> a dmo:RiskFactor ;
+    rdfs:label "Sedentary Lifestyle" ;
+    dmo:evidenceNote "中等强度运动要占 50%以上，循序渐进，持之以恒。" ;
+    dmo:name "Sedentary Lifestyle" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "sedentary-lifestyle" ;
+    dmo:evidenceQuote "中等强度运动要占 50%以上，循序渐进，持之以恒。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023> .

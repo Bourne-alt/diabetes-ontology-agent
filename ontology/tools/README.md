@@ -111,7 +111,7 @@ python3 ontology/tools/load_graphdb.py --load
 ```bash
 python3 ontology/tools/semantic_extract.py \
     --graph ontology/graph/diabetes-ontology.json \
-    --doc   ontology/knowledges/VADOD-Diabetes-CPG-Patient-Summary_final_508.pdf \
+    --doc   ontology/knowledges/ \
     --out   ontology/dist/extract
 ```
 

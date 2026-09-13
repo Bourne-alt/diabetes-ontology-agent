@@ -1,0 +1,615 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-a1c-test.txt
+# 目标 named graph：urn:dmo:extract:niddk-a1c-test
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-a1c-test'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-a1c-test> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-a1c-test.txt" ;
+    dmo:sha256 "25ea9d16380f54d1d57371a32c42b2c6e0e6207e0724cdd8ec2fc804bdb26eea" ;
+    dmo:byteSize "15732"^^xsd:integer .
+
+<urn:dmo:extract:niddk-a1c-test> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:17:32+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/hypoglycemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:adverseEffectCode "hypoglycemia" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "keeping an A1C level below 7 percent may not be safe if it leads to problems with hypoglycemia, also called low blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/complication/cardiovascular-disease> a dmo:Complication ;
+    rdfs:label "Cardiovascular Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "cardiovascular-disease" ;
+    dmo:definition "advanced diabetes complications such as chronic kidney disease, nerve problems, or cardiovascular disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0004982" ;
+    dmo:name "Cardiovascular Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "advanced diabetes complications such as chronic kidney disease, nerve problems, or cardiovascular disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/complication/chronic-kidney-disease> a dmo:Complication ;
+    rdfs:label "Chronic Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "chronic-kidney-disease" ;
+    dmo:definition "advanced diabetes complications such as chronic kidney disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Chronic Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "advanced diabetes complications such as chronic kidney disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/complication/hypoglycemia-unawareness> a dmo:Complication ;
+    rdfs:label "Hypoglycemia Unawareness" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "hypoglycemia-unawareness" ;
+    dmo:definition "inability to sense hypoglycemia (also called hypoglycemia unawareness)" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Hypoglycemia Unawareness" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "inability to sense hypoglycemia (also called hypoglycemia unawareness)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/complication/nerve-problems> a dmo:Complication ;
+    rdfs:label "Nerve Problems" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "nerve-problems" ;
+    dmo:definition "advanced diabetes complications such as chronic kidney disease, nerve problems, or cardiovascular disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Nerve Problems" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "advanced diabetes complications such as chronic kidney disease, nerve problems, or cardiovascular disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/complication/severe-hypoglycemia> a dmo:Complication ;
+    rdfs:label "Severe Hypoglycemia" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "severe-hypoglycemia" ;
+    dmo:definition "severe hypoglycemia or inability to sense hypoglycemia (also called hypoglycemia unawareness)" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Severe Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "severe hypoglycemia or inability to sense hypoglycemia (also called hypoglycemia unawareness)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-level-below-7-percent> a dmo:Contraindication ;
+    rdfs:label "A1C level below 7 percent" ;
+    dmo:contraCode "a1c-level-below-7-percent" ;
+    dmo:rationale "keeping an A1C level below 7 percent may not be safe if it leads to problems with hypoglycemia, also called low blood glucose" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "if it leads to problems with hypoglycemia, also called low blood glucose" ;
+    dmo:evidenceQuote "keeping an A1C level below 7 percent may not be safe if it leads to problems with hypoglycemia, also called low blood glucose" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-of-african-mediterranean-or-southeast-asian-descent-with-hemoglobin-variants> a dmo:Contraindication ;
+    rdfs:label "A1C test in people of African, Mediterranean, or Southeast Asian descent with hemoglobin variants" ;
+    dmo:contraCode "a1c-test-in-people-of-african-mediterranean-or-southeast-asian-descent-with-hemoglobin-variants" ;
+    dmo:rationale "If you’re of African, Mediterranean, or Southeast Asian descent or have family members with sickle cell anemia or a thalassemia NIH external link, an A1C test can be unreliable for diagnosing or monitoring diabetes and prediabetes. People in these groups may have a different type of hemoglobin, known as a hemoglobin variant, which can interfere with some A1C tests." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "people of African, Mediterranean, or Southeast Asian descent or have family members with sickle cell anemia or a thalassemia NIH external link" ;
+    dmo:evidenceQuote "If you’re of African, Mediterranean, or Southeast Asian descent or have family members with sickle cell anemia or a thalassemia NIH external link, an A1C test can be unreliable for diagnosing or monitoring diabetes and prediabetes. People in these groups may have a different type of hemoglobin, known as a hemoglobin variant, which can interfere with some A1C tests." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-iron-deficiency-anemia> a dmo:Contraindication ;
+    rdfs:label "A1C test in people with iron-deficiency anemia" ;
+    dmo:contraCode "a1c-test-in-people-with-iron-deficiency-anemia" ;
+    dmo:rationale "A falsely high A1C result can occur in people who are very low in iron; for example, those with iron-deficiency anemia NIH external link." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "people who are very low in iron; for example, those with iron-deficiency anemia NIH external link" ;
+    dmo:evidenceQuote "A falsely high A1C result can occur in people who are very low in iron; for example, those with iron-deficiency anemia NIH external link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-kidney-failure> a dmo:Contraindication ;
+    rdfs:label "A1C test in people with kidney failure" ;
+    dmo:contraCode "a1c-test-in-people-with-kidney-failure" ;
+    dmo:rationale "Other causes of false A1C results include kidney failure or liver disease." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "people with kidney failure" ;
+    dmo:evidenceQuote "Other causes of false A1C results include kidney failure or liver disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-liver-disease> a dmo:Contraindication ;
+    rdfs:label "A1C test in people with liver disease" ;
+    dmo:contraCode "a1c-test-in-people-with-liver-disease" ;
+    dmo:rationale "Other causes of false A1C results include kidney failure or liver disease." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "people with liver disease" ;
+    dmo:evidenceQuote "Other causes of false A1C results include kidney failure or liver disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-sickle-cell-disease> a dmo:Contraindication ;
+    rdfs:label "A1C test in people with sickle cell disease" ;
+    dmo:contraCode "a1c-test-in-people-with-sickle-cell-disease" ;
+    dmo:rationale "Conditions that change the life span of red blood cells, such as recent blood loss, sickle cell disease NIH external link, erythropoietin treatment, hemodialysis, or transfusion, can change A1C levels." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "people with sickle cell disease" ;
+    dmo:evidenceQuote "Conditions that change the life span of red blood cells, such as recent blood loss, sickle cell disease NIH external link, erythropoietin treatment, hemodialysis, or transfusion, can change A1C levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-should-not-be-used-to-diagnose-cystic-fibrosis-related-diabetes> a dmo:Contraindication ;
+    rdfs:label "A1C test should not be used to diagnose cystic fibrosis-related diabetes" ;
+    dmo:contraCode "a1c-test-should-not-be-used-to-diagnose-cystic-fibrosis-related-diabetes" ;
+    dmo:rationale "The A1C test should not be used to diagnose type 1 diabetes, gestational diabetes, or cystic fibrosis-related diabetes. The A1C test may give false results in people with certain conditions." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "diagnosing cystic fibrosis-related diabetes" ;
+    dmo:evidenceQuote "The A1C test should not be used to diagnose type 1 diabetes, gestational diabetes, or cystic fibrosis NIH external link-related diabetes. The A1C test may give false results in people with certain conditions." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-should-not-be-used-to-diagnose-gestational-diabetes> a dmo:Contraindication ;
+    rdfs:label "A1C test should not be used to diagnose gestational diabetes" ;
+    dmo:contraCode "a1c-test-should-not-be-used-to-diagnose-gestational-diabetes" ;
+    dmo:rationale "The A1C test should not be used to diagnose type 1 diabetes, gestational diabetes, or cystic fibrosis-related diabetes. The A1C test may give false results in people with certain conditions." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "diagnosing gestational diabetes" ;
+    dmo:evidenceQuote "The A1C test should not be used to diagnose type 1 diabetes, gestational diabetes, or cystic fibrosis NIH external link-related diabetes. The A1C test may give false results in people with certain conditions." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-should-not-be-used-to-diagnose-type-1-diabetes> a dmo:Contraindication ;
+    rdfs:label "A1C test should not be used to diagnose type 1 diabetes" ;
+    dmo:contraCode "a1c-test-should-not-be-used-to-diagnose-type-1-diabetes" ;
+    dmo:rationale "The A1C test should not be used to diagnose type 1 diabetes, gestational diabetes, or cystic fibrosis-related diabetes. The A1C test may give false results in people with certain conditions." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "diagnosing type 1 diabetes" ;
+    dmo:evidenceQuote "The A1C test should not be used to diagnose type 1 diabetes, gestational diabetes, or cystic fibrosis NIH external link-related diabetes. The A1C test may give false results in people with certain conditions." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/contraindication/point-of-care-a1c-tests-should-not-be-used-for-diagnosis> a dmo:Contraindication ;
+    rdfs:label "Point-of-care A1C tests should not be used for diagnosis" ;
+    dmo:contraCode "point-of-care-a1c-tests-should-not-be-used-for-diagnosis" ;
+    dmo:rationale "Blood samples analyzed in a doctor’s office or clinic, known as point-of-care tests, should not be used for diagnosis." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "using point-of-care A1C tests for diagnosis" ;
+    dmo:evidenceQuote "Blood samples analyzed in a doctor’s office or clinic, known as point-of-care tests, should not be used for diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "Having prediabetes is a risk factor for developing type 2 diabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "Having prediabetes is a risk factor for developing type 2 diabetes." ;
+    dmo:evidenceQuote "to diagnose type 2 diabetes and prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "The A1C test can be used to diagnose type 2 diabetes and prediabetes." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "The A1C test can be used to diagnose type 2 diabetes and prediabetes." ;
+    dmo:evidenceQuote "to diagnose type 2 diabetes and prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/a1c> a dmo:LabTest ;
+    rdfs:label "A1C" ;
+    dmo:definition "A1C test measures the average blood glucose level over the past 2 to 3 months by assessing the percentage of hemoglobin that is glycated." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "In some cases, health care professionals use the A1C test to help confirm the results of another blood glucose test." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/a1c-test> a dmo:LabTest ;
+    rdfs:label "A1C Test" ;
+    dmo:definition "The A1C test is a blood test that provides information about your average levels of blood glucose, also called blood sugar, over the past 3 months." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c-test" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "The A1C test is a blood test that provides information about your average levels of blood glucose, also called blood sugar, over the past 3 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/estimated-average-glucose> a dmo:LabTest ;
+    rdfs:label "Estimated average glucose" ;
+    dmo:definition "Estimated average glucose (eAG) is calculated from your A1C and helps you relate your A1C to daily glucose monitoring levels. It converts the A1C percentage to the same units used by home glucose meters—milligrams per deciliter (mg/dL)." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "estimated-average-glucose" ;
+    dmo:loincCode "44905-5" ;
+    dmo:name "Estimated average glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "The eAG number helps you relate your A1C to daily glucose monitoring levels. The eAG calculation converts the A1C percentage to the same units used by home glucose meters—milligrams per deciliter (mg/dL)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/fasting-plasma-glucose-test> a dmo:LabTest ;
+    rdfs:label "Fasting Plasma Glucose Test" ;
+    dmo:definition "For these blood glucose tests used to diagnose diabetes, you must fast at least 8 hours before you have your blood drawn." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-plasma-glucose-test" ;
+    dmo:loincCode "15577-6" ;
+    dmo:name "Fasting Plasma Glucose Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "For these blood glucose tests used to diagnose diabetes, you must fast at least 8 hours before you have your blood drawn." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/fpg> a dmo:LabTest ;
+    rdfs:label "FPG" ;
+    dmo:definition "Fasting plasma glucose (FPG) test measures blood glucose after at least 8 hours of fasting." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fpg" ;
+    dmo:loincCode "15577-6" ;
+    dmo:name "FPG" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "For these blood glucose tests used to diagnose diabetes, you must fast at least 8 hours before you have your blood drawn." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/ogtt-2h> a dmo:LabTest ;
+    rdfs:label "OGTT-2h" ;
+    dmo:definition "Oral glucose tolerance test (OGTT) at 2 hours measures blood glucose levels 2 hours after consuming a glucose solution following an overnight fast." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "ogtt-2h" ;
+    dmo:loincCode "15578-4" ;
+    dmo:name "OGTT-2h" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "For these blood glucose tests used to diagnose diabetes, you must fast at least 8 hours before you have your blood drawn." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> a dmo:LabTest ;
+    rdfs:label "Oral Glucose Tolerance Test" ;
+    dmo:definition "The glucose challenge test or the oral glucose tolerance test (OGTT) are used to check for gestational diabetes, usually between 24 and 28 weeks of pregnancy." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "oral-glucose-tolerance-test" ;
+    dmo:loincCode "15578-4" ;
+    dmo:name "Oral Glucose Tolerance Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "The glucose challenge test or the oral glucose tolerance test (OGTT) are used to check for gestational diabetes, usually between 24 and 28 weeks of pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/random-plasma-glucose> a dmo:LabTest ;
+    rdfs:label "Random Plasma Glucose" ;
+    dmo:definition "Random plasma glucose test measures blood glucose at any time of day, regardless of when the person last ate, and is used when symptoms of diabetes are present." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "random-plasma-glucose" ;
+    dmo:loincCode "15579-2" ;
+    dmo:name "Random Plasma Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "If you have symptoms of diabetes, your doctor may use the random plasma glucose test, which doesn’t require fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/labTest/random-plasma-glucose-test> a dmo:LabTest ;
+    rdfs:label "Random Plasma Glucose Test" ;
+    dmo:definition "If you have symptoms of diabetes, your doctor may use the random plasma glucose test, which doesn’t require fasting." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "random-plasma-glucose-test" ;
+    dmo:loincCode "15579-2" ;
+    dmo:name "Random Plasma Glucose Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "If you have symptoms of diabetes, your doctor may use the random plasma glucose test, which doesn’t require fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/lifestyleIntervention/weight-loss-or-being-physically-active-most-days-of-the-week> a dmo:LifestyleIntervention ;
+    rdfs:label "weight loss or being physically active most days of the week" ;
+    dmo:activityTarget "weight loss or being physically active most days of the week" ;
+    dmo:expectedBenefit "prevent or delay type 2 diabetes" ;
+    dmo:interventionCode "weight-loss-or-being-physically-active-most-days-of-the-week" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "weight loss or being physically active most days of the week" ;
+    dmo:evidenceQuote "You may be able to prevent or delay type 2 diabetes with lifestyle changes such as weight loss or being physically active most days of the week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/monitoringSchedule/a1c-test> a dmo:MonitoringSchedule ;
+    rdfs:label "A1C Test" ;
+    dmo:appliesTo "after diagnosis of diabetes" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "A1C Test" ;
+    dmo:scheduleId "a1c-test" ;
+    dmo:evidenceQuote "How is the A1C test used after diagnosis of diabetes?" ;
+    dmo:evidenceQuote "Experts recommend that people with diabetes have an A1C test at least twice a year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/monitoringSchedule/diabetes-screening-for-women-with-prior-gestational-diabetes> a dmo:MonitoringSchedule ;
+    rdfs:label "Diabetes Screening for Women with Prior Gestational Diabetes" ;
+    dmo:appliesTo "even if blood glucose is normal" ;
+    dmo:frequencyMonths "36"^^xsd:integer ;
+    dmo:name "Diabetes Screening for Women with Prior Gestational Diabetes" ;
+    dmo:scheduleId "diabetes-screening-for-women-with-prior-gestational-diabetes" ;
+    dmo:evidenceQuote "Even if your blood glucose is normal, you still have a greater chance of developing type 2 diabetes in the future and should get tested every 3 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/monitoringSchedule/gestational-diabetes-screening> a dmo:MonitoringSchedule ;
+    rdfs:label "Gestational Diabetes Screening" ;
+    dmo:name "Gestational Diabetes Screening" ;
+    dmo:scheduleId "gestational-diabetes-screening" ;
+    dmo:triggerWindow "24-28 weeks of pregnancy" ;
+    dmo:evidenceQuote "The glucose challenge test or the oral glucose tolerance test (OGTT) are used to check for gestational diabetes, usually between 24 and 28 weeks of pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/monitoringSchedule/postpartum-diabetes-screening> a dmo:MonitoringSchedule ;
+    rdfs:label "Postpartum Diabetes Screening" ;
+    dmo:name "Postpartum Diabetes Screening" ;
+    dmo:scheduleId "postpartum-diabetes-screening" ;
+    dmo:triggerWindow "no later than 12 weeks after your baby is born" ;
+    dmo:evidenceQuote "If you had gestational diabetes, you should be tested for diabetes no later than 12 weeks after your baby is born." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent> a dmo:Recommendation ;
+    rdfs:label "A1C Goal Below 7 Percent" ;
+    dmo:recommendationId "a1c-goal-below-7-percent" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Some people with diabetes can reduce the risk of diabetes complications by keeping A1C levels below 7 percent." ;
+    dmo:evidenceQuote "Studies have shown that some people with diabetes can reduce the risk of diabetes complications by keeping A1C levels below 7 percent." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/a1c-goal-discussion-with-health-care-professional> a dmo:Recommendation ;
+    rdfs:label "A1C Goal Discussion with Health Care Professional" ;
+    dmo:recommendationId "a1c-goal-discussion-with-health-care-professional" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "You should discuss your A1C target with your health care professional." ;
+    dmo:evidenceQuote "You should discuss your A1C target with your health care professional." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/a1c-target-below-7-percent-to-reduce-complications> a dmo:Recommendation ;
+    rdfs:label "A1C Target Below 7 Percent to Reduce Complications" ;
+    dmo:recommendationId "a1c-target-below-7-percent-to-reduce-complications" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Studies have shown that some people with diabetes can reduce the risk of diabetes complications by keeping A1C levels below 7 percent." ;
+    dmo:evidenceQuote "Studies have shown that some people with diabetes can reduce the risk of diabetes complications by keeping A1C levels below 7 percent." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/a1c-test-for-diabetes-diagnosis> a dmo:Recommendation ;
+    rdfs:label "A1C Test for Diabetes Diagnosis" ;
+    dmo:recommendationId "a1c-test-for-diabetes-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Health care professionals may use the A1C test to help confirm the results of another blood glucose test." ;
+    dmo:evidenceQuote "In some cases, health care professionals use the A1C test to help confirm the results of another blood glucose test." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/a1c-test-for-diagnosis-of-type-2-diabetes-and-prediabetes> a dmo:Recommendation ;
+    rdfs:label "A1C Test for Diagnosis of Type 2 Diabetes and Prediabetes" ;
+    dmo:recommendationId "a1c-test-for-diagnosis-of-type-2-diabetes-and-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Health care professionals can use the A1C test alone or in combination with other diabetes tests to diagnose type 2 diabetes and prediabetes." ;
+    dmo:evidenceQuote "Health care professionals can use the A1C test alone or in combination with other diabetes tests to diagnose type 2 diabetes and prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/a1c-testing-frequency-for-people-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "A1C Testing Frequency for People with Diabetes" ;
+    dmo:recommendationId "a1c-testing-frequency-for-people-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Experts recommend that people with diabetes have an A1C test at least twice a year." ;
+    dmo:evidenceQuote "Experts recommend that people with diabetes have an A1C test at least twice a year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/avoid-point-of-care-a1c-tests-for-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Avoid Point-of-Care A1C Tests for Diagnosis" ;
+    dmo:recommendationId "avoid-point-of-care-a1c-tests-for-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Blood samples analyzed in a doctor’s office or clinic, known as point-of-care tests, should not be used for diagnosis." ;
+    dmo:evidenceQuote "Blood samples analyzed in a doctor’s office or clinic, known as point-of-care tests, should not be used for diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/fasting-requirement-for-fpg-and-ogtt> a dmo:Recommendation ;
+    rdfs:label "Fasting Requirement for FPG and OGTT" ;
+    dmo:recommendationId "fasting-requirement-for-fpg-and-ogtt" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "For these blood glucose tests used to diagnose diabetes, you must fast at least 8 hours before you have your blood drawn." ;
+    dmo:evidenceQuote "For these blood glucose tests used to diagnose diabetes, you must fast at least 8 hours before you have your blood drawn." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/follow-up-testing-for-inconclusive-results> a dmo:Recommendation ;
+    rdfs:label "Follow-Up Testing for Inconclusive Results" ;
+    dmo:recommendationId "follow-up-testing-for-inconclusive-results" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "In this case, health care professionals may choose to follow the person closely and repeat the test in several months." ;
+    dmo:evidenceQuote "In this case, health care professionals may choose to follow the person closely and repeat the test in several months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/follow-up-testing-for-women-with-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Follow-Up Testing for Women with Gestational Diabetes" ;
+    dmo:recommendationId "follow-up-testing-for-women-with-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Even if your blood glucose is normal, you still have a greater chance of developing type 2 diabetes in the future and should get tested every 3 years." ;
+    dmo:evidenceQuote "Even if your blood glucose is normal, you still have a greater chance of developing type 2 diabetes in the future and should get tested every 3 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/lifestyle-changes-to-prevent-or-delay-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Lifestyle Changes to Prevent or Delay Type 2 Diabetes" ;
+    dmo:recommendationId "lifestyle-changes-to-prevent-or-delay-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You may be able to prevent or delay type 2 diabetes with lifestyle changes such as weight loss or being physically active most days of the week." ;
+    dmo:evidenceQuote "You may be able to prevent or delay type 2 diabetes with lifestyle changes such as weight loss or being physically active most days of the week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/more-frequent-a1c-testing-when-goals-not-met> a dmo:Recommendation ;
+    rdfs:label "More Frequent A1C Testing When Goals Not Met" ;
+    dmo:recommendationId "more-frequent-a1c-testing-when-goals-not-met" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Health care professionals may check your A1C more often if you aren’t meeting your treatment goals." ;
+    dmo:evidenceQuote "Health care professionals may check your A1C more often if you aren’t meeting your treatment goals." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/repeat-a1c-test-for-confirmation-of-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Repeat A1C Test for Confirmation of Diagnosis" ;
+    dmo:recommendationId "repeat-a1c-test-for-confirmation-of-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If you don’t have symptoms but the A1C test shows you have diabetes or prediabetes, you should have a repeat test on a different day using the A1C test or one of the other diabetes tests to confirm the diagnosis." ;
+    dmo:evidenceQuote "If you don’t have symptoms but the A1C test shows you have diabetes or prediabetes, you should have a repeat test on a different day using the A1C test or one of the other diabetes tests to confirm the diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/repeat-testing-for-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Repeat Testing for Diagnosis" ;
+    dmo:recommendationId "repeat-testing-for-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Because of these differences in test results, health care professionals repeat tests before making a diagnosis." ;
+    dmo:evidenceQuote "Because of these differences in test results, health care professionals repeat tests before making a diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/testing-for-diabetes-after-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Testing for Diabetes After Gestational Diabetes" ;
+    dmo:recommendationId "testing-for-diabetes-after-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If you had gestational diabetes, you should be tested for diabetes no later than 12 weeks after your baby is born." ;
+    dmo:evidenceQuote "If you had gestational diabetes, you should be tested for diabetes no later than 12 weeks after your baby is born." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/use-of-a1c-test-to-confirm-other-glucose-test-results> a dmo:Recommendation ;
+    rdfs:label "Use of A1C Test to Confirm Other Glucose Test Results" ;
+    dmo:recommendationId "use-of-a1c-test-to-confirm-other-glucose-test-results" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "In some cases, health care professionals use the A1C test to help confirm the results of another blood glucose test." ;
+    dmo:evidenceQuote "In some cases, health care professionals use the A1C test to help confirm the results of another blood glucose test." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/use-of-fpg-and-ogtt-for-diagnosis-of-type-2-diabetes-and-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Use of FPG and OGTT for Diagnosis of Type 2 Diabetes and Prediabetes" ;
+    dmo:recommendationId "use-of-fpg-and-ogtt-for-diagnosis-of-type-2-diabetes-and-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Yes. Health care professionals also use the fasting plasma glucose (FPG) test and the OGTT to diagnose type 2 diabetes and prediabetes." ;
+    dmo:evidenceQuote "Yes. Health care professionals also use the fasting plasma glucose (FPG) test and the OGTT to diagnose type 2 diabetes and prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/use-of-ngsp-certified-a1c-testing-method> a dmo:Recommendation ;
+    rdfs:label "Use of NGSP-Certified A1C Testing Method" ;
+    dmo:recommendationId "use-of-ngsp-certified-a1c-testing-method" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "When using the A1C test for diagnosis, your doctor will send your blood sample taken from a vein to a lab that uses an NGSP-certified method." ;
+    dmo:evidenceQuote "When using the A1C test for diagnosis, your doctor will send your blood sample taken from a vein to a lab that uses an NGSP-certified method." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/recommendation/use-of-random-plasma-glucose-test-for-symptomatic-patients> a dmo:Recommendation ;
+    rdfs:label "Use of Random Plasma Glucose Test for Symptomatic Patients" ;
+    dmo:recommendationId "use-of-random-plasma-glucose-test-for-symptomatic-patients" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If you have symptoms of diabetes, your doctor may use the random plasma glucose test, which doesn’t require fasting." ;
+    dmo:evidenceQuote "If you have symptoms of diabetes, your doctor may use the random plasma glucose test, which doesn’t require fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/riskFactor/limited-life-expectancy> a dmo:RiskFactor ;
+    rdfs:label "Limited Life Expectancy" ;
+    dmo:evidenceNote "Less strict blood glucose control, or an A1C between 7 and 8 percent—or even higher in some circumstances—may be appropriate in people who have limited life expectancy" ;
+    dmo:name "Limited Life Expectancy" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "limited-life-expectancy" ;
+    dmo:evidenceQuote "Less strict blood glucose control, or an A1C between 7 and 8 percent—or even higher in some circumstances—may be appropriate in people who have limited life expectancy" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/riskFactor/prediabetes> a dmo:RiskFactor ;
+    rdfs:label "Prediabetes" ;
+    dmo:evidenceNote "Having prediabetes is a risk factor for developing type 2 diabetes." ;
+    dmo:name "Prediabetes" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "prediabetes" ;
+    dmo:evidenceQuote "Having prediabetes is a risk factor for developing type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+<https://example.org/dmo/id/riskFactor/risk-factors-for-prediabetes-or-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Risk Factors for Prediabetes or Diabetes" ;
+    dmo:evidenceNote "If you have risk factors for prediabetes or diabetes, talk with your doctor about whether you should be tested." ;
+    dmo:name "Risk Factors for Prediabetes or Diabetes" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "risk-factors-for-prediabetes-or-diabetes" ;
+    dmo:evidenceQuote "If you have risk factors for prediabetes or diabetes, talk with your doctor about whether you should be tested." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-a1c-test> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/prediabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/risk-factors-for-prediabetes-or-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-iron-deficiency-anemia> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycemia-unawareness> .
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-kidney-failure> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-liver-disease> dmo:triggeredByCondition <https://example.org/dmo/id/complication/cardiovascular-disease> .
+<https://example.org/dmo/id/contraindication/a1c-test-in-people-with-sickle-cell-disease> dmo:triggeredByCondition <https://example.org/dmo/id/complication/nerve-problems> .
+<https://example.org/dmo/id/contraindication/a1c-test-should-not-be-used-to-diagnose-gestational-diabetes> dmo:triggeredByCondition <https://example.org/dmo/id/complication/cardiovascular-disease> .
+<https://example.org/dmo/id/contraindication/a1c-test-should-not-be-used-to-diagnose-type-1-diabetes> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycemia-unawareness> .
+<https://example.org/dmo/id/contraindication/a1c-test-should-not-be-used-to-diagnose-cystic-fibrosis-related-diabetes> dmo:triggeredByCondition <https://example.org/dmo/id/complication/nerve-problems> .
+<https://example.org/dmo/id/contraindication/point-of-care-a1c-tests-should-not-be-used-for-diagnosis> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/lifestyleIntervention/weight-loss-or-being-physically-active-most-days-of-the-week> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/risk-factors-for-prediabetes-or-diabetes> .
+<https://example.org/dmo/id/monitoringSchedule/a1c-test> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c-test> .
+<https://example.org/dmo/id/monitoringSchedule/diabetes-screening-for-women-with-prior-gestational-diabetes> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c-test> .
+<https://example.org/dmo/id/monitoringSchedule/gestational-diabetes-screening> dmo:schedulesTest <https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> .
+<https://example.org/dmo/id/monitoringSchedule/postpartum-diabetes-screening> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c-test> .
+<https://example.org/dmo/id/recommendation/a1c-test-for-diagnosis-of-type-2-diabetes-and-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/a1c-test-for-diagnosis-of-type-2-diabetes-and-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/a1c-test-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/a1c-test-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/avoid-point-of-care-a1c-tests-for-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/avoid-point-of-care-a1c-tests-for-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/repeat-a1c-test-for-confirmation-of-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/repeat-a1c-test-for-confirmation-of-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/repeat-testing-for-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/repeat-testing-for-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/use-of-a1c-test-to-confirm-other-glucose-test-results> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-a1c-test-to-confirm-other-glucose-test-results> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/use-of-fpg-and-ogtt-for-diagnosis-of-type-2-diabetes-and-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-fpg-and-ogtt-for-diagnosis-of-type-2-diabetes-and-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/fasting-requirement-for-fpg-and-ogtt> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/fasting-requirement-for-fpg-and-ogtt> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/use-of-random-plasma-glucose-test-for-symptomatic-patients> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-random-plasma-glucose-test-for-symptomatic-patients> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/lifestyle-changes-to-prevent-or-delay-type-2-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/weight-loss-or-being-physically-active-most-days-of-the-week> .
+<https://example.org/dmo/id/recommendation/a1c-goal-discussion-with-health-care-professional> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/a1c-test> .
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent> dmo:targetsComplication <https://example.org/dmo/id/complication/cardiovascular-disease> .
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent> dmo:targetsComplication <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent> dmo:targetsComplication <https://example.org/dmo/id/complication/nerve-problems> .
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent> dmo:targetsComplication <https://example.org/dmo/id/complication/hypoglycemia-unawareness> .
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent> dmo:targetsComplication <https://example.org/dmo/id/complication/severe-hypoglycemia> .
+<https://example.org/dmo/id/recommendation/a1c-target-below-7-percent-to-reduce-complications> dmo:targetsComplication <https://example.org/dmo/id/complication/cardiovascular-disease> .
+<https://example.org/dmo/id/recommendation/a1c-target-below-7-percent-to-reduce-complications> dmo:targetsComplication <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/recommendation/a1c-target-below-7-percent-to-reduce-complications> dmo:targetsComplication <https://example.org/dmo/id/complication/nerve-problems> .
+<https://example.org/dmo/id/recommendation/a1c-target-below-7-percent-to-reduce-complications> dmo:targetsComplication <https://example.org/dmo/id/complication/hypoglycemia-unawareness> .
+<https://example.org/dmo/id/recommendation/a1c-target-below-7-percent-to-reduce-complications> dmo:targetsComplication <https://example.org/dmo/id/complication/severe-hypoglycemia> .
+<https://example.org/dmo/id/recommendation/more-frequent-a1c-testing-when-goals-not-met> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/a1c-test> .
+<https://example.org/dmo/id/recommendation/a1c-testing-frequency-for-people-with-diabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/a1c-test> .
+<https://example.org/dmo/id/recommendation/follow-up-testing-for-women-with-gestational-diabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/postpartum-diabetes-screening> .
+<https://example.org/dmo/id/recommendation/testing-for-diabetes-after-gestational-diabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/postpartum-diabetes-screening> .
+<https://example.org/dmo/id/recommendation/follow-up-testing-for-inconclusive-results> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/gestational-diabetes-screening> .
+<https://example.org/dmo/id/recommendation/use-of-ngsp-certified-a1c-testing-method> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-ngsp-certified-a1c-testing-method> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .

@@ -1,0 +1,198 @@
+{
+  "source": {
+    "sourceId": "jbds_10_discharge_planning_guideline_with_qr_code_march_2023",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds_10_discharge_planning_guideline_with_qr_code_march_2023",
+    "localFile": "ontology/knowledges/pdfs/JBDS_10_Discharge_Planning_Guideline_with_QR_code_March_2023.pdf",
+    "sha256": "7622428406f2111f58dd6347367db2a54c6b796a94e406129f7d6ffd39d957f0",
+    "byteSize": 3273784,
+    "graphUri": "urn:dmo:extract:jbds_10_discharge_planning_guideline_with_qr_code_march_2023",
+    "documentFormat": "pdf",
+    "pageCount": 33,
+    "textPageCount": 33
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 18,
+  "counts": {
+    "rawRecords": 403,
+    "accepted": 346,
+    "rejected": 57,
+    "entities": 299,
+    "edges": 21,
+    "danglingRelations": 86,
+    "mergeConflicts": 103
+  },
+  "quality": {
+    "quoteHitRate": 0.8586,
+    "schemaSlotCoverage": 0.8548,
+    "danglingRelationRate": 0.8037,
+    "avgMentionsPerEntity": 1.16
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 29,
+    "quote_too_short": 28
+  },
+  "linkPass": {
+    "candidates": 38,
+    "accepted": 16,
+    "rejectedByReason": {
+      "quote_not_found": 11,
+      "target_unresolved": 11
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 166,
+    "riskFactor": 32,
+    "lifestyleIntervention": 22,
+    "complication": 18,
+    "device": 17,
+    "medication": 12,
+    "drugClass": 10,
+    "diabetesType": 8,
+    "labTest": 6,
+    "adverseEffect": 3,
+    "contraindication": 3,
+    "symptom": 2
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/recommendation/stage-1-review-each-individual-daily-in-the-morning-and-identify-people-for-discharge-to-leave-that-day",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/planning-at-the-point-of-admission-including-collecting-details-of-usual-home-circumstances-and-referral-to-services-if-necessary",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/provide-patient-information-leaflet-to-ensure-people-are-involved-in-decision-making",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/stage-2-the-details-of-how-to-discharge-people",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/inform-the-individual-carers-and-relevant-ongoing-support-providers-provide-information-leaflets",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/ward-staff-to-arrange-discharge-for-those-on-pathway-0-for-all-others-provided-details-of-needs-to-single-point-of-assessment-coordinator-who-will-decide-which-pathway-is-appropriate",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/all-people-suitable-for-discharge-to-be-transferred-to-a-discharge-lounge-asap",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/for-people-with-diabetes-this-should-include-effective-communication-between-teams-about-care-needs-in-relation-to-mealtimes-diabetes-equipment-and-contact-for-diabetes-related-issues",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/it-will-be-the-case-managers-role-to-ensure-individuals-and-their-families-are-informed-of-arrangements-transport-is-organised-settle-in-support-is-provided-where-needed-and-covid-test-results-are-available-where-required",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/stage-3-assessment-and-care-planning-at-home",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/case-manager-to-liaise-with-all-agencies-to-ensure-staff-and-infrastructure-are-available-to-meet-care-needs",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-of-personal-budgets-to-be-discussed-with-the-individual-and-family-if-longer-term-care-will-be-required-6-weeks",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/case-manager-to-provide-frequent-review-and-adjustments-of-care-package-according-to-need",
+      "predicate": "appliesToType",
+      "target": "Discharge to assess model"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/nice-recommends-discharge-planning-should-start-at-the-point-of-admission-for-medical-emergencies",
+      "predicate": "citesSource",
+      "target": "Discharge planning should be built into the initial assessment process and should look beyond the inpatient episode of care"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/this-proactive-approach-is-aimed-at-ensuring-safety-for-the-individual-at-home-or-community-facilities-and-reducing-the-risk-of-admission",
+      "predicate": "citesSource",
+      "target": "Discharge planning should be built into the initial assessment process and should look beyond the inpatient episode of care"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/assessment-provides-the-opportunity-for-information-gathering-and-anticipation-of-potential-problems-which-allows-for-early-resolution-of-potential-barriers-to-discharge",
+      "predicate": "citesSource",
+      "target": "Discharge planning should be built into the initial assessment process and should look beyond the inpatient episode of care"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/clear-sensitive-communication-with-the-individual-and-their-family-is-essential-especially-for-people-who-experience-a-considerable-new-loss-of-function",
+      "predicate": "citesSource",
+      "target": "Discharge planning should be built into the initial assessment process and should look beyond the inpatient episode of care"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/lack-of-knowledge-of-diabetes-and-discharge-instructions-is-a-significant-contributor-to-early-readmission-among-people-with-diabetes",
+      "predicate": "citesSource",
+      "target": "Discharge planning should be built into the initial assessment process and should look beyond the inpatient episode of care"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/minor-self-treated-hypoglycaemia",
+      "predicate": "increasesRiskOf",
+      "target": "Poor self-management skills"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/learning-barriers-language-cognition-dexterity-competence-related-to-diabetes-self-management",
+      "predicate": "increasesRiskOf",
+      "target": "Poor self-management skills"
+    }
+  ],
+  "conflictSamples": [
+    "complication/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs 'Diabetic ketoacidosis'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005040'",
+    "complication/diabetic-ketoacidosis: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'Diabetic ketoacidosis / hyperosmolar hyperglycaemic state'",
+    "complication/diabetic-ketoacidosis: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'Cause severe insulin resistance and insulin deficiency precipitating DKA in people with type 1 diabetes and unusually also in those with type 2 diabetes'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005143'",
+    "complication/diabetic-ketoacidosis: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'all people with type 1 diabetes; people with type 2 diabetes and history of DKA'",
+    "complication/hypoglycaemia: mondoCode: 'MONDO:0005148' vs 'MONDO:0005152'",
+    "complication/hypoglycaemia: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'Minor, self-treated hypoglycaemia'",
+    "complication/hypoglycaemia: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "complication/hypoglycaemia: affectedOrgan: 'Brain' vs 'Systemic'",
+    "complication/hypoglycaemia: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'The risk of hypoglycaemia'",
+    "complication/hypoglycaemia: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'Precipitate new onset diabetes'",
+    "complication/hypoglycaemia: mondoCode: 'MONDO:0005148' vs 'MONDO:0005042'",
+    "complication/hypoglycaemia: definition: 'Anyone admitted for reasons directly related to diabetes management/care e.g. DKA or hypoglycaemia, should have a clear description of the reason for admission with written plan for prevention of recurrence' vs 'potential hypoglycaemia due to tapering doses or cessation of steroid therapy'",
+    "complication/hypoglycaemia: name: 'Hypoglycaemia' vs 'hypoglycaemia'",
+    "diabetesType/type-1-diabetes: definition: 'People who have been living with type 1 diabetes for many years and are becoming increasingly frail, (particularly if admission is related to struggles with diabetes management at home).' vs \"Type 1 Diabetes is a condition where the body's immune system attacks and destroys the insulin-producing beta cells in the pancreas, leading to a complete lack of insulin production. This type of diabetes typically develops in childhood or adolescence, though it can occur at any age.\"",
+    "diabetesType/type-1-diabetes: definition: 'People who have been living with type 1 diabetes for many years and are becoming increasingly frail, (particularly if admission is related to struggles with diabetes management at home).' vs 'all people with type 1 diabetes'",
+    "diabetesType/type-1-diabetes: definition: 'People who have been living with type 1 diabetes for many years and are becoming increasingly frail, (particularly if admission is related to struggles with diabetes management at home).' vs 'safe management of diabetes during intercurrent illness, insulin dose adjustment, monitoring, blood ketone testing for patients with type 1 diabetes or ketosis-prone type 2 diabetes'",
+    "riskFactor/frequent-attendances-for-diabetes-emergencies: name: 'Frequent Attendances for Diabetes Emergencies' vs 'Frequent attendances for diabetes emergencies'",
+    "riskFactor/moderate-to-severe-frailty: name: 'Moderate to Severe Frailty' vs 'Moderate to severe frailty'"
+  ]
+}

@@ -1,0 +1,50 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/a038046e-5e45-5a21-bbba-d3aab0e93155> a dmo:Patient ;
+    dmo:birthYear 1972 ;
+    dmo:demoScenario "S01" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90001-1> ;
+    dmo:patientId "P90001" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/encounter/E90001-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-01-12"^^xsd:date ;
+    dmo:encounterId "E90001-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90001-A1C>,
+        <https://example.org/dmo/id/labResult/L90001-FPG>,
+        <https://example.org/dmo/id/labResult/L90001-UACR> .
+
+<https://example.org/dmo/id/labResult/L90001-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-01-12T08:30:00"^^xsd:dateTime ;
+    dmo:demoScenario "S01" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90001-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 5.2 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90001-FPG> a dmo:LabResult ;
+    dmo:collectedAt "2026-01-12T08:30:00"^^xsd:dateTime ;
+    dmo:demoScenario "S01" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90001-FPG" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-FPG> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 88.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90001-UACR> a dmo:LabResult ;
+    dmo:collectedAt "2026-01-12T08:30:00"^^xsd:dateTime ;
+    dmo:demoScenario "S01" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90001-UACR" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-UACR> ;
+    dmo:resultUnit "mg-per-g" ;
+    dmo:resultValue 12.0 ;
+    dmo:valueTrustLevel "Curated" .
+

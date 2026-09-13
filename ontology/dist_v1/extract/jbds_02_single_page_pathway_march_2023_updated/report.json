@@ -1,0 +1,81 @@
+{
+  "source": {
+    "sourceId": "jbds_02_single_page_pathway_march_2023_updated",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated",
+    "localFile": "ontology/knowledges/pdfs/JBDS_02_Single_page_pathway_March_2023_updated.pdf",
+    "sha256": "2acc1fa0241f08106e550d124de243be6333ccdaac1c19c606bc1c2df1addff6",
+    "byteSize": 578972,
+    "graphUri": "urn:dmo:extract:jbds_02_single_page_pathway_march_2023_updated",
+    "documentFormat": "pdf",
+    "pageCount": 1,
+    "textPageCount": 1
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 2,
+  "counts": {
+    "rawRecords": 44,
+    "accepted": 38,
+    "rejected": 6,
+    "entities": 38,
+    "edges": 24,
+    "danglingRelations": 2,
+    "mergeConflicts": 1
+  },
+  "quality": {
+    "quoteHitRate": 0.8636,
+    "schemaSlotCoverage": 0.4355,
+    "danglingRelationRate": 0.0769,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {
+    "quote_too_short": 6
+  },
+  "linkPass": {
+    "candidates": 31,
+    "accepted": 24,
+    "rejectedByReason": {
+      "quote_not_found": 7
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 25,
+    "labTest": 9,
+    "complication": 1,
+    "drugClass": 1,
+    "medication": 1,
+    "contraindication": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/recommendation/review-fluid-and-insulin-infusion-if-dka-not-resolved",
+      "predicate": "appliesToType",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/convert-to-subcutaneous-insulin-when-biochemically-stable-and-patient-is-ready-to-eat",
+      "predicate": "definesTarget",
+      "target": "Diabetic Ketoacidosis"
+    }
+  ],
+  "conflictSamples": [
+    "medication/human-soluble-insulin: name: 'Human Soluble Insulin' vs 'human soluble insulin'"
+  ]
+}

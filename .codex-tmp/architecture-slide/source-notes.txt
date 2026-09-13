@@ -1,0 +1,3 @@
+No externally sourced assets or claims were added.
+Architecture copy was derived from local project evidence: README.md, docs/presentation-story.md, docs/DESIGN.md, src/dmo/api.py, src/dmo/query/hybrid.py, src/skills/, src/dmo/db/, and src/dmo/graph/.
+

@@ -1,0 +1,73 @@
+{
+  "source": {
+    "sourceId": "emergencydiabetescarewalletcard2",
+    "uri": "https://example.org/dmo/id/guidelineSource/emergencydiabetescarewalletcard2",
+    "localFile": "ontology/knowledges/pdfs/EmergencyDiabetesCareWalletCard2.pdf",
+    "sha256": "1ad39dfd324e06fb50a8340d2221691782aae903bcbbd12f1c46383151737d2c",
+    "byteSize": 402360,
+    "graphUri": "urn:dmo:extract:emergencydiabetescarewalletcard2",
+    "documentFormat": "pdf",
+    "pageCount": 2,
+    "textPageCount": 2
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 42,
+    "accepted": 21,
+    "rejected": 21,
+    "entities": 21,
+    "edges": 13,
+    "danglingRelations": 0,
+    "mergeConflicts": 3
+  },
+  "quality": {
+    "quoteHitRate": 0.5,
+    "schemaSlotCoverage": 0.3548,
+    "danglingRelationRate": 0.0,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {
+    "quote_too_short": 19,
+    "quote_not_found": 2
+  },
+  "linkPass": {
+    "candidates": 14,
+    "accepted": 13,
+    "rejectedByReason": {
+      "target_unresolved": 1
+    }
+  },
+  "entitiesByType": {
+    "labTest": 6,
+    "recommendation": 6,
+    "monitoringSchedule": 4,
+    "symptom": 3,
+    "complication": 1,
+    "lifestyleIntervention": 1
+  },
+  "danglingSamples": [],
+  "conflictSamples": [
+    "symptom/acting-strangely: name: 'Acting Strangely' vs 'acting strangely'",
+    "symptom/cannot-be-awakened: name: 'Cannot Be Awakened' vs 'cannot be awakened'",
+    "symptom/cannot-swallow: name: 'Cannot Swallow' vs 'cannot swallow'"
+  ]
+}

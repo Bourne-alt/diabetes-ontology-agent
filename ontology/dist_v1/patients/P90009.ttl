@@ -1,0 +1,78 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/68896b03-1c65-5b87-b47f-c5f107bbb1fc> a dmo:Patient ;
+    dmo:birthYear 1957 ;
+    dmo:demoScenario "S08" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90009-BMI> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90009-DM>,
+        <https://example.org/dmo/id/diagnosis/D90009-ESRD> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90009-1> ;
+    dmo:hasMedicationUse <https://example.org/dmo/id/medicationUse/M90009-MET> ;
+    dmo:patientId "P90009" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/diagnosis/D90009-ESRD> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:demoScenario "S08" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90009-1> ;
+    dmo:diagnosedDate "2024-04-12"^^xsd:date ;
+    dmo:diagnosisComplication <https://example.org/dmo/id/KidneyFailure> ;
+    dmo:diagnosisId "D90009-ESRD" ;
+    dmo:diagnosisKind "Complication" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90009-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-11T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S08" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90009-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 8.3 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/medicationUse/M90009-MET> a dmo:MedicationUse ;
+    dmo:demoScenario "S08" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:medicationUseId "M90009-MET" ;
+    dmo:regimenRole "口服降糖" ;
+    dmo:startDate "2012-01-15"^^xsd:date ;
+    dmo:status "Active" ;
+    dmo:treatsDiagnosis <https://example.org/dmo/id/diagnosis/D90009-DM> ;
+    dmo:usesMedication <https://example.org/dmo/id/medication/metformin> .
+
+<https://example.org/dmo/id/observation/O90009-BMI> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S08" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90009-BMI" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90009-1> ;
+    dmo:observationType "BMI" ;
+    dmo:observedAt "2026-02-11T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "kg-per-m2" ;
+    dmo:valueDecimal 26.9 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/diagnosis/D90009-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S08" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90009-1> ;
+    dmo:diagnosedDate "2011-08-03"^^xsd:date ;
+    dmo:diagnosisId "D90009-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/E90009-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-11"^^xsd:date ;
+    dmo:encounterId "E90009-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90009-A1C> .
+

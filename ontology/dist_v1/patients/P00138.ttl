@@ -1,0 +1,108 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/labResult/EHR-LAB-TC00138-SUB01> a dmo:LabResult ;
+    dmo:collectedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:labResultId "EHR-LAB-TC00138|SUB01" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-TSH> ;
+    dmo:resultUnit "mIU-per-L" ;
+    dmo:resultValue 14.7 ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/labResult/EHR-LAB-TC00138-SUB02> a dmo:LabResult ;
+    dmo:collectedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:labResultId "EHR-LAB-TC00138|SUB02" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-ALT> ;
+    dmo:resultUnit "U-per-L" ;
+    dmo:resultValue 6.8 ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/labResult/EHR-LAB-TC00138-SUB03> a dmo:LabResult ;
+    dmo:collectedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:labResultId "EHR-LAB-TC00138|SUB03" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-CHOL> ;
+    dmo:resultUnit "mmol-per-L" ;
+    dmo:resultValue 18.1 ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/labResult/EHR-LAB-TC00138-SUB04> a dmo:LabResult ;
+    dmo:collectedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:labResultId "EHR-LAB-TC00138|SUB04" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-TG> ;
+    dmo:resultUnit "mmol-per-L" ;
+    dmo:resultValue 16.8 ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/patient/3d36d1b1-e97e-51d4-b18c-eab62f1d233e> a dmo:Patient ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB01-STATE>,
+        <https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB02-STATE>,
+        <https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB03-STATE>,
+        <https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB04-STATE> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/EHR-DX-P00138-C00138-D901> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/EHR-P00138-C00138> ;
+    dmo:hasMedicationUse <https://example.org/dmo/id/medicationUse/EHR-MU-P00138-C00138-T004> ;
+    dmo:patientId "P00138" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/diagnosis/EHR-DX-P00138-C00138-D901> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:diagnosisId "EHR-DX-P00138|C00138|D901" ;
+    dmo:diagnosisKind "Comorbidity" ;
+    dmo:externalCode "E78" ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/EHR-P00138-C00138> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2021-08-04"^^xsd:date ;
+    dmo:encounterId "EHR-P00138|C00138" ;
+    dmo:encounterType "骨科" ;
+    dmo:factOrigin "ehr-legacy" .
+
+<https://example.org/dmo/id/medicationUse/EHR-MU-P00138-C00138-T004> a dmo:MedicationUse ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:medicationUseId "EHR-MU-P00138|C00138|T004" ;
+    dmo:status "Active" ;
+    dmo:usesMedication <https://example.org/dmo/id/medication/metformin> .
+
+<https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB01-STATE> a dmo:ClinicalObservation ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:observationId "EHR-LAB-TC00138|SUB01-STATE" ;
+    dmo:observationType "Other" ;
+    dmo:observedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "TSH：上游判读 偏低" ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB02-STATE> a dmo:ClinicalObservation ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:observationId "EHR-LAB-TC00138|SUB02-STATE" ;
+    dmo:observationType "Other" ;
+    dmo:observedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "ALT：上游判读 偏高" ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB03-STATE> a dmo:ClinicalObservation ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:observationId "EHR-LAB-TC00138|SUB03-STATE" ;
+    dmo:observationType "Other" ;
+    dmo:observedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "总胆固醇：上游判读 偏高" ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/observation/EHR-LAB-TC00138-SUB04-STATE> a dmo:ClinicalObservation ;
+    dmo:factOrigin "ehr-legacy" ;
+    dmo:observationId "EHR-LAB-TC00138|SUB04-STATE" ;
+    dmo:observationType "Other" ;
+    dmo:observedAt "2024-06-25T00:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "甘油三酯：上游判读 正常" ;
+    dmo:valueTrustLevel "Unverified" .
+

@@ -1,0 +1,1752 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/ADA-KDIGO-Consensus-Report-Diabetes-CKD-Diabetes-Care-2022.pdf
+# 目标 named graph：urn:dmo:extract:ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/ADA-KDIGO-Consensus-Report-Diabetes-CKD-Diabetes-Care-2022.pdf" ;
+    dmo:sha256 "e63a1f405f3dd7acbd9f45641231dc61493a3f54bf845ec1261fc05b57c8bd58" ;
+    dmo:byteSize "3799267"^^xsd:integer .
+
+<urn:dmo:extract:ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T06:48:42+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/genital-mycotic-infections> a dmo:AdverseEffect ;
+    rdfs:label "Genital mycotic infections" ;
+    dmo:adverseEffectCode "genital-mycotic-infections" ;
+    dmo:frequencyCategory "Uncommon" ;
+    dmo:name "Genital mycotic infections" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "SGLT2i Genital mycotic infections /C15Counsel on genital hygiene" ;
+    dmo:evidenceQuote "Genital mycotic infections are a known complication of SGLT2i. A meta-analysis of clinical trials reported that genital mycotic infections occurred in 6% of participants assigned to an SGLT2i, compared with 1% of those assigned to placebo (65)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/adverseEffect/hypoglycemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:adverseEffectCode "hypoglycemia" ;
+    dmo:frequencyCategory "Uncommon" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "Hypovolemia and hypoglycemia may occur with SGLT2i, but absolute risks are low , especially at low eGFR." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/adverseEffect/hypovolemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypovolemia" ;
+    dmo:adverseEffectCode "hypovolemia" ;
+    dmo:frequencyCategory "Uncommon" ;
+    dmo:name "Hypovolemia" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "Hypovolemia and hypoglycemia may occur with SGLT2i, but absolute risks are low , especially at low eGFR." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/adverseEffect/increased-heart-rate> a dmo:AdverseEffect ;
+    rdfs:label "Increased heart rate" ;
+    dmo:adverseEffectCode "increased-heart-rate" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Increased heart rate" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "Heart rate typically increases by /C245 bpm but has not been associated with higher BP or other adverse events." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/adverseEffect/injection-site-reactions> a dmo:AdverseEffect ;
+    rdfs:label "Injection site reactions" ;
+    dmo:adverseEffectCode "injection-site-reactions" ;
+    dmo:frequencyCategory "Uncommon" ;
+    dmo:name "Injection site reactions" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "Injection site reactions are rare ( <1%), and semaglutide is now available in an oral formulation." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/adverseEffect/nausea-vomiting-diarrhea> a dmo:AdverseEffect ;
+    rdfs:label "Nausea/vomiting/diarrhea" ;
+    dmo:adverseEffectCode "nausea-vomiting-diarrhea" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Nausea/vomiting/diarrhea" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "GLP-1 receptor agonists Nausea/vomiting/diarrhea /C15Educate on tolerability and symptom recognition" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/acute-kidney-injury> a dmo:Complication ;
+    rdfs:label "Acute Kidney Injury" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "acute-kidney-injury" ;
+    dmo:definition "Acute kidney injury (AKI) contributes to reduced metformin clearance." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005275" ;
+    dmo:name "Acute Kidney Injury" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Most episodes of metformin-associated lactic acidosis occur concurrent with other acute illness, often when acute kidney injury (AKI) contributes to reduced metformin clearance." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/albuminuria> a dmo:Complication ;
+    rdfs:label "Albuminuria" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "albuminuria" ;
+    dmo:definition "Albuminuria is defined as ACR $30 mg/g" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005270" ;
+    dmo:name "Albuminuria" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "patients with T2D, kidney disease (defined primarily as ACR $30 mg/g)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/atherosclerotic-cardiovascular-disease> a dmo:Complication ;
+    rdfs:label "Atherosclerotic Cardiovascular Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "atherosclerotic-cardiovascular-disease" ;
+    dmo:definition "Atherosclerotic cardiovascular disease (ASCVD) refers to the buildup of plaque in the arteries, leading to conditions such as coronary artery disease, cerebrovascular disease, and peripheral artery disease." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Atherosclerotic Cardiovascular Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Among patients with T2D who have established ASCVD or established kidney disease, an SGLT2i or GLP-1 receptor agonist with demonstrated cardiovascular disease benefit is recommended as part of the comprehensive cardiovascular risk reduction and/or glucose-lowering regimens (A)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/cardiovascular-disease> a dmo:Complication ;
+    rdfs:label "Cardiovascular Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "cardiovascular-disease" ;
+    dmo:definition "CVD refers to conditions such as coronary heart disease, ischemic stroke, and other cardiovascular events, which are more common in patients with diabetes and CKD." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Cardiovascular Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "cardiovascular events and mortality are more common than kidney failure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/chronic-kidney-disease> a dmo:Complication ;
+    rdfs:label "Chronic Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "chronic-kidney-disease" ;
+    dmo:definition "Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD and should lead to immediate initiation of evidence-based treatments." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005146" ;
+    dmo:name "Chronic Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD and should lead to immediate initiation of evidence-based treatments." ;
+    dmo:evidenceQuote "patients with diabetes and CKD" ;
+    dmo:evidenceQuote "In patients with T2D and CKD who have not achieved individualized glycemic targets despite use of metformin and SGLT2i treatment, or who are unable to use those medications, we recommend a long-acting GLP-1 receptor agonist (1B)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "Diabetic ketoacidosis (DKA) is a serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis, often requiring emergency treatment." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Diabetic ketoacidosis /C15Educate about signs/symptoms to facilitate early recognition /C15Monitor blood or urine ketones in the case of very high risk /C15Institute a sick day protocol /C15Maintain at least low-dose insulin in insulin-requiring individuals" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/diabetic-kidney-disease> a dmo:Complication ;
+    rdfs:label "Diabetic Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "diabetic-kidney-disease" ;
+    dmo:definition "Diabetic kidney disease (DKD) is defined primarily as ACR $30 mg/g" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005270" ;
+    dmo:name "Diabetic Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "patients with T2D, kidney disease (defined primarily as ACR $30 mg/g)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/genital-mycotic-infections> a dmo:Complication ;
+    rdfs:label "Genital Mycotic Infections" ;
+    dmo:affectedOrgan "Vessel" ;
+    dmo:complicationCode "genital-mycotic-infections" ;
+    dmo:definition "Genital mycotic infections are a known complication of SGLT2i." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0019070" ;
+    dmo:name "Genital Mycotic Infections" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Genital mycotic infections are a known complication of SGLT2i." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complication/hypoglycemia> a dmo:Complication ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "hypoglycemia" ;
+    dmo:definition "Hypoglycemia is a condition in which blood glucose levels fall below normal, potentially leading to neurological symptoms and requiring urgent intervention." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Hypoglycemia /C15Adjust background glucose-lowering agents (e.g., insulin or sulfonylureas) as appropriate" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complicationStage/albuminuria> a dmo:ComplicationStage ;
+    rdfs:label "Albuminuria" ;
+    dmo:name "Albuminuria" ;
+    dmo:stageCode "albuminuria" ;
+    dmo:stageCriteria "ACR $30 mg/g" ;
+    dmo:stageOrder "1"^^xsd:integer ;
+    dmo:evidenceQuote "patients with T2D, kidney disease (defined primarily as ACR $30 mg/g)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complicationStage/egfr-15-29-ml-min-1-73-m2> a dmo:ComplicationStage ;
+    rdfs:label "eGFR 15–29 mL/min/1.73 m2" ;
+    dmo:name "eGFR 15–29 mL/min/1.73 m2" ;
+    dmo:stageCode "egfr-15-29-ml-min-1-73-m2" ;
+    dmo:stageCriteria "eGFR 15–29 mL/min/1.73 m2" ;
+    dmo:stageOrder "4"^^xsd:integer ;
+    dmo:evidenceQuote "Stage 4 (eGFR 15–29 mL/min/1.73 m2)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complicationStage/egfr-15-ml-min-1-73-m2> a dmo:ComplicationStage ;
+    rdfs:label "eGFR <15 mL/min/1.73 m2" ;
+    dmo:name "eGFR <15 mL/min/1.73 m2" ;
+    dmo:stageCode "egfr-15-ml-min-1-73-m2" ;
+    dmo:stageCriteria "eGFR <15 mL/min/1.73 m2" ;
+    dmo:stageOrder "5"^^xsd:integer ;
+    dmo:evidenceQuote "Stage 5 (eGFR <15 mL/min/1.73 m2)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/complicationStage/egfr-30-44-ml-min-1-73-m2> a dmo:ComplicationStage ;
+    rdfs:label "eGFR 30–44 mL/min/1.73 m2" ;
+    dmo:name "eGFR 30–44 mL/min/1.73 m2" ;
+    dmo:stageCode "egfr-30-44-ml-min-1-73-m2" ;
+    dmo:stageCriteria "eGFR 30–44 mL/min/1.73 m2" ;
+    dmo:stageOrder "3"^^xsd:integer ;
+    dmo:evidenceQuote "Stage 3b (eGFR 30–44 mL/min/1.73 m2)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/acarbose-use-not-recommended-with-egfr-30-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Acarbose use not recommended with eGFR <30 mL/min/1.73 m2" ;
+    dmo:contraCode "acarbose-use-not-recommended-with-egfr-30-ml-min-1-73-m2" ;
+    dmo:rationale "Use not recommended" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <30 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Acarbose No dose adjustment required Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/canagliflozin-initiation-not-recommended-with-egfr-20-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Canagliflozin initiation not recommended with eGFR <20 mL/min/1.73 m2" ;
+    dmo:contraCode "canagliflozin-initiation-not-recommended-with-egfr-20-ml-min-1-73-m2" ;
+    dmo:rationale "Initiation not recommended; may continue 100 mg daily if tolerated for kidney and CV benefit until dialysis" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <20 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Canagliflozin Maximum 100 mg daily Initiation not recommended; may continue 100 mg daily if tolerated for kidney and CV benefit until dialysis" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/consider-dose-reduction-of-metformin-in-the-presence-of-conditions-that-predispose-patients-to-hypoperfusion-and-hypoxemia-for-egfr-45-59-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Consider dose reduction of metformin in the presence of conditions that predispose patients to hypoperfusion and hypoxemia for eGFR 45–59 mL/min/1.73 m²" ;
+    dmo:contraCode "consider-dose-reduction-of-metformin-in-the-presence-of-conditions-that-predispose-patients-to-hypoperfusion-and-hypoxemia-for-egfr-45-59-ml-min-1-73-m2" ;
+    dmo:rationale "Consider dose reduction in the presence of conditions that predispose patients to hypoperfusion and hypoxemia for eGFR 45 –59 mL/min/1.73 m 2" ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "eGFR 45–59 mL/min/1.73 m² and conditions that predispose patients to hypoperfusion and hypoxemia" ;
+    dmo:evidenceQuote "Consider dose reduction in the presence of conditions that predispose patients to hypoperfusion and hypoxemia for eGFR 45 –59 mL/min/1.73 m 2" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/dapagliflozin-initiation-not-recommended-with-egfr-25-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Dapagliflozin initiation not recommended with eGFR <25 mL/min/1.73 m2" ;
+    dmo:contraCode "dapagliflozin-initiation-not-recommended-with-egfr-25-ml-min-1-73-m2" ;
+    dmo:rationale "Initiation not recommended with eGFR <25 mL/min/1.73 m2; may continue if tolerated for kidney and CV benefit until dialysis" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <25 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Dapagliflozin 10 mg daily† Initiation not recommended with eGFR <25 mL/min/1 .73 m2; may continue if tolerated for kidney and CV benefit until dialysis" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/empagliflozin-initiation-not-recommended-with-egfr-20-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Empagliflozin initiation not recommended with eGFR <20 mL/min/1.73 m2" ;
+    dmo:contraCode "empagliflozin-initiation-not-recommended-with-egfr-20-ml-min-1-73-m2" ;
+    dmo:rationale "Initiation not recommended with eGFR <20 mL/min/1.73 m2; may continue if tolerated for kidney and CV benefit until dialysis" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <20 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Empagliflozin Initiation not recommended with eGFR <20 mL/min/1 .73 m2; may continue if tolerated for kidney and CV benefit until dialysis" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/euglycemic-ketoacidosis-with-minimal-to-no-elevation-in-blood-glucose> a dmo:Contraindication ;
+    rdfs:label "Euglycemic Ketoacidosis with Minimal to No Elevation in Blood Glucose" ;
+    dmo:contraCode "euglycemic-ketoacidosis-with-minimal-to-no-elevation-in-blood-glucose" ;
+    dmo:rationale "Euglycemic ketoacidosis with minimal to no elevation in blood glucose may occur in patients taking SGLT2i. Patients with T2D requiring insulin are at particular risk. To mitigate risk, it is important to maintain at least low-dose insulin and consider pausing SGLT2i treatment during periods of acute illness or stressors." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Patients with T2D requiring insulin are at particular risk" ;
+    dmo:evidenceQuote "Patients with T2D requiring insulin are at particular risk. To mitigate risk, it is important to maintain at least low-dose insulin and consider pausing SGLT2i treatment during periods of acute illness or stressors." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/exenatide-use-not-recommended-with-egfr-30-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Exenatide use not recommended with eGFR <30 mL/min/1.73 m2" ;
+    dmo:contraCode "exenatide-use-not-recommended-with-egfr-30-ml-min-1-73-m2" ;
+    dmo:rationale "Use not recommended" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <30 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Exenatide 10 mg daily‡ Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/glyburide-use-not-recommended> a dmo:Contraindication ;
+    rdfs:label "Glyburide use not recommended" ;
+    dmo:contraCode "glyburide-use-not-recommended" ;
+    dmo:rationale "Use not recommended" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "No specific eGFR threshold mentioned" ;
+    dmo:evidenceQuote "Glyburide Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/hold-sglt2i-during-illness> a dmo:Contraindication ;
+    rdfs:label "Hold SGLT2i during illness" ;
+    dmo:contraCode "hold-sglt2i-during-illness" ;
+    dmo:rationale "Hold SGLT2i during illness" ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "Illness" ;
+    dmo:evidenceQuote "Hold SGLT2i during illness" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/lixisenatide-use-not-recommended-with-egfr-30-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Lixisenatide use not recommended with eGFR <30 mL/min/1.73 m2" ;
+    dmo:contraCode "lixisenatide-use-not-recommended-with-egfr-30-ml-min-1-73-m2" ;
+    dmo:rationale "Use not recommended" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <30 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Lixisenatide No dose adjustment required Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/maintain-at-least-low-dose-insulin-in-insulin-requiring-individuals-during-sglt2i-use> a dmo:Contraindication ;
+    rdfs:label "Maintain at least low-dose insulin in insulin-requiring individuals during SGLT2i use" ;
+    dmo:contraCode "maintain-at-least-low-dose-insulin-in-insulin-requiring-individuals-during-sglt2i-use" ;
+    dmo:rationale "Maintain at least low-dose insulin in insulin-requiring individuals" ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "Insulin-requiring individuals" ;
+    dmo:evidenceQuote "Maintain at least low-dose insulin in insulin-requiring individuals" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/metformin-associated-lactic-acidosis> a dmo:Contraindication ;
+    rdfs:label "Metformin-associated lactic acidosis" ;
+    dmo:contraCode "metformin-associated-lactic-acidosis" ;
+    dmo:rationale "Metformin is excreted unchanged in urine, and impaired metformin excretion in patients with CKD increases the risk of lactic acidosis; most episodes occur concurrent with other acute illness, often when AKI reduces metformin clearance" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "in patients with eGFR <30 mL/min/1.73 m2 or during acute illness, especially when acute kidney injury (AKI) contributes to reduced metformin clearance" ;
+    dmo:evidenceQuote "Most episodes of metformin-associated lactic acidosis occur concurrent with other acute illness, often when acute kidney injury (AKI) contributes to reduced metformin clearance." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/metformin-contraindicated-with-egfr-30-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Metformin contraindicated with eGFR <30 mL/min/1.73 m2" ;
+    dmo:contraCode "metformin-contraindicated-with-egfr-30-ml-min-1-73-m2" ;
+    dmo:rationale "Contraindicated" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <30 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Metformin Reduce dose to 1000 mg/day Contraindicated" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/contraindication/miglitol-use-not-recommended-with-egfr-30-ml-min-1-73-m2> a dmo:Contraindication ;
+    rdfs:label "Miglitol use not recommended with eGFR <30 mL/min/1.73 m2" ;
+    dmo:contraCode "miglitol-use-not-recommended-with-egfr-30-ml-min-1-73-m2" ;
+    dmo:rationale "Use not recommended" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "eGFR <30 mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Miglitol No dose adjustment required Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/device/automated-insulin-delivery-systems> a dmo:Device ;
+    rdfs:label "automated insulin delivery systems" ;
+    dmo:deviceCode "automated-insulin-delivery-systems" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "automated insulin delivery systems" ;
+    dmo:evidenceQuote "as well as automated insulin delivery systems that increase and decrease insulin delivery based on sensor-derived glucose levels and trends" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/device/sensor-augmented-pumps> a dmo:Device ;
+    rdfs:label "sensor-augmented pumps" ;
+    dmo:deviceCode "sensor-augmented-pumps" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "sensor-augmented pumps" ;
+    dmo:evidenceQuote "Other technologies supported by the ADA include sensor-augmented pumps that suspend insulin when glucose is low or predicted to become low" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/device/urine-ketones> a dmo:Device ;
+    rdfs:label "Urine Ketones" ;
+    dmo:deviceCode "urine-ketones" ;
+    dmo:deviceType "KetoneTestKit" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Urine Ketones" ;
+    dmo:evidenceQuote "Monitor blood or urine ketones in the case of very high risk" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/diabetesType/t1d> a dmo:DiabetesType ;
+    rdfs:label "T1D" ;
+    dmo:definition "T1D Y early starting 5 years after diagnosis" ;
+    dmo:diabetesTypeCode "t1d" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "T1D" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "T1D Y early starting 5 years after diagnosis" ;
+    dmo:evidenceQuote "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/diabetesType/t2d> a dmo:DiabetesType ;
+    rdfs:label "T2D" ;
+    dmo:definition "T2D Y early starting at diagnosis" ;
+    dmo:diabetesTypeCode "t2d" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "T2D" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "T2D Y early starting at diagnosis" ;
+    dmo:evidenceQuote "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    dmo:evidenceQuote "patients with type 2 diabetes and nephropathy" ;
+    dmo:evidenceQuote "SGLT2 inhibition for CKD and cardiovascular disease in type 2 diabetes: report of a scienti ﬁc workshop sponsored by the National Kidney Foundation." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/ace-inhibitors> a dmo:DrugClass ;
+    rdfs:label "ACE Inhibitors" ;
+    dmo:adminRoute "Oral" ;
+    dmo:atcCode "C09AA01" ;
+    dmo:drugClassCode "ace-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibits angiotensin-converting enzyme, reducing angiotensin II formation and lowering blood pressure and glomerular pressure" ;
+    dmo:name "ACE Inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/arbs> a dmo:DrugClass ;
+    rdfs:label "ARBs" ;
+    dmo:adminRoute "Oral" ;
+    dmo:atcCode "C09CA01" ;
+    dmo:drugClassCode "arbs" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Blocks angiotensin II type 1 receptors, reducing vasoconstriction and aldosterone release" ;
+    dmo:name "ARBs" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/dpp-4-inhibitors> a dmo:DrugClass ;
+    rdfs:label "DPP-4 inhibitors" ;
+    dmo:drugClassCode "dpp-4-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Dipeptidyl peptidase 4 inhibitor" ;
+    dmo:name "DPP-4 inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "SGLT2 inhibitors* GLP-1 receptor agonists§ Sulfonylureas (2nd generation) DPP-4 inhibitors Thiazolidinediones α-Glucosidase inhibitors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/glp-1-ra> a dmo:DrugClass ;
+    rdfs:label "GLP-1 RA" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "glp-1-ra" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Glucagon-like peptide-1 receptor agonist that enhances glucose-dependent insulin secretion and suppresses glucagon secretion" ;
+    dmo:name "GLP-1 RA" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "GLP-1 RA if needed to achieve individualized glycemic target" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/glp-1-receptor-agonists> a dmo:DrugClass ;
+    rdfs:label "GLP-1 receptor agonists" ;
+    dmo:drugClassCode "glp-1-receptor-agonists" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Glucagon-like peptide 1 receptor agonist" ;
+    dmo:name "GLP-1 receptor agonists" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "GLP-1 receptor agonists Nausea/vomiting/diarrhea /C15Educate on tolerability and symptom recognition\n/C15Start at lowest recommended dose and titrate slowly\nHypoglycemia /C15Adjust background glucose-lowering agents (e.g., insulin or sulfonylureas) as appropriate" ;
+    dmo:evidenceQuote "SGLT2 inhibitors* GLP-1 receptor agonists§ Sulfonylureas (2nd generation) DPP-4 inhibitors Thiazolidinediones α-Glucosidase inhibitors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Insulin mechanism of action" ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Insulin Initiate and titrate conservatively to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/metformin> a dmo:DrugClass ;
+    rdfs:label "Metformin" ;
+    dmo:drugClassCode "metformin" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Biguanide" ;
+    dmo:name "Metformin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Metformin Metformin-associated lactic acidosis /C15Monitor eGFR with increasing frequency as eGFR falls to <60 mL/min/1.73 m 2\n/C15Adjust metformin dose as appropriate per eGFR (see Table 4)\n/C15Consider dose reduction in the presence of conditions that predispose patients\nto hypoperfusion and hypoxemia for eGFR 45 –59 mL/min/1.73 m 2\n/C15Discontinue for eGFR <30 mL/min/1.73 m 2\n/C15Institute a sick day protocol\nB12 malabsorption /C15Monitor patients for vitamin B 12 deﬁciency when treated with metformin for\n>4 years" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/sglt2-inhibitor> a dmo:DrugClass ;
+    rdfs:label "SGLT2 inhibitor" ;
+    dmo:adminRoute "Oral" ;
+    dmo:atcCode "A10BJ02" ;
+    dmo:drugClassCode "sglt2-inhibitor" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibits sodium-glucose co-transporter 2 in the proximal tubule, promoting urinary glucose excretion" ;
+    dmo:name "SGLT2 inhibitor" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "The ADA 2022 Standards Care and the KDIGO 2022 guideline recommend early initiation of metformin plus an SGLT2 inhibitor in most patients with T2D and CKD (2,17) (Table 1)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> a dmo:DrugClass ;
+    rdfs:label "SGLT2 inhibitors" ;
+    dmo:drugClassCode "sglt2-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Sodium–glucose cotransporter 2 inhibitor" ;
+    dmo:name "SGLT2 inhibitors" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "SGLT2i Genital mycotic infections /C15Counsel on genital hygiene\nVolume depletion /C15Monitor for hypovolemia and consider proactive dose reduction of diuretics in\npatients at high risk\n/C15Hold SGLT2i during illness\nDiabetic ketoacidosis /C15Educate about signs/symptoms to facilitate early recognition\n/C15Monitor blood or urine ketones in the case of very high risk\n/C15Institute a sick day protocol\n/C15Maintain at least low-dose insulin in insulin-requiring individuals" ;
+    dmo:evidenceQuote "SGLT2 inhibitors* GLP-1 receptor agonists§ Sulfonylureas (2nd generation) DPP-4 inhibitors Thiazolidinediones α-Glucosidase inhibitors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/sglt2i> a dmo:DrugClass ;
+    rdfs:label "SGLT2i" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "sglt2i" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibits sodium-glucose cotransporter 2 in the proximal tubule, promoting urinary glucose excretion" ;
+    dmo:name "SGLT2i" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "SGLT2i (Initiate if eGFR ≥20; continue until dialysis or transplant)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/sodium-glucose-cotransporter-2-inhibitors> a dmo:DrugClass ;
+    rdfs:label "Sodium-glucose cotransporter 2 inhibitors" ;
+    dmo:adminRoute "Oral" ;
+    dmo:atcCode "A10BH" ;
+    dmo:drugClassCode "sodium-glucose-cotransporter-2-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibit the sodium-glucose cotransporter 2 in the proximal tubule of the kidney, leading to increased urinary glucose excretion and lower blood glucose levels." ;
+    dmo:name "Sodium-glucose cotransporter 2 inhibitors" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "SGLT2 inhibition for CKD and cardiovascular disease in type 2 diabetes: report of a scienti ﬁc workshop sponsored by the National Kidney Foundation. Diabetes 2021;70:1–16" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas-2nd-generation> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas (2nd generation)" ;
+    dmo:drugClassCode "sulfonylureas-2nd-generation" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Sulfonylurea mechanism of action" ;
+    dmo:name "Sulfonylureas (2nd generation)" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "SGLT2 inhibitors* GLP-1 receptor agonists§ Sulfonylureas (2nd generation) DPP-4 inhibitors Thiazolidinediones α-Glucosidase inhibitors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/thiazolidinediones> a dmo:DrugClass ;
+    rdfs:label "Thiazolidinediones" ;
+    dmo:drugClassCode "thiazolidinediones" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Thiazolidinedione mechanism of action" ;
+    dmo:name "Thiazolidinediones" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "SGLT2 inhibitors* GLP-1 receptor agonists§ Sulfonylureas (2nd generation) DPP-4 inhibitors Thiazolidinediones α-Glucosidase inhibitors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/drugClass/α-glucosidase-inhibitors> a dmo:DrugClass ;
+    rdfs:label "α-Glucosidase inhibitors" ;
+    dmo:drugClassCode "α-glucosidase-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "α-Glucosidase inhibitor mechanism of action" ;
+    dmo:name "α-Glucosidase inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "SGLT2 inhibitors* GLP-1 receptor agonists§ Sulfonylureas (2nd generation) DPP-4 inhibitors Thiazolidinediones α-Glucosidase inhibitors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/acr> a dmo:LabTest ;
+    rdfs:label "ACR" ;
+    dmo:definition "albumin-to-creatinine ratio, a measure of albuminuria used to define kidney disease in patients with T2D" ;
+    dmo:labTestCode "acr" ;
+    dmo:name "ACR" ;
+    dmo:unitOfMeasure "mg/g" ;
+    dmo:evidenceQuote "patients with T2D, kidney disease (defined primarily as ACR $30 mg/g), and potassium <4.8 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/albumin-to-creatinine-ratio> a dmo:LabTest ;
+    rdfs:label "Albumin-to-Creatinine Ratio" ;
+    dmo:definition "A measure of albumin excretion in urine relative to creatinine, used to assess kidney damage and albuminuria in patients with diabetes and CKD." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "albumin-to-creatinine-ratio" ;
+    dmo:loincCode "29515-2" ;
+    dmo:name "Albumin-to-Creatinine Ratio" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg-per-g" ;
+    dmo:evidenceQuote "Nonsteroidal MRA† if ACR ≥30 mg/g and normal potassium" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/blood-ketones> a dmo:LabTest ;
+    rdfs:label "Blood Ketones" ;
+    dmo:definition "blood ketones" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-ketones" ;
+    dmo:loincCode "21700-0" ;
+    dmo:name "Blood Ketones" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol-per-L" ;
+    dmo:evidenceQuote "Monitor blood or urine ketones in the case of very high risk" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate> a dmo:LabTest ;
+    rdfs:label "Estimated Glomerular Filtration Rate" ;
+    dmo:definition "Persistent eGFR <60 mL/min/1.73 m2 defines CKD diagnosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "estimated-glomerular-filtration-rate" ;
+    dmo:loincCode "30954-2" ;
+    dmo:name "Estimated Glomerular Filtration Rate" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mL/min/1.73 m2" ;
+    dmo:evidenceQuote "Persistent eGFR <60 mL/min/1 .73 m2 and" ;
+    dmo:evidenceQuote "SGLT2i (Initiate if eGFR ≥20; continue until dialysis or transplant)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/uacr> a dmo:LabTest ;
+    rdfs:label "UACR" ;
+    dmo:definition "A measure of albumin excretion in urine, used to assess kidney damage in diabetes." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "uacr" ;
+    dmo:loincCode "29515-2" ;
+    dmo:name "UACR" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg/g" ;
+    dmo:evidenceQuote "Like CREDENCE and DAPA-CKD, EMPA-KIDNEY was stopped early for clear positive efﬁcacy (63); corresponding expansion of the indications for use of an SGLT2i in CKD may be further supported b a s e do nt h e s eﬁndings." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> a dmo:LabTest ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:definition "Persistent urine ACR ≥30 mg/g defines CKD diagnosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-albumin-to-creatinine-ratio" ;
+    dmo:loincCode "2951-2" ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg/g" ;
+    dmo:evidenceQuote "Persistent urine ACR ≥30 mg/g and/or" ;
+    dmo:evidenceQuote "urine albumin ranging from normal to 200 mg/g creatinine" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/labTest/urine-ketones> a dmo:LabTest ;
+    rdfs:label "Urine Ketones" ;
+    dmo:definition "urine ketones" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-ketones" ;
+    dmo:loincCode "21701-8" ;
+    dmo:name "Urine Ketones" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "trace / 1+ / 2+ / 3+ / 4+" ;
+    dmo:evidenceQuote "Monitor blood or urine ketones in the case of very high risk" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/lifestyleIntervention/comprehensive-lifestyle-modification> a dmo:LifestyleIntervention ;
+    rdfs:label "Comprehensive lifestyle modification" ;
+    dmo:interventionCode "comprehensive-lifestyle-modification" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Comprehensive lifestyle modification" ;
+    dmo:evidenceQuote "metformin and comprehensive lifestyle modi ﬁcation (A)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/lifestyleIntervention/healthy-lifestyle-approaches> a dmo:LifestyleIntervention ;
+    rdfs:label "Healthy lifestyle approaches" ;
+    dmo:interventionCode "healthy-lifestyle-approaches" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Healthy lifestyle approaches" ;
+    dmo:evidenceQuote "pharmacotherapy that is proven to improve clinical kidney and cardiovascular outcomes is layered upon a foundation of healthy lifestyle approaches." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/lifestyleIntervention/intensification-of-lifestyle-intervention> a dmo:LifestyleIntervention ;
+    rdfs:label "intensification of lifestyle intervention" ;
+    dmo:interventionCode "intensification-of-lifestyle-intervention" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "intensification of lifestyle intervention" ;
+    dmo:evidenceQuote "For patients with high triglyceride or low HDL levels, intensiﬁcation of lifestyle in-" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/lifestyleIntervention/low-sodium-diet> a dmo:LifestyleIntervention ;
+    rdfs:label "Low-sodium diet" ;
+    dmo:activityTarget "KDIGO <2,000 mg/day, ADA 1,500 to <2,300 mg/day" ;
+    dmo:expectedBenefit "largely to control BP and reduce cardiovascular risk" ;
+    dmo:interventionCode "low-sodium-diet" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Low-sodium diet" ;
+    dmo:evidenceQuote "Both guidelines also recommend a low-sodium diet (KDIGO <2,000 mg/day, ADA 1,500 to <2,300 mg/day), largely to control BP and reduce cardiovascular risk." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/lifestyleIntervention/optimization-of-glycemic-control> a dmo:LifestyleIntervention ;
+    rdfs:label "optimization of glycemic control" ;
+    dmo:interventionCode "optimization-of-glycemic-control" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "optimization of glycemic control" ;
+    dmo:evidenceQuote "For patients with high triglyceride or low HDL levels, intensiﬁcation of lifestyle in-" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/lifestyleIntervention/smoking-cessation> a dmo:LifestyleIntervention ;
+    rdfs:label "Smoking cessation" ;
+    dmo:expectedBenefit "strongly advised" ;
+    dmo:interventionCode "smoking-cessation" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Smoking cessation" ;
+    dmo:evidenceQuote "Though speciﬁc evidence is low, smoking cessation is also strongly advised." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/acarbose> a dmo:Medication ;
+    rdfs:label "Acarbose" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "acarbose" ;
+    dmo:name "Acarbose" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Acarbose No dose adjustment required Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/ace-inhibitors> a dmo:Medication ;
+    rdfs:label "ACE Inhibitors" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ace-inhibitors" ;
+    dmo:name "ACE Inhibitors" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/acei> a dmo:Medication ;
+    rdfs:label "ACEi" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "acei" ;
+    dmo:name "ACEi" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/albiglutide> a dmo:Medication ;
+    rdfs:label "albiglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "albiglutide" ;
+    dmo:name "albiglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Albiglutide and cardiovascular outcomes in patients with type 2 diabetes and cardiovascular disease (Harmony Outcomes): a double-blind, randomised placebo-controlled trial." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/alogliptin> a dmo:Medication ;
+    rdfs:label "Alogliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "alogliptin" ;
+    dmo:name "Alogliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Alogliptin Maximum 12.5 mg daily Maximum 6.25 mg daily" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/antiplatelet-agent> a dmo:Medication ;
+    rdfs:label "Antiplatelet agent" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "antiplatelet-agent" ;
+    dmo:name "Antiplatelet agent" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Antiplatelet agent for clinical ASCVD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/arb> a dmo:Medication ;
+    rdfs:label "ARB" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "arb" ;
+    dmo:name "ARB" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/canagliflozin> a dmo:Medication ;
+    rdfs:label "Canagliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "canagliflozin" ;
+    dmo:name "Canagliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Canagliflozin Maximum 100 mg daily Initiation not recommended; may continue 100 mg daily if tolerated for kidney and CV benefit until dialysis" ;
+    dmo:evidenceQuote "Canagliﬂozin and renal outcomes in type 2 diabetes and nephropathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/dapagliflozin> a dmo:Medication ;
+    rdfs:label "Dapagliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "dapagliflozin" ;
+    dmo:name "Dapagliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dapagliflozin 10 mg daily† Initiation not recommended with eGFR <25 mL/min/1 .73 m2; may continue if tolerated for kidney and CV benefit until dialysis" ;
+    dmo:evidenceQuote "Dapagliﬂozin in patients with chronic kidney disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/dihydropyridine-ccb> a dmo:Medication ;
+    rdfs:label "Dihydropyridine CCB" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "dihydropyridine-ccb" ;
+    dmo:name "Dihydropyridine CCB" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dihydropyridine CCB and/or diuretic* if needed to achieve individualized BP target" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/dulaglutide> a dmo:Medication ;
+    rdfs:label "Dulaglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "dulaglutide" ;
+    dmo:name "Dulaglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dulaglutide No dose adjustment required" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/efpeglenatide> a dmo:Medication ;
+    rdfs:label "efpeglenatide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "efpeglenatide" ;
+    dmo:name "efpeglenatide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Cardiovascular and renal outcomes with efpeglenatide in type 2 diabetes. N Engl J Med 2021;385:896–907" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/empagliflozin> a dmo:Medication ;
+    rdfs:label "Empagliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "empagliflozin" ;
+    dmo:name "Empagliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Empagliflozin Initiation not recommended with eGFR <20 mL/min/1 .73 m2; may continue if tolerated for kidney and CV benefit until dialysis" ;
+    dmo:evidenceQuote "Empagliﬂozin in heart failure with a preserved ejection fraction." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/ertugliflozin> a dmo:Medication ;
+    rdfs:label "Ertugliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ertugliflozin" ;
+    dmo:name "Ertugliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Ertugliflozin Use not recommended with eGFR <45 mL/min/1 .73 m2" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/esaxerenone> a dmo:Medication ;
+    rdfs:label "esaxerenone" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "esaxerenone" ;
+    dmo:name "esaxerenone" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Esaxerenone (CS-3150) in patients with type 2 diabetes and microalbuminuria (ESAX-DN): phase 3 randomized controlled clinical trial." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/exenatide> a dmo:Medication ;
+    rdfs:label "Exenatide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "exenatide" ;
+    dmo:name "Exenatide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Exenatide 10 mg daily‡ Use not recommended" ;
+    dmo:evidenceQuote "Effects of once-weekly exenatide on cardiovascular outcomes in type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/ezetimibe> a dmo:Medication ;
+    rdfs:label "Ezetimibe" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ezetimibe" ;
+    dmo:name "Ezetimibe" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Ezetimibe, PCSK9i, or icosapent ethyl if indicated based on ASCVD risk and lipids" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/finerenone> a dmo:Medication ;
+    rdfs:label "finerenone" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "finerenone" ;
+    dmo:name "finerenone" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Effect of ﬁnerenone on chronic kidney disease outcomes in type 2 diabetes. N Engl J Med 2020;383:2219–2229" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/glimepiride> a dmo:Medication ;
+    rdfs:label "Glimepiride" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glimepiride" ;
+    dmo:name "Glimepiride" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Glimepiride Initiate conservatively at 1 mg daily and titrate slowly to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/glipizide> a dmo:Medication ;
+    rdfs:label "Glipizide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glipizide" ;
+    dmo:name "Glipizide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Glipizide Initiate conservatively (e.g., 2.5 mg once daily) and titrate slowly to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/glp-1-ra> a dmo:Medication ;
+    rdfs:label "GLP-1 RA" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glp-1-ra" ;
+    dmo:name "GLP-1 RA" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 RA if needed to achieve individualized glycemic target" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/glp-1-receptor-agonists> a dmo:Medication ;
+    rdfs:label "GLP-1 receptor agonists" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glp-1-receptor-agonists" ;
+    dmo:name "GLP-1 receptor agonists" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Among patients with T2D who have established ASCVD or established kidney disease, an SGLT2i or GLP-1 receptor agonist with demonstrated cardiovascular disease beneﬁ ti sr e c o m m e n d e da sp a r to ft h e" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/glucagon-like-peptide-1-receptor-agonist> a dmo:Medication ;
+    rdfs:label "Glucagon-like peptide 1 receptor agonist" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glucagon-like-peptide-1-receptor-agonist" ;
+    dmo:name "Glucagon-like peptide 1 receptor agonist" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "A glucagon-like peptide 1 (GLP-1) re-\nceptor agonist with proven cardiovas-\ncular bene ﬁt is recommended for\npatients with T2D and CKD who do\nnot meet their individualized glycemic\ntarget with metformin and/or an SGLT2i\nor who are unable to use these drugs." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/glyburide> a dmo:Medication ;
+    rdfs:label "Glyburide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glyburide" ;
+    dmo:name "Glyburide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Glyburide Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/icosapent-ethyl> a dmo:Medication ;
+    rdfs:label "Icosapent ethyl" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "icosapent-ethyl" ;
+    dmo:name "Icosapent ethyl" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Ezetimibe, PCSK9i, or icosapent ethyl if indicated based on ASCVD risk and lipids" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "insulin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "insulin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Maintain at least low-dose insulin in insulin-requiring individuals" ;
+    dmo:evidenceQuote "Insulin Initiate and titrate conservatively to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/linagliptin> a dmo:Medication ;
+    rdfs:label "Linagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "linagliptin" ;
+    dmo:name "Linagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Linagliptin No dose adjustment required" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/liraglutide> a dmo:Medication ;
+    rdfs:label "Liraglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "liraglutide" ;
+    dmo:name "Liraglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Liraglutide No dose adjustment required" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/lixisenatide> a dmo:Medication ;
+    rdfs:label "Lixisenatide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "lixisenatide" ;
+    dmo:name "Lixisenatide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Lixisenatide No dose adjustment required Use not recommended" ;
+    dmo:evidenceQuote "Lixisenatide in patients with type 2 diabetes and acute coronary syndrome. N Engl J Med 2015;373:2247–2257" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/metformin> a dmo:Medication ;
+    rdfs:label "metformin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "metformin" ;
+    dmo:name "metformin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "In patients with T2D and CKD who have not achieved individualized glycemic targets despite use of metformin and SGLT2i treatment, or who are unable to use those medications, we recommend a long-acting GLP-1 receptor agonist (1B)." ;
+    dmo:evidenceQuote "Metformin Reduce dose to 1000 mg/day Contraindicated" ;
+    dmo:evidenceQuote "Metformin in patients with type 2 diabetes and kidney disease: a systematic review." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/miglitol> a dmo:Medication ;
+    rdfs:label "Miglitol" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "miglitol" ;
+    dmo:name "Miglitol" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Miglitol No dose adjustment required Use not recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/nonsteroidal-mineralocorticoid-receptor-antagonist> a dmo:Medication ;
+    rdfs:label "Nonsteroidal mineralocorticoid receptor antagonist" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "nonsteroidal-mineralocorticoid-receptor-antagonist" ;
+    dmo:name "Nonsteroidal mineralocorticoid receptor antagonist" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "A nonsteroidal mineralocorticoid recep-\ntor antagonist (ns-MRA) with proven\nkidney and cardiovascular beneﬁ ti s\nrecommended for patients with T2D,\neGFR $25 mL/min/1.73 m\n2, normal\nserum potassium concentration, and\nalbuminuria (albumin-to-creatinine ratio\n[ACR] $30 mg/g) despite maximum\ntolerated dose of renin-angiotensin\nsystem (RAS) inhibitor." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/nonsteroidal-mra> a dmo:Medication ;
+    rdfs:label "Nonsteroidal MRA" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "nonsteroidal-mra" ;
+    dmo:name "Nonsteroidal MRA" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Nonsteroidal MRA† if ACR ≥30 mg/g and normal potassium" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/pcsk9i> a dmo:Medication ;
+    rdfs:label "PCSK9i" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "pcsk9i" ;
+    dmo:name "PCSK9i" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Ezetimibe, PCSK9i, or icosapent ethyl if indicated based on ASCVD risk and lipids" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/pioglitazone> a dmo:Medication ;
+    rdfs:label "Pioglitazone" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "pioglitazone" ;
+    dmo:name "Pioglitazone" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Pioglitazone No dose adjustment required" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/ras-inhibitor> a dmo:Medication ;
+    rdfs:label "RAS inhibitor" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ras-inhibitor" ;
+    dmo:name "RAS inhibitor" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "RAS inhibitor at maximum tolerated dose (if HTN*)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/saxagliptin> a dmo:Medication ;
+    rdfs:label "Saxagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "saxagliptin" ;
+    dmo:name "Saxagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Saxagliptin Maximum 2.5 mg daily" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/semaglutide> a dmo:Medication ;
+    rdfs:label "Semaglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "semaglutide" ;
+    dmo:name "Semaglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Semaglutide No dose adjustment required" ;
+    dmo:evidenceQuote "Semaglutide and cardiovascular outcomes in patients with type 2 diabetes. N Engl J Med 2016;375:1834–1844" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/sglt2-inhibitor> a dmo:Medication ;
+    rdfs:label "SGLT2 inhibitor" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sglt2-inhibitor" ;
+    dmo:name "SGLT2 inhibitor" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "The ADA 2022 Standards Care and the KDIGO 2022 guideline recommend early initiation of metformin plus an SGLT2 inhibitor in most patients with T2D and CKD (2,17) (Table 1)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/sglt2-inhibitors> a dmo:Medication ;
+    rdfs:label "SGLT2 inhibitors" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sglt2-inhibitors" ;
+    dmo:name "SGLT2 inhibitors" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Among patients with T2D who have established ASCVD or established kidney disease, an SGLT2i or GLP-1 receptor agonist with demonstrated cardiovascular disease beneﬁ ti sr e c o m m e n d e da sp a r to ft h e" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/sglt2i> a dmo:Medication ;
+    rdfs:label "SGLT2i" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sglt2i" ;
+    dmo:name "SGLT2i" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "SGLT2i (Initiate if eGFR ≥20; continue until dialysis or transplant)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/sitagliptin> a dmo:Medication ;
+    rdfs:label "Sitagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sitagliptin" ;
+    dmo:name "Sitagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Sitagliptin Maximum 50 mg daily Maximum 25 mg once daily" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/medication/steroidal-mra> a dmo:Medication ;
+    rdfs:label "Steroidal MRA" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "steroidal-mra" ;
+    dmo:name "Steroidal MRA" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Steroidal MRA if needed for resistant hypertension" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/monitoringSchedule/annual-screening-for-ckd-in-patients-with-diabetes> a dmo:MonitoringSchedule ;
+    rdfs:label "Annual Screening for CKD in Patients with Diabetes" ;
+    dmo:appliesTo "Patients with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Annual Screening for CKD in Patients with Diabetes" ;
+    dmo:scheduleId "annual-screening-for-ckd-in-patients-with-diabetes" ;
+    dmo:evidenceQuote "Both the ADA and KDIGO recommend annual screening of patients with diabetes for CKD (17,18) (Fig. 1)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/monitoringSchedule/chronic-kidney-disease> a dmo:MonitoringSchedule ;
+    rdfs:label "Chronic Kidney Disease" ;
+    dmo:appliesTo "people living with diabetes with persistent abnormalities in urine ACR or eGFR" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Chronic Kidney Disease" ;
+    dmo:scheduleId "chronic-kidney-disease" ;
+    dmo:evidenceQuote "Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD and should lead to immediate initiation of evidence-based treatments." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/monitoringSchedule/egfr-monitoring> a dmo:MonitoringSchedule ;
+    rdfs:label "eGFR Monitoring" ;
+    dmo:appliesTo "patients with CKD" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "eGFR Monitoring" ;
+    dmo:scheduleId "egfr-monitoring" ;
+    dmo:evidenceQuote "eGFR should be monitored at least annually in patients with CKD" ;
+    dmo:evidenceQuote "Monitor eGFR with increasing frequency as eGFR falls to <60 mL/min/1.73 m 2" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/monitoringSchedule/estimated-glomerular-filtration-rate> a dmo:MonitoringSchedule ;
+    rdfs:label "Estimated Glomerular Filtration Rate" ;
+    dmo:appliesTo "people living with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Estimated Glomerular Filtration Rate" ;
+    dmo:scheduleId "estimated-glomerular-filtration-rate" ;
+    dmo:evidenceQuote "Screening includes measurement of both urine albumin and eGFR. Abnor-\nmalities should be con ﬁrmed. Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/monitoringSchedule/serum-potassium-monitoring> a dmo:MonitoringSchedule ;
+    rdfs:label "Serum Potassium Monitoring" ;
+    dmo:frequencyMonths "4"^^xsd:integer ;
+    dmo:name "Serum Potassium Monitoring" ;
+    dmo:scheduleId "serum-potassium-monitoring" ;
+    dmo:triggerWindow "4 weeks after dose change" ;
+    dmo:evidenceQuote "Potassium should be followed 4 weeks after dose change and regularly during treatment." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/monitoringSchedule/urine-albumin-to-creatinine-ratio> a dmo:MonitoringSchedule ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:appliesTo "people living with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:scheduleId "urine-albumin-to-creatinine-ratio" ;
+    dmo:evidenceQuote "Screening includes measurement of both urine albumin and eGFR. Abnor-\nmalities should be con ﬁrmed. Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/ace-inhibitor-or-arb-for-hypertension-and-albuminuria-in-diabetes-and-ckd> a dmo:Recommendation ;
+    rdfs:label "ACE Inhibitor or ARB for Hypertension and Albuminuria in Diabetes and CKD" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "High-quality evidence from randomized clinical trials" ;
+    dmo:populationScope "Patients with type 1 diabetes or type 2 diabetes, hypertension, and albuminuria" ;
+    dmo:recommendationId "ace-inhibitor-or-arb-for-hypertension-and-albuminuria-in-diabetes-and-ckd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "An ACE inhibitor (ACEi) or angiotensin II receptor blocker (ARB) is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    dmo:evidenceQuote "An ACE inhibitor (ACEi) or angiotensin II receptor blocker (ARB) is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> a dmo:Recommendation ;
+    rdfs:label "ACE Inhibitors and ARBs" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with T1D and T2D and CKD" ;
+    dmo:recommendationId "ace-inhibitors-and-arbs" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    dmo:evidenceQuote "RAS inhibition with ACEi or ARBs has been standard of care in patients with T1D and T2D and CKD for decades." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose> a dmo:Recommendation ;
+    rdfs:label "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    dmo:gradingSystem "KDIGO" ;
+    dmo:nativeEvidenceGrade "2B" ;
+    dmo:populationScope "patients with T1D or T2D who have hypertension and albuminuria" ;
+    dmo:recommendationId "an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    dmo:evidenceQuote "An ACEi or ARB is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/annual-screening-for-ckd-in-patients-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "Annual screening for CKD in patients with diabetes" ;
+    dmo:gradingSystem "ADA, KDIGO" ;
+    dmo:populationScope "Patients with diabetes" ;
+    dmo:recommendationId "annual-screening-for-ckd-in-patients-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Both the ADA and KDIGO recommend annual screening of patients with diabetes for CKD." ;
+    dmo:evidenceQuote "Both the ADA and KDIGO recommend annual screening of patients with diabetes for CKD (17,18) (Fig. 1)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/antiplatelet-agent-for-clinical-ascvd> a dmo:Recommendation ;
+    rdfs:label "Antiplatelet agent for clinical ASCVD" ;
+    dmo:recommendationId "antiplatelet-agent-for-clinical-ascvd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Antiplatelet agent for clinical ASCVD" ;
+    dmo:evidenceQuote "Antiplatelet agent for clinical ASCVD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/bp-target-for-patients-with-diabetes-hypertension-and-low-cardiovascular-risk> a dmo:Recommendation ;
+    rdfs:label "BP Target for Patients with Diabetes, Hypertension, and Low Cardiovascular Risk" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "grade A recommendation" ;
+    dmo:populationScope "patients with diabetes, hypertension, and low cardiovascular risk (defined as those with 10-year ASCVD risk<15%)" ;
+    dmo:recommendationId "bp-target-for-patients-with-diabetes-hypertension-and-low-cardiovascular-risk" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "For patients with diabetes, hypertension, and low cardiovascular risk (defined as those with 10-year ASCVD risk<15%), the ADA recommends a BP target of <140/90 mmHg (grade A recommendation) (40)." ;
+    dmo:evidenceQuote "For patients with diabetes, hypertension, and low cardiovascular risk (defined as those with 10-year ASCVD risk<15%), the ADA recommends a BP target of <140/90 mmHg (grade A recommendation) (40)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/diagnose-ckd-based-on-persistent-abnormalities> a dmo:Recommendation ;
+    rdfs:label "Diagnose CKD Based on Persistent Abnormalities" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People living with diabetes" ;
+    dmo:recommendationId "diagnose-ckd-based-on-persistent-abnormalities" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD" ;
+    dmo:evidenceQuote "Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/dihydropyridine-ccb-and-or-diuretic-if-needed-to-achieve-individualized-bp-target> a dmo:Recommendation ;
+    rdfs:label "Dihydropyridine CCB and/or diuretic* if needed to achieve individualized BP target" ;
+    dmo:recommendationId "dihydropyridine-ccb-and-or-diuretic-if-needed-to-achieve-individualized-bp-target" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Dihydropyridine CCB and/or diuretic* if needed to achieve individualized BP target" ;
+    dmo:evidenceQuote "Dihydropyridine CCB and/or diuretic* if needed to achieve individualized BP target" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/engage-patients-in-shared-decision-making-for-diabetes-and-ckd-management> a dmo:Recommendation ;
+    rdfs:label "Engage Patients in Shared Decision-Making for Diabetes and CKD Management" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People living with diabetes" ;
+    dmo:recommendationId "engage-patients-in-shared-decision-making-for-diabetes-and-ckd-management" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "patients to take an active role in managing their diabetes and kidney disease and to have a voice in decisions that affect their well-being" ;
+    dmo:evidenceQuote "patients to take an active role in managing their diabetes and kidney disease and to have a voice in decisions that affect their well-being" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/ezetimibe-pcsk9i-or-icosapent-ethyl-if-indicated-based-on-ascvd-risk-and-lipids> a dmo:Recommendation ;
+    rdfs:label "Ezetimibe, PCSK9i, or icosapent ethyl if indicated based on ASCVD risk and lipids" ;
+    dmo:recommendationId "ezetimibe-pcsk9i-or-icosapent-ethyl-if-indicated-based-on-ascvd-risk-and-lipids" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Ezetimibe, PCSK9i, or icosapent ethyl if indicated based on ASCVD risk and lipids" ;
+    dmo:evidenceQuote "Ezetimibe, PCSK9i, or icosapent ethyl if indicated based on ASCVD risk and lipids" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/glp-1-ra-if-needed-to-achieve-individualized-glycemic-target> a dmo:Recommendation ;
+    rdfs:label "GLP-1 RA if needed to achieve individualized glycemic target" ;
+    dmo:recommendationId "glp-1-ra-if-needed-to-achieve-individualized-glycemic-target" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "GLP-1 RA if needed to achieve individualized glycemic target" ;
+    dmo:evidenceQuote "GLP-1 RA if needed to achieve individualized glycemic target" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/include-lifestyle-interventions-in-overall-care-plan> a dmo:Recommendation ;
+    rdfs:label "Include Lifestyle Interventions in Overall Care Plan" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People living with diabetes" ;
+    dmo:recommendationId "include-lifestyle-interventions-in-overall-care-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Lifestyle interventions for the patient must be included in determining an overall plan of care to ensure individual preferences are addressed and goals are established by all team members, especially the patient." ;
+    dmo:evidenceQuote "Lifestyle interventions for the patient must be included in determining an overall plan of care to ensure individual preferences are addressed and goals are established by all team members, especially the patient." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/initiate-evidence-based-treatments-after-ckd-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Initiate Evidence-Based Treatments After CKD Diagnosis" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People living with diabetes" ;
+    dmo:recommendationId "initiate-evidence-based-treatments-after-ckd-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "should lead to immediate initiation of evidence-based treatments" ;
+    dmo:evidenceQuote "should lead to immediate initiation of evidence-based treatments." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/initiate-sglt2i-if-egfr-20> a dmo:Recommendation ;
+    rdfs:label "Initiate SGLT2i if eGFR ≥20" ;
+    dmo:recommendationId "initiate-sglt2i-if-egfr-20" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "SGLT2i (Initiate if eGFR ≥20; continue until dialysis or transplant)" ;
+    dmo:evidenceQuote "SGLT2i (Initiate if eGFR ≥20; continue until dialysis or transplant)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/initiation-of-exenatide-not-recommended-with-egfr-30-ml-min-1-73-m2-for-glycemic-control-or-20-ml-min-1-73-m2-for-hf> a dmo:Recommendation ;
+    rdfs:label "Initiation of exenatide not recommended with eGFR <30 mL/min/1.73 m2 for glycemic control or <20 mL/min/1.73 m2 for HF" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Patients with T2D and eGFR <30 mL/min/1.73 m2 for glycemic control or <20 mL/min/1.73 m2 for HF" ;
+    dmo:recommendationId "initiation-of-exenatide-not-recommended-with-egfr-30-ml-min-1-73-m2-for-glycemic-control-or-20-ml-min-1-73-m2-for-hf" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Initiation not recommended with eGFR <30 mL/min/1.73 m2 for glycemic control or <20 mL/min/1.73 m2 for HF" ;
+    dmo:evidenceQuote "Initiation not recommended with eGFR <30 mL/min/1.73 m2 for glycemic control or <20 mL/min/1.73 m2 for HF" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/initiation-of-glimepiride-conservatively-to-avoid-hypoglycemia> a dmo:Recommendation ;
+    rdfs:label "Initiation of glimepiride conservatively to avoid hypoglycemia" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Patients with T2D and eGFR <45 mL/min/1.73 m2" ;
+    dmo:recommendationId "initiation-of-glimepiride-conservatively-to-avoid-hypoglycemia" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Initiate conservatively at 1 mg daily and titrate slowly to avoid hypoglycemia" ;
+    dmo:evidenceQuote "Initiate conservatively at 1 mg daily and titrate slowly to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/initiation-of-glipizide-conservatively-to-avoid-hypoglycemia> a dmo:Recommendation ;
+    rdfs:label "Initiation of glipizide conservatively to avoid hypoglycemia" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Patients with T2D and eGFR <45 mL/min/1.73 m2" ;
+    dmo:recommendationId "initiation-of-glipizide-conservatively-to-avoid-hypoglycemia" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Initiate conservatively (e.g., 2.5 mg once daily) and titrate slowly to avoid hypoglycemia" ;
+    dmo:evidenceQuote "Initiate conservatively (e.g., 2.5 mg once daily) and titrate slowly to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/initiation-of-insulin-conservatively-to-avoid-hypoglycemia> a dmo:Recommendation ;
+    rdfs:label "Initiation of insulin conservatively to avoid hypoglycemia" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Patients with T2D and eGFR <45 mL/min/1.73 m2" ;
+    dmo:recommendationId "initiation-of-insulin-conservatively-to-avoid-hypoglycemia" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Initiate and titrate conservatively to avoid hypoglycemia" ;
+    dmo:evidenceQuote "Initiate and titrate conservatively to avoid hypoglycemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/low-sodium-diet> a dmo:Recommendation ;
+    rdfs:label "Low-sodium diet" ;
+    dmo:recommendationId "low-sodium-diet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Both guidelines also recommend a low-sodium diet (KDIGO <2,000 mg/day, ADA 1,500 to <2,300 mg/day), largely to control BP and reduce cardiovascular risk." ;
+    dmo:evidenceQuote "Both guidelines also recommend a low-sodium diet (KDIGO <2,000 mg/day, ADA 1,500 to <2,300 mg/day), largely to control BP and reduce cardiovascular risk." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/moderate-or-high-intensity-statin> a dmo:Recommendation ;
+    rdfs:label "Moderate- or high-intensity statin" ;
+    dmo:recommendationId "moderate-or-high-intensity-statin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Moderate- or high-intensity statin" ;
+    dmo:evidenceQuote "Moderate- or high-intensity statin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/nonsteroidal-mra-if-acr-30-mg-g-and-normal-potassium> a dmo:Recommendation ;
+    rdfs:label "Nonsteroidal MRA† if ACR ≥30 mg/g and normal potassium" ;
+    dmo:recommendationId "nonsteroidal-mra-if-acr-30-mg-g-and-normal-potassium" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Nonsteroidal MRA† if ACR ≥30 mg/g and normal potassium" ;
+    dmo:evidenceQuote "Nonsteroidal MRA† if ACR ≥30 mg/g and normal potassium" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/ras-inhibitor-at-maximum-tolerated-dose-if-htn> a dmo:Recommendation ;
+    rdfs:label "RAS inhibitor at maximum tolerated dose if HTN*" ;
+    dmo:recommendationId "ras-inhibitor-at-maximum-tolerated-dose-if-htn" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "RAS inhibitor at maximum tolerated dose (if HTN*)" ;
+    dmo:evidenceQuote "RAS inhibitor at maximum tolerated dose (if HTN*)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/reduce-metformin-dose-to-1000-mg-day-with-egfr-45-ml-min-1-73-m2> a dmo:Recommendation ;
+    rdfs:label "Reduce metformin dose to 1000 mg/day with eGFR <45 mL/min/1.73 m2" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Patients with T2D and eGFR <45 mL/min/1.73 m2" ;
+    dmo:recommendationId "reduce-metformin-dose-to-1000-mg-day-with-egfr-45-ml-min-1-73-m2" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce dose to 1000 mg/day" ;
+    dmo:evidenceQuote "Reduce dose to 1000 mg/day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/regular-risk-factor-reassessment-every-3-6-months> a dmo:Recommendation ;
+    rdfs:label "Regular risk factor reassessment every 3–6 months" ;
+    dmo:recommendationId "regular-risk-factor-reassessment-every-3-6-months" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Regular risk factor reassessment (every 3–6 months)" ;
+    dmo:evidenceQuote "Regular risk factor reassessment (every 3–6 months)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/screening-for-ckd-in-people-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "Screening for CKD in People with Diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People living with diabetes" ;
+    dmo:recommendationId "screening-for-ckd-in-people-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Screening includes measurement of both urine albumin and eGFR." ;
+    dmo:evidenceQuote "Screening includes measurement of both urine albumin and eGFR." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/sitagliptin-maximum-dose-25-mg-once-daily-with-egfr-30-ml-min-1-73-m2> a dmo:Recommendation ;
+    rdfs:label "Sitagliptin maximum dose 25 mg once daily with eGFR <30 mL/min/1.73 m2" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Patients with T2D and eGFR <30 mL/min/1.73 m2" ;
+    dmo:recommendationId "sitagliptin-maximum-dose-25-mg-once-daily-with-egfr-30-ml-min-1-73-m2" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Maximum 25 mg once daily" ;
+    dmo:evidenceQuote "Maximum 25 mg once daily" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/smoking-cessation> a dmo:Recommendation ;
+    rdfs:label "Smoking cessation" ;
+    dmo:recommendationId "smoking-cessation" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Though specific evidence is low, smoking cessation is also strongly advised." ;
+    dmo:evidenceQuote "Though specific evidence is low, smoking cessation is also strongly advised." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/statin-for-primary-and-secondary-prevention-of-atherosclerotic-cardiovascular-disease-in-diabetes-and-ckd> a dmo:Recommendation ;
+    rdfs:label "Statin for Primary and Secondary Prevention of Atherosclerotic Cardiovascular Disease in Diabetes and CKD" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "High-quality evidence from randomized clinical trials" ;
+    dmo:populationScope "All patients with type 1 diabetes or type 2 diabetes and CKD" ;
+    dmo:recommendationId "statin-for-primary-and-secondary-prevention-of-atherosclerotic-cardiovascular-disease-in-diabetes-and-ckd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "A statin is recommended for all patients with T1D or T2D and CKD, moderate intensity for primary prevention of atherosclerotic cardiovascular disease (ASCVD) or high intensity for patients with known ASCVD and some patients with multiple ASCVD risk factors." ;
+    dmo:evidenceQuote "A statin is recommended for all patients with T1D or T2D and CKD, moderate intensity for primary prevention of atherosclerotic cardiovascular disease (ASCVD) or high intensity for patients with known ASCVD and some patients with multiple ASCVD risk factors." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/steroidal-mra-if-needed-for-resistant-hypertension> a dmo:Recommendation ;
+    rdfs:label "Steroidal MRA if needed for resistant hypertension" ;
+    dmo:recommendationId "steroidal-mra-if-needed-for-resistant-hypertension" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Steroidal MRA if needed for resistant hypertension" ;
+    dmo:evidenceQuote "Steroidal MRA if needed for resistant hypertension" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/target-systolic-bp-of-120-mmhg-for-patients-with-diabetes-and-ckd> a dmo:Recommendation ;
+    rdfs:label "Target Systolic BP of <120 mmHg for Patients with Diabetes and CKD" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with diabetes and CKD" ;
+    dmo:recommendationId "target-systolic-bp-of-120-mmhg-for-patients-with-diabetes-and-ckd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The KDIGO 2021 Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease recommends a target systolic BP of <120 mmHg with" ;
+    dmo:evidenceQuote "The KDIGO 2021 Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease recommends a target systolic BP of <120 mmHg with" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/use-of-a-long-acting-glp-1-receptor-agonist-in-patients-with-t2d-and-ckd-who-have-not-achieved-individualized-glycemic-targets-despite-use-of-metformin-and-sglt2i-treatment-or-who-are-unable-to-use-those-medications> a dmo:Recommendation ;
+    rdfs:label "Use of a long-acting GLP-1 receptor agonist in patients with T2D and CKD who have not achieved individualized glycemic targets despite use of metformin and SGLT2i treatment or who are unable to use those medications" ;
+    dmo:gradingSystem "KDIGO" ;
+    dmo:nativeEvidenceGrade "1B" ;
+    dmo:populationScope "Patients with T2D and CKD who have not achieved individualized glycemic targets despite use of metformin and SGLT2i treatment, or who are unable to use those medications" ;
+    dmo:recommendationId "use-of-a-long-acting-glp-1-receptor-agonist-in-patients-with-t2d-and-ckd-who-have-not-achieved-individualized-glycemic-targets-despite-use-of-metformin-and-sglt2i-treatment-or-who-are-unable-to-use-those-medications" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "In patients with T2D and CKD who have not achieved individualized glycemic targets despite use of metformin and SGLT2i treatment, or who are unable to use those medications, we recommend a long-acting GLP-1 receptor agonist." ;
+    dmo:evidenceQuote "In patients with T2D and CKD who have not achieved individualized glycemic targets despite use of metformin and SGLT2i treatment, or who are unable to use those medications, we recommend a long-acting GLP-1 receptor agonist (1B)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/recommendation/use-of-an-sglt2i-or-glp-1-receptor-agonist-in-patients-with-t2d-who-have-established-ascvd-or-established-kidney-disease> a dmo:Recommendation ;
+    rdfs:label "Use of an SGLT2i or GLP-1 receptor agonist in patients with T2D who have established ASCVD or established kidney disease" ;
+    dmo:gradingSystem "ADA" ;
+    dmo:nativeEvidenceGrade "A" ;
+    dmo:populationScope "Patients with T2D who have established ASCVD or established kidney disease" ;
+    dmo:recommendationId "use-of-an-sglt2i-or-glp-1-receptor-agonist-in-patients-with-t2d-who-have-established-ascvd-or-established-kidney-disease" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Among patients with T2D who have established ASCVD or established kidney disease, an SGLT2i or GLP-1 receptor agonist with demonstrated cardiovascular disease benefit is recommended as part of the comprehensive cardiovascular risk reduction and/or glucose-lowering regimens." ;
+    dmo:evidenceQuote "Among patients with T2D who have established ASCVD or established kidney disease, an SGLT2i or GLP-1 receptor agonist with demonstrated cardiovascular disease benefit is recommended as part of the comprehensive cardiovascular risk reduction and/or glucose-lowering regimens (A)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/acute-kidney-injury> a dmo:RiskFactor ;
+    rdfs:label "Acute Kidney Injury" ;
+    dmo:evidenceNote "Acute kidney injury contributes to reduced metformin clearance, increasing the risk of metformin-associated lactic acidosis." ;
+    dmo:name "Acute Kidney Injury" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "acute-kidney-injury" ;
+    dmo:evidenceQuote "Most episodes of metformin-associated lactic acidosis occur concurrent with other acute illness, often when acute kidney injury (AKI) contributes to reduced metformin clearance." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/albuminuria> a dmo:RiskFactor ;
+    rdfs:label "Albuminuria" ;
+    dmo:evidenceNote "An ACE inhibitor (ACEi) or angiotensin II receptor blocker (ARB) is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    dmo:name "Albuminuria" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "albuminuria" ;
+    dmo:evidenceQuote "An ACE inhibitor (ACEi) or angiotensin II receptor blocker (ARB) is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/atherosclerotic-cardiovascular-disease> a dmo:RiskFactor ;
+    rdfs:label "Atherosclerotic Cardiovascular Disease" ;
+    dmo:evidenceNote "A statin is recommended for all patients with T1D or T2D and CKD, moderate intensity for primary prevention of atherosclerotic cardiovascular disease (ASCVD) or high intensity for patients with known ASCVD and some patients with multiple ASCVD risk factors." ;
+    dmo:name "Atherosclerotic Cardiovascular Disease" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "atherosclerotic-cardiovascular-disease" ;
+    dmo:evidenceQuote "A statin is recommended for all patients with T1D or T2D and CKD, moderate intensity for primary prevention of atherosclerotic cardiovascular disease (ASCVD) or high intensity for patients with known ASCVD and some patients with multiple ASCVD risk factors." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/hypertension> a dmo:RiskFactor ;
+    rdfs:label "Hypertension" ;
+    dmo:evidenceNote "An ACE inhibitor (ACEi) or angiotensin II receptor blocker (ARB) is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    dmo:name "Hypertension" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "hypertension" ;
+    dmo:evidenceQuote "An ACE inhibitor (ACEi) or angiotensin II receptor blocker (ARB) is recommended for patients with T1D or T2D who have hypertension and albuminuria, titrated to the maximum antihypertensive or highest tolerated dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/limited-life-expectancy> a dmo:RiskFactor ;
+    rdfs:label "Limited Life Expectancy" ;
+    dmo:evidenceNote "Limited life expectancy is a factor that may lead to higher HbA1c targets, as the harms of intensive treatment may outweigh benefits." ;
+    dmo:name "Limited Life Expectancy" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "limited-life-expectancy" ;
+    dmo:evidenceQuote "although with higher goals (i.e., <8%) acceptable for patients with limited life expectancy and in whom the harms of treatment may outweigh the beneﬁts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/low-cardiovascular-risk> a dmo:RiskFactor ;
+    rdfs:label "Low Cardiovascular Risk" ;
+    dmo:evidenceNote "Low cardiovascular risk is defined as 10-year ASCVD risk <15% and influences the choice of less stringent BP targets." ;
+    dmo:name "Low Cardiovascular Risk" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "low-cardiovascular-risk" ;
+    dmo:evidenceQuote "For patients with diabetes, hypertension, and low cardiovascular risk (defined as those with 10-year ASCVD risk<15%), the ADA recommends a BP target of <140/90 mmHg (grade A recommendation) (40)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/riskFactor/smoking> a dmo:RiskFactor ;
+    rdfs:label "Smoking" ;
+    dmo:evidenceNote "Though specific evidence is low, smoking cessation is also strongly advised." ;
+    dmo:name "Smoking" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "smoking" ;
+    dmo:evidenceQuote "Though speciﬁc evidence is low, smoking cessation is also strongly advised." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/symptom/fournier-gangrene> a dmo:Symptom ;
+    rdfs:label "Fournier gangrene" ;
+    dmo:name "Fournier gangrene" ;
+    dmo:symptomCode "fournier-gangrene" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "severe cases of Fournier gangrene have been reported." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/symptom/genital-mycotic-infections> a dmo:Symptom ;
+    rdfs:label "Genital mycotic infections" ;
+    dmo:name "Genital mycotic infections" ;
+    dmo:symptomCode "genital-mycotic-infections" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Genital mycotic infections are a known complication of SGLT2i." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/symptom/hypoglycemia> a dmo:Symptom ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:symptomCode "hypoglycemia" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "Hypovolemia and hypoglycemia may occur with SGLT2i, but absolute risks are low , especially at low eGFR." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/symptom/hypovolemia> a dmo:Symptom ;
+    rdfs:label "Hypovolemia" ;
+    dmo:name "Hypovolemia" ;
+    dmo:symptomCode "hypovolemia" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "Hypovolemia and hypoglycemia may occur with SGLT2i, but absolute risks are low , especially at low eGFR." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/symptom/increased-heart-rate> a dmo:Symptom ;
+    rdfs:label "Increased heart rate" ;
+    dmo:hpoCode "HP:0001650" ;
+    dmo:name "Increased heart rate" ;
+    dmo:symptomCode "increased-heart-rate" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Heart rate typically increases by /C245 bpm but has not been associated with higher BP or other adverse events." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+<https://example.org/dmo/id/symptom/injection-site-reactions> a dmo:Symptom ;
+    rdfs:label "Injection site reactions" ;
+    dmo:hpoCode "HP:0002815" ;
+    dmo:name "Injection site reactions" ;
+    dmo:symptomCode "injection-site-reactions" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Injection site reactions are rare ( <1%), and semaglutide is now available in an oral formulation." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/monitoringSchedule/annual-screening-for-ckd-in-patients-with-diabetes> dmo:schedulesTest <https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> .
+<https://example.org/dmo/id/monitoringSchedule/annual-screening-for-ckd-in-patients-with-diabetes> dmo:schedulesTest <https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate> .
+<https://example.org/dmo/id/recommendation/annual-screening-for-ckd-in-patients-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/annual-screening-for-ckd-in-patients-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/monitoringSchedule/chronic-kidney-disease> dmo:schedulesTest <https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> .
+<https://example.org/dmo/id/monitoringSchedule/chronic-kidney-disease> dmo:schedulesTest <https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate> .
+<https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose> dmo:targetsComplication <https://example.org/dmo/id/complication/albuminuria> .
+<https://example.org/dmo/id/contraindication/metformin-associated-lactic-acidosis> dmo:triggeredByCondition <https://example.org/dmo/id/complication/acute-kidney-injury> .
+<https://example.org/dmo/id/drugClass/metformin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/metformin-associated-lactic-acidosis> .
+<https://example.org/dmo/id/drugClass/sodium-glucose-cotransporter-2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/genital-mycotic-infections> .
+<https://example.org/dmo/id/diabetesType/t2d> dmo:predisposesTo <https://example.org/dmo/id/complication/genital-mycotic-infections> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/genital-mycotic-infections> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypovolemia> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/nausea-vomiting-diarrhea> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/increased-heart-rate> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/injection-site-reactions> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/hold-sglt2i-during-illness> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/maintain-at-least-low-dose-insulin-in-insulin-requiring-individuals-during-sglt2i-use> .
+<https://example.org/dmo/id/drugClass/glp-1-receptor-agonists> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/increased-heart-rate> .
+<https://example.org/dmo/id/drugClass/glp-1-receptor-agonists> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/injection-site-reactions> .
+<https://example.org/dmo/id/drugClass/sulfonylureas-2nd-generation> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitor> dmo:hasContraindication <https://example.org/dmo/id/contraindication/canagliflozin-initiation-not-recommended-with-egfr-20-ml-min-1-73-m2> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitor> dmo:hasContraindication <https://example.org/dmo/id/contraindication/glyburide-use-not-recommended> .
+<https://example.org/dmo/id/medication/ace-inhibitors> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/ace-inhibitors> .
+<https://example.org/dmo/id/medication/arb> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/arbs> .
+<https://example.org/dmo/id/contraindication/acarbose-use-not-recommended-with-egfr-30-ml-min-1-73-m2> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/contraindication/canagliflozin-initiation-not-recommended-with-egfr-20-ml-min-1-73-m2> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/contraindication/exenatide-use-not-recommended-with-egfr-30-ml-min-1-73-m2> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/contraindication/glyburide-use-not-recommended> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/contraindication/lixisenatide-use-not-recommended-with-egfr-30-ml-min-1-73-m2> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/contraindication/miglitol-use-not-recommended-with-egfr-30-ml-min-1-73-m2> dmo:triggeredByCondition <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/lifestyleIntervention/smoking-cessation> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/atherosclerotic-cardiovascular-disease> .

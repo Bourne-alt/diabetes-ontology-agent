@@ -1,0 +1,705 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/VADOD-Diabetes-CPG-Patient-Summary_final_508.pdf
+# 目标 named graph：urn:dmo:extract:vadod-diabetes-cpg-patient-summary_final_508
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:vadod-diabetes-cpg-patient-summary_final_508'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/VADOD-Diabetes-CPG-Patient-Summary_final_508.pdf" ;
+    dmo:sha256 "d81bc580c61f8a5a456fa820a8822b87b25f0b6e09779b4cd2c422d2ed57fa4d" ;
+    dmo:byteSize "684822"^^xsd:integer .
+
+<urn:dmo:extract:vadod-diabetes-cpg-patient-summary_final_508> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T12:40:34+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/hypoglycemia> a dmo:Complication ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "hypoglycemia" ;
+    dmo:definition "Blood sugar less than 70mg/dl" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "a. Hypoglycemia: Blood sugar less than 70mg/dl" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/complication/large-vessel-diseases> a dmo:Complication ;
+    rdfs:label "Large vessel diseases" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "large-vessel-diseases" ;
+    dmo:definition "Heart attack and stroke" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:name "Large vessel diseases" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes also increases the risk of large vessel diseases including heart attack and stroke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/complication/low-blood-sugar> a dmo:Complication ;
+    rdfs:label "Low Blood Sugar" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "low-blood-sugar" ;
+    dmo:definition "Blood sugar less than 70mg/dl" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Low Blood Sugar" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "a: Blood sugar less than 70mg/dl" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/complication/small-vessel-diseases> a dmo:Complication ;
+    rdfs:label "Small vessel diseases" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "small-vessel-diseases" ;
+    dmo:definition "Eye disease, nerve disease, and kidney disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:name "Small vessel diseases" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "People with diabetes are at higher risk of small vessel diseases such as eye disease, nerve disease, and kidney disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/complicationStage/hypoglycemia> a dmo:ComplicationStage ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:stageCode "hypoglycemia" ;
+    dmo:stageCriteria "Blood sugar less than 70mg/dl" ;
+    dmo:stageOrder "1"^^xsd:integer ;
+    dmo:evidenceQuote "a. Hypoglycemia: Blood sugar less than 70mg/dl" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/device/blood-pressure-monitoring-device> a dmo:Device ;
+    rdfs:label "Blood Pressure Monitoring Device" ;
+    dmo:deviceCode "blood-pressure-monitoring-device" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Blood Pressure Monitoring Device" ;
+    dmo:evidenceQuote "Some patients are also given a blood pressure monitoring device." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "A fasting blood sugar between 100-125mg/dL could mean that you have prediabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "A fasting blood sugar between 100-125mg/dL could mean that you have prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "In type 1 diabetes, the body is not able to make insulin." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005146" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "In type 1 diabetes, the body is not able to make insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "The VA/DoD Clinical Practice Guideline for the Management of Type 2 Diabetes Mellitus" ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "VA/DoD Clinical Practice Guideline for the Management of Type 2 Diabetes Mellitus – Patient Summary" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes Mellitus" ;
+    dmo:definition "In type 2 diabetes mellitus (T2DM), the body is not able to use the insulin it makes, and insulin production may be lower than it should be." ;
+    dmo:diabetesTypeCode "type-2-diabetes-mellitus" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes Mellitus" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "In type 2 diabetes mellitus (T2DM), the body is not able to use the insulin it makes, and insulin production may be lower than it should be." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/blood-pressure> a dmo:LabTest ;
+    rdfs:label "Blood Pressure" ;
+    dmo:definition "A measurement of the force exerted by circulating blood against the walls of blood vessels, used to assess cardiovascular risk and monitor hypertension." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-pressure" ;
+    dmo:loincCode "85354-9" ;
+    dmo:name "Blood Pressure" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmHg" ;
+    dmo:evidenceQuote "High blood pressure Blood pressure >140/90" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/fasting-blood-sugar> a dmo:LabTest ;
+    rdfs:label "Fasting Blood Sugar" ;
+    dmo:definition "A blood glucose test performed after at least 8 hours without caloric intake, used to assess glucose metabolism and diagnose prediabetes or diabetes." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-blood-sugar" ;
+    dmo:loincCode "15577-6" ;
+    dmo:name "Fasting Blood Sugar" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "A fasting blood sugar between 100-125mg/dL could mean that you have prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/hba1c> a dmo:LabTest ;
+    rdfs:label "HbA1c" ;
+    dmo:definition "A measure of average blood glucose over the past 2-3 months, used to diagnose diabetes and monitor long-term glucose control." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "hba1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "HbA1c" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "If you have an HbA1c of 6.5% or higher, you may have diabetes mellitus." ;
+    dmo:evidenceQuote "HbA1c 2–4 times per year" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/high-density-lipoprotein-cholesterol> a dmo:LabTest ;
+    rdfs:label "High-Density Lipoprotein Cholesterol" ;
+    dmo:definition "A type of cholesterol carried in the blood that helps remove other forms of cholesterol from the bloodstream; low levels are associated with increased cardiovascular risk." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "high-density-lipoprotein-cholesterol" ;
+    dmo:loincCode "2019-8" ;
+    dmo:name "High-Density Lipoprotein Cholesterol" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "High-density lipoprotein cholesterol level <35 mg/dL (0.90 mmol/L)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/kidney-function> a dmo:LabTest ;
+    rdfs:label "Kidney function" ;
+    dmo:definition "Assessment of kidney function, typically measured by eGFR." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "kidney-function" ;
+    dmo:loincCode "2160-0" ;
+    dmo:name "Kidney function" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mL-per-min" ;
+    dmo:evidenceQuote "Kidney function At least yearly" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/lipid-panel> a dmo:LabTest ;
+    rdfs:label "Lipid panel" ;
+    dmo:definition "A group of blood tests that measure cholesterol and triglycerides." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "lipid-panel" ;
+    dmo:loincCode "2019-8" ;
+    dmo:name "Lipid panel" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Lipid panel At least yearly" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/labTest/triglycerides> a dmo:LabTest ;
+    rdfs:label "Triglycerides" ;
+    dmo:definition "A type of fat found in the blood that is used for energy storage; elevated levels are associated with increased risk of cardiovascular disease." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "triglycerides" ;
+    dmo:loincCode "2571-8" ;
+    dmo:name "Triglycerides" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "a triglyceride level >250 mg/dL (2.82 mmol/L)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/diet-and-physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Diet and Physical Activity" ;
+    dmo:activityTarget "Changing your diet and increasing exercise can help you manage your prediabetes, diabetes, and high blood pressure." ;
+    dmo:expectedBenefit "can help manage prediabetes, diabetes, and high blood pressure" ;
+    dmo:interventionCode "diet-and-physical-activity" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Diet and Physical Activity" ;
+    dmo:evidenceQuote "Changing your diet and increasing exercise can help you manage your prediabetes, diabetes, and high blood pressure." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/navy-operational-fitness-and-fueling-system> a dmo:LifestyleIntervention ;
+    rdfs:label "Navy Operational Fitness and Fueling System" ;
+    dmo:interventionCode "navy-operational-fitness-and-fueling-system" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Navy Operational Fitness and Fueling System" ;
+    dmo:evidenceQuote "Navy Operational Fitness and Fueling System https://www.navyfitness.org/" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Physical activity" ;
+    dmo:activityTarget "Not sit for more than 30 minutes without moving. Engage in daily exercise, such as walking, for 150 minutes weekly or for 30 minutes five times a week." ;
+    dmo:expectedBenefit "can help manage prediabetes, diabetes, and high blood pressure" ;
+    dmo:interventionCode "physical-activity" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Physical activity" ;
+    dmo:evidenceQuote "Most individuals with pre-diabetes should: · Not sit for more than 30 minutes without moving. · Engage in daily exercise, such as walking, for 150 minutes weekly or for 30 minutes five times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/va-dod-diabetes-self-management-education-and-support-program> a dmo:LifestyleIntervention ;
+    rdfs:label "VA/DoD Diabetes Self-Management Education and Support Program" ;
+    dmo:interventionCode "va-dod-diabetes-self-management-education-and-support-program" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "VA/DoD Diabetes Self-Management Education and Support Program" ;
+    dmo:evidenceQuote "VA/DoD Diabetes Self-Management Education and Support Program" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/va-healthy-teaching-kitchens> a dmo:LifestyleIntervention ;
+    rdfs:label "VA Healthy Teaching Kitchens" ;
+    dmo:interventionCode "va-healthy-teaching-kitchens" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "VA Healthy Teaching Kitchens" ;
+    dmo:evidenceQuote "VA Healthy Teaching Kitchens https://www.nutrition.va.gov/healthy_Teaching_Kitchen.asp" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/va-move-or-other-weight-management-classes> a dmo:LifestyleIntervention ;
+    rdfs:label "VA MOVE! or other Weight Management Classes" ;
+    dmo:interventionCode "va-move-or-other-weight-management-classes" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "VA MOVE! or other Weight Management Classes" ;
+    dmo:evidenceQuote "VA MOVE! or other Weight Management Classes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/va-moving-forward> a dmo:LifestyleIntervention ;
+    rdfs:label "VA Moving Forward" ;
+    dmo:interventionCode "va-moving-forward" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "VA Moving Forward" ;
+    dmo:evidenceQuote "VA Moving Forward https://www.veterantraining.va.gov/movingforward/" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/weight-management> a dmo:LifestyleIntervention ;
+    rdfs:label "Weight management" ;
+    dmo:activityTarget "a small amount of weight loss, around 3–7% of your body weight" ;
+    dmo:expectedBenefit "can help prevent prediabetes from progressing to diabetes" ;
+    dmo:interventionCode "weight-management" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Weight management" ;
+    dmo:evidenceQuote "If you are overweight, a small amount of weight loss, around 3–7% of your body weight can help. This is just 6–14 pounds for a 200-pound person." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/blood-pressure> a dmo:MonitoringSchedule ;
+    rdfs:label "Blood pressure" ;
+    dmo:appliesTo "Check at every healthcare visit" ;
+    dmo:name "Blood pressure" ;
+    dmo:scheduleId "blood-pressure" ;
+    dmo:evidenceQuote "Check at every healthcare visit" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/dental-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Dental exam" ;
+    dmo:appliesTo "Preventative care twice a year" ;
+    dmo:frequencyMonths "6"^^xsd:integer ;
+    dmo:name "Dental exam" ;
+    dmo:scheduleId "dental-exam" ;
+    dmo:evidenceQuote "Preventative care twice a year" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/dilated-eye-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Dilated Eye Exam" ;
+    dmo:appliesTo "Patients with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Dilated Eye Exam" ;
+    dmo:scheduleId "dilated-eye-exam" ;
+    dmo:evidenceQuote "Monitoring your HbA1c, blood pressure, lipids, and kidney health is important." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/estimated-glomerular-filtration-rate> a dmo:MonitoringSchedule ;
+    rdfs:label "Estimated Glomerular Filtration Rate" ;
+    dmo:appliesTo "Patients with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Estimated Glomerular Filtration Rate" ;
+    dmo:scheduleId "estimated-glomerular-filtration-rate" ;
+    dmo:evidenceQuote "Monitoring your HbA1c, blood pressure, lipids, and kidney health is important." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/eye-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Eye exam" ;
+    dmo:appliesTo "At diagnosis and every 1–2 years as recommended by your eye specialist" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Eye exam" ;
+    dmo:scheduleId "eye-exam" ;
+    dmo:evidenceQuote "every 1–2 years as recommended by your eye specialist" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/hba1c> a dmo:MonitoringSchedule ;
+    rdfs:label "HbA1c" ;
+    dmo:appliesTo "2–4 times per year" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "HbA1c" ;
+    dmo:scheduleId "hba1c" ;
+    dmo:evidenceQuote "HbA1c 2–4 times per year" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/hba1c-monitoring> a dmo:MonitoringSchedule ;
+    rdfs:label "HbA1c Monitoring" ;
+    dmo:appliesTo "Most individuals with diabetes" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "HbA1c Monitoring" ;
+    dmo:scheduleId "hba1c-monitoring" ;
+    dmo:evidenceQuote "Monitoring your HbA1c, blood pressure, lipids, and kidney health is important." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/immunizations> a dmo:MonitoringSchedule ;
+    rdfs:label "Immunizations" ;
+    dmo:appliesTo "Stay up to date: flu, pneumonia, COVID" ;
+    dmo:name "Immunizations" ;
+    dmo:scheduleId "immunizations" ;
+    dmo:evidenceQuote "Stay up to date: flu, pneumonia, COVID" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/monitoringSchedule/urine-albumin-to-creatinine-ratio> a dmo:MonitoringSchedule ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:appliesTo "Patients with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:scheduleId "urine-albumin-to-creatinine-ratio" ;
+    dmo:evidenceQuote "Monitoring your HbA1c, blood pressure, lipids, and kidney health is important." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/carry-fast-acting-glucose-in-case-of-low-blood-sugar> a dmo:Recommendation ;
+    rdfs:label "Carry fast-acting glucose in case of low blood sugar" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients at risk of low blood sugar" ;
+    dmo:recommendationId "carry-fast-acting-glucose-in-case-of-low-blood-sugar" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Carry fast-acting glucose in case of low blood sugar." ;
+    dmo:evidenceQuote "Carry fast-acting glucose in case of low blood sugar." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/check-blood-pressure-at-every-healthcare-visit> a dmo:Recommendation ;
+    rdfs:label "Check blood pressure at every healthcare visit" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "check-blood-pressure-at-every-healthcare-visit" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Blood pressure Check at every healthcare visit" ;
+    dmo:evidenceQuote "Blood pressure Check at every healthcare visit" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/check-feet-daily-full-exam-annually> a dmo:Recommendation ;
+    rdfs:label "Check feet daily, full exam annually" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "check-feet-daily-full-exam-annually" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Foot exam Check daily, full exam annually" ;
+    dmo:evidenceQuote "Foot exam Check daily, full exam annually" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/check-kidney-function-at-least-yearly> a dmo:Recommendation ;
+    rdfs:label "Check kidney function at least yearly" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "check-kidney-function-at-least-yearly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Kidney function At least yearly" ;
+    dmo:evidenceQuote "Kidney function At least yearly" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/check-lipid-panel-at-least-yearly> a dmo:Recommendation ;
+    rdfs:label "Check lipid panel at least yearly" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "check-lipid-panel-at-least-yearly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Lipid panel At least yearly" ;
+    dmo:evidenceQuote "Lipid panel At least yearly" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/check-your-blood-sugar-before-during-and-after-exercise-if-you-are-at-risk-of-low-blood-sugar> a dmo:Recommendation ;
+    rdfs:label "Check your blood sugar before, during, and after exercise if you are at risk of low blood sugar" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients at risk of low blood sugar" ;
+    dmo:recommendationId "check-your-blood-sugar-before-during-and-after-exercise-if-you-are-at-risk-of-low-blood-sugar" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check your blood sugar before, during, and after exercise if you are at risk of low blood sugar." ;
+    dmo:evidenceQuote "Check your blood sugar before, during, and after exercise if you are at risk of low blood sugar." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/eye-exam-at-diagnosis-and-every-1-2-years-as-recommended-by-your-eye-specialist> a dmo:Recommendation ;
+    rdfs:label "Eye exam at diagnosis and every 1–2 years as recommended by your eye specialist" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "eye-exam-at-diagnosis-and-every-1-2-years-as-recommended-by-your-eye-specialist" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Eye exam At diagnosis and every 1–2 years as recommended by your eye specialist" ;
+    dmo:evidenceQuote "Eye exam At diagnosis and every 1–2 years as recommended by your eye specialist" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/hba1c-2-4-times-per-year> a dmo:Recommendation ;
+    rdfs:label "HbA1c 2–4 times per year" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "hba1c-2-4-times-per-year" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "HbA1c 2–4 times per year" ;
+    dmo:evidenceQuote "HbA1c 2–4 times per year" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/medications-for-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Medications for prediabetes" ;
+    dmo:populationScope "Individuals with prediabetes who have not responded to weight management and exercise" ;
+    dmo:recommendationId "medications-for-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "When weight management and exercise are unsuccessful, discuss prediabetes medication options with your provider." ;
+    dmo:evidenceQuote "When weight management and exercise are unsuccessful, discuss prediabetes medication options with your provider." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/physical-activity-for-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Physical activity for prediabetes" ;
+    dmo:populationScope "Most individuals with prediabetes" ;
+    dmo:recommendationId "physical-activity-for-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Most individuals with pre-diabetes should: · Not sit for more than 30 minutes without moving. · Engage in daily exercise, such as walking, for 150 minutes weekly or for 30 minutes five times a week." ;
+    dmo:evidenceQuote "Most individuals with pre-diabetes should: · Not sit for more than 30 minutes without moving. · Engage in daily exercise, such as walking, for 150 minutes weekly or for 30 minutes five times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/preventative-dental-care-twice-a-year> a dmo:Recommendation ;
+    rdfs:label "Preventative dental care twice a year" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "preventative-dental-care-twice-a-year" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Dental exam Preventative care twice a year" ;
+    dmo:evidenceQuote "Dental exam Preventative care twice a year" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/stay-up-to-date-with-immunizations-flu-pneumonia-covid> a dmo:Recommendation ;
+    rdfs:label "Stay up to date with immunizations: flu, pneumonia, COVID" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with Type 2 Diabetes Mellitus" ;
+    dmo:recommendationId "stay-up-to-date-with-immunizations-flu-pneumonia-covid" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Immunizations Stay up to date: flu, pneumonia, COVID" ;
+    dmo:evidenceQuote "Immunizations Stay up to date: flu, pneumonia, COVID" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/use-the-rule-of-15> a dmo:Recommendation ;
+    rdfs:label "Use the rule of 15" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "patients with blood sugar less than 70mg/dl" ;
+    dmo:recommendationId "use-the-rule-of-15" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Use the rule of 15 (see Figure 2)." ;
+    dmo:evidenceQuote "Use the rule of 15 (see Figure 2)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/recommendation/weight-management-for-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Weight management for prediabetes" ;
+    dmo:populationScope "Individuals with prediabetes who are overweight" ;
+    dmo:recommendationId "weight-management-for-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you are overweight, a small amount of weight loss, around 3–7% of your body weight can help. This is just 6–14 pounds for a 200-pound person." ;
+    dmo:evidenceQuote "If you are overweight, a small amount of weight loss, around 3–7% of your body weight can help. This is just 6–14 pounds for a 200-pound person." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/first-degree-relative-with-type-2-diabetes-mellitus> a dmo:RiskFactor ;
+    rdfs:label "First-Degree Relative with Type 2 Diabetes Mellitus" ;
+    dmo:evidenceNote "Parent or sibling" ;
+    dmo:name "First-Degree Relative with Type 2 Diabetes Mellitus" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "first-degree-relative-with-type-2-diabetes-mellitus" ;
+    dmo:evidenceQuote "First-degree relative with T2DM Parent or sibling" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/gestational-diabetes-or-history-of-delivering-a-baby-weighing-9-pounds> a dmo:RiskFactor ;
+    rdfs:label "Gestational Diabetes or History of Delivering a Baby Weighing >9 Pounds" ;
+    dmo:evidenceNote "Gestational diabetes or a history of delivering a baby weighing >9 pounds" ;
+    dmo:name "Gestational Diabetes or History of Delivering a Baby Weighing >9 Pounds" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "gestational-diabetes-or-history-of-delivering-a-baby-weighing-9-pounds" ;
+    dmo:evidenceQuote "Gestational diabetes or a history of delivering a baby weighing >9 pounds" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> a dmo:RiskFactor ;
+    rdfs:label "High Blood Pressure" ;
+    dmo:evidenceNote "Blood pressure >140/90" ;
+    dmo:name "High Blood Pressure" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-pressure" ;
+    dmo:evidenceQuote "High blood pressure Blood pressure >140/90" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/high-density-lipoprotein-cholesterol-level-35-mg-dl-and-or-triglyceride-level-250-mg-dl> a dmo:RiskFactor ;
+    rdfs:label "High-Density Lipoprotein Cholesterol Level <35 mg/dL and/or Triglyceride Level >250 mg/dL" ;
+    dmo:evidenceNote "High-density lipoprotein cholesterol level <35 mg/dL (0.90 mmol/L) and/or a triglyceride level >250 mg/dL (2.82 mmol/L)" ;
+    dmo:name "High-Density Lipoprotein Cholesterol Level <35 mg/dL and/or Triglyceride Level >250 mg/dL" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-density-lipoprotein-cholesterol-level-35-mg-dl-and-or-triglyceride-level-250-mg-dl" ;
+    dmo:evidenceQuote "Lipids High-density lipoprotein cholesterol level <35 mg/dL (0.90 mmol/L) and/or a triglyceride level >250 mg/dL (2.82 mmol/L)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/high-prevalence-population> a dmo:RiskFactor ;
+    rdfs:label "High Prevalence Population" ;
+    dmo:evidenceNote "African American, Asian American, Hispanic American, Native American, Pacific Islander" ;
+    dmo:name "High Prevalence Population" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "high-prevalence-population" ;
+    dmo:evidenceQuote "High prevalence population African American, Asian American, Hispanic American, Native American, Pacific Islander" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/history-of-cardiovascular-disease> a dmo:RiskFactor ;
+    rdfs:label "History of Cardiovascular Disease" ;
+    dmo:evidenceNote "History of cardiovascular disease" ;
+    dmo:name "History of Cardiovascular Disease" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "history-of-cardiovascular-disease" ;
+    dmo:evidenceQuote "History of cardiovascular disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/history-of-prediabetes> a dmo:RiskFactor ;
+    rdfs:label "History of Prediabetes" ;
+    dmo:evidenceNote "Test annually" ;
+    dmo:name "History of Prediabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "history-of-prediabetes" ;
+    dmo:evidenceQuote "History of prediabetes Test annually" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/overweight-or-obesity> a dmo:RiskFactor ;
+    rdfs:label "Overweight or Obesity" ;
+    dmo:evidenceNote "BMI >25kg/m2 for most. BMI >23kg/m2 for Asian Americans" ;
+    dmo:name "Overweight or Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "overweight-or-obesity" ;
+    dmo:evidenceQuote "Overweight or obesity BMI >25kg/m2 for most. BMI >23kg/m2 for Asian Americans" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/patients-using-antipsychotic-or-statin-medications> a dmo:RiskFactor ;
+    rdfs:label "Patients Using Antipsychotic or Statin Medications" ;
+    dmo:evidenceNote "Patients using antipsychotic or statin medications" ;
+    dmo:name "Patients Using Antipsychotic or Statin Medications" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "patients-using-antipsychotic-or-statin-medications" ;
+    dmo:evidenceQuote "Patients using antipsychotic or statin medications" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/patients-using-certain-medications-for-human-immunodeficiency-virus> a dmo:RiskFactor ;
+    rdfs:label "Patients Using Certain Medications for Human Immunodeficiency Virus" ;
+    dmo:evidenceNote "Patients using certain medications for human immunodeficiency virus" ;
+    dmo:name "Patients Using Certain Medications for Human Immunodeficiency Virus" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "patients-using-certain-medications-for-human-immunodeficiency-virus" ;
+    dmo:evidenceQuote "Patients using certain medications for human immunodeficiency virus" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/physical-inactivity-or-a-sedentary-lifestyle> a dmo:RiskFactor ;
+    rdfs:label "Physical Inactivity or a Sedentary Lifestyle" ;
+    dmo:evidenceNote "Physical inactivity or a sedentary lifestyle" ;
+    dmo:name "Physical Inactivity or a Sedentary Lifestyle" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "physical-inactivity-or-a-sedentary-lifestyle" ;
+    dmo:evidenceQuote "Physical inactivity or a sedentary lifestyle" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/polycystic-ovary-syndrome> a dmo:RiskFactor ;
+    rdfs:label "Polycystic Ovary Syndrome" ;
+    dmo:evidenceNote "Polycystic ovary syndrome" ;
+    dmo:name "Polycystic Ovary Syndrome" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "polycystic-ovary-syndrome" ;
+    dmo:evidenceQuote "Polycystic ovary syndrome" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/riskFactor/prediabetes> a dmo:RiskFactor ;
+    rdfs:label "Prediabetes" ;
+    dmo:evidenceNote "Having prediabetes may put you at risk for developing diabetes" ;
+    dmo:name "Prediabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "prediabetes" ;
+    dmo:evidenceQuote "Prediabetes Having prediabetes may put you at risk for developing diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+<https://example.org/dmo/id/symptom/hypoglycemia> a dmo:Symptom ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:hpoCode "HP:0001934" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:symptomCode "hypoglycemia" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "a. Hypoglycemia: Blood sugar less than 70mg/dl" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> dmo:predisposesTo <https://example.org/dmo/id/complication/small-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> dmo:predisposesTo <https://example.org/dmo/id/complication/large-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/small-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/large-vessel-diseases> .
+<https://example.org/dmo/id/riskFactor/overweight-or-obesity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/history-of-prediabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/first-degree-relative-with-type-2-diabetes-mellitus> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/high-prevalence-population> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/prediabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/high-density-lipoprotein-cholesterol-level-35-mg-dl-and-or-triglyceride-level-250-mg-dl> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/gestational-diabetes-or-history-of-delivering-a-baby-weighing-9-pounds> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/history-of-cardiovascular-disease> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/polycystic-ovary-syndrome> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/physical-inactivity-or-a-sedentary-lifestyle> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/patients-using-certain-medications-for-human-immunodeficiency-virus> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/patients-using-antipsychotic-or-statin-medications> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/diabetesType/prediabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/large-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/prediabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/small-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/large-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/small-vessel-diseases> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/lifestyleIntervention/diet-and-physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/prediabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity-or-a-sedentary-lifestyle> .
+<https://example.org/dmo/id/lifestyleIntervention/weight-management> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight-or-obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/va-move-or-other-weight-management-classes> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight-or-obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/va-healthy-teaching-kitchens> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/prediabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/navy-operational-fitness-and-fueling-system> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity-or-a-sedentary-lifestyle> .
+<https://example.org/dmo/id/lifestyleIntervention/va-dod-diabetes-self-management-education-and-support-program> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/prediabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/va-moving-forward> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity-or-a-sedentary-lifestyle> .
+<https://example.org/dmo/id/device/blood-pressure-monitoring-device> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-pressure> .
+<https://example.org/dmo/id/monitoringSchedule/hba1c-monitoring> dmo:schedulesTest <https://example.org/dmo/id/labTest/hba1c> .
+<https://example.org/dmo/id/monitoringSchedule/blood-pressure> dmo:schedulesTest <https://example.org/dmo/id/labTest/blood-pressure> .
+<https://example.org/dmo/id/recommendation/hba1c-2-4-times-per-year> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/hba1c-monitoring> .
+<https://example.org/dmo/id/recommendation/check-your-blood-sugar-before-during-and-after-exercise-if-you-are-at-risk-of-low-blood-sugar> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/physical-activity> .
+<https://example.org/dmo/id/recommendation/preventative-dental-care-twice-a-year> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/dental-exam> .
+<https://example.org/dmo/id/recommendation/stay-up-to-date-with-immunizations-flu-pneumonia-covid> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/immunizations> .
+<https://example.org/dmo/id/recommendation/weight-management-for-prediabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/weight-management> .
+<https://example.org/dmo/id/recommendation/physical-activity-for-prediabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/physical-activity> .
+<https://example.org/dmo/id/recommendation/medications-for-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/physical-activity-for-prediabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/small-vessel-diseases> .
+<https://example.org/dmo/id/recommendation/physical-activity-for-prediabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/large-vessel-diseases> .
+<https://example.org/dmo/id/recommendation/weight-management-for-prediabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/small-vessel-diseases> .
+<https://example.org/dmo/id/recommendation/weight-management-for-prediabetes> dmo:targetsComplication <https://example.org/dmo/id/complication/large-vessel-diseases> .

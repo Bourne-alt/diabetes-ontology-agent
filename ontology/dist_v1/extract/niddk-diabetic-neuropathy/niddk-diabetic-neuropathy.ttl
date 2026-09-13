@@ -1,0 +1,387 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-diabetic-neuropathy.txt
+# 目标 named graph：urn:dmo:extract:niddk-diabetic-neuropathy
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-diabetic-neuropathy'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-neuropathy.txt" ;
+    dmo:sha256 "a0957384924b930c3210586494624a5bc7b99eee4118fbced220c7908a8e240c" ;
+    dmo:byteSize "7121"^^xsd:integer .
+
+<urn:dmo:extract:niddk-diabetic-neuropathy> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T03:06:42+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/autonomic-neuropathy> a dmo:Complication ;
+    rdfs:label "Autonomic Neuropathy" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "autonomic-neuropathy" ;
+    dmo:definition "Autonomic neuropathy is damage to nerves that control your internal organs. Autonomic neuropathy can lead to problems with your heart rate and blood pressure, digestive system, bladder, sex organs, sweat glands, eyes, and ability to sense hypoglycemia." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Autonomic Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Autonomic neuropathy is damage to nerves that control your internal organs. Autonomic neuropathy can lead to problems with your heart rate and blood pressure, digestive system, bladder, sex organs, sweat glands, eyes, and ability to sense hypoglycemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/complication/balance-and-coordination-problems> a dmo:Complication ;
+    rdfs:label "Balance and Coordination Problems" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "balance-and-coordination-problems" ;
+    dmo:definition "Nerve damage can also cause problems with balance and coordination, leading to falls and fractures." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005152" ;
+    dmo:name "Balance and Coordination Problems" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Nerve damage can also cause problems with balance and coordination, leading to falls and fractures." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/complication/diabetic-neuropathy> a dmo:Complication ;
+    rdfs:label "Diabetic Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "diabetic-neuropathy" ;
+    dmo:definition "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Diabetic Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/complication/focal-neuropathies> a dmo:Complication ;
+    rdfs:label "Focal Neuropathies" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "focal-neuropathies" ;
+    dmo:definition "Focal neuropathies are conditions in which you typically have damage to single nerves, most often in your hand, head, torso, and leg." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Focal Neuropathies" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Focal neuropathies are conditions in which you typically have damage to single nerves, most often in your hand, head, torso, and leg." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/complication/foot-complications> a dmo:Complication ;
+    rdfs:label "Foot Complications" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "foot-complications" ;
+    dmo:definition "Peripheral neuropathy can lead to foot complications, such as sores, ulcers, and infections, because nerve damage can make you lose feeling in your feet." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Foot Complications" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Peripheral neuropathy can lead to foot complications, such as sores, ulcers, and infections, because nerve damage can make you lose feeling in your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/complication/peripheral-neuropathy> a dmo:Complication ;
+    rdfs:label "Peripheral Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "peripheral-neuropathy" ;
+    dmo:definition "Peripheral neuropathy is nerve damage that typically affects the feet and legs and sometimes affects the hands and arms." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Peripheral Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Peripheral neuropathy is nerve damage that typically affects the feet and legs and sometimes affects the hands and arms." ;
+    dmo:evidenceQuote "Foot care is very important for all people with diabetes, and it’s even more important if you have peripheral neuropathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/complication/proximal-neuropathy> a dmo:Complication ;
+    rdfs:label "Proximal Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "proximal-neuropathy" ;
+    dmo:definition "Proximal neuropathy is a rare and disabling type of nerve damage in your hip, buttock, or thigh. This type of nerve damage typically affects one side of your body and may rarely spread to the other side. Proximal neuropathy often causes severe pain and may lead to significant weight loss." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Proximal Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Proximal neuropathy is a rare and disabling type of nerve damage in your hip, buttock, or thigh. This type of nerve damage typically affects one side of your body and may rarely spread to the other side. Proximal neuropathy often causes severe pain and may lead to significant weight loss." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/lifestyleIntervention/be-physically-active> a dmo:LifestyleIntervention ;
+    rdfs:label "Be physically active" ;
+    dmo:interventionCode "be-physically-active" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Be physically active" ;
+    dmo:evidenceQuote "You should also take the following steps to help prevent diabetes-related nerve damage: be physically active" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/lifestyleIntervention/limit-alcoholic-drinks-to-no-more-than-one-drink-per-day-for-women-and-no-more-than-two-drinks-per-day-for-men> a dmo:LifestyleIntervention ;
+    rdfs:label "Limit alcoholic drinks to no more than one drink per day for women and no more than two drinks per day for men" ;
+    dmo:interventionCode "limit-alcoholic-drinks-to-no-more-than-one-drink-per-day-for-women-and-no-more-than-two-drinks-per-day-for-men" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Limit alcoholic drinks to no more than one drink per day for women and no more than two drinks per day for men" ;
+    dmo:evidenceQuote "limit alcoholic drinks to no more than one drink per day for women and no more than two drinks per day for men" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/lifestyleIntervention/quit-smoking> a dmo:LifestyleIntervention ;
+    rdfs:label "Quit Smoking" ;
+    dmo:interventionCode "quit-smoking" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Quit Smoking" ;
+    dmo:evidenceQuote "To help prevent diabetes-related nerve damage, get help to quit smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/monitoringSchedule/foot-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Foot Exam" ;
+    dmo:appliesTo "all people with diabetes, and it’s even more important if you have peripheral neuropathy" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Foot Exam" ;
+    dmo:scheduleId "foot-exam" ;
+    dmo:evidenceQuote "See your doctor for a neurological exam and a foot exam at least once a year—more often if you have foot problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/monitoringSchedule/neurological-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Neurological Exam" ;
+    dmo:appliesTo "all people with diabetes, and it’s even more important if you have peripheral neuropathy" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Neurological Exam" ;
+    dmo:scheduleId "neurological-exam" ;
+    dmo:evidenceQuote "See your doctor for a neurological exam and a foot exam at least once a year—more often if you have foot problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/be-physically-active> a dmo:Recommendation ;
+    rdfs:label "Be Physically Active" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "be-physically-active" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You should also take the following steps to help prevent diabetes-related nerve damage: be physically active" ;
+    dmo:evidenceQuote "You should also take the following steps to help prevent diabetes-related nerve damage: be physically active" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/check-feet-for-problems-every-day> a dmo:Recommendation ;
+    rdfs:label "Check Feet for Problems Every Day" ;
+    dmo:populationScope "All people with diabetes, especially those with peripheral neuropathy" ;
+    dmo:recommendationId "check-feet-for-problems-every-day" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check your feet for problems every day, and take good care of your feet." ;
+    dmo:evidenceQuote "Check your feet for problems every day, and take good care of your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/get-help-to-quit-smoking> a dmo:Recommendation ;
+    rdfs:label "Get Help to Quit Smoking" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "get-help-to-quit-smoking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "To help prevent diabetes-related nerve damage, get help to quit smoking." ;
+    dmo:evidenceQuote "To help prevent diabetes-related nerve damage, get help to quit smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/have-a-neurological-exam-and-a-foot-exam-at-least-once-a-year> a dmo:Recommendation ;
+    rdfs:label "Have a Neurological Exam and a Foot Exam at Least Once a Year" ;
+    dmo:populationScope "All people with diabetes, especially those with peripheral neuropathy" ;
+    dmo:recommendationId "have-a-neurological-exam-and-a-foot-exam-at-least-once-a-year" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "See your doctor for a neurological exam and a foot exam at least once a year—more often if you have foot problems." ;
+    dmo:evidenceQuote "See your doctor for a neurological exam and a foot exam at least once a year—more often if you have foot problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/limit-alcoholic-drinks> a dmo:Recommendation ;
+    rdfs:label "Limit Alcoholic Drinks" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "limit-alcoholic-drinks" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You should also take the following steps to help prevent diabetes-related nerve damage: limit alcoholic drinks to no more than one drink per day for women and no more than two drinks per day for men" ;
+    dmo:evidenceQuote "limit alcoholic drinks to no more than one drink per day for women and no more than two drinks per day for men" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-blood-pressure-cholesterol-levels-and-weight> a dmo:Recommendation ;
+    rdfs:label "Manage Blood Glucose, Blood Pressure, Cholesterol Levels, and Weight" ;
+    dmo:populationScope "People with diabetic neuropathy" ;
+    dmo:recommendationId "manage-blood-glucose-blood-pressure-cholesterol-levels-and-weight" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-levels> a dmo:Recommendation ;
+    rdfs:label "Manage Blood Glucose Levels" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "manage-blood-glucose-levels" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "To prevent diabetic neuropathy, it is important to manage your diabetes by managing your blood glucose, blood pressure, and cholesterol levels." ;
+    dmo:evidenceQuote "To prevent diabetic neuropathy, it is important to manage your diabetes by managing your blood glucose, blood pressure, and cholesterol levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-levels-to-prevent-worsening> a dmo:Recommendation ;
+    rdfs:label "Manage Blood Glucose Levels to Prevent Worsening" ;
+    dmo:populationScope "People with diabetic neuropathy" ;
+    dmo:recommendationId "manage-blood-glucose-levels-to-prevent-worsening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-blood-pressure-levels> a dmo:Recommendation ;
+    rdfs:label "Manage Blood Pressure Levels" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "manage-blood-pressure-levels" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "To prevent diabetic neuropathy, it is important to manage your diabetes by managing your blood glucose, blood pressure, and cholesterol levels." ;
+    dmo:evidenceQuote "To prevent diabetic neuropathy, it is important to manage your diabetes by managing your blood glucose, blood pressure, and cholesterol levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-blood-pressure-levels-to-prevent-worsening> a dmo:Recommendation ;
+    rdfs:label "Manage Blood Pressure Levels to Prevent Worsening" ;
+    dmo:populationScope "People with diabetic neuropathy" ;
+    dmo:recommendationId "manage-blood-pressure-levels-to-prevent-worsening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-cholesterol-levels> a dmo:Recommendation ;
+    rdfs:label "Manage Cholesterol Levels" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "manage-cholesterol-levels" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "To prevent diabetic neuropathy, it is important to manage your diabetes by managing your blood glucose, blood pressure, and cholesterol levels." ;
+    dmo:evidenceQuote "To prevent diabetic neuropathy, it is important to manage your diabetes by managing your blood glucose, blood pressure, and cholesterol levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-cholesterol-levels-to-prevent-worsening> a dmo:Recommendation ;
+    rdfs:label "Manage Cholesterol Levels to Prevent Worsening" ;
+    dmo:populationScope "People with diabetic neuropathy" ;
+    dmo:recommendationId "manage-cholesterol-levels-to-prevent-worsening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/manage-weight-to-prevent-worsening> a dmo:Recommendation ;
+    rdfs:label "Manage Weight to Prevent Worsening" ;
+    dmo:populationScope "People with diabetic neuropathy" ;
+    dmo:recommendationId "manage-weight-to-prevent-worsening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/recommendation/take-prescribed-diabetes-medicines> a dmo:Recommendation ;
+    rdfs:label "Take Prescribed Diabetes Medicines" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "take-prescribed-diabetes-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "You should also take the following steps to help prevent diabetes-related nerve damage: take any diabetes medicines and other medicines your doctor prescribes" ;
+    dmo:evidenceQuote "take any diabetes medicines and other medicines your doctor prescribes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/genetic-predisposition> a dmo:RiskFactor ;
+    rdfs:label "Genetic Predisposition" ;
+    dmo:evidenceNote "Research also suggests that certain genes may make people more likely to develop diabetic neuropathy." ;
+    dmo:name "Genetic Predisposition" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "genetic-predisposition" ;
+    dmo:evidenceQuote "Research also suggests that certain genes may make people more likely to develop diabetic neuropathy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> a dmo:RiskFactor ;
+    rdfs:label "High Blood Pressure" ;
+    dmo:evidenceNote "文档指出，管理糖尿病包括控制血压，以防止神经损伤恶化。" ;
+    dmo:name "High Blood Pressure" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-pressure" ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/high-cholesterol-levels> a dmo:RiskFactor ;
+    rdfs:label "High Cholesterol Levels" ;
+    dmo:evidenceNote "文档指出，管理糖尿病包括控制胆固醇水平，以防止神经损伤恶化。" ;
+    dmo:name "High Cholesterol Levels" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-cholesterol-levels" ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/longer-duration-of-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Longer Duration of Diabetes" ;
+    dmo:evidenceNote "The chance of developing nerve damage increases the longer you have diabetes." ;
+    dmo:name "Longer Duration of Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "longer-duration-of-diabetes" ;
+    dmo:evidenceQuote "If you have diabetes, your chance of developing nerve damage caused by diabetes increases the older you get and the longer you have diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/obesity> a dmo:RiskFactor ;
+    rdfs:label "Obesity" ;
+    dmo:evidenceNote "文档指出，管理糖尿病包括控制体重，以防止神经损伤恶化。" ;
+    dmo:name "Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "obesity" ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/older-age> a dmo:RiskFactor ;
+    rdfs:label "Older Age" ;
+    dmo:evidenceNote "The chance of developing nerve damage increases the older you get." ;
+    dmo:name "Older Age" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "older-age" ;
+    dmo:evidenceQuote "If you have diabetes, your chance of developing nerve damage caused by diabetes increases the older you get and the longer you have diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/overweight> a dmo:RiskFactor ;
+    rdfs:label "Overweight" ;
+    dmo:evidenceNote "You are also more likely to develop nerve damage if you have diabetes and are overweight." ;
+    dmo:name "Overweight" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "overweight" ;
+    dmo:evidenceQuote "You are also more likely to develop nerve damage if you have diabetes and are overweight" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/poor-glycemic-control> a dmo:RiskFactor ;
+    rdfs:label "Poor Glycemic Control" ;
+    dmo:evidenceNote "文档指出，管理糖尿病意味着控制血糖水平，以防止神经损伤恶化。" ;
+    dmo:name "Poor Glycemic Control" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "poor-glycemic-control" ;
+    dmo:evidenceQuote "If you have diabetic neuropathy, you should manage your diabetes, which means managing your blood glucose, blood pressure, cholesterol levels, and weight to keep nerve damage from getting worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+<https://example.org/dmo/id/riskFactor/smoking> a dmo:RiskFactor ;
+    rdfs:label "Smoking" ;
+    dmo:evidenceNote "文档明确指出，为了预防糖尿病相关神经损伤，应寻求帮助戒烟。" ;
+    dmo:name "Smoking" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "smoking" ;
+    dmo:evidenceQuote "To help prevent diabetes-related nerve damage, get help to quit smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/lifestyleIntervention/be-physically-active> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/limit-alcoholic-drinks-to-no-more-than-one-drink-per-day-for-women-and-no-more-than-two-drinks-per-day-for-men> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/smoking> .
+<https://example.org/dmo/id/lifestyleIntervention/quit-smoking> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/smoking> .
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-levels> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/neurological-exam> .
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-levels> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/foot-exam> .
+<https://example.org/dmo/id/recommendation/manage-blood-glucose-levels> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/be-physically-active> .
+<https://example.org/dmo/id/recommendation/manage-blood-pressure-levels> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/be-physically-active> .
+<https://example.org/dmo/id/recommendation/manage-cholesterol-levels> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/be-physically-active> .
+<https://example.org/dmo/id/recommendation/have-a-neurological-exam-and-a-foot-exam-at-least-once-a-year> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/recommendation/check-feet-for-problems-every-day> dmo:targetsComplication <https://example.org/dmo/id/complication/foot-complications> .
+<https://example.org/dmo/id/recommendation/check-feet-for-problems-every-day> dmo:targetsComplication <https://example.org/dmo/id/complication/balance-and-coordination-problems> .
+<https://example.org/dmo/id/recommendation/be-physically-active> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-neuropathy> .

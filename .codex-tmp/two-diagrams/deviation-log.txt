@@ -1,0 +1,4 @@
+Output slide 4: source slide 4 is rewritten from a general knowledge-base build explanation into a technical ontology extraction workflow. Geometry, connectors, colors, typography, spacing, and chrome remain inherited.
+Output slide 7: duplicated source slide 7 and rewrote inherited text into an agent runtime architecture. The loop and guardrail geometry remain inherited.
+Other output slides: only inherited page-marker text changes.
+

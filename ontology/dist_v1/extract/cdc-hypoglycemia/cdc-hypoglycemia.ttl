@@ -1,0 +1,302 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/cdc-hypoglycemia.txt
+# 目标 named graph：urn:dmo:extract:cdc-hypoglycemia
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:cdc-hypoglycemia'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/cdc-hypoglycemia.txt" ;
+    dmo:sha256 "78367648b51015f62bf558a29fdd7546899452d639220bb5b48c4e4925b4d9fa" ;
+    dmo:byteSize "3618"^^xsd:integer .
+
+<urn:dmo:extract:cdc-hypoglycemia> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T01:41:47+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/hypoglycemia-unawareness> a dmo:Complication ;
+    rdfs:label "Hypoglycemia Unawareness" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "hypoglycemia-unawareness" ;
+    dmo:definition "You may not have any symptoms when your blood sugar is low (hypoglycemia unawareness)." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Hypoglycemia Unawareness" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "You may not have any symptoms when your blood sugar is low (hypoglycemia unawareness)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/complication/low-blood-sugar> a dmo:Complication ;
+    rdfs:label "Low Blood Sugar" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "low-blood-sugar" ;
+    dmo:definition "Blood sugar below 70 mg/dL is considered low." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Low Blood Sugar" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Blood sugar below 70 mg/dL is considered low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/complication/severe-low-blood-sugar> a dmo:Complication ;
+    rdfs:label "Severe Low Blood Sugar" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "severe-low-blood-sugar" ;
+    dmo:definition "Severe low blood sugar is below 54 mg/dL." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Severe Low Blood Sugar" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Severe low blood sugar is below 54 mg/dL." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/complicationStage/low-blood-sugar> a dmo:ComplicationStage ;
+    rdfs:label "Low Blood Sugar" ;
+    dmo:name "Low Blood Sugar" ;
+    dmo:stageCode "low-blood-sugar" ;
+    dmo:stageCriteria "Blood sugar below 70 mg/dL is considered low." ;
+    dmo:stageOrder "1"^^xsd:integer ;
+    dmo:evidenceQuote "Blood sugar below 70 mg/dL is considered low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/device/continuous-glucose-monitor> a dmo:Device ;
+    rdfs:label "Continuous Glucose Monitor" ;
+    dmo:deviceCode "continuous-glucose-monitor" ;
+    dmo:deviceType "CGM" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Continuous Glucose Monitor" ;
+    dmo:evidenceQuote "A continuous glucose monitor (CGM) can alert you if your blood sugar gets low while you're sleeping." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "Low blood sugar is especially common in people with type 1 diabetes." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "Low blood sugar is especially common in people with type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/lifestyleIntervention/checking-blood-sugar-before-driving-or-being-physically-active> a dmo:LifestyleIntervention ;
+    rdfs:label "Checking blood sugar before driving or being physically active" ;
+    dmo:interventionCode "checking-blood-sugar-before-driving-or-being-physically-active" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Checking blood sugar before driving or being physically active" ;
+    dmo:evidenceQuote "Checking is especially important to do before driving or being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/lifestyleIntervention/checking-blood-sugar-more-often> a dmo:LifestyleIntervention ;
+    rdfs:label "Checking blood sugar more often" ;
+    dmo:interventionCode "checking-blood-sugar-more-often" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Checking blood sugar more often" ;
+    dmo:evidenceQuote "If you meet one or more of the above and you have hypoglycemia unawareness, check your blood sugar more often." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eating-regular-meals-and-not-skipping-them> a dmo:LifestyleIntervention ;
+    rdfs:label "Eating regular meals and not skipping them" ;
+    dmo:interventionCode "eating-regular-meals-and-not-skipping-them" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eating regular meals and not skipping them" ;
+    dmo:evidenceQuote "Eating regular meals and not skipping them can help you avoid nighttime low blood sugar." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eating-when-you-drink-alcohol> a dmo:LifestyleIntervention ;
+    rdfs:label "Eating when you drink alcohol" ;
+    dmo:interventionCode "eating-when-you-drink-alcohol" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eating when you drink alcohol" ;
+    dmo:evidenceQuote "Eating when you drink alcohol can also help." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/lifestyleIntervention/having-a-snack-before-bed> a dmo:LifestyleIntervention ;
+    rdfs:label "Having a snack before bed" ;
+    dmo:interventionCode "having-a-snack-before-bed" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Having a snack before bed" ;
+    dmo:evidenceQuote "If you think you're at risk for low blood sugar overnight, have a snack before bed." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/recommendation/check-blood-sugar-more-often> a dmo:Recommendation ;
+    rdfs:label "Check Blood Sugar More Often" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People with diabetes who have had diabetes for more than 5–10 years, often have low blood sugar, or take certain medicines such as beta blockers for high blood pressure" ;
+    dmo:recommendationId "check-blood-sugar-more-often" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If you meet one or more of the above and you have hypoglycemia unawareness, check your blood sugar more often." ;
+    dmo:evidenceQuote "If you meet one or more of the above and you have hypoglycemia unawareness, check your blood sugar more often." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/recommendation/eat-regular-meals> a dmo:Recommendation ;
+    rdfs:label "Eat Regular Meals" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People at risk for nighttime low blood sugar" ;
+    dmo:recommendationId "eat-regular-meals" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Eating regular meals and not skipping them can help you avoid nighttime low blood sugar." ;
+    dmo:evidenceQuote "Eating regular meals and not skipping them can help you avoid nighttime low blood sugar." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/recommendation/eat-when-drinking-alcohol> a dmo:Recommendation ;
+    rdfs:label "Eat When Drinking Alcohol" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People who drink alcohol and are at risk for low blood sugar" ;
+    dmo:recommendationId "eat-when-drinking-alcohol" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Eating when you drink alcohol can also help." ;
+    dmo:evidenceQuote "Eating when you drink alcohol can also help." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/recommendation/have-a-snack-before-bed> a dmo:Recommendation ;
+    rdfs:label "Have a Snack Before Bed" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People at risk for nighttime low blood sugar" ;
+    dmo:recommendationId "have-a-snack-before-bed" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you think you're at risk for low blood sugar overnight, have a snack before bed." ;
+    dmo:evidenceQuote "If you think you're at risk for low blood sugar overnight, have a snack before bed." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/recommendation/use-continuous-glucose-monitor-cgm> a dmo:Recommendation ;
+    rdfs:label "Use Continuous Glucose Monitor (CGM)" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People who may experience low blood sugar while sleeping" ;
+    dmo:recommendationId "use-continuous-glucose-monitor-cgm" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "A continuous glucose monitor (CGM) can alert you if your blood sugar gets low while you're sleeping." ;
+    dmo:evidenceQuote "A continuous glucose monitor (CGM) can alert you if your blood sugar gets low while you're sleeping." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/having-diabetes-for-more-than-5-10-years> a dmo:RiskFactor ;
+    rdfs:label "Having Diabetes for More Than 5–10 Years" ;
+    dmo:evidenceNote "This increases the risk of hypoglycemia unawareness." ;
+    dmo:name "Having Diabetes for More Than 5–10 Years" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "having-diabetes-for-more-than-5-10-years" ;
+    dmo:evidenceQuote "This is more likely to happen if you: Have had diabetes for more than 5–10 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/having-your-period-menstruation> a dmo:RiskFactor ;
+    rdfs:label "Having Your Period (Menstruation)" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "Having Your Period (Menstruation)" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "having-your-period-menstruation" ;
+    dmo:evidenceQuote "Having your period (menstruation)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/not-eating-enough-carbohydrates-for-how-much-insulin-you-take> a dmo:RiskFactor ;
+    rdfs:label "Not Eating Enough Carbohydrates for How Much Insulin You Take" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "Not Eating Enough Carbohydrates for How Much Insulin You Take" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "not-eating-enough-carbohydrates-for-how-much-insulin-you-take" ;
+    dmo:evidenceQuote "Not eating enough carbohydrates for how much insulin you take." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/spending-time-at-a-high-altitude> a dmo:RiskFactor ;
+    rdfs:label "Spending Time at a High Altitude" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "Spending Time at a High Altitude" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "spending-time-at-a-high-altitude" ;
+    dmo:evidenceQuote "Spending time at a high altitude." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/taking-too-much-insulin> a dmo:RiskFactor ;
+    rdfs:label "Taking Too Much Insulin" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "Taking Too Much Insulin" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "taking-too-much-insulin" ;
+    dmo:evidenceQuote "Taking too much insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/the-amount-and-timing-of-physical-activity> a dmo:RiskFactor ;
+    rdfs:label "The Amount and Timing of Physical Activity" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "The Amount and Timing of Physical Activity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "the-amount-and-timing-of-physical-activity" ;
+    dmo:evidenceQuote "The amount and timing of physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/timing-of-when-you-take-your-insulin> a dmo:RiskFactor ;
+    rdfs:label "Timing of When You Take Your Insulin" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "Timing of When You Take Your Insulin" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "timing-of-when-you-take-your-insulin" ;
+    dmo:evidenceQuote "Timing of when you take your insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/riskFactor/unexpected-changes-in-your-schedule> a dmo:RiskFactor ;
+    rdfs:label "Unexpected Changes in Your Schedule" ;
+    dmo:evidenceNote "This is a cause of low blood sugar." ;
+    dmo:name "Unexpected Changes in Your Schedule" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "unexpected-changes-in-your-schedule" ;
+    dmo:evidenceQuote "Unexpected changes in your schedule." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/symptom/fainting-pass-out> a dmo:Symptom ;
+    rdfs:label "Fainting (pass out)" ;
+    dmo:name "Fainting (pass out)" ;
+    dmo:symptomCode "fainting-pass-out" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Severe low blood sugar is below 54 mg/dL. Blood sugar this low may make you faint (pass out)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/symptom/fast-heartbeat> a dmo:Symptom ;
+    rdfs:label "Fast heartbeat" ;
+    dmo:name "Fast heartbeat" ;
+    dmo:symptomCode "fast-heartbeat" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Common symptoms may include: Fast heartbeat." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+<https://example.org/dmo/id/symptom/feeling-weak> a dmo:Symptom ;
+    rdfs:label "Feeling weak" ;
+    dmo:name "Feeling weak" ;
+    dmo:symptomCode "feeling-weak" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "As your low blood sugar gets worse, you may have more serious symptoms, including: Feeling weak." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/severe-low-blood-sugar> dmo:hasStage <https://example.org/dmo/id/complicationStage/low-blood-sugar> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/low-blood-sugar> .
+<https://example.org/dmo/id/complication/severe-low-blood-sugar> dmo:presentsWith <https://example.org/dmo/id/symptom/fainting-pass-out> .
+<https://example.org/dmo/id/complication/severe-low-blood-sugar> dmo:presentsWith <https://example.org/dmo/id/symptom/feeling-weak> .
+<https://example.org/dmo/id/complication/hypoglycemia-unawareness> dmo:presentsWith <https://example.org/dmo/id/symptom/fainting-pass-out> .
+<https://example.org/dmo/id/lifestyleIntervention/eating-regular-meals-and-not-skipping-them> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/not-eating-enough-carbohydrates-for-how-much-insulin-you-take> .
+<https://example.org/dmo/id/lifestyleIntervention/having-a-snack-before-bed> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/taking-too-much-insulin> .
+<https://example.org/dmo/id/recommendation/check-blood-sugar-more-often> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/checking-blood-sugar-more-often> .
+<https://example.org/dmo/id/recommendation/check-blood-sugar-more-often> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/checking-blood-sugar-before-driving-or-being-physically-active> .
+<https://example.org/dmo/id/recommendation/eat-regular-meals> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eating-regular-meals-and-not-skipping-them> .
+<https://example.org/dmo/id/recommendation/eat-when-drinking-alcohol> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eating-when-you-drink-alcohol> .
+<https://example.org/dmo/id/recommendation/have-a-snack-before-bed> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/having-a-snack-before-bed> .
+<https://example.org/dmo/id/recommendation/use-continuous-glucose-monitor-cgm> dmo:targetsComplication <https://example.org/dmo/id/complication/severe-low-blood-sugar> .

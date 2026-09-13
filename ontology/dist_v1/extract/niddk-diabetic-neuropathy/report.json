@@ -1,0 +1,179 @@
+{
+  "source": {
+    "sourceId": "niddk-diabetic-neuropathy",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-diabetic-neuropathy",
+    "localFile": "ontology/knowledges/niddk-diabetic-neuropathy.txt",
+    "sha256": "a0957384924b930c3210586494624a5bc7b99eee4118fbced220c7908a8e240c",
+    "byteSize": 7121,
+    "graphUri": "urn:dmo:extract:niddk-diabetic-neuropathy"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 2,
+  "counts": {
+    "rawRecords": 57,
+    "accepted": 36,
+    "rejected": 21,
+    "entities": 35,
+    "edges": 12,
+    "danglingRelations": 25,
+    "mergeConflicts": 11
+  },
+  "quality": {
+    "quoteHitRate": 0.6316,
+    "schemaSlotCoverage": 0.2903,
+    "danglingRelationRate": 0.6757,
+    "avgMentionsPerEntity": 1.03
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 15,
+    "unknown_relation_predicate": 6
+  },
+  "linkPass": {
+    "candidates": 35,
+    "accepted": 12,
+    "rejectedByReason": {
+      "quote_not_found": 22,
+      "target_unresolved": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 14,
+    "riskFactor": 9,
+    "complication": 7,
+    "lifestyleIntervention": 3,
+    "monitoringSchedule": 2
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/peripheral-neuropathy",
+      "predicate": "hasStage",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/foot-complications",
+      "predicate": "presentsWith",
+      "target": "Peripheral Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/balance-and-coordination-problems",
+      "predicate": "presentsWith",
+      "target": "Peripheral Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/older-age",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/longer-duration-of-diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/overweight",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/genetic-predisposition",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-blood-glucose-levels",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-blood-pressure-levels",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-cholesterol-levels",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/be-physically-active",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/limit-alcoholic-drinks",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/take-prescribed-diabetes-medicines",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-blood-glucose-levels-to-prevent-worsening",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-blood-pressure-levels-to-prevent-worsening",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-cholesterol-levels-to-prevent-worsening",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/manage-weight-to-prevent-worsening",
+      "predicate": "appliesToType",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/poor-glycemic-control",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-pressure",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    }
+  ],
+  "conflictSamples": [
+    "complication/peripheral-neuropathy: mondoCode: 'MONDO:0005147' vs 'MONDO:0005148'",
+    "complication/peripheral-neuropathy: definition: 'Peripheral neuropathy is nerve damage that typically affects the feet and legs and sometimes affects the hands and arms.' vs 'Foot care is very important for all people with diabetes, and it’s even more important if you have peripheral neuropathy.'",
+    "riskFactor/older-age: name: 'Older Age' vs 'older age'",
+    "riskFactor/longer-duration-of-diabetes: name: 'Longer Duration of Diabetes' vs 'longer duration of diabetes'",
+    "riskFactor/overweight: name: 'Overweight' vs 'overweight'",
+    "riskFactor/genetic-predisposition: name: 'Genetic Predisposition' vs 'certain genes may make people more likely to develop diabetic neuropathy'",
+    "riskFactor/smoking: name: 'Smoking' vs 'smoking'",
+    "riskFactor/poor-glycemic-control: name: 'Poor Glycemic Control' vs 'poor blood glucose control'",
+    "riskFactor/high-blood-pressure: name: 'High Blood Pressure' vs 'high blood pressure'",
+    "riskFactor/high-cholesterol-levels: name: 'High Cholesterol Levels' vs 'high cholesterol levels'",
+    "riskFactor/obesity: name: 'Obesity' vs 'obesity'"
+  ]
+}

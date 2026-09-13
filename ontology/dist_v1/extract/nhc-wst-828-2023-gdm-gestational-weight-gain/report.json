@@ -1,0 +1,121 @@
+{
+  "source": {
+    "sourceId": "nhc-wst-828-2023-gdm-gestational-weight-gain",
+    "uri": "https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain",
+    "localFile": "ontology/knowledges/pdfs/nhc-wst-828-2023-gdm-gestational-weight-gain.pdf",
+    "sha256": "00f3244f099e131ac83c4df705267407083526540624230731bb2e0ea4ec6de2",
+    "byteSize": 508285,
+    "graphUri": "urn:dmo:extract:nhc-wst-828-2023-gdm-gestational-weight-gain",
+    "documentFormat": "pdf",
+    "pageCount": 5,
+    "textPageCount": 5
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 13,
+    "accepted": 11,
+    "rejected": 2,
+    "entities": 5,
+    "edges": 0,
+    "danglingRelations": 9,
+    "mergeConflicts": 12
+  },
+  "quality": {
+    "quoteHitRate": 0.8462,
+    "schemaSlotCoverage": 0.1452,
+    "danglingRelationRate": 1.0,
+    "avgMentionsPerEntity": 2.2
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 2
+  },
+  "linkPass": {
+    "candidates": 0,
+    "accepted": 0,
+    "rejectedByReason": {}
+  },
+  "entitiesByType": {
+    "recommendation": 3,
+    "contraindication": 2
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断后妊娠中期和妊娠晚期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断后妊娠中期和妊娠晚期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断后妊娠中期和妊娠晚期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断后妊娠中期和妊娠晚期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断前妊娠中期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断前妊娠中期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断前妊娠中期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断前妊娠中期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断前妊娠中期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断前妊娠中期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/gdm诊断前妊娠中期每周体重增长值",
+      "predicate": "definesTarget",
+      "target": "GDM诊断前妊娠中期每周体重增长值"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/妊娠早期体重增长值",
+      "predicate": "definesTarget",
+      "target": "妊娠早期体重增长值"
+    }
+  ],
+  "conflictSamples": [
+    "recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值: statement: '妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。' vs '妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.37（0.26～0.48）kg/week，适用于正常体重（18.5 kg/m²≤BMI＜24.0 kg/m²）者。'",
+    "recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值: populationScope: '低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女' vs '正常体重（18.5 kg/m²≤BMI＜24.0 kg/m²）的妊娠期糖尿病妇女'",
+    "recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值: statement: '妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。' vs '妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.26（0.19～0.32）kg/week，适用于超重（24.0 kg/m²≤BMI＜28.0 kg/m²）者。'",
+    "recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值: populationScope: '低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女' vs '超重（24.0 kg/m²≤BMI＜28.0 kg/m²）的妊娠期糖尿病妇女'",
+    "recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值: statement: '妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。' vs '妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.18（0.12～0.23）kg/week，适用于肥胖（BMI≥28.0 kg/m²）者。'",
+    "recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值: populationScope: '低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女' vs '肥胖（BMI≥28.0 kg/m²）的妊娠期糖尿病妇女'",
+    "recommendation/gdm诊断前妊娠中期每周体重增长值: statement: '妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。' vs '妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.37（0.26～0.48）kg/week，适用于正常体重（18.5 kg/m²≤BMI＜24.0 kg/m²）者。'",
+    "recommendation/gdm诊断前妊娠中期每周体重增长值: populationScope: '低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女' vs '正常体重（18.5 kg/m²≤BMI＜24.0 kg/m²）的妊娠期糖尿病妇女'",
+    "recommendation/gdm诊断前妊娠中期每周体重增长值: statement: '妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。' vs '妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.30（0.22～0.37）kg/week，适用于超重（24.0 kg/m²≤BMI＜28.0 kg/m²）者。'",
+    "recommendation/gdm诊断前妊娠中期每周体重增长值: populationScope: '低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女' vs '超重（24.0 kg/m²≤BMI＜28.0 kg/m²）的妊娠期糖尿病妇女'",
+    "recommendation/gdm诊断前妊娠中期每周体重增长值: statement: '妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。' vs '妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.22（0.15～0.30）kg/week，适用于肥胖（BMI≥28.0 kg/m²）者。'",
+    "recommendation/gdm诊断前妊娠中期每周体重增长值: populationScope: '低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女' vs '肥胖（BMI≥28.0 kg/m²）的妊娠期糖尿病妇女'"
+  ]
+}

@@ -1,0 +1,749 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/nhc-diabetes-day-2025.txt
+# 目标 named graph：urn:dmo:extract:nhc-diabetes-day-2025
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:nhc-diabetes-day-2025'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/nhc-diabetes-day-2025.txt" ;
+    dmo:sha256 "aa943eba2bc366d98ca963f55fb8029055138ec929fcff2606f8471ee2e8dcba" ;
+    dmo:byteSize "11807"^^xsd:integer .
+
+<urn:dmo:extract:nhc-diabetes-day-2025> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:08:56+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/cardiovascular-disease> a dmo:Complication ;
+    rdfs:label "Cardiovascular Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "cardiovascular-disease" ;
+    dmo:definition "大血管病变主要是指动脉粥样硬化性心血管疾病和心力衰竭，其中动脉粥样硬化性心血管疾病包括冠心病、脑血管疾病和周围血管疾病。" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005046" ;
+    dmo:name "Cardiovascular Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "大血管病变主要是指动脉粥样硬化性心血管疾病和心力衰竭，其中动脉粥样硬化性心血管疾病包括冠心病、脑血管疾病和周围血管疾病。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/complication/diabetic-foot-ulcer> a dmo:Complication ;
+    rdfs:label "Diabetic Foot Ulcer" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "diabetic-foot-ulcer" ;
+    dmo:definition "上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005045" ;
+    dmo:name "Diabetic Foot Ulcer" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/complication/diabetic-nephropathy> a dmo:Complication ;
+    rdfs:label "Diabetic Nephropathy" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "diabetic-nephropathy" ;
+    dmo:definition "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005043" ;
+    dmo:name "Diabetic Nephropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/complication/diabetic-neuropathy> a dmo:Complication ;
+    rdfs:label "Diabetic Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "diabetic-neuropathy" ;
+    dmo:definition "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005044" ;
+    dmo:name "Diabetic Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/complication/diabetic-retinopathy> a dmo:Complication ;
+    rdfs:label "Diabetic Retinopathy" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "diabetic-retinopathy" ;
+    dmo:definition "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005042" ;
+    dmo:name "Diabetic Retinopathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "微血管病变主要包括糖尿病视网膜病变、糖尿病肾脏病、糖尿病神经病变等。上述血管病变严重的可以导致心肌梗死、卒中、失明、肾衰竭、截肢等严重后果，是糖尿病患者致残或致死的主要原因。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/complication/hyperosmolar-hyperglycemic-state> a dmo:Complication ;
+    rdfs:label "Hyperosmolar Hyperglycemic State" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "hyperosmolar-hyperglycemic-state" ;
+    dmo:definition "因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005041" ;
+    dmo:name "Hyperosmolar Hyperglycemic State" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/diabetesType/糖尿病前期> a dmo:DiabetesType ;
+    rdfs:label "糖尿病前期" ;
+    dmo:definition "糖尿病前期是指空腹血糖受损（IFG）或糖耐量异常（IGT）的状态。" ;
+    dmo:diabetesTypeCode "糖尿病前期" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:name "糖尿病前期" ;
+    dmo:prevalenceShare "0"^^xsd:integer ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "1.有糖尿病前期史（空腹血糖受损IFG或糖尿病异常IGT）；" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/labTest/肺功能检查> a dmo:LabTest ;
+    rdfs:label "肺功能检查" ;
+    dmo:definition "肺功能检查是诊断慢阻肺病等慢性呼吸系统疾病的重要检查手段，在进行规范的肺功能检查及胸部影像、血常规等检查后，可确诊是否患有慢阻肺病。" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "肺功能检查" ;
+    dmo:name "肺功能检查" ;
+    dmo:specimen "Breath" ;
+    dmo:unitOfMeasure "L/min" ;
+    dmo:evidenceQuote "肺功能检查是诊断慢阻肺病等慢性呼吸系统疾病的重要检查手段，在进行规范的肺功能检查及胸部影像、血常规等检查后，可确诊是否患有慢阻肺病。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/labTest/餐后2小时血糖> a dmo:LabTest ;
+    rdfs:label "餐后2小时血糖" ;
+    dmo:definition "餐后2小时血糖是评估糖代谢状态的指标，糖尿病前期人群每半年检测1次空腹血糖或餐后2小时血糖。" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "餐后2小时血糖" ;
+    dmo:name "餐后2小时血糖" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "糖尿病前期人群每半年检测1次空腹血糖或餐后2小时血糖，当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/主动利用基本公共卫生服务> a dmo:LifestyleIntervention ;
+    rdfs:label "主动利用基本公共卫生服务" ;
+    dmo:activityTarget "主动利用基本公共卫生服务，配合医生做好健康管理" ;
+    dmo:expectedBenefit "配合医生做好健康管理" ;
+    dmo:interventionCode "主动利用基本公共卫生服务" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "主动利用基本公共卫生服务" ;
+    dmo:evidenceQuote "主动利用基本公共卫生服务，配合医生做好健康管理。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/减少室内外空气污染> a dmo:LifestyleIntervention ;
+    rdfs:label "减少室内外空气污染" ;
+    dmo:activityTarget "减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件" ;
+    dmo:expectedBenefit "避免二手烟暴露；减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件" ;
+    dmo:interventionCode "减少室内外空气污染" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "减少室内外空气污染" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/及时接种流感疫苗-肺炎球菌疫苗> a dmo:LifestyleIntervention ;
+    rdfs:label "及时接种流感疫苗、肺炎球菌疫苗" ;
+    dmo:activityTarget "及时接种流感疫苗、肺炎球菌疫苗等" ;
+    dmo:expectedBenefit "可有效预防感染导致的急性加重" ;
+    dmo:interventionCode "及时接种流感疫苗-肺炎球菌疫苗" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "及时接种流感疫苗、肺炎球菌疫苗" ;
+    dmo:evidenceQuote "及时接种流感疫苗和肺炎球菌疫苗，可有效预防感染导致的急性加重。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/合理膳食> a dmo:LifestyleIntervention ;
+    rdfs:label "合理膳食" ;
+    dmo:activityTarget "减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入" ;
+    dmo:expectedBenefit "有助于预防糖尿病" ;
+    dmo:interventionCode "合理膳食" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "合理膳食" ;
+    dmo:evidenceQuote "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/呼吸功能锻炼-如缩唇呼吸-腹式呼吸> a dmo:LifestyleIntervention ;
+    rdfs:label "呼吸功能锻炼（如缩唇呼吸、腹式呼吸）" ;
+    dmo:activityTarget "在医务人员指导下进行呼吸功能锻炼（如缩唇呼吸、腹式呼吸）" ;
+    dmo:expectedBenefit "改善运动耐量，缓解呼吸困难症状" ;
+    dmo:interventionCode "呼吸功能锻炼-如缩唇呼吸-腹式呼吸" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "呼吸功能锻炼（如缩唇呼吸、腹式呼吸）" ;
+    dmo:evidenceQuote "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。及时接种流感疫苗和肺炎球菌疫苗，可有效预防感染导致的急性加重。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/在职业环境中做好防护> a dmo:LifestyleIntervention ;
+    rdfs:label "在职业环境中做好防护" ;
+    dmo:activityTarget "在职业环境中做好防护，减少职业暴露" ;
+    dmo:expectedBenefit "减少职业暴露" ;
+    dmo:interventionCode "在职业环境中做好防护" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "在职业环境中做好防护" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/平衡心理状态> a dmo:LifestyleIntervention ;
+    rdfs:label "平衡心理状态" ;
+    dmo:activityTarget "平衡心理状态" ;
+    dmo:expectedBenefit "有助于预防糖尿病" ;
+    dmo:interventionCode "平衡心理状态" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "平衡心理状态" ;
+    dmo:evidenceQuote "对于一般人群，控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/戒烟限酒> a dmo:LifestyleIntervention ;
+    rdfs:label "戒烟限酒" ;
+    dmo:activityTarget "戒烟限酒" ;
+    dmo:expectedBenefit "有助于预防糖尿病" ;
+    dmo:interventionCode "戒烟限酒" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "戒烟限酒" ;
+    dmo:evidenceQuote "对于一般人群，控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/掌握正确的吸入药物使用方法> a dmo:LifestyleIntervention ;
+    rdfs:label "掌握正确的吸入药物使用方法" ;
+    dmo:activityTarget "在医务人员指导下掌握正确的使用方法，长期、规律使用" ;
+    dmo:expectedBenefit "确保药物能有效到达肺部，避免因不当使用影响治疗效果" ;
+    dmo:interventionCode "掌握正确的吸入药物使用方法" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "掌握正确的吸入药物使用方法" ;
+    dmo:evidenceQuote "慢阻肺病药物治疗中常涉及吸入药物，患者需在医务人员指导下掌握正确的使用方法，长期、规律使用。医务人员需反复指导并检查患者的使用方法，确保药物能有效到达肺部，避免因不当使用影响治疗效果。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/控制体重> a dmo:LifestyleIntervention ;
+    rdfs:label "控制体重" ;
+    dmo:activityTarget "控制超重肥胖及热量摄入" ;
+    dmo:expectedBenefit "有助于预防糖尿病" ;
+    dmo:interventionCode "控制体重" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "控制体重" ;
+    dmo:evidenceQuote "对于一般人群，控制体重、合理膳食、适量运动、限盐、戒烟限酒、平衡心理状态有助于预防糖尿病。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/科学运动与合理膳食> a dmo:LifestyleIntervention ;
+    rdfs:label "科学运动与合理膳食" ;
+    dmo:activityTarget "科学运动与合理膳食" ;
+    dmo:expectedBenefit "积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件" ;
+    dmo:interventionCode "科学运动与合理膳食" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "科学运动与合理膳食" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/积极戒烟> a dmo:LifestyleIntervention ;
+    rdfs:label "积极戒烟" ;
+    dmo:activityTarget "积极戒烟" ;
+    dmo:expectedBenefit "避免二手烟暴露；减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件" ;
+    dmo:interventionCode "积极戒烟" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "积极戒烟" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/营养支持> a dmo:LifestyleIntervention ;
+    rdfs:label "营养支持" ;
+    dmo:activityTarget "在医务人员指导下进行营养支持" ;
+    dmo:expectedBenefit "改善运动耐量，缓解呼吸困难症状" ;
+    dmo:interventionCode "营养支持" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "营养支持" ;
+    dmo:evidenceQuote "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。及时接种流感疫苗和肺炎球菌疫苗，可有效预防感染导致的急性加重。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/运动训练> a dmo:LifestyleIntervention ;
+    rdfs:label "运动训练" ;
+    dmo:activityTarget "在医务人员指导下进行运动训练" ;
+    dmo:expectedBenefit "改善运动耐量，缓解呼吸困难症状" ;
+    dmo:interventionCode "运动训练" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "运动训练" ;
+    dmo:evidenceQuote "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。及时接种流感疫苗和肺炎球菌疫苗，可有效预防感染导致的急性加重。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/lifestyleIntervention/适量运动> a dmo:LifestyleIntervention ;
+    rdfs:label "适量运动" ;
+    dmo:activityTarget "适当运动" ;
+    dmo:expectedBenefit "有助于预防糖尿病" ;
+    dmo:interventionCode "适量运动" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "适量运动" ;
+    dmo:evidenceQuote "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/monitoringSchedule/每年进行慢性并发症筛查> a dmo:MonitoringSchedule ;
+    rdfs:label "每年进行慢性并发症筛查" ;
+    dmo:appliesTo "糖尿病患者" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "每年进行慢性并发症筛查" ;
+    dmo:scheduleId "每年进行慢性并发症筛查" ;
+    dmo:evidenceQuote "每年进行慢性并发症筛查，包括足病、视网膜病变及肾脏病等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/为员工提供糖尿病相关的知识科普培训> a dmo:Recommendation ;
+    rdfs:label "为员工提供糖尿病相关的知识科普培训" ;
+    dmo:recommendationId "为员工提供糖尿病相关的知识科普培训" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "倡导单位为员工提供糖尿病相关的知识科普培训，包括糖尿病基础知识、早期发现、血糖监测操作、低血糖/高血糖急救措施等，提升健康防护意识和应急互助能力。" ;
+    dmo:evidenceQuote "倡导单位为员工提供糖尿病相关的知识科普培训，包括糖尿病基础知识、早期发现、血糖监测操作、低血糖/高血糖急救措施等，提升健康防护意识和应急互助能力。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/主动利用基本公共卫生服务> a dmo:Recommendation ;
+    rdfs:label "主动利用基本公共卫生服务" ;
+    dmo:recommendationId "主动利用基本公共卫生服务" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "主动利用基本公共卫生服务，配合医务人员进行连续、规范的慢性病健康管理。" ;
+    dmo:evidenceQuote "主动利用基本公共卫生服务，配合医务人员进行连续、规范的慢性病健康管理。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/保持良好的情绪和心态> a dmo:Recommendation ;
+    rdfs:label "保持良好的情绪和心态" ;
+    dmo:recommendationId "保持良好的情绪和心态" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "保持良好的情绪和心态有助于血糖稳定。如出现病情变化，在配合治疗的同时，积极调整心态。" ;
+    dmo:evidenceQuote "保持良好的情绪和心态有助于血糖稳定。如出现病情变化，在配合治疗的同时，积极调整心态。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/关注员工心理健康-提供心理辅导渠道> a dmo:Recommendation ;
+    rdfs:label "关注员工心理健康，提供心理辅导渠道" ;
+    dmo:recommendationId "关注员工心理健康-提供心理辅导渠道" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    dmo:evidenceQuote "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/减少室内外空气污染> a dmo:Recommendation ;
+    rdfs:label "减少室内外空气污染" ;
+    dmo:recommendationId "减少室内外空气污染" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/单位食堂提供低糖-少油-高纤维的健康食品> a dmo:Recommendation ;
+    rdfs:label "单位食堂提供低糖、少油、高纤维的健康食品" ;
+    dmo:recommendationId "单位食堂提供低糖-少油-高纤维的健康食品" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    dmo:evidenceQuote "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/及时和医生沟通药物不良反应或用药调整> a dmo:Recommendation ;
+    rdfs:label "及时和医生沟通药物不良反应或用药调整" ;
+    dmo:recommendationId "及时和医生沟通药物不良反应或用药调整" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "定期到医疗机构就诊，遵医嘱用药，预防糖尿病并发症，如服药后出现药物不良反应或需调整用药，需及时和医生沟通。" ;
+    dmo:evidenceQuote "定期到医疗机构就诊，遵医嘱用药，预防糖尿病并发症，如服药后出现药物不良反应或需调整用药，需及时和医生沟通。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/及时接种流感疫苗和肺炎球菌疫苗> a dmo:Recommendation ;
+    rdfs:label "及时接种流感疫苗和肺炎球菌疫苗" ;
+    dmo:recommendationId "及时接种流感疫苗和肺炎球菌疫苗" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "及时接种流感疫苗和肺炎球菌疫苗，可有效预防感染导致的急性加重。" ;
+    dmo:evidenceQuote "及时接种流感疫苗和肺炎球菌疫苗，可有效预防感染导致的急性加重。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/在职业环境中做好防护-减少职业暴露> a dmo:Recommendation ;
+    rdfs:label "在职业环境中做好防护，减少职业暴露" ;
+    dmo:recommendationId "在职业环境中做好防护-减少职业暴露" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/定期到医疗机构就诊-遵医嘱用药> a dmo:Recommendation ;
+    rdfs:label "定期到医疗机构就诊，遵医嘱用药" ;
+    dmo:recommendationId "定期到医疗机构就诊-遵医嘱用药" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "定期到医疗机构就诊，遵医嘱用药，预防糖尿病并发症，如服药后出现药物不良反应或需调整用药，需及时和医生沟通。" ;
+    dmo:evidenceQuote "定期到医疗机构就诊，遵医嘱用药，预防糖尿病并发症，如服药后出现药物不良反应或需调整用药，需及时和医生沟通。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/寻求家人-朋友或病友的帮助和支持> a dmo:Recommendation ;
+    rdfs:label "寻求家人、朋友或病友的帮助和支持" ;
+    dmo:recommendationId "寻求家人-朋友或病友的帮助和支持" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "当血糖控制遇到困难时，可寻求家人、朋友或病友的帮助和支持。" ;
+    dmo:evidenceQuote "当血糖控制遇到困难时，可寻求家人、朋友或病友的帮助和支持。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/将血糖检测纳入年度体检项目> a dmo:Recommendation ;
+    rdfs:label "将血糖检测纳入年度体检项目" ;
+    dmo:recommendationId "将血糖检测纳入年度体检项目" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    dmo:evidenceQuote "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/平衡膳食-减少精制碳水化合物和含糖饮料的摄入> a dmo:Recommendation ;
+    rdfs:label "平衡膳食，减少精制碳水化合物和含糖饮料的摄入" ;
+    dmo:recommendationId "平衡膳食-减少精制碳水化合物和含糖饮料的摄入" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    dmo:evidenceQuote "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/建立包容-支持性的工作环境> a dmo:Recommendation ;
+    rdfs:label "建立包容、支持性的工作环境" ;
+    dmo:recommendationId "建立包容-支持性的工作环境" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "建立包容、支持性的工作环境，消除对糖尿病的误解，为患病员工提供必要关怀和支持，并配备急救药品应对糖尿病相关突发情况。" ;
+    dmo:evidenceQuote "建立包容、支持性的工作环境，消除对糖尿病的误解，为患病员工提供必要关怀和支持，并配备急救药品应对糖尿病相关突发情况。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/戒烟> a dmo:Recommendation ;
+    rdfs:label "戒烟" ;
+    dmo:recommendationId "戒烟" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/戒烟限酒> a dmo:Recommendation ;
+    rdfs:label "戒烟限酒" ;
+    dmo:recommendationId "戒烟限酒" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    dmo:evidenceQuote "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/掌握正确的吸入药物使用方法> a dmo:Recommendation ;
+    rdfs:label "掌握正确的吸入药物使用方法" ;
+    dmo:recommendationId "掌握正确的吸入药物使用方法" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "慢阻肺病药物治疗中常涉及吸入药物，患者需在医务人员指导下掌握正确的使用方法，长期、规律使用。医务人员需反复指导并检查患者的使用方法，确保药物能有效到达肺部，避免因不当使用影响治疗效果。" ;
+    dmo:evidenceQuote "慢阻肺病药物治疗中常涉及吸入药物，患者需在医务人员指导下掌握正确的使用方法，长期、规律使用。医务人员需反复指导并检查患者的使用方法，确保药物能有效到达肺部，避免因不当使用影响治疗效果。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/改善厨房通风条件> a dmo:Recommendation ;
+    rdfs:label "改善厨房通风条件" ;
+    dmo:recommendationId "改善厨房通风条件" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/每半年检测1次空腹血糖或餐后2小时血糖> a dmo:Recommendation ;
+    rdfs:label "每半年检测1次空腹血糖或餐后2小时血糖" ;
+    dmo:populationScope "糖尿病前期人群" ;
+    dmo:recommendationId "每半年检测1次空腹血糖或餐后2小时血糖" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "提倡从40岁开始每年检测1次空腹血糖，糖尿病前期人群每半年检测1次空腹血糖或餐后2小时血糖，当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。" ;
+    dmo:evidenceQuote "提倡从40岁开始每年检测1次空腹血糖，糖尿病前期人群每半年检测1次空腹血糖或餐后2小时血糖，当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/每年检查1次肺功能> a dmo:Recommendation ;
+    rdfs:label "每年检查1次肺功能" ;
+    dmo:populationScope "40岁及以上人群或慢性呼吸系统疾病高危人群" ;
+    dmo:recommendationId "每年检查1次肺功能" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "提倡40岁及以上人群或慢性呼吸系统疾病高危人群每年检查1次肺功能。" ;
+    dmo:evidenceQuote "提倡40岁及以上人群或慢性呼吸系统疾病高危人群每年检查1次肺功能。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/每年检测1次空腹血糖> a dmo:Recommendation ;
+    rdfs:label "每年检测1次空腹血糖" ;
+    dmo:populationScope "40岁及以上人群" ;
+    dmo:recommendationId "每年检测1次空腹血糖" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "提倡从40岁开始每年检测1次空腹血糖，糖尿病前期人群每半年检测1次空腹血糖或餐后2小时血糖，当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。" ;
+    dmo:evidenceQuote "提倡从40岁开始每年检测1次空腹血糖，糖尿病前期人群每半年检测1次空腹血糖或餐后2小时血糖，当空腹血糖≥6.1mmol/L或餐后2小时血糖≥7.8mmol/L时，应到医疗机构进行糖代谢评估。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/每年进行慢性并发症筛查> a dmo:Recommendation ;
+    rdfs:label "每年进行慢性并发症筛查" ;
+    dmo:recommendationId "每年进行慢性并发症筛查" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "每年进行慢性并发症筛查，包括足病、视网膜病变及肾脏病等。" ;
+    dmo:evidenceQuote "每年进行慢性并发症筛查，包括足病、视网膜病变及肾脏病等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/规律作息> a dmo:Recommendation ;
+    rdfs:label "规律作息" ;
+    dmo:recommendationId "规律作息" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    dmo:evidenceQuote "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/规律监测血糖-血压-血脂和体重> a dmo:Recommendation ;
+    rdfs:label "规律监测血糖、血压、血脂和体重" ;
+    dmo:recommendationId "规律监测血糖-血压-血脂和体重" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "规律监测血糖、血压、血脂和体重；每年进行慢性并发症筛查，包括足病、视网膜病变及肾脏病等。" ;
+    dmo:evidenceQuote "规律监测血糖、血压、血脂和体重；每年进行慢性并发症筛查，包括足病、视网膜病变及肾脏病等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/进行呼吸功能锻炼> a dmo:Recommendation ;
+    rdfs:label "进行呼吸功能锻炼" ;
+    dmo:recommendationId "进行呼吸功能锻炼" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。" ;
+    dmo:evidenceQuote "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/进行营养支持> a dmo:Recommendation ;
+    rdfs:label "进行营养支持" ;
+    dmo:recommendationId "进行营养支持" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。" ;
+    dmo:evidenceQuote "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/进行运动训练> a dmo:Recommendation ;
+    rdfs:label "进行运动训练" ;
+    dmo:recommendationId "进行运动训练" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。" ;
+    dmo:evidenceQuote "其他常用非药物治疗包括戒烟、呼吸功能锻炼（如缩唇呼吸、腹式呼吸）、运动训练、营养支持等，可在医务人员指导下进行。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/适当运动> a dmo:Recommendation ;
+    rdfs:label "适当运动" ;
+    dmo:recommendationId "适当运动" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    dmo:evidenceQuote "平衡膳食，减少精制碳水化合物（如白米饭、面食、饼干等）和含糖饮料的摄入，适当运动、戒烟限酒、规律作息。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/通过激励措施鼓励体育活动> a dmo:Recommendation ;
+    rdfs:label "通过激励措施鼓励体育活动" ;
+    dmo:recommendationId "通过激励措施鼓励体育活动" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    dmo:evidenceQuote "积极组织健康促进活动，将血糖检测纳入年度体检项目；单位食堂提供低糖、少油、高纤维的健康食品；通过激励措施鼓励体育活动；关注员工心理健康，提供心理辅导渠道。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/避免二手烟暴露> a dmo:Recommendation ;
+    rdfs:label "避免二手烟暴露" ;
+    dmo:recommendationId "避免二手烟暴露" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    dmo:evidenceQuote "为预防慢阻肺病，首先要倡导健康生活方式，提倡科学运动与合理膳食，积极戒烟，避免二手烟暴露；要减少室内外空气污染，尽量选择清洁能源，改善厨房通风条件；在职业环境中做好防护，减少职业暴露；对于老年人、慢性病人群等，尤其要注意及时接种流感疫苗、肺炎球菌疫苗等；提倡高风险人群积极参与慢性呼吸系统疾病筛查，以便早期发现和治疗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/配备急救药品应对糖尿病相关突发情况> a dmo:Recommendation ;
+    rdfs:label "配备急救药品应对糖尿病相关突发情况" ;
+    dmo:recommendationId "配备急救药品应对糖尿病相关突发情况" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "建立包容、支持性的工作环境，消除对糖尿病的误解，为患病员工提供必要关怀和支持，并配备急救药品应对糖尿病相关突发情况。" ;
+    dmo:evidenceQuote "建立包容、支持性的工作环境，消除对糖尿病的误解，为患病员工提供必要关怀和支持，并配备急救药品应对糖尿病相关突发情况。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/长期-规律使用治疗药物> a dmo:Recommendation ;
+    rdfs:label "长期、规律使用治疗药物" ;
+    dmo:recommendationId "长期-规律使用治疗药物" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "慢阻肺病患者需严格遵循医嘱长期、规律使用治疗药物；戒烟，做好呼吸道防护，减少职业性粉尘、有害气体及室内外空气污染的暴露；结合个人情况进行适量运动，改善运动耐量，缓解呼吸困难症状；主动利用基本公共卫生服务，配合医务人员进行连续、规范的慢性病健康管理。" ;
+    dmo:evidenceQuote "慢阻肺病患者需严格遵循医嘱长期、规律使用治疗药物；戒烟，做好呼吸道防护，减少职业性粉尘、有害气体及室内外空气污染的暴露；结合个人情况进行适量运动，改善运动耐量，缓解呼吸困难症状；主动利用基本公共卫生服务，配合医务人员进行连续、规范的慢性病健康管理。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/recommendation/长期-规范-个体化治疗> a dmo:Recommendation ;
+    rdfs:label "长期、规范、个体化治疗" ;
+    dmo:recommendationId "长期-规范-个体化治疗" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "一旦确诊慢阻肺病，需遵循“长期、规范、个体化”的治疗原则，目标是减轻症状、提高生活质量、减少急性加重。" ;
+    dmo:evidenceQuote "一旦确诊慢阻肺病，需遵循“长期、规范、个体化”的治疗原则，目标是减轻症状、提高生活质量、减少急性加重。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/吸烟> a dmo:RiskFactor ;
+    rdfs:label "吸烟" ;
+    dmo:evidenceNote "文档中明确指出吸烟是慢阻肺病的主要危险因素，且可通过戒烟进行干预。" ;
+    dmo:name "吸烟" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "吸烟" ;
+    dmo:evidenceQuote "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/室内外空气污染> a dmo:RiskFactor ;
+    rdfs:label "室内外空气污染" ;
+    dmo:evidenceNote "文档中明确指出室内外空气污染是慢阻肺病的危险因素，且可通过改善通风、使用清洁能源等方式干预。" ;
+    dmo:name "室内外空气污染" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "室内外空气污染" ;
+    dmo:evidenceQuote "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/幼年时期的呼吸道感染> a dmo:RiskFactor ;
+    rdfs:label "幼年时期的呼吸道感染" ;
+    dmo:evidenceNote "文档中明确指出幼年时期的呼吸道感染是慢阻肺病的危险因素，且不可改变。" ;
+    dmo:name "幼年时期的呼吸道感染" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "幼年时期的呼吸道感染" ;
+    dmo:evidenceQuote "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/有巨大儿-出生体重-4kg-分娩史或妊娠糖尿病史> a dmo:RiskFactor ;
+    rdfs:label "有巨大儿（出生体重≥4Kg）分娩史或妊娠糖尿病史" ;
+    dmo:evidenceNote "文档中明确指出有巨大儿分娩史或妊娠糖尿病史是糖尿病的高危因素，属于妊娠相关因素。" ;
+    dmo:name "有巨大儿（出生体重≥4Kg）分娩史或妊娠糖尿病史" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "有巨大儿-出生体重-4kg-分娩史或妊娠糖尿病史" ;
+    dmo:evidenceQuote "9.有巨大儿（出生体重≥4Kg）分娩史或妊娠糖尿病史。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/职业暴露> a dmo:RiskFactor ;
+    rdfs:label "职业暴露" ;
+    dmo:evidenceNote "文档中明确指出职业暴露（如长期接触粉尘、化学物质等）是慢阻肺病的危险因素，且可通过职业防护进行干预。" ;
+    dmo:name "职业暴露" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "职业暴露" ;
+    dmo:evidenceQuote "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/超重与肥胖> a dmo:RiskFactor ;
+    rdfs:label "超重与肥胖" ;
+    dmo:evidenceNote "文档中明确指出超重与肥胖是糖尿病的风险因素，且可通过控制体重、合理膳食、适量运动等方式干预。" ;
+    dmo:name "超重与肥胖" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "超重与肥胖" ;
+    dmo:evidenceQuote "3.超重与肥胖[体重指数（BMI）≥24kg/m2和（或）中心型肥胖（男性腰围≥90cm,女性腰围≥85cm）]" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/riskFactor/遗传因素> a dmo:RiskFactor ;
+    rdfs:label "遗传因素" ;
+    dmo:evidenceNote "文档中明确指出遗传因素是慢阻肺病的危险因素，且不可改变。" ;
+    dmo:name "遗传因素" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "遗传因素" ;
+    dmo:evidenceQuote "慢阻肺病的危险因素主要包括吸烟、室内外空气污染、职业暴露（如长期接触粉尘、化学物质等）、遗传因素以及幼年时期的呼吸道感染等。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/咳痰> a dmo:Symptom ;
+    rdfs:label "咳痰" ;
+    dmo:name "咳痰" ;
+    dmo:symptomCode "咳痰" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "（一）慢性咳嗽、咳痰：晨起时明显，常被误认为是“吸烟者的正常现象”或“年纪大了”。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/多尿> a dmo:Symptom ;
+    rdfs:label "多尿" ;
+    dmo:name "多尿" ;
+    dmo:symptomCode "多尿" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "糖尿病的主要病理生理基础是体内胰岛素绝对或相对缺乏，或伴有胰岛素作用缺陷，即胰岛素抵抗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/多饮> a dmo:Symptom ;
+    rdfs:label "多饮" ;
+    dmo:name "多饮" ;
+    dmo:symptomCode "多饮" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "糖尿病的主要病理生理基础是体内胰岛素绝对或相对缺乏，或伴有胰岛素作用缺陷，即胰岛素抵抗。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/慢性咳嗽> a dmo:Symptom ;
+    rdfs:label "慢性咳嗽" ;
+    dmo:name "慢性咳嗽" ;
+    dmo:symptomCode "慢性咳嗽" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "（一）慢性咳嗽、咳痰：晨起时明显，常被误认为是“吸烟者的正常现象”或“年纪大了”。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/烂苹果味呼吸> a dmo:Symptom ;
+    rdfs:label "烂苹果味呼吸" ;
+    dmo:name "烂苹果味呼吸" ;
+    dmo:symptomCode "烂苹果味呼吸" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "糖尿病的危害主要表现为两方面：一是因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/进行性加重的气短或呼吸困难> a dmo:Symptom ;
+    rdfs:label "进行性加重的气短或呼吸困难" ;
+    dmo:name "进行性加重的气短或呼吸困难" ;
+    dmo:symptomCode "进行性加重的气短或呼吸困难" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "（二）进行性加重的气短或呼吸困难：最初仅在爬楼、快步走时感觉“气不够用”，逐渐发展到平路行走甚至休息时也感到憋气。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+<https://example.org/dmo/id/symptom/颤抖出汗> a dmo:Symptom ;
+    rdfs:label "颤抖出汗" ;
+    dmo:name "颤抖出汗" ;
+    dmo:symptomCode "颤抖出汗" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "糖尿病的危害主要表现为两方面：一是因急性高血糖引起的糖尿病酮症酸中毒、高渗性高血糖状态等急性并发症，如救治不及时可能危及生命。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/hyperosmolar-hyperglycemic-state> .
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-nephropathy> .
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-retinopathy> .
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/cardiovascular-disease> .
+<https://example.org/dmo/id/diabetesType/糖尿病前期> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-foot-ulcer> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:presentsWith <https://example.org/dmo/id/symptom/烂苹果味呼吸> .
+<https://example.org/dmo/id/complication/hyperosmolar-hyperglycemic-state> dmo:presentsWith <https://example.org/dmo/id/symptom/烂苹果味呼吸> .
+<https://example.org/dmo/id/complication/cardiovascular-disease> dmo:presentsWith <https://example.org/dmo/id/symptom/进行性加重的气短或呼吸困难> .
+<https://example.org/dmo/id/complication/diabetic-nephropathy> dmo:presentsWith <https://example.org/dmo/id/symptom/多尿> .
+<https://example.org/dmo/id/complication/diabetic-retinopathy> dmo:presentsWith <https://example.org/dmo/id/symptom/多饮> .
+<https://example.org/dmo/id/complication/diabetic-neuropathy> dmo:presentsWith <https://example.org/dmo/id/symptom/颤抖出汗> .
+<https://example.org/dmo/id/lifestyleIntervention/主动利用基本公共卫生服务> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/减少室内外空气污染> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/室内外空气污染> .
+<https://example.org/dmo/id/lifestyleIntervention/及时接种流感疫苗-肺炎球菌疫苗> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/幼年时期的呼吸道感染> .
+<https://example.org/dmo/id/lifestyleIntervention/合理膳食> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/呼吸功能锻炼-如缩唇呼吸-腹式呼吸> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/吸烟> .
+<https://example.org/dmo/id/lifestyleIntervention/平衡心理状态> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/戒烟限酒> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/吸烟> .
+<https://example.org/dmo/id/lifestyleIntervention/掌握正确的吸入药物使用方法> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/职业暴露> .
+<https://example.org/dmo/id/lifestyleIntervention/控制体重> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/科学运动与合理膳食> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/积极戒烟> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/吸烟> .
+<https://example.org/dmo/id/lifestyleIntervention/营养支持> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/运动训练> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .
+<https://example.org/dmo/id/lifestyleIntervention/适量运动> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/超重与肥胖> .

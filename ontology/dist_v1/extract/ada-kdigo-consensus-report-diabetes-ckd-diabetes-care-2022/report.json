@@ -1,0 +1,200 @@
+{
+  "source": {
+    "sourceId": "ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022",
+    "uri": "https://example.org/dmo/id/guidelineSource/ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022",
+    "localFile": "ontology/knowledges/pdfs/ADA-KDIGO-Consensus-Report-Diabetes-CKD-Diabetes-Care-2022.pdf",
+    "sha256": "e63a1f405f3dd7acbd9f45641231dc61493a3f54bf845ec1261fc05b57c8bd58",
+    "byteSize": 3799267,
+    "graphUri": "urn:dmo:extract:ada-kdigo-consensus-report-diabetes-ckd-diabetes-care-2022",
+    "documentFormat": "pdf",
+    "pageCount": 16,
+    "textPageCount": 16
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 18,
+  "counts": {
+    "rawRecords": 503,
+    "accepted": 183,
+    "rejected": 320,
+    "entities": 161,
+    "edges": 36,
+    "danglingRelations": 39,
+    "mergeConflicts": 70
+  },
+  "quality": {
+    "quoteHitRate": 0.3638,
+    "schemaSlotCoverage": 0.9839,
+    "danglingRelationRate": 0.52,
+    "avgMentionsPerEntity": 1.14
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 295,
+    "quote_too_short": 25
+  },
+  "linkPass": {
+    "candidates": 126,
+    "accepted": 24,
+    "rejectedByReason": {
+      "quote_not_found": 92,
+      "target_unresolved": 10
+    }
+  },
+  "entitiesByType": {
+    "medication": 43,
+    "recommendation": 32,
+    "drugClass": 14,
+    "contraindication": 14,
+    "complication": 9,
+    "riskFactor": 7,
+    "labTest": 7,
+    "monitoringSchedule": 6,
+    "lifestyleIntervention": 6,
+    "adverseEffect": 6,
+    "symptom": 6,
+    "diabetesType": 4,
+    "complicationStage": 4,
+    "device": 3
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio",
+      "predicate": "hasThreshold",
+      "target": "ACR ≥30 mg/g"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate",
+      "predicate": "hasThreshold",
+      "target": "eGFR <60 mL/min/1.73 m2"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/urine-albumin-to-creatinine-ratio",
+      "predicate": "schedulesTest",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/estimated-glomerular-filtration-rate",
+      "predicate": "schedulesTest",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/diagnose-ckd-based-on-persistent-abnormalities",
+      "predicate": "appliesToType",
+      "target": "Screening for CKD in People with Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/initiate-evidence-based-treatments-after-ckd-diagnosis",
+      "predicate": "appliesToType",
+      "target": "Diagnose CKD Based on Persistent Abnormalities"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/include-lifestyle-interventions-in-overall-care-plan",
+      "predicate": "appliesToType",
+      "target": "Use Multidisciplinary Team Care for Diabetes and CKD Management"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Cardiovascular Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose",
+      "predicate": "targetsComplication",
+      "target": "Hypertension"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose",
+      "predicate": "recommendsDrugClass",
+      "target": "ACE inhibitor"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/an-acei-or-arb-is-recommended-for-patients-with-t1d-or-t2d-who-have-hypertension-and-albuminuria-titrated-to-the-maximum-antihypertensive-or-highest-tolerated-dose",
+      "predicate": "recommendsDrugClass",
+      "target": "ARB"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/acute-kidney-injury",
+      "predicate": "increasesRiskOf",
+      "target": "Metformin-Associated Lactic Acidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Diabetic ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Volume depletion"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Genital mycotic infections"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/glp-1-receptor-agonists",
+      "predicate": "hasContraindication",
+      "target": "Nausea/vomiting/diarrhea"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/glp-1-receptor-agonists",
+      "predicate": "hasContraindication",
+      "target": "Hypoglycemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/metformin",
+      "predicate": "hasContraindication",
+      "target": "B12 malabsorption"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-of-an-sglt2i-or-glp-1-receptor-agonist-in-patients-with-t2d-who-have-established-ascvd-or-established-kidney-disease",
+      "predicate": "citesSource",
+      "target": "ADA Living Standards of Care Guideline Update Process"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/t1d: name: 'T1D' vs 'Type 1 Diabetes'",
+    "diabetesType/t2d: name: 'T2D' vs 'Type 2 Diabetes'",
+    "labTest/urine-albumin-to-creatinine-ratio: name: 'Urine Albumin-to-Creatinine Ratio' vs 'urine albumin-to-creatinine ratio'",
+    "labTest/urine-albumin-to-creatinine-ratio: loincCode: '2951-2' vs '29515-2'",
+    "labTest/urine-albumin-to-creatinine-ratio: unitOfMeasure: 'mg/g' vs 'mg-per-g'",
+    "labTest/urine-albumin-to-creatinine-ratio: definition: 'Persistent urine ACR ≥30 mg/g defines CKD diagnosis.' vs 'urine albumin-to-creatinine ratio'",
+    "labTest/estimated-glomerular-filtration-rate: loincCode: '30954-2' vs '21600-0'",
+    "labTest/estimated-glomerular-filtration-rate: unitOfMeasure: 'mL/min/1.73 m2' vs 'mL-per-min-per-1.73-m2'",
+    "labTest/estimated-glomerular-filtration-rate: definition: 'Persistent eGFR <60 mL/min/1.73 m2 defines CKD diagnosis.' vs 'A measure of kidney function based on serum creatinine, age, sex, and race, used to stage chronic kidney disease.'",
+    "complication/chronic-kidney-disease: mondoCode: 'MONDO:0005146' vs 'MONDO:0005148'",
+    "complication/chronic-kidney-disease: definition: 'Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD and should lead to immediate initiation of evidence-based treatments.' vs 'CKD is a condition characterized by reduced kidney function or structural damage, often associated with diabetes and contributing to increased risk of cardiovascular events and mortality.'",
+    "complication/chronic-kidney-disease: mondoCode: 'MONDO:0005146' vs 'MONDO:0005737'",
+    "complication/chronic-kidney-disease: definition: 'Persistent abnormalities in either urine ACR or eGFR (or both) diagnose CKD and should lead to immediate initiation of evidence-based treatments.' vs 'Chronic kidney disease (CKD) is a condition characterized by reduced kidney function over a period of time, often defined by an estimated glomerular filtration rate (eGFR) <60 mL/min/1.73 m² for at least 3 months.'",
+    "riskFactor/smoking: name: 'Smoking' vs 'smoking'",
+    "medication/sglt2i: name: 'SGLT2i' vs 'SGLT2 inhibitor'",
+    "medication/glp-1-ra: name: 'GLP-1 RA' vs 'GLP-1 receptor agonist'",
+    "medication/nonsteroidal-mra: name: 'Nonsteroidal MRA' vs 'nonsteroidal mineralocorticoid receptor antagonist'",
+    "medication/dihydropyridine-ccb: name: 'Dihydropyridine CCB' vs 'dihydropyridine calcium channel blocker'",
+    "medication/antiplatelet-agent: name: 'Antiplatelet agent' vs 'antiplatelet agent'",
+    "medication/steroidal-mra: name: 'Steroidal MRA' vs 'steroidal mineralocorticoid receptor antagonist'"
+  ]
+}

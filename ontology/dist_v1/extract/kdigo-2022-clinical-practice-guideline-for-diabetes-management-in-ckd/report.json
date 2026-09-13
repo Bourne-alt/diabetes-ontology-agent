@@ -1,0 +1,203 @@
+{
+  "source": {
+    "sourceId": "kdigo-2022-clinical-practice-guideline-for-diabetes-management-in-ckd",
+    "uri": "https://example.org/dmo/id/guidelineSource/kdigo-2022-clinical-practice-guideline-for-diabetes-management-in-ckd",
+    "localFile": "ontology/knowledges/pdfs/KDIGO-2022-Clinical-Practice-Guideline-for-Diabetes-Management-in-CKD.pdf",
+    "sha256": "d2889a8b699ea103129c9f8f8df56c53557993741702e3140e3bd37fb96eb1fb",
+    "byteSize": 8242002,
+    "graphUri": "urn:dmo:extract:kdigo-2022-clinical-practice-guideline-for-diabetes-management-in-ckd",
+    "documentFormat": "pdf",
+    "pageCount": 128,
+    "textPageCount": 128
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 123,
+  "counts": {
+    "rawRecords": 1839,
+    "accepted": 902,
+    "rejected": 937,
+    "entities": 568,
+    "edges": 96,
+    "danglingRelations": 338,
+    "mergeConflicts": 639
+  },
+  "quality": {
+    "quoteHitRate": 0.4905,
+    "schemaSlotCoverage": 0.9839,
+    "danglingRelationRate": 0.7788,
+    "avgMentionsPerEntity": 1.59
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 840,
+    "quote_too_short": 74,
+    "unknown_relation_predicate": 23
+  },
+  "linkPass": {
+    "candidates": 44,
+    "accepted": 9,
+    "rejectedByReason": {
+      "quote_not_found": 14,
+      "target_unresolved": 2,
+      "duplicate": 1,
+      "source_unresolved": 18
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 118,
+    "lifestyleIntervention": 85,
+    "medication": 80,
+    "riskFactor": 70,
+    "contraindication": 44,
+    "labTest": 39,
+    "complication": 34,
+    "adverseEffect": 23,
+    "drugClass": 21,
+    "monitoringSchedule": 21,
+    "device": 12,
+    "complicationStage": 10,
+    "diabetesType": 8,
+    "symptom": 3
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2i",
+      "predicate": "hasContraindication",
+      "target": "volume depletion"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2i",
+      "predicate": "hasContraindication",
+      "target": "genital infections"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2i",
+      "predicate": "hasContraindication",
+      "target": "lower-limb amputation due to foot ulcerations"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2i",
+      "predicate": "hasContraindication",
+      "target": "urinary tract infections"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2i",
+      "predicate": "hasContraindication",
+      "target": "kidney transplant recipients"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2i",
+      "predicate": "hasContraindication",
+      "target": "hyperkalemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/continuous-glucose-monitoring",
+      "predicate": "deviceMeasuresTest",
+      "target": "glucose"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/albumin-to-creatinine-ratio",
+      "predicate": "hasThreshold",
+      "target": "A1"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/albumin-to-creatinine-ratio",
+      "predicate": "hasThreshold",
+      "target": "A2"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/albumin-to-creatinine-ratio",
+      "predicate": "hasThreshold",
+      "target": "A3"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/glycated-hemoglobin",
+      "predicate": "hasThreshold",
+      "target": "DCCT (%)"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/albuminuria",
+      "predicate": "hasThreshold",
+      "target": "Moderately increased albuminuria"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/albuminuria",
+      "predicate": "hasThreshold",
+      "target": "Severely increased albuminuria"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/cardiovascular-disease",
+      "predicate": "presentsWith",
+      "target": "Albuminuria"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/albuminuria",
+      "predicate": "presentsWith",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Cardiovascular Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Kidney Disease Progression"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Atherosclerotic Cardiovascular Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Cardiovascular Complications"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Kidney Disease"
+    }
+  ],
+  "conflictSamples": [
+    "drugClass/glp-1-ra: mechanism: 'Glucagon-like peptide-1 receptor agonist' vs 'Activates glucagon-like peptide-1 receptors, enhancing glucose-dependent insulin secretion and suppressing glucagon secretion'",
+    "drugClass/glp-1-ra: mechanism: 'Glucagon-like peptide-1 receptor agonist' vs 'Activates glucagon-like peptide-1 receptors, enhancing glucose-dependent insulin secretion and suppressing glucagon secretion'",
+    "drugClass/glp-1-ra: mechanism: 'Glucagon-like peptide-1 receptor agonist' vs 'Enhance glucose-dependent insulin secretion, suppress inappropriately high glucagon secretion, slow gastric emptying, and promote satiety.'",
+    "drugClass/sglt2i: mechanism: 'Sodium-glucose co-transporter 2 inhibitor' vs 'Inhibits sodium-glucose cotransporter-2 in the proximal tubule, promoting urinary glucose excretion'",
+    "drugClass/sglt2i: mechanism: 'Sodium-glucose co-transporter 2 inhibitor' vs 'Inhibits sodium-glucose cotransporter-2 in the proximal tubule, promoting urinary glucose excretion'",
+    "drugClass/sglt2i: mechanism: 'Sodium-glucose co-transporter 2 inhibitor' vs 'Inhibits sodium-glucose co-transporter 2 in the proximal tubule of the kidney, promoting urinary glucose excretion and lowering blood glucose levels.'",
+    "drugClass/sglt2i: mechanism: 'Sodium-glucose co-transporter 2 inhibitor' vs 'inhibits sodium-glucose co-transporter 2 in the proximal tubule, leading to increased urinary glucose excretion'",
+    "drugClass/sglt2i: weightEffect: 'Loss' vs 'Neutral'",
+    "drugClass/sglt2i: mechanism: 'Sodium-glucose co-transporter 2 inhibitor' vs 'Sodium-glucose co-transporter 2 inhibitors'",
+    "drugClass/insulin: mechanism: 'Insulin replacement therapy' vs 'Exogenous insulin replacement to lower blood glucose levels.'",
+    "drugClass/insulin: mechanism: 'Insulin replacement therapy' vs 'Directly replaces endogenous insulin, promoting glucose uptake in muscle and adipose tissue and suppressing hepatic glucose production.'",
+    "drugClass/insulin: name: 'Insulin' vs 'insulin'",
+    "drugClass/insulin: mechanism: 'Insulin replacement therapy' vs 'Insulin lowers blood glucose by promoting glucose uptake in muscle and fat and inhibiting hepatic glucose production.'",
+    "drugClass/insulin: atcCode: 'A10A' vs 'A10AA01'",
+    "drugClass/insulin: mechanism: 'Insulin replacement therapy' vs 'Directly lowers blood glucose by promoting glucose uptake in muscle and fat and inhibiting hepatic glucose production.'",
+    "medication/insulin-degludec: name: 'Insulin degludec' vs 'insulin degludec'",
+    "medication/insulin-glargine: name: 'Insulin glargine' vs 'insulin glargine'",
+    "medication/insulin-glargine: name: 'Insulin glargine' vs 'insulin glargine'",
+    "medication/insulin-glargine: name: 'Insulin glargine' vs 'insulin glargine'",
+    "medication/thiazolidinedione: name: 'Thiazolidinedione' vs 'thiazolidinedione'"
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "sourcePptx": "/Users/fabivs/myfile/code/diabetes-ontology-agent/output-claude/project-presentation-with-architecture.pptx",
+  "workspace": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams",
+  "outDir": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect",
+  "generatedAt": "2026-08-24T13:42:32.487Z",
+  "slideCount": 11,
+  "slideArtifacts": [
+    {
+      "slide": 1,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-01.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-01.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-01.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-01.layout.json"
+    },
+    {
+      "slide": 2,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-02.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-02.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-02.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-02.layout.json"
+    },
+    {
+      "slide": 3,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-03.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-03.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-03.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-03.layout.json"
+    },
+    {
+      "slide": 4,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-04.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-04.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-04.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-04.layout.json"
+    },
+    {
+      "slide": 5,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-05.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-05.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-05.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-05.layout.json"
+    },
+    {
+      "slide": 6,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-06.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-06.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-06.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-06.layout.json"
+    },
+    {
+      "slide": 7,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-07.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-07.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-07.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-07.layout.json"
+    },
+    {
+      "slide": 8,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-08.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-08.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-08.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-08.layout.json"
+    },
+    {
+      "slide": 9,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-09.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-09.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-09.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-09.layout.json"
+    },
+    {
+      "slide": 10,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-10.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-10.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-10.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-10.layout.json"
+    },
+    {
+      "slide": 11,
+      "previewPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/source-slides/source-slide-11.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-11.png",
+      "layoutPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/layouts/source-slide-11.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-11.layout.json"
+    }
+  ],
+  "inspectPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-inspect/template-inspect.ndjson",
+  "inspectRelativePath": "template-inspect/template-inspect.ndjson",
+  "inspectTruncated": true,
+  "inspectMetadata": {
+    "revision": "ut70fx",
+    "target": {
+      "id": "pr/u2xlcv"
+    },
+    "kind": {
+      "requested": "slide,textbox,shape,image,table,chart",
+      "tokens": [
+        "slide",
+        "textbox",
+        "shape",
+        "image",
+        "table",
+        "chart"
+      ]
+    },
+    "include": {
+      "tokens": []
+    },
+    "exclude": {
+      "tokens": []
+    },
+    "notices": []
+  },
+  "extractedMedia": [],
+  "fonts": [
+    "+mj-lt",
+    "+mn-lt",
+    "Angsana New",
+    "Arial",
+    "Calibri",
+    "Calibri Light",
+    "Cordia New",
+    "Courier New",
+    "DaunPenh",
+    "DokChampa",
+    "Ebrima",
+    "Estrangelo Edessa",
+    "Euphemia",
+    "Gautami",
+    "Iskoola Pota",
+    "Javanese Text",
+    "Kalinga",
+    "Kartika",
+    "Latha",
+    "Leelawadee UI",
+    "MV Boli",
+    "Mangal",
+    "Microsoft Himalaya",
+    "Microsoft JhengHei",
+    "Microsoft New Tai Lue",
+    "Microsoft Tai Le",
+    "Microsoft Uighur",
+    "Microsoft Yi Baiti",
+    "Mongolian Baiti",
+    "MoolBoran",
+    "Myanmar Text",
+    "Nirmala UI",
+    "Nyala",
+    "Phagspa",
+    "Plantagenet Cherokee",
+    "Raavi",
+    "Segoe UI",
+    "Shruti",
+    "Sylfaen",
+    "Times New Roman",
+    "Tunga",
+    "Vrinda",
+    "新細明體",
+    "游ゴシック",
+    "游ゴシック Light",
+    "等线",
+    "等线 Light",
+    "맑은 고딕"
+  ],
+  "packageParts": {
+    "mediaCount": 0,
+    "slideXmlCount": 11,
+    "chartCount": 0,
+    "tableSlideCount": 0
+  }
+}

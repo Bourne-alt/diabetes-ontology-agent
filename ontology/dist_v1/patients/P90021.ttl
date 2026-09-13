@@ -1,0 +1,80 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/7b963cf6-d48c-59a5-bc51-7a0fe26f9ade> a dmo:Patient ;
+    dmo:birthYear 1978 ;
+    dmo:demoScenario "S18" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90021-ACT>,
+        <https://example.org/dmo/id/observation/O90021-BMI>,
+        <https://example.org/dmo/id/observation/O90021-SMOKE> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90021-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90021-1> ;
+    dmo:patientId "P90021" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/diagnosis/D90021-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S18" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90021-1> ;
+    dmo:diagnosedDate "2022-09-05"^^xsd:date ;
+    dmo:diagnosisId "D90021-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90021-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S18" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90021-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 7.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90021-ACT> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S18" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90021-ACT" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90021-1> ;
+    dmo:observationType "PhysicalActivityPerWeek" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "per-week" ;
+    dmo:valueDecimal 5.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90021-BMI> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S18" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90021-BMI" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90021-1> ;
+    dmo:observationType "BMI" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "kg-per-m2" ;
+    dmo:valueDecimal 26.4 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90021-SMOKE> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S18" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90021-SMOKE" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90021-1> ;
+    dmo:observationType "SmokingStatus" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "Never" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90021-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-09"^^xsd:date ;
+    dmo:encounterId "E90021-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90021-A1C> .
+

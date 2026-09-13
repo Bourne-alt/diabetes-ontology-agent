@@ -1,0 +1,445 @@
+{"kind":"deck","id":"pr/pwjpm3","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"DEFAULT"}
+{"kind":"slide","id":"sl/275ep0","slide":1,"title":"DMO","textShapes":14}
+{"kind":"shape","id":"sh/2dwj6t4v","slide":1,"name":"Shape 0","bbox":[86.4,86.4,82.56,59.52]}
+{"kind":"textbox","id":"sh/nep0zylg","slide":1,"name":"Text 1","text":"DMO","textPreview":"DMO","textChars":3,"textLines":1,"bbox":[86.4,86.4,82.56,59.52]}
+{"kind":"textbox","id":"sh/c3y1c3mx","slide":1,"name":"Text 2","text":"Diabetes Ontology Agent","textPreview":"Diabetes Ontology Agent","textChars":23,"textLines":1,"bbox":[187.2,86.4,576,32.64]}
+{"kind":"textbox","id":"sh/x472583i","slide":1,"name":"Text 3","text":"糖尿病本体知识库 × 患者事实库 × 证据型智能体","textPreview":"糖尿病本体知识库 × 患者事实库 × 证据型智能体","textChars":25,"textLines":1,"bbox":[187.2,119.04,576,26.88]}
+{"kind":"textbox","id":"sh/ahgjad4r","slide":1,"name":"Text 4","text":"让 AI 说的每一句话\n都能查到出处","textPreview":"让 AI 说的每一句话 | 都能查到出处","textChars":18,"textLines":2,"bbox":[86.4,220.8,662.4,182.4]}
+{"kind":"textbox","id":"sh/b2pk3ylc","slide":1,"name":"Text 5","text":"把医学指南整理成机器能查的知识网，\n让智能体只能照着证据回答——查不到，就老实说查不到。","textPreview":"把医学指南整理成机器能查的知识网， | 让智能体只能照着证据回答——查不到，就老实说查不到。","textChars":44,"textLines":2,"bbox":[86.4,422.4,662.4,76.8]}
+{"kind":"shape","id":"sh/k7i1gnm9","slide":1,"name":"Shape 6","bbox":[86.4,571.2,537.6,49.92]}
+{"kind":"textbox","id":"sh/l8r29s3e","slide":1,"name":"Text 7","text":"技术验证 / 学习项目  ·  Not a Medical Device","textPreview":"技术验证 / 学习项目  ·  Not a Medical Device","textChars":36,"textLines":1,"bbox":[86.4,571.2,537.6,49.92]}
+{"kind":"shape","id":"sh/9cv6p432","slide":1,"name":"Shape 8","bbox":[806.4,165.12,403.2,82.56]}
+{"kind":"textbox","id":"sh/obmpwz2h","slide":1,"name":"Text 9","text":"这个人测了什么","textPreview":"这个人测了什么","textChars":7,"textLines":1,"bbox":[814.08,169.92,387.84,42.93]}
+{"kind":"textbox","id":"sh/nadonulw","slide":1,"name":"Text 10","text":"原始检查记录","textPreview":"原始检查记录","textChars":6,"textLines":1,"bbox":[814.08,210.53,387.84,33.02]}
+{"kind":"shape","id":"sh/m9k7upkb","slide":1,"name":"Shape 11","bbox":[1008,247.68,0,36.48]}
+{"kind":"shape","id":"sh/x0v6t43y","slide":1,"name":"Shape 12","bbox":[806.4,284.16,403.2,82.56]}
+{"kind":"textbox","id":"sh/wzmp0j2d","slide":1,"name":"Text 13","text":"这个数字可信吗","textPreview":"这个数字可信吗","textChars":7,"textLines":1,"bbox":[814.08,288.96,387.84,42.93]}
+{"kind":"textbox","id":"sh/bydorels","slide":1,"name":"Text 14","text":"单位 · 可信度","textPreview":"单位 · 可信度","textChars":8,"textLines":1,"bbox":[814.08,329.57,387.84,33.02]}
+{"kind":"shape","id":"sh/ax47y9k7","slide":1,"name":"Shape 15","bbox":[1008,366.72,0,36.48]}
+{"kind":"shape","id":"sh/d4b6hk3u","slide":1,"name":"Shape 16","bbox":[806.4,403.2,403.2,82.56]}
+{"kind":"textbox","id":"sh/s325of29","slide":1,"name":"Text 17","text":"指南怎么说","textPreview":"指南怎么说","textChars":5,"textLines":1,"bbox":[814.08,408,387.84,42.93]}
+{"kind":"textbox","id":"sh/4n6p4fa5","slide":1,"name":"Text 18","text":"切点 · 原文出处","textPreview":"切点 · 原文出处","textChars":9,"textLines":1,"bbox":[814.08,448.61,387.84,33.02]}
+{"kind":"shape","id":"sh/5of6xkbq","slide":1,"name":"Shape 19","bbox":[1008,485.76,0,36.48]}
+{"kind":"shape","id":"sh/il4725sz","slide":1,"name":"Shape 20","bbox":[806.4,522.24,403.2,82.56]}
+{"kind":"textbox","id":"sh/jmdovatk","slide":1,"name":"Text 21","text":"结论 + 出处 + 还缺什么","textPreview":"结论 + 出处 + 还缺什么","textChars":14,"textLines":1,"bbox":[814.08,527.04,387.84,42.93]}
+{"kind":"textbox","id":"sh/sr6p8za1","slide":1,"name":"Text 22","text":"可核查的答案","textPreview":"可核查的答案","textChars":6,"textLines":1,"bbox":[814.08,567.65,387.84,33.02]}
+{"kind":"notes","id":"nt/275ep0","slide":1,"text":""}
+{"kind":"slide","id":"sl/bqupsc","slide":2,"title":"先说清楚这是什么","textShapes":15}
+{"kind":"textbox","id":"sh/zy14fip0","slide":2,"name":"Text 0","text":"先说清楚这是什么","textPreview":"先说清楚这是什么","textChars":8,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/yxsn6dof","slide":2,"name":"Text 1","text":"它是给 AI 用的“查证工具”，不是会看病的 AI","textPreview":"它是给 AI 用的“查证工具”，不是会看病的 AI","textChars":25,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/9o36ls72","slide":2,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/8nu5c76h","slide":2,"name":"Text 3","text":"01 / 10","textPreview":"01 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/7mloj2pw","slide":2,"name":"Shape 4","bbox":[67.2,155.52,1145.57,42.24]}
+{"kind":"textbox","id":"sh/mlcnaxor","slide":2,"name":"Text 5","text":"把它想成三样东西凑在一起：一个整理过的书架、一个病历柜，和一个只会照着查、不许自己编的助手。","textPreview":"把它想成三样东西凑在一起：一个整理过的书架、一个病历柜，和一个只会照着查、不许自己编的助手。","textChars":46,"textLines":1,"bbox":[84.48,155.52,1111.01,42.24]}
+{"kind":"shape","id":"sh/psjm987y","slide":2,"name":"Shape 6","bbox":[67.2,225.6,363.84,316.8]}
+{"kind":"shape","id":"sh/ora5036d","slide":2,"name":"Shape 7","bbox":[97.92,257.28,96,14.4]}
+{"kind":"shape","id":"sh/i94fu5wv","slide":2,"name":"Shape 8","bbox":[97.92,278.4,80.64,14.4]}
+{"kind":"shape","id":"sh/jadw3axg","slide":2,"name":"Shape 9","bbox":[97.92,299.52,65.28,14.4]}
+{"kind":"textbox","id":"sh/4bmxwfe1","slide":2,"name":"Text 10","text":"知识书架","textPreview":"知识书架","textChars":4,"textLines":1,"bbox":[97.92,337.92,302.4,40.32]}
+{"kind":"textbox","id":"sh/5cve5kfm","slide":2,"name":"Text 11","text":"Knowledge","textPreview":"Knowledge","textChars":9,"textLines":1,"bbox":[97.92,380.16,302.4,24.96]}
+{"kind":"textbox","id":"sh/6dofypw7","slide":2,"name":"Text 12","text":"一本整理过的糖尿病知识库。\n每一条数值、每一句建议，都标着\n出自哪份指南的哪一句原话。","textPreview":"一本整理过的糖尿病知识库。 | 每一条数值、每一句建议，都标着 | 出自哪份指南的哪一句原话。","textChars":43,"textLines":3,"bbox":[97.92,416.64,302.4,105.6]}
+{"kind":"shape","id":"sh/rexw7uxs","slide":2,"name":"Shape 13","bbox":[457.92,225.6,363.84,316.8]}
+{"kind":"shape","id":"sh/sf6x0zed","slide":2,"name":"Shape 14","bbox":[488.64,255.36,96,69.12]}
+{"kind":"shape","id":"sh/d0fe9kvi","slide":2,"name":"Shape 15","bbox":[502.08,273.6,69.12,7.68]}
+{"kind":"shape","id":"sh/e1of2pw3","slide":2,"name":"Shape 16","bbox":[502.08,294.72,69.12,7.68]}
+{"kind":"textbox","id":"sh/f2xwbudo","slide":2,"name":"Text 17","text":"病历柜","textPreview":"病历柜","textChars":3,"textLines":1,"bbox":[488.64,337.92,302.4,40.32]}
+{"kind":"textbox","id":"sh/b6hwzutw","slide":2,"name":"Text 18","text":"Patient Facts","textPreview":"Patient Facts","textChars":13,"textLines":1,"bbox":[488.64,380.16,302.4,24.96]}
+{"kind":"textbox","id":"sh/a58vqpcb","slide":2,"name":"Text 19","text":"这位患者真实的检查记录。\n哪天测的、用什么单位、\n这个数字可不可信，都记着。","textPreview":"这位患者真实的检查记录。 | 哪天测的、用什么单位、 | 这个数字可不可信，都记着。","textChars":38,"textLines":3,"bbox":[488.64,416.64,302.4,105.6]}
+{"kind":"shape","id":"sh/x8ze14b2","slide":2,"name":"Shape 20","bbox":[848.64,225.6,363.84,316.8]}
+{"kind":"shape","id":"sh/c7qdszuh","slide":2,"name":"Shape 21","bbox":[879.36,251.52,59.52,59.52]}
+{"kind":"shape","id":"sh/n2xwvutk","slide":2,"name":"Shape 22","bbox":[931.2,303.36,28.8,26.88]}
+{"kind":"textbox","id":"sh/2hovmpcf","slide":2,"name":"Text 23","text":"查证助手","textPreview":"查证助手","textChars":4,"textLines":1,"bbox":[879.36,337.92,302.4,40.32]}
+{"kind":"textbox","id":"sh/p4fex4bq","slide":2,"name":"Text 24","text":"Agent","textPreview":"Agent","textChars":5,"textLines":1,"bbox":[879.36,380.16,302.4,24.96]}
+{"kind":"textbox","id":"sh/o36dozu5","slide":2,"name":"Text 25","text":"会翻书、会翻病历，但不许自己编。\n查不到就说查不到，\n判不了就说清楚为什么判不了。","textPreview":"会翻书、会翻病历，但不许自己编。 | 查不到就说查不到， | 判不了就说清楚为什么判不了。","textChars":41,"textLines":3,"bbox":[879.36,416.64,302.4,105.6]}
+{"kind":"textbox","id":"sh/fexcrato","slide":2,"name":"Text 26","text":"它的价值不是“多回答几个问题”，而是“每个回答都能被人当场核对”。","textPreview":"它的价值不是“多回答几个问题”，而是“每个回答都能被人当场核对”。","textChars":33,"textLines":1,"bbox":[67.2,571.2,1145.57,48]}
+{"kind":"notes","id":"nt/bqupsc","slide":2,"text":"开场不要讲技术。用三样东西把系统说清：一个整理过的知识书架、一个病历柜、一个只会照着查的助手。\n\n重点是最后那句话：这套系统追求的不是回答更多，而是每个回答都能被现场核对。后面每一页都在拆解这句话怎么落地。"}
+{"kind":"slide","id":"sl/h2a59l","slide":3,"title":"总体架构 · 一次回答如何被验证","textShapes":32}
+{"kind":"textbox","id":"sh/q1svyp0v","slide":3,"name":"Text 0","text":"总体架构 · 一次回答如何被验证","textPreview":"总体架构 · 一次回答如何被验证","textChars":16,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/r21wru10","slide":3,"name":"Text 1","text":"四层协作，让每个结论都能回到事实与来源","textPreview":"四层协作，让每个结论都能回到事实与来源","textChars":19,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/07ux4jix","slide":3,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/183ex4ji","slide":3,"name":"Text 3","text":"02 / 10","textPreview":"02 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/e5sf290r","slide":3,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/z61wve1c","slide":3,"name":"Text 5","text":"问题进入系统后，智能体只负责编排；事实核验、规则推理与证据回溯，都由确定性服务完成。","textPreview":"问题进入系统后，智能体只负责编排；事实核验、规则推理与证据回溯，都由确定性服务完成。","textChars":42,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"textbox","id":"sh/gbqdsf2d","slide":3,"name":"Text 6","text":"交互与编排","textPreview":"交互与编排","textChars":5,"textLines":1,"bbox":[67.2,206.4,249.6,28.8]}
+{"kind":"textbox","id":"sh/hczelkjy","slide":3,"name":"Text 7","text":"能力调用","textPreview":"能力调用","textChars":4,"textLines":1,"bbox":[364.8,206.4,249.6,28.8]}
+{"kind":"textbox","id":"sh/10jatsv6","slide":3,"name":"Text 8","text":"证据融合","textPreview":"证据融合","textChars":4,"textLines":1,"bbox":[662.4,206.4,249.6,28.8]}
+{"kind":"textbox","id":"sh/0zat0nel","slide":3,"name":"Text 9","text":"双库底座","textPreview":"双库底座","textChars":4,"textLines":1,"bbox":[960,206.4,249.6,28.8]}
+{"kind":"shape","id":"sh/fy1srid0","slide":3,"name":"Shape 10","bbox":[67.2,241.92,249.6,86.4]}
+{"kind":"textbox","id":"sh/exsbydwf","slide":3,"name":"Text 11","text":"用户问题","textPreview":"用户问题","textChars":4,"textLines":1,"bbox":[74.88,246.72,234.24,44.93]}
+{"kind":"textbox","id":"sh/pojaxsv2","slide":3,"name":"Text 12","text":"自然语言提出任务","textPreview":"自然语言提出任务","textChars":8,"textLines":1,"bbox":[74.88,289.44,234.24,34.56]}
+{"kind":"shape","id":"sh/onat4nex","slide":3,"name":"Shape 13","bbox":[67.2,378.24,249.6,86.4]}
+{"kind":"textbox","id":"sh/nm1sv2dc","slide":3,"name":"Text 14","text":"Agent 编排","textPreview":"Agent 编排","textChars":8,"textLines":1,"bbox":[74.88,383.04,234.24,44.93]}
+{"kind":"textbox","id":"sh/2lsb2xwr","slide":3,"name":"Text 15","text":"选择 Skill，不直接判断","textPreview":"选择 Skill，不直接判断","textChars":14,"textLines":1,"bbox":[74.88,425.76,234.24,34.56]}
+{"kind":"shape","id":"sh/xs3u1cve","slide":3,"name":"Shape 16","bbox":[364.8,241.92,249.6,78.72]}
+{"kind":"textbox","id":"sh/crut87ut","slide":3,"name":"Text 17","text":"Skills / Tools","textPreview":"Skills / Tools","textChars":14,"textLines":1,"bbox":[372.48,246.72,234.24,40.93]}
+{"kind":"textbox","id":"sh/wv2d4b25","slide":3,"name":"Text 18","text":"查询 · 推演 · 溯源 · 裁决","textPreview":"查询 · 推演 · 溯源 · 裁决","textChars":17,"textLines":1,"bbox":[372.48,285.22,234.24,31.49]}
+{"kind":"shape","id":"sh/hwbexg3q","slide":3,"name":"Shape 19","bbox":[364.8,333.12,249.6,78.72]}
+{"kind":"textbox","id":"sh/utkv21kz","slide":3,"name":"Text 20","text":"FastAPI / CLI","textPreview":"FastAPI / CLI","textChars":13,"textLines":1,"bbox":[372.48,337.92,234.24,40.93]}
+{"kind":"textbox","id":"sh/vutcv6lk","slide":3,"name":"Text 21","text":"稳定接口，统一返回","textPreview":"稳定接口，统一返回","textChars":9,"textLines":1,"bbox":[372.48,376.42,234.24,31.49]}
+{"kind":"shape","id":"sh/4z2d8v21","slide":3,"name":"Shape 22","bbox":[364.8,424.32,249.6,78.72]}
+{"kind":"textbox","id":"sh/50ve103m","slide":3,"name":"Text 23","text":"安全边界","textPreview":"安全边界","textChars":4,"textLines":1,"bbox":[372.48,429.12,234.24,40.93]}
+{"kind":"textbox","id":"sh/ixkv6lkv","slide":3,"name":"Text 24","text":"不猜测；证据不足就停","textPreview":"不猜测；证据不足就停","textChars":10,"textLines":1,"bbox":[372.48,467.62,234.24,31.49]}
+{"kind":"shape","id":"sh/jytwzqlg","slide":3,"name":"Shape 25","bbox":[662.4,241.92,249.6,78.72]}
+{"kind":"textbox","id":"sh/k3idwr2x","slide":3,"name":"Text 26","text":"SQL 收敛患者集","textPreview":"SQL 收敛患者集","textChars":9,"textLines":1,"bbox":[670.08,246.72,234.24,40.93]}
+{"kind":"textbox","id":"sh/l4rupw3i","slide":3,"name":"Text 27","text":"先缩小事实范围","textPreview":"先缩小事实范围","textChars":7,"textLines":1,"bbox":[670.08,285.22,234.24,31.49]}
+{"kind":"shape","id":"sh/nuhory9w","slide":3,"name":"Shape 28","bbox":[662.4,333.12,249.6,78.72]}
+{"kind":"textbox","id":"sh/2t87it8r","slide":3,"name":"Text 29","text":"SPARQL 语义推理","textPreview":"SPARQL 语义推理","textChars":11,"textLines":1,"bbox":[670.08,337.92,234.24,40.93]}
+{"kind":"textbox","id":"sh/pwjqt8r2","slide":3,"name":"Text 30","text":"本体 + 规则给出结论","textPreview":"本体 + 规则给出结论","textChars":11,"textLines":1,"bbox":[670.08,376.42,234.24,31.49]}
+{"kind":"shape","id":"sh/ovqpk3qh","slide":3,"name":"Shape 31","bbox":[662.4,424.32,249.6,78.72]}
+{"kind":"textbox","id":"sh/f6hone90","slide":3,"name":"Text 32","text":"证据回拼","textPreview":"证据回拼","textChars":4,"textLines":1,"bbox":[670.08,429.12,234.24,40.93]}
+{"kind":"textbox","id":"sh/e587e98f","slide":3,"name":"Text 33","text":"source_pk 回到原始记录","textPreview":"source_pk 回到原始记录","textChars":16,"textLines":1,"bbox":[670.08,467.62,234.24,31.49]}
+{"kind":"shape","id":"sh/18z6por6","slide":3,"name":"Shape 34","bbox":[960,241.92,249.6,86.4]}
+{"kind":"textbox","id":"sh/07qpgjql","slide":3,"name":"Text 35","text":"PostgreSQL","textPreview":"PostgreSQL","textChars":10,"textLines":1,"bbox":[967.68,246.72,234.24,44.93]}
+{"kind":"textbox","id":"sh/r2xoje94","slide":3,"name":"Text 36","text":"患者事实 · 单位 · 时间","textPreview":"患者事实 · 单位 · 时间","textChars":14,"textLines":1,"bbox":[967.68,289.44,234.24,34.56]}
+{"kind":"shape","id":"sh/q1o7a98j","slide":3,"name":"Shape 37","bbox":[960,378.24,249.6,86.4]}
+{"kind":"textbox","id":"sh/698beh43","slide":3,"name":"Text 38","text":"GraphDB","textPreview":"GraphDB","textChars":7,"textLines":1,"bbox":[967.68,383.04,234.24,44.93]}
+{"kind":"textbox","id":"sh/7ahsn25o","slide":3,"name":"Text 39","text":"本体 · 规则 · 来源","textPreview":"本体 · 规则 · 来源","textChars":12,"textLines":1,"bbox":[967.68,425.76,234.24,34.56]}
+{"kind":"shape","id":"sh/sbatg7m9","slide":3,"name":"Shape 40","bbox":[324.48,355.2,32.64,0]}
+{"kind":"shape","id":"sh/tcjapcne","slide":3,"name":"Shape 41","bbox":[622.08,355.2,32.64,0]}
+{"kind":"shape","id":"sh/yl8bax4r","slide":3,"name":"Shape 42","bbox":[919.68,355.2,32.64,0]}
+{"kind":"shape","id":"sh/j6hsj25c","slide":3,"name":"Shape 43","bbox":[364.8,520.32,547.2,59.52]}
+{"kind":"textbox","id":"sh/k7qtc7mx","slide":3,"name":"Text 44","text":"LLM 负责理解与编排","textPreview":"LLM 负责理解与编排","textChars":11,"textLines":1,"bbox":[382.08,520.32,278.4,59.52]}
+{"kind":"textbox","id":"sh/58zalcni","slide":3,"name":"Text 45","text":"临床结论不由模型自由生成","textPreview":"临床结论不由模型自由生成","textChars":12,"textLines":1,"bbox":[672,520.32,230.4,59.52]}
+{"kind":"shape","id":"sh/ahor6dov","slide":3,"name":"Shape 46","bbox":[67.2,599.04,1145.57,46.08]}
+{"kind":"textbox","id":"sh/bixsfi5g","slide":3,"name":"Text 47","text":"返回“证据收据”：结论状态 · 规则依据 · 来源 · 原始事实 · 证据缺口","textPreview":"返回“证据收据”：结论状态 · 规则依据 · 来源 · 原始事实 · 证据缺口","textChars":39,"textLines":1,"bbox":[88.32,599.04,1103.33,46.08]}
+{"kind":"notes","id":"nt/h2a59l","slide":3,"text":"这一页回答“知识从哪来”。三个要点：\n\n可重建——概念框架是一份文件，骨架自动生成，不靠人工在多个格式里同步。\n可追踪——每份指南文件按内容算指纹，改一个字指纹就变，能定位是哪一版。\n可把关——三道体检不过就进不了库。\n\n最关键的是那个红色标记：诊断切点和控制目标不让 AI 生成。一个切点错 0.1，患者结论就变了，所以这类数字由人写死。AI 只做“照原文摘句子”，不下判断。\n\n底部状态要照实讲，不要说成全绿。"}
+{"kind":"slide","id":"sl/eb5y2a","slide":4,"title":"一 · 知识库是怎么建出来的","textShapes":32}
+{"kind":"textbox","id":"sh/h4ryhwfe","slide":4,"name":"Text 0","text":"一 · 知识库是怎么建出来的","textPreview":"一 · 知识库是怎么建出来的","textChars":14,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/g3ih8ret","slide":4,"name":"Text 1","text":"知识库不是手写出来的，是“造”出来的","textPreview":"知识库不是手写出来的，是“造”出来的","textChars":18,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/7ypgbmxc","slide":4,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/6xgz2hwr","slide":4,"name":"Text 3","text":"03 / 10","textPreview":"03 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/t07ydwfi","slide":4,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/szyh4rex","slide":4,"name":"Text 5","text":"从一份概念框架和几份指南原文出发，经过加工和三道体检，才变成机器能直接查的知识网。每一步都留痕，改了什么、谁改的，都查得到。","textPreview":"从一份概念框架和几份指南原文出发，经过加工和三道体检，才变成机器能直接查的知识网。每一步都留痕，改了什么、谁改的，都查得到。","textChars":62,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"textbox","id":"sh/ru90n6xg","slide":4,"name":"Text 6","text":"原料","textPreview":"原料","textChars":2,"textLines":1,"bbox":[67.2,206.4,249.6,28.8]}
+{"kind":"textbox","id":"sh/qt0ze1wv","slide":4,"name":"Text 7","text":"加工","textPreview":"加工","textChars":2,"textLines":1,"bbox":[364.8,206.4,249.6,28.8]}
+{"kind":"textbox","id":"sh/kbu5k7yd","slide":4,"name":"Text 8","text":"把关","textPreview":"把关","textChars":2,"textLines":1,"bbox":[662.4,206.4,249.6,28.8]}
+{"kind":"textbox","id":"sh/lc3mdczy","slide":4,"name":"Text 9","text":"成品","textPreview":"成品","textChars":2,"textLines":1,"bbox":[960,206.4,249.6,28.8]}
+{"kind":"shape","id":"sh/y9cnixgn","slide":4,"name":"Shape 10","bbox":[67.2,241.92,249.6,86.4]}
+{"kind":"textbox","id":"sh/jal4b2h8","slide":4,"name":"Text 11","text":"概念框架","textPreview":"概念框架","textChars":4,"textLines":1,"bbox":[74.88,246.72,234.24,44.93]}
+{"kind":"textbox","id":"sh/w7a5g7yh","slide":4,"name":"Text 12","text":"有哪些概念、谁连谁","textPreview":"有哪些概念、谁连谁","textChars":9,"textLines":1,"bbox":[74.88,289.44,234.24,34.56]}
+{"kind":"shape","id":"sh/x83m9sz2","slide":4,"name":"Shape 13","bbox":[67.2,378.24,249.6,86.4]}
+{"kind":"textbox","id":"sh/a5snexgb","slide":4,"name":"Text 14","text":"指南原文","textPreview":"指南原文","textChars":4,"textLines":1,"bbox":[74.88,383.04,234.24,44.93]}
+{"kind":"textbox","id":"sh/b61472hw","slide":4,"name":"Text 15","text":"TXT / PDF 文件","textPreview":"TXT / PDF 文件","textChars":12,"textLines":1,"bbox":[74.88,425.76,234.24,34.56]}
+{"kind":"shape","id":"sh/o3alcnyl","slide":4,"name":"Shape 16","bbox":[364.8,241.92,249.6,78.72]}
+{"kind":"textbox","id":"sh/94jm5szq","slide":4,"name":"Text 17","text":"自动生成骨架","textPreview":"自动生成骨架","textChars":6,"textLines":1,"bbox":[372.48,246.72,234.24,40.93]}
+{"kind":"textbox","id":"sh/p0b29oru","slide":4,"name":"Text 18","text":"不用人工同步多份文件","textPreview":"不用人工同步多份文件","textChars":10,"textLines":1,"bbox":[372.48,285.22,234.24,31.49]}
+{"kind":"shape","id":"sh/oz2l0ja9","slide":4,"name":"Shape 19","bbox":[364.8,333.12,249.6,78.72]}
+{"kind":"textbox","id":"sh/3ytk7e9o","slide":4,"name":"Text 20","text":"给每份文件按内容算指纹","textPreview":"给每份文件按内容算指纹","textChars":11,"textLines":1,"bbox":[372.48,337.92,234.24,40.93]}
+{"kind":"textbox","id":"sh/2xkjy9s3","slide":4,"name":"Text 21","text":"改一个字，指纹就变","textPreview":"改一个字，指纹就变","textChars":9,"textLines":1,"bbox":[372.48,376.42,234.24,31.49]}
+{"kind":"shape","id":"sh/1wb254ri","slide":4,"name":"Shape 22","bbox":[364.8,424.32,249.6,78.72]}
+{"kind":"textbox","id":"sh/gbi1wzax","slide":4,"name":"Text 23","text":"让 AI 照原文摘句","textPreview":"让 AI 照原文摘句","textChars":10,"textLines":1,"bbox":[372.48,429.12,234.24,40.93]}
+{"kind":"textbox","id":"sh/fa9k3u9s","slide":4,"name":"Text 24","text":"只摘，不下判断","textPreview":"只摘，不下判断","textChars":7,"textLines":1,"bbox":[372.48,467.62,234.24,31.49]}
+{"kind":"shape","id":"sh/e90jups7","slide":4,"name":"Shape 25","bbox":[662.4,241.92,249.6,78.72]}
+{"kind":"textbox","id":"sh/lsv2h8r2","slide":4,"name":"Text 26","text":"结构体检","textPreview":"结构体检","textChars":4,"textLines":1,"bbox":[670.08,246.72,234.24,40.93]}
+{"kind":"textbox","id":"sh/07ml83ah","slide":4,"name":"Text 27","text":"格式和安全约束","textPreview":"格式和安全约束","textChars":7,"textLines":1,"bbox":[670.08,285.22,234.24,31.49]}
+{"kind":"shape","id":"sh/idgz258z","slide":4,"name":"Shape 28","bbox":[662.4,333.12,249.6,78.72]}
+{"kind":"textbox","id":"sh/jep0bqpk","slide":4,"name":"Text 29","text":"原文逐字核对","textPreview":"原文逐字核对","textChars":6,"textLines":1,"bbox":[670.08,337.92,234.24,40.93]}
+{"kind":"textbox","id":"sh/kfyh4vqp","slide":4,"name":"Text 30","text":"引用是不是真的那句话","textPreview":"引用是不是真的那句话","textChars":10,"textLines":1,"bbox":[670.08,376.42,234.24,31.49]}
+{"kind":"shape","id":"sh/5g7id07a","slide":4,"name":"Shape 31","bbox":[662.4,424.32,249.6,78.72]}
+{"kind":"textbox","id":"sh/a9wzyl8n","slide":4,"name":"Text 32","text":"装载验收","textPreview":"装载验收","textChars":4,"textLines":1,"bbox":[670.08,429.12,234.24,40.93]}
+{"kind":"textbox","id":"sh/va5g7qp8","slide":4,"name":"Text 33","text":"进库后再查一遍","textPreview":"进库后再查一遍","textChars":7,"textLines":1,"bbox":[670.08,467.62,234.24,31.49]}
+{"kind":"shape","id":"sh/wbeh0vqt","slide":4,"name":"Shape 34","bbox":[960,241.92,249.6,86.4]}
+{"kind":"textbox","id":"sh/xcni907e","slide":4,"name":"Text 35","text":"可查询的知识网","textPreview":"可查询的知识网","textChars":7,"textLines":1,"bbox":[967.68,246.72,234.24,44.93]}
+{"kind":"textbox","id":"sh/u50zap87","slide":4,"name":"Text 36","text":"概念 · 关系 · 出处","textPreview":"概念 · 关系 · 出处","textChars":12,"textLines":1,"bbox":[967.68,289.44,234.24,34.56]}
+{"kind":"shape","id":"sh/f690japc","slide":4,"name":"Shape 37","bbox":[960,378.24,249.6,86.4]}
+{"kind":"textbox","id":"sh/zy5wfmts","slide":4,"name":"Text 38","text":"可执行的判定规则","textPreview":"可执行的判定规则","textChars":8,"textLines":1,"bbox":[967.68,383.04,234.24,44.93]}
+{"kind":"textbox","id":"sh/exwv6hc7","slide":4,"name":"Text 39","text":"机器直接跑","textPreview":"机器直接跑","textChars":5,"textLines":1,"bbox":[967.68,425.76,234.24,34.56]}
+{"kind":"shape","id":"sh/107ehwby","slide":4,"name":"Shape 40","bbox":[324.48,355.2,32.64,0]}
+{"kind":"shape","id":"sh/0zyd8rud","slide":4,"name":"Shape 41","bbox":[622.08,355.2,32.64,0]}
+{"kind":"shape","id":"sh/ru5wb2tw","slide":4,"name":"Shape 42","bbox":[919.68,355.2,32.64,0]}
+{"kind":"shape","id":"sh/q9wv2xcb","slide":4,"name":"Shape 43","bbox":[364.8,520.32,547.2,59.52]}
+{"kind":"textbox","id":"sh/dwnedcb2","slide":4,"name":"Text 44","text":"×   诊断切点 · 控制目标","textPreview":"×   诊断切点 · 控制目标","textChars":15,"textLines":1,"bbox":[382.08,520.32,278.4,59.52]}
+{"kind":"textbox","id":"sh/cved47uh","slide":4,"name":"Text 45","text":"由人工写定，AI 不参与","textPreview":"由人工写定，AI 不参与","textChars":12,"textLines":1,"bbox":[672,520.32,230.4,59.52]}
+{"kind":"shape","id":"sh/bq9wn6t0","slide":4,"name":"Shape 46","bbox":[67.2,599.04,1145.57,46.08]}
+{"kind":"textbox","id":"sh/apgve1sf","slide":4,"name":"Text 47","text":"现状如实说：原文逐字核对 31 / 31 全过；结构体检目前还有 2 条新问题没修 —— 这不是一条全绿的流水线。","textPreview":"现状如实说：原文逐字核对 31 / 31 全过；结构体检目前还有 2 条新问题没修 —— 这不是一条全绿的流水线。","textChars":57,"textLines":1,"bbox":[88.32,599.04,1103.33,46.08]}
+{"kind":"notes","id":"nt/eb5y2a","slide":4,"text":"这一页回答“知识从哪来”。三个要点：\n\n可重建——概念框架是一份文件，骨架自动生成，不靠人工在多个格式里同步。\n可追踪——每份指南文件按内容算指纹，改一个字指纹就变，能定位是哪一版。\n可把关——三道体检不过就进不了库。\n\n最关键的是那个红色标记：诊断切点和控制目标不让 AI 生成。一个切点错 0.1，患者结论就变了，所以这类数字由人写死。AI 只做“照原文摘句子”，不下判断。\n\n底部状态要照实讲，不要说成全绿。"}
+{"kind":"slide","id":"sl/dgzmiz","slide":5,"title":"二 · 数据存在哪里","textShapes":34}
+{"kind":"textbox","id":"sh/k7mlojax","slide":5,"name":"Text 0","text":"二 · 数据存在哪里","textPreview":"二 · 数据存在哪里","textChars":10,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/58vmxobi","slide":5,"name":"Text 1","text":"两个仓库，各存各的，绝不混在一起","textPreview":"两个仓库，各存各的，绝不混在一起","textChars":16,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/6943qts3","slide":5,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/7ax4zyto","slide":5,"name":"Text 3","text":"04 / 10","textPreview":"04 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/sb65sja9","slide":5,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/tcfm1oru","slide":5,"name":"Text 5","text":"一个存“关系网”，一个存“一行行的记录”。分开存，系统才分得清哪些是记录下来的、哪些是算出来的。","textPreview":"一个存“关系网”，一个存“一行行的记录”。分开存，系统才分得清哪些是记录下来的、哪些是算出来的。","textChars":48,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"shape","id":"sh/udonutsz","slide":5,"name":"Shape 6","bbox":[67.2,225.6,561.6,340.8]}
+{"kind":"shape","id":"sh/fyx43y9k","slide":5,"name":"Shape 7","bbox":[91.2,244.8,59.52,69.12]}
+{"kind":"textbox","id":"sh/fa9sjidw","slide":5,"name":"Text 8","text":"图数据库","textPreview":"图数据库","textChars":4,"textLines":1,"bbox":[168,244.8,441.6,34.56]}
+{"kind":"textbox","id":"sh/e90radwb","slide":5,"name":"Text 9","text":"存“关系网”  ·  擅长回答：这两件事有没有关系","textPreview":"存“关系网”  ·  擅长回答：这两件事有没有关系","textChars":25,"textLines":1,"bbox":[168,281.28,441.6,28.8]}
+{"kind":"textbox","id":"sh/1cra5svm","slide":5,"name":"Text 10","text":"分成几个抽屉，各存各的","textPreview":"分成几个抽屉，各存各的","textChars":11,"textLines":1,"bbox":[91.2,326.4,513.6,24.96]}
+{"kind":"shape","id":"sh/0bi9cneh","slide":5,"name":"Shape 11","bbox":[91.2,351.36,249.6,48]}
+{"kind":"textbox","id":"sh/r6psfyxk","slide":5,"name":"Text 12","text":"概念骨架","textPreview":"概念骨架","textChars":4,"textLines":1,"bbox":[102.72,354.24,226.56,24.96]}
+{"kind":"textbox","id":"sh/q5gr6twz","slide":5,"name":"Text 13","text":"有哪些概念、怎么分类","textPreview":"有哪些概念、怎么分类","textChars":10,"textLines":1,"bbox":[102.72,376.32,226.56,21.12]}
+{"kind":"shape","id":"sh/d87ah8fq","slide":5,"name":"Shape 14","bbox":[352.32,351.36,249.6,48]}
+{"kind":"textbox","id":"sh/s7y983e5","slide":5,"name":"Text 15","text":"人工写的诊断切点","textPreview":"人工写的诊断切点","textChars":8,"textLines":1,"bbox":[363.84,354.24,226.56,24.96]}
+{"kind":"textbox","id":"sh/b2tsb2d4","slide":5,"name":"Text 16","text":"高危数值","textPreview":"高危数值","textChars":4,"textLines":1,"bbox":[363.84,376.32,226.56,21.12]}
+{"kind":"shape","id":"sh/a1kbixwj","slide":5,"name":"Shape 17","bbox":[91.2,407.04,249.6,48]}
+{"kind":"textbox","id":"sh/6x4va1gr","slide":5,"name":"Text 18","text":"指南出处原文","textPreview":"指南出处原文","textChars":6,"textLines":1,"bbox":[102.72,409.92,226.56,24.96]}
+{"kind":"textbox","id":"sh/7ydcj6xc","slide":5,"name":"Text 19","text":"逐字引用 + 指纹","textPreview":"逐字引用 + 指纹","textChars":9,"textLines":1,"bbox":[102.72,432,226.56,21.12]}
+{"kind":"shape","id":"sh/8z6dcbyh","slide":5,"name":"Shape 20","bbox":[352.32,407.04,249.6,48]}
+{"kind":"textbox","id":"sh/t0fulwf2","slide":5,"name":"Text 21","text":"AI 摘出来的条目","textPreview":"AI 摘出来的条目","textChars":9,"textLines":1,"bbox":[363.84,409.92,226.56,24.96]}
+{"kind":"textbox","id":"sh/u1ove1gn","slide":5,"name":"Text 22","text":"单独一格，可回溯","textPreview":"单独一格，可回溯","textChars":8,"textLines":1,"bbox":[363.84,432,226.56,21.12]}
+{"kind":"shape","id":"sh/v2xcn6x8","slide":5,"name":"Shape 23","bbox":[91.2,462.72,249.6,48]}
+{"kind":"textbox","id":"sh/gn6dgbyt","slide":5,"name":"Text 24","text":"每位患者一张关系图","textPreview":"每位患者一张关系图","textChars":9,"textLines":1,"bbox":[102.72,465.6,226.56,24.96]}
+{"kind":"textbox","id":"sh/hofepgfe","slide":5,"name":"Text 25","text":"一人一张，互不干扰","textPreview":"一人一张，互不干扰","textChars":9,"textLines":1,"bbox":[102.72,487.68,226.56,21.12]}
+{"kind":"shape","id":"sh/a5kv2hgj","slide":5,"name":"Shape 26","bbox":[352.32,462.72,249.6,48]}
+{"kind":"textbox","id":"sh/b6tcbmh4","slide":5,"name":"Text 27","text":"规则算出来的结论","textPreview":"规则算出来的结论","textChars":8,"textLines":1,"bbox":[363.84,465.6,226.56,24.96]}
+{"kind":"textbox","id":"sh/dw36x43y","slide":5,"name":"Text 28","text":"单独一格","textPreview":"单独一格","textChars":4,"textLines":1,"bbox":[363.84,487.68,226.56,21.12]}
+{"kind":"textbox","id":"sh/cvap4jmd","slide":5,"name":"Text 29","text":"记录下来的事实   ≠   算出来的结论   —— 不放同一格","textPreview":"记录下来的事实   ≠   算出来的结论   —— 不放同一格","textChars":31,"textLines":1,"bbox":[91.2,528,513.6,28.8]}
+{"kind":"shape","id":"sh/ru1ovels","slide":5,"name":"Shape 30","bbox":[650.88,225.6,561.6,340.8]}
+{"kind":"shape","id":"sh/qts72947","slide":5,"name":"Shape 31","bbox":[674.88,244.8,59.52,69.12]}
+{"kind":"textbox","id":"sh/10361o3u","slide":5,"name":"Text 32","text":"关系型数据库","textPreview":"关系型数据库","textChars":6,"textLines":1,"bbox":[751.68,244.8,441.6,34.56]}
+{"kind":"textbox","id":"sh/0zup8jm9","slide":5,"name":"Text 33","text":"存“一行行的记录”  ·  擅长回答：有哪些人、测了几次","textPreview":"存“一行行的记录”  ·  擅长回答：有哪些人、测了几次","textChars":28,"textLines":1,"bbox":[751.68,281.28,441.6,28.8]}
+{"kind":"textbox","id":"sh/zylozelo","slide":5,"name":"Text 34","text":"按“干净程度”分层","textPreview":"按“干净程度”分层","textChars":9,"textLines":1,"bbox":[674.88,326.4,513.6,24.96]}
+{"kind":"shape","id":"sh/exc76943","slide":5,"name":"Shape 35","bbox":[674.88,351.36,513.6,38.4]}
+{"kind":"textbox","id":"sh/h4j6pk3q","slide":5,"name":"Text 36","text":"原始层","textPreview":"原始层","textChars":3,"textLines":1,"bbox":[686.4,351.36,129.6,38.4]}
+{"kind":"textbox","id":"sh/g3q5wzm5","slide":5,"name":"Text 37","text":"从医院库照抄，没清洗，只能用来溯源","textPreview":"从医院库照抄，没清洗，只能用来溯源","textChars":17,"textLines":1,"bbox":[820.8,351.36,360,38.4]}
+{"kind":"shape","id":"sh/kjy94n6t","slide":5,"name":"Shape 38","bbox":[674.88,393.6,513.6,38.4]}
+{"kind":"textbox","id":"sh/5k7axsny","slide":5,"name":"Text 39","text":"对照层","textPreview":"对照层","textChars":3,"textLines":1,"bbox":[686.4,393.6,129.6,38.4]}
+{"kind":"textbox","id":"sh/yxgr2xon","slide":5,"name":"Text 40","text":"本地叫法 ↔ 标准概念的翻译表","textPreview":"本地叫法 ↔ 标准概念的翻译表","textChars":15,"textLines":1,"bbox":[820.8,393.6,360,38.4]}
+{"kind":"shape","id":"sh/jipsv258","slide":5,"name":"Shape 41","bbox":[674.88,435.84,513.6,38.4]}
+{"kind":"textbox","id":"sh/wvy90n6h","slide":5,"name":"Text 42","text":"可用层","textPreview":"可用层","textChars":3,"textLines":1,"bbox":[686.4,435.84,129.6,38.4]}
+{"kind":"textbox","id":"sh/xw7atsn2","slide":5,"name":"Text 43","text":"清洗过、单位统一，才准参与判定","textPreview":"清洗过、单位统一，才准参与判定","textChars":15,"textLines":1,"bbox":[820.8,435.84,360,38.4]}
+{"kind":"shape","id":"sh/atwrydob","slide":5,"name":"Shape 44","bbox":[674.88,478.08,513.6,38.4]}
+{"kind":"textbox","id":"sh/bu5sri5w","slide":5,"name":"Text 45","text":"演示层","textPreview":"演示层","textChars":3,"textLines":1,"bbox":[686.4,478.08,129.6,38.4]}
+{"kind":"textbox","id":"sh/ore9w36l","slide":5,"name":"Text 46","text":"为演示造的数据，绝不和真实数据算进同一个数字","textPreview":"为演示造的数据，绝不和真实数据算进同一个数字","textChars":22,"textLines":1,"bbox":[820.8,478.08,360,38.4]}
+{"kind":"textbox","id":"sh/9snap8n6","slide":5,"name":"Text 47","text":"只有“可用层”的数据，才允许拿去和切点比大小","textPreview":"只有“可用层”的数据，才允许拿去和切点比大小","textChars":22,"textLines":1,"bbox":[674.88,528,513.6,28.8]}
+{"kind":"textbox","id":"sh/rmlsfy9s","slide":5,"name":"Text 48","text":"一句话：表库回答“是什么”，图库回答“凭什么”。","textPreview":"一句话：表库回答“是什么”，图库回答“凭什么”。","textChars":24,"textLines":1,"bbox":[67.2,595.2,1145.57,42.24]}
+{"kind":"notes","id":"nt/dgzmiz","slide":5,"text":"不要陷进表结构。只讲两个仓库各自擅长什么。\n\n关系型数据库擅长筛人、翻页、对账，存的是一行行原始记录，按干净程度分层——没清洗的只能溯源，清洗过的才准参与判定，演示数据绝不和真实数据算进同一个数字。\n\n图数据库擅长回答关系问题，按抽屉分开存：概念骨架、人工写的切点、指南出处、AI 摘的条目、每位患者一张图，还有单独一格放“规则算出来的结论”。\n\n最后那句是这一页的记忆点：表库回答是什么，图库回答凭什么。"}
+{"kind":"slide","id":"sl/t5l5db","slide":6,"title":"三 · 一次判断是怎么做出来的","textShapes":27}
+{"kind":"textbox","id":"sh/vadkn2pk","slide":6,"name":"Text 0","text":"三 · 一次判断是怎么做出来的","textPreview":"三 · 一次判断是怎么做出来的","textChars":15,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/a943ex8z","slide":6,"name":"Text 1","text":"回答一个问题要走四步，而且顺序不能反","textPreview":"回答一个问题要走四步，而且顺序不能反","textChars":18,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/98v2ls7e","slide":6,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/8nmlcnqt","slide":6,"name":"Text 3","text":"05 / 10","textPreview":"05 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/nmdkjip8","slide":6,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/ml43ad8n","slide":6,"name":"Text 5","text":"先在表库里把人和原始记录锁定，再交给图库里的规则去判——反过来做，就等于在整张关系网里大海捞针。","textPreview":"先在表库里把人和原始记录锁定，再交给图库里的规则去判——反过来做，就等于在整张关系网里大海捞针。","textChars":48,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"shape","id":"sh/lkv2h87i","slide":6,"name":"Shape 6","bbox":[67.2,225.6,264,273.6]}
+{"kind":"textbox","id":"sh/0j2183qx","slide":6,"name":"Text 7","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[88.32,240,221.76,53.76]}
+{"kind":"textbox","id":"sh/i14nyl8b","slide":6,"name":"Text 8","text":"先翻病历柜","textPreview":"先翻病历柜","textChars":5,"textLines":1,"bbox":[88.32,297.6,221.76,34.56]}
+{"kind":"textbox","id":"sh/j2do769w","slide":6,"name":"Text 9","text":"表库","textPreview":"表库","textChars":2,"textLines":1,"bbox":[88.32,334.08,221.76,24.96]}
+{"kind":"textbox","id":"sh/k3m50bqh","slide":6,"name":"Text 10","text":"在关系型数据库里定位这个人，\n取出他的原始检查行。\n先锁定人，再谈判定。","textPreview":"在关系型数据库里定位这个人， | 取出他的原始检查行。 | 先锁定人，再谈判定。","textChars":36,"textLines":3,"bbox":[88.32,366.72,221.76,115.2]}
+{"kind":"shape","id":"sh/54v69gr2","slide":6,"name":"Shape 11","bbox":[336.96,307.2,18.24,0]}
+{"kind":"shape","id":"sh/adknu18f","slide":6,"name":"Shape 12","bbox":[360.96,225.6,264,273.6]}
+{"kind":"textbox","id":"sh/vyt43690","slide":6,"name":"Text 13","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[382.08,240,221.76,53.76]}
+{"kind":"textbox","id":"sh/wzm5wbql","slide":6,"name":"Text 14","text":"翻译 + 体检","textPreview":"翻译 + 体检","textChars":7,"textLines":1,"bbox":[382.08,297.6,221.76,34.56]}
+{"kind":"textbox","id":"sh/x0v65gr6","slide":6,"name":"Text 15","text":"对照表","textPreview":"对照表","textChars":3,"textLines":1,"bbox":[382.08,334.08,221.76,24.96]}
+{"kind":"textbox","id":"sh/m9knq18j","slide":6,"name":"Text 16","text":"把“糖化血红蛋白”这类本地叫法\n对到知识库里的标准概念；\n顺手检查单位对不对、\n这个数值可不可信。","textPreview":"把“糖化血红蛋白”这类本地叫法 | 对到知识库里的标准概念； | 顺手检查单位对不对、 | 这个数值可不可信。","textChars":49,"textLines":4,"bbox":[382.08,366.72,221.76,115.2]}
+{"kind":"shape","id":"sh/nat4zm9o","slide":6,"name":"Shape 17","bbox":[630.72,307.2,18.24,0]}
+{"kind":"shape","id":"sh/bepk72pg","slide":6,"name":"Shape 18","bbox":[654.72,225.6,264,273.6]}
+{"kind":"textbox","id":"sh/qdg3yxob","slide":6,"name":"Text 19","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[675.84,240,221.76,53.76]}
+{"kind":"textbox","id":"sh/dgr29s7m","slide":6,"name":"Text 20","text":"让规则判","textPreview":"让规则判","textChars":4,"textLines":1,"bbox":[675.84,297.6,221.76,34.56]}
+{"kind":"textbox","id":"sh/cfyl0n61","slide":6,"name":"Text 21","text":"图库","textPreview":"图库","textChars":2,"textLines":1,"bbox":[675.84,334.08,221.76,24.96]}
+{"kind":"textbox","id":"sh/zi9kb2ps","slide":6,"name":"Text 22","text":"落在哪个区间？够不够确诊？\n有没有用药禁忌？\n判定由规则做，不由模型做。","textPreview":"落在哪个区间？够不够确诊？ | 有没有用药禁忌？ | 判定由规则做，不由模型做。","textChars":36,"textLines":3,"bbox":[675.84,366.72,221.76,115.2]}
+{"kind":"shape","id":"sh/yh032xo7","slide":6,"name":"Shape 23","bbox":[924.48,307.2,18.24,0]}
+{"kind":"shape","id":"sh/l4r2dc7y","slide":6,"name":"Shape 24","bbox":[948.48,225.6,264,273.6]}
+{"kind":"textbox","id":"sh/0jil476d","slide":6,"name":"Text 25","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[969.6,240,221.76,53.76]}
+{"kind":"textbox","id":"sh/fm5kzypo","slide":6,"name":"Text 26","text":"拼证据","textPreview":"拼证据","textChars":3,"textLines":1,"bbox":[969.6,297.6,221.76,34.56]}
+{"kind":"textbox","id":"sh/elwjqdo3","slide":6,"name":"Text 27","text":"汇总","textPreview":"汇总","textChars":2,"textLines":1,"bbox":[969.6,334.08,221.76,24.96]}
+{"kind":"textbox","id":"sh/kruh0zml","slide":6,"name":"Text 28","text":"把结论、用到的规则、指南原句，\n以及原始那一行记录，\n拼成一个能被核对的答案。","textPreview":"把结论、用到的规则、指南原句， | 以及原始那一行记录， | 拼成一个能被核对的答案。","textChars":39,"textLines":3,"bbox":[969.6,366.72,221.76,115.2]}
+{"kind":"textbox","id":"sh/5s3it4n6","slide":6,"name":"Text 29","text":"最后交出来的不是一句话，而是四件东西","textPreview":"最后交出来的不是一句话，而是四件东西","textChars":18,"textLines":1,"bbox":[67.2,520.32,1145.57,26.88]}
+{"kind":"shape","id":"sh/ipczy94v","slide":6,"name":"Shape 30","bbox":[67.2,552.96,264,49.92]}
+{"kind":"textbox","id":"sh/jql0re5g","slide":6,"name":"Text 31","text":"结论是什么","textPreview":"结论是什么","textChars":5,"textLines":1,"bbox":[67.2,552.96,264,49.92]}
+{"kind":"shape","id":"sh/wnahwzmp","slide":6,"name":"Shape 32","bbox":[360.96,552.96,264,49.92]}
+{"kind":"textbox","id":"sh/xojy54na","slide":6,"name":"Text 33","text":"凭什么这么说","textPreview":"凭什么这么说","textChars":6,"textLines":1,"bbox":[360.96,552.96,264,49.92]}
+{"kind":"shape","id":"sh/alszup4j","slide":6,"name":"Shape 34","bbox":[654.72,552.96,264,49.92]}
+{"kind":"textbox","id":"sh/vm1g3u54","slide":6,"name":"Text 35","text":"指南原话在哪","textPreview":"指南原话在哪","textChars":6,"textLines":1,"bbox":[654.72,552.96,264,49.92]}
+{"kind":"shape","id":"sh/gjeh8jmt","slide":6,"name":"Shape 36","bbox":[948.48,552.96,264,49.92]}
+{"kind":"textbox","id":"sh/1kni1one","slide":6,"name":"Text 37","text":"还缺什么","textPreview":"还缺什么","textChars":4,"textLines":1,"bbox":[948.48,552.96,264,49.92]}
+{"kind":"textbox","id":"sh/dsf6dwzu","slide":6,"name":"Text 38","text":"如果第 2 步发现单位缺了或数值不可信，流程就在这里停下并说明原因——不会硬给一个结论。","textPreview":"如果第 2 步发现单位缺了或数值不可信，流程就在这里停下并说明原因——不会硬给一个结论。","textChars":44,"textLines":1,"bbox":[67.2,616.32,1145.57,28.8]}
+{"kind":"notes","id":"nt/t5l5db","slide":6,"text":"这一页要纠正一个常见的想象：不是“把问题丢给模型，模型想一想就答了”。\n\n顺序是有原因的。先在表库里把人锁定，是因为在整张关系网里全库扫描既慢又容易牵连无关的人。第二步的翻译和体检是关口——单位不对、数值不可信，流程在这里就停，不会硬给结论。第三步才让规则判，判定由规则做，不由模型做。第四步把结论和它的依据拼在一起。\n\n最后交出来的是四件东西，不是一句话。尤其是第四件“还缺什么”——大多数系统不会主动告诉你这个。"}
+{"kind":"slide","id":"sl/yu32ll","slide":7,"title":"四 · 智能体是怎么“想”的","textShapes":26}
+{"kind":"textbox","id":"sh/4725oreh","slide":7,"name":"Text 0","text":"四 · 智能体是怎么“想”的","textPreview":"四 · 智能体是怎么“想”的","textChars":14,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/p8b6hwf2","slide":7,"name":"Text 1","text":"想一步，查一步，看一眼结果，再想下一步","textPreview":"想一步，查一步，看一眼结果，再想下一步","textChars":19,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/uh0nihwf","slide":7,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/f29obmx0","slide":7,"name":"Text 3","text":"06 / 10","textPreview":"06 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/g3i5k7el","slide":7,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/h4b6dcf6","slide":7,"name":"Text 5","text":"ReAct = Reason（想）+ Act（做）。它不是把问题一次性丢给模型，而是每做一个动作前必须先说理由，做完必须看结果，不够就再来一轮。","textPreview":"ReAct = Reason（想）+ Act（做）。它不是把问题一次性丢给模型，而是每做一个动作前必须先说理由，做完必须看结果，不够就再来一轮。","textChars":72,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"shape","id":"sh/6d0nexwj","slide":7,"name":"Shape 6","bbox":[86.4,225.6,230.4,144]}
+{"kind":"textbox","id":"sh/7e9472x4","slide":7,"name":"Text 7","text":"1  想","textPreview":"1  想","textChars":4,"textLines":1,"bbox":[105.6,237.12,192,32.64]}
+{"kind":"textbox","id":"sh/jydc3il0","slide":7,"name":"Text 8","text":"这个问题该问哪一层？\n是问“是什么”，\n还是问“凭什么”？","textPreview":"这个问题该问哪一层？ | 是问“是什么”， | 还是问“凭什么”？","textChars":29,"textLines":3,"bbox":[105.6,273.6,192,86.4]}
+{"kind":"shape","id":"sh/ix4badkf","slide":7,"name":"Shape 9","bbox":[374.4,225.6,230.4,144]}
+{"kind":"textbox","id":"sh/50vu5s36","slide":7,"name":"Text 10","text":"2  做","textPreview":"2  做","textChars":4,"textLines":1,"bbox":[393.6,237.12,192,32.64]}
+{"kind":"textbox","id":"sh/4zmdcn2l","slide":7,"name":"Text 11","text":"只调这一层\n够用的那几个工具，\n不为“更完整”多调。","textPreview":"只调这一层 | 够用的那几个工具， | 不为“更完整”多调。","textChars":26,"textLines":3,"bbox":[393.6,273.6,192,86.4]}
+{"kind":"shape","id":"sh/r2dc7ilc","slide":7,"name":"Shape 12","bbox":[374.4,398.4,230.4,144]}
+{"kind":"textbox","id":"sh/614vedkr","slide":7,"name":"Text 13","text":"3  看","textPreview":"3  看","textChars":4,"textLines":1,"bbox":[393.6,409.92,192,32.64]}
+{"kind":"textbox","id":"sh/t4fu9s32","slide":7,"name":"Text 14","text":"读返回的数据，\n缺什么就记下什么，\n不脑补。","textPreview":"读返回的数据， | 缺什么就记下什么， | 不脑补。","textChars":22,"textLines":3,"bbox":[393.6,446.4,192,86.4]}
+{"kind":"shape","id":"sh/s3mdgn2h","slide":7,"name":"Shape 15","bbox":[86.4,398.4,230.4,144]}
+{"kind":"textbox","id":"sh/n6tcvyls","slide":7,"name":"Text 16","text":"4  够了吗","textPreview":"4  够了吗","textChars":6,"textLines":1,"bbox":[105.6,409.92,192,32.64]}
+{"kind":"textbox","id":"sh/m50b2tk7","slide":7,"name":"Text 17","text":"不够 → 回到第一步；\n够了才动笔写答案。","textPreview":"不够 → 回到第一步； | 够了才动笔写答案。","textChars":21,"textLines":2,"bbox":[105.6,446.4,192,86.4]}
+{"kind":"shape","id":"sh/q18fa14v","slide":7,"name":"Shape 18","bbox":[321.6,297.6,48,0]}
+{"kind":"shape","id":"sh/bmhg365g","slide":7,"name":"Shape 19","bbox":[489.6,374.4,0,19.2]}
+{"kind":"shape","id":"sh/cnqxcbm1","slide":7,"name":"Shape 20","bbox":[321.6,470.4,48,0]}
+{"kind":"shape","id":"sh/dojy5gnm","slide":7,"name":"Shape 21","bbox":[201.6,374.4,0,19.2]}
+{"kind":"textbox","id":"sh/2x8f6h4z","slide":7,"name":"Text 22","text":"这个“助手”本身在仓库之外（例如 Claude）。\n仓库提供的是它的行动手册和可调用的工具，不含内置对话模型。","textPreview":"这个“助手”本身在仓库之外（例如 Claude）。 | 仓库提供的是它的行动手册和可调用的工具，不含内置对话模型。","textChars":55,"textLines":2,"bbox":[86.4,554.88,518.4,57.6]}
+{"kind":"textbox","id":"sh/3yhwzm5k","slide":7,"name":"Text 23","text":"五条护栏 —— 它和普通聊天机器人的区别","textPreview":"五条护栏 —— 它和普通聊天机器人的区别","textChars":20,"textLines":1,"bbox":[662.4,225.6,550.08,28.8]}
+{"kind":"shape","id":"sh/ozqx8rmp","slide":7,"name":"Shape 24","bbox":[662.4,266.88,550.08,57.6]}
+{"kind":"textbox","id":"sh/p0ze1wna","slide":7,"name":"Text 25","text":"先体检","textPreview":"先体检","textChars":3,"textLines":1,"bbox":[679.68,266.88,129.6,57.6]}
+{"kind":"textbox","id":"sh/etof2h4n","slide":7,"name":"Text 26","text":"两个仓库通不通？不通就停，不用常识补","textPreview":"两个仓库通不通？不通就停，不用常识补","textChars":18,"textLines":1,"bbox":[816,266.88,384,57.6]}
+{"kind":"shape","id":"sh/fuxwvm58","slide":7,"name":"Shape 27","bbox":[662.4,334.08,550.08,57.6]}
+{"kind":"textbox","id":"sh/xoni1k7q","slide":7,"name":"Text 28","text":"分层走","textPreview":"分层走","textChars":3,"textLines":1,"bbox":[679.68,334.08,129.6,57.6]}
+{"kind":"textbox","id":"sh/wneh8f65","slide":7,"name":"Text 29","text":"问“是什么”去表库，问“凭什么”去图库","textPreview":"问“是什么”去表库，问“凭什么”去图库","textChars":19,"textLines":1,"bbox":[816,334.08,384,57.6]}
+{"kind":"shape","id":"sh/vml0zapk","slide":7,"name":"Shape 30","bbox":[662.4,401.28,550.08,57.6]}
+{"kind":"textbox","id":"sh/alcz65of","slide":7,"name":"Text 31","text":"由窄到宽","textPreview":"由窄到宽","textChars":4,"textLines":1,"bbox":[679.68,401.28,129.6,57.6]}
+{"kind":"textbox","id":"sh/9k3ix07u","slide":7,"name":"Text 32","text":"先用现成接口，自由查询是最后手段","textPreview":"先用现成接口，自由查询是最后手段","textChars":16,"textLines":1,"bbox":[816,401.28,384,57.6]}
+{"kind":"shape","id":"sh/8juh4f69","slide":7,"name":"Shape 33","bbox":[662.4,468.48,550.08,57.6]}
+{"kind":"textbox","id":"sh/nil0bapo","slide":7,"name":"Text 34","text":"不猜名字","textPreview":"不猜名字","textChars":4,"textLines":1,"bbox":[679.68,468.48,129.6,57.6]}
+{"kind":"textbox","id":"sh/mhcz25o3","slide":7,"name":"Text 35","text":"术语查不到就说查不到，不换个说法再试一遍","textPreview":"术语查不到就说查不到，不换个说法再试一遍","textChars":20,"textLines":1,"bbox":[816,468.48,384,57.6]}
+{"kind":"shape","id":"sh/lg3i907i","slide":7,"name":"Shape 36","bbox":[662.4,535.68,550.08,57.6]}
+{"kind":"textbox","id":"sh/0vuh0v6x","slide":7,"name":"Text 37","text":"有预算","textPreview":"有预算","textChars":3,"textLines":1,"bbox":[679.68,535.68,129.6,57.6]}
+{"kind":"textbox","id":"sh/0zm9gz69","slide":7,"name":"Text 38","text":"一个目标最多试 4 次，用完就说“没推出来”","textPreview":"一个目标最多试 4 次，用完就说“没推出来”","textChars":22,"textLines":1,"bbox":[816,535.68,384,57.6]}
+{"kind":"textbox","id":"sh/1kvq947u","slide":7,"name":"Text 39","text":"护栏的作用：让它答不出来的时候，老实说答不出来。","textPreview":"护栏的作用：让它答不出来的时候，老实说答不出来。","textChars":24,"textLines":1,"bbox":[662.4,606.72,550.08,28.8]}
+{"kind":"notes","id":"nt/yu32ll","slide":7,"text":"ReAct 就是 Reason 加 Act：想一步、做一步、看一眼结果，再决定下一步。和“把问题丢给模型让它一口气答完”是两回事。\n\n右边五条护栏才是重点。没有护栏的 ReAct 会变成“一直换个说法试，直到试出想要的答案”。所以：先检查两个库通不通；按问题类型分层走；从现成接口开始，自由查询放最后；术语查不到就记账不猜；每个目标有调用预算，用完就报“没推出来”。\n\n要主动说明：这个助手本身在仓库外，仓库提供的是行动手册和工具，没有内置对话模型。"}
+{"kind":"slide","id":"sl/td55fq","slide":8,"title":"四 · 智能体是怎么“想”的","textShapes":26}
+{"kind":"textbox","id":"sh/kbqpon6p","slide":8,"name":"Text 0","text":"四 · 智能体是怎么“想”的","textPreview":"四 · 智能体是怎么“想”的","textChars":14,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/lczqx87a","slide":8,"name":"Text 1","text":"想一步，查一步，看一眼结果，再想下一步","textPreview":"想一步，查一步，看一眼结果，再想下一步","textChars":19,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/a5o7iton","slide":8,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/b6x8ryp8","slide":8,"name":"Text 3","text":"06 / 10","textPreview":"06 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/c76pk36t","slide":8,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/x8fqt87e","slide":8,"name":"Text 5","text":"ReAct = Reason（想）+ Act（做）。它不是把问题一次性丢给模型，而是每做一个动作前必须先说理由，做完必须看结果，不够就再来一轮。","textPreview":"ReAct = Reason（想）+ Act（做）。它不是把问题一次性丢给模型，而是每做一个动作前必须先说理由，做完必须看结果，不够就再来一轮。","textChars":72,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"shape","id":"sh/u1sruxo7","slide":8,"name":"Shape 6","bbox":[86.4,225.6,230.4,144]}
+{"kind":"textbox","id":"sh/v21832pc","slide":8,"name":"Text 7","text":"1  想","textPreview":"1  想","textChars":4,"textLines":1,"bbox":[105.6,237.12,192,32.64]}
+{"kind":"textbox","id":"sh/3mhk72hw","slide":8,"name":"Text 8","text":"这个问题该问哪一层？\n是问“是什么”，\n还是问“凭什么”？","textPreview":"这个问题该问哪一层？ | 是问“是什么”， | 还是问“凭什么”？","textChars":29,"textLines":3,"bbox":[105.6,273.6,192,86.4]}
+{"kind":"shape","id":"sh/2l83eh0b","slide":8,"name":"Shape 9","bbox":[374.4,225.6,230.4,144]}
+{"kind":"textbox","id":"sh/poz29cz2","slide":8,"name":"Text 10","text":"2  做","textPreview":"2  做","textChars":4,"textLines":1,"bbox":[393.6,237.12,192,32.64]}
+{"kind":"textbox","id":"sh/onqlg7ih","slide":8,"name":"Text 11","text":"只调这一层\n够用的那几个工具，\n不为“更完整”多调。","textPreview":"只调这一层 | 够用的那几个工具， | 不为“更完整”多调。","textChars":26,"textLines":3,"bbox":[393.6,273.6,192,86.4]}
+{"kind":"shape","id":"sh/ba14bmhs","slide":8,"name":"Shape 12","bbox":[374.4,398.4,230.4,144]}
+{"kind":"textbox","id":"sh/qps3ihgn","slide":8,"name":"Text 13","text":"3  看","textPreview":"3  看","textChars":4,"textLines":1,"bbox":[393.6,409.92,192,32.64]}
+{"kind":"textbox","id":"sh/dcjmdwzy","slide":8,"name":"Text 14","text":"读返回的数据，\n缺什么就记下什么，\n不脑补。","textPreview":"读返回的数据， | 缺什么就记下什么， | 不脑补。","textChars":22,"textLines":3,"bbox":[393.6,446.4,192,86.4]}
+{"kind":"shape","id":"sh/cbalkryd","slide":8,"name":"Shape 15","bbox":[86.4,398.4,230.4,144]}
+{"kind":"textbox","id":"sh/ze14fmh4","slide":8,"name":"Text 16","text":"4  够了吗","textPreview":"4  够了吗","textChars":6,"textLines":1,"bbox":[105.6,409.92,192,32.64]}
+{"kind":"textbox","id":"sh/yds3m1gj","slide":8,"name":"Text 17","text":"不够 → 回到第一步；\n够了才动笔写答案。","textPreview":"不够 → 回到第一步； | 够了才动笔写答案。","textChars":21,"textLines":2,"bbox":[105.6,446.4,192,86.4]}
+{"kind":"shape","id":"sh/a9wnel0r","slide":8,"name":"Shape 18","bbox":[321.6,297.6,48,0]}
+{"kind":"shape","id":"sh/va5onq1c","slide":8,"name":"Shape 19","bbox":[489.6,374.4,0,19.2]}
+{"kind":"shape","id":"sh/wbe5gvix","slide":8,"name":"Shape 20","bbox":[321.6,470.4,48,0]}
+{"kind":"shape","id":"sh/xcn6p0ji","slide":8,"name":"Shape 21","bbox":[201.6,374.4,0,19.2]}
+{"kind":"textbox","id":"sh/m5cnalkv","slide":8,"name":"Text 22","text":"这个“助手”本身在仓库之外（例如 Claude）。\n仓库提供的是它的行动手册和可调用的工具，不含内置对话模型。","textPreview":"这个“助手”本身在仓库之外（例如 Claude）。 | 仓库提供的是它的行动手册和可调用的工具，不含内置对话模型。","textChars":55,"textLines":2,"bbox":[86.4,554.88,518.4,57.6]}
+{"kind":"textbox","id":"sh/n6lojq10","slide":8,"name":"Text 23","text":"五条护栏 —— 它和普通聊天机器人的区别","textPreview":"五条护栏 —— 它和普通聊天机器人的区别","textChars":20,"textLines":1,"bbox":[662.4,225.6,550.08,28.8]}
+{"kind":"shape","id":"sh/87u5cvil","slide":8,"name":"Shape 24","bbox":[662.4,266.88,550.08,57.6]}
+{"kind":"textbox","id":"sh/9836l0j6","slide":8,"name":"Text 25","text":"先体检","textPreview":"先体检","textChars":3,"textLines":1,"bbox":[679.68,266.88,129.6,57.6]}
+{"kind":"textbox","id":"sh/61g7mp0z","slide":8,"name":"Text 26","text":"两个仓库通不通？不通就停，不用常识补","textPreview":"两个仓库通不通？不通就停，不用常识补","textChars":18,"textLines":1,"bbox":[816,266.88,384,57.6]}
+{"kind":"shape","id":"sh/72pova1k","slide":8,"name":"Shape 27","bbox":[662.4,334.08,550.08,57.6]}
+{"kind":"textbox","id":"sh/hwrqlo3m","slide":8,"name":"Text 28","text":"分层走","textPreview":"分层走","textChars":3,"textLines":1,"bbox":[679.68,334.08,129.6,57.6]}
+{"kind":"textbox","id":"sh/gvi9cj21","slide":8,"name":"Text 29","text":"问“是什么”去表库，问“凭什么”去图库","textPreview":"问“是什么”去表库，问“凭什么”去图库","textChars":19,"textLines":1,"bbox":[816,334.08,384,57.6]}
+{"kind":"shape","id":"sh/fu98jelg","slide":8,"name":"Shape 30","bbox":[662.4,401.28,550.08,57.6]}
+{"kind":"textbox","id":"sh/u90ra9kv","slide":8,"name":"Text 31","text":"由窄到宽","textPreview":"由窄到宽","textChars":4,"textLines":1,"bbox":[679.68,401.28,129.6,57.6]}
+{"kind":"textbox","id":"sh/t8rqh43q","slide":8,"name":"Text 32","text":"先用现成接口，自由查询是最后手段","textPreview":"先用现成接口，自由查询是最后手段","textChars":16,"textLines":1,"bbox":[816,401.28,384,57.6]}
+{"kind":"shape","id":"sh/s7y98z25","slide":8,"name":"Shape 33","bbox":[662.4,468.48,550.08,57.6]}
+{"kind":"textbox","id":"sh/76p8fulk","slide":8,"name":"Text 34","text":"不猜名字","textPreview":"不猜名字","textChars":4,"textLines":1,"bbox":[679.68,468.48,129.6,57.6]}
+{"kind":"textbox","id":"sh/65gr6pkz","slide":8,"name":"Text 35","text":"术语查不到就说查不到，不换个说法再试一遍","textPreview":"术语查不到就说查不到，不换个说法再试一遍","textChars":20,"textLines":1,"bbox":[816,468.48,384,57.6]}
+{"kind":"shape","id":"sh/d4bat83u","slide":8,"name":"Shape 36","bbox":[662.4,535.68,550.08,57.6]}
+{"kind":"textbox","id":"sh/c329k329","slide":8,"name":"Text 37","text":"有预算","textPreview":"有预算","textChars":3,"textLines":1,"bbox":[679.68,535.68,129.6,57.6]}
+{"kind":"textbox","id":"sh/k7qhk325","slide":8,"name":"Text 38","text":"一个目标最多试 4 次，用完就说“没推出来”","textPreview":"一个目标最多试 4 次，用完就说“没推出来”","textChars":22,"textLines":1,"bbox":[816,535.68,384,57.6]}
+{"kind":"textbox","id":"sh/l8zid83a","slide":8,"name":"Text 39","text":"护栏的作用：让它答不出来的时候，老实说答不出来。","textPreview":"护栏的作用：让它答不出来的时候，老实说答不出来。","textChars":24,"textLines":1,"bbox":[662.4,606.72,550.08,28.8]}
+{"kind":"notes","id":"nt/td55fq","slide":8,"text":"ReAct 就是 Reason 加 Act：想一步、做一步、看一眼结果，再决定下一步。和“把问题丢给模型让它一口气答完”是两回事。\n\n右边五条护栏才是重点。没有护栏的 ReAct 会变成“一直换个说法试，直到试出想要的答案”。所以：先检查两个库通不通；按问题类型分层走；从现成接口开始，自由查询放最后；术语查不到就记账不猜；每个目标有调用预算，用完就报“没推出来”。\n\n要主动说明：这个助手本身在仓库外，仓库提供的是行动手册和工具，没有内置对话模型。"}
+{"kind":"slide","id":"sl/u0a3bc","slide":9,"title":"五 · 真实样例（一）起点","textShapes":21}
+{"kind":"textbox","id":"sh/vyxojmdg","slide":9,"name":"Text 0","text":"五 · 真实样例（一）起点","textPreview":"五 · 真实样例（一）起点","textChars":13,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/uxonqhwv","slide":9,"name":"Text 1","text":"一次 7.4%，为什么只能说“暂定”","textPreview":"一次 7.4%，为什么只能说“暂定”","textChars":18,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/twf6hcva","slide":9,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/8v65o7e5","slide":9,"name":"Text 3","text":"07 / 10","textPreview":"07 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/7udofmdk","slide":9,"name":"Shape 4","bbox":[67.2,153.6,1145.57,42.24]}
+{"kind":"textbox","id":"sh/6t4nmhwz","slide":9,"name":"Text 5","text":"患者 P90002：2026-01-15 测了一次糖化血红蛋白，结果 7.4%。这个数落进了糖尿病区间——但系统给的结论是“暂定”，不是“确诊”。","textPreview":"患者 P90002：2026-01-15 测了一次糖化血红蛋白，结果 7.4%。这个数落进了糖尿病区间——但系统给的结论是“暂定”，不是“确诊”。","textChars":73,"textLines":1,"bbox":[84.48,153.6,1111.01,42.24]}
+{"kind":"textbox","id":"sh/dsz6tgvu","slide":9,"name":"Text 6","text":"知识库里的三个区间（由人工写定的诊断切点）","textPreview":"知识库里的三个区间（由人工写定的诊断切点）","textChars":21,"textLines":1,"bbox":[67.2,220.8,1145.57,28.8]}
+{"kind":"shape","id":"sh/srqp0be9","slide":9,"name":"Shape 7","bbox":[115.2,321.6,311.04,59.52]}
+{"kind":"textbox","id":"sh/e90ny54r","slide":9,"name":"Text 8","text":"正常","textPreview":"正常","textChars":2,"textLines":1,"bbox":[115.2,321.6,311.04,59.52]}
+{"kind":"textbox","id":"sh/fa94ralc","slide":9,"name":"Text 9","text":"( −∞ , 5.7 )","textPreview":"( −∞ , 5.7 )","textChars":12,"textLines":1,"bbox":[115.2,387.84,311.04,26.88]}
+{"kind":"shape","id":"sh/gbi50f2h","slide":9,"name":"Shape 10","bbox":[432,321.6,243.84,59.52]}
+{"kind":"textbox","id":"sh/1crmtk32","slide":9,"name":"Text 11","text":"糖尿病前期","textPreview":"糖尿病前期","textChars":5,"textLines":1,"bbox":[432,321.6,243.84,59.52]}
+{"kind":"textbox","id":"sh/65g3u54f","slide":9,"name":"Text 12","text":"[ 5.7 , 6.4 ]","textPreview":"[ 5.7 , 6.4 ]","textChars":13,"textLines":1,"bbox":[432,387.84,243.84,26.88]}
+{"kind":"shape","id":"sh/r6p4nql0","slide":9,"name":"Shape 13","bbox":[681.6,321.6,480,59.52]}
+{"kind":"textbox","id":"sh/s7ylwvml","slide":9,"name":"Text 14","text":"糖尿病区间","textPreview":"糖尿病区间","textChars":5,"textLines":1,"bbox":[681.6,321.6,480,59.52]}
+{"kind":"textbox","id":"sh/t8rmp036","slide":9,"name":"Text 15","text":"[ 6.5 , +∞ )","textPreview":"[ 6.5 , +∞ )","textChars":12,"textLines":1,"bbox":[681.6,387.84,480,26.88]}
+{"kind":"textbox","id":"sh/q1kn6pkz","slide":9,"name":"Text 16","text":"7.4 %","textPreview":"7.4 %","textChars":5,"textLines":1,"bbox":[758.4,261.12,172.8,42.24]}
+{"kind":"shape","id":"sh/b2t4zul4","slide":9,"name":"Shape 17","bbox":[844.8,307.2,0,12.48]}
+{"kind":"textbox","id":"sh/nmlkrm1w","slide":9,"name":"Text 18","text":"开区间和闭区间不能混：5.7 属于糖尿病前期，不属于正常。","textPreview":"开区间和闭区间不能混：5.7 属于糖尿病前期，不属于正常。","textChars":29,"textLines":1,"bbox":[115.2,424.32,1046.4,26.88]}
+{"kind":"shape","id":"sh/mlcjyhkb","slide":9,"name":"Shape 19","bbox":[67.2,480,550.08,122.88]}
+{"kind":"textbox","id":"sh/9o32twjm","slide":9,"name":"Text 20","text":"只有 1 个检测日","textPreview":"只有 1 个检测日","textChars":9,"textLines":1,"bbox":[91.2,493.44,249.6,28.8]}
+{"kind":"textbox","id":"sh/8nu10r2h","slide":9,"name":"Text 21","text":"暂定","textPreview":"暂定","textChars":2,"textLines":1,"bbox":[91.2,524.16,249.6,48]}
+{"kind":"textbox","id":"sh/vq5kv61s","slide":9,"name":"Text 22","text":"落进区间了，但规则还要求\n“两个不同的检测日期”，条件没凑齐。","textPreview":"落进区间了，但规则还要求 | “两个不同的检测日期”，条件没凑齐。","textChars":31,"textLines":2,"bbox":[355.2,493.44,240,86.4]}
+{"kind":"shape","id":"sh/upwj21k7","slide":9,"name":"Shape 23","bbox":[662.4,480,550.08,122.88]}
+{"kind":"textbox","id":"sh/hcn2xwjy","slide":9,"name":"Text 24","text":"2 个不同检测日","textPreview":"2 个不同检测日","textChars":8,"textLines":1,"bbox":[686.4,493.44,249.6,28.8]}
+{"kind":"textbox","id":"sh/wbe14rid","slide":9,"name":"Text 25","text":"确诊","textPreview":"确诊","textChars":2,"textLines":1,"bbox":[686.4,524.16,249.6,48]}
+{"kind":"textbox","id":"sh/je5kz614","slide":9,"name":"Text 26","text":"同一天重复测两次不算——\n规则数的是不同日期，不是结果条数。","textPreview":"同一天重复测两次不算—— | 规则数的是不同日期，不是结果条数。","textChars":30,"textLines":2,"bbox":[950.4,493.44,240,86.4]}
+{"kind":"textbox","id":"sh/idwj610j","slide":9,"name":"Text 27","text":"“这个数落进了糖尿病区间”和“这个人确诊了糖尿病”，不是同一句话。","textPreview":"“这个数落进了糖尿病区间”和“这个人确诊了糖尿病”，不是同一句话。","textChars":33,"textLines":1,"bbox":[67.2,619.2,1145.57,28.8]}
+{"kind":"notes","id":"nt/u0a3bc","slide":9,"text":"先让听众看懂这一步，后面的推演才有意义。\n\n7.4% 确实落进了糖尿病区间——但落进区间只是完成了“这一次检验属于哪个区间”这件事。要形成确诊，规则还要求两个不同的检测日期。P90002 只测了一天，所以是暂定。\n\n补一句容易被忽略的细节：同一天重复测两次也不能升级，因为规则数的是不同日期，不是结果条数。\n\n这一页的记忆点：“数落进区间”和“人确诊了”，不是同一句话。"}
+{"kind":"slide","id":"sl/35w6zz","slide":10,"title":"五 · 真实样例（二）过程","textShapes":19}
+{"kind":"textbox","id":"sh/ipgzmt4v","slide":10,"name":"Text 0","text":"五 · 真实样例（二）过程","textPreview":"五 · 真实样例（二）过程","textChars":13,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/japgfy5g","slide":10,"name":"Text 1","text":"“对 P90002 的病情进行推演”——它是这样做的","textPreview":"“对 P90002 的病情进行推演”——它是这样做的","textChars":26,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/sfihsnmx","slide":10,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/tgryl8ni","slide":10,"name":"Text 3","text":"08 / 10","textPreview":"08 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/6dgzqd4r","slide":10,"name":"Shape 4","bbox":[67.2,155.52,74.88,59.52]}
+{"kind":"textbox","id":"sh/7e9gji5c","slide":10,"name":"Text 5","text":"想","textPreview":"想","textChars":1,"textLines":1,"bbox":[67.2,155.52,74.88,59.52]}
+{"kind":"shape","id":"sh/gjihwnmt","slide":10,"name":"Shape 6","bbox":[155.52,155.52,1056.96,59.52]}
+{"kind":"textbox","id":"sh/hkrypsne","slide":10,"name":"Text 7","text":"这是“如果……会怎样”，属于推演，不是预测。先要拿到他现在的真实情况。","textPreview":"这是“如果……会怎样”，属于推演，不是预测。先要拿到他现在的真实情况。","textChars":35,"textLines":1,"bbox":[176.64,155.52,1017.6,59.52]}
+{"kind":"shape","id":"sh/l8nmpsfa","slide":10,"name":"Shape 8","bbox":[67.2,224.64,74.88,59.52]}
+{"kind":"textbox","id":"sh/k7u5gnep","slide":10,"name":"Text 9","text":"做","textPreview":"做","textChars":1,"textLines":1,"bbox":[67.2,224.64,74.88,59.52]}
+{"kind":"shape","id":"sh/j6l4nixk","slide":10,"name":"Shape 10","bbox":[155.52,224.64,1056.96,59.52]}
+{"kind":"textbox","id":"sh/y5cnedwz","slide":10,"name":"Text 11","text":"取基线：把这位患者的现状完整读一遍。","textPreview":"取基线：把这位患者的现状完整读一遍。","textChars":18,"textLines":1,"bbox":[176.64,224.64,1017.6,59.52]}
+{"kind":"shape","id":"sh/tcnmtsvm","slide":10,"name":"Shape 12","bbox":[67.2,293.76,74.88,59.52]}
+{"kind":"textbox","id":"sh/8be5kne1","slide":10,"name":"Text 13","text":"看","textPreview":"看","textChars":1,"textLines":1,"bbox":[67.2,293.76,74.88,59.52]}
+{"kind":"shape","id":"sh/7a54rixg","slide":10,"name":"Shape 14","bbox":[155.52,293.76,1056.96,59.52]}
+{"kind":"textbox","id":"sh/69wnixwv","slide":10,"name":"Text 15","text":"7.4%、暂定诊断——而且系统直接告诉它“还差什么”，不用自己猜。","textPreview":"7.4%、暂定诊断——而且系统直接告诉它“还差什么”，不用自己猜。","textChars":33,"textLines":1,"bbox":[176.64,293.76,1017.6,59.52]}
+{"kind":"shape","id":"sh/9g3mh8f2","slide":10,"name":"Shape 16","bbox":[67.2,362.88,74.88,59.52]}
+{"kind":"textbox","id":"sh/ofal83ex","slide":10,"name":"Text 17","text":"想","textPreview":"想","textChars":1,"textLines":1,"bbox":[67.2,362.88,74.88,59.52]}
+{"kind":"shape","id":"sh/0ze543md","slide":10,"name":"Shape 18","bbox":[155.52,362.88,1056.96,59.52]}
+{"kind":"textbox","id":"sh/1knmx8ny","slide":10,"name":"Text 19","text":"目标是把“暂定”变成“确诊”。差的是第二个检测日期，不是更高的数值。","textPreview":"目标是把“暂定”变成“确诊”。差的是第二个检测日期，不是更高的数值。","textChars":34,"textLines":1,"bbox":[176.64,362.88,1017.6,59.52]}
+{"kind":"shape","id":"sh/exwn2t4n","slide":10,"name":"Shape 20","bbox":[67.2,432,74.88,59.52]}
+{"kind":"textbox","id":"sh/fy54vy58","slide":10,"name":"Text 21","text":"做","textPreview":"做","textChars":1,"textLines":1,"bbox":[67.2,432,74.88,59.52]}
+{"kind":"shape","id":"sh/ony58nmp","slide":10,"name":"Shape 22","bbox":[155.52,432,1056.96,59.52]}
+{"kind":"textbox","id":"sh/po7m18na","slide":10,"name":"Text 23","text":"设一个假设：同一个项目、同一个单位，换一个日期。数值不许自己编——要么用户给，要么原样取切点 6.5，并注明这个数出自哪条区间。","textPreview":"设一个假设：同一个项目、同一个单位，换一个日期。数值不许自己编——要么用户给，要么原样取切点 6.5，并注明这个数出自哪条区间。","textChars":64,"textLines":1,"bbox":[176.64,432,1017.6,59.52]}
+{"kind":"shape","id":"sh/2lgn6d4j","slide":10,"name":"Shape 24","bbox":[67.2,501.12,74.88,59.52]}
+{"kind":"textbox","id":"sh/nmp4zi54","slide":10,"name":"Text 25","text":"看","textPreview":"看","textChars":1,"textLines":1,"bbox":[67.2,501.12,74.88,59.52]}
+{"kind":"shape","id":"sh/cry5cnml","slide":10,"name":"Shape 26","bbox":[155.52,501.12,1056.96,59.52]}
+{"kind":"textbox","id":"sh/xs7m5sn6","slide":10,"name":"Text 27","text":"结论从“暂定”变成“确诊”；同时拿到一个固定的结果指纹。","textPreview":"结论从“暂定”变成“确诊”；同时拿到一个固定的结果指纹。","textChars":28,"textLines":1,"bbox":[176.64,501.12,1017.6,59.52]}
+{"kind":"shape","id":"sh/7ydgrqtk","slide":10,"name":"Shape 28","bbox":[67.2,570.24,74.88,59.52]}
+{"kind":"textbox","id":"sh/6xkzilsz","slide":10,"name":"Text 29","text":"答","textPreview":"答","textChars":1,"textLines":1,"bbox":[67.2,570.24,74.88,59.52]}
+{"kind":"shape","id":"sh/t0vytgbq","slide":10,"name":"Shape 30","bbox":[155.52,570.24,1056.96,59.52]}
+{"kind":"textbox","id":"sh/8zmhkba5","slide":10,"name":"Text 31","text":"若在另一天再测到一次不低于 6.5% 的结果，则结论转为确诊。","textPreview":"若在另一天再测到一次不低于 6.5% 的结果，则结论转为确诊。","textChars":31,"textLines":1,"bbox":[176.64,570.24,1017.6,59.52]}
+{"kind":"textbox","id":"sh/jutgn6to","slide":10,"name":"Text 32","text":"关键在第 5 步：它可以自己决定探哪一项、探几步；但具体那个数字，它没有编造的权限。","textPreview":"关键在第 5 步：它可以自己决定探哪一项、探几步；但具体那个数字，它没有编造的权限。","textChars":42,"textLines":1,"bbox":[67.2,639.36,1145.57,28.8]}
+{"kind":"notes","id":"nt/35w6zz","slide":10,"text":"沿着七行念下来就是完整的 ReAct 过程：想、做、看、想、做、看、答。\n\n第 3 步值得停一下：系统直接返回“还差什么”，助手不用自己猜差距在哪。\n\n第 5 步是整页的重点，也是这套设计最克制的地方——助手可以自主决定探哪个项目、探几步、按什么顺序，但具体数值只有两个合法来源：用户明确给出，或者原样取自知识库里那条区间的端点，并且必须注明这个数的出身。取中点、微调、“典型值”，全部禁止，因为那些数是编的。\n\n第 7 步必须保持“若……则……”的句式，不能说成“他已经确诊了”。"}
+{"kind":"slide","id":"sl/mg4v1z","slide":11,"title":"五 · 真实样例（三）结果","textShapes":12}
+{"kind":"textbox","id":"sh/mhw7itgb","slide":11,"name":"Text 0","text":"五 · 真实样例（三）结果","textPreview":"五 · 真实样例（三）结果","textChars":13,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/n258ryhw","slide":11,"name":"Text 1","text":"一句结论，和它必须带着的三条红线","textPreview":"一句结论，和它必须带着的三条红线","textChars":16,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/w7yponyt","slide":11,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/x87qxszy","slide":11,"name":"Text 3","text":"09 / 10","textPreview":"09 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"shape","id":"sh/a5g7mdgn","slide":11,"name":"Shape 4","bbox":[67.2,155.52,1145.57,126.72]}
+{"kind":"textbox","id":"sh/v6p8vih8","slide":11,"name":"Text 5","text":"若在另一个检测日再测到一次不低于 6.5% 的糖化血红蛋白，\n则该患者的诊断状态从“暂定”转为“确诊”。","textPreview":"若在另一个检测日再测到一次不低于 6.5% 的糖化血红蛋白， | 则该患者的诊断状态从“暂定”转为“确诊”。","textChars":52,"textLines":2,"bbox":[100.8,172.8,1075.2,90.24]}
+{"kind":"shape","id":"sh/kbi9snyp","slide":11,"name":"Shape 6","bbox":[67.2,314.88,363.84,244.8]}
+{"kind":"textbox","id":"sh/5crq1sfa","slide":11,"name":"Text 7","text":"这不是预测","textPreview":"这不是预测","textChars":5,"textLines":1,"bbox":[94.08,332.16,310.08,40.32]}
+{"kind":"textbox","id":"sh/p0n6tor6","slide":11,"name":"Text 8","text":"系统没有说他会不会真的\n再测到那个数。\n它只回答“如果测到，\n结论会怎么变”。","textPreview":"系统没有说他会不会真的 | 再测到那个数。 | 它只回答“如果测到， | 结论会怎么变”。","textChars":39,"textLines":4,"bbox":[94.08,384,310.08,153.6]}
+{"kind":"shape","id":"sh/ozu50jal","slide":11,"name":"Shape 9","bbox":[457.92,314.88,363.84,244.8]}
+{"kind":"textbox","id":"sh/nyl4ret0","slide":11,"name":"Text 10","text":"数字不是编的","textPreview":"数字不是编的","textChars":6,"textLines":1,"bbox":[484.8,332.16,310.08,40.32]}
+{"kind":"textbox","id":"sh/2xcnytsf","slide":11,"name":"Text 11","text":"6.5 原样取自知识库里\n那条区间的下界，\n并且注明了出处。\n不是“差不多这个数”。","textPreview":"6.5 原样取自知识库里 | 那条区间的下界， | 并且注明了出处。 | 不是“差不多这个数”。","textChars":42,"textLines":4,"bbox":[484.8,384,310.08,153.6]}
+{"kind":"shape","id":"sh/xon6x8r2","slide":11,"name":"Shape 12","bbox":[848.64,314.88,363.84,244.8]}
+{"kind":"textbox","id":"sh/cne543ax","slide":11,"name":"Text 13","text":"结果可以复核","textPreview":"结果可以复核","textChars":6,"textLines":1,"bbox":[875.52,332.16,310.08,40.32]}
+{"kind":"textbox","id":"sh/bm5ovy9c","slide":11,"name":"Text 14","text":"同一个问题问 5 次，\n拿到 5 个一模一样的指纹。\n指纹变了只有三种可能：\n假设变了、知识改了、规则改了。","textPreview":"同一个问题问 5 次， | 拿到 5 个一模一样的指纹。 | 指纹变了只有三种可能： | 假设变了、知识改了、规则改了。","textChars":54,"textLines":4,"bbox":[875.52,384,310.08,153.6]}
+{"kind":"shape","id":"sh/alwn2tsr","slide":11,"name":"Shape 15","bbox":[67.2,583.68,1145.57,53.76]}
+{"kind":"textbox","id":"sh/dsjml4by","slide":11,"name":"Text 16","text":"整个推演在一块临时的“沙盘”里跑完：真实数据库一个字都没有改。要多跑几遍都行。","textPreview":"整个推演在一块临时的“沙盘”里跑完：真实数据库一个字都没有改。要多跑几遍都行。","textChars":39,"textLines":1,"bbox":[91.2,583.68,1097.57,53.76]}
+{"kind":"notes","id":"nt/mg4v1z","slide":11,"text":"结论必须保持“若……则……”的形式念出来，一旦说成“他确诊了”，这一页就白做了。\n\n三条红线逐条讲：\n第一，这不是预测。系统不回答“他会不会”，只回答“如果，那么”。\n第二，6.5 不是拍脑袋，是原样取自那条区间的下界，而且要注明出身——用了知识库的数就得说清是知识库的数。\n第三，可复核。同一个问题问五次得到五个一样的指纹，这是和纯生成式回答最硬的一条差别。\n\n最后强调沙盘：推演不写真实数据库，结构上就没有写入路径。"}
+{"kind":"slide","id":"sl/d7f680","slide":12,"title":"最后","textShapes":17}
+{"kind":"textbox","id":"sh/69oraxsn","slide":12,"name":"Text 0","text":"最后","textPreview":"最后","textChars":2,"textLines":1,"bbox":[67.2,40.32,1145.57,24.96]}
+{"kind":"textbox","id":"sh/7ax8jit8","slide":12,"name":"Text 1","text":"它做什么，不做什么","textPreview":"它做什么，不做什么","textChars":9,"textLines":1,"bbox":[67.2,74.88,1145.57,63.36]}
+{"kind":"textbox","id":"sh/k7698nuh","slide":12,"name":"Text 2","text":"DMO · Diabetes Ontology Agent","textPreview":"DMO · Diabetes Ontology Agent","textChars":29,"textLines":1,"bbox":[67.2,664.32,576,24.96]}
+{"kind":"textbox","id":"sh/58fqhsb2","slide":12,"name":"Text 3","text":"10 / 10","textPreview":"10 / 10","textChars":7,"textLines":1,"bbox":[1020.77,664.32,192,24.96]}
+{"kind":"textbox","id":"sh/ilor6dcb","slide":12,"name":"Text 4","text":"它做的","textPreview":"它做的","textChars":3,"textLines":1,"bbox":[67.2,163.2,553.92,30.72]}
+{"kind":"shape","id":"sh/j6x8fitw","slide":12,"name":"Shape 5","bbox":[67.2,211.2,553.92,61.44]}
+{"kind":"textbox","id":"sh/wjm943ul","slide":12,"name":"Text 6","text":"把医学指南整理成能查、能核对的知识网","textPreview":"把医学指南整理成能查、能核对的知识网","textChars":18,"textLines":1,"bbox":[90.24,211.2,507.84,61.44]}
+{"kind":"shape","id":"sh/xkfqd8bq","slide":12,"name":"Shape 7","bbox":[67.2,284.16,553.92,61.44]}
+{"kind":"textbox","id":"sh/9gnu1gby","slide":12,"name":"Text 8","text":"判断一次检查落在哪个区间、够不够确诊","textPreview":"判断一次检查落在哪个区间、够不够确诊","textChars":18,"textLines":1,"bbox":[90.24,284.16,507.84,61.44]}
+{"kind":"shape","id":"sh/8fet8bad","slide":12,"name":"Shape 9","bbox":[67.2,357.12,553.92,61.44]}
+{"kind":"textbox","id":"sh/7e5cz6ts","slide":12,"name":"Text 10","text":"把每个结论追回到规则、指南原句和原始那行记录","textPreview":"把每个结论追回到规则、指南原句和原始那行记录","textChars":22,"textLines":1,"bbox":[90.24,357.12,507.84,61.44]}
+{"kind":"shape","id":"sh/mdwb61s7","slide":12,"name":"Shape 11","bbox":[67.2,430.08,553.92,61.44]}
+{"kind":"textbox","id":"sh/lcnuxwbm","slide":12,"name":"Text 12","text":"明确说出“现在判不了，缺的是什么”","textPreview":"明确说出“现在判不了，缺的是什么”","textChars":17,"textLines":1,"bbox":[90.24,430.08,507.84,61.44]}
+{"kind":"textbox","id":"sh/kret4rah","slide":12,"name":"Text 13","text":"它不做的","textPreview":"它不做的","textChars":4,"textLines":1,"bbox":[658.56,163.2,553.92,30.72]}
+{"kind":"shape","id":"sh/zqlcv6tw","slide":12,"name":"Shape 14","bbox":[658.56,211.2,553.92,61.44]}
+{"kind":"textbox","id":"sh/ypcb21sb","slide":12,"name":"Text 15","text":"不给药，不给剂量","textPreview":"不给药，不给剂量","textChars":8,"textLines":1,"bbox":[681.6,211.2,507.84,61.44]}
+{"kind":"shape","id":"sh/xo3utwbq","slide":12,"name":"Shape 16","bbox":[658.56,284.16,553.92,61.44]}
+{"kind":"textbox","id":"sh/cnut0ra5","slide":12,"name":"Text 17","text":"不给概率，不预测多久会怎样","textPreview":"不给概率，不预测多久会怎样","textChars":13,"textLines":1,"bbox":[681.6,284.16,507.84,61.44]}
+{"kind":"shape","id":"sh/o7ytgri1","slide":12,"name":"Shape 18","bbox":[658.56,357.12,553.92,61.44]}
+{"kind":"textbox","id":"sh/ps7upwjm","slide":12,"name":"Text 19","text":"不替代医生，也不是医疗器械","textPreview":"不替代医生，也不是医疗器械","textChars":13,"textLines":1,"bbox":[681.6,357.12,507.84,61.44]}
+{"kind":"shape","id":"sh/25gbeh0v","slide":12,"name":"Shape 20","bbox":[658.56,430.08,553.92,61.44]}
+{"kind":"textbox","id":"sh/36pcnm1g","slide":12,"name":"Text 21","text":"不用没有依据的评分和百分比包装自己","textPreview":"不用没有依据的评分和百分比包装自己","textChars":17,"textLines":1,"bbox":[681.6,430.08,507.84,61.44]}
+{"kind":"textbox","id":"sh/g3etcri5","slide":12,"name":"Text 22","text":"少生成一点，多核对一点。","textPreview":"少生成一点，多核对一点。","textChars":12,"textLines":1,"bbox":[67.2,528,643.2,57.6]}
+{"kind":"shape","id":"sh/h4nulcja","slide":12,"name":"Shape 23","bbox":[67.2,602.88,537.6,48]}
+{"kind":"textbox","id":"sh/u1wbah0z","slide":12,"name":"Text 24","text":"技术验证 / 学习项目  ·  Not a Medical Device","textPreview":"技术验证 / 学习项目  ·  Not a Medical Device","textChars":36,"textLines":1,"bbox":[67.2,602.88,537.6,48]}
+{"kind":"textbox","id":"sh/f25cjm1k","slide":12,"name":"Text 25","text":"这不是一个已经完成的医疗智能体，\n而是一套让未来的智能体\n更少越过证据边界的底座。","textPreview":"这不是一个已经完成的医疗智能体， | 而是一套让未来的智能体 | 更少越过证据边界的底座。","textChars":41,"textLines":3,"bbox":[729.6,528,482.88,122.88]}
+{"kind":"notes","id":"nt/d7f680","slide":12,"text":"收尾要把边界说完整，这一页本身就是可信度的一部分。\n\n左边是它真能做的四件事；右边是它明确不做的四件事——不给药、不给概率、不替代医生、不用没有依据的数字包装自己。\n\n最后一句回扣全场：少生成一点，多核对一点。以及定位——这不是一个已经完成的医疗智能体，而是一套让未来的智能体更少越过证据边界的底座。"}

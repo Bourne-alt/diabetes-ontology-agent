@@ -1,0 +1,33 @@
+{
+  "outputSlides": [
+    {"outputSlide": 1, "sourceSlide": 1, "narrativeRole": "opening brand preserve-only", "reuseMode": "duplicate-slide", "editTargets": []},
+    {"outputSlide": 2, "sourceSlide": 2, "narrativeRole": "project definition", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/a10jqpsj"}]},
+    {
+      "outputSlide": 3,
+      "sourceSlide": 3,
+      "narrativeRole": "overall architecture map",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [
+        {"action": "rewrite", "sourceElementIds": [
+          "sh/cza94vmx", "sh/d0jax03i", "sh/298ryl4v", "sh/3ah8rqlg", "sh/pcjqtg36",
+          "sh/m5cra54z", "sh/n6ls3alk", "sh/n2l4fq98", "sh/m1c3mlsn",
+          "sh/83ulovat", "sh/v6l4jq94", "sh/x8nml0ra", "sh/w7ulsvqp",
+          "sh/i9w3u58v", "sh/e10f2twf", "sh/03ix43e5", "sh/14ryd8fq", "sh/re9g7yxo", "sh/sfix03y9",
+          "sh/a9kfadwn", "sh/batgjixs", "sh/k3m1g7yp", "sh/z2d07mh4", "sh/x0vi5czy", "sh/czmhc7id",
+          "sh/ax4zax0n", "sh/hwzihwzi", "sh/4nuhs7uh", "sh/po3ilcvm",
+          "sh/qpczuhc7", "sh/rql0nmds", "sh/1wnitwvu"
+        ]}
+      ]
+    },
+    {"outputSlide": 4, "sourceSlide": 3, "narrativeRole": "knowledge construction", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/3ah8rqlg"}]},
+    {"outputSlide": 5, "sourceSlide": 4, "narrativeRole": "data stores", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/ql8jytsj"}]},
+    {"outputSlide": 6, "sourceSlide": 5, "narrativeRole": "answer flow", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/yhkbe1o7"}]},
+    {"outputSlide": 7, "sourceSlide": 6, "narrativeRole": "capability flow", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/98rqt4r6"}]},
+    {"outputSlide": 8, "sourceSlide": 7, "narrativeRole": "case evidence", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/zedcfa9g"}]},
+    {"outputSlide": 9, "sourceSlide": 8, "narrativeRole": "disease inference", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/6h0fypgb"}]},
+    {"outputSlide": 10, "sourceSlide": 9, "narrativeRole": "safety conclusion", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/mdonql4z"}]},
+    {"outputSlide": 11, "sourceSlide": 10, "narrativeRole": "closing boundaries", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/ydcnatkn"}]}
+  ],
+  "omittedSourceSlides": []
+}
+

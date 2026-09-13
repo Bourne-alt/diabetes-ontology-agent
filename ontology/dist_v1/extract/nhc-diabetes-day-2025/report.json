@@ -1,0 +1,180 @@
+{
+  "source": {
+    "sourceId": "nhc-diabetes-day-2025",
+    "uri": "https://example.org/dmo/id/guidelineSource/nhc-diabetes-day-2025",
+    "localFile": "ontology/knowledges/nhc-diabetes-day-2025.txt",
+    "sha256": "aa943eba2bc366d98ca963f55fb8029055138ec929fcff2606f8471ee2e8dcba",
+    "byteSize": 11807,
+    "graphUri": "urn:dmo:extract:nhc-diabetes-day-2025"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 80,
+    "accepted": 73,
+    "rejected": 7,
+    "entities": 73,
+    "edges": 27,
+    "danglingRelations": 44,
+    "mergeConflicts": 7
+  },
+  "quality": {
+    "quoteHitRate": 0.9125,
+    "schemaSlotCoverage": 0.5161,
+    "danglingRelationRate": 0.6197,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {
+    "quote_too_short": 6,
+    "quote_not_found": 1
+  },
+  "linkPass": {
+    "candidates": 37,
+    "accepted": 27,
+    "rejectedByReason": {
+      "target_unresolved": 6,
+      "quote_not_found": 2,
+      "quote_too_short": 1,
+      "source_unresolved": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 33,
+    "lifestyleIntervention": 15,
+    "complication": 7,
+    "symptom": 7,
+    "riskFactor": 7,
+    "labTest": 2,
+    "diabetesType": 1,
+    "monitoringSchedule": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/labTest/餐后2小时血糖",
+      "predicate": "hasThreshold",
+      "target": "餐后2小时血糖"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/超重与肥胖",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/吸烟",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/室内外空气污染",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/职业暴露",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/遗传因素",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/幼年时期的呼吸道感染",
+      "predicate": "increasesRiskOf",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/有巨大儿-出生体重-4kg-分娩史或妊娠糖尿病史",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/每年进行慢性并发症筛查",
+      "predicate": "schedulesTest",
+      "target": "Urine Albumin-to-Creatinine Ratio"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/每年进行慢性并发症筛查",
+      "predicate": "schedulesTest",
+      "target": "eGFR"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/每年进行慢性并发症筛查",
+      "predicate": "schedulesTest",
+      "target": "Dilated Eye Examination"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/每年检测1次空腹血糖",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/每半年检测1次空腹血糖或餐后2小时血糖",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/每年检查1次肺功能",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/戒烟",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/避免二手烟暴露",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/减少室内外空气污染",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/改善厨房通风条件",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/在职业环境中做好防护-减少职业暴露",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/及时接种流感疫苗和肺炎球菌疫苗",
+      "predicate": "appliesToType",
+      "target": "Chronic Obstructive Pulmonary Disease"
+    }
+  ],
+  "conflictSamples": [
+    "complication/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs '糖尿病酮症酸中毒'",
+    "complication/hyperosmolar-hyperglycemic-state: name: 'Hyperosmolar Hyperglycemic State' vs '高渗性高血糖状态'",
+    "complication/diabetic-retinopathy: name: 'Diabetic Retinopathy' vs '糖尿病视网膜病变'",
+    "complication/diabetic-nephropathy: name: 'Diabetic Nephropathy' vs '糖尿病肾脏病'",
+    "complication/diabetic-neuropathy: name: 'Diabetic Neuropathy' vs '糖尿病神经病变'",
+    "complication/diabetic-foot-ulcer: name: 'Diabetic Foot Ulcer' vs '糖尿病足溃疡'",
+    "complication/cardiovascular-disease: name: 'Cardiovascular Disease' vs '动脉粥样硬化性心血管疾病'"
+  ]
+}

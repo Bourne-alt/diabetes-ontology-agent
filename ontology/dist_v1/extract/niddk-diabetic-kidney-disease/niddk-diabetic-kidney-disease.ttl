@@ -1,0 +1,394 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-diabetic-kidney-disease.txt
+# 目标 named graph：urn:dmo:extract:niddk-diabetic-kidney-disease
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-diabetic-kidney-disease'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-kidney-disease.txt" ;
+    dmo:sha256 "4ae81fcb052899f65ac9de769d40690e888b9335b755c8bbeb61f8dac9a16b04" ;
+    dmo:byteSize "8779"^^xsd:integer .
+
+<urn:dmo:extract:niddk-diabetic-kidney-disease> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:58:27+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/diabetic-kidney-disease> a dmo:Complication ;
+    rdfs:label "Diabetic Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "diabetic-kidney-disease" ;
+    dmo:definition "Diabetic kidney disease is a type of kidney disease caused by diabetes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Diabetic Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetic kidney disease is a type of kidney disease caused by diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/contraindication/ace-inhibitors-and-arbs> a dmo:Contraindication ;
+    rdfs:label "ACE inhibitors and ARBs" ;
+    dmo:contraCode "ace-inhibitors-and-arbs" ;
+    dmo:rationale "ACE inhibitors and ARBs are not safe for women who are pregnant." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "women who are pregnant" ;
+    dmo:evidenceQuote "ACE inhibitors and ARBs are not safe for women who are pregnant." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "You should get tested every year for kidney disease if you have type 2 diabetes" ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "You should get tested every year for kidney disease if you have type 2 diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/labTest/a1c> a dmo:LabTest ;
+    rdfs:label "A1C" ;
+    dmo:definition "A blood test that shows your average blood glucose level over the past 3 months." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "The A1C is a blood test that shows your average blood glucose level over the past 3 months. This is different from the blood glucose checks that you may do yourself. The higher your A1C number, the higher your blood glucose levels have been during the past 3 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> a dmo:LabTest ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:definition "A urine test to check for albumin, which can indicate kidney damage." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-albumin-to-creatinine-ratio" ;
+    dmo:loincCode "29515-2" ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg-per-g" ;
+    dmo:evidenceQuote "Your health care professional will check your urine for albumin and will also do a blood test to see how well your kidneys are filtering your blood." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/are-not-active> a dmo:LifestyleIntervention ;
+    rdfs:label "Are not active" ;
+    dmo:interventionCode "are-not-active" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Are not active" ;
+    dmo:evidenceQuote "You are also more likely to develop kidney disease if you have diabetes and\n\nsmoke\ndon’t follow your diabetes eating plan\neat foods high in salt\nare not active\nare overweight\nhave heart disease\nhave a family history of kidney failure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/are-overweight> a dmo:LifestyleIntervention ;
+    rdfs:label "Are overweight" ;
+    dmo:interventionCode "are-overweight" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Are overweight" ;
+    dmo:evidenceQuote "You are also more likely to develop kidney disease if you have diabetes and\n\nsmoke\ndon’t follow your diabetes eating plan\neat foods high in salt\nare not active\nare overweight\nhave heart disease\nhave a family history of kidney failure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> a dmo:LifestyleIntervention ;
+    rdfs:label "Eat foods high in salt" ;
+    dmo:interventionCode "eat-foods-high-in-salt" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eat foods high in salt" ;
+    dmo:evidenceQuote "You are also more likely to develop kidney disease if you have diabetes and\n\nsmoke\ndon’t follow your diabetes eating plan\neat foods high in salt\nare not active\nare overweight\nhave heart disease\nhave a family history of kidney failure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> a dmo:LifestyleIntervention ;
+    rdfs:label "Get enough sleep. Aim for 7 to 8 hours of sleep each night" ;
+    dmo:interventionCode "get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Get enough sleep. Aim for 7 to 8 hours of sleep each night" ;
+    dmo:evidenceQuote "Get enough sleep. Aim for 7 to 8 hours of sleep each night." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> a dmo:LifestyleIntervention ;
+    rdfs:label "Make physical activity part of your routine" ;
+    dmo:interventionCode "make-physical-activity-part-of-your-routine" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Make physical activity part of your routine" ;
+    dmo:evidenceQuote "Make physical activity part of your routine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/smoke> a dmo:LifestyleIntervention ;
+    rdfs:label "Smoke" ;
+    dmo:interventionCode "smoke" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Smoke" ;
+    dmo:evidenceQuote "You are also more likely to develop kidney disease if you have diabetes and\n\nsmoke\ndon’t follow your diabetes eating plan\neat foods high in salt\nare not active\nare overweight\nhave heart disease\nhave a family history of kidney failure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> a dmo:LifestyleIntervention ;
+    rdfs:label "Stay at or get to a healthy weight" ;
+    dmo:interventionCode "stay-at-or-get-to-a-healthy-weight" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Stay at or get to a healthy weight" ;
+    dmo:evidenceQuote "Stay at or get to a healthy weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> a dmo:LifestyleIntervention ;
+    rdfs:label "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium" ;
+    dmo:interventionCode "work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium" ;
+    dmo:evidenceQuote "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/monitoringSchedule/a1c> a dmo:MonitoringSchedule ;
+    rdfs:label "A1C" ;
+    dmo:appliesTo "people with diabetes" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "A1C" ;
+    dmo:scheduleId "a1c" ;
+    dmo:evidenceQuote "The A1C is a blood test that shows your average blood glucose level over the past 3 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/a1c-goal-below-7-percent-for-kidney-protection> a dmo:Recommendation ;
+    rdfs:label "A1C Goal Below 7 Percent for Kidney Protection" ;
+    dmo:populationScope "Many people with diabetes" ;
+    dmo:recommendationId "a1c-goal-below-7-percent-for-kidney-protection" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The A1C goal for many people with diabetes is below 7 percent. Ask your health care team what your goal should be. Reaching your goal numbers will help you protect your kidneys." ;
+    dmo:evidenceQuote "The A1C goal for many people with diabetes is below 7 percent. Ask your health care team what your goal should be. Reaching your goal numbers will help you protect your kidneys." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> a dmo:Recommendation ;
+    rdfs:label "ACE inhibitors and ARBs" ;
+    dmo:populationScope "women who are pregnant" ;
+    dmo:recommendationId "ace-inhibitors-and-arbs" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "ACE inhibitors and ARBs are not safe for women who are pregnant." ;
+    dmo:evidenceQuote "ACE inhibitors and ARBs are not safe for women who are pregnant." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/blood-pressure-goal-below-140-90-mm-hg-for-kidney-protection> a dmo:Recommendation ;
+    rdfs:label "Blood Pressure Goal Below 140/90 mm Hg for Kidney Protection" ;
+    dmo:populationScope "Most people with diabetes" ;
+    dmo:recommendationId "blood-pressure-goal-below-140-90-mm-hg-for-kidney-protection" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The blood pressure goal for most people with diabetes is below 140/90 mm Hg. Ask your health care team what your goal should be." ;
+    dmo:evidenceQuote "The blood pressure goal for most people with diabetes is below 140/90 mm Hg. Ask your health care team what your goal should be." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> a dmo:Recommendation ;
+    rdfs:label "Get enough sleep. Aim for 7 to 8 hours of sleep each night" ;
+    dmo:recommendationId "get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Get enough sleep. Aim for 7 to 8 hours of sleep each night." ;
+    dmo:evidenceQuote "Get enough sleep. Aim for 7 to 8 hours of sleep each night." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> a dmo:Recommendation ;
+    rdfs:label "Make physical activity part of your routine" ;
+    dmo:recommendationId "make-physical-activity-part-of-your-routine" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Make physical activity part of your routine." ;
+    dmo:evidenceQuote "Make physical activity part of your routine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> a dmo:Recommendation ;
+    rdfs:label "Stay at or get to a healthy weight" ;
+    dmo:recommendationId "stay-at-or-get-to-a-healthy-weight" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Stay at or get to a healthy weight." ;
+    dmo:evidenceQuote "Stay at or get to a healthy weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> a dmo:Recommendation ;
+    rdfs:label "Talk to your health care professional or pharmacist about all of the medicines you take, including over-the-counter medicines" ;
+    dmo:recommendationId "talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Talk to your health care professional or pharmacist about all of the medicines you take, including over-the-counter medicines." ;
+    dmo:evidenceQuote "Talk to your health care professional or pharmacist about all of the medicines you take, including over-the-counter medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> a dmo:Recommendation ;
+    rdfs:label "Try deep breathing, gardening, taking a walk, doing yoga, meditating, doing a hobby, or listening to your favorite music" ;
+    dmo:recommendationId "try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Try deep breathing, gardening, taking a walk, doing yoga, meditating, doing a hobby, or listening to your favorite music." ;
+    dmo:evidenceQuote "Try deep breathing, gardening, taking a walk, doing yoga, meditating, doing a hobby, or listening to your favorite music." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/use-of-ace-inhibitors-or-arbs-to-slow-kidney-damage-in-diabetic-kidney-disease> a dmo:Recommendation ;
+    rdfs:label "Use of ACE Inhibitors or ARBs to Slow Kidney Damage in Diabetic Kidney Disease" ;
+    dmo:populationScope "People with diabetes who have high blood pressure and DKD" ;
+    dmo:recommendationId "use-of-ace-inhibitors-or-arbs-to-slow-kidney-damage-in-diabetic-kidney-disease" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Two types of blood pressure medicines, ACE inhibitors and ARBs, play a special role in protecting your kidneys. Each has been found to slow kidney damage in people with diabetes who have high blood pressure and DKD. The names of these medicines end in –pril or –sartan. ACE inhibitors and ARBs are not safe for women who are pregnant." ;
+    dmo:evidenceQuote "Two types of blood pressure medicines, ACE inhibitors and ARBs, play a special role in protecting your kidneys. Each has been found to slow kidney damage in people with diabetes who have high blood pressure and DKD. The names of these medicines end in –pril or –sartan. ACE inhibitors and ARBs are not safe for women who are pregnant." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> a dmo:Recommendation ;
+    rdfs:label "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium" ;
+    dmo:recommendationId "work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium." ;
+    dmo:evidenceQuote "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/chronic-stress> a dmo:RiskFactor ;
+    rdfs:label "Chronic Stress" ;
+    dmo:evidenceNote "Long-term stress can raise blood glucose and blood pressure, which may worsen kidney damage." ;
+    dmo:name "Chronic Stress" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "chronic-stress" ;
+    dmo:evidenceQuote "Long-term stress can raise your blood glucose and blood pressure, but you can learn ways to lower your stress." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/having-diabetes-for-a-longer-time> a dmo:RiskFactor ;
+    rdfs:label "Having Diabetes for a Longer Time" ;
+    dmo:evidenceNote "The document states that having diabetes for a longer time increases the chances of kidney damage, and this is not presented as a modifiable factor." ;
+    dmo:name "Having Diabetes for a Longer Time" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "having-diabetes-for-a-longer-time" ;
+    dmo:evidenceQuote "Having diabetes for a longer time increases the chances that you will have kidney damage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-glucose> a dmo:RiskFactor ;
+    rdfs:label "High Blood Glucose" ;
+    dmo:evidenceNote "The document states that high blood glucose can damage kidney blood vessels and that controlling blood glucose can protect kidneys, indicating it is modifiable." ;
+    dmo:name "High Blood Glucose" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-glucose" ;
+    dmo:evidenceQuote "If you have diabetes, you are more likely to develop kidney disease if your blood glucose is too high" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> a dmo:RiskFactor ;
+    rdfs:label "High Blood Pressure" ;
+    dmo:evidenceNote "The document states that high blood pressure can damage kidneys and that controlling it helps protect kidneys, indicating it is modifiable." ;
+    dmo:name "High Blood Pressure" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-pressure" ;
+    dmo:evidenceQuote "If you have diabetes, you are more likely to develop kidney disease if you have high blood pressure." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/high-salt-and-sodium-intake> a dmo:RiskFactor ;
+    rdfs:label "High Salt and Sodium Intake" ;
+    dmo:evidenceNote "Limiting salt and sodium is recommended to support kidney health." ;
+    dmo:name "High Salt and Sodium Intake" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-salt-and-sodium-intake" ;
+    dmo:evidenceQuote "Work with a dietitian to develop a diabetes meal plan and limit salt and sodium." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/obesity-or-overweight> a dmo:RiskFactor ;
+    rdfs:label "Obesity or Overweight" ;
+    dmo:evidenceNote "Staying at or getting to a healthy weight is recommended for kidney health." ;
+    dmo:name "Obesity or Overweight" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "obesity-or-overweight" ;
+    dmo:evidenceQuote "Stay at or get to a healthy weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/physical-inactivity> a dmo:RiskFactor ;
+    rdfs:label "Physical Inactivity" ;
+    dmo:evidenceNote "Making physical activity part of your routine is recommended for kidney health." ;
+    dmo:name "Physical Inactivity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "physical-inactivity" ;
+    dmo:evidenceQuote "Make physical activity part of your routine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/poor-sleep> a dmo:RiskFactor ;
+    rdfs:label "Poor Sleep" ;
+    dmo:evidenceNote "Getting enough sleep is recommended to support kidney health." ;
+    dmo:name "Poor Sleep" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "poor-sleep" ;
+    dmo:evidenceQuote "Get enough sleep. Aim for 7 to 8 hours of sleep each night." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+<https://example.org/dmo/id/riskFactor/race-and-ethnicity-african-americans-american-indians-and-hispanics-latinos> a dmo:RiskFactor ;
+    rdfs:label "Race and Ethnicity: African Americans, American Indians, and Hispanics/Latinos" ;
+    dmo:evidenceNote "The document states these groups develop diabetes, kidney disease, and kidney failure at a higher rate than Caucasians, which is a demographic factor not modifiable by individual action." ;
+    dmo:name "Race and Ethnicity: African Americans, American Indians, and Hispanics/Latinos" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "race-and-ethnicity-african-americans-american-indians-and-hispanics-latinos" ;
+    dmo:evidenceQuote "African Americans, American Indians, and Hispanics/Latinos develop diabetes, kidney disease, and kidney failure at a higher rate than Caucasians." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/diabetic-kidney-disease> dmo:screenedByTest <https://example.org/dmo/id/labTest/a1c> .
+<https://example.org/dmo/id/complication/diabetic-kidney-disease> dmo:screenedByTest <https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> .
+<https://example.org/dmo/id/contraindication/ace-inhibitors-and-arbs> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-kidney-disease> .
+<https://example.org/dmo/id/lifestyleIntervention/are-not-active> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/are-overweight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity-or-overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/high-salt-and-sodium-intake> .
+<https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/poor-sleep> .
+<https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity-or-overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/high-salt-and-sodium-intake> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> .
+<https://example.org/dmo/id/recommendation/ace-inhibitors-and-arbs> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> .
+<https://example.org/dmo/id/recommendation/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> .
+<https://example.org/dmo/id/recommendation/make-physical-activity-part-of-your-routine> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/stay-at-or-get-to-a-healthy-weight> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> .
+<https://example.org/dmo/id/recommendation/talk-to-your-health-care-professional-or-pharmacist-about-all-of-the-medicines-you-take-including-over-the-counter-medicines> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> .
+<https://example.org/dmo/id/recommendation/try-deep-breathing-gardening-taking-a-walk-doing-yoga-meditating-doing-a-hobby-or-listening-to-your-favorite-music> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> .
+<https://example.org/dmo/id/recommendation/use-of-ace-inhibitors-or-arbs-to-slow-kidney-damage-in-diabetic-kidney-disease> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-kidney-disease> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-not-active> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/are-overweight> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-foods-high-in-salt> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/get-enough-sleep-aim-for-7-to-8-hours-of-sleep-each-night> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-physical-activity-part-of-your-routine> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/smoke> .
+<https://example.org/dmo/id/recommendation/work-with-a-dietitian-to-develop-a-diabetes-meal-plan-and-limit-salt-and-sodium> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-at-or-get-to-a-healthy-weight> .

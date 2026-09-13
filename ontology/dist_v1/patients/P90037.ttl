@@ -1,0 +1,67 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/b66b06e9-a22e-5924-8c56-fe47481b8645> a dmo:Patient ;
+    dmo:birthYear 1956 ;
+    dmo:demoScenario "S32" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90037-CKD>,
+        <https://example.org/dmo/id/diagnosis/D90037-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90037-1> ;
+    dmo:patientId "P90037" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/diagnosis/D90037-CKD> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S32" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90037-1> ;
+    dmo:diagnosedDate "2023-11-14"^^xsd:date ;
+    dmo:diagnosisComplication <https://example.org/dmo/id/CKD> ;
+    dmo:diagnosisId "D90037-CKD" ;
+    dmo:diagnosisKind "Complication" ;
+    dmo:externalCode "N18" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/diagnosis/D90037-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S32" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90037-1> ;
+    dmo:diagnosedDate "2012-08-30"^^xsd:date ;
+    dmo:diagnosisId "D90037-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90037-EGFR> a dmo:LabResult ;
+    dmo:collectedAt "2026-06-05T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S32" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90037-EGFR" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-EGFR> ;
+    dmo:resultUnit "mL-per-min" ;
+    dmo:resultValue 52.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90037-UACR> a dmo:LabResult ;
+    dmo:collectedAt "2026-06-05T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S32" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90037-UACR" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-UACR> ;
+    dmo:resultUnit "mg-per-g" ;
+    dmo:resultValue 210.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90037-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-06-05"^^xsd:date ;
+    dmo:encounterId "E90037-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90037-EGFR>,
+        <https://example.org/dmo/id/labResult/L90037-UACR> .
+

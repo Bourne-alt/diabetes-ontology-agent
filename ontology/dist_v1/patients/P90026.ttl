@@ -1,0 +1,55 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/02fc941d-e4de-5409-ab4e-e0f4f417bd80> a dmo:Patient ;
+    dmo:birthYear 1976 ;
+    dmo:demoScenario "S23" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90026-BMI> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90026-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90026-1> ;
+    dmo:patientId "P90026" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/diagnosis/D90026-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S23" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90026-1> ;
+    dmo:diagnosedDate "2022-01-25"^^xsd:date ;
+    dmo:diagnosisId "D90026-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90026-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-16T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S23" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90026-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 9.1 ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/observation/O90026-BMI> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S23" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90026-BMI" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90026-1> ;
+    dmo:observationType "BMI" ;
+    dmo:observedAt "2026-02-16T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "kg-per-m2" ;
+    dmo:valueDecimal 30.4 ;
+    dmo:valueTrustLevel "Unverified" .
+
+<https://example.org/dmo/id/encounter/E90026-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-16"^^xsd:date ;
+    dmo:encounterId "E90026-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90026-A1C> .
+

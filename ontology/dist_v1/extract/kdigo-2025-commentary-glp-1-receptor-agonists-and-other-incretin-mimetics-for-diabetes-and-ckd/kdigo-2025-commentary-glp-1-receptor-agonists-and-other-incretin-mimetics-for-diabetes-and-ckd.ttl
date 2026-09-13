@@ -1,0 +1,178 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/KDIGO-2025-Commentary-GLP-1-Receptor-Agonists-and-Other-Incretin-Mimetics-for-Diabetes-and-CKD.pdf
+# 目标 named graph：urn:dmo:extract:kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/KDIGO-2025-Commentary-GLP-1-Receptor-Agonists-and-Other-Incretin-Mimetics-for-Diabetes-and-CKD.pdf" ;
+    dmo:sha256 "f8f4e19fcb804e2af6b472e473257c95f0fd4ff741b333b7dd372affd5f26fc6" ;
+    dmo:byteSize "136922"^^xsd:integer .
+
+<urn:dmo:extract:kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T12:03:59+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/atherosclerotic-cardiovascular-disease> a dmo:Complication ;
+    rdfs:label "Atherosclerotic Cardiovascular Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "atherosclerotic-cardiovascular-disease" ;
+    dmo:definition "prevalent atherosclerotic cardiovascular disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Atherosclerotic Cardiovascular Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "prevalent atherosclerotic cardiovascular disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/complication/cardiovascular-disease> a dmo:Complication ;
+    rdfs:label "Cardiovascular Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "cardiovascular-disease" ;
+    dmo:definition "Preexisting CV disease and a BMI of $27 kg/m 2 but no history of diabetes" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Cardiovascular Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Preexisting CV disease and a BMI of $27 kg/m 2 but no history of diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/complication/obesity> a dmo:Complication ;
+    rdfs:label "Obesity" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "obesity" ;
+    dmo:definition "Among people with obesity, trials of incretin mimetics have reported reduced weight by up to 24% compared with placebo" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0004767" ;
+    dmo:name "Obesity" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Among people with obesity, trials of incretin mimetics have reported reduced weight by up to 24% compared with placebo" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "People with type 1 diabetes (T1D) also have a high need for new kidney- and cardiovascular-protective therapies." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "People with type 1 diabetes (T1D) also have a high need for new kidney- and cardiovascular-protective therapies." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "Type 2 diabetes is a chronic condition characterized by insulin resistance and relative insulin deficiency." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Effects of semaglutide on chronic kidney disease in patients with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/labTest/albuminuria> a dmo:LabTest ;
+    rdfs:label "Albuminuria" ;
+    dmo:definition "The presence of albumin in the urine, indicating kidney damage and a risk factor for progression of chronic kidney disease." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "albuminuria" ;
+    dmo:loincCode "29515-1" ;
+    dmo:name "Albuminuria" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg-per-g" ;
+    dmo:evidenceQuote "People with T2D and albuminuria are at high absolute risk of both CKD progression and cardiovascular events, therefore these people would be expected to have the highest absolute risk reductions with incretin mimetics." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> a dmo:LabTest ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:definition "A measure of albumin in urine relative to creatinine, used to assess kidney damage and albuminuria in chronic kidney disease." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-albumin-to-creatinine-ratio" ;
+    dmo:loincCode "29515-1" ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg-per-g" ;
+    dmo:evidenceQuote "Primary endpoint was percentage change from baseline in UACR at week 24" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/medication/insulin-glargine> a dmo:Medication ;
+    rdfs:label "insulin glargine" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin-glargine" ;
+    dmo:name "insulin glargine" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "compared with insulin glargine" ;
+    dmo:evidenceQuote "Tirzepatide (5 mg, 10 mg, or 15 mg once weekly) Insulin glargine Composite kidney outcome was a composite of time to first occurrence of eGFR decline of $40% from baseline" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/medication/semaglutide-1-mg-once-weekly> a dmo:Medication ;
+    rdfs:label "Semaglutide 1 mg once weekly" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "semaglutide-1-mg-once-weekly" ;
+    dmo:name "Semaglutide 1 mg once weekly" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Semaglutide 1 mg once weekly Placebo Primary composite kidney outcome" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/medication/semaglutide-2-4-mg-once-weekly> a dmo:Medication ;
+    rdfs:label "Semaglutide 2.4 mg once weekly" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "semaglutide-2-4-mg-once-weekly" ;
+    dmo:name "Semaglutide 2.4 mg once weekly" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Semaglutide 2.4 mg once weekly Placebo Primary composite CV outcome" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/medication/tirzepatide> a dmo:Medication ;
+    rdfs:label "tirzepatide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "tirzepatide" ;
+    dmo:name "tirzepatide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "tirzepatide (a dual GLP-1 RA and GIP receptor agonist)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/medication/tirzepatide-5-mg-10-mg-or-15-mg-once-weekly> a dmo:Medication ;
+    rdfs:label "Tirzepatide (5 mg, 10 mg, or 15 mg once weekly)" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "tirzepatide-5-mg-10-mg-or-15-mg-once-weekly" ;
+    dmo:name "Tirzepatide (5 mg, 10 mg, or 15 mg once weekly)" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Tirzepatide (5 mg, 10 mg, or 15 mg once weekly) Insulin glargine Composite kidney outcome was a composite of time to first occurrence of eGFR decline of $40% from baseline" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+<https://example.org/dmo/id/riskFactor/albuminuria> a dmo:RiskFactor ;
+    rdfs:label "Albuminuria" ;
+    dmo:evidenceNote "People with T2D and albuminuria are at high absolute risk of both CKD progression and cardiovascular events, and the FLOW trial included albuminuria as a key inclusion criterion." ;
+    dmo:name "Albuminuria" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "albuminuria" ;
+    dmo:evidenceQuote "People with T2D and albuminuria are at high absolute risk of both CKD progression and cardiovascular events, therefore these people would be expected to have the highest absolute risk reductions with incretin mimetics." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/kdigo-2025-commentary-glp-1-receptor-agonists-and-other-incretin-mimetics-for-diabetes-and-ckd> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/atherosclerotic-cardiovascular-disease> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/cardiovascular-disease> .

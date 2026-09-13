@@ -1,0 +1,234 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-gestational-diabetes.txt
+# 目标 named graph：urn:dmo:extract:niddk-gestational-diabetes
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-gestational-diabetes'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-gestational-diabetes.txt" ;
+    dmo:sha256 "d06560c0e6bf5225cace6845b184ff6ad3c3cbc8377ce4bb5d6415ff689127de" ;
+    dmo:byteSize "3141"^^xsd:integer .
+
+<urn:dmo:extract:niddk-gestational-diabetes> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T03:08:44+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Gestational Diabetes" ;
+    dmo:definition "Gestational diabetes is a type of diabetes that occurs only during pregnancy." ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Gestational Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "Gestational diabetes is a type of diabetes that occurs only during pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/labTest/glucose-challenge-test> a dmo:LabTest ;
+    rdfs:label "Glucose Challenge Test" ;
+    dmo:definition "A test used to screen for gestational diabetes, performed between 24 and 28 weeks of pregnancy. If the results show high blood glucose, an oral glucose tolerance test is required to confirm the diagnosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "glucose-challenge-test" ;
+    dmo:name "Glucose Challenge Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Your doctor will test you for gestational diabetes between 24 and 28 weeks of pregnancy. Tests include the glucose challenge test and the oral glucose tolerance test (OGTT). If the results of the glucose challenge test show high blood glucose, you will return for an OGTT test to confirm the diagnosis of gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> a dmo:LabTest ;
+    rdfs:label "Oral Glucose Tolerance Test" ;
+    dmo:definition "A test used to confirm the diagnosis of gestational diabetes after a positive glucose challenge test. It measures blood glucose levels before and after consuming a glucose solution." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "oral-glucose-tolerance-test" ;
+    dmo:loincCode "15076-8" ;
+    dmo:name "Oral Glucose Tolerance Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "If the results of the glucose challenge test show high blood glucose, you will return for an OGTT test to confirm the diagnosis of gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/being-physically-active> a dmo:LifestyleIntervention ;
+    rdfs:label "Being Physically Active" ;
+    dmo:interventionCode "being-physically-active" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Being Physically Active" ;
+    dmo:evidenceQuote "Managing gestational diabetes includes following a healthy eating plan and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/being-physically-active-after-pregnancy> a dmo:LifestyleIntervention ;
+    rdfs:label "Being Physically Active After Pregnancy" ;
+    dmo:interventionCode "being-physically-active-after-pregnancy" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Being Physically Active After Pregnancy" ;
+    dmo:evidenceQuote "You may be able to lower your and your child’s chances of developing these problems by reaching a healthy weight, making healthy food choices, and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/healthy-eating-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Healthy Eating Plan" ;
+    dmo:interventionCode "healthy-eating-plan" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Healthy Eating Plan" ;
+    dmo:evidenceQuote "Managing gestational diabetes includes following a healthy eating plan and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/losing-extra-weight-before-pregnancy> a dmo:LifestyleIntervention ;
+    rdfs:label "Losing Extra Weight Before Pregnancy" ;
+    dmo:interventionCode "losing-extra-weight-before-pregnancy" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Losing Extra Weight Before Pregnancy" ;
+    dmo:evidenceQuote "You can lower your chance of getting gestational diabetes by losing extra weight before you get pregnant if you are overweight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/making-healthy-food-choices> a dmo:LifestyleIntervention ;
+    rdfs:label "Making Healthy Food Choices" ;
+    dmo:interventionCode "making-healthy-food-choices" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Making Healthy Food Choices" ;
+    dmo:evidenceQuote "You may be able to lower your and your child’s chances of developing these problems by reaching a healthy weight, making healthy food choices, and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "Insulin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "Insulin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "If your eating plan and physical activity aren’t enough to keep your blood glucose in your target range, you may need insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/monitoringSchedule/gestational-diabetes-screening> a dmo:MonitoringSchedule ;
+    rdfs:label "Gestational Diabetes Screening" ;
+    dmo:appliesTo "pregnant women" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "Gestational Diabetes Screening" ;
+    dmo:scheduleId "gestational-diabetes-screening" ;
+    dmo:triggerWindow "24 to 28 weeks of pregnancy" ;
+    dmo:evidenceQuote "Your doctor will test you for gestational diabetes between 24 and 28 weeks of pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/recommendation/insulin-use-for-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Insulin Use for Gestational Diabetes" ;
+    dmo:populationScope "Women with gestational diabetes whose blood glucose is not controlled by diet and exercise" ;
+    dmo:recommendationId "insulin-use-for-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If your eating plan and physical activity aren’t enough to keep your blood glucose in your target range, you may need insulin." ;
+    dmo:evidenceQuote "If your eating plan and physical activity aren’t enough to keep your blood glucose in your target range, you may need insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/recommendation/managing-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Managing Gestational Diabetes" ;
+    dmo:populationScope "Women with gestational diabetes" ;
+    dmo:recommendationId "managing-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Managing gestational diabetes includes following a healthy eating plan and being physically active." ;
+    dmo:evidenceQuote "Managing gestational diabetes includes following a healthy eating plan and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/recommendation/postpartum-prevention-of-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Postpartum Prevention of Type 2 Diabetes" ;
+    dmo:populationScope "Women who had gestational diabetes and their children" ;
+    dmo:recommendationId "postpartum-prevention-of-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You may be able to lower your and your child’s chances of developing these problems by reaching a healthy weight, making healthy food choices, and being physically active." ;
+    dmo:evidenceQuote "You may be able to lower your and your child’s chances of developing these problems by reaching a healthy weight, making healthy food choices, and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/recommendation/prevention-of-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Prevention of Gestational Diabetes" ;
+    dmo:populationScope "Women who are overweight and planning pregnancy" ;
+    dmo:recommendationId "prevention-of-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You can lower your chance of getting gestational diabetes by losing extra weight before you get pregnant if you are overweight. Being physically active before and during pregnancy also may help prevent gestational diabetes." ;
+    dmo:evidenceQuote "You can lower your chance of getting gestational diabetes by losing extra weight before you get pregnant if you are overweight. Being physically active before and during pregnancy also may help prevent gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/being-physically-active-before-and-during-pregnancy> a dmo:RiskFactor ;
+    rdfs:label "Being Physically Active Before and During Pregnancy" ;
+    dmo:evidenceNote "Being physically active before and during pregnancy also may help prevent gestational diabetes." ;
+    dmo:name "Being Physically Active Before and During Pregnancy" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "being-physically-active-before-and-during-pregnancy" ;
+    dmo:evidenceQuote "Being physically active before and during pregnancy also may help prevent gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/extra-weight> a dmo:RiskFactor ;
+    rdfs:label "Extra Weight" ;
+    dmo:evidenceNote "Genes and extra weight may also play a role." ;
+    dmo:name "Extra Weight" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "extra-weight" ;
+    dmo:evidenceQuote "Genes and extra weight may also play a role." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/genes> a dmo:RiskFactor ;
+    rdfs:label "Genes" ;
+    dmo:evidenceNote "Genes and extra weight may also play a role." ;
+    dmo:name "Genes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "genes" ;
+    dmo:evidenceQuote "Genes and extra weight may also play a role." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/losing-extra-weight-before-pregnancy> a dmo:RiskFactor ;
+    rdfs:label "Losing Extra Weight Before Pregnancy" ;
+    dmo:evidenceNote "You can lower your chance of getting gestational diabetes by losing extra weight before you get pregnant if you are overweight." ;
+    dmo:name "Losing Extra Weight Before Pregnancy" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "losing-extra-weight-before-pregnancy" ;
+    dmo:evidenceQuote "You can lower your chance of getting gestational diabetes by losing extra weight before you get pregnant if you are overweight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/symptom/frequent-urination> a dmo:Symptom ;
+    rdfs:label "Frequent Urination" ;
+    dmo:name "Frequent Urination" ;
+    dmo:symptomCode "frequent-urination" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Gestational diabetes often has no symptoms, or they may be mild, such as being thirstier than normal or having to urinate more often." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+<https://example.org/dmo/id/symptom/thirstiness> a dmo:Symptom ;
+    rdfs:label "Thirstiness" ;
+    dmo:name "Thirstiness" ;
+    dmo:symptomCode "thirstiness" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Gestational diabetes often has no symptoms, or they may be mild, such as being thirstier than normal or having to urinate more often." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-gestational-diabetes> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/extra-weight> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/riskFactor/genes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/riskFactor/being-physically-active-before-and-during-pregnancy> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/riskFactor/losing-extra-weight-before-pregnancy> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/being-physically-active> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/extra-weight> .
+<https://example.org/dmo/id/lifestyleIntervention/being-physically-active> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/being-physically-active-before-and-during-pregnancy> .
+<https://example.org/dmo/id/lifestyleIntervention/losing-extra-weight-before-pregnancy> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/extra-weight> .
+<https://example.org/dmo/id/lifestyleIntervention/healthy-eating-plan> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/extra-weight> .
+<https://example.org/dmo/id/lifestyleIntervention/making-healthy-food-choices> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/extra-weight> .
+<https://example.org/dmo/id/lifestyleIntervention/being-physically-active-after-pregnancy> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/extra-weight> .
+<https://example.org/dmo/id/monitoringSchedule/gestational-diabetes-screening> dmo:schedulesTest <https://example.org/dmo/id/labTest/glucose-challenge-test> .
+<https://example.org/dmo/id/monitoringSchedule/gestational-diabetes-screening> dmo:schedulesTest <https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> .
+<https://example.org/dmo/id/recommendation/managing-gestational-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/insulin-use-for-gestational-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/prevention-of-gestational-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/losing-extra-weight-before-pregnancy> .
+<https://example.org/dmo/id/recommendation/prevention-of-gestational-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/being-physically-active> .
+<https://example.org/dmo/id/recommendation/postpartum-prevention-of-type-2-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/making-healthy-food-choices> .
+<https://example.org/dmo/id/recommendation/postpartum-prevention-of-type-2-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/being-physically-active-after-pregnancy> .
+<https://example.org/dmo/id/recommendation/postpartum-prevention-of-type-2-diabetes> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-eating-plan> .

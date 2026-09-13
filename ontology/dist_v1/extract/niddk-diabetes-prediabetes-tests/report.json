@@ -1,0 +1,113 @@
+{
+  "source": {
+    "sourceId": "niddk-diabetes-prediabetes-tests",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests",
+    "localFile": "ontology/knowledges/niddk-diabetes-prediabetes-tests.txt",
+    "sha256": "9a3b9cdc52c8fce00d1facab1734426193f4a3569cab41dde45da2fc041e1f93",
+    "byteSize": 10846,
+    "graphUri": "urn:dmo:extract:niddk-diabetes-prediabetes-tests"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 2,
+  "counts": {
+    "rawRecords": 44,
+    "accepted": 33,
+    "rejected": 11,
+    "entities": 21,
+    "edges": 11,
+    "danglingRelations": 5,
+    "mergeConflicts": 24
+  },
+  "quality": {
+    "quoteHitRate": 0.75,
+    "schemaSlotCoverage": 0.3871,
+    "danglingRelationRate": 0.3125,
+    "avgMentionsPerEntity": 1.57
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 9,
+    "quote_too_short": 2
+  },
+  "linkPass": {
+    "candidates": 13,
+    "accepted": 11,
+    "rejectedByReason": {
+      "target_unresolved": 2
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 8,
+    "labTest": 4,
+    "symptom": 3,
+    "contraindication": 3,
+    "diabetesType": 2,
+    "monitoringSchedule": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/diabetesType/prediabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/a1c-test",
+      "predicate": "hasThreshold",
+      "target": "A1C test - Prediabetes threshold"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/a1c-test",
+      "predicate": "hasThreshold",
+      "target": "A1C test - Type 2 diabetes threshold"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/repeating-test-when-results-conflict",
+      "predicate": "appliesToType",
+      "target": "Confirming diagnosis of type 2 diabetes and prediabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/random-plasma-glucose-rpg-test",
+      "predicate": "hasThreshold",
+      "target": "Random plasma glucose (RPG) test - Diabetes threshold"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/type-2-diabetes: definition: 'Diagnosis of type 2 diabetes is definitively made by blood tests. Diagnosis requires two abnormal test results from the same sample or from two different samples.' vs 'Screening and diagnosis of type 2 diabetes1 6.5% or higher1 repeat for confirmation of diagnosis'",
+    "diabetesType/prediabetes: definition: 'If the patient’s diabetes test results are close to—but not within—the diagnostic range of the test, the patient may have prediabetes.' vs 'Screening and diagnosis of prediabetes1 5.7–6.4%1'",
+    "labTest/a1c-test: name: 'A1C Test' vs 'A1C test'",
+    "labTest/a1c-test: definition: 'Screening and diagnosis of prediabetes; Screening and diagnosis of type 2 diabetes; Monitoring of diabetes' vs 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.'",
+    "symptom/polyuria: name: 'Polyuria' vs 'polyuria'",
+    "symptom/polydypsia: name: 'Polydypsia' vs 'polydypsia'",
+    "symptom/unexplained-weight-loss: name: 'Unexplained Weight Loss' vs 'unexplained weight loss'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'Screening and diagnosis of prediabetes1'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'Screening and diagnosis of type 2 diabetes1'",
+    "recommendation/a1c-test: recommendationType: 'Screening' vs 'Diagnosis'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'repeat for confirmation of diagnosis'",
+    "recommendation/a1c-test: recommendationType: 'Screening' vs 'Diagnosis'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'Diagnosis requires a laboratory test certified by the NGSP and standardized to the DCCT assay.'",
+    "recommendation/a1c-test: recommendationType: 'Screening' vs 'Diagnosis'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'Some point-of-care A1C assays may be certified by the NGSP or approved by the U.S. Food and Drug Administration for diagnosis; however, they should only be considered in laboratories that are certified to perform moderate-to-high complexity tests to ensure testing proficiency.'",
+    "recommendation/a1c-test: recommendationType: 'Screening' vs 'Diagnosis'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'Not recommended for rapidly progressing diabetes, e.g., type 1 diabetes in children1'",
+    "recommendation/a1c-test: recommendationType: 'Screening' vs 'Safety'",
+    "recommendation/a1c-test: statement: 'The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.' vs 'Not recommended for screening cystic fibrosis NIH external link-related diabetes1'",
+    "recommendation/a1c-test: recommendationType: 'Screening' vs 'Safety'"
+  ]
+}

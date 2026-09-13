@@ -1,0 +1,54 @@
+{
+  "source": {
+    "sourceId": "nhc-gdm-weight-standard-2023",
+    "uri": "https://example.org/dmo/id/guidelineSource/nhc-gdm-weight-standard-2023",
+    "localFile": "ontology/knowledges/nhc-gdm-weight-standard-2023.txt",
+    "sha256": "d8fe705773c27e76ca207341c608661c979de76dfffdc53e7dc2333f7e255b9d",
+    "byteSize": 829,
+    "graphUri": "urn:dmo:extract:nhc-gdm-weight-standard-2023"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "entities": 0,
+    "edges": 0,
+    "danglingRelations": 0,
+    "mergeConflicts": 0
+  },
+  "quality": {
+    "quoteHitRate": null,
+    "schemaSlotCoverage": 0.0,
+    "danglingRelationRate": null,
+    "avgMentionsPerEntity": null
+  },
+  "rejectionsByReason": {},
+  "linkPass": {
+    "candidates": 0,
+    "accepted": 0,
+    "rejectedByReason": {}
+  },
+  "entitiesByType": {},
+  "danglingSamples": [],
+  "conflictSamples": []
+}

@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#9AA9B7"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#0E8C7D"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#11202F" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .font { font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .eyebrow { font-size: 22px; font-weight: 700; letter-spacing: 4px; fill: #0E8C7D; }
+      .title { font-size: 48px; font-weight: 700; fill: #11202F; }
+      .subtitle { font-size: 22px; fill: #5F7183; }
+      .lane { font-size: 22px; font-weight: 700; fill: #0E8C7D; letter-spacing: 2px; }
+      .nodeTitle { font-size: 23px; font-weight: 700; fill: #11202F; }
+      .nodeBody { font-size: 17px; fill: #64778A; }
+      .code { font-family: "SFMono-Regular", Consolas, monospace; font-size: 18px; font-weight: 700; fill: #11202F; }
+      .small { font-size: 16px; fill: #718397; }
+      .mini { font-size: 14px; fill: #718397; }
+      .agentTitle { font-size: 25px; font-weight: 700; fill: #FFFFFF; }
+      .agentBody { font-size: 17px; fill: #C8D8E7; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#F7F9FB"/>
+
+  <text x="80" y="65" class="font eyebrow">ONTOLOGY/TOOLS · CODE-BASED ARCHITECTURE</text>
+  <text x="80" y="128" class="font title">智能体的知识不是模型记忆，而是由一条可重建、可审计的知识工厂供给</text>
+  <rect x="80" y="154" width="1760" height="52" rx="14" fill="#EEF2F6"/>
+  <text x="105" y="188" class="font subtitle">唯一的模型环节是 semantic_extract.py 的候选抽取与可选连边；TBox 编译、校验、装载、规则执行和验收均为确定性代码。</text>
+
+  <text x="80" y="252" class="font lane">01 输入与契约</text>
+  <text x="400" y="252" class="font lane">02 离线知识构建</text>
+  <text x="1080" y="252" class="font lane">03 质量门禁与发布</text>
+  <text x="1510" y="252" class="font lane">04 智能体消费</text>
+
+  <!-- connectors behind nodes -->
+  <path d="M350 340 H390" stroke="#9AA9B7" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+  <path d="M350 500 H390" stroke="#9AA9B7" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+  <path d="M350 660 H390" stroke="#9AA9B7" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+  <path d="M1015 365 H1065" stroke="#9AA9B7" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+  <path d="M1015 635 H1065" stroke="#9AA9B7" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+  <path d="M1440 535 H1495" stroke="#0E8C7D" stroke-width="4" marker-end="url(#arrowTeal)" fill="none"/>
+  <path d="M1655 745 V790" stroke="#0E8C7D" stroke-width="4" marker-end="url(#arrowTeal)" fill="none"/>
+  <path d="M1860 900 H1880 V540 H1810" stroke="#5F7183" stroke-width="3" stroke-dasharray="9 8" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- input nodes -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="285" width="270" height="115" rx="18" fill="#FFFFFF" stroke="#D9E1E8" stroke-width="2"/>
+    <rect x="80" y="445" width="270" height="115" rx="18" fill="#FFFFFF" stroke="#D9E1E8" stroke-width="2"/>
+    <rect x="80" y="605" width="270" height="115" rx="18" fill="#FFFFFF" stroke="#D9E1E8" stroke-width="2"/>
+  </g>
+  <text x="105" y="325" class="font nodeTitle">领域图模型 JSON</text>
+  <text x="105" y="356" class="font nodeBody">entityTypes · properties</text>
+  <text x="105" y="382" class="font nodeBody">relationships · extraction.policy</text>
+  <text x="105" y="485" class="font nodeTitle">指南与资料</text>
+  <text x="105" y="516" class="font nodeBody">ontology/knowledges/</text>
+  <text x="105" y="542" class="font nodeBody">TXT / PDF 原文</text>
+  <text x="105" y="645" class="font nodeTitle">人工策展知识</text>
+  <text x="105" y="676" class="font nodeBody">dmo-axioms.ttl · threshold seed</text>
+  <text x="105" y="702" class="font nodeBody">risk map · SHACL shapes · rules</text>
+
+  <!-- build lane schema branch -->
+  <rect x="400" y="285" width="615" height="160" rx="22" fill="#FFFFFF" stroke="#C8D5DF" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="420" y="306" width="12" height="118" rx="6" fill="#0E8C7D"/>
+  <text x="455" y="330" class="font code">build_tbox.py</text>
+  <text x="455" y="364" class="font nodeTitle">把 graph 编译为 OWL TBox 骨架</text>
+  <text x="455" y="398" class="font nodeBody">类 · 数据属性 · 对象属性 · SKOS 枚举 · route 骨架</text>
+  <rect x="770" y="315" width="220" height="88" rx="16" fill="#E5F3F0"/>
+  <text x="790" y="349" class="font code">tbox-v2.ttl</text>
+  <text x="790" y="378" class="font small">可重复生成，不手改</text>
+
+  <!-- build lane document branch -->
+  <rect x="400" y="470" width="615" height="360" rx="22" fill="#FFFFFF" stroke="#C8D5DF" stroke-width="2" filter="url(#shadow)"/>
+  <text x="430" y="510" class="font code">source_registry.py</text>
+  <text x="430" y="540" class="font nodeBody">机械登记 sourceId · publisher · year · 文件 SHA-256</text>
+  <line x1="430" y1="565" x2="985" y2="565" stroke="#E0E6EB" stroke-width="2"/>
+  <text x="430" y="603" class="font code">semantic_extract.py</text>
+  <text x="430" y="633" class="font nodeBody">graph 驱动的 ABox 抽取与审计流水线</text>
+
+  <rect x="430" y="660" width="105" height="54" rx="12" fill="#F0F3F6"/>
+  <rect x="547" y="660" width="105" height="54" rx="12" fill="#F0F3F6"/>
+  <rect x="664" y="660" width="105" height="54" rx="12" fill="#FFF1D6" stroke="#E6A61A"/>
+  <rect x="781" y="660" width="105" height="54" rx="12" fill="#F0F3F6"/>
+  <rect x="898" y="660" width="88" height="54" rx="12" fill="#FFF1D6" stroke="#E6A61A"/>
+  <text x="449" y="694" class="font small">chunk</text>
+  <text x="569" y="694" class="font small">schema</text>
+  <text x="681" y="684" class="font small" font-weight="700">LLM</text>
+  <text x="676" y="705" class="font mini">extract</text>
+  <text x="803" y="694" class="font small">verify</text>
+  <text x="913" y="684" class="font small" font-weight="700">LLM</text>
+  <text x="916" y="705" class="font mini">link?</text>
+
+  <path d="M535 687 H543 M652 687 H660 M769 687 H777 M886 687 H894" stroke="#9AA9B7" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="430" y="756" class="font nodeBody">resolve → emit Turtle + PROV-O → report.json / report.md</text>
+  <text x="430" y="791" class="font small">raw.jsonl 与 rejected.jsonl 保留；--from-raw 可离线重放确定性阶段</text>
+
+  <!-- governance -->
+  <rect x="1080" y="285" width="360" height="560" rx="22" fill="#FFFFFF" stroke="#E6A61A" stroke-width="2.5" filter="url(#shadow)"/>
+  <text x="1110" y="328" class="font nodeTitle" fill="#B47700">四道门禁</text>
+
+  <rect x="1110" y="355" width="300" height="82" rx="14" fill="#FFF4DD"/>
+  <text x="1130" y="386" class="font code">policy 分级</text>
+  <text x="1130" y="414" class="font small">llm / manual / registry / derived</text>
+
+  <rect x="1110" y="455" width="300" height="82" rx="14" fill="#FFF4DD"/>
+  <text x="1130" y="486" class="font code">verify_passages.py</text>
+  <text x="1130" y="514" class="font small">quote 逐字命中 + contentHash</text>
+
+  <rect x="1110" y="555" width="300" height="82" rx="14" fill="#FFF4DD"/>
+  <text x="1130" y="586" class="font code">validate_shacl.py</text>
+  <text x="1130" y="614" class="font small">全量闭世界校验 + 违规基线</text>
+
+  <rect x="1110" y="655" width="300" height="160" rx="14" fill="#E5F3F0" stroke="#0E8C7D" stroke-width="2"/>
+  <text x="1130" y="690" class="font code">load_graphdb.py</text>
+  <text x="1130" y="722" class="font small">命名图幂等 PUT</text>
+  <text x="1130" y="750" class="font small">rules/*.rq 顺序物化</text>
+  <text x="1130" y="778" class="font small">CHECKS 验收查询</text>
+
+  <!-- outputs / runtime -->
+  <rect x="1510" y="285" width="330" height="460" rx="22" fill="#0B1928" filter="url(#shadow)"/>
+  <text x="1540" y="330" class="font agentTitle">GraphDB / dmo</text>
+  <text x="1540" y="360" class="font agentBody">owl2-rl-optimized · 命名图分层</text>
+
+  <rect x="1540" y="390" width="270" height="52" rx="12" fill="#152A44" stroke="#294765"/>
+  <rect x="1540" y="454" width="270" height="52" rx="12" fill="#152A44" stroke="#294765"/>
+  <rect x="1540" y="518" width="270" height="52" rx="12" fill="#152A44" stroke="#294765"/>
+  <rect x="1540" y="582" width="270" height="52" rx="12" fill="#152A44" stroke="#294765"/>
+  <rect x="1540" y="646" width="270" height="52" rx="12" fill="#0F756A"/>
+  <text x="1560" y="423" class="font agentBody">urn:dmo:tbox / seed</text>
+  <text x="1560" y="487" class="font agentBody">urn:dmo:sources</text>
+  <text x="1560" y="551" class="font agentBody">urn:dmo:extract:&lt;source&gt;</text>
+  <text x="1560" y="615" class="font agentBody">SHACL shapes graph</text>
+  <text x="1560" y="679" class="font agentTitle" font-size="20">urn:dmo:inferred</text>
+
+  <rect x="1510" y="800" width="330" height="150" rx="22" fill="#FFFFFF" stroke="#0E8C7D" stroke-width="3" filter="url(#shadow)"/>
+  <text x="1540" y="842" class="font nodeTitle">外部 Agent / 业务应用</text>
+  <text x="1540" y="875" class="font nodeBody">Skills / Tools → FastAPI / CLI</text>
+  <text x="1540" y="906" class="font nodeBody">SQL 收敛事实 + SPARQL 查知识</text>
+  <text x="1540" y="934" class="font small">仓库不内置聊天模型；运行时模型可替换</text>
+
+  <!-- bottom principle -->
+  <rect x="80" y="895" width="1360" height="105" rx="20" fill="#FFF3DF" stroke="#E6A61A" stroke-width="2"/>
+  <text x="112" y="936" class="font nodeTitle" fill="#B47700">核心原则</text>
+  <text x="112" y="972" class="font subtitle" fill="#795614">模型只提出候选与调度工具；知识是否可用，由 schema、逐字出处、SHACL、命名图装载和验收查询共同决定。</text>
+
+  <text x="80" y="1042" class="font mini">Code basis: ontology/tools/build_tbox.py · source_registry.py · semantic_extract.py · verify_passages.py · validate_shacl.py · load_graphdb.py · graphdb_http.py</text>
+</svg>
+

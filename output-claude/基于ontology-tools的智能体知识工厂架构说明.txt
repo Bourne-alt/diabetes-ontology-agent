@@ -1,0 +1,46 @@
+基于 ontology/tools/ 的智能体知识工厂架构说明
+
+定位
+----
+ontology/tools/ 不是一个内置聊天 Agent，而是给外部 Agent/业务应用提供可信知识的离线构建工具链。运行时 src/dmo/ 不包含 LLM 对话循环；唯一的模型调用位于 semantic_extract.py 的离线候选抽取与可选关系连边。
+
+1. 输入与共同契约
+-----------------
+- ontology/graph/diabetes-ontology-v2.json：定义 entityTypes、properties、relationships、标识字段和 extraction.policy。
+- ontology/knowledges/：TXT/PDF 指南与资料原文。
+- ontology/src/、ontology/shapes/、ontology/rules/：人工策展的领域公理、阈值 seed、风险映射、SHACL shapes 和 SPARQL 规则。
+
+2. TBox 构建
+------------
+- build_tbox.py 把图模型机械编译为 ontology/dist/tbox-v2.ttl。
+- 生成 OWL Class、DatatypeProperty、ObjectProperty、SKOS 枚举和 route 骨架。
+- 手写 dmo-axioms.ttl 补充图模型无法表达的 subclass、disjoint、equivalentClass 等领域公理。
+
+3. 来源登记与 ABox 抽取
+----------------------
+- source_registry.py 机械生成来源元数据和文件 SHA-256，不调用 LLM。
+- semantic_extract.py 执行：读取文档 → 注册来源 → 分块 → schema-guided LLM 抽取 → 逐字 quote 校验 → 实体消解 → 可选 LLM 连边 → Turtle/PROV-O 输出 → 质量报告。
+- raw.jsonl、raw-links.jsonl、rejected.jsonl、report.json/report.md 都保留，支持审计和 --from-raw 离线重放。
+
+4. 知识治理门禁
+--------------
+- extraction.policy 把知识分成 llm、manual、registry、derived；DiagnosticThreshold、GlycemicTarget 等高风险常量不交给模型生成。
+- verify_passages.py 要求 SourcePassage.quote 在本地语料中逐字存在，且 contentHash 一致；不做模糊匹配。
+- validate_shacl.py 合并 TBox、seed、sources、extract 和患者图执行闭世界校验，并用 known-violations.tsv 区分已知反例与新增缺陷。
+
+5. GraphDB 发布
+--------------
+- load_graphdb.py 通过 graphdb_http.py 创建仓库并按命名图整图 PUT，保证构建幂等。
+- 主要图包括 urn:dmo:tbox、urn:dmo:seed、urn:dmo:sources、urn:dmo:extract:<source-id>、SHACL shapes graph 和 urn:dmo:inferred。
+- rules/*.rq 按顺序执行 SPARQL CONSTRUCT，并由 CHECKS 验收查询验证装载与推理结果。
+
+6. 外部 Agent 如何消费
+---------------------
+- Agent 通过 Skills/Tools、FastAPI 或 CLI 调用确定性服务。
+- SQL 负责收敛患者事实范围，SPARQL 负责获取本体、规则、来源和推理结果，再按 source_pk 回拼原始事实。
+- 模型可以负责理解问题与工具调度，但结论必须附带状态、规则依据、来源、原始事实和证据缺口。
+
+一句话总结
+----------
+这套架构把“模型记得什么”改造成“代码能重建什么、校验什么、追溯什么”，因此智能体可以更换模型，但知识与证据执行链保持稳定。
+

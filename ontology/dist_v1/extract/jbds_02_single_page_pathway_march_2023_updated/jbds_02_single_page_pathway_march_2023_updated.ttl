@@ -1,0 +1,414 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/JBDS_02_Single_page_pathway_March_2023_updated.pdf
+# 目标 named graph：urn:dmo:extract:jbds_02_single_page_pathway_march_2023_updated
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:jbds_02_single_page_pathway_march_2023_updated'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/JBDS_02_Single_page_pathway_March_2023_updated.pdf" ;
+    dmo:sha256 "2acc1fa0241f08106e550d124de243be6333ccdaac1c19c606bc1c2df1addff6" ;
+    dmo:byteSize "578972"^^xsd:integer .
+
+<urn:dmo:extract:jbds_02_single_page_pathway_march_2023_updated> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T01:23:11+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "Diabetic ketoacidosis (DKA) is a serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005070" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Diagnostic criteria: all three of the following must be present • capillary blood glucose above 11 mmol/L • capillary ketones above 3 mmol/L or urine ketones ++ or more • venous pH less than 7.3 and/or bicarbonate less than 15 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/contraindication/more-cautious-fluid-replacement-in-young-people-aged-18-25-years-elderly-pregnant-heart-or-renal-failure> a dmo:Contraindication ;
+    rdfs:label "More cautious fluid replacement in young people aged 18-25 years, elderly, pregnant, heart or renal failure" ;
+    dmo:contraCode "more-cautious-fluid-replacement-in-young-people-aged-18-25-years-elderly-pregnant-heart-or-renal-failure" ;
+    dmo:rationale "More cautious fluid replacement in young people aged 18-25 years, elderly, pregnant, heart or renal failure. (Consider HDU and/or central line)" ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "young people aged 18-25 years, elderly, pregnant, heart or renal failure" ;
+    dmo:evidenceQuote "More cautious fluid replacement in young people aged 18-25 years, elderly, pregnant, heart or renal failure. (Consider HDU and/or central line)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/drugClass/intravenous-insulin-infusion> a dmo:DrugClass ;
+    rdfs:label "Intravenous Insulin Infusion" ;
+    dmo:adminRoute "Intravenous" ;
+    dmo:drugClassCode "intravenous-insulin-infusion" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Insulin infusion to lower blood glucose and reduce ketone production in diabetic ketoacidosis" ;
+    dmo:name "Intravenous Insulin Infusion" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Commence a fixed rate intravenous insulin infusion (FRIII). (0.1unit/kg/hr based on estimate of weight) 50 units human soluble insulin (Actrapid® or Humulin S®) made up to 50ml with 0.9% sodium chloride solution." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/arterial-blood-gases> a dmo:LabTest ;
+    rdfs:label "Arterial Blood Gases" ;
+    dmo:definition "Arterial blood gases are measured if oxygen saturation is less than 92% to assess gas exchange." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "arterial-blood-gases" ;
+    dmo:name "Arterial Blood Gases" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "• Measure arterial blood gases and repeat chest radiograph if oxygen saturation less than 92%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/capillary-blood-glucose> a dmo:LabTest ;
+    rdfs:label "Capillary Blood Glucose" ;
+    dmo:definition "Capillary blood glucose above 11 mmol/L is one of the diagnostic criteria for diabetic ketoacidosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "capillary-blood-glucose" ;
+    dmo:name "Capillary Blood Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "• capillary blood glucose above 11 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/capillary-ketones> a dmo:LabTest ;
+    rdfs:label "Capillary Ketones" ;
+    dmo:definition "Capillary ketones above 3 mmol/L is one of the diagnostic criteria for diabetic ketoacidosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "capillary-ketones" ;
+    dmo:name "Capillary Ketones" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "• capillary ketones above 3 mmol/L or urine ketones ++ or more" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/laboratory-glucose> a dmo:LabTest ;
+    rdfs:label "Laboratory Glucose" ;
+    dmo:definition "Laboratory glucose is measured as part of further investigations to confirm capillary blood glucose levels." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "laboratory-glucose" ;
+    dmo:name "Laboratory Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "• Capillary and laboratory glucose" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/plasma-electrolytes> a dmo:LabTest ;
+    rdfs:label "Plasma Electrolytes" ;
+    dmo:definition "Plasma electrolytes are measured 4 hourly to monitor electrolyte balance during treatment." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "plasma-electrolytes" ;
+    dmo:name "Plasma Electrolytes" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "• 4 hourly plasma electrolytes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/urine-ketones> a dmo:LabTest ;
+    rdfs:label "Urine Ketones" ;
+    dmo:definition "Urine ketones ++ or more is one of the diagnostic criteria for diabetic ketoacidosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-ketones" ;
+    dmo:name "Urine Ketones" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "++ or more" ;
+    dmo:evidenceQuote "• capillary ketones above 3 mmol/L or urine ketones ++ or more" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/venous-bicarbonate> a dmo:LabTest ;
+    rdfs:label "Venous Bicarbonate" ;
+    dmo:definition "Venous bicarbonate less than 15 mmol/L is one of the diagnostic criteria for diabetic ketoacidosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "venous-bicarbonate" ;
+    dmo:name "Venous Bicarbonate" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "• venous pH less than 7.3 and/or bicarbonate less than 15 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/venous-blood-gas> a dmo:LabTest ;
+    rdfs:label "Venous Blood Gas" ;
+    dmo:definition "Venous blood gas is measured at 60 minutes, 2 hours, and 2 hourly thereafter to assess pH, bicarbonate, and potassium." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "venous-blood-gas" ;
+    dmo:name "Venous Blood Gas" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "• Venous blood gas for pH, bicarbonate and potassium at 60 minutes, 2 hours and 2 hourly thereafter" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/labTest/venous-ph> a dmo:LabTest ;
+    rdfs:label "Venous pH" ;
+    dmo:definition "Venous pH less than 7.3 is one of the diagnostic criteria for diabetic ketoacidosis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "venous-ph" ;
+    dmo:name "Venous pH" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "less than 7.3" ;
+    dmo:evidenceQuote "• venous pH less than 7.3 and/or bicarbonate less than 15 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/medication/human-soluble-insulin> a dmo:Medication ;
+    rdfs:label "Human Soluble Insulin" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "human-soluble-insulin" ;
+    dmo:name "Human Soluble Insulin" ;
+    dmo:onsetMinutes "15"^^xsd:integer ;
+    dmo:evidenceQuote "50 units human soluble insulin (Actrapid® or Humulin S®) made up to 50ml with 0.9% sodium chloride solution." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/add-10-dextrose-if-glucose-falls-below-14-mmol-l> a dmo:Recommendation ;
+    rdfs:label "Add 10% dextrose if glucose falls below 14 mmol/L" ;
+    dmo:recommendationId "add-10-dextrose-if-glucose-falls-below-14-mmol-l" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Add 10% dextrose 125mls/hr if the glucose falls below 14 mmol/L" ;
+    dmo:evidenceQuote "• Add 10% dextrose 125mls/hr if the glucose falls below 14 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/arrange-follow-up-with-specialist-team> a dmo:Recommendation ;
+    rdfs:label "Arrange follow up with specialist team" ;
+    dmo:recommendationId "arrange-follow-up-with-specialist-team" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Arrange follow up with specialist team" ;
+    dmo:evidenceQuote "Arrange follow up with specialist team" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/assess-for-complications-of-treatment-such-as-fluid-overload-and-cerebral-oedema> a dmo:Recommendation ;
+    rdfs:label "Assess for complications of treatment such as fluid overload and cerebral oedema" ;
+    dmo:recommendationId "assess-for-complications-of-treatment-such-as-fluid-overload-and-cerebral-oedema" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Assess for complications of treatment, e.g. fluid overload, cerebral oedema" ;
+    dmo:evidenceQuote "• Assess for complications of treatment e.g. fluid overload, cerebral oedema" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/check-for-fluid-overload> a dmo:Recommendation ;
+    rdfs:label "Check for fluid overload" ;
+    dmo:recommendationId "check-for-fluid-overload" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check for fluid overload" ;
+    dmo:evidenceQuote "Check for fluid overload" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/check-venous-ph-bicarbonate-potassium-capillary-ketones-and-glucose-at-12-hours> a dmo:Recommendation ;
+    rdfs:label "Check venous pH, bicarbonate, potassium, capillary ketones and glucose at 12 hours" ;
+    dmo:recommendationId "check-venous-ph-bicarbonate-potassium-capillary-ketones-and-glucose-at-12-hours" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "At 12 hours check venous pH, bicarbonate, potassium, capillary ketones and glucose" ;
+    dmo:evidenceQuote "At 12 hours check venous pH, bicarbonate, potassium, capillary ketones and glucose" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/check-venous-ph-bicarbonate-potassium-capillary-ketones-and-glucose-at-6-hours> a dmo:Recommendation ;
+    rdfs:label "Check venous pH, bicarbonate, potassium, capillary ketones and glucose at 6 hours" ;
+    dmo:recommendationId "check-venous-ph-bicarbonate-potassium-capillary-ketones-and-glucose-at-6-hours" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "At 6 hours check venous pH, bicarbonate, potassium, capillary ketones and glucose" ;
+    dmo:evidenceQuote "• At 6 hours check venous pH, bicarbonate, potassium, capillary ketones and glucose" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/consider-reducing-insulin-infusion-rate-to-0-05-units-kg-hour-when-glucose-falls-below-14-mmol-l> a dmo:Recommendation ;
+    rdfs:label "Consider reducing insulin infusion rate to 0.05 units/kg/hour when glucose falls below 14 mmol/L" ;
+    dmo:recommendationId "consider-reducing-insulin-infusion-rate-to-0-05-units-kg-hour-when-glucose-falls-below-14-mmol-l" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Consider reducing the rate of intravenous insulin infusion to 0.05 units/ kg/hour when glucose falls below 14 mmol/L" ;
+    dmo:evidenceQuote "• Consider reducing the rate of intravenous insulin infusion to 0.05 units/ kg/hour when glucose falls below 14 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/continue-iv-fluid-replacement-and-avoid-hypoglycaemia> a dmo:Recommendation ;
+    rdfs:label "Continue IV fluid replacement and avoid hypoglycaemia" ;
+    dmo:recommendationId "continue-iv-fluid-replacement-and-avoid-hypoglycaemia" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue IV fluid replacement and avoid hypoglycaemia" ;
+    dmo:evidenceQuote "• Continue IV fluid replacement • Avoid hypoglycaemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/continue-iv-fluid-via-infusion-pump-at-reduced-rate> a dmo:Recommendation ;
+    rdfs:label "Continue IV fluid via infusion pump at reduced rate" ;
+    dmo:recommendationId "continue-iv-fluid-via-infusion-pump-at-reduced-rate" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue IV fluid via infusion pump at reduced rate o 0.9% sodium chloride 1L with KCl over 4 hours o 0.9% sodium chloride with KCl over 6 hours" ;
+    dmo:evidenceQuote "• Continue IV fluid via infusion pump at reduced rate o 0.9% sodium chloride 1L with KCl over 4 hours o 0.9% sodium chloride with KCl over 6 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/convert-to-subcutaneous-insulin-when-biochemically-stable-and-patient-is-ready-to-eat> a dmo:Recommendation ;
+    rdfs:label "Convert to subcutaneous insulin when biochemically stable and patient is ready to eat" ;
+    dmo:recommendationId "convert-to-subcutaneous-insulin-when-biochemically-stable-and-patient-is-ready-to-eat" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Convert to subcutaneous regime when biochemically stable (capillary ketones less than 0.6 mmol/L AND pH over 7.3) and the patient is ready and able to eat." ;
+    dmo:evidenceQuote "Convert to subcutaneous regime when biochemically stable (capillary ketones less than 0.6 mmol/L AND pH over 7.3) and the patient is ready and able to eat." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/define-resolution-of-dka-as-ketones-0-6-mmol-l-and-venous-ph-7-3> a dmo:Recommendation ;
+    rdfs:label "Define resolution of DKA as ketones <0.6 mmol/L and venous pH >7.3" ;
+    dmo:recommendationId "define-resolution-of-dka-as-ketones-0-6-mmol-l-and-venous-ph-7-3" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Resolution is defined as ketones <0.6 mmol/L, venous pH>7.3" ;
+    dmo:evidenceQuote "Resolution is defined as ketones <0.6 mmol/L, venous pH>7.3" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/define-resolution-of-dka-at-ketones-0-6-mmol-l-and-venous-ph-7-3> a dmo:Recommendation ;
+    rdfs:label "Define resolution of DKA at ketones <0.6 mmol/L and venous pH >7.3" ;
+    dmo:recommendationId "define-resolution-of-dka-at-ketones-0-6-mmol-l-and-venous-ph-7-3" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Resolution of DKA is defined at ketones <0.6 mmol/L AND venous pH >7.3 (do not use bicarbonate as a marker at this stage)" ;
+    dmo:evidenceQuote "Resolution of DKA is defined at ketones <0.6 mmol/L AND venous pH >7.3 (do not use bicarbonate as a marker at this stage)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/do-not-discontinue-intravenous-insulin-until-30-minutes-after-subcutaneous-short-acting-insulin-has-been-given> a dmo:Recommendation ;
+    rdfs:label "Do not discontinue intravenous insulin until 30 minutes after subcutaneous short acting insulin has been given" ;
+    dmo:recommendationId "do-not-discontinue-intravenous-insulin-until-30-minutes-after-subcutaneous-short-acting-insulin-has-been-given" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Do not discontinue intravenous insulin infusion until 30 minutes after subcutaneous short acting insulin has been given" ;
+    dmo:evidenceQuote "Do not discontinue intravenous insulin infusion until 30 minutes after subcutaneous short acting insulin has been given" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/ensure-referral-to-diabetes-team-has-been-made> a dmo:Recommendation ;
+    rdfs:label "Ensure referral to diabetes team has been made" ;
+    dmo:recommendationId "ensure-referral-to-diabetes-team-has-been-made" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Ensure a referral has been made to the diabetes team" ;
+    dmo:evidenceQuote "• Ensure a referral has been made to the diabetes team" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/ensure-specialist-team-review-prior-to-discharge-for-newly-diagnosed-patients> a dmo:Recommendation ;
+    rdfs:label "Ensure specialist team review prior to discharge for newly diagnosed patients" ;
+    dmo:recommendationId "ensure-specialist-team-review-prior-to-discharge-for-newly-diagnosed-patients" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If the patient is newly diagnosed it is essential they are seen by a member of the specialist team prior to discharge" ;
+    dmo:evidenceQuote "If the patient is newly diagnosed it is essential they are seen by a member of the specialist team prior to discharge" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/manage-conversion-to-subcutaneous-insulin-by-the-specialist-diabetes-team> a dmo:Recommendation ;
+    rdfs:label "Manage conversion to subcutaneous insulin by the Specialist Diabetes Team" ;
+    dmo:recommendationId "manage-conversion-to-subcutaneous-insulin-by-the-specialist-diabetes-team" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Conversion to subcutaneous insulin should be managed by the Specialist Diabetes Team." ;
+    dmo:evidenceQuote "Conversion to subcutaneous insulin should be managed by the Specialist Diabetes Team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/reassess-cardiovascular-status-at-12-hours-further-fluid-may-be-required> a dmo:Recommendation ;
+    rdfs:label "Reassess cardiovascular status at 12 hours; further fluid may be required" ;
+    dmo:recommendationId "reassess-cardiovascular-status-at-12-hours-further-fluid-may-be-required" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Reassess cardiovascular status at 12 hours; further fluid may be required" ;
+    dmo:evidenceQuote "Reassess cardiovascular status at 12 hours; further fluid may be required" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/reassess-patient-and-monitor-vital-signs> a dmo:Recommendation ;
+    rdfs:label "Reassess patient and monitor vital signs" ;
+    dmo:recommendationId "reassess-patient-and-monitor-vital-signs" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Reassess patient, monitor vital signs" ;
+    dmo:evidenceQuote "Action 1 – Re-assess patient, monitor vital signs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/review-biochemical-and-metabolic-parameters> a dmo:Recommendation ;
+    rdfs:label "Review biochemical and metabolic parameters" ;
+    dmo:recommendationId "review-biochemical-and-metabolic-parameters" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Review biochemical and metabolic parameters" ;
+    dmo:evidenceQuote "Action 2 – Review biochemical and metabolic parameters" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/review-fluid-and-insulin-infusion-if-dka-not-resolved> a dmo:Recommendation ;
+    rdfs:label "Review fluid and insulin infusion if DKA not resolved" ;
+    dmo:recommendationId "review-fluid-and-insulin-infusion-if-dka-not-resolved" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If not resolved review fluid Box 4 Action 1 and insulin infusion Box 3" ;
+    dmo:evidenceQuote "If not resolved review fluid Box 4 Action 1 and insulin infusion Box 3" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/review-insulin-infusion-if-dka-not-resolved> a dmo:Recommendation ;
+    rdfs:label "Review insulin infusion if DKA not resolved" ;
+    dmo:recommendationId "review-insulin-infusion-if-dka-not-resolved" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If DKA not resolved review insulin infusion (see BOX 3 Action 3)" ;
+    dmo:evidenceQuote "• If DKA not resolved review insulin infusion (see BOX 3 Action 3)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/seek-senior-advice-if-patient-not-improving-by-criteria-in-box-3> a dmo:Recommendation ;
+    rdfs:label "Seek senior advice if patient not improving by criteria in Box 3" ;
+    dmo:recommendationId "seek-senior-advice-if-patient-not-improving-by-criteria-in-box-3" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If patient not improving by criteria in Box 3, seek senior advice" ;
+    dmo:evidenceQuote "• If patient not improving by criteria in Box 3, seek senior advice" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/transfer-to-subcutaneous-insulin-when-eating-and-drinking-normally-and-biochemistry-is-normal> a dmo:Recommendation ;
+    rdfs:label "Transfer to subcutaneous insulin when eating and drinking normally and biochemistry is normal" ;
+    dmo:recommendationId "transfer-to-subcutaneous-insulin-when-eating-and-drinking-normally-and-biochemistry-is-normal" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Transfer to subcutaneous insulin if the person is eating and drinking normally and biochemistry is normal" ;
+    dmo:evidenceQuote "Transfer to subcutaneous insulin if the person is eating and drinking normally and biochemistry is normal" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/treat-precipitating-factors-as-necessary> a dmo:Recommendation ;
+    rdfs:label "Treat precipitating factors as necessary" ;
+    dmo:recommendationId "treat-precipitating-factors-as-necessary" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue to treat precipitating factors" ;
+    dmo:evidenceQuote "Continue to treat precipitating factors" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+<https://example.org/dmo/id/recommendation/use-local-guidelines-if-specialist-diabetes-team-is-not-available> a dmo:Recommendation ;
+    rdfs:label "Use local guidelines if Specialist Diabetes Team is not available" ;
+    dmo:recommendationId "use-local-guidelines-if-specialist-diabetes-team-is-not-available" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If the team is not available use local guidelines." ;
+    dmo:evidenceQuote "If the team is not available use local guidelines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_single_page_pathway_march_2023_updated> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:screenedByTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/contraindication/more-cautious-fluid-replacement-in-young-people-aged-18-25-years-elderly-pregnant-heart-or-renal-failure> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/arrange-follow-up-with-specialist-team> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/check-for-fluid-overload> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/check-venous-ph-bicarbonate-potassium-capillary-ketones-and-glucose-at-12-hours> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/check-venous-ph-bicarbonate-potassium-capillary-ketones-and-glucose-at-6-hours> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/consider-reducing-insulin-infusion-rate-to-0-05-units-kg-hour-when-glucose-falls-below-14-mmol-l> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/intravenous-insulin-infusion> .
+<https://example.org/dmo/id/recommendation/continue-iv-fluid-replacement-and-avoid-hypoglycaemia> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/continue-iv-fluid-via-infusion-pump-at-reduced-rate> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/convert-to-subcutaneous-insulin-when-biochemically-stable-and-patient-is-ready-to-eat> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/intravenous-insulin-infusion> .
+<https://example.org/dmo/id/recommendation/define-resolution-of-dka-as-ketones-0-6-mmol-l-and-venous-ph-7-3> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/define-resolution-of-dka-at-ketones-0-6-mmol-l-and-venous-ph-7-3> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/do-not-discontinue-intravenous-insulin-until-30-minutes-after-subcutaneous-short-acting-insulin-has-been-given> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/intravenous-insulin-infusion> .
+<https://example.org/dmo/id/recommendation/ensure-referral-to-diabetes-team-has-been-made> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/ensure-specialist-team-review-prior-to-discharge-for-newly-diagnosed-patients> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/manage-conversion-to-subcutaneous-insulin-by-the-specialist-diabetes-team> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/reassess-cardiovascular-status-at-12-hours-further-fluid-may-be-required> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/reassess-patient-and-monitor-vital-signs> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/review-biochemical-and-metabolic-parameters> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/review-insulin-infusion-if-dka-not-resolved> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/seek-senior-advice-if-patient-not-improving-by-criteria-in-box-3> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/transfer-to-subcutaneous-insulin-when-eating-and-drinking-normally-and-biochemistry-is-normal> dmo:recommendsDrugClass <https://example.org/dmo/id/drugClass/intravenous-insulin-infusion> .
+<https://example.org/dmo/id/recommendation/treat-precipitating-factors-as-necessary> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/use-local-guidelines-if-specialist-diabetes-team-is-not-available> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .

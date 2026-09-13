@@ -1,0 +1,66 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/ba21e6f1-094f-5236-b29d-e4692b4a9cb0> a dmo:Patient ;
+    dmo:birthYear 1994 ;
+    dmo:demoScenario "S04" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90004-GA>,
+        <https://example.org/dmo/id/observation/O90004-PREG> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90004-GDM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90004-1> ;
+    dmo:patientId "P90004" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/diagnosis/D90004-GDM> a dmo:Diagnosis ;
+    dmo:caveat "⚠️ 糖筛 142 mg/dL 命中的是妊娠期**转诊触发点**（GCT1H-REFER，≥135），不是 GDM 诊断切点。确诊需空腹 OGTT 两次以上超标；本仓库语料未收录 GDM 的 OGTT 数值切点，因此系统无法给出确诊结论。" ;
+    dmo:clinicalStatus "Active" ;
+    dmo:demoScenario "S04" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90004-1> ;
+    dmo:diagnosedDate "2026-03-10"^^xsd:date ;
+    dmo:diagnosisId "D90004-GDM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Provisional" .
+
+<https://example.org/dmo/id/labResult/L90004-GCT> a dmo:LabResult ;
+    dmo:collectedAt "2026-03-10T10:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S04" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90004-GCT" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-GCT1H> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 142.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90004-GA> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S04" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90004-GA" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90004-1> ;
+    dmo:observationType "GestationalAge" ;
+    dmo:observedAt "2026-03-10T10:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "wk" ;
+    dmo:valueDecimal 26.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90004-PREG> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S04" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90004-PREG" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90004-1> ;
+    dmo:observationType "PregnancyStatus" ;
+    dmo:observedAt "2026-03-10T10:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "Pregnant" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90004-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-03-10"^^xsd:date ;
+    dmo:encounterId "E90004-1" ;
+    dmo:encounterType "Prenatal" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:gestationalWeek 26 ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90004-GCT> .
+

@@ -1,0 +1,753 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-healthy-living-with-diabetes.txt
+# 目标 named graph：urn:dmo:extract:niddk-healthy-living-with-diabetes
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-healthy-living-with-diabetes'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-healthy-living-with-diabetes.txt" ;
+    dmo:sha256 "f8169016f7637f71a7976afc7db187b426d18bce6e58942e460e8d5742d9ee13" ;
+    dmo:byteSize "19848"^^xsd:integer .
+
+<urn:dmo:extract:niddk-healthy-living-with-diabetes> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T03:21:20+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/hypoglycemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:adverseEffectCode "hypoglycemia" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "If you take insulin or certain diabetes medicines, drinking alcohol can make your blood glucose level drop too low, which is called hypoglycemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/adverseEffect/low-blood-glucose> a dmo:AdverseEffect ;
+    rdfs:label "Low Blood Glucose" ;
+    dmo:adverseEffectCode "low-blood-glucose" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Low Blood Glucose" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "DKA is a medical emergency that should be treated right away." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005041" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "DKA is a medical emergency that should be treated right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/complication/foot-problems> a dmo:Complication ;
+    rdfs:label "Foot Problems" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "foot-problems" ;
+    dmo:definition "People with diabetes may have problems with their feet because high blood glucose levels can damage blood vessels and nerves." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005042" ;
+    dmo:name "Foot Problems" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "People with diabetes may have problems with their feet because high blood glucose levels can damage blood vessels and nerves." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/complication/hypoglycemia> a dmo:Complication ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "hypoglycemia" ;
+    dmo:definition "If you take insulin or certain diabetes medicines, drinking alcohol can make your blood glucose level drop too low, which is called hypoglycemia." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005000" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "If you take insulin or certain diabetes medicines, drinking alcohol can make your blood glucose level drop too low, which is called hypoglycemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/complication/low-blood-glucose> a dmo:Complication ;
+    rdfs:label "Low Blood Glucose" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "low-blood-glucose" ;
+    dmo:definition "Low blood glucose levels may last for hours or days after physical activity. You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005004" ;
+    dmo:name "Low Blood Glucose" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Low blood glucose levels may last for hours or days after physical activity. You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    dmo:evidenceQuote "Low blood glucose can be a serious medical emergency that must be treated right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/contraindication/alcohol-consumption-with-insulin-or-certain-diabetes-medicines> a dmo:Contraindication ;
+    rdfs:label "Alcohol Consumption with Insulin or Certain Diabetes Medicines" ;
+    dmo:contraCode "alcohol-consumption-with-insulin-or-certain-diabetes-medicines" ;
+    dmo:rationale "drinking alcohol can make your blood glucose level drop too low, which is called hypoglycemia" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "If you take insulin or certain diabetes medicines" ;
+    dmo:evidenceQuote "If you take insulin or certain diabetes medicines, drinking alcohol can make your blood glucose level drop too low, which is called hypoglycemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/contraindication/diabetic-ketoacidosis-dka> a dmo:Contraindication ;
+    rdfs:label "Diabetic ketoacidosis (DKA)" ;
+    dmo:contraCode "diabetic-ketoacidosis-dka" ;
+    dmo:rationale "High levels of ketones in your blood can lead to a condition called diabetic ketoacidosis (DKA) External link. DKA is a medical emergency that should be treated right away. DKA is most common in people with type 1 diabetes. Occasionally, DKA may affect people with type 2 diabetes who have lost their ability to produce insulin." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "If your body does not have enough insulin, it can’t use glucose as a source of energy and will use fat instead. When your body uses fat for energy, your body makes chemicals called ketones." ;
+    dmo:evidenceQuote "High levels of ketones in your blood can lead to a condition called diabetic ketoacidosis (DKA) External link. DKA is a medical emergency that should be treated right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/contraindication/low-blood-glucose> a dmo:Contraindication ;
+    rdfs:label "Low blood glucose" ;
+    dmo:contraCode "low-blood-glucose" ;
+    dmo:rationale "Physical activity often lowers the level of glucose in your blood. Low blood glucose levels may last for hours or days after physical activity. Low blood glucose can be a serious medical emergency that must be treated right away." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    dmo:evidenceQuote "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/contraindication/physical-activities-that-need-balance> a dmo:Contraindication ;
+    rdfs:label "Physical activities that need balance" ;
+    dmo:contraCode "physical-activities-that-need-balance" ;
+    dmo:rationale "Some activities that need balance may be unsafe for people with nerve damage or vision problems caused by diabetes." ;
+    dmo:severity "Caution" ;
+    dmo:triggerCriteria "if you have nerve damage or vision problems caused by diabetes" ;
+    dmo:evidenceQuote "Some activities that need balance may be unsafe for people with nerve damage or vision problems caused by diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/contraindication/taking-less-insulin-before-physical-activity> a dmo:Contraindication ;
+    rdfs:label "Taking less insulin before physical activity" ;
+    dmo:contraCode "taking-less-insulin-before-physical-activity" ;
+    dmo:rationale "Taking less insulin before physical activity may help prevent low blood glucose, but it may also make you more likely to have high blood glucose. If your body does not have enough insulin, it can’t use glucose as a source of energy and will use fat instead. When your body uses fat for energy, your body makes chemicals called ketones." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Taking less insulin before physical activity may help prevent low blood glucose, but it may also make you more likely to have high blood glucose." ;
+    dmo:evidenceQuote "Taking less insulin before physical activity may help prevent low blood glucose, but it may also make you more likely to have high blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "type 1 diabetes" ;
+    dmo:definition "DKA is most common in people with type 1 diabetes." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "type 1 diabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "DKA is most common in people with type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "type 2 diabetes" ;
+    dmo:definition "If you have type 2 diabetes, your health care professional may recommend diabetes medicines that may help you lose weight." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "type 2 diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "If you have type 2 diabetes, your health care professional may recommend diabetes medicines that may help you lose weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:atcCode "A10AA" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Replaces or supplements insulin in the body to lower blood glucose" ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Some diabetes medicines, such as sulfonylureas or insulin, may make your blood glucose level drop too low during exercise or if you skip or delay a meal." ;
+    dmo:evidenceQuote "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:adminRoute "Oral" ;
+    dmo:atcCode "A10BB" ;
+    dmo:drugClassCode "sulfonylureas" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Stimulate insulin secretion from the pancreas" ;
+    dmo:name "Sulfonylureas" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Some diabetes medicines, such as sulfonylureas or insulin, may make your blood glucose level drop too low during exercise or if you skip or delay a meal." ;
+    dmo:evidenceQuote "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/labTest/urine-ketones> a dmo:LabTest ;
+    rdfs:label "urine ketones" ;
+    dmo:definition "When your body uses fat for energy, your body makes chemicals called ketones. High levels of ketones in your blood can lead to a condition called diabetic ketoacidosis (DKA)." ;
+    dmo:labTestCode "urine-ketones" ;
+    dmo:name "urine ketones" ;
+    dmo:specimen "Urine" ;
+    dmo:evidenceQuote "Ask your health care professional how much insulin you should take before physical activity, whether you need to test your urine for ketones, and what level of ketones is dangerous for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/aerobic-activities> a dmo:LifestyleIntervention ;
+    rdfs:label "Aerobic activities" ;
+    dmo:activityTarget "Walk, dance, wheelchair roll, or swim for at least 150 minutes of moderate-intensity activity per week, or 30 minutes a day on most days of the week" ;
+    dmo:expectedBenefit "Lower blood glucose, blood pressure, and cholesterol levels; better heart health; healthier weight; better mood and sleep; better balance and memory" ;
+    dmo:interventionCode "aerobic-activities" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Aerobic activities" ;
+    dmo:evidenceQuote "Aerobic activities make you breathe harder and make your heart beat faster. You can try walking, dancing, wheelchair rolling, or swimming. Most adults should try to get at least 150 minutes of moderate-intensity physical activity External link each week. Aim to do 30 minutes a day on most days of the week. You don’t have to do all 30 minutes at one time. You can break up physical activity into small amounts during your day and still get the benefit." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/balance-and-stretching-activities> a dmo:LifestyleIntervention ;
+    rdfs:label "Balance and stretching activities" ;
+    dmo:activityTarget "Stand on one leg or stretch legs while sitting on the floor, two or three times a week" ;
+    dmo:expectedBenefit "Help you move better and have stronger muscles and bones" ;
+    dmo:interventionCode "balance-and-stretching-activities" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Balance and stretching activities" ;
+    dmo:evidenceQuote "Balance and stretching activities NIH external link may help you move better and have stronger muscles and bones. You may want to try standing on one leg or stretching your legs when sitting on the floor. Try to do these kinds of activities two or three times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Healthy meal plan" ;
+    dmo:activityTarget "Include dairy or plant-based dairy products, fruits, nonstarchy vegetables, protein foods, and whole grains; choose foods with vitamins, calcium, fiber, and healthy fats; limit foods high in saturated fat, sodium, and added sugar; limit alcohol; consider carb counting or the plate method for portion control" ;
+    dmo:expectedBenefit "Help keep blood glucose, blood pressure, and cholesterol levels in recommended ranges; help reach and maintain a healthy weight; prevent or delay diabetes-related health problems" ;
+    dmo:interventionCode "healthy-meal-plan" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Healthy meal plan" ;
+    dmo:evidenceQuote "Having healthy foods and drinks can help keep your blood glucose, blood pressure, and cholesterol levels in the ranges your health care professional recommends. If you have overweight or obesity, a healthy meal plan—along with regular physical activity, getting enough sleep, and other healthy behaviors—may help you reach and maintain a healthy weight." ;
+    dmo:evidenceQuote "You may be able to reach and maintain a healthy weight by following a healthy meal plan" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Physical Activity" ;
+    dmo:activityTarget "Check your blood glucose level before, during, and right after physical activity" ;
+    dmo:expectedBenefit "Lower the level of glucose in your blood" ;
+    dmo:interventionCode "physical-activity" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Physical Activity" ;
+    dmo:evidenceQuote "Check your blood glucose level before, during, and right after physical activity. Physical activity often lowers the level of glucose in your blood." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/plate-method> a dmo:LifestyleIntervention ;
+    rdfs:label "Plate method" ;
+    dmo:activityTarget "Divide a 9-inch plate into three sections: half nonstarchy vegetables, one-quarter high-fiber carb foods, and one-quarter protein foods" ;
+    dmo:expectedBenefit "Helps control blood glucose without counting carbs" ;
+    dmo:interventionCode "plate-method" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Plate method" ;
+    dmo:evidenceQuote "The plate method External link helps you control portion sizes without counting and measuring. This method divides a 9-inch plate into the following three sections to help you choose the types and amounts of foods External link to eat for each meal." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/quit-smoking-or-using-tobacco-products> a dmo:LifestyleIntervention ;
+    rdfs:label "Quit smoking or using tobacco products" ;
+    dmo:activityTarget "Quit smoking or using tobacco products" ;
+    dmo:expectedBenefit "Help prevent or delay diabetes-related health problems" ;
+    dmo:interventionCode "quit-smoking-or-using-tobacco-products" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Quit smoking or using tobacco products" ;
+    dmo:evidenceQuote "To have a healthy lifestyle, take steps now to plan healthy meals and snacks, do physical activities, get enough sleep, and quit smoking or using tobacco products." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/reach-or-maintain-a-healthy-weight> a dmo:LifestyleIntervention ;
+    rdfs:label "Reach or maintain a healthy weight" ;
+    dmo:activityTarget "Reach and maintain a healthy weight through a healthy meal plan, regular physical activity, and other healthy behaviors" ;
+    dmo:expectedBenefit "Help keep blood glucose, blood pressure, and cholesterol levels in recommended ranges; prevent or delay diabetes-related health problems" ;
+    dmo:interventionCode "reach-or-maintain-a-healthy-weight" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Reach or maintain a healthy weight" ;
+    dmo:evidenceQuote "If you have overweight or obesity, a healthy meal plan—along with regular physical activity, getting enough sleep, and other healthy behaviors—may help you reach and maintain a healthy weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/strength-training-or-resistance-training> a dmo:LifestyleIntervention ;
+    rdfs:label "Strength training or resistance training" ;
+    dmo:activityTarget "Lift weights or do exercises such as wall pushups or arm raises, two times a week" ;
+    dmo:expectedBenefit "Make muscles and bones stronger" ;
+    dmo:interventionCode "strength-training-or-resistance-training" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Strength training or resistance training" ;
+    dmo:evidenceQuote "Strength training or resistance training may make your muscles and bones stronger. You can try lifting weights or doing other exercises such as wall pushups or arm raises. Try to do this kind of training two times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/weight-management> a dmo:LifestyleIntervention ;
+    rdfs:label "Weight Management" ;
+    dmo:activityTarget "Losing 5% to 7% of your current weight" ;
+    dmo:expectedBenefit "Help you prevent or improve some health problems and manage your blood glucose, cholesterol, and blood pressure levels" ;
+    dmo:interventionCode "weight-management" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Weight Management" ;
+    dmo:evidenceQuote "Losing 5% to 7% of your current weight may help you prevent or improve some health problems and manage your blood glucose, cholesterol, and blood pressure levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "Insulin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "Insulin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/medication/sulfonylureas> a dmo:Medication ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sulfonylureas" ;
+    dmo:name "Sulfonylureas" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/ask-about-eating-before-during-or-after-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Ask About Eating Before, During, or After Physical Activity" ;
+    dmo:recommendationId "ask-about-eating-before-during-or-after-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Ask your health care team if you should eat before, during, or after physical activity. Some diabetes medicines, such as sulfonylureas or insulin, may make your blood glucose level drop too low during exercise or if you skip or delay a meal." ;
+    dmo:evidenceQuote "Ask your health care team if you should eat before, during, or after physical activity. Some diabetes medicines, such as sulfonylureas or insulin, may make your blood glucose level drop too low during exercise or if you skip or delay a meal." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/ask-health-care-professional-about-healthy-weight-status-and-weight-loss-plan> a dmo:Recommendation ;
+    rdfs:label "Ask health care professional about healthy weight status and weight-loss plan" ;
+    dmo:recommendationId "ask-health-care-professional-about-healthy-weight-status-and-weight-loss-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Ask your health care professional or health care team if you are at a healthy weight or if you should try to lose weight." ;
+    dmo:evidenceQuote "Ask your health care professional or health care team if you are at a healthy weight or if you should try to lose weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/ask-health-care-professional-about-insulin-adjustment-and-ketone-testing-before-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Ask health care professional about insulin adjustment and ketone testing before physical activity" ;
+    dmo:recommendationId "ask-health-care-professional-about-insulin-adjustment-and-ketone-testing-before-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ask your health care professional how much insulin you should take before physical activity, whether you need to test your urine for ketones, and what level of ketones is dangerous for you." ;
+    dmo:evidenceQuote "Ask your health care professional how much insulin you should take before physical activity, whether you need to test your urine for ketones, and what level of ketones is dangerous for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/ask-health-care-professional-about-insulin-or-carb-adjustments-before-during-or-after-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Ask health care professional about insulin or carb adjustments before, during, or after physical activity" ;
+    dmo:recommendationId "ask-health-care-professional-about-insulin-or-carb-adjustments-before-during-or-after-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Ask your health care professional if you should take less insulin or eat carbs before, during, or after physical activity." ;
+    dmo:evidenceQuote "Ask your health care professional if you should take less insulin or eat carbs before, during, or after physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/ask-health-care-team-for-mental-health-resources-for-people-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "Ask health care team for mental health resources for people with diabetes" ;
+    dmo:recommendationId "ask-health-care-team-for-mental-health-resources-for-people-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Ask your health care team for mental health resources for people with diabetes." ;
+    dmo:evidenceQuote "Ask your health care team for mental health resources for people with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/avoid-low-blood-glucose-during-and-after-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Avoid Low Blood Glucose During and After Physical Activity" ;
+    dmo:populationScope "People with diabetes who take insulin or some other diabetes medicines, such as sulfonylureas" ;
+    dmo:recommendationId "avoid-low-blood-glucose-during-and-after-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Physical activity often lowers the level of glucose in your blood. Low blood glucose levels may last for hours or days after physical activity. You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    dmo:evidenceQuote "Physical activity often lowers the level of glucose in your blood. Low blood glucose levels may last for hours or days after physical activity. You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/avoid-sports-drinks-for-most-moderate-physical-activities> a dmo:Recommendation ;
+    rdfs:label "Avoid Sports Drinks for Most Moderate Physical Activities" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "avoid-sports-drinks-for-most-moderate-physical-activities" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Sports drinks often have a lot of sugar and calories, and you don’t need them for most moderate physical activities." ;
+    dmo:evidenceQuote "Sports drinks often have a lot of sugar and calories, and you don’t need them for most moderate physical activities." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/balance-and-stretching-activities-two-to-three-times-weekly> a dmo:Recommendation ;
+    rdfs:label "Balance and Stretching Activities Two to Three Times Weekly" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "balance-and-stretching-activities-two-to-three-times-weekly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Try to do these kinds of activities two or three times a week." ;
+    dmo:evidenceQuote "Try to do these kinds of activities two or three times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/carb-counting-not-required-for-non-insulin-users-using-plate-method> a dmo:Recommendation ;
+    rdfs:label "Carb Counting Not Required for Non-Insulin Users Using Plate Method" ;
+    dmo:populationScope "People with diabetes who are not taking insulin" ;
+    dmo:recommendationId "carb-counting-not-required-for-non-insulin-users-using-plate-method" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you are not taking insulin, you may not need to count carbs when using the plate method." ;
+    dmo:evidenceQuote "If you are not taking insulin, you may not need to count carbs when using the plate method." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/check-blood-glucose-before-during-and-after-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Check Blood Glucose Before, During, and After Physical Activity" ;
+    dmo:populationScope "People with diabetes who take insulin or some other diabetes medicines, such as sulfonylureas" ;
+    dmo:recommendationId "check-blood-glucose-before-during-and-after-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check your blood glucose level before, during, and right after physical activity." ;
+    dmo:evidenceQuote "Check your blood glucose level before, during, and right after physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/check-blood-glucose-level-before-during-and-right-after-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Check blood glucose level before, during, and right after physical activity" ;
+    dmo:recommendationId "check-blood-glucose-level-before-during-and-right-after-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check your blood glucose level before, during, and right after physical activity." ;
+    dmo:evidenceQuote "Check your blood glucose level before, during, and right after physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/consider-diabetes-medicines-that-may-help-with-weight-loss-if-you-have-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Consider diabetes medicines that may help with weight loss if you have type 2 diabetes" ;
+    dmo:recommendationId "consider-diabetes-medicines-that-may-help-with-weight-loss-if-you-have-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have type 2 diabetes, your health care professional may recommend diabetes medicines that may help you lose weight." ;
+    dmo:evidenceQuote "If you have type 2 diabetes, your health care professional may recommend diabetes medicines that may help you lose weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/consider-sleep-apnea-as-a-possible-contributor-to-poor-sleep-and-cardiovascular-risk> a dmo:Recommendation ;
+    rdfs:label "Consider sleep apnea as a possible contributor to poor sleep and cardiovascular risk" ;
+    dmo:recommendationId "consider-sleep-apnea-as-a-possible-contributor-to-poor-sleep-and-cardiovascular-risk" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "People with diabetes and overweight or obesity can also have other health conditions that affect sleep, such as sleep apnea NIH external link, which can raise your blood pressure and risk of heart disease." ;
+    dmo:evidenceQuote "People with diabetes and overweight or obesity can also have other health conditions that affect sleep, such as sleep apnea NIH external link, which can raise your blood pressure and risk of heart disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/consider-weight-loss-surgery-if-unable-to-reach-healthy-weight-with-other-methods> a dmo:Recommendation ;
+    rdfs:label "Consider weight-loss surgery if unable to reach healthy weight with other methods" ;
+    dmo:recommendationId "consider-weight-loss-surgery-if-unable-to-reach-healthy-weight-with-other-methods" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Your health care professional may recommend weight-loss surgery if you aren’t able to reach a healthy weight with meal planning, physical activity, and taking diabetes medicines that help with weight loss." ;
+    dmo:evidenceQuote "Your health care professional may recommend weight-loss surgery if you aren’t able to reach a healthy weight with meal planning, physical activity, and taking diabetes medicines that help with weight loss." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/do-not-try-to-lose-weight-during-pregnancy-without-professional-guidance> a dmo:Recommendation ;
+    rdfs:label "Do not try to lose weight during pregnancy without professional guidance" ;
+    dmo:recommendationId "do-not-try-to-lose-weight-during-pregnancy-without-professional-guidance" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "If you are pregnant, trying to lose weight may not be healthy. However, you should ask your health care professional whether it makes sense to monitor or limit your weight gain during pregnancy." ;
+    dmo:evidenceQuote "If you are pregnant, trying to lose weight may not be healthy. However, you should ask your health care professional whether it makes sense to monitor or limit your weight gain during pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/engage-in-regular-physical-activity-for-diabetes-management> a dmo:Recommendation ;
+    rdfs:label "Engage in Regular Physical Activity for Diabetes Management" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "engage-in-regular-physical-activity-for-diabetes-management" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Research shows that regular physical activity helps people manage their diabetes and stay healthy." ;
+    dmo:evidenceQuote "Research shows that regular physical activity helps people manage their diabetes and stay healthy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/include-diabetes-educator-or-registered-dietitian-in-care-team> a dmo:Recommendation ;
+    rdfs:label "Include Diabetes Educator or Registered Dietitian in Care Team" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "include-diabetes-educator-or-registered-dietitian-in-care-team" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You may want to have a diabetes educator or a registered dietitian on your team." ;
+    dmo:evidenceQuote "You may want to have a diabetes educator or a registered dietitian on your team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/include-nutrient-rich-foods-in-meal-plan> a dmo:Recommendation ;
+    rdfs:label "Include Nutrient-Rich Foods in Meal Plan" ;
+    dmo:recommendationId "include-nutrient-rich-foods-in-meal-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Try to choose foods that include nutrients such as vitamins, calcium, fiber, and healthy fats." ;
+    dmo:evidenceQuote "Try to choose foods that include nutrients such as vitamins, calcium, fiber, and healthy fats." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/learn-healthy-ways-to-lower-stress-and-seek-help-from-health-care-team-or-mental-health-professional> a dmo:Recommendation ;
+    rdfs:label "Learn healthy ways to lower stress and seek help from health care team or mental health professional" ;
+    dmo:recommendationId "learn-healthy-ways-to-lower-stress-and-seek-help-from-health-care-team-or-mental-health-professional" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Learn healthy ways to lower your stress NIH external link, and ask for help from your health care team or a mental health professional." ;
+    dmo:evidenceQuote "Learn healthy ways to lower your stress NIH external link, and ask for help from your health care team or a mental health professional." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/learn-how-to-treat-low-blood-glucose-and-inform-others> a dmo:Recommendation ;
+    rdfs:label "Learn how to treat low blood glucose and inform others" ;
+    dmo:recommendationId "learn-how-to-treat-low-blood-glucose-and-inform-others" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You can learn how to treat low blood glucose, let other people know what to do if you need help, and use a medical alert bracelet." ;
+    dmo:evidenceQuote "You can learn how to treat low blood glucose, let other people know what to do if you need help, and use a medical alert bracelet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/lose-5-to-7-of-current-weight-to-improve-health-outcomes> a dmo:Recommendation ;
+    rdfs:label "Lose 5% to 7% of current weight to improve health outcomes" ;
+    dmo:recommendationId "lose-5-to-7-of-current-weight-to-improve-health-outcomes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Losing 5% to 7% of your current weight may help you prevent or improve some health problems and manage your blood glucose, cholesterol, and blood pressure levels." ;
+    dmo:evidenceQuote "Losing 5% to 7% of your current weight may help you prevent or improve some health problems and manage your blood glucose, cholesterol, and blood pressure levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/plan-healthy-meals-and-snacks> a dmo:Recommendation ;
+    rdfs:label "Plan Healthy Meals and Snacks" ;
+    dmo:recommendationId "plan-healthy-meals-and-snacks" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "To have a healthy lifestyle, take steps now to plan healthy meals and snacks, do physical activities, get enough sleep, and quit smoking or using tobacco products." ;
+    dmo:evidenceQuote "To have a healthy lifestyle, take steps now to plan healthy meals and snacks, do physical activities, get enough sleep, and quit smoking or using tobacco products." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/plate-method-composition> a dmo:Recommendation ;
+    rdfs:label "Plate Method Composition" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "plate-method-composition" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Nonstarchy vegetables—such as leafy greens, peppers, carrots, or green beans—should make up half of your plate. Carb foods that are high in fiber—such as brown rice, whole grains, beans, or fruits—should make up one-quarter of your plate. Protein foods—such as lean meats, fish, dairy, or tofu or other soy products—should make up one quarter of your plate." ;
+    dmo:evidenceQuote "Nonstarchy vegetables—such as leafy greens, peppers, carrots, or green beans—should make up half of your plate. Carb foods that are high in fiber—such as brown rice, whole grains, beans, or fruits—should make up one-quarter of your plate. Protein foods—such as lean meats, fish, dairy, or tofu or other soy products—should make up one quarter of your plate." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/strength-training-twice-weekly> a dmo:Recommendation ;
+    rdfs:label "Strength Training Twice Weekly" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "strength-training-twice-weekly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Try to do this kind of training two times a week." ;
+    dmo:evidenceQuote "Try to do this kind of training two times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/take-care-of-feet-before-during-and-after-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Take care of feet before, during, and after physical activity" ;
+    dmo:recommendationId "take-care-of-feet-before-during-and-after-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "To help prevent foot problems, wear comfortable and supportive shoes and take care of your feet before, during, and after physical activity." ;
+    dmo:evidenceQuote "Take care of your feet before, during, and after physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/take-steps-to-protect-yourself-from-low-blood-glucose> a dmo:Recommendation ;
+    rdfs:label "Take steps to protect yourself from low blood glucose" ;
+    dmo:recommendationId "take-steps-to-protect-yourself-from-low-blood-glucose" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Low blood glucose can be a serious medical emergency that must be treated right away. Take steps to protect yourself." ;
+    dmo:evidenceQuote "Low blood glucose can be a serious medical emergency that must be treated right away. Take steps to protect yourself." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-about-mental-health-if-experiencing-stress-sadness-or-anger> a dmo:Recommendation ;
+    rdfs:label "Talk with health care professional about mental health if experiencing stress, sadness, or anger" ;
+    dmo:recommendationId "talk-with-health-care-professional-about-mental-health-if-experiencing-stress-sadness-or-anger" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Having diabetes can be stressful. Talk with your health care professional or health care team if you need help." ;
+    dmo:evidenceQuote "Having diabetes can be stressful. Talk with your health care professional or health care team if you need help." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-about-weight-loss-programs-with-support-and-counseling> a dmo:Recommendation ;
+    rdfs:label "Talk with health care professional about weight-loss programs with support and counseling" ;
+    dmo:recommendationId "talk-with-health-care-professional-about-weight-loss-programs-with-support-and-counseling" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You may want to talk with your health care professional about other options for managing your weight, including joining a weight-loss program that can provide helpful information, support, and behavioral or lifestyle counseling." ;
+    dmo:evidenceQuote "You may want to talk with your health care professional about other options for managing your weight, including joining a weight-loss program that can provide helpful information, support, and behavioral or lifestyle counseling." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-before-starting-new-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Talk with Health Care Professional Before Starting New Physical Activity" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "talk-with-health-care-professional-before-starting-new-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Talk with your health care professional before starting a new physical activity or changing how much physical activity you do." ;
+    dmo:evidenceQuote "Talk with your health care professional before starting a new physical activity or changing how much physical activity you do." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-before-starting-weight-loss-plan-for-child-with-diabetes> a dmo:Recommendation ;
+    rdfs:label "Talk with health care professional before starting weight-loss plan for child with diabetes" ;
+    dmo:recommendationId "talk-with-health-care-professional-before-starting-weight-loss-plan-for-child-with-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "If you are worried about your child’s weight and they have diabetes, talk with their health care professional before your child starts a new weight-loss plan." ;
+    dmo:evidenceQuote "If you are worried about your child’s weight and they have diabetes, talk with their health care professional before your child starts a new weight-loss plan." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-before-taking-dietary-supplements> a dmo:Recommendation ;
+    rdfs:label "Talk with Health Care Professional Before Taking Dietary Supplements" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "talk-with-health-care-professional-before-taking-dietary-supplements" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Talk with your health care professional before you take any supplements, because some may cause side effects or affect how well your diabetes medicines work." ;
+    dmo:evidenceQuote "Talk with your health care professional before you take any supplements, because some may cause side effects or affect how well your diabetes medicines work." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-carb-counting-or-plate-method-for-portion-control> a dmo:Recommendation ;
+    rdfs:label "Use Carb Counting or Plate Method for Portion Control" ;
+    dmo:recommendationId "use-carb-counting-or-plate-method-for-portion-control" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For people who have diabetes, carb counting and the plate method are two common ways to plan how much to eat or drink. Talk with your health care professional or health care team to find a method that works for you." ;
+    dmo:evidenceQuote "For people who have diabetes, carb counting and the plate method are two common ways to plan how much to eat or drink. Talk with your health care professional or health care team to find a method that works for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-carb-counting-to-adjust-insulin-dose> a dmo:Recommendation ;
+    rdfs:label "Use Carb Counting to Adjust Insulin Dose" ;
+    dmo:recommendationId "use-carb-counting-to-adjust-insulin-dose" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Not all people with diabetes need to count carbs. However, if you take insulin, counting carbs can help you know how much insulin to take." ;
+    dmo:evidenceQuote "Not all people with diabetes need to count carbs. However, if you take insulin, counting carbs can help you know how much insulin to take." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-online-tools-like-body-weight-planner-to-create-eating-and-physical-activity-plans> a dmo:Recommendation ;
+    rdfs:label "Use online tools like Body Weight Planner to create eating and physical activity plans" ;
+    dmo:recommendationId "use-online-tools-like-body-weight-planner-to-create-eating-and-physical-activity-plans" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Online tools such as the Body Weight Planner may help you create eating and physical activity plans." ;
+    dmo:evidenceQuote "Online tools such as the Body Weight Planner may help you create eating and physical activity plans." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/work-with-health-care-team-to-create-a-weight-loss-plan-if-overweight-or-obese> a dmo:Recommendation ;
+    rdfs:label "Work with health care team to create a weight-loss plan if overweight or obese" ;
+    dmo:recommendationId "work-with-health-care-team-to-create-a-weight-loss-plan-if-overweight-or-obese" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you are an adult with overweight or obesity, work with your health care team to create a weight-loss plan." ;
+    dmo:evidenceQuote "If you are an adult with overweight or obesity, work with your health care team to create a weight-loss plan." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/recommendation/work-with-health-care-team-to-create-personalized-meal-plan> a dmo:Recommendation ;
+    rdfs:label "Work with Health Care Team to Create Personalized Meal Plan" ;
+    dmo:populationScope "All people with diabetes" ;
+    dmo:recommendationId "work-with-health-care-team-to-create-personalized-meal-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Work with your health care team to create a meal plan that works for you." ;
+    dmo:evidenceQuote "Work with your health care team to create a meal plan that works for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/diabetes-mellitus> a dmo:RiskFactor ;
+    rdfs:label "Diabetes Mellitus" ;
+    dmo:evidenceNote "文档整体讨论的是糖尿病患者如何管理健康，糖尿病本身是基础疾病，不可干预。" ;
+    dmo:name "Diabetes Mellitus" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "diabetes-mellitus" ;
+    dmo:evidenceQuote "If you have diabetes, managing your weight may bring you several health benefits." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/obesity> a dmo:RiskFactor ;
+    rdfs:label "Obesity" ;
+    dmo:evidenceNote "文档中提到，如果成人超重或肥胖，应与医疗团队合作制定减重计划，并指出减重5%至7%可改善健康问题和血糖、胆固醇、血压水平。" ;
+    dmo:name "Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "obesity" ;
+    dmo:evidenceQuote "If you are an adult with overweight or obesity, work with your health care team to create a weight-loss plan. Losing 5% to 7% of your current weight may help you prevent or improve some health problems and manage your blood glucose, cholesterol, and blood pressure levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/overweight> a dmo:RiskFactor ;
+    rdfs:label "Overweight" ;
+    dmo:evidenceNote "文档中明确指出，如果患有糖尿病，管理体重可能带来多种健康益处，并建议通过健康饮食、减少卡路里摄入、增加体力活动和保证充足睡眠来达到或维持健康体重。" ;
+    dmo:name "Overweight" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "overweight" ;
+    dmo:evidenceQuote "If you have diabetes, managing your weight may bring you several health benefits. Ask your health care professional or health care team if you are at a healthy weight or if you should try to lose weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/type-1-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:evidenceNote "文档提到糖尿病酮症酸中毒（DKA）最常见于1型糖尿病患者，偶尔也影响2型糖尿病中已丧失胰岛素分泌能力者，说明1型糖尿病是不可干预的疾病类型。" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "type-1-diabetes" ;
+    dmo:evidenceQuote "DKA is most common in people with type 1 diabetes. Occasionally, DKA may affect people with type 2 diabetes who have lost their ability to produce insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+<https://example.org/dmo/id/riskFactor/type-2-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:evidenceNote "文档中将2型糖尿病作为一类独立的疾病类型提及，其发展与胰岛素分泌能力丧失相关，属于不可干预的疾病状态。" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "type-2-diabetes" ;
+    dmo:evidenceQuote "Occasionally, DKA may affect people with type 2 diabetes who have lost their ability to produce insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/low-blood-glucose> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/low-blood-glucose> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:screenedByTest <https://example.org/dmo/id/labTest/urine-ketones> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:screenedByTest <https://example.org/dmo/id/labTest/urine-ketones> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/taking-less-insulin-before-physical-activity> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:hasContraindication <https://example.org/dmo/id/contraindication/low-blood-glucose> .
+<https://example.org/dmo/id/medication/insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/insulin> .
+<https://example.org/dmo/id/medication/sulfonylureas> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/contraindication/alcohol-consumption-with-insulin-or-certain-diabetes-medicines> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/contraindication/physical-activities-that-need-balance> dmo:triggeredByCondition <https://example.org/dmo/id/complication/foot-problems> .
+<https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/aerobic-activities> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/strength-training-or-resistance-training> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/balance-and-stretching-activities> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/reach-or-maintain-a-healthy-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/reach-or-maintain-a-healthy-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/reach-or-maintain-a-healthy-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/weight-management> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/weight-management> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/weight-management> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/lifestyleIntervention/plate-method> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetes-mellitus> .
+<https://example.org/dmo/id/recommendation/ask-health-care-professional-about-healthy-weight-status-and-weight-loss-plan> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/ask-health-care-professional-about-insulin-adjustment-and-ketone-testing-before-physical-activity> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/ask-health-care-professional-about-insulin-or-carb-adjustments-before-during-or-after-physical-activity> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/avoid-low-blood-glucose-during-and-after-physical-activity> dmo:targetsComplication <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/recommendation/avoid-sports-drinks-for-most-moderate-physical-activities> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/balance-and-stretching-activities-two-to-three-times-weekly> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/carb-counting-not-required-for-non-insulin-users-using-plate-method> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/check-blood-glucose-before-during-and-after-physical-activity> dmo:targetsComplication <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/recommendation/consider-diabetes-medicines-that-may-help-with-weight-loss-if-you-have-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/consider-sleep-apnea-as-a-possible-contributor-to-poor-sleep-and-cardiovascular-risk> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/consider-weight-loss-surgery-if-unable-to-reach-healthy-weight-with-other-methods> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/do-not-try-to-lose-weight-during-pregnancy-without-professional-guidance> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/engage-in-regular-physical-activity-for-diabetes-management> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/include-diabetes-educator-or-registered-dietitian-in-care-team> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> .
+<https://example.org/dmo/id/recommendation/include-nutrient-rich-foods-in-meal-plan> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> .
+<https://example.org/dmo/id/recommendation/learn-how-to-treat-low-blood-glucose-and-inform-others> dmo:targetsComplication <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/recommendation/lose-5-to-7-of-current-weight-to-improve-health-outcomes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/plan-healthy-meals-and-snacks> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> .
+<https://example.org/dmo/id/recommendation/plate-method-composition> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/plate-method> .
+<https://example.org/dmo/id/recommendation/strength-training-twice-weekly> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/take-care-of-feet-before-during-and-after-physical-activity> dmo:targetsComplication <https://example.org/dmo/id/complication/foot-problems> .
+<https://example.org/dmo/id/recommendation/take-steps-to-protect-yourself-from-low-blood-glucose> dmo:targetsComplication <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-before-starting-new-physical-activity> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-before-taking-dietary-supplements> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-about-mental-health-if-experiencing-stress-sadness-or-anger> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-about-weight-loss-programs-with-support-and-counseling> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/weight-management> .
+<https://example.org/dmo/id/recommendation/talk-with-health-care-professional-before-starting-weight-loss-plan-for-child-with-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/use-carb-counting-or-plate-method-for-portion-control> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/plate-method> .
+<https://example.org/dmo/id/recommendation/use-online-tools-like-body-weight-planner-to-create-eating-and-physical-activity-plans> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/weight-management> .
+<https://example.org/dmo/id/recommendation/work-with-health-care-team-to-create-personalized-meal-plan> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan> .
+<https://example.org/dmo/id/recommendation/work-with-health-care-team-to-create-a-weight-loss-plan-if-overweight-or-obese> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .

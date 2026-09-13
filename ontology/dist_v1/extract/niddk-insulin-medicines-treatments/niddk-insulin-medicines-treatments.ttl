@@ -1,0 +1,666 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-insulin-medicines-treatments.txt
+# 目标 named graph：urn:dmo:extract:niddk-insulin-medicines-treatments
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-insulin-medicines-treatments'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-insulin-medicines-treatments.txt" ;
+    dmo:sha256 "9bc64702ec75fb79790e7a108c6cd7cd525cc6a3cb1802cac8362fa75cd65534" ;
+    dmo:byteSize "18735"^^xsd:integer .
+
+<urn:dmo:extract:niddk-insulin-medicines-treatments> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T03:33:04+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/hypoglycemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:adverseEffectCode "hypoglycemia" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Some diabetes medicines can cause hypoglycemia, also called low blood glucose, if you don’t balance your medicines with food and activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/adverseEffect/upset-stomach> a dmo:AdverseEffect ;
+    rdfs:label "Upset stomach" ;
+    dmo:adverseEffectCode "upset-stomach" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Upset stomach" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Ask your doctor whether your diabetes medicine can cause hypoglycemia or other side effects, such as upset stomach and weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/adverseEffect/weight-gain> a dmo:AdverseEffect ;
+    rdfs:label "Weight gain" ;
+    dmo:adverseEffectCode "weight-gain" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Weight gain" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Ask your doctor whether your diabetes medicine can cause hypoglycemia or other side effects, such as upset stomach and weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/complication/hypoglycemia> a dmo:Complication ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "hypoglycemia" ;
+    dmo:definition "Some diabetes medicines can cause hypoglycemia, also called low blood glucose, if you don’t balance your medicines with food and activity." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005001" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Some diabetes medicines can cause hypoglycemia, also called low blood glucose, if you don’t balance your medicines with food and activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/device/artificial-pancreas> a dmo:Device ;
+    rdfs:label "Artificial Pancreas" ;
+    dmo:deviceCode "artificial-pancreas" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Artificial Pancreas" ;
+    dmo:evidenceQuote "An artificial pancreas—also called an automated insulin delivery system—may be another option for some people." ;
+    dmo:evidenceQuote "An artificial pancreas is a system of three devices that work together to mimic how a healthy pancreas controls blood glucose in the body." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/device/continuous-glucose-monitor> a dmo:Device ;
+    rdfs:label "Continuous Glucose Monitor" ;
+    dmo:deviceCode "continuous-glucose-monitor" ;
+    dmo:deviceType "CGM" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Continuous Glucose Monitor" ;
+    dmo:evidenceQuote "A continuous glucose monitor (CGM) tracks blood glucose levels every few minutes using a small sensor inserted under the skin that is held in place with an adhesive pad." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/device/insulin-infusion-pump> a dmo:Device ;
+    rdfs:label "Insulin Infusion Pump" ;
+    dmo:deviceCode "insulin-infusion-pump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Insulin Infusion Pump" ;
+    dmo:evidenceQuote "The insulin infusion pump will adjust how much insulin is given from minute to minute to help keep your blood glucose level in your target range." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/device/insulin-pump> a dmo:Device ;
+    rdfs:label "Insulin Pump" ;
+    dmo:deviceCode "insulin-pump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Insulin Pump" ;
+    dmo:evidenceQuote "You can use a needle and syringe, an insulin pen, or an insulin pump." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Gestational diabetes" ;
+    dmo:definition "If you have gestational diabetes, you can manage your blood glucose level by following a healthy eating plan and doing a moderate-intensity physical activity, such as brisk walking for 150 minutes, each week." ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:name "Gestational diabetes" ;
+    dmo:prevalenceShare "0.02"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "If you have gestational diabetes, you can manage your blood glucose level by following a healthy eating plan and doing a moderate-intensity physical activity, such as brisk walking for 150 minutes, each week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 diabetes" ;
+    dmo:definition "If you have type 1 diabetes, you must take insulin because your pancreas does not make it." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "If you have type 1 diabetes, you must take insulin because your pancreas does not make it." ;
+    dmo:evidenceQuote "An artificial pancreas is mainly used to help people with type 1 diabetes." ;
+    dmo:evidenceQuote "If you have type 1 diabetes, your doctor may recommend you take other medicines, in addition to insulin, to help control your blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 diabetes" ;
+    dmo:definition "Some people with type 2 diabetes can control their blood glucose level by making lifestyle changes." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001513" ;
+    dmo:name "Type 2 diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Some people with type 2 diabetes can control their blood glucose level by making lifestyle changes." ;
+    dmo:evidenceQuote "Inhaled insulin is only for adults with type 1 or type 2 diabetes." ;
+    dmo:evidenceQuote "Besides insulin, other types of injected medicines External link (PDF, 2.8 MB) are available that will keep your blood glucose level from rising too high after you eat or drink." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> a dmo:DrugClass ;
+    rdfs:label "Glucagon-like Peptide-1 Receptor Agonists" ;
+    dmo:drugClassCode "glucagon-like-peptide-1-receptor-agonists" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "work to slow how fast food and beverages move through your stomach. These medicines also slow down how quickly and how high your blood glucose levels rise after eating." ;
+    dmo:name "Glucagon-like Peptide-1 Receptor Agonists" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "These medicines, known as glucagon-like peptide-1 (GLP-1) receptor agonists,3 may make you feel less hungry and help you lose some weight. GLP-1 medicines are not substitutes for insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Helps the body use glucose from the blood for energy and stores excess glucose in the liver and muscles." ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "If you have type 1 diabetes, you must take insulin because your pancreas does not make it." ;
+    dmo:evidenceQuote "You can give yourself insulin shots using a needle and syringe. You draw up your dose of insulin from the vial—or bottle—through the needle into the syringe." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/intermediate-acting-insulin> a dmo:DrugClass ;
+    rdfs:label "Intermediate-acting insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "intermediate-acting-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Starts working within 2 to 4 hours and peaks in 4 to 12 hours." ;
+    dmo:name "Intermediate-acting insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "intermediate-acting 2 to 4 hours 4 to 12 hours 12 to 18 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/long-acting-insulin> a dmo:DrugClass ;
+    rdfs:label "Long-acting insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "long-acting-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Starts working within 2 hours and does not peak." ;
+    dmo:name "Long-acting insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "long-acting 2 hours does not peak 24 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/metformin> a dmo:DrugClass ;
+    rdfs:label "Metformin" ;
+    dmo:adminRoute "Oral" ;
+    dmo:atcCode "A10BA02" ;
+    dmo:drugClassCode "metformin" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Metformin helps your liver make less glucose and helps your body use insulin better." ;
+    dmo:name "Metformin" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "Most people with type 2 diabetes start with metformin NIH external link pills. Metformin also comes as a liquid. Metformin helps your liver make less glucose and helps your body use insulin better." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/premixed-insulin> a dmo:DrugClass ;
+    rdfs:label "Premixed insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "premixed-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "A combination of insulins listed in Table 1, starts to work in 15 to 60 minutes and can last from 10 to 16 hours." ;
+    dmo:name "Premixed insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Premixed insulin starts to work in 15 to 60 minutes and can last from 10 to 16 hours." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/rapid-acting-inhaled-insulin> a dmo:DrugClass ;
+    rdfs:label "Rapid-acting, inhaled insulin" ;
+    dmo:adminRoute "Inhaled" ;
+    dmo:drugClassCode "rapid-acting-inhaled-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Starts working within 10 to 15 minutes and peaks in about 30 minutes." ;
+    dmo:name "Rapid-acting, inhaled insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "rapid-acting, inhaled 10 to 15 minutes 30 minutes 3 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/regular-also-called-short-acting-insulin> a dmo:DrugClass ;
+    rdfs:label "Regular, also called short-acting insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "regular-also-called-short-acting-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Starts working within 30 minutes and peaks in 2 to 3 hours." ;
+    dmo:name "Regular, also called short-acting insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "regular, also called short-acting 30 minutes 2 to 3 hours 3 to 6 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/drugClass/ultra-long-acting-insulin> a dmo:DrugClass ;
+    rdfs:label "Ultra long-acting insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "ultra-long-acting-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Starts working within 6 hours and does not peak." ;
+    dmo:name "Ultra long-acting insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "ultra long-acting 6 hours does not peak 36 hours or longer" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/being-physically-active> a dmo:LifestyleIntervention ;
+    rdfs:label "Being Physically Active" ;
+    dmo:interventionCode "being-physically-active" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Being Physically Active" ;
+    dmo:evidenceQuote "You may need to take medicines to manage your type 2 diabetes, in addition to consuming healthy foods and beverages and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/brisk-walking-for-150-minutes-each-week> a dmo:LifestyleIntervention ;
+    rdfs:label "Brisk walking for 150 minutes, each week" ;
+    dmo:activityTarget "150 minutes of moderate-intensity physical activity per week" ;
+    dmo:interventionCode "brisk-walking-for-150-minutes-each-week" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Brisk walking for 150 minutes, each week" ;
+    dmo:evidenceQuote "If you have gestational diabetes, you can manage your blood glucose level by following a healthy eating plan and doing a moderate-intensity physical activity, such as brisk walking for 150 minutes, each week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/consuming-healthy-meals-and-beverages> a dmo:LifestyleIntervention ;
+    rdfs:label "Consuming healthy meals and beverages" ;
+    dmo:interventionCode "consuming-healthy-meals-and-beverages" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Consuming healthy meals and beverages" ;
+    dmo:evidenceQuote "These lifestyle changes include consuming healthy meals and beverages, limiting calories if they have overweight or obesity, and getting physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/getting-physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Getting physical activity" ;
+    dmo:interventionCode "getting-physical-activity" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Getting physical activity" ;
+    dmo:evidenceQuote "These lifestyle changes include consuming healthy meals and beverages, limiting calories if they have overweight or obesity, and getting physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/healthy-foods-and-beverages> a dmo:LifestyleIntervention ;
+    rdfs:label "Healthy Foods and Beverages" ;
+    dmo:interventionCode "healthy-foods-and-beverages" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Healthy Foods and Beverages" ;
+    dmo:evidenceQuote "You may need to take medicines to manage your type 2 diabetes, in addition to consuming healthy foods and beverages and being physically active." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/limiting-calories-if-they-have-overweight-or-obesity> a dmo:LifestyleIntervention ;
+    rdfs:label "Limiting calories if they have overweight or obesity" ;
+    dmo:interventionCode "limiting-calories-if-they-have-overweight-or-obesity" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Limiting calories if they have overweight or obesity" ;
+    dmo:evidenceQuote "These lifestyle changes include consuming healthy meals and beverages, limiting calories if they have overweight or obesity, and getting physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/lifestyleIntervention/weight-loss-surgery> a dmo:LifestyleIntervention ;
+    rdfs:label "Weight-loss surgery" ;
+    dmo:activityTarget "help some people who have obesity and type 2 diabetes lose a large amount of weight and bring their blood glucose levels back to a healthy range" ;
+    dmo:expectedBenefit "Some people with type 2 diabetes may no longer need to use diabetes medicines after weight-loss surgery" ;
+    dmo:interventionCode "weight-loss-surgery" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Weight-loss surgery" ;
+    dmo:evidenceQuote "Weight-loss surgery are operations that help you lose weight by making changes to your digestive system. Weight-loss surgery is also called bariatric or metabolic surgery." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/glucagon-like-peptide-1-glp-1-receptor-agonists> a dmo:Medication ;
+    rdfs:label "Glucagon-like peptide-1 (GLP-1) receptor agonists" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glucagon-like-peptide-1-glp-1-receptor-agonists" ;
+    dmo:name "Glucagon-like peptide-1 (GLP-1) receptor agonists" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "These medicines, known as glucagon-like peptide-1 (GLP-1) receptor agonists,3 may make you feel less hungry and help you lose some weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "Insulin" ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "Insulin" ;
+    dmo:evidenceQuote "You can give yourself insulin shots using a needle and syringe." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/intermediate-acting-insulin> a dmo:Medication ;
+    rdfs:label "Intermediate-Acting Insulin" ;
+    dmo:durationHours "12"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "intermediate-acting-insulin" ;
+    dmo:name "Intermediate-Acting Insulin" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "intermediate-acting\t2 to 4 hours\t4 to 12 hours\t12 to 18 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/long-acting-insulin> a dmo:Medication ;
+    rdfs:label "Long-Acting Insulin" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "long-acting-insulin" ;
+    dmo:name "Long-Acting Insulin" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "long-acting\t2 hours\tdoes not peak\t24 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/metformin> a dmo:Medication ;
+    rdfs:label "Metformin" ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "metformin" ;
+    dmo:name "Metformin" ;
+    dmo:evidenceQuote "Most people with type 2 diabetes start with metformin NIH external link pills." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/premixed-insulin> a dmo:Medication ;
+    rdfs:label "Premixed Insulin" ;
+    dmo:durationHours "10"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "premixed-insulin" ;
+    dmo:name "Premixed Insulin" ;
+    dmo:onsetMinutes "15"^^xsd:integer ;
+    dmo:evidenceQuote "Another type of insulin, called premixed insulin, is a combination of insulins listed in Table 1. Premixed insulin starts to work in 15 to 60 minutes and can last from 10 to 16 hours." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/rapid-acting-inhaled-insulin> a dmo:Medication ;
+    rdfs:label "Rapid-Acting Inhaled Insulin" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "rapid-acting-inhaled-insulin" ;
+    dmo:name "Rapid-Acting Inhaled Insulin" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "rapid-acting, inhaled\t10 to 15 minutes\t30 minutes\t3 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/regular-insulin> a dmo:Medication ;
+    rdfs:label "Regular Insulin" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "ShortActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "regular-insulin" ;
+    dmo:name "Regular Insulin" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "regular, also called short-acting\t30 minutes\t2 to 3 hours\t3 to 6 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/medication/ultra-long-acting-insulin> a dmo:Medication ;
+    rdfs:label "Ultra Long-Acting Insulin" ;
+    dmo:durationHours "36"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "ultra-long-acting-insulin" ;
+    dmo:name "Ultra Long-Acting Insulin" ;
+    dmo:onsetMinutes "360"^^xsd:integer ;
+    dmo:evidenceQuote "ultra long-acting\t6 hours\tdoes not peak\t36 hours or longer" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-low-blood-glucose> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor about low blood glucose" ;
+    dmo:recommendationId "ask-your-doctor-about-low-blood-glucose" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Can my diabetes medicine cause low blood glucose?" ;
+    dmo:evidenceQuote "Can my diabetes medicine cause low blood glucose?" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-other-treatment-options> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor about other treatment options" ;
+    dmo:recommendationId "ask-your-doctor-about-other-treatment-options" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Do I have other treatment options for my diabetes?" ;
+    dmo:evidenceQuote "Do I have other treatment options for my diabetes?" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-side-effects-of-diabetes-medicines> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor about side effects of diabetes medicines" ;
+    dmo:recommendationId "ask-your-doctor-about-side-effects-of-diabetes-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Ask your doctor whether your diabetes medicine can cause hypoglycemia or other side effects, such as upset stomach and weight gain." ;
+    dmo:evidenceQuote "Ask your doctor whether your diabetes medicine can cause hypoglycemia or other side effects, such as upset stomach and weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-side-effects-of-medicine> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor about side effects of medicine" ;
+    dmo:recommendationId "ask-your-doctor-about-side-effects-of-medicine" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "What side effects can this medicine cause?" ;
+    dmo:evidenceQuote "What side effects can this medicine cause?" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-about-storage-of-medicine> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor about storage of medicine" ;
+    dmo:recommendationId "ask-your-doctor-about-storage-of-medicine" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "How should I store this medicine?" ;
+    dmo:evidenceQuote "How should I store this medicine?" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-what-to-do-if-blood-glucose-is-too-low> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor what to do if blood glucose is too low" ;
+    dmo:recommendationId "ask-your-doctor-what-to-do-if-blood-glucose-is-too-low" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "What should I do if my blood glucose is too low?" ;
+    dmo:evidenceQuote "What should I do if my blood glucose is too low?" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/ask-your-doctor-what-to-do-if-you-have-side-effects> a dmo:Recommendation ;
+    rdfs:label "Ask your doctor what to do if you have side effects" ;
+    dmo:recommendationId "ask-your-doctor-what-to-do-if-you-have-side-effects" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "What should I do if I have side effects?" ;
+    dmo:evidenceQuote "What should I do if I have side effects?" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/avoid-repeated-injections-in-the-same-spot-to-prevent-tissue-hardening> a dmo:Recommendation ;
+    rdfs:label "Avoid repeated injections in the same spot to prevent tissue hardening" ;
+    dmo:recommendationId "avoid-repeated-injections-in-the-same-spot-to-prevent-tissue-hardening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Injecting insulin in the same spot repeatedly could cause the tissue to harden, making it harder to take shots in that area over time." ;
+    dmo:evidenceQuote "Injecting insulin in the same spot repeatedly could cause the tissue to harden, making it harder to take shots in that area over time." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/combining-two-or-three-kinds-of-diabetes-medicines> a dmo:Recommendation ;
+    rdfs:label "Combining two or three kinds of diabetes medicines" ;
+    dmo:recommendationId "combining-two-or-three-kinds-of-diabetes-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Combining two or three kinds of diabetes medicines can lower blood glucose levels better than taking just one medicine." ;
+    dmo:evidenceQuote "Combining two or three kinds of diabetes medicines can lower blood glucose levels better than taking just one medicine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/consider-using-an-insulin-pen-if-you-have-difficulty-filling-a-syringe-or-reading-syringe-markings> a dmo:Recommendation ;
+    rdfs:label "Consider using an insulin pen if you have difficulty filling a syringe or reading syringe markings" ;
+    dmo:recommendationId "consider-using-an-insulin-pen-if-you-have-difficulty-filling-a-syringe-or-reading-syringe-markings" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "You may want to consider using an insulin pen if you find it hard to fill the syringe while holding the vial or cannot read the markings on the syringe." ;
+    dmo:evidenceQuote "You may want to consider using an insulin pen if you find it hard to fill the syringe while holding the vial or cannot read the markings on the syringe." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/follow-your-doctor-s-advice-on-when-and-how-to-take-your-insulin> a dmo:Recommendation ;
+    rdfs:label "Follow your doctor’s advice on when and how to take your insulin" ;
+    dmo:recommendationId "follow-your-doctor-s-advice-on-when-and-how-to-take-your-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Follow your doctor’s advice on when and how to take your insulin." ;
+    dmo:evidenceQuote "Follow your doctor’s advice on when and how to take your insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/inject-insulin-in-the-belly-for-fastest-action> a dmo:Recommendation ;
+    rdfs:label "Inject insulin in the belly for fastest action" ;
+    dmo:recommendationId "inject-insulin-in-the-belly-for-fastest-action" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Insulin works fastest when you inject it in your belly, but your doctor may recommend alternating the spot where you inject it." ;
+    dmo:evidenceQuote "Insulin works fastest when you inject it in your belly, but your doctor may recommend alternating the spot where you inject it." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/insulin-for-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Insulin for Gestational Diabetes" ;
+    dmo:populationScope "People with gestational diabetes" ;
+    dmo:recommendationId "insulin-for-gestational-diabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have gestational diabetes, you can manage your blood glucose level by following a healthy eating plan and doing a moderate-intensity physical activity, such as brisk walking for 150 minutes, each week. If consuming healthy food and beverages and getting regular physical activity aren’t enough to keep your blood glucose level in your target range, a doctor will work with you and may recommend you take insulin. Insulin is safe to take while you are pregnant." ;
+    dmo:evidenceQuote "If you have gestational diabetes, you can manage your blood glucose level by following a healthy eating plan and doing a moderate-intensity physical activity, such as brisk walking for 150 minutes, each week. If consuming healthy food and beverages and getting regular physical activity aren’t enough to keep your blood glucose level in your target range, a doctor will work with you and may recommend you take insulin. Insulin is safe to take while you are pregnant." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/insulin-for-type-1-diabetes> a dmo:Recommendation ;
+    rdfs:label "Insulin for Type 1 Diabetes" ;
+    dmo:populationScope "People with type 1 diabetes" ;
+    dmo:recommendationId "insulin-for-type-1-diabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you have type 1 diabetes, you must take insulin because your pancreas does not make it. You will need to take insulin several times during the day, including when you eat and drink, to control your blood glucose level." ;
+    dmo:evidenceQuote "If you have type 1 diabetes, you must take insulin because your pancreas does not make it. You will need to take insulin several times during the day, including when you eat and drink, to control your blood glucose level." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/insulin-use-in-type-2-diabetes-during-special-times> a dmo:Recommendation ;
+    rdfs:label "Insulin Use in Type 2 Diabetes During Special Times" ;
+    dmo:populationScope "People with type 2 diabetes" ;
+    dmo:recommendationId "insulin-use-in-type-2-diabetes-during-special-times" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Even if you do not take insulin, you may need it at special times, such as if you are pregnant or if you are in the hospital for treatment." ;
+    dmo:evidenceQuote "Even if you do not take insulin, you may need it at special times, such as if you are pregnant or if you are in the hospital for treatment." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/lifestyle-changes-for-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Lifestyle Changes for Type 2 Diabetes" ;
+    dmo:populationScope "People with type 2 diabetes" ;
+    dmo:recommendationId "lifestyle-changes-for-type-2-diabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Some people with type 2 diabetes can control their blood glucose level by making lifestyle changes. These lifestyle changes include consuming healthy meals and beverages, limiting calories if they have overweight or obesity, and getting physical activity." ;
+    dmo:evidenceQuote "Some people with type 2 diabetes can control their blood glucose level by making lifestyle changes. These lifestyle changes include consuming healthy meals and beverages, limiting calories if they have overweight or obesity, and getting physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/pancreatic-islet-transplantation> a dmo:Recommendation ;
+    rdfs:label "Pancreatic islet transplantation" ;
+    dmo:populationScope "People with type 1 diabetes who struggle to manage their blood glucose levels" ;
+    dmo:recommendationId "pancreatic-islet-transplantation" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Pancreatic islet transplantation is a treatment for type 1 diabetes in people who struggle to manage their blood glucose levels." ;
+    dmo:evidenceQuote "Pancreatic islet transplantation is a treatment for type 1 diabetes in people who struggle to manage their blood glucose levels." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/take-diabetes-medicines-as-instructed-to-prevent-side-effects> a dmo:Recommendation ;
+    rdfs:label "Take diabetes medicines as instructed to prevent side effects" ;
+    dmo:recommendationId "take-diabetes-medicines-as-instructed-to-prevent-side-effects" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Aim to take your diabetes medicines as your doctor instructs you, to help prevent side effects and diabetes problems." ;
+    dmo:evidenceQuote "Aim to take your diabetes medicines as your doctor instructs you, to help prevent side effects and diabetes problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/talk-with-your-doctor-about-insulin-delivery-options> a dmo:Recommendation ;
+    rdfs:label "Talk with your doctor about insulin delivery options" ;
+    dmo:recommendationId "talk-with-your-doctor-about-insulin-delivery-options" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Talk with your doctor about the options and which one is best for you." ;
+    dmo:evidenceQuote "Talk with your doctor about the options and which one is best for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/talk-with-your-doctor-if-you-re-worried-about-the-cost-of-insulin> a dmo:Recommendation ;
+    rdfs:label "Talk with your doctor if you're worried about the cost of insulin" ;
+    dmo:recommendationId "talk-with-your-doctor-if-you-re-worried-about-the-cost-of-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If you're worried about the cost, talk with your doctor." ;
+    dmo:evidenceQuote "If you're worried about the cost, talk with your doctor." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/use-an-artificial-pancreas-system-if-you-have-type-1-diabetes> a dmo:Recommendation ;
+    rdfs:label "Use an artificial pancreas system if you have type 1 diabetes" ;
+    dmo:populationScope "people with type 1 diabetes" ;
+    dmo:recommendationId "use-an-artificial-pancreas-system-if-you-have-type-1-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "An artificial pancreas is mainly used to help people with type 1 diabetes." ;
+    dmo:evidenceQuote "An artificial pancreas is mainly used to help people with type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/use-combination-therapy-with-two-or-three-kinds-of-diabetes-medicines-for-better-glucose-control> a dmo:Recommendation ;
+    rdfs:label "Use combination therapy with two or three kinds of diabetes medicines for better glucose control" ;
+    dmo:recommendationId "use-combination-therapy-with-two-or-three-kinds-of-diabetes-medicines-for-better-glucose-control" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Combining two or three kinds of diabetes medicines can lower blood glucose levels better than taking just one medicine." ;
+    dmo:evidenceQuote "Combining two or three kinds of diabetes medicines can lower blood glucose levels better than taking just one medicine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/recommendation/weight-loss-surgery> a dmo:Recommendation ;
+    rdfs:label "Weight-loss surgery" ;
+    dmo:populationScope "People with obesity and type 2 diabetes" ;
+    dmo:recommendationId "weight-loss-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Weight-loss surgery may help some people who have obesity and type 2 diabetes lose a large amount of weight and bring their blood glucose levels back to a healthy range." ;
+    dmo:evidenceQuote "This type of surgery may help some people who have obesity and type 2 diabetes lose a large amount of weight and bring their blood glucose levels back to a healthy range." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/symptom/hypoglycemia> a dmo:Symptom ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:hpoCode "HP:0001934" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:symptomCode "hypoglycemia" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Some diabetes medicines can cause hypoglycemia, also called low blood glucose, if you don’t balance your medicines with food and activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/symptom/upset-stomach> a dmo:Symptom ;
+    rdfs:label "Upset Stomach" ;
+    dmo:hpoCode "HP:0002051" ;
+    dmo:name "Upset Stomach" ;
+    dmo:symptomCode "upset-stomach" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Ask your doctor whether your diabetes medicine can cause hypoglycemia or other side effects, such as upset stomach and weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+<https://example.org/dmo/id/symptom/weight-gain> a dmo:Symptom ;
+    rdfs:label "Weight Gain" ;
+    dmo:hpoCode "HP:0001508" ;
+    dmo:name "Weight Gain" ;
+    dmo:symptomCode "weight-gain" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Ask your doctor whether your diabetes medicine can cause hypoglycemia or other side effects, such as upset stomach and weight gain." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/recommendation/weight-loss-surgery> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/pancreatic-islet-transplantation> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycemia> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/hypoglycemia> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/upset-stomach> .
+<https://example.org/dmo/id/complication/hypoglycemia> dmo:presentsWith <https://example.org/dmo/id/symptom/weight-gain> .
+<https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/upset-stomach> .
+<https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/weight-gain> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/metformin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/upset-stomach> .
+<https://example.org/dmo/id/drugClass/metformin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/weight-gain> .
+<https://example.org/dmo/id/drugClass/intermediate-acting-insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/long-acting-insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/premixed-insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/rapid-acting-inhaled-insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/regular-also-called-short-acting-insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/drugClass/ultra-long-acting-insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycemia> .
+<https://example.org/dmo/id/medication/glucagon-like-peptide-1-glp-1-receptor-agonists> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists> .
+<https://example.org/dmo/id/medication/insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/insulin> .
+<https://example.org/dmo/id/medication/intermediate-acting-insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/intermediate-acting-insulin> .
+<https://example.org/dmo/id/medication/long-acting-insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/long-acting-insulin> .
+<https://example.org/dmo/id/medication/metformin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/metformin> .
+<https://example.org/dmo/id/medication/premixed-insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/premixed-insulin> .
+<https://example.org/dmo/id/medication/rapid-acting-inhaled-insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/rapid-acting-inhaled-insulin> .
+<https://example.org/dmo/id/medication/regular-insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/regular-also-called-short-acting-insulin> .
+<https://example.org/dmo/id/medication/ultra-long-acting-insulin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/ultra-long-acting-insulin> .

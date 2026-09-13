@@ -1,0 +1,193 @@
+{
+  "source": {
+    "sourceId": "niddk-diabetic-eye-disease",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-diabetic-eye-disease",
+    "localFile": "ontology/knowledges/niddk-diabetic-eye-disease.txt",
+    "sha256": "b7986310bc704c60300726189bd9f316c3e80cab494131eb8bc22c299fe9ae72",
+    "byteSize": 15554,
+    "graphUri": "urn:dmo:extract:niddk-diabetic-eye-disease"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 3,
+  "counts": {
+    "rawRecords": 85,
+    "accepted": 76,
+    "rejected": 9,
+    "entities": 62,
+    "edges": 46,
+    "danglingRelations": 66,
+    "mergeConflicts": 50
+  },
+  "quality": {
+    "quoteHitRate": 0.8941,
+    "schemaSlotCoverage": 0.6452,
+    "danglingRelationRate": 0.5893,
+    "avgMentionsPerEntity": 1.23
+  },
+  "rejectionsByReason": {
+    "unknown_relation_predicate": 4,
+    "quote_not_found": 3,
+    "quote_too_short": 2
+  },
+  "linkPass": {
+    "candidates": 86,
+    "accepted": 46,
+    "rejectedByReason": {
+      "quote_not_found": 18,
+      "target_unresolved": 22
+    }
+  },
+  "entitiesByType": {
+    "riskFactor": 16,
+    "recommendation": 14,
+    "complication": 9,
+    "symptom": 9,
+    "diabetesType": 4,
+    "monitoringSchedule": 4,
+    "medication": 3,
+    "lifestyleIntervention": 2,
+    "labTest": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-retinopathy",
+      "predicate": "hasStage",
+      "target": "Nonproliferative Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-retinopathy",
+      "predicate": "hasStage",
+      "target": "Proliferative Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-retinopathy",
+      "predicate": "presentsWith",
+      "target": "Diabetic Macular Edema"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/nonproliferative-diabetic-retinopathy",
+      "predicate": "hasStage",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/proliferative-diabetic-retinopathy",
+      "predicate": "hasStage",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/proliferative-diabetic-retinopathy",
+      "predicate": "presentsWith",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-macular-edema",
+      "predicate": "presentsWith",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-macular-edema",
+      "predicate": "presentsWith",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/glaucoma",
+      "predicate": "presentsWith",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/cataracts",
+      "predicate": "presentsWith",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Macular Edema"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Cataracts"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Glaucoma"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Eye Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/prediabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Macular Edema"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Glaucoma"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Cataracts"
+    }
+  ],
+  "conflictSamples": [
+    "complication/diabetic-retinopathy: definition: 'Damaged blood vessels can harm the retina, causing a disease called diabetic retinopathy.' vs 'Diabetic retinopathy is the most common cause of vision loss in people with diabetes.'",
+    "complication/proliferative-diabetic-retinopathy: mondoCode: 'MONDO:0005150' vs 'MONDO:0005116'",
+    "complication/proliferative-diabetic-retinopathy: definition: 'If the disease gets worse, some blood vessels close off, which causes new blood vessels to grow, or proliferate, on the surface of the retina. This stage is called proliferative diabetic retinopathy.' vs 'A condition in which abnormal blood vessels grow in the retina due to diabetes, potentially leading to severe vision loss or blindness.'",
+    "complication/diabetic-macular-edema: mondoCode: 'MONDO:0005151' vs 'MONDO:0005115'",
+    "complication/diabetic-macular-edema: definition: 'The part of your retina that you need for reading, driving, and seeing faces is called the macula. Diabetes can lead to swelling in the macula, which is called diabetic macular edema.' vs 'A condition characterized by swelling in the macula of the retina due to diabetes, which can lead to vision loss.'",
+    "complication/glaucoma: mondoCode: 'MONDO:0005152' vs 'MONDO:0005147'",
+    "complication/glaucoma: definition: 'Glaucoma is a group of eye diseases that can damage the optic nerve—the bundle of nerves that connects the eye to the brain.' vs 'Your chances of developing glaucoma or cataracts are about twice that of someone without diabetes.'",
+    "complication/cataracts: mondoCode: 'MONDO:0005153' vs 'MONDO:0005146'",
+    "complication/cataracts: definition: 'The lenses within our eyes are clear structures that help provide sharp vision—but they tend to become cloudy as we age. People with diabetes are more likely to develop cloudy lenses, called cataracts.' vs 'Your chances of developing glaucoma or cataracts are about twice that of someone without diabetes.'",
+    "symptom/blurry-vision: name: 'Blurry Vision' vs 'blurry vision'",
+    "symptom/cloudy-vision: name: 'Cloudy Vision' vs 'cloudy vision'",
+    "symptom/faded-colors: name: 'Faded Colors' vs 'faded colors'",
+    "symptom/loss-of-side-vision: name: 'Loss of Side Vision' vs 'loss of side vision'",
+    "riskFactor/high-blood-glucose: name: 'High Blood Glucose' vs '高血糖'",
+    "riskFactor/high-blood-glucose: name: 'High Blood Glucose' vs '高血糖'",
+    "riskFactor/high-blood-glucose: evidenceNote: '高血糖是糖尿病影响眼睛的主要原因，长期高血糖会损害视网膜的微小血管。' vs '未治疗的高血糖会增加糖尿病眼病的风险。'",
+    "riskFactor/prediabetes: name: 'Prediabetes' vs '糖尿病前期'",
+    "riskFactor/smoking: name: 'Smoking' vs '吸烟'",
+    "riskFactor/smoking: name: 'Smoking' vs '吸烟'",
+    "riskFactor/smoking: evidenceNote: '文档建议吸烟者应寻求帮助戒烟，暗示吸烟是可干预的风险因素。' vs '吸烟可能增加糖尿病眼病的风险。'"
+  ]
+}

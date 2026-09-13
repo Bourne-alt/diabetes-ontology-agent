@@ -1,0 +1,148 @@
+{
+  "source": {
+    "sourceId": "niddk-insulin-medicines-treatments",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-insulin-medicines-treatments",
+    "localFile": "ontology/knowledges/niddk-insulin-medicines-treatments.txt",
+    "sha256": "9bc64702ec75fb79790e7a108c6cd7cd525cc6a3cb1802cac8362fa75cd65534",
+    "byteSize": 18735,
+    "graphUri": "urn:dmo:extract:niddk-insulin-medicines-treatments"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 4,
+  "counts": {
+    "rawRecords": 74,
+    "accepted": 68,
+    "rejected": 6,
+    "entities": 62,
+    "edges": 29,
+    "danglingRelations": 12,
+    "mergeConflicts": 27
+  },
+  "quality": {
+    "quoteHitRate": 0.9189,
+    "schemaSlotCoverage": 0.6452,
+    "danglingRelationRate": 0.2927,
+    "avgMentionsPerEntity": 1.1
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 6
+  },
+  "linkPass": {
+    "candidates": 27,
+    "accepted": 27,
+    "rejectedByReason": {}
+  },
+  "entitiesByType": {
+    "recommendation": 23,
+    "drugClass": 9,
+    "medication": 9,
+    "lifestyleIntervention": 7,
+    "device": 4,
+    "diabetesType": 3,
+    "symptom": 3,
+    "adverseEffect": 3,
+    "complication": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/drugClass/rapid-acting-inhaled-insulin",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/regular-also-called-short-acting-insulin",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/intermediate-acting-insulin",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/long-acting-insulin",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/ultra-long-acting-insulin",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/premixed-insulin",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/artificial-pancreas",
+      "predicate": "deviceMeasuresTest",
+      "target": "Blood Glucose Level"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/continuous-glucose-monitor",
+      "predicate": "deviceMeasuresTest",
+      "target": "Blood Glucose Level"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/insulin-infusion-pump",
+      "predicate": "deviceMeasuresTest",
+      "target": "Blood Glucose Level"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/glucagon-like-peptide-1-receptor-agonists",
+      "predicate": "hasContraindication",
+      "target": "Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/weight-loss-surgery",
+      "predicate": "definesTarget",
+      "target": "Weight-loss surgery"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/pancreatic-islet-transplantation",
+      "predicate": "definesTarget",
+      "target": "Pancreatic islet transplantation"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/type-1-diabetes: name: 'Type 1 diabetes' vs 'Type 1 Diabetes'",
+    "diabetesType/type-1-diabetes: definition: 'If you have type 1 diabetes, you must take insulin because your pancreas does not make it.' vs 'An artificial pancreas is mainly used to help people with type 1 diabetes.'",
+    "diabetesType/type-1-diabetes: prevalenceShare: 0.05 vs 0.1",
+    "diabetesType/type-1-diabetes: definition: 'If you have type 1 diabetes, you must take insulin because your pancreas does not make it.' vs 'If you have type 1 diabetes, your doctor may recommend you take other medicines, in addition to insulin, to help control your blood glucose.'",
+    "diabetesType/type-2-diabetes: name: 'Type 2 diabetes' vs 'Type 2 Diabetes'",
+    "diabetesType/type-2-diabetes: definition: 'Some people with type 2 diabetes can control their blood glucose level by making lifestyle changes.' vs 'Inhaled insulin is only for adults with type 1 or type 2 diabetes.'",
+    "diabetesType/type-2-diabetes: definition: 'Some people with type 2 diabetes can control their blood glucose level by making lifestyle changes.' vs 'Besides insulin, other types of injected medicines External link (PDF, 2.8 MB) are available that will keep your blood glucose level from rising too high after you eat or drink.'",
+    "drugClass/insulin: mechanism: 'Helps the body use glucose from the blood for energy and stores excess glucose in the liver and muscles.' vs 'Insulin is a hormone that helps regulate blood glucose levels by allowing cells to take in glucose from the bloodstream.'",
+    "medication/rapid-acting-inhaled-insulin: name: 'Rapid-Acting Inhaled Insulin' vs 'rapid-acting, inhaled'",
+    "medication/regular-insulin: name: 'Regular Insulin' vs 'regular'",
+    "medication/intermediate-acting-insulin: name: 'Intermediate-Acting Insulin' vs 'intermediate-acting'",
+    "medication/long-acting-insulin: name: 'Long-Acting Insulin' vs 'long-acting'",
+    "medication/ultra-long-acting-insulin: name: 'Ultra Long-Acting Insulin' vs 'ultra long-acting'",
+    "medication/premixed-insulin: name: 'Premixed Insulin' vs 'premixed insulin'",
+    "device/artificial-pancreas: name: 'Artificial Pancreas' vs 'artificial pancreas'",
+    "medication/insulin: name: 'Insulin' vs 'insulin'",
+    "medication/metformin: name: 'Metformin' vs 'metformin'",
+    "device/continuous-glucose-monitor: name: 'Continuous Glucose Monitor' vs 'continuous glucose monitor (CGM)'",
+    "device/insulin-infusion-pump: name: 'Insulin Infusion Pump' vs 'insulin infusion pump'",
+    "symptom/hypoglycemia: name: 'Hypoglycemia' vs 'hypoglycemia'"
+  ]
+}

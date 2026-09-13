@@ -1,0 +1,174 @@
+{
+  "source": {
+    "sourceId": "jbds_02_nursing_management_for_dka_v1_20122022",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022",
+    "localFile": "ontology/knowledges/pdfs/JBDS_02_Nursing_Management_for_DKA_v1_20122022.pdf",
+    "sha256": "446ccba661df3bfea39e90e94e9ac399bcd75553521ec520e1716c09d690de02",
+    "byteSize": 490895,
+    "graphUri": "urn:dmo:extract:jbds_02_nursing_management_for_dka_v1_20122022",
+    "documentFormat": "pdf",
+    "pageCount": 10,
+    "textPageCount": 10
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 8,
+  "counts": {
+    "rawRecords": 217,
+    "accepted": 202,
+    "rejected": 15,
+    "entities": 167,
+    "edges": 31,
+    "danglingRelations": 16,
+    "mergeConflicts": 100
+  },
+  "quality": {
+    "quoteHitRate": 0.9309,
+    "schemaSlotCoverage": 0.6452,
+    "danglingRelationRate": 0.3404,
+    "avgMentionsPerEntity": 1.21
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 15
+  },
+  "linkPass": {
+    "candidates": 32,
+    "accepted": 31,
+    "rejectedByReason": {
+      "quote_not_found": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 56,
+    "medication": 39,
+    "labTest": 25,
+    "device": 10,
+    "drugClass": 10,
+    "symptom": 8,
+    "monitoringSchedule": 8,
+    "contraindication": 7,
+    "complication": 2,
+    "adverseEffect": 2
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/recommendation/review-by-consultant-physician-for-severe-dka-signs",
+      "predicate": "appliesToType",
+      "target": "Assess for Severe DKA Indicators"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/consider-alternative-causes-for-deterioration-in-dka",
+      "predicate": "appliesToType",
+      "target": "Review by Consultant Physician for Severe DKA Signs"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/urgent-senior-multidisciplinary-discussion-for-surgical-needs",
+      "predicate": "appliesToType",
+      "target": "Consider Alternative Causes for Deterioration in DKA"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/remove-csii-and-replace-with-subcutaneous-basal-insulin-if-no-local-policy",
+      "predicate": "appliesToType",
+      "target": "Manage CSII in DKA Patients"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/consider-level-2-hdu-admission-for-high-risk-dka-patients",
+      "predicate": "appliesToType",
+      "target": "Administer Fluids in Stages for DKA"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/guide-fluid-replacement-by-central-venous-pressure-in-high-risk-cases",
+      "predicate": "appliesToType",
+      "target": "Consider Level 2/HDU Admission for High-Risk DKA Patients"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/prepare-insulin-infusion-with-human-soluble-insulin-in-0-9-sodium-chloride",
+      "predicate": "appliesToType",
+      "target": "Start Continuous Fixed Rate Intravenous Insulin Infusion (FRIII)"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/basal-insulin",
+      "predicate": "hasContraindication",
+      "target": "Basal Insulin"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/basal-insulin",
+      "predicate": "causesAdverseEffect",
+      "target": "Hypoglycemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/restarting-short-acting-insulin-after-basal-insulin",
+      "predicate": "appliesToType",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/overlap-between-insulin-infusion-and-rapid-acting-insulin",
+      "predicate": "appliesToType",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/reintroducing-subcutaneous-insulin-after-fixed-mix-insulin",
+      "predicate": "appliesToType",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/stopping-additional-basal-insulin-after-mixed-insulin-reintroduction",
+      "predicate": "appliesToType",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/transitioning-from-iv-insulin-infusion-to-csii",
+      "predicate": "appliesToType",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/fixed-rate-intravenous-insulin-infusion",
+      "predicate": "hasContraindication",
+      "target": "Fixed Rate Intravenous Insulin Infusion"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/fixed-rate-intravenous-insulin-infusion",
+      "predicate": "causesAdverseEffect",
+      "target": "Hypoglycemia"
+    }
+  ],
+  "conflictSamples": [
+    "labTest/capillary-or-blood-ketone-concentration: definition: 'a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)' vs 'A measure of ketone levels in capillary or blood samples, used to diagnose ketonaemia in DKA.'",
+    "labTest/venous-ph: definition: 'venous pH <7.3' vs 'Venous/arterial pH below 7.0 may indicate severe DKA.'",
+    "labTest/venous-ph: definition: 'venous pH <7.3' vs 'A measure of the acidity or alkalinity of venous blood, used to assess acidosis in DKA.'",
+    "labTest/urine-ketone: definition: 'significant ketonuria (more than 2+ on standard urine sticks)' vs 'A measure of ketones in urine, used to assess ketonuria in DKA.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005040'",
+    "complication/diabetic-ketoacidosis: definition: \"The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3\" vs 'Diabetic Ketoacidosis (DKA) is a serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005070'",
+    "complication/diabetic-ketoacidosis: definition: \"The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3\" vs 'Diabetic Ketoacidosis (DKA) is a serious complication of diabetes characterized by high blood glucose, ketone production, and metabolic acidosis.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005148'",
+    "complication/diabetic-ketoacidosis: definition: \"The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3\" vs 'Diabetic Ketoacidosis (DKA) is a serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis, often requiring urgent medical intervention.'",
+    "complication/diabetic-ketoacidosis: definition: \"The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3\" vs 'The ‘D’ is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The ‘K’ is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The ‘A’ is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3'",
+    "complication/diabetic-ketoacidosis: definition: \"The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3\" vs 'Diabetic Ketoacidosis (DKA) is a serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis, requiring urgent medical intervention.'",
+    "labTest/blood-ketones: name: 'Blood ketones' vs 'Blood Ketones'",
+    "labTest/blood-ketones: definition: 'Blood ketones over 6.0mmol/L may indicate severe DKA.' vs 'Monitor blood ketones hourly using Trust approved meter until <0.6 mmol/L'",
+    "symptom/blood-ketones-over-6-0mmol-l: name: 'Blood Ketones over 6.0mmol/L' vs 'Blood ketones over 6.0mmol/L'",
+    "medication/human-soluble-insulin: name: 'Human Soluble Insulin' vs 'human soluble insulin'",
+    "medication/human-soluble-insulin: name: 'Human Soluble Insulin' vs 'human soluble insulin'",
+    "device/continuous-subcutaneous-insulin-infusion-pump: name: 'Continuous Subcutaneous Insulin Infusion Pump' vs 'continuous subcutaneous insulin infusion pump'",
+    "labTest/capillary-blood-glucose: definition: 'Capillary blood glucose is monitored hourly using Trust approved meter. If meter reads “over POCT QA range ie >27.8mmol/L\" or “Hi\", venous blood should be sent to the laboratory hourly or measured using venous blood in a blood gas analyser.' vs 'A measure of blood glucose concentration from capillary blood, used to monitor glucose levels in DKA management.'",
+    "labTest/venous-bicarbonate: definition: 'Assess the resolution of ketoacidosis: If blood ketone measurement is available and blood ketones are not falling by at least 0.5mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until the ketones are falling at target rates (also check infusion**)' vs 'A measure of bicarbonate concentration in venous blood, used to assess acidosis in DKA.'"
+  ]
+}

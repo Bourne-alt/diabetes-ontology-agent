@@ -1,0 +1,193 @@
+{
+  "source": {
+    "sourceId": "niddk-managing-diabetes",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes",
+    "localFile": "ontology/knowledges/niddk-managing-diabetes.txt",
+    "sha256": "b4c9ee1844691b7781b7de94e42d47bf14c2e2820036351627fe4e3d5d6de6f0",
+    "byteSize": 21485,
+    "graphUri": "urn:dmo:extract:niddk-managing-diabetes"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 4,
+  "counts": {
+    "rawRecords": 93,
+    "accepted": 77,
+    "rejected": 16,
+    "entities": 70,
+    "edges": 24,
+    "danglingRelations": 42,
+    "mergeConflicts": 26
+  },
+  "quality": {
+    "quoteHitRate": 0.828,
+    "schemaSlotCoverage": 0.7419,
+    "danglingRelationRate": 0.6364,
+    "avgMentionsPerEntity": 1.1
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 13,
+    "unknown_relation_predicate": 3
+  },
+  "linkPass": {
+    "candidates": 35,
+    "accepted": 18,
+    "rejectedByReason": {
+      "target_unresolved": 6,
+      "quote_not_found": 11
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 27,
+    "complication": 12,
+    "symptom": 11,
+    "lifestyleIntervention": 5,
+    "device": 5,
+    "labTest": 4,
+    "diabetesType": 3,
+    "medication": 1,
+    "monitoringSchedule": 1,
+    "drugClass": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/heart-attack",
+      "predicate": "presentsWith",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/stroke",
+      "predicate": "presentsWith",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/kidney-disease",
+      "predicate": "presentsWith",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/blindness",
+      "predicate": "presentsWith",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/foot-or-leg-amputation",
+      "predicate": "presentsWith",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/a1c-blood-glucose-test",
+      "predicate": "definesTarget",
+      "target": "A1C level below 7%"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/blood-pressure-goal-below-130-80-mm-hg",
+      "predicate": "definesTarget",
+      "target": "Blood pressure goal below 130/80 mm Hg"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/cholesterol-test",
+      "predicate": "definesTarget",
+      "target": "Cholesterol level"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/stop-smoking",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/create-a-healthy-meal-plan",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/get-physical-activity",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/reach-and-maintain-a-healthy-weight",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/get-enough-sleep",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/take-care-of-your-mental-health",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-ketoacidosis",
+      "predicate": "presentsWith",
+      "target": "Ketones in Urine"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Diabetic ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/continuous-glucose-monitor",
+      "predicate": "deviceMeasuresTest",
+      "target": "Blood Glucose Level"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/artificial-pancreas",
+      "predicate": "deviceMeasuresTest",
+      "target": "Continuous Glucose Monitor"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/artificial-pancreas",
+      "predicate": "deviceMeasuresTest",
+      "target": "Insulin Pump"
+    },
+    {
+      "from": "https://example.org/dmo/id/device/insulin-pump",
+      "predicate": "deviceMeasuresTest",
+      "target": "Continuous Glucose Monitor"
+    }
+  ],
+  "conflictSamples": [
+    "complication/kidney-disease: name: 'Kidney Disease' vs 'Kidney disease'",
+    "complication/kidney-disease: mondoCode: 'MONDO:0005149' vs 'MONDO:0005147'",
+    "complication/kidney-disease: definition: 'Kidney disease is a health problem from diabetes that can be prevented or delayed by managing your ABCs.' vs 'participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease'",
+    "medication/statin: name: 'Statin' vs 'statin'",
+    "diabetesType/type-1-diabetes: definition: 'If you have type 1 diabetes, your health care team may ask you to check your urine at home for substances called ketones.' vs 'Most often, ketoacidosis affects people with type 1 diabetes.'",
+    "diabetesType/type-1-diabetes: prevalenceShare: 0.1 vs 0.05",
+    "diabetesType/type-1-diabetes: definition: 'If you have type 1 diabetes, your health care team may ask you to check your urine at home for substances called ketones.' vs 'participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease'",
+    "labTest/urine-ketones: definition: 'Substances in the urine that indicate the body is breaking down fat for energy, which can happen when there is not enough insulin.' vs 'Checking urine for ketones is recommended if you have symptoms of diabetic ketoacidosis.'",
+    "complication/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs 'Diabetic ketoacidosis'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005075' vs 'MONDO:0005148'",
+    "complication/diabetic-ketoacidosis: definition: 'A dangerous condition that may develop if high levels of ketones are left untreated.' vs 'Diabetic ketoacidosis is a medical emergency that needs to be treated right away.'",
+    "diabetesType/type-2-diabetes: definition: 'However, some people with type 2 diabetes can develop ketoacidosis if they do not produce enough insulin.' vs 'people with type 2 diabetes. The study found that people with less effective diabetes management during the first year after being diagnosed with diabetes had a higher risk of diabetes complications and death.'",
+    "symptom/feeling-shaky-or-jittery: name: 'Feeling Shaky or Jittery' vs 'feeling shaky or jittery'",
+    "symptom/headache: name: 'Headache' vs 'headache'",
+    "symptom/cold-sweat: name: 'Cold Sweat' vs 'cold sweat'",
+    "symptom/feeling-tired: name: 'Feeling Tired' vs 'feeling tired'",
+    "symptom/feeling-thirsty: name: 'Feeling Thirsty' vs 'feeling thirsty'",
+    "symptom/having-blurry-vision: name: 'Having Blurry Vision' vs 'having blurry vision'",
+    "symptom/urinating-too-often: name: 'Urinating Too Often' vs 'urinating too often'",
+    "symptom/feeling-very-tired: name: 'Feeling Very Tired' vs 'feeling very tired'"
+  ]
+}

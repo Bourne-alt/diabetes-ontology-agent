@@ -1,0 +1,2407 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/JBDS-21-Metabolic-bariatric-surgery-March-2026.pdf
+# 目标 named graph：urn:dmo:extract:jbds-21-metabolic-bariatric-surgery-march-2026
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:jbds-21-metabolic-bariatric-surgery-march-2026'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/JBDS-21-Metabolic-bariatric-surgery-March-2026.pdf" ;
+    dmo:sha256 "48a1291adc8423a8ecb1020b65aebb088df6ba72276ee05c6d80dcf8204f29f7" ;
+    dmo:byteSize "1358217"^^xsd:integer .
+
+<urn:dmo:extract:jbds-21-metabolic-bariatric-surgery-march-2026> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T07:35:39+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/diabetic-ketoacidosis> a dmo:AdverseEffect ;
+    rdfs:label "Diabetic ketoacidosis" ;
+    dmo:adverseEffectCode "diabetic-ketoacidosis" ;
+    dmo:frequencyCategory "Uncommon" ;
+    dmo:name "Diabetic ketoacidosis" ;
+    dmo:severity "Severe" ;
+    dmo:evidenceQuote "Individuals with type 1 diabetes must not have their insulin discontinued, as they will develop diabetic ketoacidosis (DKA). This may occur in up to 25% of cases following metabolic-bariatric surgery." ;
+    dmo:evidenceQuote "Do not stop insulin; risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/adverseEffect/hypoglycaemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycaemia" ;
+    dmo:adverseEffectCode "hypoglycaemia" ;
+    dmo:frequencyCategory "Common" ;
+    dmo:name "Hypoglycaemia" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)" ;
+    dmo:evidenceQuote "Prevent hypoglycaemia (blood glucose <4 mmol/L) during all phases of care" ;
+    dmo:evidenceQuote "prevention of hypoglycaemia (blood glucose <4 mmol/L)" ;
+    dmo:evidenceQuote "It is also important to check for the occurrence of and frequency of hypoglycaemia when conducting reviews in the postoperative phase for all individuals with diabetes on sulfonylurea, meglitinides or insulin therapies." ;
+    dmo:evidenceQuote "optimise glycaemic control and prevention of hypoglycaemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "Risk of DKA if insulin is stopped or dose is inadequate, particularly in insulin-treated individuals." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Diabetic ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Do not stop insulin (risk of DKA)." ;
+    dmo:evidenceQuote "Do NOT stop insulin (risk of DKA)" ;
+    dmo:evidenceQuote "This may occur in up to 25% of cases following metabolic-bariatric surgery." ;
+    dmo:evidenceQuote "Do not stop insulin; risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/complication/hypoglycaemia> a dmo:Complication ;
+    rdfs:label "Hypoglycaemia" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "hypoglycaemia" ;
+    dmo:definition "Blood glucose <4 mmol/L." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005041" ;
+    dmo:name "Hypoglycaemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Hypoglycaemia is defined as blood glucose <4 mmol/L." ;
+    dmo:evidenceQuote "Prevent hypoglycaemia (blood glucose <4 mmol/L) during all phases of care" ;
+    dmo:evidenceQuote "It is also important to check for the occurrence of and frequency of hypoglycaemia when conducting reviews in the postoperative phase for all individuals with diabetes on sulfonylurea, meglitinides or insulin therapies." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/basal-bolus-insulin-regime> a dmo:Contraindication ;
+    rdfs:label "Basal-bolus insulin regime" ;
+    dmo:contraCode "basal-bolus-insulin-regime" ;
+    dmo:rationale "Reduce basal insulin by 50% at start LRD. May need optimisation" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "at start of LRD" ;
+    dmo:evidenceQuote "Reduce basal insulin by 50% at start LRD. May need optimisation" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/basal-insulin-regimens> a dmo:Contraindication ;
+    rdfs:label "Basal insulin regimens" ;
+    dmo:contraCode "basal-insulin-regimens" ;
+    dmo:rationale "Reduce the total daily insulin dose by 50% at start LRD. May need optimisation" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "at start of LRD" ;
+    dmo:evidenceQuote "Reduce the total daily insulin dose by 50% at start LRD. May need optimisation" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/dipeptidyl-peptidase-4-inhibitors> a dmo:Contraindication ;
+    rdfs:label "Dipeptidyl Peptidase-4 Inhibitors" ;
+    dmo:contraCode "dipeptidyl-peptidase-4-inhibitors" ;
+    dmo:rationale "Discontinue. Can be restarted if there is a need to optimise glycaemic control or there is intolerance of metformin" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "if there is a need to optimise glycaemic control or there is intolerance of metformin" ;
+    dmo:evidenceQuote "Discontinue. Can be restarted if there is a need to optimise glycaemic control or there is intolerance of metformin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-dpp-4-inhibitors-postoperatively> a dmo:Contraindication ;
+    rdfs:label "Discontinue DPP-4 inhibitors postoperatively" ;
+    dmo:contraCode "discontinue-dpp-4-inhibitors-postoperatively" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "postoperative" ;
+    dmo:evidenceQuote "DPP-4 inhibitors Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-glp-1-based-therapies> a dmo:Contraindication ;
+    rdfs:label "Discontinue GLP-1 based therapies" ;
+    dmo:contraCode "discontinue-glp-1-based-therapies" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "during postoperative phase" ;
+    dmo:evidenceQuote "GLP-1 based therapies Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-glp-1-based-therapies-postoperatively> a dmo:Contraindication ;
+    rdfs:label "Discontinue GLP-1 based therapies postoperatively" ;
+    dmo:contraCode "discontinue-glp-1-based-therapies-postoperatively" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "postoperative" ;
+    dmo:evidenceQuote "GLP-1 based therapies Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-sglt2-inhibitors> a dmo:Contraindication ;
+    rdfs:label "Discontinue SGLT2 inhibitors" ;
+    dmo:contraCode "discontinue-sglt2-inhibitors" ;
+    dmo:rationale "Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "during liver reduction diet (LRD)" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-sglt2-inhibitors-postoperatively> a dmo:Contraindication ;
+    rdfs:label "Discontinue SGLT2 inhibitors postoperatively" ;
+    dmo:contraCode "discontinue-sglt2-inhibitors-postoperatively" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "postoperative" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-and-meglitinides-postoperatively> a dmo:Contraindication ;
+    rdfs:label "Discontinue sulfonylureas and meglitinides postoperatively" ;
+    dmo:contraCode "discontinue-sulfonylureas-and-meglitinides-postoperatively" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "postoperative" ;
+    dmo:evidenceQuote "Sulfonylureas/Meglitinides Discontinue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-meglitinides> a dmo:Contraindication ;
+    rdfs:label "Discontinue sulfonylureas/meglitinides" ;
+    dmo:contraCode "discontinue-sulfonylureas-meglitinides" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "during postoperative phase" ;
+    dmo:evidenceQuote "Sulfonylureas/Meglitinides Discontinue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-thiazolidinediones> a dmo:Contraindication ;
+    rdfs:label "Discontinue thiazolidinediones" ;
+    dmo:contraCode "discontinue-thiazolidinediones" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "during postoperative phase" ;
+    dmo:evidenceQuote "Thiazolidinediones Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/discontinue-thiazolidinediones-postoperatively> a dmo:Contraindication ;
+    rdfs:label "Discontinue thiazolidinediones postoperatively" ;
+    dmo:contraCode "discontinue-thiazolidinediones-postoperatively" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "postoperative" ;
+    dmo:evidenceQuote "Thiazolidinediones Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/do-not-omit-basal-insulin-in-the-perioperative-phase> a dmo:Contraindication ;
+    rdfs:label "Do not omit basal insulin in the perioperative phase" ;
+    dmo:contraCode "do-not-omit-basal-insulin-in-the-perioperative-phase" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "in the perioperative phase" ;
+    dmo:evidenceQuote "Do not omit basal insulin in the perioperative phase." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/do-not-stop-insulin> a dmo:Contraindication ;
+    rdfs:label "Do NOT stop insulin" ;
+    dmo:contraCode "do-not-stop-insulin" ;
+    dmo:rationale "risk of DKA" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "in the perioperative phase" ;
+    dmo:evidenceQuote "Do NOT  stop insulin (risk of DKA)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/do-not-stop-insulin-risk-of-dka> a dmo:Contraindication ;
+    rdfs:label "Do not stop insulin (risk of DKA)" ;
+    dmo:contraCode "do-not-stop-insulin-risk-of-dka" ;
+    dmo:rationale "risk of DKA" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "in the perioperative phase" ;
+    dmo:evidenceQuote "Do not stop insulin (risk of DKA)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/glp-1-based-therapies> a dmo:Contraindication ;
+    rdfs:label "GLP-1 Based Therapies" ;
+    dmo:contraCode "glp-1-based-therapies" ;
+    dmo:rationale "Discontinue. May result in GI related side effects (nausea, vomiting). However, this could be restarted with diabetes team advice" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "May result in GI related side effects (nausea, vomiting)" ;
+    dmo:evidenceQuote "Discontinue. May result in GI related side effects (nausea, vomiting). However, this could be restarted with diabetes team advice" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/insulin-discontinuation-in-type-1-diabetes> a dmo:Contraindication ;
+    rdfs:label "Insulin discontinuation in type 1 diabetes" ;
+    dmo:contraCode "insulin-discontinuation-in-type-1-diabetes" ;
+    dmo:rationale "Individuals with type 1 diabetes must not have their insulin discontinued, as they will develop diabetic ketoacidosis (DKA). This may occur in up to 25% of cases following metabolic-bariatric surgery." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "in those with type 1 diabetes" ;
+    dmo:evidenceQuote "Individuals with type 1 diabetes must not have their insulin discontinued, as they will develop diabetic ketoacidosis (DKA). This may occur in up to 25% of cases following metabolic-bariatric surgery." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/insulin-must-never-be-stopped-in-individuals-with-type-1-diabetes> a dmo:Contraindication ;
+    rdfs:label "Insulin must never be stopped in individuals with type 1 diabetes" ;
+    dmo:contraCode "insulin-must-never-be-stopped-in-individuals-with-type-1-diabetes" ;
+    dmo:rationale "This exposes them to the risk of DKA" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "In individuals with type 1 diabetes" ;
+    dmo:evidenceQuote "For individuals with type 1 diabetes: insulin must never be stopped as this expose them to the risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/insulin-therapy> a dmo:Contraindication ;
+    rdfs:label "Insulin therapy" ;
+    dmo:contraCode "insulin-therapy" ;
+    dmo:rationale "The total daily dose of different insulin regimes can be reduced to 50% of the pre-LRD dosage" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "at start of LRD" ;
+    dmo:evidenceQuote "The total daily dose of different insulin regimes can be reduced to 50% of the pre-LRD dosage" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/meglitinides> a dmo:Contraindication ;
+    rdfs:label "Meglitinides" ;
+    dmo:contraCode "meglitinides" ;
+    dmo:rationale "should be discontinued at start of LRD" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "during the liver reduction diet" ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "Meglitinides Repaglinide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Discontinue. Risk of hypoglycaemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/premixed-insulin-regimens> a dmo:Contraindication ;
+    rdfs:label "Premixed insulin regimens" ;
+    dmo:contraCode "premixed-insulin-regimens" ;
+    dmo:rationale "Reduce the total daily insulin dose by 50% at start LRD. May need optimisation" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "at start of LRD" ;
+    dmo:evidenceQuote "Reduce the total daily insulin dose by 50% at start LRD. May need optimisation" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/sglt2-inhibitors> a dmo:Contraindication ;
+    rdfs:label "SGLT2 inhibitors" ;
+    dmo:contraCode "sglt2-inhibitors" ;
+    dmo:rationale "should be discontinued at start of LRD" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "during the liver reduction diet" ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Discontinue. Risk of euglycaemic ketoacidosis" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/stop-bolus-insulin-in-basal-bolus-regimen> a dmo:Contraindication ;
+    rdfs:label "Stop bolus insulin in basal-bolus regimen" ;
+    dmo:contraCode "stop-bolus-insulin-in-basal-bolus-regimen" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "basal-bolus insulin regimen" ;
+    dmo:evidenceQuote "Bolus: Stop or reduce by 50%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/stop-fast-acting-insulin-in-basal-bolus-regimen> a dmo:Contraindication ;
+    rdfs:label "Stop fast-acting insulin in basal-bolus regimen" ;
+    dmo:contraCode "stop-fast-acting-insulin-in-basal-bolus-regimen" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "basal-bolus insulin regimen" ;
+    dmo:evidenceQuote "Consider reducing/stopping fast acting insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/stop-insulin-in-perioperative-phase> a dmo:Contraindication ;
+    rdfs:label "Stop insulin in perioperative phase" ;
+    dmo:contraCode "stop-insulin-in-perioperative-phase" ;
+    dmo:rationale "risk of DKA" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "perioperative phase" ;
+    dmo:evidenceQuote "Do not stop insulin (risk of DKA)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/stop-midday-dose-of-premixed-insulin-if-on-3-day> a dmo:Contraindication ;
+    rdfs:label "Stop midday dose of premixed insulin if on 3/day" ;
+    dmo:contraCode "stop-midday-dose-of-premixed-insulin-if-on-3-day" ;
+    dmo:rationale "no specific rationale provided in text" ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "premixed insulin regimen with 3 daily doses" ;
+    dmo:evidenceQuote "Stop midday dose if on 3/day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/stopping-insulin-in-type-1-diabetes> a dmo:Contraindication ;
+    rdfs:label "Stopping insulin in type 1 diabetes" ;
+    dmo:contraCode "stopping-insulin-in-type-1-diabetes" ;
+    dmo:rationale "risk of DKA" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "in individuals with type 1 diabetes" ;
+    dmo:evidenceQuote "Do not stop insulin; risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/sulfonylureas> a dmo:Contraindication ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:contraCode "sulfonylureas" ;
+    dmo:rationale "should be discontinued at start of LRD" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "during the liver reduction diet" ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "de, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Discontinue. Risk of hypoglycaemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/contraindication/thiazolidinediones> a dmo:Contraindication ;
+    rdfs:label "Thiazolidinediones" ;
+    dmo:contraCode "thiazolidinediones" ;
+    dmo:rationale "Discontinue. Risk of weight gain, fluid retention" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "Risk of weight gain, fluid retention" ;
+    dmo:evidenceQuote "Discontinue. Risk of weight gain, fluid retention" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/blood-glucose> a dmo:Device ;
+    rdfs:label "Blood Glucose" ;
+    dmo:deviceCode "blood-glucose" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Blood Glucose" ;
+    dmo:evidenceQuote "Monitor blood glucose a minimum of 4 times daily during inpatient stay. Target blood glucose 6-12 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/blood-ketones> a dmo:Device ;
+    rdfs:label "Blood Ketones" ;
+    dmo:deviceCode "blood-ketones" ;
+    dmo:deviceType "KetoneTestKit" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Blood Ketones" ;
+    dmo:evidenceQuote "Check blood ketones if unwell or blood glucose >11 mmol/L (risk of DKA)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/closed-loop-system> a dmo:Device ;
+    rdfs:label "Closed Loop System" ;
+    dmo:deviceCode "closed-loop-system" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Closed Loop System" ;
+    dmo:evidenceQuote "Where an individual with type 1 diabetes is using an insulin pump or closed loop system, dir" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/closed-loop-systems> a dmo:Device ;
+    rdfs:label "Closed loop systems" ;
+    dmo:deviceCode "closed-loop-systems" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Closed loop systems" ;
+    dmo:evidenceQuote "For individuals using insulin pump/closed loop systems, follow the latest JBDS-IP guidelines on using technology to support diabetes care in hospital(12):" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/continuous-glucose-monitoring> a dmo:Device ;
+    rdfs:label "continuous glucose monitoring" ;
+    dmo:deviceCode "continuous-glucose-monitoring" ;
+    dmo:deviceType "CGM" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "continuous glucose monitoring" ;
+    dmo:evidenceQuote "c. The provision of a ketone testing kit and a form of continuous glucose monitoring. Liaise with the diabetes team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/hybrid-closed-loop-system> a dmo:Device ;
+    rdfs:label "Hybrid Closed Loop System" ;
+    dmo:deviceCode "hybrid-closed-loop-system" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Hybrid Closed Loop System" ;
+    dmo:evidenceQuote "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualised care plan." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/insulin-pump> a dmo:Device ;
+    rdfs:label "Insulin Pump" ;
+    dmo:deviceCode "insulin-pump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Insulin Pump" ;
+    dmo:evidenceQuote "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualised care plan." ;
+    dmo:evidenceQuote "For individuals using insulin pump/closed loop systems, follow the latest JBDS-IP guidelines on using technology to support diabetes care in hospital(12):" ;
+    dmo:evidenceQuote "Where an individual with type 1 diabetes is using an insulin pump or closed loop system, dir" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/device/ketone-testing-kit> a dmo:Device ;
+    rdfs:label "ketone testing kit" ;
+    dmo:deviceCode "ketone-testing-kit" ;
+    dmo:deviceType "KetoneTestKit" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "ketone testing kit" ;
+    dmo:evidenceQuote "c. The provision of a ketone testing kit and a form of continuous glucose monitoring. Liaise with the diabetes team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)" ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)" ;
+    dmo:evidenceQuote "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualised care plan." ;
+    dmo:evidenceQuote "Individuals with type 1 diabetes require review by the Diabetes-Bariatric Physician." ;
+    dmo:evidenceQuote "Individuals with type 1 diabetes could liaise with diabetes teams to adjust further to achieve/maintain optimal diabetes control" ;
+    dmo:evidenceQuote "For individuals with type 1 diabetes: insulin must never be stopped as this expose them to the risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "The role of metabolic-bariatric surgery as effective interventions for obesity and type 2 diabetes is well recognised, particularly in achieving type 2 diabetes remission or improvement in glycaemic control, treatment impact and improvements in associated complications" ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "The role of metabolic-bariatric surgery as effective interventions for obesity and type 2 diabetes is well recognised, particularly in achieving type 2 diabetes remission or improvement in glycaemic control, treatment impact and improvements in associated complications" ;
+    dmo:evidenceQuote "Refer to obesity/specialist metabolic bariatric surgery MDT. Document type of diabetes." ;
+    dmo:evidenceQuote "Type 2 diabetes - Insulin-based therapy agents during the liver reduction diet (LRD)" ;
+    dmo:evidenceQuote "Individuals on insulin therapy should be discussed with and/or reviewed by the Diabetes-Bariatric Physician/Nurse. There is no set rule for insulin needs following metabolic-bariatric surgery(4)." ;
+    dmo:evidenceQuote "If type 2 diabetes remission is achieved following surgery, a recommendation should be made for an annual HbA1c and routine microvascular/macrovascular screening as this group is at high-risk of type 2 diabetes relapse and complications." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/basal-insulin-regimens> a dmo:DrugClass ;
+    rdfs:label "Basal insulin regimens" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "basal-insulin-regimens" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Provides a steady background level of insulin to control fasting glucose" ;
+    dmo:name "Basal insulin regimens" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Reduce dose by 35-50% of pre-liver reduction diet (LRD) dose. Consider further reduction or discontinuation in those with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/biguanide> a dmo:DrugClass ;
+    rdfs:label "Biguanide" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "biguanide" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Improves insulin sensitivity and reduces hepatic glucose production" ;
+    dmo:name "Biguanide" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Biguanide Metformin Can be restarted" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/dipeptidyl-peptidase-4-inhibitors> a dmo:DrugClass ;
+    rdfs:label "Dipeptidyl peptidase-4 inhibitors" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "dipeptidyl-peptidase-4-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibits DPP-4 enzyme, increasing active GLP-1 levels" ;
+    dmo:name "Dipeptidyl peptidase-4 inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Discontinue. Can be restarted if there is a need to optimise glycaemic control or there is intolerance of metformin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/dpp-4-inhibitors> a dmo:DrugClass ;
+    rdfs:label "DPP-4 inhibitors" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "dpp-4-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibit dipeptidyl peptidase-4, increasing active GLP-1 levels" ;
+    dmo:name "DPP-4 inhibitors" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "DPP-4 inhibitors Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/glp-1-based-therapies> a dmo:DrugClass ;
+    rdfs:label "GLP-1 based therapies" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "glp-1-based-therapies" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Activate glucagon-like peptide-1 receptors, enhancing glucose-dependent insulin secretion and suppressing glucagon" ;
+    dmo:name "GLP-1 based therapies" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "GLP-1 based therapies Continue Discontinue" ;
+    dmo:evidenceQuote "The recent consensus statement of the Association of Anaesthetists, Association of British Clinical Diabetologists, British Obesity and Metabolic Surgery Society, Centre for Perioperative Care, Joint British Diabetes Societies for Inpatient Care, Royal College of Anaesthetists, Society for Obesity and Bariatric Anaesthesia and UK Clinical Pharmacy Association included specific recommendations for the peri-operative management of patients taking GLP-1 based therapies to avoid pulmonary aspiration (9)." ;
+    dmo:evidenceQuote "Discontinue. May result in GI related side effects (nausea, vomiting). However, this could be restarted with diabetes team advice" ;
+    dmo:evidenceQuote "Reintroduction of GLP-1 based therapies may be appropriate for ongoing management of glycaemic control, excess weight and cardiovascular risk. Seek specialist diabetes advice." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:atcCode "A10A" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Directly lowers blood glucose by promoting glucose uptake in muscle and fat and inhibiting hepatic glucose production" ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Do NOT stop insulin (risk of DKA)." ;
+    dmo:evidenceQuote "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Individuals with type 1 diabetes must not have their insulin discontinued, as they will develop diabetic ketoacidosis (DKA). This may occur in up to 25% of cases following metabolic-bariatric surgery." ;
+    dmo:evidenceQuote "Do not stop insulin; risk of DKA." ;
+    dmo:evidenceQuote "For individuals with type 1 diabetes: insulin must never be stopped as this expose them to the risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/meglitinides> a dmo:DrugClass ;
+    rdfs:label "Meglitinides" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "meglitinides" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Not specified in the document" ;
+    dmo:name "Meglitinides" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Discontinue. Risk of hypoglycaemia" ;
+    dmo:evidenceQuote "It is also important to check for the occurrence of and frequency of hypoglycaemia when conducting reviews in the postoperative phase for all individuals with diabetes on sulfonylurea, meglitinides or insulin therapies." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/metformin> a dmo:DrugClass ;
+    rdfs:label "Metformin" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "metformin" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Decreases hepatic glucose production and improves insulin sensitivity" ;
+    dmo:name "Metformin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Metformin Continue Restart immediate-release if pre-op HbA1c ≥58 mmol/mol" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/premixed-insulin-regimens> a dmo:DrugClass ;
+    rdfs:label "Premixed insulin regimens" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "premixed-insulin-regimens" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Combines short-acting and intermediate-acting insulin to cover both mealtime and background insulin needs" ;
+    dmo:name "Premixed insulin regimens" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Reduce dose by 35-50% of pre-LRD dose. Consider further reduction or discontinuation in those with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> a dmo:DrugClass ;
+    rdfs:label "SGLT2 inhibitors" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "sglt2-inhibitors" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Inhibit sodium-glucose co-transporter 2 in the kidneys, promoting urinary glucose excretion" ;
+    dmo:name "SGLT2 inhibitors" ;
+    dmo:weightEffect "Loss" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Discontinue. Risk of euglycaemic ketoacidosis" ;
+    dmo:evidenceQuote "For those with type 2 diabetes and risk factors for (or existing) diabetes complications, ensure agents with added benefits of cardiovascular and renal protection are used (e.g. SGLT2 inhibitors)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/sulfonylurea> a dmo:DrugClass ;
+    rdfs:label "Sulfonylurea" ;
+    dmo:drugClassCode "sulfonylurea" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Sulfonylureas stimulate insulin secretion from pancreatic beta cells." ;
+    dmo:name "Sulfonylurea" ;
+    dmo:evidenceQuote "It is also important to check for the occurrence of and frequency of hypoglycaemia when conducting reviews in the postoperative phase for all individuals with diabetes on sulfonylurea, meglitinides or insulin therapies." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "sulfonylureas" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Not specified in the document" ;
+    dmo:name "Sulfonylureas" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Discontinue. Risk of hypoglycaemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas-meglitinides> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas/Meglitinides" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "sulfonylureas-meglitinides" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Stimulate insulin secretion from pancreatic beta cells" ;
+    dmo:name "Sulfonylureas/Meglitinides" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Sulfonylureas/Meglitinides Discontinue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/drugClass/thiazolidinediones> a dmo:DrugClass ;
+    rdfs:label "Thiazolidinediones" ;
+    dmo:adminRoute "Oral" ;
+    dmo:drugClassCode "thiazolidinediones" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Activate peroxisome proliferator-activated receptor gamma (PPAR-γ), improving insulin sensitivity" ;
+    dmo:name "Thiazolidinediones" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "Thiazolidinediones Continue Discontinue" ;
+    dmo:evidenceQuote "Discontinue. Risk of weight gain, fluid retention" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/labTest/blood-glucose> a dmo:LabTest ;
+    rdfs:label "Blood glucose" ;
+    dmo:definition "A measure of the concentration of glucose in the blood, used to assess acute glycaemic status." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-glucose" ;
+    dmo:loincCode "15577-6" ;
+    dmo:name "Blood glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Hypoglycaemia is defined as blood glucose <4 mmol/L." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/labTest/blood-ketones> a dmo:LabTest ;
+    rdfs:label "Blood ketones" ;
+    dmo:definition "A measure of ketone bodies in the blood, used to assess risk of diabetic ketoacidosis (DKA)." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-ketones" ;
+    dmo:loincCode "57690-0" ;
+    dmo:name "Blood ketones" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Check blood ketones if unwell or blood glucose >11 mmol/L (risk of DKA)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/labTest/hba1c> a dmo:LabTest ;
+    rdfs:label "HbA1c" ;
+    dmo:definition "A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "hba1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "HbA1c" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/mol" ;
+    dmo:evidenceQuote "Target pre-operative HbA1c <69 mmol/mol (<8.5%) if safe to do so." ;
+    dmo:evidenceQuote "HbA1c to be measured and communicated to the specialist metabolic-bariatric surgery MDT coordinator prior to the individual being listed for surgery (within 3 month(s). HbA1c should ideally be 69 mmol/mol (<8.5%) (5)" ;
+    dmo:evidenceQuote "The specialist metabolic-bariatric surgical MDT/GP/Diabetes car e provider should check HbA1c at 3, 6 and 12 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/labTest/urine-ketones> a dmo:LabTest ;
+    rdfs:label "Urine Ketones" ;
+    dmo:definition "A test to detect ketones in urine, used to monitor for diabetic ketoacidosis (DKA), especially in individuals with type 1 diabetes." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-ketones" ;
+    dmo:loincCode "15514-0" ;
+    dmo:name "Urine Ketones" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "trace / 1+ / 2+ / 3+ / 4+" ;
+    dmo:evidenceQuote "The provision of a ketone testing kit and a form of continuous glucose monitoring. Liaise with the diabetes team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/abasaglar> a dmo:Medication ;
+    rdfs:label "Abasaglar®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "abasaglar" ;
+    dmo:name "Abasaglar®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625555" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/actrapid> a dmo:Medication ;
+    rdfs:label "Actrapid®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "ShortActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "actrapid" ;
+    dmo:name "Actrapid®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625560" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/admelog> a dmo:Medication ;
+    rdfs:label "Admelog®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "admelog" ;
+    dmo:name "Admelog®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625559" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/alogliptin> a dmo:Medication ;
+    rdfs:label "Alogliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "alogliptin" ;
+    dmo:name "Alogliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dipeptidyl peptidase-4 inhibitors Alogliptin, Linagliptin, Saxagliptin, Sitagliptin, Vildagliptin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/apidra> a dmo:Medication ;
+    rdfs:label "Apidra®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "apidra" ;
+    dmo:name "Apidra®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625561" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/basal-only> a dmo:Medication ;
+    rdfs:label "Basal only" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "basal-only" ;
+    dmo:name "Basal only" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Basal only Reduce dose by 50% Reduce dose by 35-50% of pre-LRD dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/canagliflozin> a dmo:Medication ;
+    rdfs:label "Canagliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "canagliflozin" ;
+    dmo:name "Canagliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin Discontinue at start of LRD" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/dapagliflozin> a dmo:Medication ;
+    rdfs:label "Dapagliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "dapagliflozin" ;
+    dmo:name "Dapagliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin Discontinue at start of LRD" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/dpp-4-inhibitors> a dmo:Medication ;
+    rdfs:label "DPP-4 inhibitors" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "dpp-4-inhibitors" ;
+    dmo:name "DPP-4 inhibitors" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "DPP-4 inhibitors Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/dulaglutide> a dmo:Medication ;
+    rdfs:label "Dulaglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "dulaglutide" ;
+    dmo:name "Dulaglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Exenatide, Dulaglutide, Liraglutide, Semaglutide, (including Rybelsus®), Tirzepatide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/empagliflozin> a dmo:Medication ;
+    rdfs:label "Empagliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "empagliflozin" ;
+    dmo:name "Empagliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin Discontinue at start of LRD" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/ertugliflozin> a dmo:Medication ;
+    rdfs:label "Ertugliflozin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "ertugliflozin" ;
+    dmo:name "Ertugliflozin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin Discontinue at start of LRD" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/exenatide> a dmo:Medication ;
+    rdfs:label "Exenatide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "exenatide" ;
+    dmo:name "Exenatide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Exenatide, Dulaglutide, Liraglutide, Semaglutide, (including Rybelsus®), Tirzepatide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/fiasp> a dmo:Medication ;
+    rdfs:label "Fiasp®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "fiasp" ;
+    dmo:name "Fiasp®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625560" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/glibenclamide> a dmo:Medication ;
+    rdfs:label "Glibenclamide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glibenclamide" ;
+    dmo:name "Glibenclamide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/gliclazide> a dmo:Medication ;
+    rdfs:label "Gliclazide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "gliclazide" ;
+    dmo:name "Gliclazide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "de, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/glimepiride> a dmo:Medication ;
+    rdfs:label "Glimepiride" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glimepiride" ;
+    dmo:name "Glimepiride" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "de, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/glipizide> a dmo:Medication ;
+    rdfs:label "Glipizide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glipizide" ;
+    dmo:name "Glipizide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "de, Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Sulfonylureas Glibenclamide, Gliclazide, Glimepiride, Glipizide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/glp-1-based-therapies> a dmo:Medication ;
+    rdfs:label "GLP-1 based therapies" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glp-1-based-therapies" ;
+    dmo:name "GLP-1 based therapies" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/humalog> a dmo:Medication ;
+    rdfs:label "Humalog®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog" ;
+    dmo:name "Humalog®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625559" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/humalog-mix25> a dmo:Medication ;
+    rdfs:label "Humalog Mix25®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog-mix25" ;
+    dmo:name "Humalog Mix25®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Humalog Mix25®, Humalog Mix50®, Humulin M3®, Novomix 30®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/humalog-mix50> a dmo:Medication ;
+    rdfs:label "Humalog Mix50®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog-mix50" ;
+    dmo:name "Humalog Mix50®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Humalog Mix25®, Humalog Mix50®, Humulin M3®, Novomix 30®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/humulin-i> a dmo:Medication ;
+    rdfs:label "Humulin-I®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humulin-i" ;
+    dmo:name "Humulin-I®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625556" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/humulin-m3> a dmo:Medication ;
+    rdfs:label "Humulin M3®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humulin-m3" ;
+    dmo:name "Humulin M3®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Humalog Mix25®, Humalog Mix50®, Humulin M3®, Novomix 30®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/humulin-s> a dmo:Medication ;
+    rdfs:label "Humulin-S®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "ShortActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humulin-s" ;
+    dmo:name "Humulin-S®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625556" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/insulatard> a dmo:Medication ;
+    rdfs:label "Insulatard®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard" ;
+    dmo:name "Insulatard®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625556" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "Insulin" ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "Insulin" ;
+    dmo:evidenceQuote "Ensure regular follow-up with the usual diabetes care provider" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/lantus> a dmo:Medication ;
+    rdfs:label "Lantus®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "lantus" ;
+    dmo:name "Lantus®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625555" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/lee> a dmo:Medication ;
+    rdfs:label "lee®" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "lee" ;
+    dmo:name "lee®" ;
+    dmo:onsetMinutes "15"^^xsd:integer ;
+    dmo:rxNormCode "1622549" ;
+    dmo:evidenceQuote "lee® (once or twice daily)," ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/levemir> a dmo:Medication ;
+    rdfs:label "Levemir®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "levemir" ;
+    dmo:name "Levemir®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625557" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/linagliptin> a dmo:Medication ;
+    rdfs:label "Linagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "linagliptin" ;
+    dmo:name "Linagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dipeptidyl peptidase-4 inhibitors Alogliptin, Linagliptin, Saxagliptin, Sitagliptin, Vildagliptin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/liraglutide> a dmo:Medication ;
+    rdfs:label "Liraglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "liraglutide" ;
+    dmo:name "Liraglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Exenatide, Dulaglutide, Liraglutide, Semaglutide, (including Rybelsus®), Tirzepatide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/lyumjev> a dmo:Medication ;
+    rdfs:label "Lyumjev®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "lyumjev" ;
+    dmo:name "Lyumjev®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625559" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/metformin> a dmo:Medication ;
+    rdfs:label "Metformin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "metformin" ;
+    dmo:name "Metformin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Metformin Continue Restart immediate-release if pre-op HbA1c ≥58 mmol/mol" ;
+    dmo:evidenceQuote "Biguanide Metformin Continue during LRD" ;
+    dmo:evidenceQuote "Biguanide Metformin Can be restarted" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/novomix-30> a dmo:Medication ;
+    rdfs:label "Novomix 30®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "novomix-30" ;
+    dmo:name "Novomix 30®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Humalog Mix25®, Humalog Mix50®, Humulin M3®, Novomix 30®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/novorapid> a dmo:Medication ;
+    rdfs:label "Novorapid®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "novorapid" ;
+    dmo:name "Novorapid®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625560" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/pioglitazone> a dmo:Medication ;
+    rdfs:label "Pioglitazone" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "pioglitazone" ;
+    dmo:name "Pioglitazone" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Thiazolidinediones Pioglitazone Continue during LRD" ;
+    dmo:evidenceQuote "Thiazolidinediones Pioglitazone Discontinue. Risk of weight gain, fluid retention" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/premixed-insulin> a dmo:Medication ;
+    rdfs:label "Premixed insulin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "premixed-insulin" ;
+    dmo:name "Premixed insulin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Premixed insulin Reduce total dose by 50%. Stop midday dose if on 3/day Reduce dose by 35-50% of pre-LRD dose. Stop midday dose if on 3/day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/repaglinide> a dmo:Medication ;
+    rdfs:label "Repaglinide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "repaglinide" ;
+    dmo:name "Repaglinide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Meglitinides Repaglinide Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Meglitinides Repaglinide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/rybelsus> a dmo:Medication ;
+    rdfs:label "Rybelsus" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "rybelsus" ;
+    dmo:name "Rybelsus" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Exenatide, Dulaglutide, Liraglutide, Semaglutide, (including Rybelsus®), Tirzepatide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/saxagliptin> a dmo:Medication ;
+    rdfs:label "Saxagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "saxagliptin" ;
+    dmo:name "Saxagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dipeptidyl peptidase-4 inhibitors Alogliptin, Linagliptin, Saxagliptin, Sitagliptin, Vildagliptin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/semaglutide> a dmo:Medication ;
+    rdfs:label "Semaglutide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "semaglutide" ;
+    dmo:name "Semaglutide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Exenatide, Dulaglutide, Liraglutide, Semaglutide, (including Rybelsus®), Tirzepatide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/semglee> a dmo:Medication ;
+    rdfs:label "Semglee®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "semglee" ;
+    dmo:name "Semglee®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625555" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/sglt2-inhibitors> a dmo:Medication ;
+    rdfs:label "SGLT2 inhibitors" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sglt2-inhibitors" ;
+    dmo:name "SGLT2 inhibitors" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "SGLT2 inhibitors Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/sitagliptin> a dmo:Medication ;
+    rdfs:label "Sitagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sitagliptin" ;
+    dmo:name "Sitagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dipeptidyl peptidase-4 inhibitors Alogliptin, Linagliptin, Saxagliptin, Sitagliptin, Vildagliptin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/sulfonylureas-meglitinides> a dmo:Medication ;
+    rdfs:label "Sulfonylureas/Meglitinides" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "sulfonylureas-meglitinides" ;
+    dmo:name "Sulfonylureas/Meglitinides" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Sulfonylureas/Meglitinides Discontinue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/thiazolidinediones> a dmo:Medication ;
+    rdfs:label "Thiazolidinediones" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "thiazolidinediones" ;
+    dmo:name "Thiazolidinediones" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Thiazolidinediones Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/tirzepatide> a dmo:Medication ;
+    rdfs:label "Tirzepatide" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "tirzepatide" ;
+    dmo:name "Tirzepatide" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "GLP-1 based therapies Exenatide, Dulaglutide, Liraglutide, Semaglutide, (including Rybelsus®), Tirzepatide" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/toujeo> a dmo:Medication ;
+    rdfs:label "Toujeo®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "toujeo" ;
+    dmo:name "Toujeo®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625555" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/tresiba> a dmo:Medication ;
+    rdfs:label "Tresiba®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "tresiba" ;
+    dmo:name "Tresiba®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625558" ;
+    dmo:evidenceQuote "Abasaglar® (once or twice daily), Humulin-I® (once or twice daily), Insulatard® (once or twice daily), Lantus® (once or twice daily), Levemir® (once or twice daily), Semglee® (once or twice daily), Toujeo® (once daily), Tresiba® (once daily)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/trurapi> a dmo:Medication ;
+    rdfs:label "Trurapi®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "trurapi" ;
+    dmo:name "Trurapi®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:rxNormCode "1625560" ;
+    dmo:evidenceQuote "Mealtime Actrapid®, Admelog®, Apidra®, Fiasp®, Humalog®, Humulin-S®, Lyumjev®, Novorapid®, Trurapi®" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/medication/vildagliptin> a dmo:Medication ;
+    rdfs:label "Vildagliptin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "vildagliptin" ;
+    dmo:name "Vildagliptin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Dipeptidyl peptidase-4 inhibitors Alogliptin, Linagliptin, Saxagliptin, Sitagliptin, Vildagliptin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/monitoringSchedule/annual-hba1c-and-routine-microvascular-macrovascular-screening> a dmo:MonitoringSchedule ;
+    rdfs:label "Annual HbA1c and routine microvascular/macrovascular screening" ;
+    dmo:appliesTo "individuals with type 2 diabetes who have achieved remission following surgery" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Annual HbA1c and routine microvascular/macrovascular screening" ;
+    dmo:scheduleId "annual-hba1c-and-routine-microvascular-macrovascular-screening" ;
+    dmo:evidenceQuote "If type 2 diabetes remission is achieved following surgery, a recommendation should be made for an annual HbA1c and routine microvascular/macrovascular screening as this group is at high-risk of type 2 diabetes relapse and complications." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/monitoringSchedule/hba1c> a dmo:MonitoringSchedule ;
+    rdfs:label "HbA1c" ;
+    dmo:appliesTo "individuals with diabetes on sulfonylurea, meglitinides or insulin therapies" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "HbA1c" ;
+    dmo:scheduleId "hba1c" ;
+    dmo:evidenceQuote "The specialist metabolic-bariatric surgical MDT/GP/Diabetes car e provider should check HbA1c at 3, 6 and 12 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/monitoringSchedule/hba1c-at-3-6-12-months-postoperatively-and-then-annual-checks> a dmo:MonitoringSchedule ;
+    rdfs:label "HbA1c at 3, 6, & 12 months postoperatively and then annual checks" ;
+    dmo:appliesTo "people undergoing metabolic-bariatric surgery" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "HbA1c at 3, 6, & 12 months postoperatively and then annual checks" ;
+    dmo:scheduleId "hba1c-at-3-6-12-months-postoperatively-and-then-annual-checks" ;
+    dmo:evidenceQuote "HbA1c at 3, 6, & 12 months postoperatively and then annual checks." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/adjust-medication-during-liver-reduction-diet> a dmo:Recommendation ;
+    rdfs:label "Adjust medication during liver reduction diet" ;
+    dmo:recommendationId "adjust-medication-during-liver-reduction-diet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Adjust medication during liver reduction diet" ;
+    dmo:evidenceQuote "Adjust medication during liver reduction diet" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/adjust-medication-guided-by-blood-glucose-readings-and-table-below> a dmo:Recommendation ;
+    rdfs:label "Adjust medication guided by blood glucose readings and table below" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "adjust-medication-guided-by-blood-glucose-readings-and-table-below" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Adjust medication guided by blood glucose readings and table below." ;
+    dmo:evidenceQuote "Adjust medication guided by blood glucose readings and table below." ;
+    dmo:evidenceQuote "Adjust medication guided by blood glucose readings and table below" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/adjustment-of-diabetes-medication-doses-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Adjustment of diabetes medication doses postoperatively" ;
+    dmo:gradingSystem "CPOC" ;
+    dmo:nativeEvidenceGrade "5" ;
+    dmo:populationScope "People with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "adjustment-of-diabetes-medication-doses-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Depending on their preoperative HbA1c, rapid modifications of the doses of their usual diabetes medication may be necessary (remembering that those with type 1 diabetes must never have their insulin stopped)." ;
+    dmo:evidenceQuote "Depending on their preoperative HbA1c, rapid modifications of the doses of their usual diabetes medication may be necessary (remembering that those with type 1 diabetes must never have their insulin stopped)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/aim-to-achieve-an-hba1c-69-mmol-mol-8-5-where-it-is-safe-to-do-so-including-prevention-of-hypoglycaemia> a dmo:Recommendation ;
+    rdfs:label "Aim to achieve an HbA1c <69 mmol/mol (<8.5%), where it is safe to do so including prevention of hypoglycaemia" ;
+    dmo:recommendationId "aim-to-achieve-an-hba1c-69-mmol-mol-8-5-where-it-is-safe-to-do-so-including-prevention-of-hypoglycaemia" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Aim to achieve an HbA1c <69 mmol/mol (<8.5%), where it is safe to do so including prevention of hypoglycaemia" ;
+    dmo:evidenceQuote "Aim to achieve an HbA1c <69 mmol/mol (<8.5%), where it is safe to do so including prevention of hypoglycaemia" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/avoid-pulmonary-aspiration-by-following-specific-recommendations-for-patients-taking-glp-1-based-therapies> a dmo:Recommendation ;
+    rdfs:label "Avoid pulmonary aspiration by following specific recommendations for patients taking GLP-1 based therapies" ;
+    dmo:recommendationId "avoid-pulmonary-aspiration-by-following-specific-recommendations-for-patients-taking-glp-1-based-therapies" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "The recent consensus statement of the Association of Anaesthetists, Association of British Clinical Diabetologists, British Obesity and Metabolic Surgery Society, Centre for Perioperative Care, Joint British Diabetes Societies for Inpatient Care, Royal College of Anaesthetists, Society for Obesity and Bariatric Anaesthesia and UK Clinical Pharmacy Association included specific recommendations for the peri-operative management of patients taking GLP-1 based therapies to avoid pulmonary aspiration (9)." ;
+    dmo:evidenceQuote "The recent consensus statement of the Association of Anaesthetists, Association of British Clinical Diabetologists, British Obesity and Metabolic Surgery Society, Centre for Perioperative Care, Joint British Diabetes Societies for Inpatient Care, Royal College of Anaesthetists, Society for Obesity and Bariatric Anaesthesia and UK Clinical Pharmacy Association included specific recommendations for the peri-operative management of patients taking GLP-1 based therapies to avoid pulmonary aspiration (9)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/basal-reduce-by-50-bolus-stop-or-reduce-by-50> a dmo:Recommendation ;
+    rdfs:label "Basal: Reduce by 50% Bolus: Stop or reduce by 50%" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "basal-reduce-by-50-bolus-stop-or-reduce-by-50" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Basal: Reduce by 50% Bolus: Stop or reduce by 50%" ;
+    dmo:evidenceQuote "Basal: Reduce by 50% Bolus: Stop or reduce by 50%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/check-availability-of-blood-glucose-monitoring-and-hypoglycaemia-management-knowledge-prior-to-commencing-lrd> a dmo:Recommendation ;
+    rdfs:label "Check availability of blood glucose monitoring and hypoglycaemia management knowledge prior to commencing LRD" ;
+    dmo:recommendationId "check-availability-of-blood-glucose-monitoring-and-hypoglycaemia-management-knowledge-prior-to-commencing-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Perioperative metabolic bariatric team should check availability with the individual with diabetes. Ensure the individual has access to this PRIOR to commencing the LRD." ;
+    dmo:evidenceQuote "Perioperative metabolic bariatric team should check availability with the individual with diabetes. Ensure the individual has access to this PRIOR to commencing the LRD." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/check-blood-ketones-if-unwell-or-blood-glucose-11-mmol-l-risk-of-dka> a dmo:Recommendation ;
+    rdfs:label "Check blood ketones if unwell or blood glucose >11 mmol/L (risk of DKA)" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "check-blood-ketones-if-unwell-or-blood-glucose-11-mmol-l-risk-of-dka" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check blood ketones if unwell or blood glucose >11 mmol/L (risk of DKA)." ;
+    dmo:evidenceQuote "Check blood ketones if unwell or blood glucose >11 mmol/L (risk of DKA)." ;
+    dmo:evidenceQuote "Check blood ketones if unwell or blood glucose >11 mmol/L (risk of DKA)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/consider-dose-reductions-of-30-50-as-guided-by-diabetes-specialist-teams> a dmo:Recommendation ;
+    rdfs:label "Consider dose reductions of 30-50% as guided by diabetes specialist teams" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "consider-dose-reductions-of-30-50-as-guided-by-diabetes-specialist-teams" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Consider dose reductions of 30-50% as guided by diabetes specialist teams." ;
+    dmo:evidenceQuote "Consider dose reductions of 30-50% as guided by diabetes specialist teams." ;
+    dmo:evidenceQuote "Consider dose reductions of 30-50% as guided by diabetes specialist teams" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/consider-insulin-discontinuation-if-hba1c-48-mmol-mol-6-5-and-total-daily-insulin-dose-10-units-day-in-individuals-with-type-2-diabetes-discharged-with-insulin-therapy> a dmo:Recommendation ;
+    rdfs:label "Consider insulin discontinuation if HbA1c <48 mmol/mol (<6.5%) and total daily insulin dose <10 units/day in individuals with type 2 diabetes discharged with insulin therapy" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "10" ;
+    dmo:populationScope "Individuals with type 2 diabetes discharged with insulin therapy" ;
+    dmo:recommendationId "consider-insulin-discontinuation-if-hba1c-48-mmol-mol-6-5-and-total-daily-insulin-dose-10-units-day-in-individuals-with-type-2-diabetes-discharged-with-insulin-therapy" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If HbA1c <48 mmol/mol (<6.5%) (10) and total daily insulin dose <10 units/day, in those with type 2 diabetes consider insulin discontinuation with specialist diabetes input" ;
+    dmo:evidenceQuote "• If HbA1c <48 mmol/mol (<6.5%) (10) and total daily insulin dose <10 units/day, in those with type 2 diabetes consider insulin discontinuation with specialist diabetes input." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/consider-reducing-stopping-fast-acting-insulin> a dmo:Recommendation ;
+    rdfs:label "Consider reducing/stopping fast acting insulin" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "consider-reducing-stopping-fast-acting-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Consider reducing/stopping fast acting insulin" ;
+    dmo:evidenceQuote "Consider reducing/stopping fast acting insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/consider-reducing-stopping-fast-acting-insulin-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Consider reducing/stopping fast acting insulin postoperatively" ;
+    dmo:recommendationId "consider-reducing-stopping-fast-acting-insulin-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Consider reducing/stopping fast acting insulin postoperatively" ;
+    dmo:evidenceQuote "Consider reducing/stopping fast acting insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/consider-switching-modified-release-metformin-to-immediate-release-metformin> a dmo:Recommendation ;
+    rdfs:label "Consider switching modified release metformin to immediate release metformin" ;
+    dmo:recommendationId "consider-switching-modified-release-metformin-to-immediate-release-metformin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Alternatively, consider switching modified release metformin to immediate release (standard) metformin (it is not possible to crush modified release metformin)." ;
+    dmo:evidenceQuote "Alternatively, consider switching modified release metformin to immediate release (standard) metformin (it is not possible to crush modified release metformin)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/consideration-should-be-given-to-the-individual-s-glycaemic-control-and-insulin-requirements-which-govern-dose-adjustment-to-optimise-glycaemic-control> a dmo:Recommendation ;
+    rdfs:label "Consideration should be given to the individual’s glycaemic control and insulin requirements which govern dose adjustment to optimise glycaemic control" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "consideration-should-be-given-to-the-individual-s-glycaemic-control-and-insulin-requirements-which-govern-dose-adjustment-to-optimise-glycaemic-control" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Consideration should be given to the individual’s glycaemic control and insulin requirements which govern dose adjustment to optimise glycaemic control" ;
+    dmo:evidenceQuote "Consideration should be given to the individual’s glycaemic control and insulin requirements which govern dose adjustment to optimise glycaemic control" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/contact-diabetes-specialist-team-for-individualised-care-plan> a dmo:Recommendation ;
+    rdfs:label "Contact diabetes specialist team for individualised care plan" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "contact-diabetes-specialist-team-for-individualised-care-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Contact diabetes specialist team for individualised care plan." ;
+    dmo:evidenceQuote "Contact diabetes specialist team for individualised care plan." ;
+    dmo:evidenceQuote "Contact diabetes specialist team for individualised care plan" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/continue-discontinue> a dmo:Recommendation ;
+    rdfs:label "Continue Discontinue" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "continue-discontinue" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue Discontinue" ;
+    dmo:evidenceQuote "DPP-4 inhibitors Continue Discontinue" ;
+    dmo:evidenceQuote "Thiazolidinediones Continue Discontinue" ;
+    dmo:evidenceQuote "GLP-1 based therapies Continue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/continue-dpp-4-inhibitors-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Continue DPP-4 inhibitors during LRD" ;
+    dmo:recommendationId "continue-dpp-4-inhibitors-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue DPP-4 inhibitors during LRD" ;
+    dmo:evidenceQuote "DPP-4 inhibitors Continue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/continue-glp-1-based-therapies-before-metabolic-bariatric-surgery-to-maintain-peri-operative-glycaemic-control> a dmo:Recommendation ;
+    rdfs:label "Continue GLP-1 based therapies before metabolic-bariatric surgery to maintain peri-operative glycaemic control" ;
+    dmo:recommendationId "continue-glp-1-based-therapies-before-metabolic-bariatric-surgery-to-maintain-peri-operative-glycaemic-control" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "We advise continuing GLP-1 based therapies before metabolic-bariatric surgery to maintain peri-operative glycaemic control." ;
+    dmo:evidenceQuote "We advise continuing GLP-1 based therapies before metabolic-bariatric surgery to maintain peri-operative glycaemic control." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/continue-glp-1-based-therapies-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Continue GLP-1 based therapies during LRD" ;
+    dmo:recommendationId "continue-glp-1-based-therapies-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue GLP-1 based therapies during LRD" ;
+    dmo:evidenceQuote "GLP-1 based therapies Continue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/continue-restart-immediate-release-if-pre-op-hba1c-58-mmol-mol> a dmo:Recommendation ;
+    rdfs:label "Continue Restart immediate-release if pre-op HbA1c ≥58 mmol/mol" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "continue-restart-immediate-release-if-pre-op-hba1c-58-mmol-mol" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue Restart immediate-release if pre-op HbA1c ≥58 mmol/mol" ;
+    dmo:evidenceQuote "Metformin Continue Restart immediate-release if pre-op HbA1c ≥58 mmol/mol" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/continue-thiazolidinediones-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Continue Thiazolidinediones during LRD" ;
+    dmo:recommendationId "continue-thiazolidinediones-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Continue Thiazolidinediones during LRD" ;
+    dmo:evidenceQuote "Thiazolidinediones Continue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinuation-of-sulfonylureas-during-liver-reduction-diet> a dmo:Recommendation ;
+    rdfs:label "Discontinuation of sulfonylureas during liver reduction diet" ;
+    dmo:gradingSystem "CPOC" ;
+    dmo:nativeEvidenceGrade "4" ;
+    dmo:populationScope "Individuals with type 2 diabetes undergoing liver reduction diet prior to metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinuation-of-sulfonylureas-during-liver-reduction-diet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    dmo:evidenceQuote "Sulfonylureas, meglitinides and sodium glucose transporter-2 (SGLT2) inhibitors should be discontinued." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-dipeptidyl-peptidase-4-inhibitors-after-metabolic-bariatric-surgery> a dmo:Recommendation ;
+    rdfs:label "Discontinue Dipeptidyl Peptidase-4 Inhibitors After Metabolic-Bariatric Surgery" ;
+    dmo:populationScope "Individuals following metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-dipeptidyl-peptidase-4-inhibitors-after-metabolic-bariatric-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Dipeptidyl peptidase-4 inhibitors should be discontinued after metabolic-bariatric surgery. Can be restarted if there is a need to optimise glycaemic control or there is intolerance of metformin." ;
+    dmo:evidenceQuote "Discontinue. Can be restarted if there is a need to optimise glycaemic control or there is intolerance of metformin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-discontinue> a dmo:Recommendation ;
+    rdfs:label "Discontinue Discontinue" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-discontinue" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue Discontinue" ;
+    dmo:evidenceQuote "Sulfonylureas/Meglitinides Discontinue Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-glp-1-based-therapies-after-metabolic-bariatric-surgery> a dmo:Recommendation ;
+    rdfs:label "Discontinue GLP-1 Based Therapies After Metabolic-Bariatric Surgery" ;
+    dmo:populationScope "Individuals following metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-glp-1-based-therapies-after-metabolic-bariatric-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "GLP-1 based therapies should be discontinued after metabolic-bariatric surgery as they may result in gastrointestinal related side effects (nausea, vomiting). However, this could be restarted with diabetes team advice." ;
+    dmo:evidenceQuote "Discontinue. May result in GI related side effects (nausea, vomiting). However, this could be restarted with diabetes team advice" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-insulin-if-total-daily-dose-10-units-day-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Discontinue Insulin if Total Daily Dose <10 Units/Day Postoperatively" ;
+    dmo:populationScope "Individuals with type 2 diabetes on insulin therapy following metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-insulin-if-total-daily-dose-10-units-day-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If the total daily dose of insulin required during the LRD/postoperatively is <10 units/day, then the insulin could be discontinued with guidance from the Diabetes-Bariatric Physician/Nurse." ;
+    dmo:evidenceQuote "If the total daily dose of insulin required during the LRD/postoperatively is <10 units/day, then the insulin could be discontinued with guidance from the Diabetes-Bariatric Physician/Nurse" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-meglitinides-at-start-of-lrd> a dmo:Recommendation ;
+    rdfs:label "Discontinue meglitinides at start of LRD" ;
+    dmo:recommendationId "discontinue-meglitinides-at-start-of-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Meglitinides Repaglinide Discontinue at start of LRD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-metformin-if-hba1c-48-mmol-mol-6-5-in-individuals-previously-on-diet-alone-or-non-insulin-based-therapies> a dmo:Recommendation ;
+    rdfs:label "Discontinue metformin if HbA1c <48 mmol/mol (<6.5%) in individuals previously on diet alone or non-insulin based therapies" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "10" ;
+    dmo:populationScope "Individuals previously on diet alone, or non-insulin based therapies" ;
+    dmo:recommendationId "discontinue-metformin-if-hba1c-48-mmol-mol-6-5-in-individuals-previously-on-diet-alone-or-non-insulin-based-therapies" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If HbA1c <48 mmol/mol (<6.5%), discontinue metformin (or other therapy)" ;
+    dmo:evidenceQuote "• If HbA1c <48 mmol/mol (<6.5%), discontinue metformin (or other therapy) (10)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-seek-advice-if-additional-indication-e-g-ckd-heart-failure> a dmo:Recommendation ;
+    rdfs:label "Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-seek-advice-if-additional-indication-e-g-ckd-heart-failure" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-sglt2-inhibitors-at-start-of-lrd> a dmo:Recommendation ;
+    rdfs:label "Discontinue SGLT2 inhibitors at start of LRD" ;
+    dmo:recommendationId "discontinue-sglt2-inhibitors-at-start-of-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Canagliflozin, Dapagliflozin, Empagliflozin, Ertugliflozin Discontinue at start of LRD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-sglt2-inhibitors-during-lrd-seek-advice-if-additional-indication-e-g-ckd-heart-failure> a dmo:Recommendation ;
+    rdfs:label "Discontinue SGLT2 inhibitors during LRD. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    dmo:recommendationId "discontinue-sglt2-inhibitors-during-lrd-seek-advice-if-additional-indication-e-g-ckd-heart-failure" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue SGLT2 inhibitors during LRD. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    dmo:evidenceQuote "SGLT2 inhibitors Discontinue. Seek advice if additional indication (e.g. CKD, heart failure)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-sulfonylureas-after-metabolic-bariatric-surgery> a dmo:Recommendation ;
+    rdfs:label "Discontinue Sulfonylureas After Metabolic-Bariatric Surgery" ;
+    dmo:populationScope "Individuals following metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-sulfonylureas-after-metabolic-bariatric-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Sulfonylureas should be discontinued after metabolic-bariatric surgery due to risk of hypoglycaemia. May be continued at a lower dose if postoperative glucose levels are elevated. Discuss with diabetes team." ;
+    dmo:evidenceQuote "Discontinue. Risk of hypoglycaemia May be continued at a lower dose if postoperative glucose levels elevated. Discuss with diabetes team" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-sulfonylureas-at-start-of-lrd> a dmo:Recommendation ;
+    rdfs:label "Discontinue sulfonylureas at start of LRD" ;
+    dmo:recommendationId "discontinue-sulfonylureas-at-start-of-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue at start of LRD" ;
+    dmo:evidenceQuote "Gliclazide, Glimepiride, Glipizide Discontinue at start of LRD" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-sulfonylureas-meglitinides-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Discontinue Sulfonylureas/Meglitinides during LRD" ;
+    dmo:recommendationId "discontinue-sulfonylureas-meglitinides-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Discontinue Sulfonylureas/Meglitinides during LRD" ;
+    dmo:evidenceQuote "Sulfonylureas/Meglitinides Discontinue" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/discontinue-thiazolidinediones-after-metabolic-bariatric-surgery> a dmo:Recommendation ;
+    rdfs:label "Discontinue Thiazolidinediones After Metabolic-Bariatric Surgery" ;
+    dmo:populationScope "Individuals following metabolic-bariatric surgery" ;
+    dmo:recommendationId "discontinue-thiazolidinediones-after-metabolic-bariatric-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Thiazolidinediones should be discontinued after metabolic-bariatric surgery due to risk of weight gain and fluid retention." ;
+    dmo:evidenceQuote "Discontinue. Risk of weight gain, fluid retention" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/do-not-omit-basal-insulin-in-the-perioperative-phase> a dmo:Recommendation ;
+    rdfs:label "Do not omit basal insulin in the perioperative phase" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "do-not-omit-basal-insulin-in-the-perioperative-phase" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Do not omit basal insulin in the perioperative phase." ;
+    dmo:evidenceQuote "Do not omit basal insulin in the perioperative phase." ;
+    dmo:evidenceQuote "Do not omit basal insulin in the perioperative phase" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/do-not-stop-insulin-risk-of-dka> a dmo:Recommendation ;
+    rdfs:label "Do NOT stop insulin (risk of DKA)" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals on insulin" ;
+    dmo:recommendationId "do-not-stop-insulin-risk-of-dka" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Do NOT stop insulin (risk of DKA)" ;
+    dmo:evidenceQuote "Do NOT stop insulin (risk of DKA)." ;
+    dmo:evidenceQuote "Do NOT stop insulin (risk of DKA)" ;
+    dmo:evidenceQuote "Do not stop insulin (risk of DKA)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/document-type-of-diabetes> a dmo:Recommendation ;
+    rdfs:label "Document type of diabetes" ;
+    dmo:recommendationId "document-type-of-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Document type of diabetes" ;
+    dmo:evidenceQuote "Document type of diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/ensure-access-to-and-knowledge-of-blood-glucose-monitoring-and-hypoglycaemia-management-for-individuals-on-sulfonylureas-meglitinides-or-insulin> a dmo:Recommendation ;
+    rdfs:label "Ensure access to and knowledge of blood glucose monitoring and hypoglycaemia management for individuals on sulfonylureas, meglitinides, or insulin" ;
+    dmo:recommendationId "ensure-access-to-and-knowledge-of-blood-glucose-monitoring-and-hypoglycaemia-management-for-individuals-on-sulfonylureas-meglitinides-or-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "All individuals with diabetes on sulfonylureas, meglitinides or insulin therapies must have access to and knowledge of how to perform blood glucose monitoring and how to prevent and manage hypoglycaemia." ;
+    dmo:evidenceQuote "All individuals with diabetes on sulfonylureas, meglitinides or insulin therapies must have access to and knowledge of how to perform blood glucose monitoring and how to prevent and manage hypoglycaemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/ensure-regular-follow-up-with-the-usual-diabetes-care-provider> a dmo:Recommendation ;
+    rdfs:label "Ensure regular follow-up with the usual diabetes care provider" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "ensure-regular-follow-up-with-the-usual-diabetes-care-provider" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ensure regular follow-up with the usual diabetes care provider" ;
+    dmo:evidenceQuote "Ensure regular follow-up with the usual diabetes care provider" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/ensure-that-the-referral-letter-states-all-of-the-recommended-information-outlined-in-local-national-available-guidelines> a dmo:Recommendation ;
+    rdfs:label "Ensure that the referral letter states all of the recommended information outlined in local/national available guidelines" ;
+    dmo:recommendationId "ensure-that-the-referral-letter-states-all-of-the-recommended-information-outlined-in-local-national-available-guidelines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Ensure that the referral letter states all of the recommended information outlined in local/national available guidelines" ;
+    dmo:evidenceQuote "Ensure that the referral letter states all of the recommended information outlined in local/national available guidelines" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/ensure-the-classification-of-diabetes-eg-autoimmune-diabetes-type-2-diabetes-secondary-diabetes-is-clearly-documented-prior-to-surgical-referral-and-assessment> a dmo:Recommendation ;
+    rdfs:label "Ensure the classification of diabetes (eg autoimmune diabetes, type 2 diabetes, secondary diabetes) is clearly documented prior to surgical referral and assessment" ;
+    dmo:recommendationId "ensure-the-classification-of-diabetes-eg-autoimmune-diabetes-type-2-diabetes-secondary-diabetes-is-clearly-documented-prior-to-surgical-referral-and-assessment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Ensure the classification of diabetes (eg autoimmune diabetes, type 2 diabetes, secondary diabetes) is clearly documented prior to surgical referral and assessment" ;
+    dmo:evidenceQuote "Ensure the classification of diabetes (eg autoimmune diabetes, type 2 diabetes, secondary diabetes) is clearly documented prior to surgical referral and assessment" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/follow-latest-guidelines-for-perioperative-diabetes-management-e-g-cpoc> a dmo:Recommendation ;
+    rdfs:label "Follow latest guidelines for perioperative diabetes management (e.g. CPOC)" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "follow-latest-guidelines-for-perioperative-diabetes-management-e-g-cpoc" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Follow latest guidelines for perioperative diabetes management (e.g. CPOC)." ;
+    dmo:evidenceQuote "Follow latest guidelines for perioperative diabetes management (e.g. CPOC)." ;
+    dmo:evidenceQuote "Follow latest guidelines for perioperative diabetes management (e.g. CPOC)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/follow-local-national-guidelines-for-timing-of-admission-and-use-of-vriii> a dmo:Recommendation ;
+    rdfs:label "Follow local/national guidelines for timing of admission and use of VRIII" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "follow-local-national-guidelines-for-timing-of-admission-and-use-of-vriii" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Follow local/national guidelines for timing of admission and use of VRIII." ;
+    dmo:evidenceQuote "Follow local/national guidelines for timing of admission and use of VRIII." ;
+    dmo:evidenceQuote "Follow local/national guidelines for timing of admission and use of VRIII" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/follow-up-usual-diabetes-provider> a dmo:Recommendation ;
+    rdfs:label "Follow-up usual diabetes provider" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "follow-up-usual-diabetes-provider" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Follow-up usual diabetes provider" ;
+    dmo:evidenceQuote "Ensure regular follow-up with the usual diabetes care provider" ;
+    dmo:evidenceQuote "Follow-up usual diabetes provider" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/hba1c-48mmol-mol-consider-stopping-diabetes-therapy-seek-advice-if-on-insulin> a dmo:Recommendation ;
+    rdfs:label "HbA1c <48mmol/mol: Consider stopping diabetes therapy. Seek advice if on insulin" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "hba1c-48mmol-mol-consider-stopping-diabetes-therapy-seek-advice-if-on-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "HbA1c <48mmol/mol: Consider stopping diabetes therapy. Seek advice if on insulin." ;
+    dmo:evidenceQuote "HbA1c <48mmol/mol: Consider stopping diabetes therapy. Seek advice if on insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/hba1c-48mmol-mol-optimise-diabetes-therapy-as-per-local-guidelines> a dmo:Recommendation ;
+    rdfs:label "HbA1c ≥48mmol/mol: Optimise diabetes therapy as per local guidelines" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "hba1c-48mmol-mol-optimise-diabetes-therapy-as-per-local-guidelines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "HbA1c ≥48mmol/mol: Optimise diabetes therapy as per local guidelines" ;
+    dmo:evidenceQuote "HbA1c ≥48mmol/mol: Optimise diabetes therapy as per local guidelines" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/hba1c-at-3-6-12-months-postoperatively-and-then-annual-checks> a dmo:Recommendation ;
+    rdfs:label "HbA1c at 3, 6, & 12 months postoperatively and then annual checks" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "hba1c-at-3-6-12-months-postoperatively-and-then-annual-checks" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "HbA1c at 3, 6, & 12 months postoperatively and then annual checks." ;
+    dmo:evidenceQuote "HbA1c at 3, 6, & 12 months postoperatively and then annual checks." ;
+    dmo:evidenceQuote "HbA1c at 3, 6, & 12 months postoperatively and then annual checks" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/if-it-is-not-achievable-or-unsafe-to-do-so-this-should-be-communicated-to-the-metabolic-bariatric-surgery-team> a dmo:Recommendation ;
+    rdfs:label "If it is not achievable, or unsafe to do so, this should be communicated to the metabolic-bariatric surgery team" ;
+    dmo:recommendationId "if-it-is-not-achievable-or-unsafe-to-do-so-this-should-be-communicated-to-the-metabolic-bariatric-surgery-team" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If it is not achievable, or unsafe to do so, this should be communicated to the metabolic-bariatric surgery team" ;
+    dmo:evidenceQuote "If it is not achievable, or unsafe to do so, this should be communicated to the metabolic-bariatric surgery team" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/if-using-insulin-pump-hybrid-closed-loop-system-seek-specialist-diabetes-advice-for-an-individualise> a dmo:Recommendation ;
+    rdfs:label "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualise" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "if-using-insulin-pump-hybrid-closed-loop-system-seek-specialist-diabetes-advice-for-an-individualise" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualise" ;
+    dmo:evidenceQuote "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualise" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/if-using-insulin-pump-hybrid-closed-loop-system-seek-specialist-diabetes-advice-for-an-individualised-care-plan> a dmo:Recommendation ;
+    rdfs:label "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualised care plan" ;
+    dmo:recommendationId "if-using-insulin-pump-hybrid-closed-loop-system-seek-specialist-diabetes-advice-for-an-individualised-care-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualised care plan" ;
+    dmo:evidenceQuote "If using insulin pump/hybrid closed loop system, seek specialist diabetes advice for an individualised care plan" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/insulin-should-never-be-stopped-in-individuals-with-type-1-diabetes> a dmo:Recommendation ;
+    rdfs:label "Insulin should never be stopped in individuals with type 1 diabetes" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 1 diabetes" ;
+    dmo:recommendationId "insulin-should-never-be-stopped-in-individuals-with-type-1-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Insulin should never be stopped in those with type 1 diabetes." ;
+    dmo:evidenceQuote "Insulin should never be stopped in those with type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/maintain-adequate-calorie-and-carbohydrate-intake-for-individuals-with-type-1-diabetes-on-low-calorie-diet> a dmo:Recommendation ;
+    rdfs:label "Maintain adequate calorie and carbohydrate intake for individuals with type 1 diabetes on low-calorie diet" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 1 diabetes on low-calorie diet" ;
+    dmo:recommendationId "maintain-adequate-calorie-and-carbohydrate-intake-for-individuals-with-type-1-diabetes-on-low-calorie-diet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Individuals with type 1 diabetes need calories (and carbohydrate) to maintain insulin demands. A low-calorie diet can be harmful as it can induce ketone formation and acidosis. Therefore, there should be an adequate calorie (and carbohydrate) intake to maintain insulin needs (without insulin DKA will develop)." ;
+    dmo:evidenceQuote "Individuals with type 1 diabetes need calories (and carbohydrate) to maintain insulin demands. A low-calorie diet can be harmful as it can induce ketone formation and acidosis. Therefore, there should be an adequate calorie (and carbohydrate) intake to maintain insulin needs (without insulin DKA will develop)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/measurement-and-communication-of-hba1c-prior-to-surgery> a dmo:Recommendation ;
+    rdfs:label "Measurement and communication of HbA1c prior to surgery" ;
+    dmo:gradingSystem "CPOC" ;
+    dmo:nativeEvidenceGrade "5" ;
+    dmo:populationScope "Individuals with diabetes being referred for metabolic-bariatric surgery" ;
+    dmo:recommendationId "measurement-and-communication-of-hba1c-prior-to-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "HbA1c to be measured and communicated to the specialist metabolic-bariatric surgery MDT coordinator prior to the individual being listed for surgery (within 3 month(s). HbA1c should ideally be 69 mmol/mol (<8.5%) (5) where this can be safely achieved." ;
+    dmo:evidenceQuote "HbA1c to be measured and communicated to the specialist metabolic-bariatric surgery MDT coordinator prior to the individual being listed for surgery (within 3 month(s). HbA1c should ideally be 69 mmol/mol (<8.5%) (5) where this can be safely achieved." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/modification-of-medication-formulation-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Modification of medication formulation postoperatively" ;
+    dmo:gradingSystem "CPOC" ;
+    dmo:nativeEvidenceGrade "5" ;
+    dmo:populationScope "People with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "modification-of-medication-formulation-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Depending on their ability to take medication orally, modification of the formulations of their medications may be necessary." ;
+    dmo:evidenceQuote "Depending on their ability to take medication orally, modification of the formulations of their medications may be necessary." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/monitor-blood-glucose-a-minimum-of-4-times-daily-during-inpatient-stay> a dmo:Recommendation ;
+    rdfs:label "Monitor blood glucose a minimum of 4 times daily during inpatient stay" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "monitor-blood-glucose-a-minimum-of-4-times-daily-during-inpatient-stay" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Monitor blood glucose a minimum of 4 times daily during inpatient stay." ;
+    dmo:evidenceQuote "Monitor blood glucose a minimum of 4 times daily during inpatient stay." ;
+    dmo:evidenceQuote "Monitor blood glucose a minimum of 4 times daily during inpatient stay" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/never-stop-insulin-in-individuals-with-type-1-diabetes-due-to-risk-of-dka> a dmo:Recommendation ;
+    rdfs:label "Never stop insulin in individuals with type 1 diabetes due to risk of DKA" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Individuals with type 1 diabetes" ;
+    dmo:recommendationId "never-stop-insulin-in-individuals-with-type-1-diabetes-due-to-risk-of-dka" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "For individuals with type 1 diabetes: insulin must never be stopped as this exposes them to the risk of DKA." ;
+    dmo:evidenceQuote "For individuals with type 1 diabetes: insulin must never be stopped as this expose them to the risk of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/no-action-if-hba1c-48-mmol-mol-6-5-in-individuals-who-were-discharged-with-insulin-therapy-and-had-it-discontinued> a dmo:Recommendation ;
+    rdfs:label "No action if HbA1c <48 mmol/mol (<6.5%) in individuals who were discharged with insulin therapy and had it discontinued" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals who were discharged with insulin therapy and had it discontinued" ;
+    dmo:recommendationId "no-action-if-hba1c-48-mmol-mol-6-5-in-individuals-who-were-discharged-with-insulin-therapy-and-had-it-discontinued" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If HbA1c <48 mmol/mol (<6.5%), no action." ;
+    dmo:evidenceQuote "• If HbA1c <48 mmol/mol (<6.5%), no action." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/planning-the-perioperative-phase-in-individuals-using-weekly-insulin> a dmo:Recommendation ;
+    rdfs:label "Planning the perioperative phase in individuals using weekly insulin" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Individuals using weekly insulin" ;
+    dmo:recommendationId "planning-the-perioperative-phase-in-individuals-using-weekly-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Planning the perioperative phase in individuals using weekly insulin." ;
+    dmo:evidenceQuote "Planning the perioperative phase in individuals using weekly insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/postoperative-management-of-oral-intake-after-metabolic-bariatric-surgery> a dmo:Recommendation ;
+    rdfs:label "Postoperative management of oral intake after metabolic-bariatric surgery" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Individuals with type 1 diabetes following metabolic-bariatric surgery" ;
+    dmo:recommendationId "postoperative-management-of-oral-intake-after-metabolic-bariatric-surgery" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Aim to commence oral intake (shakes etc) at the earliest opportunity following metabolic-bariatric surgery so that a transition to subcutaneous insulin can be made." ;
+    dmo:evidenceQuote "Aim to commence oral intake (shakes etc) at the earliest opportunity following metabolic-bariatric surgery so that a transition to subcutaneous insulin can be made." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/postoperative-review-by-diabetes-specialist-team-prior-to-discharge> a dmo:Recommendation ;
+    rdfs:label "Postoperative review by diabetes specialist team prior to discharge" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Individuals with type 1 diabetes following metabolic-bariatric surgery" ;
+    dmo:recommendationId "postoperative-review-by-diabetes-specialist-team-prior-to-discharge" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "All individuals with type 1 diabetes should be reviewed by the diabetes specialist team or the Bariatric-Diabetes Physician prior to discharge from hospital." ;
+    dmo:evidenceQuote "All individuals with type 1 diabetes should be reviewed by the diabetes specialist team or the Bariatric-Diabetes Physician prior to discharge from hospital." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/preparation-of-pre-operative-diabetes-medication-management-plan-during-liver-reduction-diet> a dmo:Recommendation ;
+    rdfs:label "Preparation of pre-operative diabetes medication management plan during liver reduction diet" ;
+    dmo:gradingSystem "CPOC" ;
+    dmo:nativeEvidenceGrade "8" ;
+    dmo:populationScope "Individuals undergoing liver reduction diet prior to metabolic-bariatric surgery" ;
+    dmo:recommendationId "preparation-of-pre-operative-diabetes-medication-management-plan-during-liver-reduction-diet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The metabolic-bariatric surgery MDT should prepare a pre-operative diabetes medication management plan for this period and inform the individual, GP and diabetes care providers." ;
+    dmo:evidenceQuote "The metabolic-bariatric surgery MDT should prepare a pre-operative diabetes medication management plan for this period and inform the individual, GP and diabetes care providers." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/prevent-hypoglycaemia-blood-glucose-4-mmol-l-during-all-phases-of-care> a dmo:Recommendation ;
+    rdfs:label "Prevent hypoglycaemia (blood glucose <4 mmol/L) during all phases of care" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals at risk (on insulin and insulin secretagogues)" ;
+    dmo:recommendationId "prevent-hypoglycaemia-blood-glucose-4-mmol-l-during-all-phases-of-care" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Prevent hypoglycaemia (blood glucose <4 mmol/L) during all phases of care" ;
+    dmo:evidenceQuote "Prevent hypoglycaemia (blood glucose <4 mmol/L) during all phases of care" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/provide-education-on-dka-avoidance-and-hypoglycaemia-management-for-individuals-with-type-1-diabetes-and-staff> a dmo:Recommendation ;
+    rdfs:label "Provide education on DKA avoidance and hypoglycaemia management for individuals with type 1 diabetes and staff" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 1 diabetes and staff" ;
+    dmo:recommendationId "provide-education-on-dka-avoidance-and-hypoglycaemia-management-for-individuals-with-type-1-diabetes-and-staff" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "b. Education relating to DKA avoidance and hypoglycaemia management to the individual with type 1 diabetes and staff." ;
+    dmo:evidenceQuote "b. Education relating to DKA avoidance and hypoglycaemia management to the individual with type 1 diabetes and staff." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/provide-ketone-testing-kit-and-continuous-glucose-monitoring-for-individuals-with-type-1-diabetes> a dmo:Recommendation ;
+    rdfs:label "Provide ketone testing kit and continuous glucose monitoring for individuals with type 1 diabetes" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 1 diabetes" ;
+    dmo:recommendationId "provide-ketone-testing-kit-and-continuous-glucose-monitoring-for-individuals-with-type-1-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "c. The provision of a ketone testing kit and a form of continuous glucose monitoring. Liaise with the diabetes team." ;
+    dmo:evidenceQuote "c. The provision of a ketone testing kit and a form of continuous glucose monitoring. Liaise with the diabetes team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/provide-written-instructions-about-any-medication-adjustments-to-ensure-safety> a dmo:Recommendation ;
+    rdfs:label "Provide written instructions about any medication adjustments to ensure safety" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "provide-written-instructions-about-any-medication-adjustments-to-ensure-safety" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Provide written instructions about any medication adjustments to ensure safety." ;
+    dmo:evidenceQuote "Provide written instructions about any medication adjustments to ensure safety." ;
+    dmo:evidenceQuote "Provide written instructions about any medication adjustments to ensure safety" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/recommend-annual-hba1c-and-routine-microvascular-macrovascular-screening-for-individuals-with-type-2-diabetes-remission-following-surgery> a dmo:Recommendation ;
+    rdfs:label "Recommend annual HbA1c and routine microvascular/macrovascular screening for individuals with type 2 diabetes remission following surgery" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "10" ;
+    dmo:populationScope "Individuals with type 2 diabetes remission following surgery" ;
+    dmo:recommendationId "recommend-annual-hba1c-and-routine-microvascular-macrovascular-screening-for-individuals-with-type-2-diabetes-remission-following-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If type 2 diabetes remission is achieved following surgery, a recommendation should be made for an annual HbA1c and routine microvascular/macrovascular screening as this group is at high-risk of type 2 diabetes relapse and complications." ;
+    dmo:evidenceQuote "If type 2 diabetes remission is achieved following surgery, a recommendation should be made for an annual HbA1c and routine microvascular/macrovascular screening as this group is at high-risk of type 2 diabetes relapse and complications." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-basal-insulin-by-30-50> a dmo:Recommendation ;
+    rdfs:label "Reduce basal insulin by 30-50%" ;
+    dmo:recommendationId "reduce-basal-insulin-by-30-50" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce basal insulin by 30-50%" ;
+    dmo:evidenceQuote "Reduce basal insulin by 30-50%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-basal-insulin-by-30-50-seek-advice-for-further-insulin-dosing> a dmo:Recommendation ;
+    rdfs:label "Reduce basal insulin by 30-50%. Seek advice for further insulin dosing" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "reduce-basal-insulin-by-30-50-seek-advice-for-further-insulin-dosing" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce basal insulin by 30-50%. Seek advice for further insulin dosing." ;
+    dmo:evidenceQuote "Reduce basal insulin by 30-50%. Seek advice for further insulin dosing." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-basal-insulin-dose-by-35-50-after-metabolic-bariatric-surgery> a dmo:Recommendation ;
+    rdfs:label "Reduce Basal Insulin Dose by 35-50% After Metabolic-Bariatric Surgery" ;
+    dmo:populationScope "Individuals with type 2 diabetes following metabolic-bariatric surgery" ;
+    dmo:recommendationId "reduce-basal-insulin-dose-by-35-50-after-metabolic-bariatric-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce dose by 35-50% of pre-liver reduction diet (LRD) dose. Consider further reduction or discontinuation in those with type 2 diabetes. Consideration should be given to the individual’s glycaemic control and insulin requirements which govern dose adjustment to optimise glycaemic control." ;
+    dmo:evidenceQuote "Reduce dose by 35-50% of pre-liver reduction diet (LRD) dose. Consider further reduction or discontinuation in those with type 2 diabetes. Consideration should be given to the individual’s glycaemic control and insulin requirements which govern dose adjustment to optimise glycaemic control" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-basal-insulin-dose-by-35-50-of-pre-lrd-dose-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Reduce basal insulin dose by 35-50% of pre-LRD dose postoperatively" ;
+    dmo:recommendationId "reduce-basal-insulin-dose-by-35-50-of-pre-lrd-dose-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce basal insulin dose by 35-50% of pre-LRD dose postoperatively" ;
+    dmo:evidenceQuote "Reduce dose by 35-50% of pre-LRD dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-basal-insulin-dose-by-35-50-postoperatively-in-basal-bolus-regimen> a dmo:Recommendation ;
+    rdfs:label "Reduce basal insulin dose by 35-50% postoperatively in basal-bolus regimen" ;
+    dmo:recommendationId "reduce-basal-insulin-dose-by-35-50-postoperatively-in-basal-bolus-regimen" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce basal insulin dose by 35-50% postoperatively in basal-bolus regimen" ;
+    dmo:evidenceQuote "Reduce basal dose by 35-50%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-basal-insulin-dose-by-50-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Reduce basal insulin dose by 50% during LRD" ;
+    dmo:recommendationId "reduce-basal-insulin-dose-by-50-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce basal insulin dose by 50% during LRD" ;
+    dmo:evidenceQuote "Basal only Reduce dose by 50%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-dose-by-35-50-of-pre-lrd-dose> a dmo:Recommendation ;
+    rdfs:label "Reduce dose by 35-50% of pre-LRD dose" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "reduce-dose-by-35-50-of-pre-lrd-dose" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce dose by 35-50% of pre-LRD dose." ;
+    dmo:evidenceQuote "Reduce dose by 35-50% of pre-LRD dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-total-daily-insulin-dose-by-50-at-start-of-lrd> a dmo:Recommendation ;
+    rdfs:label "Reduce total daily insulin dose by 50% at start of LRD" ;
+    dmo:recommendationId "reduce-total-daily-insulin-dose-by-50-at-start-of-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce the total daily insulin dose by 50% at start LRD. May need optimisation" ;
+    dmo:evidenceQuote "Reduce the total daily insulin dose by 50% at start LRD. May need optimisation" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-total-dose-by-50-stop-midday-dose-if-on-3-day> a dmo:Recommendation ;
+    rdfs:label "Reduce total dose by 50%. Stop midday dose if on 3/day" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "reduce-total-dose-by-50-stop-midday-dose-if-on-3-day" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce total dose by 50%. Stop midday dose if on 3/day" ;
+    dmo:evidenceQuote "Reduce total dose by 50%. Stop midday dose if on 3/day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-total-dose-of-premixed-insulin-by-35-50-of-pre-lrd-dose-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Reduce total dose of premixed insulin by 35-50% of pre-LRD dose postoperatively" ;
+    dmo:recommendationId "reduce-total-dose-of-premixed-insulin-by-35-50-of-pre-lrd-dose-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce total dose of premixed insulin by 35-50% of pre-LRD dose postoperatively" ;
+    dmo:evidenceQuote "Reduce dose by 35-50% of pre-LRD dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reduce-total-dose-of-premixed-insulin-by-50-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Reduce total dose of premixed insulin by 50% during LRD" ;
+    dmo:recommendationId "reduce-total-dose-of-premixed-insulin-by-50-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reduce total dose of premixed insulin by 50% during LRD" ;
+    dmo:evidenceQuote "Premixed insulin Reduce total dose by 50%." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/refer-to-obesity-specialist-metabolic-bariatric-surgery-mdt> a dmo:Recommendation ;
+    rdfs:label "Refer to obesity/specialist metabolic bariatric surgery MDT" ;
+    dmo:recommendationId "refer-to-obesity-specialist-metabolic-bariatric-surgery-mdt" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Refer to obesity/specialist metabolic bariatric surgery MDT" ;
+    dmo:evidenceQuote "Refer to obesity/specialist metabolic bariatric surgery MDT" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/reintroduce-glp-1-based-therapies-for-ongoing-management-of-glycaemic-control-excess-weight-and-cardiovascular-risk-in-individuals-with-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Reintroduce GLP-1 based therapies for ongoing management of glycaemic control, excess weight, and cardiovascular risk in individuals with type 2 diabetes" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 2 diabetes" ;
+    dmo:recommendationId "reintroduce-glp-1-based-therapies-for-ongoing-management-of-glycaemic-control-excess-weight-and-cardiovascular-risk-in-individuals-with-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Reintroduction of GLP-1 based therapies may be appropriate for ongoing management of glycaemic control, excess weight and cardiovascular risk. Seek specialist diabetes advice." ;
+    dmo:evidenceQuote "Reintroduction of GLP-1 based therapies may be appropriate for ongoing management of glycaemic control, excess weight and cardiovascular risk. Seek specialist diabetes advice." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/restart-immediate-release-metformin-if-pre-op-hba1c-58-mmol-mol> a dmo:Recommendation ;
+    rdfs:label "Restart immediate-release Metformin if pre-op HbA1c ≥58 mmol/mol" ;
+    dmo:recommendationId "restart-immediate-release-metformin-if-pre-op-hba1c-58-mmol-mol" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Restart immediate-release Metformin if pre-op HbA1c ≥58 mmol/mol" ;
+    dmo:evidenceQuote "Restart immediate-release if pre-op HbA1c ≥58 mmol/mol" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/review-by-diabetes-specialist-team-prior-to-discharge-for-all-individuals-with-diabetes-who-have-undergone-bariatric-metabolic-surgery> a dmo:Recommendation ;
+    rdfs:label "Review by diabetes specialist team prior to discharge for all individuals with diabetes who have undergone bariatric-metabolic surgery" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with diabetes who have undergone bariatric-metabolic surgery" ;
+    dmo:recommendationId "review-by-diabetes-specialist-team-prior-to-discharge-for-all-individuals-with-diabetes-who-have-undergone-bariatric-metabolic-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "All individuals with diabetes who have undergone bariatric-metabolic surgery should be reviewed by the diabetes specialist team prior to discharge." ;
+    dmo:evidenceQuote "All individuals with diabetes who have undergone bariatric-metabolic surgery should be r eviewed by the diabetes specialist team prior to discharge." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/seek-advice-for-agents-with-other-indications-e-g-sglt2i-for-ckd-heart-failure> a dmo:Recommendation ;
+    rdfs:label "Seek advice for agents with other indications (e.g. SGLT2i for CKD/heart failure)" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals with T2DM undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "seek-advice-for-agents-with-other-indications-e-g-sglt2i-for-ckd-heart-failure" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Seek advice for agents with other indications (e.g. SGLT2i for CKD/heart failure)" ;
+    dmo:evidenceQuote "Seek advice for agents with other indications (e.g. SGLT2i for CKD/heart failure)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/seek-advice-for-further-insulin-dosing> a dmo:Recommendation ;
+    rdfs:label "Seek advice for further insulin dosing" ;
+    dmo:recommendationId "seek-advice-for-further-insulin-dosing" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Seek advice for further insulin dosing" ;
+    dmo:evidenceQuote "Seek advice for further insulin dosing" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/stop-midday-dose-of-premixed-insulin-if-on-3-day-during-lrd> a dmo:Recommendation ;
+    rdfs:label "Stop midday dose of premixed insulin if on 3/day during LRD" ;
+    dmo:recommendationId "stop-midday-dose-of-premixed-insulin-if-on-3-day-during-lrd" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Stop midday dose of premixed insulin if on 3/day during LRD" ;
+    dmo:evidenceQuote "Stop midday dose if on 3/day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/stop-midday-dose-of-premixed-insulin-if-on-3-day-postoperatively> a dmo:Recommendation ;
+    rdfs:label "Stop midday dose of premixed insulin if on 3/day postoperatively" ;
+    dmo:recommendationId "stop-midday-dose-of-premixed-insulin-if-on-3-day-postoperatively" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Stop midday dose of premixed insulin if on 3/day postoperatively" ;
+    dmo:evidenceQuote "Stop midday dose if on 3/day" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/stop-or-reduce-bolus-insulin-by-50-during-lrd-in-basal-bolus-regimen> a dmo:Recommendation ;
+    rdfs:label "Stop or reduce bolus insulin by 50% during LRD in basal-bolus regimen" ;
+    dmo:recommendationId "stop-or-reduce-bolus-insulin-by-50-during-lrd-in-basal-bolus-regimen" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Stop or reduce bolus insulin by 50% during LRD in basal-bolus regimen" ;
+    dmo:evidenceQuote "Bolus: Stop or reduce by 50%" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/tailor-insulin-doses-to-individual-needs-for-individuals-with-type-1-diabetes> a dmo:Recommendation ;
+    rdfs:label "Tailor insulin doses to individual needs for individuals with type 1 diabetes" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 1 diabetes" ;
+    dmo:recommendationId "tailor-insulin-doses-to-individual-needs-for-individuals-with-type-1-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "d. Insulin doses need to be tailored to the individual’s needs. This applies to the pre-operative LRD, perioperative and postoperative periods." ;
+    dmo:evidenceQuote "d. Insulin doses need to be tailored to the individual’s needs. This applies to the pre-operative LRD, perioperative and postoperative periods." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/target-blood-glucose-6-12-mmol-l> a dmo:Recommendation ;
+    rdfs:label "Target blood glucose 6-12 mmol/L" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All individuals undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "target-blood-glucose-6-12-mmol-l" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Target blood glucose 6-12 mmol/L" ;
+    dmo:evidenceQuote "Target blood glucose 6-12 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/target-pre-operative-hba1c-69-mmol-mol-8-5-if-safe-to-do-so> a dmo:Recommendation ;
+    rdfs:label "Target pre-operative HbA1c <69 mmol/mol (<8.5%) if safe to do so" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "People undergoing metabolic-bariatric surgery" ;
+    dmo:recommendationId "target-pre-operative-hba1c-69-mmol-mol-8-5-if-safe-to-do-so" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Target pre-operative HbA1c <69 mmol/mol (<8.5%) if safe to do so." ;
+    dmo:evidenceQuote "Target pre-operative HbA1c <69 mmol/mol (<8.5%) if safe to do so." ;
+    dmo:evidenceQuote "Target pre-operative HbA1c <69 mmol/mol (<8.5%) if safe to do so" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/to-support-care-use-the-principles-set-in-the-jbds-ip-guidelines-on-using-technology-to-support-diabetes-care-in-hospital> a dmo:Recommendation ;
+    rdfs:label "To support care, use the principles set in the JBDS-IP guidelines on using technology to support diabetes care in hospital" ;
+    dmo:recommendationId "to-support-care-use-the-principles-set-in-the-jbds-ip-guidelines-on-using-technology-to-support-diabetes-care-in-hospital" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "To support care, use the principles set in the JBDS-IP guidelines on using technology to support diabetes care in hospital" ;
+    dmo:evidenceQuote "To support care, use the principles set in the JBDS-IP guidelines on using technology to support diabetes care in hospital" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/use-agents-with-cardiovascular-and-renal-protection-in-individuals-with-type-2-diabetes-and-risk-factors-for-or-existing-diabetes-complications> a dmo:Recommendation ;
+    rdfs:label "Use agents with cardiovascular and renal protection in individuals with type 2 diabetes and risk factors for or existing diabetes complications" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "Individuals with type 2 diabetes and risk factors for or existing diabetes complications" ;
+    dmo:recommendationId "use-agents-with-cardiovascular-and-renal-protection-in-individuals-with-type-2-diabetes-and-risk-factors-for-or-existing-diabetes-complications" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "For those with type 2 diabetes and risk factors for (or existing) diabetes complications, ensure agents with added benefits of cardiovascular and renal protection are used (e.g. SGLT2 inhibitors)." ;
+    dmo:evidenceQuote "For those with type 2 diabetes and risk factors for (or existing) diabetes complications, ensure agents with added benefits of cardiovascular and renal protection are used (e.g. SGLT2 inhibitors)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/use-of-glucose-monitoring-technology-and-insulin-pump-therapy-in-perioperative-and-immediate-postoperative-phase> a dmo:Recommendation ;
+    rdfs:label "Use of glucose monitoring technology and insulin pump therapy in perioperative and immediate postoperative phase" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Individuals undergoing bariatric-metabolic surgery" ;
+    dmo:recommendationId "use-of-glucose-monitoring-technology-and-insulin-pump-therapy-in-perioperative-and-immediate-postoperative-phase" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Use of glucose monitoring technology and insulin pump therapy in the perioperative and immediate postoperative phase." ;
+    dmo:evidenceQuote "Use of glucose monitoring technology and insulin pump therapy in the perioperative and immediate postoperative phase." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/recommendation/we-would-recommend-within-2-months-of-surgery> a dmo:Recommendation ;
+    rdfs:label "We would recommend within 2 months of surgery" ;
+    dmo:recommendationId "we-would-recommend-within-2-months-of-surgery" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "We would recommend within 2 months of surgery" ;
+    dmo:evidenceQuote "We would recommend within 2 months of surgery" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+<https://example.org/dmo/id/riskFactor/obesity> a dmo:RiskFactor ;
+    rdfs:label "Obesity" ;
+    dmo:evidenceNote "Obesity is associated with a higher risk of obesity-related complications, along with economic and societal impact." ;
+    dmo:name "Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "obesity" ;
+    dmo:evidenceQuote "Obesity is associated with a higher risk of obesity-related complications, along with economic and societal impact." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/drugClass/thiazolidinediones> dmo:hasContraindication <https://example.org/dmo/id/contraindication/thiazolidinediones> .
+<https://example.org/dmo/id/drugClass/glp-1-based-therapies> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycaemia> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/sglt2-inhibitors> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycaemia> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:hasContraindication <https://example.org/dmo/id/contraindication/sulfonylureas> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/meglitinides> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycaemia> .
+<https://example.org/dmo/id/medication/abasaglar> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/humulin-i> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/insulatard> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/lantus> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/levemir> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/semglee> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/toujeo> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/tresiba> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/basal-insulin-regimens> .
+<https://example.org/dmo/id/medication/humalog-mix25> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/premixed-insulin-regimens> .
+<https://example.org/dmo/id/medication/humalog-mix50> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/premixed-insulin-regimens> .
+<https://example.org/dmo/id/medication/humulin-m3> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/premixed-insulin-regimens> .
+<https://example.org/dmo/id/medication/novomix-30> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/premixed-insulin-regimens> .
+<https://example.org/dmo/id/drugClass/dipeptidyl-peptidase-4-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/dipeptidyl-peptidase-4-inhibitors> .
+<https://example.org/dmo/id/drugClass/sulfonylurea> dmo:causesAdverseEffect <https://example.org/dmo/id/adverseEffect/hypoglycaemia> .
+<https://example.org/dmo/id/monitoringSchedule/annual-hba1c-and-routine-microvascular-macrovascular-screening> dmo:schedulesTest <https://example.org/dmo/id/labTest/hba1c> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:screenedByTest <https://example.org/dmo/id/labTest/blood-ketones> .
+<https://example.org/dmo/id/complication/hypoglycaemia> dmo:screenedByTest <https://example.org/dmo/id/labTest/blood-glucose> .
+<https://example.org/dmo/id/drugClass/basal-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-omit-basal-insulin-in-the-perioperative-phase> .
+<https://example.org/dmo/id/drugClass/basal-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-stop-insulin-risk-of-dka> .
+<https://example.org/dmo/id/drugClass/basal-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-stop-insulin> .
+<https://example.org/dmo/id/drugClass/basal-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/stopping-insulin-in-type-1-diabetes> .
+<https://example.org/dmo/id/drugClass/basal-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/insulin-discontinuation-in-type-1-diabetes> .
+<https://example.org/dmo/id/drugClass/biguanide> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-thiazolidinediones-postoperatively> .
+<https://example.org/dmo/id/drugClass/dpp-4-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-dpp-4-inhibitors-postoperatively> .
+<https://example.org/dmo/id/drugClass/dipeptidyl-peptidase-4-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-dpp-4-inhibitors-postoperatively> .
+<https://example.org/dmo/id/drugClass/glp-1-based-therapies> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-glp-1-based-therapies> .
+<https://example.org/dmo/id/drugClass/glp-1-based-therapies> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-glp-1-based-therapies-postoperatively> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-stop-insulin-risk-of-dka> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-stop-insulin> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/stopping-insulin-in-type-1-diabetes> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/insulin-discontinuation-in-type-1-diabetes> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-and-meglitinides-postoperatively> .
+<https://example.org/dmo/id/drugClass/metformin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-thiazolidinediones-postoperatively> .
+<https://example.org/dmo/id/drugClass/premixed-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-omit-basal-insulin-in-the-perioperative-phase> .
+<https://example.org/dmo/id/drugClass/premixed-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-stop-insulin-risk-of-dka> .
+<https://example.org/dmo/id/drugClass/premixed-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/do-not-stop-insulin> .
+<https://example.org/dmo/id/drugClass/premixed-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/stopping-insulin-in-type-1-diabetes> .
+<https://example.org/dmo/id/drugClass/premixed-insulin-regimens> dmo:hasContraindication <https://example.org/dmo/id/contraindication/insulin-discontinuation-in-type-1-diabetes> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-sglt2-inhibitors> .
+<https://example.org/dmo/id/drugClass/sglt2-inhibitors> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-sglt2-inhibitors-postoperatively> .
+<https://example.org/dmo/id/drugClass/sulfonylurea> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-and-meglitinides-postoperatively> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-and-meglitinides-postoperatively> .
+<https://example.org/dmo/id/drugClass/sulfonylureas-meglitinides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-and-meglitinides-postoperatively> .
+<https://example.org/dmo/id/drugClass/thiazolidinediones> dmo:hasContraindication <https://example.org/dmo/id/contraindication/discontinue-thiazolidinediones-postoperatively> .
+<https://example.org/dmo/id/medication/metformin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/biguanide> .
+<https://example.org/dmo/id/medication/sglt2-inhibitors> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sglt2-inhibitors> .
+<https://example.org/dmo/id/medication/thiazolidinediones> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/thiazolidinediones> .
+<https://example.org/dmo/id/contraindication/do-not-stop-insulin> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/do-not-omit-basal-insulin-in-the-perioperative-phase> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/do-not-stop-insulin-risk-of-dka> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-and-meglitinides-postoperatively> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/discontinue-sglt2-inhibitors> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/discontinue-thiazolidinediones> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/discontinue-dpp-4-inhibitors-postoperatively> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/discontinue-glp-1-based-therapies> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/stop-fast-acting-insulin-in-basal-bolus-regimen> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/stop-midday-dose-of-premixed-insulin-if-on-3-day> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/discontinue-sulfonylureas-meglitinides> dmo:triggeredByCondition <https://example.org/dmo/id/complication/hypoglycaemia> .
+<https://example.org/dmo/id/contraindication/stop-insulin-in-perioperative-phase> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/insulin-discontinuation-in-type-1-diabetes> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/stopping-insulin-in-type-1-diabetes> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/device/blood-glucose> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-glucose> .
+<https://example.org/dmo/id/device/blood-ketones> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketones> .
+<https://example.org/dmo/id/device/ketone-testing-kit> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketones> .

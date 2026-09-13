@@ -1,0 +1,202 @@
+{
+  "source": {
+    "sourceId": "jbds_08_hyperglycaemia_and_steroid_therapy_january_2023",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds_08_hyperglycaemia_and_steroid_therapy_january_2023",
+    "localFile": "ontology/knowledges/pdfs/JBDS_08_Hyperglycaemia_and_Steroid_Therapy_January_2023.pdf",
+    "sha256": "a83d17dfbe86a9e7eacfcb4b0e1753620e5b2fb700f140655daa61c8505caf89",
+    "byteSize": 1776497,
+    "graphUri": "urn:dmo:extract:jbds_08_hyperglycaemia_and_steroid_therapy_january_2023",
+    "documentFormat": "pdf",
+    "pageCount": 25,
+    "textPageCount": 25
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 14,
+  "counts": {
+    "rawRecords": 399,
+    "accepted": 336,
+    "rejected": 63,
+    "entities": 295,
+    "edges": 83,
+    "danglingRelations": 114,
+    "mergeConflicts": 128
+  },
+  "quality": {
+    "quoteHitRate": 0.8421,
+    "schemaSlotCoverage": 0.9032,
+    "danglingRelationRate": 0.5787,
+    "avgMentionsPerEntity": 1.14
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 48,
+    "quote_too_short": 10,
+    "unknown_relation_predicate": 5
+  },
+  "linkPass": {
+    "candidates": 80,
+    "accepted": 66,
+    "rejectedByReason": {
+      "quote_not_found": 8,
+      "target_unresolved": 2,
+      "duplicate": 1,
+      "source_unresolved": 3
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 127,
+    "medication": 32,
+    "riskFactor": 31,
+    "drugClass": 22,
+    "symptom": 17,
+    "monitoringSchedule": 15,
+    "labTest": 12,
+    "lifestyleIntervention": 10,
+    "device": 7,
+    "contraindication": 7,
+    "complication": 6,
+    "adverseEffect": 5,
+    "diabetesType": 4
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/riskFactor/steroid-therapy",
+      "predicate": "increasesRiskOf",
+      "target": "Glucocorticoid Induced Hyperglycaemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/duration-of-steroid-use",
+      "predicate": "increasesRiskOf",
+      "target": "Glucocorticoid Induced Hyperglycaemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/dose-of-glucocorticoids",
+      "predicate": "increasesRiskOf",
+      "target": "Glucocorticoid Induced Hyperglycaemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/potency-of-glucocorticoid",
+      "predicate": "increasesRiskOf",
+      "target": "Glucocorticoid Induced Hyperglycaemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/pre-existing-diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Steroid Induced Hyperglycaemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sulphonylureas",
+      "predicate": "hasContraindication",
+      "target": "Steroid therapy"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sulphonylureas",
+      "predicate": "hasContraindication",
+      "target": "Steroid Therapy"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sulphonylureas",
+      "predicate": "hasContraindication",
+      "target": "Hyperglycaemia in COVID-19"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Steroid therapy"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Steroid Therapy"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Steroid therapy"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Pregnancy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/obesity",
+      "predicate": "increasesRiskOf",
+      "target": "People at increased risk of diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/family-history-of-diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "People at increased risk of diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/previous-gestational-diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "People at increased risk of diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/ethnic-minorities",
+      "predicate": "increasesRiskOf",
+      "target": "People at increased risk of diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/polycystic-ovarian-syndrome",
+      "predicate": "increasesRiskOf",
+      "target": "People at increased risk of diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/use-of-diabetes-risk-calculator",
+      "predicate": "increasesRiskOf",
+      "target": "People at increased risk of diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/basal-bolus-insulin-adjustment-for-hyperglycaemia-in-steroid-therapy",
+      "predicate": "definesTarget",
+      "target": "Capillary blood glucose (CBG) targets"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/glycaemic-targets-for-hospital-inpatients-on-steroid-therapy",
+      "predicate": "definesTarget",
+      "target": "Capillary blood glucose (CBG) targets"
+    }
+  ],
+  "conflictSamples": [
+    "drugClass/sulphonylureas-and-meglitinides: mechanism: 'Stimulate insulin secretion from pancreatic beta cells' vs 'promote insulin release from the pancreatic beta cell'",
+    "medication/twice-daily-gliclazide-or-isophane-insulin: name: 'Twice daily gliclazide or isophane insulin' vs 'gliclazide'",
+    "medication/twice-daily-gliclazide-or-isophane-insulin: name: 'Twice daily gliclazide or isophane insulin' vs 'isophane insulin'",
+    "medication/twice-daily-gliclazide-or-isophane-insulin: isInsulin: False vs True",
+    "medication/twice-daily-gliclazide-or-isophane-insulin: insulinAction: 'NotApplicable' vs 'Intermediate'",
+    "symptom/acute-hyperglycaemia: name: 'Acute hyperglycaemia' vs 'acute hyperglycaemia'",
+    "symptom/fatigue: name: 'Fatigue' vs 'fatigue'",
+    "symptom/polyuria: name: 'Polyuria' vs 'polyuria'",
+    "symptom/polydipsia: name: 'Polydipsia' vs 'polydipsia'",
+    "riskFactor/steroid-therapy: name: 'Steroid Therapy' vs 'Steroid therapy'",
+    "riskFactor/duration-of-steroid-use: name: 'Duration of Steroid Use' vs 'Duration of steroid use'",
+    "riskFactor/dose-of-glucocorticoids: name: 'Dose of Glucocorticoids' vs 'Dose of glucocorticoids'",
+    "riskFactor/potency-of-glucocorticoid: name: 'Potency of Glucocorticoid' vs 'Potency of glucocorticoid'",
+    "riskFactor/pre-existing-diabetes: name: 'Pre-existing Diabetes' vs 'Pre-existing diabetes'",
+    "medication/dexamethasone: name: 'Dexamethasone' vs 'dexamethasone'",
+    "medication/dexamethasone: name: 'Dexamethasone' vs 'dexamethasone'",
+    "medication/dexamethasone: durationHours: 0 vs 36",
+    "medication/dexamethasone: name: 'Dexamethasone' vs 'dexamethasone'",
+    "diabetesType/type-1-diabetes: name: 'Type 1 diabetes' vs 'Type 1 Diabetes'",
+    "diabetesType/type-1-diabetes: definition: 'In Type 1 diabetes also check daily for ketones if CBG >12mmol/L.' vs 'These individuals will still need to follow the algorithm on page 10.'"
+  ]
+}

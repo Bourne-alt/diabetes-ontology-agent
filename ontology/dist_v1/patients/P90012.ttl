@@ -1,0 +1,30 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/20b0a2ce-3865-5aa5-b746-a14cb425cdc3> a dmo:Patient ;
+    dmo:birthYear 1970 ;
+    dmo:demoScenario "S11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90012-1> ;
+    dmo:patientId "P90012" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/encounter/E90012-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-01-26"^^xsd:date ;
+    dmo:encounterId "E90012-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90012-FPG> .
+
+<https://example.org/dmo/id/labResult/L90012-FPG> a dmo:LabResult ;
+    dmo:collectedAt "2026-01-26T07:40:00"^^xsd:dateTime ;
+    dmo:demoScenario "S11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90012-FPG" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-FPG> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 140.54196 ;
+    dmo:sourceUnit "mmol-per-L" ;
+    dmo:sourceValue 7.8 ;
+    dmo:valueTrustLevel "Curated" .
+

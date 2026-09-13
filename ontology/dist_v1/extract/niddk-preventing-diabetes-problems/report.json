@@ -1,0 +1,171 @@
+{
+  "source": {
+    "sourceId": "niddk-preventing-diabetes-problems",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems",
+    "localFile": "ontology/knowledges/niddk-preventing-diabetes-problems.txt",
+    "sha256": "48dc8bd409f88678f69e194025f23446bd068ef55c86b9da4be4ad97676cd518",
+    "byteSize": 4397,
+    "graphUri": "urn:dmo:extract:niddk-preventing-diabetes-problems"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 65,
+    "accepted": 50,
+    "rejected": 15,
+    "entities": 44,
+    "edges": 11,
+    "danglingRelations": 37,
+    "mergeConflicts": 2
+  },
+  "quality": {
+    "quoteHitRate": 0.7692,
+    "schemaSlotCoverage": 0.3226,
+    "danglingRelationRate": 0.7708,
+    "avgMentionsPerEntity": 1.14
+  },
+  "rejectionsByReason": {
+    "unknown_relation_predicate": 12,
+    "quote_not_found": 3
+  },
+  "linkPass": {
+    "candidates": 44,
+    "accepted": 9,
+    "rejectedByReason": {
+      "target_unresolved": 33,
+      "source_unresolved": 2
+    }
+  },
+  "entitiesByType": {
+    "lifestyleIntervention": 15,
+    "recommendation": 12,
+    "complication": 11,
+    "riskFactor": 4,
+    "adverseEffect": 1,
+    "monitoringSchedule": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Disease & Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Glucose (Hypoglycemia)"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetes & Foot Problems"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Eye Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetes, Gum Disease, & Other Dental Problems"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetes, Sexual, & Bladder Problems"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Depression & Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Cancer & Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Dementia & Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetes",
+      "predicate": "increasesRiskOf",
+      "target": "Sleep Apnea & Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-pressure",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Disease & Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-pressure",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-cholesterol",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Disease & Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Disease & Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Eye Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetes, Gum Disease, & Other Dental Problems"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/managing-blood-glucose-blood-pressure-and-cholesterol-levels",
+      "predicate": "appliesToType",
+      "target": "Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/managing-blood-glucose-blood-pressure-and-cholesterol-levels",
+      "predicate": "targetsComplication",
+      "target": "Diabetes, Heart Disease, & Stroke"
+    }
+  ],
+  "conflictSamples": [
+    "riskFactor/high-blood-pressure: name: 'High Blood Pressure' vs 'High blood pressure'",
+    "riskFactor/high-cholesterol: name: 'High Cholesterol' vs 'High cholesterol'"
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "source": {
+    "sourceId": "niddk-pregnancy-preexisting-diabetes",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-pregnancy-preexisting-diabetes",
+    "localFile": "ontology/knowledges/niddk-pregnancy-preexisting-diabetes.txt",
+    "sha256": "0717b4f58acd4293e734953f3d4bef13ee121defd9dda0ddab8fbeb4a5f7febb",
+    "byteSize": 21461,
+    "graphUri": "urn:dmo:extract:niddk-pregnancy-preexisting-diabetes"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 4,
+  "counts": {
+    "rawRecords": 122,
+    "accepted": 81,
+    "rejected": 41,
+    "entities": 76,
+    "edges": 37,
+    "danglingRelations": 45,
+    "mergeConflicts": 33
+  },
+  "quality": {
+    "quoteHitRate": 0.6639,
+    "schemaSlotCoverage": 0.8548,
+    "danglingRelationRate": 0.5488,
+    "avgMentionsPerEntity": 1.07
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 36,
+    "unknown_relation_predicate": 5
+  },
+  "linkPass": {
+    "candidates": 80,
+    "accepted": 36,
+    "rejectedByReason": {
+      "target_unresolved": 36,
+      "quote_not_found": 8
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 27,
+    "riskFactor": 11,
+    "complication": 10,
+    "lifestyleIntervention": 6,
+    "monitoringSchedule": 6,
+    "contraindication": 3,
+    "labTest": 3,
+    "device": 3,
+    "symptom": 3,
+    "diabetesType": 2,
+    "drugClass": 1,
+    "medication": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Gestational Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/gestational-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/gestational-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/birth-defects",
+      "predicate": "presentsWith",
+      "target": "High blood glucose levels"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/preterm-birth",
+      "predicate": "presentsWith",
+      "target": "High blood glucose levels"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/miscarriage",
+      "predicate": "presentsWith",
+      "target": "High blood glucose levels"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/obesity",
+      "predicate": "presentsWith",
+      "target": "High blood glucose levels"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Birth Defects"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Preterm Birth"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Large for Gestational Age"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Neonatal Respiratory Distress Syndrome"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Neonatal Hypoglycemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Miscarriage"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Stillbirth"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Childhood Obesity"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Type 2 Diabetes in Offspring"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Preeclampsia"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Eye Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/type-2-diabetes: mondoCode: 'MONDO:0005147' vs 'MONDO:0005148'",
+    "diabetesType/type-2-diabetes: definition: 'Some people develop diabetes during pregnancy that goes away after they have the baby. This type of diabetes is called gestational diabetes. However, having gestational diabetes increases your risk of getting type 2 diabetes later in life.' vs 'If you have gestational diabetes, you are more likely to develop type 2 diabetes later in life.'",
+    "diabetesType/gestational-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/gestational-diabetes: prevalenceShare: 0.07 vs 0.05",
+    "diabetesType/gestational-diabetes: definition: 'Some people develop diabetes during pregnancy that goes away after they have the baby. This type of diabetes is called gestational diabetes.' vs 'If you had gestational diabetes, your health care team will check your blood glucose levels in the first 3 months after having your baby to see if your gestational diabetes has completely gone away.'",
+    "riskFactor/high-blood-glucose-levels: name: 'High Blood Glucose Levels' vs '高血糖水平'",
+    "riskFactor/high-blood-glucose-levels: name: 'High Blood Glucose Levels' vs 'high blood glucose levels'",
+    "riskFactor/high-blood-glucose-levels: evidenceNote: '高血糖水平在怀孕早期会损害胎儿，增加出生缺陷的风险。' vs 'The document states that high blood glucose levels can worsen diabetes-related health problems during pregnancy.'",
+    "riskFactor/gestational-diabetes: name: 'Gestational Diabetes' vs '妊娠期糖尿病'",
+    "riskFactor/gestational-diabetes: name: 'Gestational Diabetes' vs 'Gestational diabetes'",
+    "riskFactor/gestational-diabetes: riskCategory: 'Modifiable' vs 'Obstetric'",
+    "riskFactor/gestational-diabetes: evidenceNote: '妊娠期糖尿病在产后通常会消失，但会增加未来患2型糖尿病的风险。' vs 'Gestational diabetes is a condition that occurs during pregnancy and increases the risk of developing type 2 diabetes later in life.'",
+    "riskFactor/being-overweight: name: 'Being Overweight' vs '超重'",
+    "riskFactor/physical-inactivity: name: 'Physical Inactivity' vs '久坐不动'",
+    "complication/diabetic-eye-disease: mondoCode: 'MONDO:0005147' vs 'MONDO:0005041'",
+    "complication/diabetic-eye-disease: definition: 'Diabetic eye disease can get worse during your pregnancy, and you may need special care.' vs 'Diabetic eye disease may get worse after you have a baby.'",
+    "riskFactor/diabetes: name: 'Diabetes' vs 'diabetes'",
+    "riskFactor/preeclampsia: name: 'Preeclampsia' vs 'preeclampsia'",
+    "riskFactor/large-for-gestational-age-baby: name: 'Large for Gestational Age Baby' vs 'large for gestational age baby'",
+    "riskFactor/smoking: name: 'Smoking' vs 'smoking'"
+  ]
+}

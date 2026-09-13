@@ -1,0 +1,119 @@
+{
+  "source": {
+    "sourceId": "fda-diabetes-drug-classes",
+    "uri": "https://example.org/dmo/id/guidelineSource/fda-diabetes-drug-classes",
+    "localFile": "ontology/knowledges/fda-diabetes-drug-classes.txt",
+    "sha256": "38f4accfbefe8fe3d4d11c9b72c61df31131bf60bca97ee976c4021969ab2b90",
+    "byteSize": 12998,
+    "graphUri": "urn:dmo:extract:fda-diabetes-drug-classes"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 3,
+  "counts": {
+    "rawRecords": 154,
+    "accepted": 79,
+    "rejected": 75,
+    "entities": 74,
+    "edges": 49,
+    "danglingRelations": 6,
+    "mergeConflicts": 15
+  },
+  "quality": {
+    "quoteHitRate": 0.513,
+    "schemaSlotCoverage": 0.5645,
+    "danglingRelationRate": 0.1091,
+    "avgMentionsPerEntity": 1.07
+  },
+  "rejectionsByReason": {
+    "quote_too_short": 45,
+    "quote_not_found": 30
+  },
+  "linkPass": {
+    "candidates": 106,
+    "accepted": 46,
+    "rejectedByReason": {
+      "target_unresolved": 27,
+      "quote_too_short": 5,
+      "quote_not_found": 25,
+      "source_unresolved": 3
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 20,
+    "symptom": 10,
+    "drugClass": 10,
+    "adverseEffect": 9,
+    "riskFactor": 8,
+    "contraindication": 7,
+    "medication": 7,
+    "diabetesType": 2,
+    "complication": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/drugClass/meglitinides",
+      "predicate": "hasContraindication",
+      "target": "Liver or kidney problems"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Heart problems"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors",
+      "predicate": "causesAdverseEffect",
+      "target": "Gas"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/alpha-glucosidase-inhibitors",
+      "predicate": "causesAdverseEffect",
+      "target": "Abnormal Liver Tests"
+    },
+    {
+      "from": "https://example.org/dmo/id/medication/pioglitazone",
+      "predicate": "belongsToDrugClass",
+      "target": "Thiazolidinediones"
+    },
+    {
+      "from": "https://example.org/dmo/id/medication/rosiglitazone",
+      "predicate": "belongsToDrugClass",
+      "target": "Thiazolidinediones"
+    }
+  ],
+  "conflictSamples": [
+    "symptom/hypoglycemia: name: 'Hypoglycemia' vs 'Hypoglycemia (blood sugar that is too low)'",
+    "symptom/hypoglycemia: name: 'Hypoglycemia' vs 'hypoglycemia'",
+    "riskFactor/liver-problems: name: 'Liver Problems' vs 'Liver problems'",
+    "riskFactor/kidney-problems: name: 'Kidney Problems' vs 'Kidney problems'",
+    "riskFactor/heart-failure: name: 'Heart Failure' vs 'Heart failure'",
+    "riskFactor/heart-failure: evidenceNote: '文档中提到Thiazolidinediones类药物可能引起心力衰竭，且使用前需告知医生是否有心衰。' vs \"Document states 'Heart Failure (heart cannot pump blood well)' as a condition associated with certain medications, implying it is a pre-existing condition that may affect drug use.\"",
+    "adverseEffect/hypoglycemia: name: 'Hypoglycemia' vs 'Hypoglycemia (blood sugar that is too low)'",
+    "symptom/severe-stomach-pain: name: 'Severe Stomach Pain' vs 'severe stomach pain'",
+    "symptom/nausea: name: 'Nausea' vs 'nausea'",
+    "symptom/vomiting: name: 'Vomiting' vs 'vomiting'",
+    "symptom/dyspepsia: name: 'Dyspepsia' vs 'dyspepsia'",
+    "symptom/vaginal-yeast-infections: name: 'Vaginal Yeast Infections' vs 'vaginal yeast infections'",
+    "symptom/urinary-tract-infections: name: 'Urinary Tract Infections' vs 'urinary tract infections'",
+    "adverseEffect/nausea: name: 'Nausea' vs 'nauseous'",
+    "adverseEffect/nausea: severity: 'Unknown' vs 'Mild'"
+  ]
+}

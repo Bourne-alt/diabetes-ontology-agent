@@ -15,3 +15,5 @@ ontology/shapes/
 src/skills/*.zip
 .codex-build/
 outputs/
+.codex-ppt-build/
+output-codex/

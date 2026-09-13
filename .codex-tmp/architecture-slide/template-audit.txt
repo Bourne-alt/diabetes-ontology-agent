@@ -1,0 +1,8 @@
+Source deck: output-claude/project-presentation-plain.pptx
+Slide count: 10; 16:9 (1280 x 720).
+Visual system: white content slides, dark navy opening/closing slides, teal primary accent, amber warning accent, Arial typography, compact eyebrow, large claim title, pale gray description rail, and small footer/page marker.
+Reusable pattern selected: source slide 3. It already contains a four-stage left-to-right process diagram with two/three/three/two detail nodes, connectors, one governance callout, and one bottom takeaway rail. This supports the requested overall-architecture page without adding a parallel visual system.
+Insertion contract: duplicate source slide 3 as new output slide 3, between the existing project-definition slide and the knowledge-base build slide. Rewrite only inherited text elements; preserve all inherited shapes, connectors, colors, spacing, typography, footer chrome, masters, and layouts.
+Pagination contract: source content slides are numbered 01/9 through 09/9. After inserting one content slide, rewrite only the inherited page-marker text to 01/10 through 10/10.
+Placeholder audit: source layouts and master contain no inherited placeholder elements; all visible content is slide-local.
+

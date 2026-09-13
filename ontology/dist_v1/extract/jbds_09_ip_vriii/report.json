@@ -1,0 +1,200 @@
+{
+  "source": {
+    "sourceId": "jbds_09_ip_vriii",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds_09_ip_vriii",
+    "localFile": "ontology/knowledges/pdfs/JBDS_09_IP_VRIII.pdf",
+    "sha256": "f27306f506a9c032ecbee3f854fd55d963c4f433aeea1091b968a4fb422cf359",
+    "byteSize": 4991018,
+    "graphUri": "urn:dmo:extract:jbds_09_ip_vriii",
+    "documentFormat": "pdf",
+    "pageCount": 48,
+    "textPageCount": 47
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 23,
+  "counts": {
+    "rawRecords": 511,
+    "accepted": 420,
+    "rejected": 91,
+    "entities": 365,
+    "edges": 32,
+    "danglingRelations": 84,
+    "mergeConflicts": 155
+  },
+  "quality": {
+    "quoteHitRate": 0.8219,
+    "schemaSlotCoverage": 0.9032,
+    "danglingRelationRate": 0.7241,
+    "avgMentionsPerEntity": 1.15
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 85,
+    "quote_too_short": 6
+  },
+  "linkPass": {
+    "candidates": 53,
+    "accepted": 21,
+    "rejectedByReason": {
+      "target_unresolved": 12,
+      "quote_not_found": 19,
+      "source_unresolved": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 187,
+    "contraindication": 38,
+    "medication": 29,
+    "drugClass": 23,
+    "labTest": 21,
+    "riskFactor": 21,
+    "monitoringSchedule": 16,
+    "adverseEffect": 11,
+    "complication": 7,
+    "device": 7,
+    "diabetesType": 2,
+    "complicationStage": 2,
+    "lifestyleIntervention": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/drugClass/variable-rate-intravenous-insulin-infusion",
+      "predicate": "hasContraindication",
+      "target": "DKA"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/variable-rate-intravenous-insulin-infusion",
+      "predicate": "causesAdverseEffect",
+      "target": "excess length of stay"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/safe-use-of-variable-rate-intravenous-insulin-infusion",
+      "predicate": "definesTarget",
+      "target": "Target blood glucose levels"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/safe-use-of-variable-rate-intravenous-insulin-infusion",
+      "predicate": "definesSchedule",
+      "target": "Short duration of use"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/safe-use-of-variable-rate-intravenous-insulin-infusion",
+      "predicate": "recommendsLifestyle",
+      "target": "Referral to local diabetes teams"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/safe-use-of-variable-rate-intravenous-insulin-infusion",
+      "predicate": "citesSource",
+      "target": "NHS Diabetes e-learning module 'Safe use of Intravenous insulin infusion'"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/referral-to-local-diabetes-teams",
+      "predicate": "appliesToType",
+      "target": "Variable Rate Intravenous Insulin Infusion (VRIII)"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/completion-of-e-learning-module-on-intravenous-insulin-infusion",
+      "predicate": "citesSource",
+      "target": "NHS Diabetes e-learning module 'Safe use of Intravenous insulin infusion'"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/hyperglycaemia",
+      "predicate": "increasesRiskOf",
+      "target": "Poor clinical outcomes"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/glucose-variability",
+      "predicate": "increasesRiskOf",
+      "target": "Mortality"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/admission-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Mortality"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/uncontrolled-hyperglycaemia",
+      "predicate": "increasesRiskOf",
+      "target": "Poor outcomes in ACS"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/nice-recommends-the-use-of-a-dose-adjusted-intravenous-insulin-to-prevent-uncontrolled-hyperglycaemia-bg-11-0-mmol-l-in-patients-with-acute-coronary-syndrome-acs",
+      "predicate": "definesTarget",
+      "target": "moderate glycaemic control target BG <11 mmol/L"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/nice-recommends-the-use-of-a-dose-adjusted-intravenous-insulin-to-prevent-uncontrolled-hyperglycaemia-bg-11-0-mmol-l-in-patients-with-acute-coronary-syndrome-acs",
+      "predicate": "citesSource",
+      "target": "NICE"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/moderate-glycaemic-control-target-bg-11-mmol-l",
+      "predicate": "definesTarget",
+      "target": "moderate glycaemic control target BG <11 mmol/L"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/moderate-glycaemic-control-target-bg-11-mmol-l",
+      "predicate": "appliesToType",
+      "target": "Treatment"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Hypoglycaemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "unstable blood glucose"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "HbA1c > 59 mmol/mol"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Frail elderly patients"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/type-2-diabetes: name: 'Type 2 diabetes' vs 'Type 2 Diabetes'",
+    "diabetesType/type-2-diabetes: definition: 'This guideline is designed for acutely unwell patients, including those with a pre-existing diagnosis of diabetes and those who present with hyperglycaemia for the first time.' vs 'Patients with type 2 diabetes may also be prone to ketone production if unwell. We recommend ketone testing in this group of patients when presenting with acute illness. We do not recommend the routine use of capillary blood ketone testing in hyperglycaemic patients with Type 2 diabetes who are not acutely unwell.'",
+    "diabetesType/type-2-diabetes: name: 'Type 2 diabetes' vs 'Type 2 Diabetes'",
+    "diabetesType/type-2-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes: definition: 'This guideline is designed for acutely unwell patients, including those with a pre-existing diagnosis of diabetes and those who present with hyperglycaemia for the first time.' vs 'Most patients will be taking additional OHG treatments, which should be restarted when a meal is due'",
+    "diabetesType/type-2-diabetes: name: 'Type 2 diabetes' vs 'Type 2 Diabetes'",
+    "diabetesType/type-2-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes: definition: 'This guideline is designed for acutely unwell patients, including those with a pre-existing diagnosis of diabetes and those who present with hyperglycaemia for the first time.' vs 'Restarting insulin for patients previously on subcutaneous insulin'",
+    "diabetesType/type-2-diabetes: definition: 'This guideline is designed for acutely unwell patients, including those with a pre-existing diagnosis of diabetes and those who present with hyperglycaemia for the first time.' vs 'Type 2 diabetes: give 0.1 units/kg of subcutaneous rapid acting analogue Insulin *, and recheck blood glucose 1 hour later to ensure it is falling.'",
+    "diabetesType/type-2-diabetes: definition: 'This guideline is designed for acutely unwell patients, including those with a pre-existing diagnosis of diabetes and those who present with hyperglycaemia for the first time.' vs 'Type 1 or 2 diabetes and severe illness with need to achieve good glycaemic control e.g. sepsis'",
+    "diabetesType/type-2-diabetes: name: 'Type 2 diabetes' vs 'Type 2 Diabetes'",
+    "diabetesType/type-2-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes: definition: 'This guideline is designed for acutely unwell patients, including those with a pre-existing diagnosis of diabetes and those who present with hyperglycaemia for the first time.' vs 'Type 2 Diabetes'",
+    "complication/hypoglycaemia: mondoCode: 'MONDO:0005042' vs 'MONDO:0005040'",
+    "complication/hypoglycaemia: affectedOrgan: 'Brain' vs 'Systemic'",
+    "complication/hypoglycaemia: definition: 'hypoglycaemia' vs 'Defined as CBG less than 4 mmol/L'",
+    "complication/hypoglycaemia: mondoCode: 'MONDO:0005042' vs 'MONDO:0005147'",
+    "complication/hypoglycaemia: definition: 'hypoglycaemia' vs 'If the TPN is stopped for any reason this will put the patient at risk of hypoglycaemia.'",
+    "complication/hypoglycaemia: mondoCode: 'MONDO:0005042' vs 'MONDO:0005005'",
+    "complication/hypoglycaemia: affectedOrgan: 'Brain' vs 'Systemic'"
+  ]
+}

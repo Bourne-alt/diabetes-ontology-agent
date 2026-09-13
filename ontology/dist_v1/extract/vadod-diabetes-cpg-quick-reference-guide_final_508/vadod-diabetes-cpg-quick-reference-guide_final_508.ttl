@@ -1,0 +1,510 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/VADOD-Diabetes-CPG-Quick-Reference-Guide_final_508.pdf
+# 目标 named graph：urn:dmo:extract:vadod-diabetes-cpg-quick-reference-guide_final_508
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:vadod-diabetes-cpg-quick-reference-guide_final_508'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/VADOD-Diabetes-CPG-Quick-Reference-Guide_final_508.pdf" ;
+    dmo:sha256 "f10e4025f3682ed0d4a6971699fd8213cb3aea474da08bb0f0d625455c23315d" ;
+    dmo:byteSize "741809"^^xsd:integer .
+
+<urn:dmo:extract:vadod-diabetes-cpg-quick-reference-guide_final_508> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T14:55:32+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/intermittent-fasting> a dmo:Contraindication ;
+    rdfs:label "Intermittent Fasting" ;
+    dmo:contraCode "intermittent-fasting" ;
+    dmo:rationale "We suggest against intermittent fasting." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "For adults with type 2 diabetes mellitus" ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest against intermittent fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0"^^xsd:integer ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes Mellitus" ;
+    dmo:definition "In adults with type 2 diabetes mellitus, we suggest offering health care delivered through telehealth interventions to improve outcomes." ;
+    dmo:diabetesTypeCode "type-2-diabetes-mellitus" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes Mellitus" ;
+    dmo:prevalenceShare "0"^^xsd:integer ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, we suggest offering health care delivered through telehealth interventions to improve outcomes." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a vegetarian dietary pattern for glycemic control and weight loss." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Insulin is a hormone that facilitates the uptake of glucose into cells, thereby lowering blood glucose levels." ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, especially those 65 years and older, we suggest prioritizing drug classes other than insulin, sulfonylureas, or meglitinides to minimize the risk of hypoglycemia, if glycemic control can be achieved with other treatments." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/drugClass/meglitinides> a dmo:DrugClass ;
+    rdfs:label "Meglitinides" ;
+    dmo:drugClassCode "meglitinides" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Meglitinides are a class of oral hypoglycemic agents that stimulate insulin secretion from pancreatic beta cells, primarily in response to meals." ;
+    dmo:name "Meglitinides" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, especially those 65 years and older, we suggest prioritizing drug classes other than insulin, sulfonylureas, or meglitinides to minimize the risk of hypoglycemia, if glycemic control can be achieved with other treatments." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/drugClass/sulfonylureas> a dmo:DrugClass ;
+    rdfs:label "Sulfonylureas" ;
+    dmo:drugClassCode "sulfonylureas" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Sulfonylureas are a class of oral hypoglycemic agents that stimulate insulin secretion from pancreatic beta cells." ;
+    dmo:name "Sulfonylureas" ;
+    dmo:weightEffect "Gain" ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, especially those 65 years and older, we suggest prioritizing drug classes other than insulin, sulfonylureas, or meglitinides to minimize the risk of hypoglycemia, if glycemic control can be achieved with other treatments." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/labTest/fasting-blood-glucose> a dmo:LabTest ;
+    rdfs:label "Fasting Blood Glucose" ;
+    dmo:definition "Fasting blood glucose is a measure of blood glucose after an overnight fast and is used to assess glycemic status in patients with diabetes or prediabetes." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-blood-glucose" ;
+    dmo:loincCode "15577-2" ;
+    dmo:name "Fasting Blood Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/labTest/glycemic-variability> a dmo:LabTest ;
+    rdfs:label "Glycemic Variability" ;
+    dmo:definition "Glycemic variability refers to the fluctuations in blood glucose levels over time, which can be assessed through HbA1c or fasting blood glucose measurements, and is used as a prognostic indicator for hypoglycemia, morbidity, and mortality." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "glycemic-variability" ;
+    dmo:loincCode "94575-5" ;
+    dmo:name "Glycemic Variability" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "fluctuation in HbA1c or fasting blood glucose" ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest using high glycemic variability over time (e.g., fluctuation in HbA1c or fasting blood glucose) as a prognostic indicator for risk of hypoglycemia, morbidity, and mortality." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/labTest/hba1c> a dmo:LabTest ;
+    rdfs:label "HbA1c" ;
+    dmo:definition "HbA1c is a measure of average blood glucose levels over the past 2–3 months and is used to assess long-term glycemic control in patients with diabetes." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "hba1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "HbA1c" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "We suggest an HbA1c range of 7.0–8.5% for most patients, if it can be safely achieved." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/aerobic-exercise> a dmo:LifestyleIntervention ;
+    rdfs:label "Aerobic Exercise" ;
+    dmo:activityTarget "walking 8–9 miles a week" ;
+    dmo:expectedBenefit "reduction in body fat mass, weight loss, and improvement in fasting blood glucose" ;
+    dmo:interventionCode "aerobic-exercise" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Aerobic Exercise" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-management-education-and-support> a dmo:LifestyleIntervention ;
+    rdfs:label "Diabetes Self-Management Education and Support" ;
+    dmo:interventionCode "diabetes-self-management-education-and-support" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Diabetes Self-Management Education and Support" ;
+    dmo:evidenceQuote "DSMES: diabetes self-management education and support; MNT: Medical Nutrition Therapy; T2DM: type 2 diabetes mellitus; VA: Department of Veterans Affairs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/healthy-eating> a dmo:LifestyleIntervention ;
+    rdfs:label "Healthy Eating" ;
+    dmo:activityTarget "goal weight loss >3%" ;
+    dmo:expectedBenefit "reduction in body fat mass, weight loss, and improvement in fasting blood glucose" ;
+    dmo:interventionCode "healthy-eating" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Healthy Eating" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/medical-nutrition-therapy> a dmo:LifestyleIntervention ;
+    rdfs:label "Medical Nutrition Therapy" ;
+    dmo:interventionCode "medical-nutrition-therapy" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Medical Nutrition Therapy" ;
+    dmo:evidenceQuote "MNT: Medical Nutrition Therapy; T2DM: type 2 diabetes mellitus" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/mediterranean-style-diet> a dmo:LifestyleIntervention ;
+    rdfs:label "Mediterranean Style Diet" ;
+    dmo:expectedBenefit "improve glycemic control, body weight, and hypertension" ;
+    dmo:interventionCode "mediterranean-style-diet" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Mediterranean Style Diet" ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a Mediterranean style diet to improve glycemic control, body weight, and hypertension." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Regular physical activity" ;
+    dmo:activityTarget "including but not limited to aerobic exercise, resistance training, or tai chi" ;
+    dmo:expectedBenefit "Improve glycemic control" ;
+    dmo:interventionCode "regular-physical-activity" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Regular physical activity" ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, we suggest regular physical activity to improve glycemic control, including but not limited to aerobic exercise, resistance training, or tai chi." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/lifestyleIntervention/vegetarian-dietary-pattern> a dmo:LifestyleIntervention ;
+    rdfs:label "Vegetarian Dietary Pattern" ;
+    dmo:expectedBenefit "glycemic control and weight loss" ;
+    dmo:interventionCode "vegetarian-dietary-pattern" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Vegetarian Dietary Pattern" ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a vegetarian dietary pattern for glycemic control and weight loss." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/medication/metformin> a dmo:Medication ;
+    rdfs:label "metformin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "metformin" ;
+    dmo:name "metformin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "In adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus, we suggest evaluating patient characteristics (e.g., age, life expectancy, co-occurring conditions, BMI, other risk factors) and offering metformin or other select medications to reduce the risk of progression from prediabetes to type 2 diabetes mellitus." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/acupuncture-biofeedback-hypnosis-guided-imagery-massage-therapy-yoga-or-tai-chi-for-diabetes-distress> a dmo:Recommendation ;
+    rdfs:label "Acupuncture, Biofeedback, Hypnosis, Guided Imagery, Massage Therapy, Yoga, or Tai Chi for Diabetes Distress" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Neither for nor against" ;
+    dmo:populationScope "Adults with type 2 diabetes mellitus and diabetes distress" ;
+    dmo:recommendationId "acupuncture-biofeedback-hypnosis-guided-imagery-massage-therapy-yoga-or-tai-chi-for-diabetes-distress" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus and diabetes distress, there is insufficient evidence to recommend for or against the use of acupuncture, biofeedback, hypnosis, guided imagery, massage therapy, yoga, or tai chi to improve outcomes." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus and diabetes distress, there is insufficient evidence to recommend for or against the use of acupuncture, biofeedback, hypnosis, guided imagery, massage therapy, yoga, or tai chi to improve outcomes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/carbohydrate-intake-for-diabetes-management> a dmo:Recommendation ;
+    rdfs:label "Carbohydrate Intake for Diabetes Management" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "Adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "carbohydrate-intake-for-diabetes-management" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "13–50% of their total daily caloric intake from carbohydrates for diabetes management." ;
+    dmo:evidenceQuote "13–50% of their total daily caloric intake from carbohydrates for diabetes management." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/exercise-nutrition> a dmo:Recommendation ;
+    rdfs:label "Exercise/Nutrition" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with prediabetes" ;
+    dmo:recommendationId "exercise-nutrition" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/hba1c-range-of-7-0-8-5> a dmo:Recommendation ;
+    rdfs:label "HbA1c Range of 7.0–8.5%" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "most patients with type 2 diabetes mellitus" ;
+    dmo:recommendationId "hba1c-range-of-7-0-8-5" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "We suggest an HbA1c range of 7.0–8.5% for most patients, if it can be safely achieved." ;
+    dmo:evidenceQuote "We suggest an HbA1c range of 7.0–8.5% for most patients, if it can be safely achieved." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/intermittent-fasting-for-type-2-diabetes-mellitus> a dmo:Recommendation ;
+    rdfs:label "Intermittent Fasting for Type 2 Diabetes Mellitus" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "Adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "intermittent-fasting-for-type-2-diabetes-mellitus" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest against intermittent fasting." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest against intermittent fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/mediterranean-style-diet> a dmo:Recommendation ;
+    rdfs:label "Mediterranean Style Diet" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "mediterranean-style-diet" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest a Mediterranean style diet to improve glycemic control, body weight, and hypertension." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a Mediterranean style diet to improve glycemic control, body weight, and hypertension." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/nutrition-intervention-strategy-with-13-50-carbohydrates> a dmo:Recommendation ;
+    rdfs:label "Nutrition Intervention Strategy with 13–50% Carbohydrates" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "nutrition-intervention-strategy-with-13-50-carbohydrates" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest a nutrition intervention strategy providing 13–50% of their total daily caloric intake from carbohydrates for diabetes management." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a nutrition intervention strategy providing 13–50% of their total daily caloric intake from carbohydrates for diabetes management." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/pharmacotherapy> a dmo:Recommendation ;
+    rdfs:label "Pharmacotherapy" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus" ;
+    dmo:recommendationId "pharmacotherapy" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "In adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus, we suggest evaluating patient characteristics (e.g., age, life expectancy, co-occurring conditions, BMI, other risk factors) and offering metformin or other select medications to reduce the risk of progression from prediabetes to type 2 diabetes mellitus." ;
+    dmo:evidenceQuote "In adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus, we suggest evaluating patient characteristics (e.g., age, life expectancy, co-occurring conditions, BMI, other risk factors) and offering metformin or other select medications to reduce the risk of progression from prediabetes to type 2 diabetes mellitus." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/prioritizing-drug-classes-other-than-insulin-sulfonylureas-or-meglitinides-in-older-adults> a dmo:Recommendation ;
+    rdfs:label "Prioritizing Drug Classes Other Than Insulin, Sulfonylureas, or Meglitinides in Older Adults" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "Adults with type 2 diabetes mellitus, especially those 65 years and older" ;
+    dmo:recommendationId "prioritizing-drug-classes-other-than-insulin-sulfonylureas-or-meglitinides-in-older-adults" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "In adults with type 2 diabetes mellitus, especially those 65 years and older, we suggest prioritizing drug classes other than insulin, sulfonylureas, or meglitinides to minimize the risk of hypoglycemia, if glycemic control can be achieved with other treatments." ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, especially those 65 years and older, we suggest prioritizing drug classes other than insulin, sulfonylureas, or meglitinides to minimize the risk of hypoglycemia, if glycemic control can be achieved with other treatments." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/regular-physical-activity-for-glycemic-control> a dmo:Recommendation ;
+    rdfs:label "Regular Physical Activity for Glycemic Control" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "Adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "regular-physical-activity-for-glycemic-control" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "In adults with type 2 diabetes mellitus, we suggest regular physical activity to improve glycemic control, including but not limited to aerobic exercise, resistance training, or tai chi." ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, we suggest regular physical activity to improve glycemic control, including but not limited to aerobic exercise, resistance training, or tai chi." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/routine-screening-for-fall-risk-and-cognitive-impairment> a dmo:Recommendation ;
+    rdfs:label "Routine Screening for Fall Risk and Cognitive Impairment" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Neither for nor against" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "routine-screening-for-fall-risk-and-cognitive-impairment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "In adults with type 2 diabetes mellitus, there is insufficient evidence to recommend for or against routine screening for fall risk and cognitive impairment to improve outcomes." ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, there is insufficient evidence to recommend for or against routine screening for fall risk and cognitive impairment to improve outcomes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/screening-for-comorbidities> a dmo:Recommendation ;
+    rdfs:label "Screening for Comorbidities" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Neither for nor against" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "screening-for-comorbidities" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "There is insufficient evidence to recommend for or against routine screening or using a specific tool to screen for or diagnose diabetes distress." ;
+    dmo:evidenceQuote "There is insufficient evidence to recommend for or against routine screening or using a specific tool to screen for or diagnose diabetes distress." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/set-individualized-hba1c-target-range> a dmo:Recommendation ;
+    rdfs:label "Set Individualized HbA1c Target Range" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "set-individualized-hba1c-target-range" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "We suggest setting an individualized HbA1c target range based on the clinician’s appraisal of the risk benefit ratio, patient characteristics, presence or absence of type 2 diabetes mellitus complications, comorbidities, and life expectancy." ;
+    dmo:evidenceQuote "We suggest setting an individualized HbA1c target range based on the clinician’s appraisal of the risk benefit ratio, patient characteristics, presence or absence of type 2 diabetes mellitus complications, comorbidities, and life expectancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/suggest-against-intermittent-fasting> a dmo:Recommendation ;
+    rdfs:label "Suggest Against Intermittent Fasting" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "suggest-against-intermittent-fasting" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest against intermittent fasting." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest against intermittent fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/telehealth> a dmo:Recommendation ;
+    rdfs:label "Telehealth" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "telehealth" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "In adults with type 2 diabetes mellitus, we suggest offering health care delivered through telehealth interventions to improve outcomes." ;
+    dmo:evidenceQuote "In adults with type 2 diabetes mellitus, we suggest offering health care delivered through telehealth interventions to improve outcomes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/use-high-glycemic-variability-as-prognostic-indicator> a dmo:Recommendation ;
+    rdfs:label "Use High Glycemic Variability as Prognostic Indicator" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "use-high-glycemic-variability-as-prognostic-indicator" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest using high glycemic variability over time (e.g., fluctuation in HbA1c or fasting blood glucose) as a prognostic indicator for risk of hypoglycemia, morbidity, and mortality." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest using high glycemic variability over time (e.g., fluctuation in HbA1c or fasting blood glucose) as a prognostic indicator for risk of hypoglycemia, morbidity, and mortality." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/vegetarian-dietary-pattern> a dmo:Recommendation ;
+    rdfs:label "Vegetarian Dietary Pattern" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "vegetarian-dietary-pattern" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest a vegetarian dietary pattern for glycemic control and weight loss." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a vegetarian dietary pattern for glycemic control and weight loss." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/recommendation/vegetarian-dietary-pattern-for-glycemic-control-and-weight-loss> a dmo:Recommendation ;
+    rdfs:label "Vegetarian Dietary Pattern for Glycemic Control and Weight Loss" ;
+    dmo:gradingSystem "VA-DoD" ;
+    dmo:nativeEvidenceGrade "Weak" ;
+    dmo:populationScope "Adults with type 2 diabetes mellitus" ;
+    dmo:recommendationId "vegetarian-dietary-pattern-for-glycemic-control-and-weight-loss" ;
+    dmo:recommendationStrength "Conditional" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For adults with type 2 diabetes mellitus, we suggest a vegetarian dietary pattern for glycemic control and weight loss." ;
+    dmo:evidenceQuote "For adults with type 2 diabetes mellitus, we suggest a vegetarian dietary pattern for glycemic control and weight loss." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/advanced-age> a dmo:RiskFactor ;
+    rdfs:label "Advanced Age" ;
+    dmo:evidenceNote "Advanced age is a non-modifiable risk factor for type 2 diabetes mellitus, as it is considered in evaluating patient characteristics for pharmacotherapy in prediabetes." ;
+    dmo:name "Advanced Age" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "advanced-age" ;
+    dmo:evidenceQuote "In adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus, we suggest evaluating patient characteristics (e.g., age, life expectancy, co-occurring conditions, BMI, other risk factors) and offering metformin or other select medications to reduce the risk of progression from prediabetes to type 2 diabetes mellitus." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/co-occurring-conditions> a dmo:RiskFactor ;
+    rdfs:label "Co-occurring Conditions" ;
+    dmo:evidenceNote "Co-occurring conditions are non-modifiable risk factors considered in evaluating patient characteristics for pharmacotherapy in prediabetes." ;
+    dmo:name "Co-occurring Conditions" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "co-occurring-conditions" ;
+    dmo:evidenceQuote "In adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus, we suggest evaluating patient characteristics (e.g., age, life expectancy, co-occurring conditions, BMI, other risk factors) and offering metformin or other select medications to reduce the risk of progression from prediabetes to type 2 diabetes mellitus." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/high-bmi> a dmo:RiskFactor ;
+    rdfs:label "High BMI" ;
+    dmo:evidenceNote "High BMI is a modifiable risk factor for type 2 diabetes mellitus, as weight loss is recommended in adults with prediabetes to reduce body fat mass." ;
+    dmo:name "High BMI" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-bmi" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/obesity> a dmo:RiskFactor ;
+    rdfs:label "Obesity" ;
+    dmo:evidenceNote "Obesity is a modifiable risk factor for type 2 diabetes mellitus, as weight loss is recommended in adults with prediabetes to reduce body fat mass and improve fasting blood glucose." ;
+    dmo:name "Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "obesity" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/physical-inactivity> a dmo:RiskFactor ;
+    rdfs:label "Physical Inactivity" ;
+    dmo:evidenceNote "Physical inactivity is a modifiable risk factor for type 2 diabetes mellitus, as aerobic exercise is recommended for adults with prediabetes to improve metabolic outcomes." ;
+    dmo:name "Physical Inactivity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "physical-inactivity" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/prediabetes> a dmo:RiskFactor ;
+    rdfs:label "Prediabetes" ;
+    dmo:evidenceNote "Prediabetes is a condition that increases the risk of progression to type 2 diabetes mellitus." ;
+    dmo:name "Prediabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "prediabetes" ;
+    dmo:evidenceQuote "In adults with prediabetes, we suggest aerobic exercise (such as walking 8–9 miles a week) and healthy eating (with a goal weight loss >3%) to achieve a reduction in body fat mass, weight loss, and improvement in fasting blood glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+<https://example.org/dmo/id/riskFactor/short-life-expectancy> a dmo:RiskFactor ;
+    rdfs:label "Short Life Expectancy" ;
+    dmo:evidenceNote "Short life expectancy is a non-modifiable factor considered in evaluating patient characteristics for pharmacotherapy in prediabetes." ;
+    dmo:name "Short Life Expectancy" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "short-life-expectancy" ;
+    dmo:evidenceQuote "In adults with prediabetes who have participated in healthy lifestyle modification and remain at high risk for progression to type 2 diabetes mellitus, we suggest evaluating patient characteristics (e.g., age, life expectancy, co-occurring conditions, BMI, other risk factors) and offering metformin or other select medications to reduce the risk of progression from prediabetes to type 2 diabetes mellitus." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-quick-reference-guide_final_508> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/prediabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/obesity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/physical-inactivity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/advanced-age> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/short-life-expectancy> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/co-occurring-conditions> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/riskFactor/high-bmi> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/drugClass/insulin> dmo:hasContraindication <https://example.org/dmo/id/contraindication/intermittent-fasting> .
+<https://example.org/dmo/id/drugClass/meglitinides> dmo:hasContraindication <https://example.org/dmo/id/contraindication/intermittent-fasting> .
+<https://example.org/dmo/id/drugClass/sulfonylureas> dmo:hasContraindication <https://example.org/dmo/id/contraindication/intermittent-fasting> .
+<https://example.org/dmo/id/medication/metformin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/sulfonylureas> .
+<https://example.org/dmo/id/lifestyleIntervention/aerobic-exercise> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/healthy-eating> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/medical-nutrition-therapy> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/prediabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/mediterranean-style-diet> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/prediabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/vegetarian-dietary-pattern> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/prediabetes> .
+<https://example.org/dmo/id/recommendation/exercise-nutrition> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/aerobic-exercise> .
+<https://example.org/dmo/id/recommendation/exercise-nutrition> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-eating> .
+<https://example.org/dmo/id/recommendation/hba1c-range-of-7-0-8-5> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/recommendation/set-individualized-hba1c-target-range> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/recommendation/use-high-glycemic-variability-as-prognostic-indicator> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/recommendation/mediterranean-style-diet> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/mediterranean-style-diet> .
+<https://example.org/dmo/id/recommendation/nutrition-intervention-strategy-with-13-50-carbohydrates> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/medical-nutrition-therapy> .
+<https://example.org/dmo/id/recommendation/vegetarian-dietary-pattern> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/vegetarian-dietary-pattern> .
+<https://example.org/dmo/id/recommendation/regular-physical-activity-for-glycemic-control> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity> .
+<https://example.org/dmo/id/recommendation/prioritizing-drug-classes-other-than-insulin-sulfonylureas-or-meglitinides-in-older-adults> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/recommendation/acupuncture-biofeedback-hypnosis-guided-imagery-massage-therapy-yoga-or-tai-chi-for-diabetes-distress> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .
+<https://example.org/dmo/id/recommendation/carbohydrate-intake-for-diabetes-management> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/medical-nutrition-therapy> .
+<https://example.org/dmo/id/recommendation/routine-screening-for-fall-risk-and-cognitive-impairment> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes-mellitus> .

@@ -1,0 +1,3 @@
+Output slide 3: duplicated source slide 3 and rewrote inherited text only. The original knowledge-build process diagram becomes a system architecture diagram; geometry, connectors, colors, typography, spacing, and slide chrome are unchanged.
+Output slides 2 and 4-11: only the inherited page-marker text is updated to reflect the inserted slide and new total.
+

@@ -1,0 +1,727 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-symptoms-causes.txt
+# 目标 named graph：urn:dmo:extract:niddk-symptoms-causes
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-symptoms-causes'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-symptoms-causes.txt" ;
+    dmo:sha256 "644724a0516b7670a298f0c0b1de29be78643f33c81a55707dd52e3ec85369bb" ;
+    dmo:byteSize "15893"^^xsd:integer .
+
+<urn:dmo:extract:niddk-symptoms-causes> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T04:18:06+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/statins> a dmo:AdverseEffect ;
+    rdfs:label "Statins" ;
+    dmo:adverseEffectCode "statins" ;
+    dmo:frequencyCategory "Uncommon" ;
+    dmo:name "Statins" ;
+    dmo:severity "Mild" ;
+    dmo:evidenceQuote "Statins, which are medicines to reduce LDL (“bad”) cholesterol levels, can slightly increase the chance that you’ll develop diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/acromegaly> a dmo:DiabetesType ;
+    rdfs:label "Acromegaly" ;
+    dmo:definition "acromegaly, which can cause the body to produce too much growth hormone" ;
+    dmo:diabetesTypeCode "acromegaly" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001453" ;
+    dmo:name "Acromegaly" ;
+    dmo:prevalenceShare "1e-05"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "acromegaly, which can cause the body to produce too much growth hormone" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/antiseizure-medicines> a dmo:DiabetesType ;
+    rdfs:label "Antiseizure Medicines" ;
+    dmo:definition "antiseizure medicines that are used to treat epilepsy" ;
+    dmo:diabetesTypeCode "antiseizure-medicines" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001459" ;
+    dmo:name "Antiseizure Medicines" ;
+    dmo:prevalenceShare "0.0001"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "antiseizure medicines that are used to treat epilepsy" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/cushing-s-syndrome> a dmo:DiabetesType ;
+    rdfs:label "Cushing’s Syndrome" ;
+    dmo:definition "Cushing’s syndrome, which can cause the body to produce too much cortisol—often called the “stress hormone”" ;
+    dmo:diabetesTypeCode "cushing-s-syndrome" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001452" ;
+    dmo:name "Cushing’s Syndrome" ;
+    dmo:prevalenceShare "1e-05"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Cushing’s syndrome, which can cause the body to produce too much cortisol—often called the “stress hormone”" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/diabetes-related-to-acute-pancreatitis-and-its-mechanisms> a dmo:DiabetesType ;
+    rdfs:label "Diabetes Related to Acute Pancreatitis and Its Mechanisms" ;
+    dmo:definition "As part of this group, the Diabetes Related to Acute Pancreatitis and Its Mechanisms (DREAM) study is looking at people with recent acute pancreatitis to see how many develop diabetes." ;
+    dmo:diabetesTypeCode "diabetes-related-to-acute-pancreatitis-and-its-mechanisms" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Diabetes Related to Acute Pancreatitis and Its Mechanisms" ;
+    dmo:prevalenceShare "0.005"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "As part of this group, the Diabetes Related to Acute Pancreatitis and Its Mechanisms (DREAM) study is looking at people with recent acute pancreatitis to see how many develop diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Gestational Diabetes" ;
+    dmo:definition "Gestational diabetes is a type of diabetes that may develop when you are pregnant." ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Gestational Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "People with a history of gestational diabetes are at higher risk of developing type 2 diabetes later in life." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/hyperthyroidism> a dmo:DiabetesType ;
+    rdfs:label "Hyperthyroidism" ;
+    dmo:definition "hyperthyroidism, which can cause the body to produce too much thyroid hormone" ;
+    dmo:diabetesTypeCode "hyperthyroidism" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001454" ;
+    dmo:name "Hyperthyroidism" ;
+    dmo:prevalenceShare "5e-05"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "hyperthyroidism, which can cause the body to produce too much thyroid hormone" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/hypothyroidism> a dmo:DiabetesType ;
+    rdfs:label "Hypothyroidism" ;
+    dmo:definition "hypothyroidism, which can cause the body to produce too little thyroid hormone" ;
+    dmo:diabetesTypeCode "hypothyroidism" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001455" ;
+    dmo:name "Hypothyroidism" ;
+    dmo:prevalenceShare "5e-05"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "hypothyroidism, which can cause the body to produce too little thyroid hormone" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/immunosuppressants> a dmo:DiabetesType ;
+    rdfs:label "Immunosuppressants" ;
+    dmo:definition "immunosuppressants that are used after an organ transplant" ;
+    dmo:diabetesTypeCode "immunosuppressants" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001462" ;
+    dmo:name "Immunosuppressants" ;
+    dmo:prevalenceShare "0.0001"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "immunosuppressants that are used after an organ transplant" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Monogenic Diabetes" ;
+    dmo:definition "Monogenic diabetes is a group of rare forms of diabetes caused by a variant, or change, in a single gene." ;
+    dmo:diabetesTypeCode "monogenic-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Monogenic Diabetes" ;
+    dmo:prevalenceShare "0.0001"^^xsd:decimal ;
+    dmo:typicalOnset "Neonatal" ;
+    dmo:evidenceQuote "Monogenic diabetes is a group of rare forms of diabetes caused by a variant, or change, in a single gene." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/pancreatitis> a dmo:DiabetesType ;
+    rdfs:label "Pancreatitis" ;
+    dmo:definition "The pancreas can be damaged by injury or diseases such as inflammation of the pancreas, also called pancreatitis." ;
+    dmo:diabetesTypeCode "pancreatitis" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0001456" ;
+    dmo:name "Pancreatitis" ;
+    dmo:prevalenceShare "0.0001"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "The pancreas can be damaged by injury or diseases such as inflammation of the pancreas, also called pancreatitis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "When blood glucose levels are higher than normal but not high enough to be diagnosed as type 2 diabetes, you have a condition called prediabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "When blood glucose levels are higher than normal but not high enough to be diagnosed as type 2 diabetes, you have a condition called prediabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "NIDDK-supported research helped scientists find genes linked to type 1 diabetes and new ways to identify people with type 1 diabetes before they develop symptoms." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "NIDDK-supported research helped scientists find genes linked to type 1 diabetes and new ways to identify people with type 1 diabetes before they develop symptoms." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "Type 2 diabetes develops when your pancreas doesn’t produce enough insulin, and your body has trouble using insulin, a condition called insulin resistance." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Type 2 diabetes develops when your pancreas doesn’t produce enough insulin, and your body has trouble using insulin, a condition called insulin resistance." ;
+    dmo:evidenceQuote "The Diabetes Prevention Program (DPP) studied how to prevent or delay disease in people at high risk of developing type 2 diabetes. The study found that participants who did regular physical activity and lost 5% to 7% of their body weight lowered their chance of developing type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> a dmo:LifestyleIntervention ;
+    rdfs:label "Regular physical activity and lost 5% to 7% of their body weight" ;
+    dmo:activityTarget "Regular physical activity and lost 5% to 7% of their body weight" ;
+    dmo:expectedBenefit "Lowered their chance of developing type 2 diabetes" ;
+    dmo:interventionCode "regular-physical-activity-and-lost-5-to-7-of-their-body-weight" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Regular physical activity and lost 5% to 7% of their body weight" ;
+    dmo:evidenceQuote "The study found that participants who did regular physical activity and lost 5% to 7% of their body weight lowered their chance of developing type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/medication/beta-blockers> a dmo:Medication ;
+    rdfs:label "Beta-blockers" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "beta-blockers" ;
+    dmo:name "Beta-blockers" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "beta-blockers and diuretics NIH external link that are used to treat high blood pressure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/medication/diuretics> a dmo:Medication ;
+    rdfs:label "Diuretics" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "diuretics" ;
+    dmo:name "Diuretics" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "beta-blockers and diuretics NIH external link that are used to treat high blood pressure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/medication/glucocorticoids> a dmo:Medication ;
+    rdfs:label "Glucocorticoids" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "glucocorticoids" ;
+    dmo:name "Glucocorticoids" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "glucocorticoids NIH external link that are used to treat certain inflammatory diseases" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/medication/immunosuppressants> a dmo:Medication ;
+    rdfs:label "Immunosuppressants" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "immunosuppressants" ;
+    dmo:name "Immunosuppressants" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "immunosuppressants that are used after an organ transplant" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/medication/niacin> a dmo:Medication ;
+    rdfs:label "Niacin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "niacin" ;
+    dmo:name "Niacin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "niacin NIH external link, a type of vitamin B that is sometimes used to treat high blood cholesterol" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/medication/statins> a dmo:Medication ;
+    rdfs:label "Statins" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "statins" ;
+    dmo:name "Statins" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Statins, which are medicines to reduce LDL (“bad”) cholesterol levels, can slightly increase the chance that you’ll develop diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/recommendation/diabetes-prevention-program-lifestyle-recommendation> a dmo:Recommendation ;
+    rdfs:label "Diabetes Prevention Program Lifestyle Recommendation" ;
+    dmo:gradingSystem "Not specified" ;
+    dmo:nativeEvidenceGrade "Not specified" ;
+    dmo:populationScope "People at high risk of developing type 2 diabetes" ;
+    dmo:recommendationId "diabetes-prevention-program-lifestyle-recommendation" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Participants who did regular physical activity and lost 5% to 7% of their body weight lowered their chance of developing type 2 diabetes." ;
+    dmo:evidenceQuote "The study found that participants who did regular physical activity and lost 5% to 7% of their body weight lowered their chance of developing type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/acromegaly> a dmo:RiskFactor ;
+    rdfs:label "Acromegaly" ;
+    dmo:evidenceNote "acromegaly, which can cause the body to produce too much growth hormone" ;
+    dmo:name "Acromegaly" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "acromegaly" ;
+    dmo:evidenceQuote "acromegaly, which can cause the body to produce too much growth hormone" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/african-american> a dmo:RiskFactor ;
+    rdfs:label "African American" ;
+    dmo:evidenceNote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    dmo:name "African American" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "african-american" ;
+    dmo:evidenceQuote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/age-35-or-older> a dmo:RiskFactor ;
+    rdfs:label "Age 35 or Older" ;
+    dmo:evidenceNote "are age 35 or older. Children and teens can also develop type 2 diabetes, but the risk increases as a person gets older." ;
+    dmo:name "Age 35 or Older" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "age-35-or-older" ;
+    dmo:evidenceQuote "are age 35 or older. Children and teens can also develop type 2 diabetes, but the risk increases as a person gets older." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/american-indian> a dmo:RiskFactor ;
+    rdfs:label "American Indian" ;
+    dmo:evidenceNote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    dmo:name "American Indian" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "american-indian" ;
+    dmo:evidenceQuote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/antipsychotics> a dmo:RiskFactor ;
+    rdfs:label "Antipsychotics" ;
+    dmo:evidenceNote "antipsychotics NIH external link that are used to treat certain mental health problems" ;
+    dmo:name "Antipsychotics" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "antipsychotics" ;
+    dmo:evidenceQuote "antipsychotics NIH external link that are used to treat certain mental health problems" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/antiseizure-medicines> a dmo:RiskFactor ;
+    rdfs:label "Antiseizure Medicines" ;
+    dmo:evidenceNote "antiseizure medicines that are used to treat epilepsy NIH external link" ;
+    dmo:name "Antiseizure Medicines" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "antiseizure-medicines" ;
+    dmo:evidenceQuote "antiseizure medicines that are used to treat epilepsy NIH external link" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/asian-american> a dmo:RiskFactor ;
+    rdfs:label "Asian American" ;
+    dmo:evidenceNote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    dmo:name "Asian American" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "asian-american" ;
+    dmo:evidenceQuote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/beta-blockers> a dmo:RiskFactor ;
+    rdfs:label "Beta-Blockers" ;
+    dmo:evidenceNote "beta-blockers and diuretics NIH external link that are used to treat high blood pressure" ;
+    dmo:name "Beta-Blockers" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "beta-blockers" ;
+    dmo:evidenceQuote "beta-blockers and diuretics NIH external link that are used to treat high blood pressure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/cushing-s-syndrome> a dmo:RiskFactor ;
+    rdfs:label "Cushing’s Syndrome" ;
+    dmo:evidenceNote "Cushing’s syndrome, which can cause the body to produce too much cortisol—often called the “stress hormone”" ;
+    dmo:name "Cushing’s Syndrome" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "cushing-s-syndrome" ;
+    dmo:evidenceQuote "Cushing’s syndrome, which can cause the body to produce too much cortisol—often called the “stress hormone”" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/cystic-fibrosis> a dmo:RiskFactor ;
+    rdfs:label "Cystic Fibrosis" ;
+    dmo:evidenceNote "Cystic fibrosis NIH external link is a genetic disease that leads to swelling and scarring in the pancreas. This scarring can prevent the pancreas from making enough insulin." ;
+    dmo:name "Cystic Fibrosis" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "cystic-fibrosis" ;
+    dmo:evidenceQuote "Cystic fibrosis NIH external link is a genetic disease that leads to swelling and scarring in the pancreas. This scarring can prevent the pancreas from making enough insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/diuretics> a dmo:RiskFactor ;
+    rdfs:label "Diuretics" ;
+    dmo:evidenceNote "beta-blockers and diuretics NIH external link that are used to treat high blood pressure" ;
+    dmo:name "Diuretics" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "diuretics" ;
+    dmo:evidenceQuote "beta-blockers and diuretics NIH external link that are used to treat high blood pressure" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-gestational-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Gestational Diabetes" ;
+    dmo:evidenceNote "having a family history of gestational diabetes, type 2 diabetes, or both" ;
+    dmo:name "Family History of Gestational Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-gestational-diabetes" ;
+    dmo:evidenceQuote "having a family history of gestational diabetes, type 2 diabetes, or both" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Type 2 Diabetes" ;
+    dmo:evidenceNote "have a family history of type 2 diabetes." ;
+    dmo:name "Family History of Type 2 Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-type-2-diabetes" ;
+    dmo:evidenceQuote "have a family history of type 2 diabetes." ;
+    dmo:evidenceQuote "having a family history of gestational diabetes, type 2 diabetes, or both" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/gaining-too-much-weight-during-pregnancy> a dmo:RiskFactor ;
+    rdfs:label "Gaining Too Much Weight During Pregnancy" ;
+    dmo:evidenceNote "gaining too much weight during pregnancy" ;
+    dmo:name "Gaining Too Much Weight During Pregnancy" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "gaining-too-much-weight-during-pregnancy" ;
+    dmo:evidenceQuote "gaining too much weight during pregnancy" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/giving-birth-to-a-baby-weighing-9-pounds-or-more> a dmo:RiskFactor ;
+    rdfs:label "Giving Birth to a Baby Weighing 9 Pounds or More" ;
+    dmo:evidenceNote "have a history of gestational diabetes, a type of diabetes that develops during pregnancy, or gave birth to a baby weighing 9 pounds or more." ;
+    dmo:name "Giving Birth to a Baby Weighing 9 Pounds or More" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "giving-birth-to-a-baby-weighing-9-pounds-or-more" ;
+    dmo:evidenceQuote "have a history of gestational diabetes, a type of diabetes that develops during pregnancy, or gave birth to a baby weighing 9 pounds or more." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/glucocorticoids> a dmo:RiskFactor ;
+    rdfs:label "Glucocorticoids" ;
+    dmo:evidenceNote "glucocorticoids NIH external link that are used to treat certain inflammatory diseases" ;
+    dmo:name "Glucocorticoids" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "glucocorticoids" ;
+    dmo:evidenceQuote "glucocorticoids NIH external link that are used to treat certain inflammatory diseases" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/hemochromatosis> a dmo:RiskFactor ;
+    rdfs:label "Hemochromatosis" ;
+    dmo:evidenceNote "Hemochromatosis is a genetic condition that causes your body and organs to build up harmful levels of iron NIH external link. If the disease is not treated, high levels of iron may damage your pancreas and other organs." ;
+    dmo:name "Hemochromatosis" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "hemochromatosis" ;
+    dmo:evidenceQuote "Hemochromatosis is a genetic condition that causes your body and organs to build up harmful levels of iron NIH external link. If the disease is not treated, high levels of iron may damage your pancreas and other organs." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/hispanic> a dmo:RiskFactor ;
+    rdfs:label "Hispanic" ;
+    dmo:evidenceNote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    dmo:name "Hispanic" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "hispanic" ;
+    dmo:evidenceQuote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/history-of-gestational-diabetes> a dmo:RiskFactor ;
+    rdfs:label "History of Gestational Diabetes" ;
+    dmo:evidenceNote "People with a history of gestational diabetes are at higher risk of developing type 2 diabetes later in life." ;
+    dmo:name "History of Gestational Diabetes" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "history-of-gestational-diabetes" ;
+    dmo:evidenceQuote "People with a history of gestational diabetes are at higher risk of developing type 2 diabetes later in life." ;
+    dmo:evidenceQuote "have a history of gestational diabetes, a type of diabetes that develops during pregnancy, or gave birth to a baby weighing 9 pounds or more." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/hyperthyroidism> a dmo:RiskFactor ;
+    rdfs:label "Hyperthyroidism" ;
+    dmo:evidenceNote "hyperthyroidism, which can cause the body to produce too much thyroid hormone" ;
+    dmo:name "Hyperthyroidism" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "hyperthyroidism" ;
+    dmo:evidenceQuote "hyperthyroidism, which can cause the body to produce too much thyroid hormone" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/hypothyroidism> a dmo:RiskFactor ;
+    rdfs:label "Hypothyroidism" ;
+    dmo:evidenceNote "hypothyroidism, which can cause the body to produce too little thyroid hormone" ;
+    dmo:name "Hypothyroidism" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "hypothyroidism" ;
+    dmo:evidenceQuote "hypothyroidism, which can cause the body to produce too little thyroid hormone" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/immunosuppressants> a dmo:RiskFactor ;
+    rdfs:label "Immunosuppressants" ;
+    dmo:evidenceNote "immunosuppressants that are used after an organ transplant" ;
+    dmo:name "Immunosuppressants" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "immunosuppressants" ;
+    dmo:evidenceQuote "immunosuppressants that are used after an organ transplant" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/large-waist-size> a dmo:RiskFactor ;
+    rdfs:label "Large Waist Size" ;
+    dmo:evidenceNote "People are more likely to develop type 2 diabetes if they have overweight, obesity, or a large waist size." ;
+    dmo:name "Large Waist Size" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "large-waist-size" ;
+    dmo:evidenceQuote "have overweight, obesity, or a large waist size." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/latino> a dmo:RiskFactor ;
+    rdfs:label "Latino" ;
+    dmo:evidenceNote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    dmo:name "Latino" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "latino" ;
+    dmo:evidenceQuote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/monogenic-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Monogenic Diabetes" ;
+    dmo:evidenceNote "Monogenic diabetes is a group of rare forms of diabetes caused by a variant, or change, in a single gene." ;
+    dmo:name "Monogenic Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "monogenic-diabetes" ;
+    dmo:evidenceQuote "Monogenic diabetes is a group of rare forms of diabetes caused by a variant, or change, in a single gene." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/niacin> a dmo:RiskFactor ;
+    rdfs:label "Niacin" ;
+    dmo:evidenceNote "niacin NIH external link, a type of vitamin B that is sometimes used to treat high blood cholesterol" ;
+    dmo:name "Niacin" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "niacin" ;
+    dmo:evidenceQuote "niacin NIH external link, a type of vitamin B that is sometimes used to treat high blood cholesterol" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/not-physically-active> a dmo:RiskFactor ;
+    rdfs:label "Not Physically Active" ;
+    dmo:evidenceNote "are not physically active, because of a job that requires sitting for long periods of time or because of difficulty moving their body." ;
+    dmo:name "Not Physically Active" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "not-physically-active" ;
+    dmo:evidenceQuote "are not physically active, because of a job that requires sitting for long periods of time or because of difficulty moving their body." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/obesity> a dmo:RiskFactor ;
+    rdfs:label "Obesity" ;
+    dmo:evidenceNote "People are more likely to develop type 2 diabetes if they have overweight, obesity, or a large waist size." ;
+    dmo:name "Obesity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "obesity" ;
+    dmo:evidenceQuote "have overweight, obesity, or a large waist size." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/overweight> a dmo:RiskFactor ;
+    rdfs:label "Overweight" ;
+    dmo:evidenceNote "People are more likely to develop type 2 diabetes if they have overweight, obesity, or a large waist size." ;
+    dmo:name "Overweight" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "overweight" ;
+    dmo:evidenceQuote "have overweight, obesity, or a large waist size." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/pacific-islander> a dmo:RiskFactor ;
+    rdfs:label "Pacific Islander" ;
+    dmo:evidenceNote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    dmo:name "Pacific Islander" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "pacific-islander" ;
+    dmo:evidenceQuote "are African American, American Indian, Asian American, Hispanic, Latino, or Pacific Islander." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/pancreatic-cancer> a dmo:RiskFactor ;
+    rdfs:label "Pancreatic Cancer" ;
+    dmo:evidenceNote "Diabetes may be the first sign of pancreatic cancer NIH external link in older people without diabetes risk factors who develop diabetes." ;
+    dmo:name "Pancreatic Cancer" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "pancreatic-cancer" ;
+    dmo:evidenceQuote "Diabetes may be the first sign of pancreatic cancer NIH external link in older people without diabetes risk factors who develop diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/pancreatitis> a dmo:RiskFactor ;
+    rdfs:label "Pancreatitis" ;
+    dmo:evidenceNote "The pancreas can be damaged by injury or diseases such as inflammation of the pancreas, also called pancreatitis." ;
+    dmo:name "Pancreatitis" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "pancreatitis" ;
+    dmo:evidenceQuote "The pancreas can be damaged by injury or diseases such as inflammation of the pancreas, also called pancreatitis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/removal-of-the-pancreas> a dmo:RiskFactor ;
+    rdfs:label "Removal of the Pancreas" ;
+    dmo:evidenceNote "In some cases, your pancreas may need to be removed. Without a pancreas, your body can’t produce insulin. You’ll develop diabetes and will have to take insulin." ;
+    dmo:name "Removal of the Pancreas" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "removal-of-the-pancreas" ;
+    dmo:evidenceQuote "In some cases, your pancreas may need to be removed. Without a pancreas, your body can’t produce insulin. You’ll develop diabetes and will have to take insulin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/smoking> a dmo:RiskFactor ;
+    rdfs:label "Smoking" ;
+    dmo:evidenceNote "smoke External link, including tobacco products and e-cigarettes External link, or are exposed to secondhand smoke External link." ;
+    dmo:name "Smoking" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "smoking" ;
+    dmo:evidenceQuote "smoke External link, including tobacco products and e-cigarettes External link, or are exposed to secondhand smoke External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/riskFactor/statins> a dmo:RiskFactor ;
+    rdfs:label "Statins" ;
+    dmo:evidenceNote "Statins can slightly increase the chance that you’ll develop diabetes." ;
+    dmo:name "Statins" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "statins" ;
+    dmo:evidenceQuote "Statins, which are medicines to reduce LDL (“bad”) cholesterol levels, can slightly increase the chance that you’ll develop diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/abdominal-pain> a dmo:Symptom ;
+    rdfs:label "Abdominal Pain" ;
+    dmo:name "Abdominal Pain" ;
+    dmo:symptomCode "abdominal-pain" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "having pain in your abdomen, nausea, or vomiting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/chest-pain> a dmo:Symptom ;
+    rdfs:label "Chest Pain" ;
+    dmo:name "Chest Pain" ;
+    dmo:symptomCode "chest-pain" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "chest pain NIH external link" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/fainting-from-dehydration> a dmo:Symptom ;
+    rdfs:label "Fainting from Dehydration" ;
+    dmo:name "Fainting from Dehydration" ;
+    dmo:symptomCode "fainting-from-dehydration" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "fainting from dehydration" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/feeling-very-hungry-even-after-eating> a dmo:Symptom ;
+    rdfs:label "Feeling Very Hungry Even After Eating" ;
+    dmo:name "Feeling Very Hungry Even After Eating" ;
+    dmo:symptomCode "feeling-very-hungry-even-after-eating" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "feeling very hungry, even after you have eaten" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/frequent-infections> a dmo:Symptom ;
+    rdfs:label "Frequent Infections" ;
+    dmo:name "Frequent Infections" ;
+    dmo:symptomCode "frequent-infections" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "frequent infections, such as urinary tract infections, skin infections NIH external link, or yeast infections NIH external link" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/fruity-smelling-breath> a dmo:Symptom ;
+    rdfs:label "Fruity-Smelling Breath" ;
+    dmo:name "Fruity-Smelling Breath" ;
+    dmo:symptomCode "fruity-smelling-breath" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "having fruity-smelling breath" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/nausea> a dmo:Symptom ;
+    rdfs:label "Nausea" ;
+    dmo:name "Nausea" ;
+    dmo:symptomCode "nausea" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "having pain in your abdomen, nausea, or vomiting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/pain-numbness-or-tingling-in-feet-or-hands> a dmo:Symptom ;
+    rdfs:label "Pain, Numbness, or Tingling in Feet or Hands" ;
+    dmo:name "Pain, Numbness, or Tingling in Feet or Hands" ;
+    dmo:symptomCode "pain-numbness-or-tingling-in-feet-or-hands" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "pain, numbness, or tingling in the feet or hands" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/trouble-breathing> a dmo:Symptom ;
+    rdfs:label "Trouble Breathing" ;
+    dmo:name "Trouble Breathing" ;
+    dmo:symptomCode "trouble-breathing" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "having trouble breathing" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/unexplained-weight-loss> a dmo:Symptom ;
+    rdfs:label "Unexplained Weight Loss" ;
+    dmo:name "Unexplained Weight Loss" ;
+    dmo:symptomCode "unexplained-weight-loss" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "an unexplained weight loss" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+<https://example.org/dmo/id/symptom/vomiting> a dmo:Symptom ;
+    rdfs:label "Vomiting" ;
+    dmo:name "Vomiting" ;
+    dmo:symptomCode "vomiting" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "having pain in your abdomen, nausea, or vomiting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-symptoms-causes> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/history-of-gestational-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/overweight> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/obesity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/large-waist-size> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/age-35-or-older> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/riskFactor/african-american> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/american-indian> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/asian-american> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/hispanic> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/latino> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/pacific-islander> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/not-physically-active> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/smoking> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/giving-birth-to-a-baby-weighing-9-pounds-or-more> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/gaining-too-much-weight-during-pregnancy> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/riskFactor/family-history-of-gestational-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/riskFactor/pancreatitis> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/diabetes-related-to-acute-pancreatitis-and-its-mechanisms> .
+<https://example.org/dmo/id/riskFactor/pancreatic-cancer> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/diabetes-related-to-acute-pancreatitis-and-its-mechanisms> .
+<https://example.org/dmo/id/riskFactor/removal-of-the-pancreas> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/riskFactor/cystic-fibrosis> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/hemochromatosis> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/riskFactor/antipsychotics> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/antiseizure-medicines> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/beta-blockers> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/diuretics> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/glucocorticoids> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/immunosuppressants> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/niacin> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/statins> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/cushing-s-syndrome> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/acromegaly> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/hyperthyroidism> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/hypothyroidism> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/overweight> .
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/obesity> .
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/not-physically-active> .
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/large-waist-size> .
+<https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/age-35-or-older> .
+<https://example.org/dmo/id/recommendation/diabetes-prevention-program-lifestyle-recommendation> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/regular-physical-activity-and-lost-5-to-7-of-their-body-weight> .

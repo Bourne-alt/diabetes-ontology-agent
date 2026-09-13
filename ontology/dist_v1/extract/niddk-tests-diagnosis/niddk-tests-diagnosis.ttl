@@ -1,0 +1,552 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-tests-diagnosis.txt
+# 目标 named graph：urn:dmo:extract:niddk-tests-diagnosis
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-tests-diagnosis'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-tests-diagnosis.txt" ;
+    dmo:sha256 "122009a36c702dd16fd6ec7517ed7688d85de3154c6468fdeeff38960d52261d" ;
+    dmo:byteSize "10527"^^xsd:integer .
+
+<urn:dmo:extract:niddk-tests-diagnosis> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T04:23:03+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/a1c-test-in-presence-of-another-problem-with-your-blood> a dmo:Contraindication ;
+    rdfs:label "A1C test in presence of another problem with your blood" ;
+    dmo:contraCode "a1c-test-in-presence-of-another-problem-with-your-blood" ;
+    dmo:rationale "Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have another problem with your blood" ;
+    dmo:evidenceQuote "Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-presence-of-certain-types-of-anemia> a dmo:Contraindication ;
+    rdfs:label "A1C test in presence of certain types of anemia" ;
+    dmo:contraCode "a1c-test-in-presence-of-certain-types-of-anemia" ;
+    dmo:rationale "Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have certain types of anemia" ;
+    dmo:evidenceQuote "Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-presence-of-hemoglobin-variants> a dmo:Contraindication ;
+    rdfs:label "A1C test in presence of hemoglobin variants" ;
+    dmo:contraCode "a1c-test-in-presence-of-hemoglobin-variants" ;
+    dmo:rationale "Certain types of hemoglobin, called hemoglobin variants, can interfere with measuring A1C levels. Most A1C tests used in the United States are not affected by the most common variants. If your A1C test results and blood glucose levels do not match, your doctor should consider that the A1C test may not be a reliable test for you." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you have certain types of hemoglobin, called hemoglobin variants" ;
+    dmo:evidenceQuote "Certain types of hemoglobin, called hemoglobin variants, can interfere with measuring A1C levels. Most A1C tests used in the United States are not affected by the most common variants. If your A1C test results and blood glucose levels do not match, your doctor should consider that the A1C test may not be a reliable test for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/contraindication/a1c-test-in-second-or-third-trimester-of-pregnancy> a dmo:Contraindication ;
+    rdfs:label "A1C test in second or third trimester of pregnancy" ;
+    dmo:contraCode "a1c-test-in-second-or-third-trimester-of-pregnancy" ;
+    dmo:rationale "Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "you are in your second or third trimester of pregnancy" ;
+    dmo:evidenceQuote "Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/diabetesType/gestational-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Gestational Diabetes" ;
+    dmo:definition "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy." ;
+    dmo:diabetesTypeCode "gestational-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Gestational Diabetes" ;
+    dmo:prevalenceShare "0.07"^^xsd:decimal ;
+    dmo:typicalOnset "Pregnancy" ;
+    dmo:evidenceQuote "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy." ;
+    dmo:evidenceQuote "If you are pregnant, your doctor might test you for gestational diabetes with the glucose challenge test." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/diabetesType/monogenic-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Monogenic Diabetes" ;
+    dmo:definition "Genetic testing can diagnose most forms of monogenic diabetes, which is caused by a change—or mutation—in a gene." ;
+    dmo:diabetesTypeCode "monogenic-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Monogenic Diabetes" ;
+    dmo:prevalenceShare "0.0001"^^xsd:decimal ;
+    dmo:typicalOnset "Neonatal" ;
+    dmo:evidenceQuote "Genetic testing can diagnose most forms of monogenic diabetes, which is caused by a change—or mutation—in a gene." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "If your blood glucose levels are higher than the target range, but not high enough to be diagnosed with diabetes, doctors will diagnose you with prediabetes. Having prediabetes is serious because it raises the chance of developing type 2 diabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0.15"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "If your blood glucose levels are higher than the target range, but not high enough to be diagnosed with diabetes, doctors will diagnose you with prediabetes. Having prediabetes is serious because it raises the chance of developing type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "If you have diabetes, your doctor may look for certain autoantibodies to see if your diabetes is type 1. Autoantibodies are proteins in your immune system that mistakenly attack your healthy tissues and cells." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "If you have diabetes, your doctor may look for certain autoantibodies to see if your diabetes is type 1." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "The oral glucose tolerance test (OGTT) helps doctors detect type 2 diabetes, prediabetes, and gestational diabetes." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "The oral glucose tolerance test (OGTT) helps doctors detect type 2 diabetes, prediabetes, and gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/a1c> a dmo:LabTest ;
+    rdfs:label "A1C" ;
+    dmo:definition "A1C test results and blood glucose levels do not match, your doctor should consider that the A1C test may not be a reliable test for you." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "If your A1C test results and blood glucose levels do not match, your doctor should consider that the A1C test may not be a reliable test for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/a1c-test> a dmo:LabTest ;
+    rdfs:label "A1C Test" ;
+    dmo:definition "The A1C test is a blood test that provides your average levels of blood glucose over the last 3 months. Other names for the A1C test are hemoglobin A1C, HbA1C, glycated hemoglobin, and glycosylated hemoglobin test. You can eat and drink before this test. Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood.1 The A1C test might not be accurate in those cases." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c-test" ;
+    dmo:name "A1C Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "The A1C test is a blood test that provides your average levels of blood glucose over the last 3 months. Other names for the A1C test are hemoglobin A1C, HbA1C, glycated hemoglobin, and glycosylated hemoglobin test. You can eat and drink before this test. Before using the A1C test to diagnose diabetes, your doctor will consider factors, such as whether you are in your second or third trimester of pregnancy or whether you have certain types of anemia NIH external link or another problem with your blood.1 The A1C test might not be accurate in those cases." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/fasting-plasma-glucose> a dmo:LabTest ;
+    rdfs:label "Fasting Plasma Glucose" ;
+    dmo:definition "Before the test, you will need to fast for at least 8 hours. A health care professional will take a blood sample to measure your glucose level after fasting." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-plasma-glucose" ;
+    dmo:loincCode "15577-6" ;
+    dmo:name "Fasting Plasma Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Before the test, you will need to fast for at least 8 hours. A health care professional will take a blood sample to measure your glucose level after fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/fasting-plasma-glucose-test> a dmo:LabTest ;
+    rdfs:label "Fasting Plasma Glucose Test" ;
+    dmo:definition "The fasting plasma glucose (FPG) test measures your blood glucose level at a single point in time. For the most reliable results, your doctor will give you the test in the morning after you have fasted for at least 8 hours. Fasting means having nothing to eat or drink except sips of water." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-plasma-glucose-test" ;
+    dmo:name "Fasting Plasma Glucose Test" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "The fasting plasma glucose (FPG) test measures your blood glucose level at a single point in time. For the most reliable results, your doctor will give you the test in the morning after you have fasted for at least 8 hours. Fasting means having nothing to eat or drink except sips of water." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/glucose-challenge-test> a dmo:LabTest ;
+    rdfs:label "Glucose Challenge Test" ;
+    dmo:definition "In this test, a health care professional will take a sample of your blood 1 hour after you drink a sweet liquid containing glucose." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "glucose-challenge-test" ;
+    dmo:loincCode "15580-0" ;
+    dmo:name "Glucose Challenge Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "In this test, a health care professional will take a sample of your blood 1 hour after you drink a sweet liquid containing glucose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> a dmo:LabTest ;
+    rdfs:label "Oral Glucose Tolerance Test" ;
+    dmo:definition "The oral glucose tolerance test (OGTT) helps doctors detect type 2 diabetes, prediabetes, and gestational diabetes." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "oral-glucose-tolerance-test" ;
+    dmo:loincCode "15578-4" ;
+    dmo:name "Oral Glucose Tolerance Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "The oral glucose tolerance test (OGTT) helps doctors detect type 2 diabetes, prediabetes, and gestational diabetes. However, the OGTT is a more expensive test than the FPG test and the glucose challenge test, and it is not as easy to give." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/oral-glucose-tolerance-test-2h> a dmo:LabTest ;
+    rdfs:label "Oral Glucose Tolerance Test-2h" ;
+    dmo:definition "Another blood sample is taken 2 hours later to check your blood glucose level." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "oral-glucose-tolerance-test-2h" ;
+    dmo:loincCode "15578-4" ;
+    dmo:name "Oral Glucose Tolerance Test-2h" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Another blood sample is taken 2 hours later to check your blood glucose level." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/labTest/random-plasma-glucose-test> a dmo:LabTest ;
+    rdfs:label "Random Plasma Glucose Test" ;
+    dmo:definition "Sometimes doctors use the random plasma glucose test to diagnose diabetes when you have symptoms of diabetes and they do not want to wait until you have fasted for 8 hours." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "random-plasma-glucose-test" ;
+    dmo:loincCode "15579-2" ;
+    dmo:name "Random Plasma Glucose Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Sometimes doctors use the random plasma glucose test to diagnose diabetes when you have symptoms of diabetes and they do not want to wait until you have fasted for 8 hours." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year> a dmo:MonitoringSchedule ;
+    rdfs:label "Adults and children diagnosed with prediabetes should be tested for type 2 diabetes every year" ;
+    dmo:appliesTo "Adults and children diagnosed with prediabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Adults and children diagnosed with prediabetes should be tested for type 2 diabetes every year" ;
+    dmo:scheduleId "adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year" ;
+    dmo:evidenceQuote "Adults and children diagnosed with prediabetes should be tested for type 2 diabetes every year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years> a dmo:MonitoringSchedule ;
+    rdfs:label "Adults and children with normal diabetes test results should be retested every 3 years" ;
+    dmo:appliesTo "Adults and children with normal diabetes test results" ;
+    dmo:frequencyMonths "36"^^xsd:integer ;
+    dmo:name "Adults and children with normal diabetes test results should be retested every 3 years" ;
+    dmo:scheduleId "adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years" ;
+    dmo:evidenceQuote "Adults and children with normal diabetes test results should be retested every 3 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/monitoringSchedule/all-pregnant-women-who-do-not-have-a-previous-diagnosis-of-diabetes-should-be-tested-for-gestational-diabetes-between-24-and-28-weeks-of-pregnancy> a dmo:MonitoringSchedule ;
+    rdfs:label "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy" ;
+    dmo:appliesTo "All pregnant women who do not have a previous diagnosis of diabetes" ;
+    dmo:name "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy" ;
+    dmo:scheduleId "all-pregnant-women-who-do-not-have-a-previous-diagnosis-of-diabetes-should-be-tested-for-gestational-diabetes-between-24-and-28-weeks-of-pregnancy" ;
+    dmo:triggerWindow "24-28 weeks of pregnancy" ;
+    dmo:evidenceQuote "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/monitoringSchedule/if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery> a dmo:MonitoringSchedule ;
+    rdfs:label "If you have gestational diabetes, you should get tested after your baby is born to see if you have type 2 diabetes, usually within 12 weeks after delivery" ;
+    dmo:appliesTo "Women with gestational diabetes" ;
+    dmo:name "If you have gestational diabetes, you should get tested after your baby is born to see if you have type 2 diabetes, usually within 12 weeks after delivery" ;
+    dmo:scheduleId "if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery" ;
+    dmo:triggerWindow "within 12 weeks after delivery" ;
+    dmo:evidenceQuote "If you have gestational diabetes, you should get tested after your baby is born to see if you have type 2 diabetes, usually within 12 weeks after delivery." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/a1c-test-reliability-consideration> a dmo:Recommendation ;
+    rdfs:label "A1C Test Reliability Consideration" ;
+    dmo:recommendationId "a1c-test-reliability-consideration" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If your A1C test results and blood glucose levels do not match, your doctor should consider that the A1C test may not be a reliable test for you." ;
+    dmo:evidenceQuote "If your A1C test results and blood glucose levels do not match, your doctor should consider that the A1C test may not be a reliable test for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/annual-testing-for-adults-and-children-diagnosed-with-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Annual testing for adults and children diagnosed with prediabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Adults and children diagnosed with prediabetes" ;
+    dmo:recommendationId "annual-testing-for-adults-and-children-diagnosed-with-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Adults and children diagnosed with prediabetes should be tested for type 2 diabetes every year." ;
+    dmo:evidenceQuote "Adults and children diagnosed with prediabetes should be tested for type 2 diabetes every year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/autoantibody-testing-for-type-1-diabetes-identification> a dmo:Recommendation ;
+    rdfs:label "Autoantibody Testing for Type 1 Diabetes Identification" ;
+    dmo:recommendationId "autoantibody-testing-for-type-1-diabetes-identification" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If you have diabetes, your doctor may look for certain autoantibodies to see if your diabetes is type 1." ;
+    dmo:evidenceQuote "If you have diabetes, your doctor may look for certain autoantibodies to see if your diabetes is type 1." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/autoantibody-testing-for-type-1-diabetes-risk-assessment-in-relatives> a dmo:Recommendation ;
+    rdfs:label "Autoantibody Testing for Type 1 Diabetes Risk Assessment in Relatives" ;
+    dmo:populationScope "individuals with a family history of type 1 diabetes" ;
+    dmo:recommendationId "autoantibody-testing-for-type-1-diabetes-risk-assessment-in-relatives" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "If you do not have diabetes but your parent or sibling has type 1 diabetes, your doctor might give you this test to see if you have a higher risk of developing type 1 diabetes." ;
+    dmo:evidenceQuote "If you do not have diabetes but your parent or sibling has type 1 diabetes, your doctor might give you this test to see if you have a higher risk of developing type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/confirmatory-testing-for-diabetes-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Confirmatory Testing for Diabetes Diagnosis" ;
+    dmo:recommendationId "confirmatory-testing-for-diabetes-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Usually, your doctor will use a second test to confirm you have diabetes." ;
+    dmo:evidenceQuote "Usually, your doctor will use a second test to confirm you have diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/follow-up-ogtt-after-abnormal-glucose-challenge-test> a dmo:Recommendation ;
+    rdfs:label "Follow-up OGTT After Abnormal Glucose Challenge Test" ;
+    dmo:recommendationId "follow-up-ogtt-after-abnormal-glucose-challenge-test" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If your blood glucose level is too high—135 mg/dL to 140 mg/dL or higher—you may need to return for an oral glucose tolerance test while fasting." ;
+    dmo:evidenceQuote "If your blood glucose level is too high—135 mg/dL to 140 mg/dL or higher—you may need to return for an oral glucose tolerance test while fasting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/genetic-testing-for-monogenic-diabetes-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Genetic Testing for Monogenic Diabetes Diagnosis" ;
+    dmo:recommendationId "genetic-testing-for-monogenic-diabetes-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Genetic testing can diagnose most forms of monogenic diabetes, which is caused by a change—or mutation—in a gene." ;
+    dmo:evidenceQuote "Genetic testing can diagnose most forms of monogenic diabetes, which is caused by a change—or mutation—in a gene." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/glucose-challenge-test-for-gestational-diabetes-screening> a dmo:Recommendation ;
+    rdfs:label "Glucose Challenge Test for Gestational Diabetes Screening" ;
+    dmo:populationScope "pregnant individuals" ;
+    dmo:recommendationId "glucose-challenge-test-for-gestational-diabetes-screening" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "If you are pregnant, your doctor might test you for gestational diabetes with the glucose challenge test." ;
+    dmo:evidenceQuote "If you are pregnant, your doctor might test you for gestational diabetes with the glucose challenge test." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/oral-glucose-tolerance-test-for-type-2-and-gestational-diabetes-detection> a dmo:Recommendation ;
+    rdfs:label "Oral Glucose Tolerance Test for Type 2 and Gestational Diabetes Detection" ;
+    dmo:recommendationId "oral-glucose-tolerance-test-for-type-2-and-gestational-diabetes-detection" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "The oral glucose tolerance test (OGTT) helps doctors detect type 2 diabetes, prediabetes, and gestational diabetes." ;
+    dmo:evidenceQuote "The oral glucose tolerance test (OGTT) helps doctors detect type 2 diabetes, prediabetes, and gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/random-plasma-glucose-test-for-diabetes-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Random Plasma Glucose Test for Diabetes Diagnosis" ;
+    dmo:recommendationId "random-plasma-glucose-test-for-diabetes-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Sometimes doctors use the random plasma glucose test to diagnose diabetes when you have symptoms of diabetes and they do not want to wait until you have fasted for 8 hours." ;
+    dmo:evidenceQuote "Sometimes doctors use the random plasma glucose test to diagnose diabetes when you have symptoms of diabetes and they do not want to wait until you have fasted for 8 hours." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/retesting-adults-and-children-with-normal-diabetes-test-results> a dmo:Recommendation ;
+    rdfs:label "Retesting adults and children with normal diabetes test results" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Adults and children with normal diabetes test results" ;
+    dmo:recommendationId "retesting-adults-and-children-with-normal-diabetes-test-results" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Adults and children with normal diabetes test results should be retested every 3 years." ;
+    dmo:evidenceQuote "Adults and children with normal diabetes test results should be retested every 3 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/routine-testing-for-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Routine testing for type 2 diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Individuals who are age 35 or older, American Indian, Black or African American, Asian American, Hispanic/Latino, or Pacific Islander, overweight or have obesity and have at least one other risk factor, or a woman who had gestational diabetes" ;
+    dmo:recommendationId "routine-testing-for-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Experts recommend routine testing for type 2 diabetes if you have certain risk factors." ;
+    dmo:evidenceQuote "Experts recommend routine testing for type 2 diabetes if you have certain risk factors." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/testing-after-delivery-for-women-with-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Testing after delivery for women with gestational diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Women with gestational diabetes" ;
+    dmo:recommendationId "testing-after-delivery-for-women-with-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If you have gestational diabetes, you should get tested after your baby is born to see if you have type 2 diabetes, usually within 12 weeks after delivery." ;
+    dmo:evidenceQuote "If you have gestational diabetes, you should get tested after your baby is born to see if you have type 2 diabetes, usually within 12 weeks after delivery." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/testing-all-pregnant-women-for-gestational-diabetes> a dmo:Recommendation ;
+    rdfs:label "Testing all pregnant women for gestational diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All pregnant women who do not have a previous diagnosis of diabetes" ;
+    dmo:recommendationId "testing-all-pregnant-women-for-gestational-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy." ;
+    dmo:evidenceQuote "All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/testing-children-and-teens-for-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Testing children and teens for type 2 diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Children and teens between the ages of 10 and 18 who are overweight or have obesity and have at least one more risk factor" ;
+    dmo:recommendationId "testing-children-and-teens-for-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Experts recommend testing children and teens between the ages of 10 and 18 who are overweight or have obesity and have at least one more risk factor, such as a low birth weight, a parent who had diabetes while pregnant, or another factor." ;
+    dmo:evidenceQuote "Experts recommend testing children and teens between the ages of 10 and 18 who are overweight or have obesity and have at least one more risk factor, such as a low birth weight, a parent who had diabetes while pregnant, or another factor." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/testing-pregnant-women-for-type-2-diabetes-at-first-prenatal-appointment> a dmo:Recommendation ;
+    rdfs:label "Testing pregnant women for type 2 diabetes at first prenatal appointment" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "Pregnant women" ;
+    dmo:recommendationId "testing-pregnant-women-for-type-2-diabetes-at-first-prenatal-appointment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "If you are already pregnant, you should be tested for type 2 diabetes at the first prenatal appointment, or in the first 15 weeks of pregnancy." ;
+    dmo:evidenceQuote "If you are already pregnant, you should be tested for type 2 diabetes at the first prenatal appointment, or in the first 15 weeks of pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/testing-women-planning-to-get-pregnant-for-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Testing women planning to get pregnant for type 2 diabetes" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "All women who are planning to get pregnant, especially those with risk factors" ;
+    dmo:recommendationId "testing-women-planning-to-get-pregnant-for-type-2-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "All women who are planning to get pregnant should be tested for type 2 diabetes, especially if they have risk factors." ;
+    dmo:evidenceQuote "All women who are planning to get pregnant should be tested for type 2 diabetes, especially if they have risk factors." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/recommendation/use-of-ogtt-for-gestational-diabetes-diagnosis> a dmo:Recommendation ;
+    rdfs:label "Use of OGTT for Gestational Diabetes Diagnosis" ;
+    dmo:populationScope "pregnant individuals" ;
+    dmo:recommendationId "use-of-ogtt-for-gestational-diabetes-diagnosis" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If you are pregnant, your blood will be drawn every hour for 2 to 3 hours. If your blood glucose levels are high two or more times during the OGTT, you may have gestational diabetes." ;
+    dmo:evidenceQuote "If you are pregnant, your blood will be drawn every hour for 2 to 3 hours. If your blood glucose levels are high two or more times during the OGTT, you may have gestational diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/riskFactor/a-parent-who-had-diabetes-while-pregnant> a dmo:RiskFactor ;
+    rdfs:label "A Parent Who Had Diabetes While Pregnant" ;
+    dmo:evidenceNote "Family history of diabetes during pregnancy is an obstetric risk factor for type 2 diabetes in children and teens." ;
+    dmo:name "A Parent Who Had Diabetes While Pregnant" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "a-parent-who-had-diabetes-while-pregnant" ;
+    dmo:evidenceQuote "a parent who had diabetes while pregnant" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/riskFactor/a-woman-who-had-gestational-diabetes> a dmo:RiskFactor ;
+    rdfs:label "A Woman Who Had Gestational Diabetes" ;
+    dmo:evidenceNote "History of gestational diabetes is an obstetric risk factor for type 2 diabetes." ;
+    dmo:name "A Woman Who Had Gestational Diabetes" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "a-woman-who-had-gestational-diabetes" ;
+    dmo:evidenceQuote "a woman who had gestational diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/riskFactor/age-35-or-older> a dmo:RiskFactor ;
+    rdfs:label "Age 35 or Older" ;
+    dmo:evidenceNote "Age is a non-modifiable risk factor for type 2 diabetes." ;
+    dmo:name "Age 35 or Older" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "age-35-or-older" ;
+    dmo:evidenceQuote "You may have a higher risk of developing type 2 diabetes if you are age 35 or older" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/riskFactor/american-indian-black-or-african-american-asian-american-hispanic-latino-or-pacific-islander> a dmo:RiskFactor ;
+    rdfs:label "American Indian, Black or African American, Asian American, Hispanic/Latino, or Pacific Islander" ;
+    dmo:evidenceNote "Certain racial and ethnic groups have higher risk for type 2 diabetes." ;
+    dmo:name "American Indian, Black or African American, Asian American, Hispanic/Latino, or Pacific Islander" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "american-indian-black-or-african-american-asian-american-hispanic-latino-or-pacific-islander" ;
+    dmo:evidenceQuote "American Indian, Black or African American, Asian American, Hispanic/Latino, or Pacific Islander" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/riskFactor/overweight-or-have-obesity-and-have-at-least-one-other-risk-factor> a dmo:RiskFactor ;
+    rdfs:label "Overweight or Have Obesity and Have at Least One Other Risk Factor" ;
+    dmo:evidenceNote "Being overweight or having obesity is a modifiable risk factor for type 2 diabetes." ;
+    dmo:name "Overweight or Have Obesity and Have at Least One Other Risk Factor" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "overweight-or-have-obesity-and-have-at-least-one-other-risk-factor" ;
+    dmo:evidenceQuote "overweight or have obesity and have at least one other risk factor" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/symptom/diabetic-ketoacidosis> a dmo:Symptom ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:symptomCode "diabetic-ketoacidosis" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "such as feeling thirsty and having to urinate more often, or if they may have diabetic ketoacidosis External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/symptom/feeling-thirsty> a dmo:Symptom ;
+    rdfs:label "Feeling Thirsty" ;
+    dmo:name "Feeling Thirsty" ;
+    dmo:symptomCode "feeling-thirsty" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "such as feeling thirsty and having to urinate more often, or if they may have diabetic ketoacidosis External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+<https://example.org/dmo/id/symptom/having-to-urinate-more-often> a dmo:Symptom ;
+    rdfs:label "Having to Urinate More Often" ;
+    dmo:name "Having to Urinate More Often" ;
+    dmo:symptomCode "having-to-urinate-more-often" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "such as feeling thirsty and having to urinate more often, or if they may have diabetic ketoacidosis External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/age-35-or-older> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/american-indian-black-or-african-american-asian-american-hispanic-latino-or-pacific-islander> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/overweight-or-have-obesity-and-have-at-least-one-other-risk-factor> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/a-woman-who-had-gestational-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/a-parent-who-had-diabetes-while-pregnant> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c> .
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year> dmo:schedulesTest <https://example.org/dmo/id/labTest/fasting-plasma-glucose> .
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year> dmo:schedulesTest <https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> .
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c> .
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years> dmo:schedulesTest <https://example.org/dmo/id/labTest/fasting-plasma-glucose> .
+<https://example.org/dmo/id/monitoringSchedule/adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years> dmo:schedulesTest <https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> .
+<https://example.org/dmo/id/monitoringSchedule/all-pregnant-women-who-do-not-have-a-previous-diagnosis-of-diabetes-should-be-tested-for-gestational-diabetes-between-24-and-28-weeks-of-pregnancy> dmo:schedulesTest <https://example.org/dmo/id/labTest/glucose-challenge-test> .
+<https://example.org/dmo/id/monitoringSchedule/if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c> .
+<https://example.org/dmo/id/monitoringSchedule/if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery> dmo:schedulesTest <https://example.org/dmo/id/labTest/fasting-plasma-glucose> .
+<https://example.org/dmo/id/monitoringSchedule/if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery> dmo:schedulesTest <https://example.org/dmo/id/labTest/oral-glucose-tolerance-test> .
+<https://example.org/dmo/id/recommendation/annual-testing-for-adults-and-children-diagnosed-with-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/retesting-adults-and-children-with-normal-diabetes-test-results> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/testing-all-pregnant-women-for-gestational-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/testing-women-planning-to-get-pregnant-for-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/testing-pregnant-women-for-type-2-diabetes-at-first-prenatal-appointment> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/routine-testing-for-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/testing-children-and-teens-for-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/testing-after-delivery-for-women-with-gestational-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/glucose-challenge-test-for-gestational-diabetes-screening> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/oral-glucose-tolerance-test-for-type-2-and-gestational-diabetes-detection> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/oral-glucose-tolerance-test-for-type-2-and-gestational-diabetes-detection> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/random-plasma-glucose-test-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/random-plasma-glucose-test-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/confirmatory-testing-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/confirmatory-testing-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/confirmatory-testing-for-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/follow-up-ogtt-after-abnormal-glucose-challenge-test> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/genetic-testing-for-monogenic-diabetes-diagnosis> dmo:appliesToType <https://example.org/dmo/id/diabetesType/monogenic-diabetes> .
+<https://example.org/dmo/id/recommendation/autoantibody-testing-for-type-1-diabetes-identification> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/autoantibody-testing-for-type-1-diabetes-risk-assessment-in-relatives> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/a1c-test-reliability-consideration> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/a1c-test-reliability-consideration> dmo:appliesToType <https://example.org/dmo/id/diabetesType/gestational-diabetes> .
+<https://example.org/dmo/id/recommendation/use-of-ogtt-for-gestational-diabetes-diagnosis> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/all-pregnant-women-who-do-not-have-a-previous-diagnosis-of-diabetes-should-be-tested-for-gestational-diabetes-between-24-and-28-weeks-of-pregnancy> .
+<https://example.org/dmo/id/recommendation/testing-after-delivery-for-women-with-gestational-diabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery> .
+<https://example.org/dmo/id/recommendation/annual-testing-for-adults-and-children-diagnosed-with-prediabetes> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year> .
+<https://example.org/dmo/id/recommendation/retesting-adults-and-children-with-normal-diabetes-test-results> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years> .

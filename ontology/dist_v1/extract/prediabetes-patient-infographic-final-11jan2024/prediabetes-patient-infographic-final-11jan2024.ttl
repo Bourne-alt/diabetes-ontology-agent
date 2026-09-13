@@ -1,0 +1,688 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/Prediabetes-Patient-Infographic-final-11Jan2024.pdf
+# 目标 named graph：urn:dmo:extract:prediabetes-patient-infographic-final-11jan2024
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:prediabetes-patient-infographic-final-11jan2024'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/Prediabetes-Patient-Infographic-final-11Jan2024.pdf" ;
+    dmo:sha256 "8756639a2b774a59c2cc386f027a341015ed3c8a35cbc2009b9a742ed7b9f5ad" ;
+    dmo:byteSize "946225"^^xsd:integer .
+
+<urn:dmo:extract:prediabetes-patient-infographic-final-11jan2024> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T12:35:31+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "Blood glucose levels that are slightly elevated are known as “prediabetes” or impaired fasting glucose (IFG)/impaired glucose tolerance (IGT)." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:name "Prediabetes" ;
+    dmo:evidenceQuote "Blood glucose levels that are slightly elevated are known as “prediabetes” or impaired fasting glucose (IFG)/impaired glucose tolerance (IGT)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Prediabetes puts you at a higher risk of developing type 2 diabetes within 10 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/labTest/impaired-fasting-glucose> a dmo:LabTest ;
+    rdfs:label "Impaired Fasting Glucose" ;
+    dmo:definition "Blood glucose levels that are slightly elevated are known as “prediabetes” or impaired fasting glucose (IFG)/impaired glucose tolerance (IGT)." ;
+    dmo:labTestCode "impaired-fasting-glucose" ;
+    dmo:name "Impaired Fasting Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Blood glucose levels that are slightly elevated are known as “prediabetes” or impaired fasting glucose (IFG)/impaired glucose tolerance (IGT)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/labTest/impaired-glucose-tolerance> a dmo:LabTest ;
+    rdfs:label "Impaired Glucose Tolerance" ;
+    dmo:definition "Blood glucose levels that are slightly elevated are known as “prediabetes” or impaired fasting glucose (IFG)/impaired glucose tolerance (IGT)." ;
+    dmo:labTestCode "impaired-glucose-tolerance" ;
+    dmo:name "Impaired Glucose Tolerance" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Blood glucose levels that are slightly elevated are known as “prediabetes” or impaired fasting glucose (IFG)/impaired glucose tolerance (IGT)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/avoid-going-shopping-when-you-are-hungry> a dmo:LifestyleIntervention ;
+    rdfs:label "Avoid going shopping when you are hungry" ;
+    dmo:activityTarget "Avoid grocery shopping when hungry" ;
+    dmo:expectedBenefit "reduce impulse purchases of unhealthy foods" ;
+    dmo:interventionCode "avoid-going-shopping-when-you-are-hungry" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Avoid going shopping when you are hungry" ;
+    dmo:evidenceQuote "• Avoid going shopping when you are hungry." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/choose-foods-that-are-grilled-or-baked-not-fried> a dmo:LifestyleIntervention ;
+    rdfs:label "Choose foods that are grilled or baked, not fried" ;
+    dmo:activityTarget "Select grilled or baked foods over fried" ;
+    dmo:expectedBenefit "reduce unhealthy fat intake and support metabolic health" ;
+    dmo:interventionCode "choose-foods-that-are-grilled-or-baked-not-fried" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Choose foods that are grilled or baked, not fried" ;
+    dmo:evidenceQuote "• Choose foods that are grilled or baked, not fried." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/close-the-kitchen-at-night-avoid-snacking> a dmo:LifestyleIntervention ;
+    rdfs:label "Close the kitchen at night — avoid snacking" ;
+    dmo:activityTarget "Close the kitchen at night to avoid late-night snacking" ;
+    dmo:expectedBenefit "reduce unnecessary calorie intake" ;
+    dmo:interventionCode "close-the-kitchen-at-night-avoid-snacking" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Close the kitchen at night — avoid snacking" ;
+    dmo:evidenceQuote "• Close the kitchen at night — avoid snacking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/deliver-a-message-in-person-instead-of-sending-an-e-mail> a dmo:LifestyleIntervention ;
+    rdfs:label "Deliver a message in person instead of sending an e-mail" ;
+    dmo:activityTarget "Walk to deliver messages instead of emailing" ;
+    dmo:expectedBenefit "increase daily physical activity" ;
+    dmo:interventionCode "deliver-a-message-in-person-instead-of-sending-an-e-mail" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Deliver a message in person instead of sending an e-mail" ;
+    dmo:evidenceQuote "• Deliver a message in person instead of sending an e-mail." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/drink-water-instead-of-soda-sugared-drinks-or-fruit-juice> a dmo:LifestyleIntervention ;
+    rdfs:label "Drink water instead of soda, sugared drinks, or fruit juice" ;
+    dmo:activityTarget "Replace sugary beverages with water" ;
+    dmo:expectedBenefit "reduce sugar intake and support blood glucose control" ;
+    dmo:interventionCode "drink-water-instead-of-soda-sugared-drinks-or-fruit-juice" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Drink water instead of soda, sugared drinks, or fruit juice" ;
+    dmo:evidenceQuote "• Drink water instead of soda, sugared drinks, or fruit juice." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eat-healthy-fats-such-as-olive-oil-avocados-and-flax-seed> a dmo:LifestyleIntervention ;
+    rdfs:label "Eat healthy fats such as olive oil, avocados, and flax seed" ;
+    dmo:activityTarget "Consume healthy fats like olive oil, avocados, and flax seed" ;
+    dmo:expectedBenefit "support overall metabolic health" ;
+    dmo:interventionCode "eat-healthy-fats-such-as-olive-oil-avocados-and-flax-seed" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eat healthy fats such as olive oil, avocados, and flax seed" ;
+    dmo:evidenceQuote "• Eat healthy fats such as olive oil, avocados, and flax seed." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eat-more-lean-skinless-poultry-fish-beans-tofu-eggs-or-low-fat-cheeses> a dmo:LifestyleIntervention ;
+    rdfs:label "Eat more lean skinless poultry, fish, beans, tofu, eggs, or low-fat cheeses" ;
+    dmo:activityTarget "Include lean proteins and low-fat dairy in meals" ;
+    dmo:expectedBenefit "support satiety and blood glucose control" ;
+    dmo:interventionCode "eat-more-lean-skinless-poultry-fish-beans-tofu-eggs-or-low-fat-cheeses" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eat more lean skinless poultry, fish, beans, tofu, eggs, or low-fat cheeses" ;
+    dmo:evidenceQuote "• Eat more lean skinless poultry, fish, beans, tofu, eggs, or low-fat cheeses." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eat-more-non-starchy-vegetables> a dmo:LifestyleIntervention ;
+    rdfs:label "Eat more non-starchy vegetables" ;
+    dmo:activityTarget "Increase intake of non-starchy vegetables" ;
+    dmo:expectedBenefit "support blood glucose control and weight management" ;
+    dmo:interventionCode "eat-more-non-starchy-vegetables" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eat more non-starchy vegetables" ;
+    dmo:evidenceQuote "• Eat more non-starchy vegetables." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/eat-smaller-portions-and-use-a-9-inch-plate> a dmo:LifestyleIntervention ;
+    rdfs:label "Eat smaller portions and use a 9-inch plate" ;
+    dmo:activityTarget "Use a 9-inch plate" ;
+    dmo:expectedBenefit "help with weight loss and blood glucose control" ;
+    dmo:interventionCode "eat-smaller-portions-and-use-a-9-inch-plate" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Eat smaller portions and use a 9-inch plate" ;
+    dmo:evidenceQuote "• Eat smaller portions and use a 9-inch plate." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/for-dessert-eat-a-piece-of-fruit-or-unsalted-nuts> a dmo:LifestyleIntervention ;
+    rdfs:label "For dessert, eat a piece of fruit or unsalted nuts" ;
+    dmo:activityTarget "Choose fruit or unsalted nuts as dessert" ;
+    dmo:expectedBenefit "support blood glucose control and healthy snacking" ;
+    dmo:interventionCode "for-dessert-eat-a-piece-of-fruit-or-unsalted-nuts" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "For dessert, eat a piece of fruit or unsalted nuts" ;
+    dmo:evidenceQuote "• For dessert, eat a piece of fruit or unsalted nuts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/healthy-eating-changes-in-diet> a dmo:LifestyleIntervention ;
+    rdfs:label "Healthy eating changes in diet" ;
+    dmo:activityTarget "Eat fewer calories or weight loss of 3-5%" ;
+    dmo:expectedBenefit "improve blood glucose and delay and possibly prevent type 2 diabetes" ;
+    dmo:interventionCode "healthy-eating-changes-in-diet" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Healthy eating changes in diet" ;
+    dmo:evidenceQuote "• If you are overweight, focus on eating fewer calories or weight loss of 3-5%." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way> a dmo:LifestyleIntervention ;
+    rdfs:label "If it is safe, get off the bus a stop or two before your work place or home and walk the rest of the way" ;
+    dmo:activityTarget "Get off the bus earlier and walk the rest of the way" ;
+    dmo:expectedBenefit "increase daily physical activity" ;
+    dmo:interventionCode "if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "If it is safe, get off the bus a stop or two before your work place or home and walk the rest of the way" ;
+    dmo:evidenceQuote "• If it is safe, get off the bus a stop or two before your work place or home and walk the rest of the way." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/increased-physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Increased physical activity" ;
+    dmo:activityTarget "30 minutes, 5 days a week" ;
+    dmo:expectedBenefit "prevent or delay diabetes and may return blood glucose levels to normal" ;
+    dmo:interventionCode "increased-physical-activity" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Increased physical activity" ;
+    dmo:evidenceQuote "• Increased physical activity can prevent or delay diabetes and may return blood glucose levels to normal." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week> a dmo:LifestyleIntervention ;
+    rdfs:label "Make a plan to increase your regular physical activity, walk or move more each week" ;
+    dmo:activityTarget "Increase physical activity weekly, walk or move more" ;
+    dmo:expectedBenefit "support diabetes prevention and weight management" ;
+    dmo:interventionCode "make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Make a plan to increase your regular physical activity, walk or move more each week" ;
+    dmo:evidenceQuote "• Make a plan to increase your regular physical activity, walk or move more each week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/read-and-compare-food-labels-when-shopping> a dmo:LifestyleIntervention ;
+    rdfs:label "Read and compare food labels when shopping" ;
+    dmo:activityTarget "Check and compare food labels during shopping" ;
+    dmo:expectedBenefit "make informed, healthier food choices" ;
+    dmo:interventionCode "read-and-compare-food-labels-when-shopping" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Read and compare food labels when shopping" ;
+    dmo:evidenceQuote "• Read and compare food labels when shopping." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week> a dmo:LifestyleIntervention ;
+    rdfs:label "Slowly, add more time until you reach 30 minutes, 5 days a week" ;
+    dmo:activityTarget "Gradually increase to 30 minutes, 5 days a week" ;
+    dmo:expectedBenefit "achieve recommended physical activity level for diabetes prevention" ;
+    dmo:interventionCode "slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Slowly, add more time until you reach 30 minutes, 5 days a week" ;
+    dmo:evidenceQuote "• Slowly, add more time until you reach 30 minutes, 5 days a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/start-off-by-taking-a-5-minute-walk> a dmo:LifestyleIntervention ;
+    rdfs:label "Start off by taking a 5-minute walk" ;
+    dmo:activityTarget "Begin with a 5-minute walk" ;
+    dmo:expectedBenefit "initiate physical activity safely and build habit" ;
+    dmo:interventionCode "start-off-by-taking-a-5-minute-walk" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Start off by taking a 5-minute walk" ;
+    dmo:evidenceQuote "• Start off by taking a 5-minute walk." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/stay-away-from-all-you-can-eat-restaurants-or-buffets> a dmo:LifestyleIntervention ;
+    rdfs:label "Stay away from “all-you-can-eat restaurants” or buffets" ;
+    dmo:activityTarget "Avoid all-you-can-eat restaurants or buffets" ;
+    dmo:expectedBenefit "reduce overeating and calorie intake" ;
+    dmo:interventionCode "stay-away-from-all-you-can-eat-restaurants-or-buffets" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Stay away from “all-you-can-eat restaurants” or buffets" ;
+    dmo:evidenceQuote "• Stay away from “all-you-can-eat restaurants” or buffets." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/take-a-walk-during-lunch-time> a dmo:LifestyleIntervention ;
+    rdfs:label "Take a walk during lunch time" ;
+    dmo:activityTarget "Walk during lunch break" ;
+    dmo:expectedBenefit "increase daily physical activity and support blood glucose control" ;
+    dmo:interventionCode "take-a-walk-during-lunch-time" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Take a walk during lunch time" ;
+    dmo:evidenceQuote "• Take a walk during lunch time." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/take-the-stairs-instead-of-the-elevator> a dmo:LifestyleIntervention ;
+    rdfs:label "Take the stairs instead of the elevator" ;
+    dmo:activityTarget "Use stairs instead of elevator" ;
+    dmo:expectedBenefit "increase daily physical activity" ;
+    dmo:interventionCode "take-the-stairs-instead-of-the-elevator" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Take the stairs instead of the elevator" ;
+    dmo:evidenceQuote "• Take the stairs instead of the elevator." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/take-your-time-when-you-eat> a dmo:LifestyleIntervention ;
+    rdfs:label "Take your time when you eat" ;
+    dmo:activityTarget "Eat slowly" ;
+    dmo:expectedBenefit "improve satiety and reduce overeating" ;
+    dmo:interventionCode "take-your-time-when-you-eat" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Take your time when you eat" ;
+    dmo:evidenceQuote "• Take your time when you eat." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/talk-with-your-provider-about-what-exercises-would-be-safe-for-you> a dmo:LifestyleIntervention ;
+    rdfs:label "Talk with your provider about what exercises would be safe for you" ;
+    dmo:activityTarget "Consult provider before starting exercise" ;
+    dmo:expectedBenefit "ensure safe and appropriate physical activity" ;
+    dmo:interventionCode "talk-with-your-provider-about-what-exercises-would-be-safe-for-you" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Talk with your provider about what exercises would be safe for you" ;
+    dmo:evidenceQuote "• Talk with your provider about what exercises would be safe for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/try-to-eat-meals-at-regular-times> a dmo:LifestyleIntervention ;
+    rdfs:label "Try to eat meals at regular times" ;
+    dmo:activityTarget "Eat meals at consistent times" ;
+    dmo:expectedBenefit "support blood glucose regulation" ;
+    dmo:interventionCode "try-to-eat-meals-at-regular-times" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Try to eat meals at regular times" ;
+    dmo:evidenceQuote "• Try to eat meals at regular times." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/try-using-a-pedometer-to-count-the-steps-you-take> a dmo:LifestyleIntervention ;
+    rdfs:label "Try using a pedometer to count the steps you take" ;
+    dmo:activityTarget "Use a pedometer to track daily steps" ;
+    dmo:expectedBenefit "monitor and increase physical activity" ;
+    dmo:interventionCode "try-using-a-pedometer-to-count-the-steps-you-take" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Try using a pedometer to count the steps you take" ;
+    dmo:evidenceQuote "• Try using a pedometer to count the steps you take." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/weight-loss> a dmo:LifestyleIntervention ;
+    rdfs:label "Weight loss" ;
+    dmo:activityTarget "3% weight loss" ;
+    dmo:expectedBenefit "improve blood glucose and delay and possibly prevent type 2 diabetes" ;
+    dmo:interventionCode "weight-loss" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Weight loss" ;
+    dmo:evidenceQuote "Even just 3% weight loss can improve blood glucose and delay and possibly prevent type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance> a dmo:LifestyleIntervention ;
+    rdfs:label "When shopping or driving to work, park a little farther away from the entrance" ;
+    dmo:activityTarget "Park farther from entrance to increase walking" ;
+    dmo:expectedBenefit "increase daily physical activity" ;
+    dmo:interventionCode "when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "When shopping or driving to work, park a little farther away from the entrance" ;
+    dmo:evidenceQuote "• When shopping or driving to work, park a little farther away from the entrance." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/lifestyleIntervention/while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts> a dmo:LifestyleIntervention ;
+    rdfs:label "While watching TV, walk or dance around the room, march in place, or do some sit-ups and leg lifts" ;
+    dmo:activityTarget "Perform light movement during TV watching" ;
+    dmo:expectedBenefit "increase non-exercise activity thermogenesis" ;
+    dmo:interventionCode "while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "While watching TV, walk or dance around the room, march in place, or do some sit-ups and leg lifts" ;
+    dmo:evidenceQuote "• While watching TV, walk or dance around the room, march in place, or do some sit-ups and leg lifts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/monitoringSchedule/blood-glucose-test> a dmo:MonitoringSchedule ;
+    rdfs:label "Blood Glucose Test" ;
+    dmo:appliesTo "If your blood glucose is higher than normal (in the range of prediabetes)" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Blood Glucose Test" ;
+    dmo:scheduleId "blood-glucose-test" ;
+    dmo:triggerWindow "in 1 to 2 years" ;
+    dmo:evidenceQuote "If your blood glucose is higher than normal (in the range of prediabetes), have your blood glucose test repeated in 1 to 2 years." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/avoid-going-shopping-when-you-are-hungry> a dmo:Recommendation ;
+    rdfs:label "Avoid going shopping when you are hungry" ;
+    dmo:recommendationId "avoid-going-shopping-when-you-are-hungry" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Avoid going shopping when you are hungry." ;
+    dmo:evidenceQuote "Avoid going shopping when you are hungry." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/choose-foods-that-are-grilled-or-baked-not-fried> a dmo:Recommendation ;
+    rdfs:label "Choose foods that are grilled or baked, not fried" ;
+    dmo:recommendationId "choose-foods-that-are-grilled-or-baked-not-fried" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Choose foods that are grilled or baked, not fried." ;
+    dmo:evidenceQuote "Choose foods that are grilled or baked, not fried." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/close-the-kitchen-at-night-avoid-snacking> a dmo:Recommendation ;
+    rdfs:label "Close the kitchen at night — avoid snacking" ;
+    dmo:recommendationId "close-the-kitchen-at-night-avoid-snacking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Close the kitchen at night — avoid snacking." ;
+    dmo:evidenceQuote "Close the kitchen at night — avoid snacking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/deliver-a-message-in-person-instead-of-sending-an-e-mail> a dmo:Recommendation ;
+    rdfs:label "Deliver a message in person instead of sending an e-mail" ;
+    dmo:recommendationId "deliver-a-message-in-person-instead-of-sending-an-e-mail" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Deliver a message in person instead of sending an e-mail." ;
+    dmo:evidenceQuote "Deliver a message in person instead of sending an e-mail." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/drink-water-instead-of-soda-sugared-drinks-or-fruit-juice> a dmo:Recommendation ;
+    rdfs:label "Drink water instead of soda, sugared drinks, or fruit juice" ;
+    dmo:recommendationId "drink-water-instead-of-soda-sugared-drinks-or-fruit-juice" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Drink water instead of soda, sugared drinks, or fruit juice." ;
+    dmo:evidenceQuote "Drink water instead of soda, sugared drinks, or fruit juice." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/eat-fewer-calories-or-weight-loss-of-3-5> a dmo:Recommendation ;
+    rdfs:label "Eat fewer calories or weight loss of 3-5%" ;
+    dmo:recommendationId "eat-fewer-calories-or-weight-loss-of-3-5" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you are overweight, focus on eating fewer calories or weight loss of 3-5%." ;
+    dmo:evidenceQuote "If you are overweight, focus on eating fewer calories or weight loss of 3-5%." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/eat-healthy-fats-such-as-olive-oil-avocados-and-flax-seed> a dmo:Recommendation ;
+    rdfs:label "Eat healthy fats such as olive oil, avocados, and flax seed" ;
+    dmo:recommendationId "eat-healthy-fats-such-as-olive-oil-avocados-and-flax-seed" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Eat healthy fats such as olive oil, avocados, and flax seed." ;
+    dmo:evidenceQuote "Eat healthy fats such as olive oil, avocados, and flax seed." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/eat-more-lean-skinless-poultry-fish-beans-tofu-eggs-or-low-fat-cheeses> a dmo:Recommendation ;
+    rdfs:label "Eat more lean skinless poultry, fish, beans, tofu, eggs, or low-fat cheeses" ;
+    dmo:recommendationId "eat-more-lean-skinless-poultry-fish-beans-tofu-eggs-or-low-fat-cheeses" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Eat more lean skinless poultry, fish, beans, tofu, eggs, or low-fat cheeses." ;
+    dmo:evidenceQuote "Eat more lean skinless poultry, fish, beans, tofu, eggs, or low-fat cheeses." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/eat-more-non-starchy-vegetables> a dmo:Recommendation ;
+    rdfs:label "Eat more non-starchy vegetables" ;
+    dmo:recommendationId "eat-more-non-starchy-vegetables" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Eat more non-starchy vegetables." ;
+    dmo:evidenceQuote "Eat more non-starchy vegetables." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/eat-smaller-portions-and-use-a-9-inch-plate> a dmo:Recommendation ;
+    rdfs:label "Eat smaller portions and use a 9-inch plate" ;
+    dmo:recommendationId "eat-smaller-portions-and-use-a-9-inch-plate" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Eat smaller portions and use a 9-inch plate." ;
+    dmo:evidenceQuote "Eat smaller portions and use a 9-inch plate." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/for-dessert-eat-a-piece-of-fruit-or-unsalted-nuts> a dmo:Recommendation ;
+    rdfs:label "For dessert, eat a piece of fruit or unsalted nuts" ;
+    dmo:recommendationId "for-dessert-eat-a-piece-of-fruit-or-unsalted-nuts" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "For dessert, eat a piece of fruit or unsalted nuts." ;
+    dmo:evidenceQuote "For dessert, eat a piece of fruit or unsalted nuts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/healthy-eating-changes-in-diet> a dmo:Recommendation ;
+    rdfs:label "Healthy eating changes in diet" ;
+    dmo:recommendationId "healthy-eating-changes-in-diet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Healthy eating changes in diet." ;
+    dmo:evidenceQuote "Healthy eating changes in diet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way> a dmo:Recommendation ;
+    rdfs:label "If it is safe, get off the bus a stop or two before your work place or home and walk the rest of the way" ;
+    dmo:recommendationId "if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If it is safe, get off the bus a stop or two before your work place or home and walk the rest of the way." ;
+    dmo:evidenceQuote "If it is safe, get off the bus a stop or two before your work place or home and walk the rest of the way." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/increased-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Increased physical activity" ;
+    dmo:recommendationId "increased-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Increased physical activity can prevent or delay diabetes and may return blood glucose levels to normal." ;
+    dmo:evidenceQuote "Increased physical activity can prevent or delay diabetes and may return blood glucose levels to normal." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week> a dmo:Recommendation ;
+    rdfs:label "Make a plan to increase your regular physical activity, walk or move more each week" ;
+    dmo:recommendationId "make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Make a plan to increase your regular physical activity, walk or move more each week." ;
+    dmo:evidenceQuote "Make a plan to increase your regular physical activity, walk or move more each week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/read-and-compare-food-labels-when-shopping> a dmo:Recommendation ;
+    rdfs:label "Read and compare food labels when shopping" ;
+    dmo:recommendationId "read-and-compare-food-labels-when-shopping" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Read and compare food labels when shopping." ;
+    dmo:evidenceQuote "Read and compare food labels when shopping." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week> a dmo:Recommendation ;
+    rdfs:label "Slowly, add more time until you reach 30 minutes, 5 days a week" ;
+    dmo:recommendationId "slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Slowly, add more time until you reach 30 minutes, 5 days a week." ;
+    dmo:evidenceQuote "Slowly, add more time until you reach 30 minutes, 5 days a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/start-off-by-taking-a-5-minute-walk> a dmo:Recommendation ;
+    rdfs:label "Start off by taking a 5-minute walk" ;
+    dmo:recommendationId "start-off-by-taking-a-5-minute-walk" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Start off by taking a 5-minute walk." ;
+    dmo:evidenceQuote "Start off by taking a 5-minute walk." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/stay-away-from-all-you-can-eat-restaurants-or-buffets> a dmo:Recommendation ;
+    rdfs:label "Stay away from “all-you-can-eat restaurants” or buffets" ;
+    dmo:recommendationId "stay-away-from-all-you-can-eat-restaurants-or-buffets" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Stay away from “all-you-can-eat restaurants” or buffets." ;
+    dmo:evidenceQuote "Stay away from “all-you-can-eat restaurants” or buffets." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/take-a-walk-during-lunch-time> a dmo:Recommendation ;
+    rdfs:label "Take a walk during lunch time" ;
+    dmo:recommendationId "take-a-walk-during-lunch-time" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Take a walk during lunch time." ;
+    dmo:evidenceQuote "Take a walk during lunch time." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/take-the-stairs-instead-of-the-elevator> a dmo:Recommendation ;
+    rdfs:label "Take the stairs instead of the elevator" ;
+    dmo:recommendationId "take-the-stairs-instead-of-the-elevator" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Take the stairs instead of the elevator." ;
+    dmo:evidenceQuote "Take the stairs instead of the elevator." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/take-your-time-when-you-eat> a dmo:Recommendation ;
+    rdfs:label "Take your time when you eat" ;
+    dmo:recommendationId "take-your-time-when-you-eat" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Take your time when you eat." ;
+    dmo:evidenceQuote "Take your time when you eat." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/talk-with-your-provider-about-what-exercises-would-be-safe-for-you> a dmo:Recommendation ;
+    rdfs:label "Talk with your provider about what exercises would be safe for you" ;
+    dmo:recommendationId "talk-with-your-provider-about-what-exercises-would-be-safe-for-you" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Talk with your provider about what exercises would be safe for you." ;
+    dmo:evidenceQuote "Talk with your provider about what exercises would be safe for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/try-to-eat-meals-at-regular-times> a dmo:Recommendation ;
+    rdfs:label "Try to eat meals at regular times" ;
+    dmo:recommendationId "try-to-eat-meals-at-regular-times" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Try to eat meals at regular times." ;
+    dmo:evidenceQuote "Try to eat meals at regular times." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/try-using-a-pedometer-to-count-the-steps-you-take> a dmo:Recommendation ;
+    rdfs:label "Try using a pedometer to count the steps you take" ;
+    dmo:recommendationId "try-using-a-pedometer-to-count-the-steps-you-take" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Try using a pedometer to count the steps you take." ;
+    dmo:evidenceQuote "Try using a pedometer to count the steps you take." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance> a dmo:Recommendation ;
+    rdfs:label "When shopping or driving to work, park a little farther away from the entrance" ;
+    dmo:recommendationId "when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "When shopping or driving to work, park a little farther away from the entrance." ;
+    dmo:evidenceQuote "When shopping or driving to work, park a little farther away from the entrance." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/recommendation/while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts> a dmo:Recommendation ;
+    rdfs:label "While watching TV, walk or dance around the room, march in place, or do some sit-ups and leg lifts" ;
+    dmo:recommendationId "while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "While watching TV, walk or dance around the room, march in place, or do some sit-ups and leg lifts." ;
+    dmo:evidenceQuote "While watching TV, walk or dance around the room, march in place, or do some sit-ups and leg lifts." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/riskFactor/birth-of-at-least-one-baby-weighing-more-than-9-pounds> a dmo:RiskFactor ;
+    rdfs:label "Birth of at Least One Baby Weighing More Than 9 Pounds" ;
+    dmo:evidenceNote "This is a pregnancy-related history and not modifiable." ;
+    dmo:name "Birth of at Least One Baby Weighing More Than 9 Pounds" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "birth-of-at-least-one-baby-weighing-more-than-9-pounds" ;
+    dmo:evidenceQuote "• Birth of at least one baby weighing more than 9 pounds." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/riskFactor/ethnicity> a dmo:RiskFactor ;
+    rdfs:label "Ethnicity" ;
+    dmo:evidenceNote "Ethnicity is a fixed demographic characteristic and not modifiable." ;
+    dmo:name "Ethnicity" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "ethnicity" ;
+    dmo:evidenceQuote "• African American, American Indian, Asian American, Pacific Islander, or Hispanic American/Latino heritage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Diabetes" ;
+    dmo:evidenceNote "Document explicitly lists this as a risk factor without suggesting it can be changed." ;
+    dmo:name "Family History of Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-diabetes" ;
+    dmo:evidenceQuote "• A family history (parent, brother, or sister) with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> a dmo:RiskFactor ;
+    rdfs:label "High Blood Pressure" ;
+    dmo:evidenceNote "Document implies that high blood pressure is a modifiable risk factor through lifestyle changes and medical management." ;
+    dmo:name "High Blood Pressure" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-pressure" ;
+    dmo:evidenceQuote "• High blood pressure measuring 140/90 or higher." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/riskFactor/physical-inactivity> a dmo:RiskFactor ;
+    rdfs:label "Physical Inactivity" ;
+    dmo:evidenceNote "Document recommends increased physical activity as a preventive measure, indicating this factor is modifiable." ;
+    dmo:name "Physical Inactivity" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "physical-inactivity" ;
+    dmo:evidenceQuote "• Physical inactivity—exercising less than 3 times a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+<https://example.org/dmo/id/riskFactor/prior-history-of-diabetes-during-pregnancy> a dmo:RiskFactor ;
+    rdfs:label "Prior History of Diabetes During Pregnancy" ;
+    dmo:evidenceNote "This refers to gestational diabetes, which is an obstetric condition and not modifiable in the current context." ;
+    dmo:name "Prior History of Diabetes During Pregnancy" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "prior-history-of-diabetes-during-pregnancy" ;
+    dmo:evidenceQuote "• Prior history of diabetes during pregnancy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/prediabetes-patient-infographic-final-11jan2024> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/family-history-of-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/physical-inactivity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/prior-history-of-diabetes-during-pregnancy> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/birth-of-at-least-one-baby-weighing-more-than-9-pounds> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/ethnicity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/increased-physical-activity> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/start-off-by-taking-a-5-minute-walk> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/take-a-walk-during-lunch-time> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/deliver-a-message-in-person-instead-of-sending-an-e-mail> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/take-the-stairs-instead-of-the-elevator> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/try-using-a-pedometer-to-count-the-steps-you-take> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/lifestyleIntervention/talk-with-your-provider-about-what-exercises-would-be-safe-for-you> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/physical-inactivity> .
+<https://example.org/dmo/id/monitoringSchedule/blood-glucose-test> dmo:schedulesTest <https://example.org/dmo/id/labTest/impaired-fasting-glucose> .
+<https://example.org/dmo/id/monitoringSchedule/blood-glucose-test> dmo:schedulesTest <https://example.org/dmo/id/labTest/impaired-glucose-tolerance> .
+<https://example.org/dmo/id/recommendation/avoid-going-shopping-when-you-are-hungry> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/avoid-going-shopping-when-you-are-hungry> .
+<https://example.org/dmo/id/recommendation/choose-foods-that-are-grilled-or-baked-not-fried> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/choose-foods-that-are-grilled-or-baked-not-fried> .
+<https://example.org/dmo/id/recommendation/close-the-kitchen-at-night-avoid-snacking> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/close-the-kitchen-at-night-avoid-snacking> .
+<https://example.org/dmo/id/recommendation/deliver-a-message-in-person-instead-of-sending-an-e-mail> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/deliver-a-message-in-person-instead-of-sending-an-e-mail> .
+<https://example.org/dmo/id/recommendation/drink-water-instead-of-soda-sugared-drinks-or-fruit-juice> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/drink-water-instead-of-soda-sugared-drinks-or-fruit-juice> .
+<https://example.org/dmo/id/recommendation/eat-healthy-fats-such-as-olive-oil-avocados-and-flax-seed> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-healthy-fats-such-as-olive-oil-avocados-and-flax-seed> .
+<https://example.org/dmo/id/recommendation/eat-more-lean-skinless-poultry-fish-beans-tofu-eggs-or-low-fat-cheeses> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-more-lean-skinless-poultry-fish-beans-tofu-eggs-or-low-fat-cheeses> .
+<https://example.org/dmo/id/recommendation/eat-more-non-starchy-vegetables> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-more-non-starchy-vegetables> .
+<https://example.org/dmo/id/recommendation/eat-smaller-portions-and-use-a-9-inch-plate> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/eat-smaller-portions-and-use-a-9-inch-plate> .
+<https://example.org/dmo/id/recommendation/for-dessert-eat-a-piece-of-fruit-or-unsalted-nuts> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/for-dessert-eat-a-piece-of-fruit-or-unsalted-nuts> .
+<https://example.org/dmo/id/recommendation/healthy-eating-changes-in-diet> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/healthy-eating-changes-in-diet> .
+<https://example.org/dmo/id/recommendation/if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/if-it-is-safe-get-off-the-bus-a-stop-or-two-before-your-work-place-or-home-and-walk-the-rest-of-the-way> .
+<https://example.org/dmo/id/recommendation/increased-physical-activity> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/increased-physical-activity> .
+<https://example.org/dmo/id/recommendation/make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/make-a-plan-to-increase-your-regular-physical-activity-walk-or-move-more-each-week> .
+<https://example.org/dmo/id/recommendation/read-and-compare-food-labels-when-shopping> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/read-and-compare-food-labels-when-shopping> .
+<https://example.org/dmo/id/recommendation/slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/slowly-add-more-time-until-you-reach-30-minutes-5-days-a-week> .
+<https://example.org/dmo/id/recommendation/start-off-by-taking-a-5-minute-walk> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/start-off-by-taking-a-5-minute-walk> .
+<https://example.org/dmo/id/recommendation/stay-away-from-all-you-can-eat-restaurants-or-buffets> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/stay-away-from-all-you-can-eat-restaurants-or-buffets> .
+<https://example.org/dmo/id/recommendation/take-a-walk-during-lunch-time> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/take-a-walk-during-lunch-time> .
+<https://example.org/dmo/id/recommendation/take-the-stairs-instead-of-the-elevator> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/take-the-stairs-instead-of-the-elevator> .
+<https://example.org/dmo/id/recommendation/take-your-time-when-you-eat> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/take-your-time-when-you-eat> .
+<https://example.org/dmo/id/recommendation/talk-with-your-provider-about-what-exercises-would-be-safe-for-you> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/talk-with-your-provider-about-what-exercises-would-be-safe-for-you> .
+<https://example.org/dmo/id/recommendation/try-to-eat-meals-at-regular-times> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/try-to-eat-meals-at-regular-times> .
+<https://example.org/dmo/id/recommendation/try-using-a-pedometer-to-count-the-steps-you-take> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/try-using-a-pedometer-to-count-the-steps-you-take> .
+<https://example.org/dmo/id/recommendation/when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/when-shopping-or-driving-to-work-park-a-little-farther-away-from-the-entrance> .
+<https://example.org/dmo/id/recommendation/while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/while-watching-tv-walk-or-dance-around-the-room-march-in-place-or-do-some-sit-ups-and-leg-lifts> .
+<https://example.org/dmo/id/recommendation/eat-fewer-calories-or-weight-loss-of-3-5> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/weight-loss> .
+<https://example.org/dmo/id/recommendation/increased-physical-activity> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/healthy-eating-changes-in-diet> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .

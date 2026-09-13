@@ -1,0 +1,192 @@
+{
+  "source": {
+    "sourceId": "niddk-healthy-living-with-diabetes",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-healthy-living-with-diabetes",
+    "localFile": "ontology/knowledges/niddk-healthy-living-with-diabetes.txt",
+    "sha256": "f8169016f7637f71a7976afc7db187b426d18bce6e58942e460e8d5742d9ee13",
+    "byteSize": 19848,
+    "graphUri": "urn:dmo:extract:niddk-healthy-living-with-diabetes"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 4,
+  "counts": {
+    "rawRecords": 100,
+    "accepted": 74,
+    "rejected": 26,
+    "entities": 68,
+    "edges": 61,
+    "danglingRelations": 30,
+    "mergeConflicts": 19
+  },
+  "quality": {
+    "quoteHitRate": 0.74,
+    "schemaSlotCoverage": 0.6935,
+    "danglingRelationRate": 0.3297,
+    "avgMentionsPerEntity": 1.09
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 24,
+    "unknown_relation_predicate": 2
+  },
+  "linkPass": {
+    "candidates": 66,
+    "accepted": 60,
+    "rejectedByReason": {
+      "quote_not_found": 4,
+      "target_unresolved": 2
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 36,
+    "lifestyleIntervention": 9,
+    "contraindication": 5,
+    "riskFactor": 5,
+    "complication": 4,
+    "drugClass": 2,
+    "adverseEffect": 2,
+    "diabetesType": 2,
+    "medication": 2,
+    "labTest": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/drugClass/sulfonylureas",
+      "predicate": "hasContraindication",
+      "target": "Physical activity"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Physical activity"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "causesAdverseEffect",
+      "target": "Diabetic ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/healthy-meal-plan",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Overweight or Obesity"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/reach-or-maintain-a-healthy-weight",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Overweight or obesity"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/include-nutrient-rich-foods-in-meal-plan",
+      "predicate": "appliesToType",
+      "target": "Plan Healthy Meals and Snacks"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/ask-about-eating-before-during-or-after-physical-activity",
+      "predicate": "appliesToType",
+      "target": "Plan Healthy Meals and Snacks"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-carb-counting-or-plate-method-for-portion-control",
+      "predicate": "appliesToType",
+      "target": "Plan Healthy Meals and Snacks"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-carb-counting-to-adjust-insulin-dose",
+      "predicate": "appliesToType",
+      "target": "Use Carb Counting or Plate Method for Portion Control"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/aerobic-activities",
+      "predicate": "mitigatesRiskFactor",
+      "target": "High blood glucose"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/aerobic-activities",
+      "predicate": "mitigatesRiskFactor",
+      "target": "High blood pressure"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/aerobic-activities",
+      "predicate": "mitigatesRiskFactor",
+      "target": "High cholesterol"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/strength-training-or-resistance-training",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Weak muscles"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/strength-training-or-resistance-training",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Osteoporosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/balance-and-stretching-activities",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Poor balance"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/balance-and-stretching-activities",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Muscle stiffness"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/plate-method-composition",
+      "predicate": "appliesToType",
+      "target": "Use of Plate Method for Portion Control"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/carb-counting-not-required-for-non-insulin-users-using-plate-method",
+      "predicate": "appliesToType",
+      "target": "Use of Plate Method for Portion Control"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/include-diabetes-educator-or-registered-dietitian-in-care-team",
+      "predicate": "appliesToType",
+      "target": "Work with Health Care Team to Create Personalized Meal Plan"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/strength-training-twice-weekly",
+      "predicate": "appliesToType",
+      "target": "Engage in Regular Physical Activity for Diabetes Management"
+    }
+  ],
+  "conflictSamples": [
+    "drugClass/sulfonylureas: mechanism: 'Stimulate insulin secretion from the pancreas' vs 'Sulfonylureas stimulate the pancreas to release more insulin.'",
+    "drugClass/sulfonylureas: name: 'Sulfonylureas' vs 'sulfonylureas'",
+    "drugClass/sulfonylureas: mechanism: 'Stimulate insulin secretion from the pancreas' vs 'Stimulate the pancreas to release more insulin'",
+    "drugClass/insulin: mechanism: 'Replaces or supplements insulin in the body to lower blood glucose' vs 'Insulin is a hormone that helps regulate blood glucose levels by allowing cells to take in glucose from the bloodstream.'",
+    "drugClass/insulin: weightEffect: 'Gain' vs 'Neutral'",
+    "drugClass/insulin: name: 'Insulin' vs 'insulin'",
+    "drugClass/insulin: mechanism: 'Replaces or supplements insulin in the body to lower blood glucose' vs 'Replace or supplement insulin in the body to lower blood glucose'",
+    "adverseEffect/hypoglycemia: name: 'Hypoglycemia' vs '低血糖'",
+    "lifestyleIntervention/healthy-meal-plan: name: 'Healthy meal plan' vs 'Healthy Meal Plan'",
+    "lifestyleIntervention/healthy-meal-plan: activityTarget: 'Include dairy or plant-based dairy products, fruits, nonstarchy vegetables, protein foods, and whole grains; choose foods with vitamins, calcium, fiber, and healthy fats; limit foods high in saturated fat, sodium, and added sugar; limit alcohol; consider carb counting or the plate method for portion control' vs 'Following a healthy meal plan'",
+    "lifestyleIntervention/healthy-meal-plan: expectedBenefit: 'Help keep blood glucose, blood pressure, and cholesterol levels in recommended ranges; help reach and maintain a healthy weight; prevent or delay diabetes-related health problems' vs 'Help you reach and maintain a healthy weight'",
+    "complication/low-blood-glucose: mondoCode: 'MONDO:0005004' vs 'MONDO:0005040'",
+    "complication/low-blood-glucose: definition: 'Low blood glucose levels may last for hours or days after physical activity. You are most likely to have low blood glucose if you take insulin or some other diabetes medicines, such as sulfonylureas.' vs 'Low blood glucose can be a serious medical emergency that must be treated right away.'",
+    "adverseEffect/low-blood-glucose: name: 'Low Blood Glucose' vs '低血糖'",
+    "riskFactor/overweight: name: 'Overweight' vs 'overweight'",
+    "riskFactor/obesity: name: 'Obesity' vs 'obesity'",
+    "riskFactor/diabetes-mellitus: name: 'Diabetes Mellitus' vs 'diabetes mellitus'",
+    "medication/insulin: name: 'Insulin' vs 'insulin'",
+    "medication/sulfonylureas: name: 'Sulfonylureas' vs 'sulfonylureas'"
+  ]
+}

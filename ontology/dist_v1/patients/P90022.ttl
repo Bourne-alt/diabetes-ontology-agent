@@ -1,0 +1,42 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/bdc48b29-19fc-5778-8819-abbc8f6e1e7a> a dmo:Patient ;
+    dmo:birthYear 1985 ;
+    dmo:demoScenario "S19" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90022-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90022-1> ;
+    dmo:patientId "P90022" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/diagnosis/D90022-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S19" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90022-1> ;
+    dmo:diagnosedDate "2023-03-17"^^xsd:date ;
+    dmo:diagnosisId "D90022-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90022-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-10T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S19" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90022-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 7.3 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90022-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-10"^^xsd:date ;
+    dmo:encounterId "E90022-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90022-A1C> .
+

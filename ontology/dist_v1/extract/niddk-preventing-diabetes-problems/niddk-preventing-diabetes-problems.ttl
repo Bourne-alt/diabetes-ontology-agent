@@ -1,0 +1,458 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-preventing-diabetes-problems.txt
+# 目标 named graph：urn:dmo:extract:niddk-preventing-diabetes-problems
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-preventing-diabetes-problems'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-preventing-diabetes-problems.txt" ;
+    dmo:sha256 "48dc8bd409f88678f69e194025f23446bd068ef55c86b9da4be4ad97676cd518" ;
+    dmo:byteSize "4397"^^xsd:integer .
+
+<urn:dmo:extract:niddk-preventing-diabetes-problems> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T04:10:04+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/low-blood-glucose> a dmo:AdverseEffect ;
+    rdfs:label "Low Blood Glucose" ;
+    dmo:adverseEffectCode "low-blood-glucose" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Low Blood Glucose" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "Hypoglycemia occurs when your blood glucose drops too low. Certain diabetes medicines make low blood glucose more likely." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/cancer> a dmo:Complication ;
+    rdfs:label "Cancer" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "cancer" ;
+    dmo:definition "Diabetes is linked to some types of cancer External link." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005155" ;
+    dmo:name "Cancer" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes is linked to some types of cancer External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/dementia> a dmo:Complication ;
+    rdfs:label "Dementia" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "dementia" ;
+    dmo:definition "High blood glucose increases the chance of developing dementia NIH external link." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005156" ;
+    dmo:name "Dementia" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "High blood glucose increases the chance of developing dementia NIH external link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/depression> a dmo:Complication ;
+    rdfs:label "Depression" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "depression" ;
+    dmo:definition "Depression NIH external link is common among people with a chronic, or long-term, illness such as diabetes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005154" ;
+    dmo:name "Depression" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Depression NIH external link is common among people with a chronic, or long-term, illness such as diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/diabetes-foot-problems> a dmo:Complication ;
+    rdfs:label "Diabetes & Foot Problems" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "diabetes-foot-problems" ;
+    dmo:definition "Diabetes can cause nerve damage and poor blood flow, which can lead to serious foot problems." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Diabetes & Foot Problems" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes can cause nerve damage and poor blood flow, which can lead to serious foot problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/diabetes-gum-disease-other-dental-problems> a dmo:Complication ;
+    rdfs:label "Diabetes, Gum Disease, & Other Dental Problems" ;
+    dmo:affectedOrgan "Mouth" ;
+    dmo:complicationCode "diabetes-gum-disease-other-dental-problems" ;
+    dmo:definition "Diabetes can lead to problems in your mouth, such as infection, gum disease, or dry mouth." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005152" ;
+    dmo:name "Diabetes, Gum Disease, & Other Dental Problems" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes can lead to problems in your mouth, such as infection, gum disease, or dry mouth." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/diabetes-sexual-bladder-problems> a dmo:Complication ;
+    rdfs:label "Diabetes, Sexual, & Bladder Problems" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetes-sexual-bladder-problems" ;
+    dmo:definition "Sexual and bladder problems are more common in people with diabetes. Problems like erectile dysfunction, loss of interest in sex, bladder leaks, and retained urine can happen if diabetes damages your blood vessels and nerves." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005153" ;
+    dmo:name "Diabetes, Sexual, & Bladder Problems" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Sexual and bladder problems are more common in people with diabetes. Problems like erectile dysfunction, loss of interest in sex, bladder leaks, and retained urine can happen if diabetes damages your blood vessels and nerves." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/diabetic-eye-disease> a dmo:Complication ;
+    rdfs:label "Diabetic Eye Disease" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "diabetic-eye-disease" ;
+    dmo:definition "Diabetes can damage your eyes and lead to low vision and blindness." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Diabetic Eye Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetes can damage your eyes and lead to low vision and blindness." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/diabetic-kidney-disease> a dmo:Complication ;
+    rdfs:label "Diabetic Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "diabetic-kidney-disease" ;
+    dmo:definition "Diabetic kidney disease, also called diabetic nephropathy, is kidney disease caused by diabetes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Diabetic Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetic kidney disease, also called diabetic nephropathy, is kidney disease caused by diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/diabetic-neuropathy> a dmo:Complication ;
+    rdfs:label "Diabetic Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "diabetic-neuropathy" ;
+    dmo:definition "Diabetic neuropathy is nerve damage that can result from diabetes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Diabetic Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Diabetic neuropathy is nerve damage that can result from diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/low-blood-glucose> a dmo:Complication ;
+    rdfs:label "Low Blood Glucose" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "low-blood-glucose" ;
+    dmo:definition "Hypoglycemia occurs when your blood glucose drops too low." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Low Blood Glucose" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Hypoglycemia occurs when your blood glucose drops too low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/complication/sleep-apnea> a dmo:Complication ;
+    rdfs:label "Sleep Apnea" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "sleep-apnea" ;
+    dmo:definition "People who have sleep apnea NIH external link—when you stop breathing for short periods during sleep—are more likely to develop type 2 diabetes." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005157" ;
+    dmo:name "Sleep Apnea" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "People who have sleep apnea NIH external link—when you stop breathing for short periods during sleep—are more likely to develop type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/balancing-your-physical-activity-food-and-medicines> a dmo:LifestyleIntervention ;
+    rdfs:label "Balancing your physical activity, food, and medicines" ;
+    dmo:interventionCode "balancing-your-physical-activity-food-and-medicines" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Balancing your physical activity, food, and medicines" ;
+    dmo:evidenceQuote "You can prevent hypoglycemia by following your meal plan and balancing your physical activity, food, and medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/brushing-your-teeth-twice-a-day> a dmo:LifestyleIntervention ;
+    rdfs:label "Brushing your teeth twice a day" ;
+    dmo:interventionCode "brushing-your-teeth-twice-a-day" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Brushing your teeth twice a day" ;
+    dmo:evidenceQuote "To help keep your mouth healthy, manage your blood glucose, brush your teeth twice a day, see your dentist at least once a year, and don’t smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/following-your-meal-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Following your meal plan" ;
+    dmo:interventionCode "following-your-meal-plan" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Following your meal plan" ;
+    dmo:evidenceQuote "You can prevent hypoglycemia by following your meal plan and balancing your physical activity, food, and medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/getting-a-foot-checkup-at-each-visit-with-your-health-care-team> a dmo:LifestyleIntervention ;
+    rdfs:label "Getting a foot checkup at each visit with your health care team" ;
+    dmo:interventionCode "getting-a-foot-checkup-at-each-visit-with-your-health-care-team" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Getting a foot checkup at each visit with your health care team" ;
+    dmo:evidenceQuote "Get a foot checkup at each visit with your health care team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/getting-recommended-cancer-screenings> a dmo:LifestyleIntervention ;
+    rdfs:label "Getting recommended cancer screenings" ;
+    dmo:interventionCode "getting-recommended-cancer-screenings" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Getting recommended cancer screenings" ;
+    dmo:evidenceQuote "Not smoking and getting recommended cancer screenings can help prevent cancer." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/having-a-dilated-eye-exam-at-least-once-a-year> a dmo:LifestyleIntervention ;
+    rdfs:label "Having a dilated eye exam at least once a year" ;
+    dmo:interventionCode "having-a-dilated-eye-exam-at-least-once-a-year" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Having a dilated eye exam at least once a year" ;
+    dmo:evidenceQuote "Also, have a dilated eye exam at least once a year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/managing-your-blood-glucose> a dmo:LifestyleIntervention ;
+    rdfs:label "Managing your blood glucose" ;
+    dmo:interventionCode "managing-your-blood-glucose" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Managing your blood glucose" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    dmo:evidenceQuote "The best way to prevent eye disease is to manage your blood glucose, blood pressure, and cholesterol; and to not smoke." ;
+    dmo:evidenceQuote "To help keep your mouth healthy, manage your blood glucose, brush your teeth twice a day, see your dentist at least once a year, and don’t smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/managing-your-blood-pressure> a dmo:LifestyleIntervention ;
+    rdfs:label "Managing your blood pressure" ;
+    dmo:interventionCode "managing-your-blood-pressure" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Managing your blood pressure" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    dmo:evidenceQuote "The best way to prevent eye disease is to manage your blood glucose, blood pressure, and cholesterol; and to not smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/managing-your-cholesterol> a dmo:LifestyleIntervention ;
+    rdfs:label "Managing your cholesterol" ;
+    dmo:interventionCode "managing-your-cholesterol" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Managing your cholesterol" ;
+    dmo:evidenceQuote "The best way to prevent eye disease is to manage your blood glucose, blood pressure, and cholesterol; and to not smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/managing-your-cholesterol-levels> a dmo:LifestyleIntervention ;
+    rdfs:label "Managing your cholesterol levels" ;
+    dmo:interventionCode "managing-your-cholesterol-levels" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Managing your cholesterol levels" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/managing-your-diabetes> a dmo:LifestyleIntervention ;
+    rdfs:label "Managing your diabetes" ;
+    dmo:interventionCode "managing-your-diabetes" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Managing your diabetes" ;
+    dmo:evidenceQuote "Managing your diabetes can help prevent nerve damage that affects your feet and limbs, and organs such as your heart." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/meeting-your-blood-pressure-goals> a dmo:LifestyleIntervention ;
+    rdfs:label "Meeting your blood pressure goals" ;
+    dmo:interventionCode "meeting-your-blood-pressure-goals" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Meeting your blood pressure goals" ;
+    dmo:evidenceQuote "You can help protect your kidneys by managing your diabetes and meeting your blood pressure goals." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/not-smoking> a dmo:LifestyleIntervention ;
+    rdfs:label "Not smoking" ;
+    dmo:interventionCode "not-smoking" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Not smoking" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    dmo:evidenceQuote "The best way to prevent eye disease is to manage your blood glucose, blood pressure, and cholesterol; and to not smoke." ;
+    dmo:evidenceQuote "To help keep your mouth healthy, manage your blood glucose, brush your teeth twice a day, see your dentist at least once a year, and don’t smoke." ;
+    dmo:evidenceQuote "Not smoking and getting recommended cancer screenings can help prevent cancer." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/seeing-your-dentist-at-least-once-a-year> a dmo:LifestyleIntervention ;
+    rdfs:label "Seeing your dentist at least once a year" ;
+    dmo:interventionCode "seeing-your-dentist-at-least-once-a-year" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Seeing your dentist at least once a year" ;
+    dmo:evidenceQuote "To help keep your mouth healthy, manage your blood glucose, brush your teeth twice a day, see your dentist at least once a year, and don’t smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/testing-your-blood-glucose-regularly> a dmo:LifestyleIntervention ;
+    rdfs:label "Testing your blood glucose regularly" ;
+    dmo:interventionCode "testing-your-blood-glucose-regularly" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Testing your blood glucose regularly" ;
+    dmo:evidenceQuote "Testing your blood glucose regularly can also help prevent hypoglycemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/monitoringSchedule/dilated-eye-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Dilated Eye Exam" ;
+    dmo:appliesTo "people with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Dilated Eye Exam" ;
+    dmo:scheduleId "dilated-eye-exam" ;
+    dmo:evidenceQuote "Also, have a dilated eye exam at least once a year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/following-meal-plan-and-balancing-physical-activity-food-and-medicines> a dmo:Recommendation ;
+    rdfs:label "Following Meal Plan and Balancing Physical Activity, Food, and Medicines" ;
+    dmo:recommendationId "following-meal-plan-and-balancing-physical-activity-food-and-medicines" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You can prevent hypoglycemia by following your meal plan and balancing your physical activity, food, and medicines." ;
+    dmo:evidenceQuote "You can prevent hypoglycemia by following your meal plan and balancing your physical activity, food, and medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/getting-a-foot-checkup-at-each-visit-with-health-care-team> a dmo:Recommendation ;
+    rdfs:label "Getting a Foot Checkup at Each Visit with Health Care Team" ;
+    dmo:recommendationId "getting-a-foot-checkup-at-each-visit-with-health-care-team" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Get a foot checkup at each visit with your health care team." ;
+    dmo:evidenceQuote "Get a foot checkup at each visit with your health care team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/getting-treatment-for-sleep-apnea> a dmo:Recommendation ;
+    rdfs:label "Getting Treatment for Sleep Apnea" ;
+    dmo:recommendationId "getting-treatment-for-sleep-apnea" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Treatment for sleep apnea can help." ;
+    dmo:evidenceQuote "Treatment for sleep apnea can help." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/having-a-dilated-eye-exam-at-least-once-a-year> a dmo:Recommendation ;
+    rdfs:label "Having a Dilated Eye Exam at Least Once a Year" ;
+    dmo:recommendationId "having-a-dilated-eye-exam-at-least-once-a-year" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Also, have a dilated eye exam at least once a year." ;
+    dmo:evidenceQuote "Also, have a dilated eye exam at least once a year." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/managing-blood-glucose-blood-pressure-and-cholesterol-levels> a dmo:Recommendation ;
+    rdfs:label "Managing Blood Glucose, Blood Pressure, and Cholesterol Levels" ;
+    dmo:recommendationId "managing-blood-glucose-blood-pressure-and-cholesterol-levels" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/managing-blood-glucose-brushing-teeth-twice-a-day-seeing-dentist-annually-and-not-smoking> a dmo:Recommendation ;
+    rdfs:label "Managing Blood Glucose, Brushing Teeth Twice a Day, Seeing Dentist Annually, and Not Smoking" ;
+    dmo:recommendationId "managing-blood-glucose-brushing-teeth-twice-a-day-seeing-dentist-annually-and-not-smoking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "To help keep your mouth healthy, manage your blood glucose, brush your teeth twice a day, see your dentist at least once a year, and don’t smoke." ;
+    dmo:evidenceQuote "To help keep your mouth healthy, manage your blood glucose, brush your teeth twice a day, see your dentist at least once a year, and don’t smoke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/managing-diabetes-to-prevent-nerve-damage> a dmo:Recommendation ;
+    rdfs:label "Managing Diabetes to Prevent Nerve Damage" ;
+    dmo:recommendationId "managing-diabetes-to-prevent-nerve-damage" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Managing your diabetes can help prevent nerve damage that affects your feet and limbs, and organs such as your heart." ;
+    dmo:evidenceQuote "Managing your diabetes can help prevent nerve damage that affects your feet and limbs, and organs such as your heart." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/meeting-blood-pressure-goals-to-protect-kidneys> a dmo:Recommendation ;
+    rdfs:label "Meeting Blood Pressure Goals to Protect Kidneys" ;
+    dmo:recommendationId "meeting-blood-pressure-goals-to-protect-kidneys" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "You can help protect your kidneys by managing your diabetes and meeting your blood pressure goals." ;
+    dmo:evidenceQuote "You can help protect your kidneys by managing your diabetes and meeting your blood pressure goals." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/not-smoking-and-getting-recommended-cancer-screenings> a dmo:Recommendation ;
+    rdfs:label "Not Smoking and Getting Recommended Cancer Screenings" ;
+    dmo:recommendationId "not-smoking-and-getting-recommended-cancer-screenings" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Not smoking and getting recommended cancer screenings can help prevent cancer." ;
+    dmo:evidenceQuote "Not smoking and getting recommended cancer screenings can help prevent cancer." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/telling-doctor-if-feeling-sad-hopeless-or-anxious> a dmo:Recommendation ;
+    rdfs:label "Telling Doctor if Feeling Sad, Hopeless, or Anxious" ;
+    dmo:recommendationId "telling-doctor-if-feeling-sad-hopeless-or-anxious" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Depression can be treated so tell your doctor if you feel sad, hopeless, or anxious." ;
+    dmo:evidenceQuote "Depression can be treated so tell your doctor if you feel sad, hopeless, or anxious." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/telling-doctor-if-forgetful> a dmo:Recommendation ;
+    rdfs:label "Telling Doctor if Forgetful" ;
+    dmo:recommendationId "telling-doctor-if-forgetful" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Tell your doctor if you are forgetful because dementia can make it hard to manage your diabetes." ;
+    dmo:evidenceQuote "Tell your doctor if you are forgetful because dementia can make it hard to manage your diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/recommendation/testing-blood-glucose-regularly> a dmo:Recommendation ;
+    rdfs:label "Testing Blood Glucose Regularly" ;
+    dmo:recommendationId "testing-blood-glucose-regularly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Testing your blood glucose regularly can also help prevent hypoglycemia." ;
+    dmo:evidenceQuote "Testing your blood glucose regularly can also help prevent hypoglycemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/riskFactor/diabetes> a dmo:RiskFactor ;
+    rdfs:label "Diabetes" ;
+    dmo:evidenceNote "Diabetes is a chronic condition that increases the risk of multiple complications." ;
+    dmo:name "Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "diabetes" ;
+    dmo:evidenceQuote "Diabetes can damage blood vessels and lead to heart disease and stroke. You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-pressure> a dmo:RiskFactor ;
+    rdfs:label "High Blood Pressure" ;
+    dmo:evidenceNote "Managing your blood pressure can help prevent heart disease and stroke." ;
+    dmo:name "High Blood Pressure" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-pressure" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/riskFactor/high-cholesterol> a dmo:RiskFactor ;
+    rdfs:label "High Cholesterol" ;
+    dmo:evidenceNote "Managing your blood glucose, blood pressure, and cholesterol levels can help prevent heart disease and stroke." ;
+    dmo:name "High Cholesterol" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-cholesterol" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+<https://example.org/dmo/id/riskFactor/smoking> a dmo:RiskFactor ;
+    rdfs:label "Smoking" ;
+    dmo:evidenceNote "Not smoking can help prevent heart disease and stroke, and eye disease." ;
+    dmo:name "Smoking" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "smoking" ;
+    dmo:evidenceQuote "You can do a lot to prevent heart disease and stroke by managing your blood glucose, blood pressure, and cholesterol levels; and by not smoking." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-preventing-diabetes-problems> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/recommendation/managing-diabetes-to-prevent-nerve-damage> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/recommendation/meeting-blood-pressure-goals-to-protect-kidneys> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-kidney-disease> .
+<https://example.org/dmo/id/recommendation/getting-a-foot-checkup-at-each-visit-with-health-care-team> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetes-foot-problems> .
+<https://example.org/dmo/id/recommendation/having-a-dilated-eye-exam-at-least-once-a-year> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-eye-disease> .
+<https://example.org/dmo/id/recommendation/managing-blood-glucose-brushing-teeth-twice-a-day-seeing-dentist-annually-and-not-smoking> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetes-gum-disease-other-dental-problems> .
+<https://example.org/dmo/id/recommendation/testing-blood-glucose-regularly> dmo:targetsComplication <https://example.org/dmo/id/complication/low-blood-glucose> .
+<https://example.org/dmo/id/recommendation/not-smoking-and-getting-recommended-cancer-screenings> dmo:targetsComplication <https://example.org/dmo/id/complication/cancer> .
+<https://example.org/dmo/id/recommendation/telling-doctor-if-feeling-sad-hopeless-or-anxious> dmo:targetsComplication <https://example.org/dmo/id/complication/depression> .
+<https://example.org/dmo/id/recommendation/telling-doctor-if-forgetful> dmo:targetsComplication <https://example.org/dmo/id/complication/dementia> .
+<https://example.org/dmo/id/recommendation/getting-treatment-for-sleep-apnea> dmo:targetsComplication <https://example.org/dmo/id/complication/sleep-apnea> .
+<https://example.org/dmo/id/recommendation/following-meal-plan-and-balancing-physical-activity-food-and-medicines> dmo:targetsComplication <https://example.org/dmo/id/complication/low-blood-glucose> .

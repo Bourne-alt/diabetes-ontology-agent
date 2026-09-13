@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-08-24T13:45:46.630Z",
+  "workspace": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams",
+  "finalPptx": "/Users/fabivs/myfile/code/diabetes-ontology-agent/output-claude/project-presentation-with-agent-and-ontology-diagrams.pptx",
+  "starterPptx": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-starter.pptx",
+  "mapPath": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-frame-map.json",
+  "starterLayoutDir": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/template-starter-layout",
+  "finalLayoutDir": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams/final-layout",
+  "editDir": "/Users/fabivs/myfile/code/diabetes-ontology-agent/.codex-tmp/two-diagrams",
+  "issueCount": 0,
+  "issues": []
+}

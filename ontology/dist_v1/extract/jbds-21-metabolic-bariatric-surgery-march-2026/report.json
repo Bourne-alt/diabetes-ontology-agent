@@ -1,0 +1,200 @@
+{
+  "source": {
+    "sourceId": "jbds-21-metabolic-bariatric-surgery-march-2026",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds-21-metabolic-bariatric-surgery-march-2026",
+    "localFile": "ontology/knowledges/pdfs/JBDS-21-Metabolic-bariatric-surgery-March-2026.pdf",
+    "sha256": "48a1291adc8423a8ecb1020b65aebb088df6ba72276ee05c6d80dcf8204f29f7",
+    "byteSize": 1358217,
+    "graphUri": "urn:dmo:extract:jbds-21-metabolic-bariatric-surgery-march-2026",
+    "documentFormat": "pdf",
+    "pageCount": 25,
+    "textPageCount": 25
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 10,
+  "counts": {
+    "rawRecords": 461,
+    "accepted": 324,
+    "rejected": 137,
+    "entities": 211,
+    "edges": 76,
+    "danglingRelations": 35,
+    "mergeConflicts": 225
+  },
+  "quality": {
+    "quoteHitRate": 0.7028,
+    "schemaSlotCoverage": 0.8226,
+    "danglingRelationRate": 0.3153,
+    "avgMentionsPerEntity": 1.54
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 120,
+    "quote_too_short": 12,
+    "unknown_relation_predicate": 5
+  },
+  "linkPass": {
+    "candidates": 92,
+    "accepted": 56,
+    "rejectedByReason": {
+      "quote_not_found": 19,
+      "source_unresolved": 5,
+      "target_unresolved": 11,
+      "quote_too_short": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 94,
+    "medication": 52,
+    "contraindication": 29,
+    "drugClass": 14,
+    "device": 8,
+    "labTest": 4,
+    "monitoringSchedule": 3,
+    "diabetesType": 2,
+    "complication": 2,
+    "adverseEffect": 2,
+    "riskFactor": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/drugClass/glp-1-based-therapies",
+      "predicate": "causesAdverseEffect",
+      "target": "Pulmonary aspiration"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/glp-1-based-therapies",
+      "predicate": "causesAdverseEffect",
+      "target": "GLP-1 based therapies"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Diabetic ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "DKA"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Liver reduction diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sglt2-inhibitors",
+      "predicate": "hasContraindication",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Diabetic ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "DKA"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Type 1 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/insulin",
+      "predicate": "hasContraindication",
+      "target": "Low-calorie diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sulfonylureas",
+      "predicate": "hasContraindication",
+      "target": "Liver reduction diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/sulfonylureas",
+      "predicate": "hasContraindication",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/meglitinides",
+      "predicate": "hasContraindication",
+      "target": "Liver reduction diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/drugClass/meglitinides",
+      "predicate": "hasContraindication",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/contraindication/sulfonylureas",
+      "predicate": "triggeredByCondition",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/contraindication/meglitinides",
+      "predicate": "triggeredByCondition",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/contraindication/sglt2-inhibitors",
+      "predicate": "triggeredByCondition",
+      "target": "Liver Reduction Diet"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/adjustment-of-diabetes-medication-doses-postoperatively",
+      "predicate": "citesSource",
+      "target": "CPOC Guideline for Perioperative Care for People with Diabetes Mellitus Undergoing Elective and Emergency Surgery (updated October 2023)"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/modification-of-medication-formulation-postoperatively",
+      "predicate": "citesSource",
+      "target": "CPOC Guideline for Perioperative Care for People with Diabetes Mellitus Undergoing Elective and Emergency Surgery (updated October 2023)"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/type-2-diabetes: definition: 'The role of metabolic-bariatric surgery as effective interventions for obesity and type 2 diabetes is well recognised, particularly in achieving type 2 diabetes remission or improvement in glycaemic control, treatment impact and improvements in associated complications' vs 'Type 2 Diabetes'",
+    "diabetesType/type-2-diabetes: name: 'Type 2 Diabetes' vs 'Type 2 diabetes'",
+    "diabetesType/type-2-diabetes: definition: 'The role of metabolic-bariatric surgery as effective interventions for obesity and type 2 diabetes is well recognised, particularly in achieving type 2 diabetes remission or improvement in glycaemic control, treatment impact and improvements in associated complications' vs 'Type 2 diabetes - Insulin-based therapy agents during the liver reduction diet (LRD)'",
+    "diabetesType/type-2-diabetes: definition: 'The role of metabolic-bariatric surgery as effective interventions for obesity and type 2 diabetes is well recognised, particularly in achieving type 2 diabetes remission or improvement in glycaemic control, treatment impact and improvements in associated complications' vs 'Individuals on insulin therapy should be discussed with and/or reviewed by the Diabetes-Bariatric Physician/Nurse. There is no set rule for insulin needs following metabolic-bariatric surgery(4).'",
+    "diabetesType/type-2-diabetes: mondoCode: 'MONDO:0005147' vs 'MONDO:0005148'",
+    "diabetesType/type-2-diabetes: definition: 'The role of metabolic-bariatric surgery as effective interventions for obesity and type 2 diabetes is well recognised, particularly in achieving type 2 diabetes remission or improvement in glycaemic control, treatment impact and improvements in associated complications' vs 'If type 2 diabetes remission is achieved following surgery, a recommendation should be made for an annual HbA1c and routine microvascular/macrovascular screening as this group is at high-risk of type 2 diabetes relapse and complications.'",
+    "diabetesType/type-1-diabetes: definition: 'Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)' vs 'Type 1 Diabetes'",
+    "diabetesType/type-1-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/type-1-diabetes: prevalenceShare: 0.1 vs 0.05",
+    "diabetesType/type-1-diabetes: definition: 'Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)' vs 'Individuals with type 1 diabetes require review by the Diabetes-Bariatric Physician. There is no set rule for individual insulin requirements following metabolic-bariatric surgery. The usual diabetes care providers must be contacted early to allow careful insulin management.'",
+    "diabetesType/type-1-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/type-1-diabetes: prevalenceShare: 0.1 vs 0.05",
+    "diabetesType/type-1-diabetes: definition: 'Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)' vs 'Individuals with type 1 diabetes could liaise with diabetes teams to adjust further to achieve/maintain optimal diabetes control'",
+    "diabetesType/type-1-diabetes: mondoCode: 'MONDO:0005148' vs 'MONDO:0005147'",
+    "diabetesType/type-1-diabetes: prevalenceShare: 0.1 vs 0.05",
+    "diabetesType/type-1-diabetes: definition: 'Hypoglycaemia is defined as blood glucose <4 mmol/L. Prevention and management of hypoglycaemia must be considered when planning and during the perioperative and postoperative phases of surgery in all those at risk (on insulin and insulin secretagogues)' vs 'insulin must never be stopped as this expose them to the risk of DKA'",
+    "labTest/hba1c: definition: 'A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control.' vs 'A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control in diabetes.'",
+    "labTest/hba1c: definition: 'A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control.' vs 'A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control in people with diabetes.'",
+    "labTest/hba1c: definition: 'A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control.' vs 'A measure of average blood glucose levels over the past 2-3 months, used to assess long-term glycaemic control in diabetes.'",
+    "labTest/blood-ketones: name: 'Blood ketones' vs 'Blood Ketones'"
+  ]
+}

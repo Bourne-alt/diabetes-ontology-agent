@@ -1,0 +1,14 @@
+{"source": "Low Blood Sugar", "predicate": "presentsWith", "target": "Acting Strangely", "quote": "If I am acting strangely or cannot be awakened, my blood sugar may be low.", "sourceType": "complication"}
+{"source": "Low Blood Sugar", "predicate": "presentsWith", "target": "Cannot Be Awakened", "quote": "If I am acting strangely or cannot be awakened, my blood sugar may be low.", "sourceType": "complication"}
+{"source": "Low Blood Sugar", "predicate": "presentsWith", "target": "Cannot Swallow", "quote": "If I cannot be awakened or cannot swallow, do not try to give me anything by mouth.", "sourceType": "complication"}
+{"source": "Dental Exam", "predicate": "schedulesTest", "target": "Dental Exam", "quote": "Dental Exam (Every 6 months)", "sourceType": "monitoringSchedule"}
+{"source": "Lipid Profile", "predicate": "schedulesTest", "target": "Lipid Profile", "quote": "Lipid Profile (Annually)", "sourceType": "monitoringSchedule"}
+{"source": "Microalbuminuria", "predicate": "schedulesTest", "target": "Microalbuminuria", "quote": "Microalbuminuria (Annually)", "sourceType": "monitoringSchedule"}
+{"source": "Self-Management Education", "predicate": "schedulesTest", "target": "Self-Management Education", "quote": "Self-Management Education", "sourceType": "monitoringSchedule"}
+{"source": "Low Blood Sugar Emergency Response", "predicate": "targetsComplication", "target": "Low Blood Sugar", "quote": "If I am acting strangely or cannot be awakened, my blood sugar may be low.", "sourceType": "recommendation"}
+{"source": "Low Blood Sugar Emergency Response", "predicate": "recommendsLifestyle", "target": "Self-Management Education", "quote": "Bring this card to each visit with your health care provider or diabetes educator. Discuss these issues during your visit and use the chart below to record your results so that you can take charge of your diabetes.", "sourceType": "recommendation"}
+{"source": "Self-Management Education", "predicate": "definesSchedule", "target": "Self-Management Education", "quote": "Self-Management Education", "sourceType": "recommendation"}
+{"source": "Dental Exam Frequency", "predicate": "definesSchedule", "target": "Dental Exam", "quote": "Dental Exam (Every 6 months)", "sourceType": "recommendation"}
+{"source": "Lipid Profile Testing Frequency", "predicate": "definesSchedule", "target": "Lipid Profile", "quote": "Lipid Profile (Annually)", "sourceType": "recommendation"}
+{"source": "Microalbuminuria Testing Frequency", "predicate": "definesSchedule", "target": "Microalbuminuria", "quote": "Microalbuminuria (Annually)", "sourceType": "recommendation"}
+{"source": "Blood Pressure Monitoring Frequency", "predicate": "definesSchedule", "target": "Blood Pressure", "quote": "Blood Pressure (Every visit)", "sourceType": "recommendation"}

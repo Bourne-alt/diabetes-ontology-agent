@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1660" viewBox="0 0 1700 1660">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#93A2B2"/></marker>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#D4534C"/></marker>
+</defs>
+<rect width="1700" height="1660" fill="#F6F8FA"/>
+<text x="40" y="52" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="27" font-weight="700" fill="#18212B">糖尿病管理本体（DMO）搭建流程</text>
+<text x="40" y="78" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="400" fill="#5A6875">ontology/tools/ · 一张 ER 图驱动全流程：机械可生成的绝不手写，高危常量绝不交给 LLM</text>
+<rect x="40" y="94" width="12" height="12" rx="3" fill="#E7F0FD" stroke="#3B78D8" stroke-width="1.5"/>
+<text x="58" y="104" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" font-weight="400" fill="#5A6875">输入/语料</text>
+<rect x="162" y="94" width="12" height="12" rx="3" fill="#E7F6EE" stroke="#2A9960" stroke-width="1.5"/>
+<text x="180" y="104" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" font-weight="400" fill="#5A6875">确定性生成</text>
+<rect x="284" y="94" width="12" height="12" rx="3" fill="#FDF0E3" stroke="#DF8827" stroke-width="1.5"/>
+<text x="302" y="104" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" font-weight="400" fill="#5A6875">涉及 LLM</text>
+<rect x="406" y="94" width="12" height="12" rx="3" fill="#F2ECFB" stroke="#7A52C6" stroke-width="1.5"/>
+<text x="424" y="104" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" font-weight="400" fill="#5A6875">人工策展</text>
+<rect x="528" y="94" width="12" height="12" rx="3" fill="#FCE9E9" stroke="#D4534C" stroke-width="1.5"/>
+<text x="546" y="104" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" font-weight="400" fill="#5A6875">校验门禁</text>
+<rect x="40" y="124" width="1620" height="246" rx="13" fill="#FFFFFF" stroke="#E2E7EE" stroke-width="1.2"/>
+<rect x="40" y="124" width="6" height="246" rx="3" fill="#93A2B2" opacity="0.5"/>
+<text x="58" y="151" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">①</text>
+<text x="84" y="151" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">契约层</text>
+<text x="141" y="151" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" font-weight="400" fill="#5A6875">唯一事实源 —— 改图即改契约，TBox 与 ABox 一起跟着变</text>
+<rect x="52" y="166" width="530" height="92" rx="10" fill="#E7F0FD" stroke="#3B78D8" stroke-width="1.6"/>
+<rect x="514.0" y="174" width="58.0" height="19" rx="9.5" fill="#3B78D8" opacity="0.17"/>
+<text x="520.0" y="188" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#3B78D8">唯一契约</text>
+<text x="65" y="190" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">graph/diabetes-ontology-v2.json</text>
+<text x="65" y="210" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">ER 图：entityTypes / properties / relationships</text>
+<text x="65" y="227.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">enum · tbox.route · extraction.policy</text>
+<rect x="593" y="166" width="490" height="92" rx="10" fill="#E7F0FD" stroke="#3B78D8" stroke-width="1.6"/>
+<rect x="1038.0" y="174" width="35.0" height="19" rx="9.5" fill="#3B78D8" opacity="0.17"/>
+<text x="1044.0" y="188" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#3B78D8">语料</text>
+<text x="606" y="190" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">ontology/knowledges/</text>
+<text x="606" y="210" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">52 份指南 / 说明书原文</text>
+<text x="606" y="227.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">TXT + PDF（只取文本层，不做 OCR）</text>
+<rect x="1094" y="166" width="554" height="92" rx="10" fill="#F2ECFB" stroke="#7A52C6" stroke-width="1.6"/>
+<rect x="1580.0" y="174" width="58.0" height="19" rx="9.5" fill="#7A52C6" opacity="0.17"/>
+<text x="1586.0" y="188" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#7A52C6">手写策展</text>
+<text x="1107" y="190" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">ontology/src/*.ttl</text>
+<text x="1107" y="210" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">dmo-axioms：subClassOf / disjointWith / 属性链</text>
+<text x="1107" y="227.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">dmo-threshold-seed（诊断切点）· dmo-risk-map</text>
+<rect x="52" y="270" width="530" height="82" rx="10" fill="#E7F0FD" stroke="#3B78D8" stroke-width="1.6"/>
+<text x="65" y="294" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">ontology/data/synthetic-patients.ttl</text>
+<text x="65" y="314" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">业务侧患者事实（policy = derived，不参与抽取）</text>
+<rect x="593" y="270" width="490" height="82" rx="10" fill="#F2ECFB" stroke="#7A52C6" stroke-width="1.6"/>
+<text x="606" y="294" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">shapes/*.shacl.ttl · rules/*.rq</text>
+<text x="606" y="314" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">2 份 SHACL shapes · 10 条物化规则</text>
+<rect x="1094" y="270" width="554" height="82" rx="10" fill="#E7F6EE" stroke="#2A9960" stroke-width="1.6"/>
+<rect x="1603.0" y="278" width="35.0" height="19" rx="9.5" fill="#2A9960" opacity="0.17"/>
+<text x="1609.0" y="292" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#2A9960">旁支</text>
+<text x="1107" y="294" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">build_playground_rdf.py → *.rdf</text>
+<text x="1107" y="314" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">旁支：编成 Fabric IQ 命名规范的 RDF/XML，供设计器往返</text>
+<rect x="40" y="388" width="1620" height="428" rx="13" fill="#FFFFFF" stroke="#E2E7EE" stroke-width="1.2"/>
+<rect x="40" y="388" width="6" height="428" rx="3" fill="#93A2B2" opacity="0.5"/>
+<text x="58" y="415" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">②</text>
+<text x="84" y="415" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">生成层</text>
+<text x="141" y="415" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" font-weight="400" fill="#5A6875">三条支线互不调用，只靠命名空间 https://example.org/dmo# 对齐；对不上 = SPARQL 静默返回空集</text>
+<rect x="52" y="430" width="780" height="122" rx="10" fill="#E7F6EE" stroke="#2A9960" stroke-width="1.6"/>
+<rect x="797.12" y="438" width="24.880000000000003" height="19" rx="9.5" fill="#2A9960" opacity="0.17"/>
+<text x="803.12" y="452" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#2A9960">S1</text>
+<text x="65" y="454" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">build_tbox.py</text>
+<text x="65" y="474" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">owl:Class ← entityTypes；DatatypeProperty ← properties（含 domain/range/单位）</text>
+<text x="65" y="491.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">ObjectProperty ← relationships，按基数推函数性 / 反函数性</text>
+<text x="65" y="509.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">enum → SKOS ConceptScheme；tbox.route → class(punning) / skos / individual</text>
+<text x="65" y="526.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">不生成 subClassOf、disjointWith、属性链 —— ER 图里根本没有这些信息</text>
+<rect x="52" y="560" width="780" height="58" rx="10" fill="#E7F6EE" stroke="#2A9960" stroke-width="1.6"/>
+<text x="65" y="584" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">→ ontology/dist/tbox-v2.ttl</text>
+<text x="65" y="604" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">幂等重生成，禁止手改；装载时与手写 dmo-axioms.ttl 合并</text>
+<rect x="844" y="430" width="804" height="122" rx="10" fill="#E7F6EE" stroke="#2A9960" stroke-width="1.6"/>
+<rect x="1588.74" y="438" width="49.260000000000005" height="19" rx="9.5" fill="#2A9960" opacity="0.17"/>
+<text x="1594.74" y="452" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#2A9960">零 LLM</text>
+<text x="857" y="454" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">source_registry.py</text>
+<text x="857" y="474" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">sha256 摘要 —— 语料一改，所有下游三元组自动过期，重跑有明确触发条件</text>
+<text x="857" y="491.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">文件名前缀 → 发布机构；正则 → 发布/审阅年份</text>
+<text x="857" y="509.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">长句计数 → 判定这份文件是否只抓到了导航壳（无正文）</text>
+<text x="857" y="526.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">刻意不填 sourceUrl：原文没有 URL，凭文件名猜链接就是编造出处</text>
+<rect x="844" y="560" width="804" height="58" rx="10" fill="#E7F6EE" stroke="#2A9960" stroke-width="1.6"/>
+<text x="857" y="584" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">→ ontology/dist/sources.ttl</text>
+<text x="857" y="604" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">dmo:GuidelineSource 实例，全流程唯一的出处锚点</text>
+<rect x="52" y="636" width="1596" height="118" rx="10" fill="#FDF0E3" stroke="#DF8827" stroke-width="1.6"/>
+<text x="65" y="660" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">semantic_extract.py    八阶段流水线（仅 ✦ 两步调用模型）</text>
+<text x="65" y="680" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">load → register → chunk → ✦extract → verify → resolve → ✦link → emit → report</text>
+<text x="65" y="697.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">四道防线：① policy 分级，manual / registry / derived 根本不给模型碰　② schema 由图现生成，标识属性不外露</text>
+<text x="65" y="715.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">　　　　　③ quote 逐字校验（NFKC + 空白归一，短于 24 字符即弃，对不上整条丢进 rejected.jsonl）　④ 冲突与悬空显式记账</text>
+<text x="65" y="732.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">四个指标：quoteHitRate · schemaSlotCoverage · danglingRelationRate · avgMentionsPerEntity</text>
+<rect x="52" y="762" width="1596" height="42" rx="10" fill="#FDF0E3" stroke="#DF8827" stroke-width="1.6"/>
+<text x="65" y="786" font-family="SF Mono, Menlo, Consolas, monospace" font-size="13.5" font-weight="600" fill="#18212B">→ dist/extract/&lt;sid&gt;/{&lt;sid&gt;.ttl · raw.jsonl · rejected.jsonl · report.json}</text>
+<text x="1634" y="788" text-anchor="end" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.8" font-weight="400" fill="#5A6875">一篇文档一个命名图；rejected.jsonl 是审计入口不是垃圾桶；--from-raw 零 token 重放 5–8 阶段</text>
+<rect x="40" y="834" width="1620" height="246" rx="13" fill="#FFFFFF" stroke="#E2E7EE" stroke-width="1.2"/>
+<rect x="40" y="834" width="6" height="246" rx="3" fill="#93A2B2" opacity="0.5"/>
+<text x="58" y="861" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">③</text>
+<text x="84" y="861" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">门禁层</text>
+<text x="141" y="861" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" font-weight="400" fill="#5A6875">任何一条红，构建停在这里 —— 不是生成报告，是 CI 的非零退出</text>
+<rect x="52" y="876" width="792.0" height="110" rx="10" fill="#FCE9E9" stroke="#D4534C" stroke-width="1.6"/>
+<rect x="776.0" y="884" width="58.0" height="19" rx="9.5" fill="#D4534C" opacity="0.17"/>
+<text x="782.0" y="898" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#D4534C">反向验证</text>
+<text x="65" y="900" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">verify_passages.py</text>
+<text x="65" y="920" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">拿人已写好的 quote 回语料逐字核对 + contentHash 复算</text>
+<text x="65" y="937.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">方向反过来：风险从「编造」降级为「找不到」</text>
+<text x="65" y="955.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">MISSING 出处是编的 / HASH 改了没重算 / NOSOURCE 追溯链断</text>
+<text x="65" y="972.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">输入 = ① 中人工策展的 src/*.ttl 与 knowledges/ 语料</text>
+<rect x="856.0" y="876" width="792.0" height="110" rx="10" fill="#FCE9E9" stroke="#D4534C" stroke-width="1.6"/>
+<rect x="1613.12" y="884" width="24.880000000000003" height="19" rx="9.5" fill="#D4534C" opacity="0.17"/>
+<text x="1619.12" y="898" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.5" fill="#D4534C">S6</text>
+<text x="869.0" y="900" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">validate_shacl.py</text>
+<text x="869.0" y="920" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">pyshacl 全量体检，纯 Python，不依赖 GraphDB 在跑</text>
+<text x="869.0" y="937.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">对基线 known-violations.tsv 逐条比对，★ 新增即红</text>
+<text x="869.0" y="955.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">不用 --allow N：夹具刻意违规与真缺陷不能混在一个总数里</text>
+<rect x="52" y="996" width="1596" height="60" rx="10" fill="#FCE9E9" stroke="#D4534C" stroke-width="1.6"/>
+<text x="65" y="1020" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">semantic_extract.py --min-quote-hit-rate 0.85    ·    --dry-run    ·    --strict-docs</text>
+<text x="65" y="1040" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">命中率低于阈值即非零退出 —— 这条是「工作流」和「脚本」的分界线；--dry-run 预估调用次数（&gt;200 提示收窄），无 API key 亦可查前置流程</text>
+<rect x="40" y="1098" width="1620" height="300" rx="13" fill="#FFFFFF" stroke="#E2E7EE" stroke-width="1.2"/>
+<rect x="40" y="1098" width="6" height="300" rx="3" fill="#93A2B2" opacity="0.5"/>
+<text x="58" y="1125" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">④</text>
+<text x="84" y="1125" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">装载层</text>
+<text x="141" y="1125" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" font-weight="400" fill="#5A6875">load_graphdb.py · graphdb_http.py（纯标准库 HTTP 原语，与运行时 src/dmo/graph 共用）</text>
+<rect x="52" y="1140" width="524.0" height="96" rx="10" fill="#E9EFF6" stroke="#47617F" stroke-width="1.6"/>
+<text x="65" y="1164" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">--create</text>
+<text x="65" y="1184" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">ruleset = owl2-rl-optimized</text>
+<text x="65" y="1201.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">建仓时定死，事后改要全量 reload</text>
+<text x="65" y="1219.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">建完回读校验，不符即退出</text>
+<rect x="588.0" y="1140" width="524.0" height="96" rx="10" fill="#E9EFF6" stroke="#47617F" stroke-width="1.6"/>
+<text x="601.0" y="1164" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">--load   整图 PUT</text>
+<text x="601.0" y="1184" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">PUT 而非 POST —— 构建必须幂等</text>
+<text x="601.0" y="1201.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">同一图多个源文件？先在客户端合并再 PUT</text>
+<text x="601.0" y="1219.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">源文件缺失显式 WARN，绝不静默跳过</text>
+<rect x="1124.0" y="1140" width="524.0" height="96" rx="10" fill="#E9EFF6" stroke="#47617F" stroke-width="1.6"/>
+<text x="1137.0" y="1164" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14.5" font-weight="600" fill="#18212B">--rules  →  --verify</text>
+<text x="1137.0" y="1184" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">rules/*.rq 逐条物化进 urn:dmo:inferred</text>
+<text x="1137.0" y="1201.5" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">逐条提交，后序规则可见前序结果</text>
+<text x="1137.0" y="1219.0" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" fill="#5A6875">验收查询：类 / 实例 / 关系 / 出处计数</text>
+<rect x="52" y="1248" width="1596" height="52" rx="10" fill="#FCE9E9" stroke="#D4534C" stroke-width="1.6"/>
+<text x="65" y="1272" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13.5" font-weight="600" fill="#18212B">⚠ 装载顺序是硬约束，不是风格问题</text>
+<text x="65" y="1292" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.8" fill="#5A6875">GraphDB 11 实测忽略建仓时的 validationEnabled=false（建完读回仍是 true）。改用「SHACL 只在 shapes 图非空时触发」——把 shapes 图强制排到装载序列最末尾，效果等价于先关后开，且不依赖任何配置项。</text>
+<text x="56" y="1330" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.5" font-weight="600" fill="#18212B">命名图布局：</text>
+<rect x="148" y="1314" width="152.56000000000003" height="46" rx="8" fill="#FFF" stroke="#2A9960" stroke-width="1.4"/>
+<text x="160" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">urn:dmo:tbox</text>
+<text x="160" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">tbox-v2 + dmo-axioms</text>
+<rect x="311.56000000000006" y="1314" width="124.084" height="46" rx="8" fill="#FFF" stroke="#7A52C6" stroke-width="1.4"/>
+<text x="323.56000000000006" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">urn:dmo:seed</text>
+<text x="323.56000000000006" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">阈值 + 风险因子桥</text>
+<rect x="446.64400000000006" y="1314" width="126.80000000000001" height="46" rx="8" fill="#FFF" stroke="#2A9960" stroke-width="1.4"/>
+<text x="458.64400000000006" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">urn:dmo:sources</text>
+<text x="458.64400000000006" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">GuidelineSource</text>
+<rect x="584.4440000000001" y="1314" width="106.64000000000001" height="46" rx="8" fill="#FFF" stroke="#3B78D8" stroke-width="1.4"/>
+<text x="596.4440000000001" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">urn:dmo:data</text>
+<text x="596.4440000000001" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">患者事实</text>
+<rect x="702.0840000000001" y="1314" width="167.12" height="46" rx="8" fill="#FFF" stroke="#DF8827" stroke-width="1.4"/>
+<text x="714.0840000000001" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">urn:dmo:extract:&lt;sid&gt;</text>
+<text x="714.0840000000001" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">一篇文档一个图</text>
+<rect x="880.2040000000001" y="1314" width="133.52" height="46" rx="8" fill="#FFF" stroke="#47617F" stroke-width="1.4"/>
+<text x="892.2040000000001" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">urn:dmo:inferred</text>
+<text x="892.2040000000001" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">规则物化结果</text>
+<rect x="1024.7240000000002" y="1314" width="145.52" height="46" rx="8" fill="#FFF" stroke="#D4534C" stroke-width="1.4"/>
+<text x="1036.7240000000002" y="1333" text-anchor="start" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#18212B">…#SHACLShapeGraph</text>
+<text x="1036.7240000000002" y="1350" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.3" font-weight="400" fill="#5A6875">必须最后装载</text>
+<path d="M 287 258 L 287 378.4 L 352 378.4 L 352 430" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 812 258 L 812 378.4 L 1132 378.4 L 1132 430" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 922 258 L 922 380.85 L 612 380.85 L 612 636" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 352 552 L 352 560" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 1132 552 L 1132 560" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 572 754 L 572 762" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 352 618 L 352 759.9 L 1006.0 759.9 L 1006.0 876" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 1052 804 L 1052 840.0 L 1236.0 840.0 L 1236.0 876" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 352 986 L 352 1070.7 L 212 1070.7 L 212 1140" stroke="#D4534C" stroke-width="1.9" fill="none" marker-end="url(#ar)"/>
+<path d="M 1244.0 1056 L 1244.0 1102.2 L 828.0 1102.2 L 828.0 1140" stroke="#D4534C" stroke-width="1.9" fill="none" marker-end="url(#ar)"/>
+<path d="M 576.0 1188 L 588.0 1188" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<path d="M 1112.0 1188 L 1124.0 1188" stroke="#93A2B2" stroke-width="1.9" fill="none" marker-end="url(#a)"/>
+<rect x="40" y="1416" width="1620" height="216" rx="13" fill="#FFFFFF" stroke="#E2E7EE" stroke-width="1.2"/>
+<rect x="40" y="1416" width="6" height="216" rx="3" fill="#93A2B2" opacity="0.5"/>
+<text x="58" y="1443" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">⑤</text>
+<text x="84" y="1443" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#18212B">已知残余风险</text>
+<text x="186" y="1443" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.2" font-weight="400" fill="#5A6875">画进图里，是因为它们还没被解决 —— 不是完成品的注脚</text>
+<rect x="52.0" y="1458" width="792.0" height="42" rx="8" fill="#FFF" stroke="#E2E7EE"/>
+<rect x="52.0" y="1458" width="4" height="42" rx="2" fill="#D4534C" opacity="0.75"/>
+<text x="67.0" y="1476" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.3" font-weight="600" fill="#18212B">quote ≠ 蕴含</text>
+<text x="67.0" y="1492" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.2" font-weight="400" fill="#5A6875">只证明「原文有这句话」，不证明「这句话支持这个结论」。propertyEvidence 仍是可选字段 —— 当前最大残余风险</text>
+<rect x="856.0" y="1458" width="792.0" height="42" rx="8" fill="#FFF" stroke="#E2E7EE"/>
+<rect x="856.0" y="1458" width="4" height="42" rx="2" fill="#D4534C" opacity="0.75"/>
+<text x="871.0" y="1476" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.3" font-weight="600" fill="#18212B">消解只做到 slug 精确匹配</text>
+<text x="871.0" y="1492" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.2" font-weight="400" fill="#5A6875">「SGLT2 Inhibitors」与「SGLT-2 inhibitors」被当成两个实体，需别名表 / MONDO·ATC 对齐</text>
+<rect x="52.0" y="1508" width="792.0" height="42" rx="8" fill="#FFF" stroke="#E2E7EE"/>
+<rect x="52.0" y="1508" width="4" height="42" rx="2" fill="#D4534C" opacity="0.75"/>
+<text x="67.0" y="1526" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.3" font-weight="600" fill="#18212B">调用量是笨办法</text>
+<text x="67.0" y="1542" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.2" font-weight="400" fill="#5A6875">每 chunk × 每类型各一次，多数返回空数组。待加 router 预筛（1+k 次而非 14 次）</text>
+<rect x="856.0" y="1508" width="792.0" height="42" rx="8" fill="#FFF" stroke="#E2E7EE"/>
+<rect x="856.0" y="1508" width="4" height="42" rx="2" fill="#D4534C" opacity="0.75"/>
+<text x="871.0" y="1526" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.3" font-weight="600" fill="#18212B">跨 chunk 关系抽不到</text>
+<text x="871.0" y="1542" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.2" font-weight="400" fill="#5A6875">target 按 canonicalName 匹配，目标实体不在本 chunk 即悬空；overlap 只能缓解不能消除</text>
+<rect x="52.0" y="1558" width="792.0" height="42" rx="8" fill="#FFF" stroke="#E2E7EE"/>
+<rect x="52.0" y="1558" width="4" height="42" rx="2" fill="#D4534C" opacity="0.75"/>
+<text x="67.0" y="1576" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.3" font-weight="600" fill="#18212B">PDF 只有文本层</text>
+<text x="67.0" y="1592" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.2" font-weight="400" fill="#5A6875">多栏、表格、页眉的读取顺序取决于 PDF 内部结构；扫描件必须先 OCR</text>
+<rect x="856.0" y="1558" width="792.0" height="42" rx="8" fill="#FFF" stroke="#E2E7EE"/>
+<rect x="856.0" y="1558" width="4" height="42" rx="2" fill="#D4534C" opacity="0.75"/>
+<text x="871.0" y="1576" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12.3" font-weight="600" fill="#18212B">类型边界模糊</text>
+<text x="871.0" y="1592" text-anchor="start" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11.2" font-weight="400" fill="#5A6875">同一概念被塞进多个类型；prompt 约束有改善但未根治 —— 单类型调用看不到全局分配</text>
+</svg>

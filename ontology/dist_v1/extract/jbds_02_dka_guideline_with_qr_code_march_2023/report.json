@@ -1,0 +1,201 @@
+{
+  "source": {
+    "sourceId": "jbds_02_dka_guideline_with_qr_code_march_2023",
+    "uri": "https://example.org/dmo/id/guidelineSource/jbds_02_dka_guideline_with_qr_code_march_2023",
+    "localFile": "ontology/knowledges/pdfs/JBDS_02_DKA_Guideline_with_QR_code_March_2023.pdf",
+    "sha256": "568323c1bb8b554190162ddf0e4e605b0e14f092757fb60927a5cc5b0f164ee8",
+    "byteSize": 2474128,
+    "graphUri": "urn:dmo:extract:jbds_02_dka_guideline_with_qr_code_march_2023",
+    "documentFormat": "pdf",
+    "pageCount": 50,
+    "textPageCount": 50
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 30,
+  "counts": {
+    "rawRecords": 764,
+    "accepted": 634,
+    "rejected": 130,
+    "entities": 518,
+    "edges": 103,
+    "danglingRelations": 144,
+    "mergeConflicts": 248
+  },
+  "quality": {
+    "quoteHitRate": 0.8298,
+    "schemaSlotCoverage": 0.9677,
+    "danglingRelationRate": 0.583,
+    "avgMentionsPerEntity": 1.22
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 76,
+    "quote_too_short": 31,
+    "unknown_relation_predicate": 23
+  },
+  "linkPass": {
+    "candidates": 159,
+    "accepted": 90,
+    "rejectedByReason": {
+      "quote_not_found": 39,
+      "target_unresolved": 30
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 246,
+    "labTest": 47,
+    "medication": 33,
+    "device": 30,
+    "monitoringSchedule": 29,
+    "symptom": 27,
+    "contraindication": 26,
+    "lifestyleIntervention": 21,
+    "riskFactor": 20,
+    "complication": 19,
+    "drugClass": 11,
+    "diabetesType": 5,
+    "adverseEffect": 3,
+    "complicationStage": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/diabetic-ketoacidosis",
+      "predicate": "hasStage",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/reduce-the-rate-of-insulin-infusion-to-0-05-units-kg-hr-when-glucose-drops-to-14-0-mmol-l",
+      "predicate": "citesSource",
+      "target": "A national survey of DKA management following earlier version of this guideline found that the rates of hypoglycaemia (<4.0 mmol/L) and hypokalaemia (<4.0 mmol/L) were 27.6% and 67% respectively. Whilst it may have been that these occurred due to 10% dextrose not being added in a timely manner, or that potassium containing fluids were not given correctly, the main driver for both of these biochemical abnormalities is the use of insulin. Thus, when glucose drops below 14 mmol/L, consider reducing the rate of intravenous insulin infusion to 0.05 units/kg/hr. This is already an option in the adult guidelines elsewhere (25), and several paediatric studies have suggested that the rate of resolution of DKA is not longer compared to 0.1 units/kg/hr (30-32). It is thus also included in the UK paediatric guidelines (33)."
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-of-guidance-based-on-admitting-ward",
+      "predicate": "citesSource",
+      "target": "2021 guidance"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/capillary-ketones",
+      "predicate": "hasThreshold",
+      "target": "Ketones Less Than 0.6 mmol/L"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/urine-ketones",
+      "predicate": "hasThreshold",
+      "target": "Urine ketones"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/venous-ph",
+      "predicate": "hasThreshold",
+      "target": "Venous pH"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/venous-ph",
+      "predicate": "hasThreshold",
+      "target": "Venous pH"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/venous-ph",
+      "predicate": "hasThreshold",
+      "target": "7.3"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/venous-bicarbonate",
+      "predicate": "hasThreshold",
+      "target": "Venous Bicarbonate Over 18 mmol/L"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/hourly-capillary-blood-glucose",
+      "predicate": "schedulesTest",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/hourly-capillary-ketone-measurement",
+      "predicate": "schedulesTest",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/venous-bicarbonate-and-potassium-at-60-minutes-2-hours-and-2-hourly-thereafter",
+      "predicate": "schedulesTest",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/4-hourly-plasma-electrolytes",
+      "predicate": "schedulesTest",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/continuous-cardiac-monitoring-if-required",
+      "predicate": "schedulesTest",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/monitoringSchedule/continuous-pulse-oximetry-if-required",
+      "predicate": "schedulesTest",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/plasma-glucose",
+      "predicate": "hasThreshold",
+      "target": "Glucose Less Than 14 mmol/L"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/capillary-ketone-concentration",
+      "predicate": "hasThreshold",
+      "target": "Capillary Ketone Concentration"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/bicarbonate-concentration",
+      "predicate": "hasThreshold",
+      "target": "Bicarbonate Concentration"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/blood-glucose-concentration",
+      "predicate": "hasThreshold",
+      "target": "Blood Glucose Concentration"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/ketonuria",
+      "predicate": "hasThreshold",
+      "target": "Ketonuria"
+    }
+  ],
+  "conflictSamples": [
+    "complication/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs 'Diabetic ketoacidosis'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis (DKA) is a frequent and potentially life-threatening complication of type 1 diabetes.'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'A life threatening complication of diabetes characterized by hyperglycaemia, ketonaemia, and metabolic acidosis.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005040'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'A serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis, requiring urgent medical intervention.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005075'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis (DKA) is a serious complication of diabetes that occurs when the body produces high levels of blood acids called ketones. It is characterized by hyperglycemia, ketonemia, and metabolic acidosis, and requires urgent medical treatment.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005143'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis (DKA) is a life-threatening complication of diabetes characterized by hyperglycaemia, ketonaemia, and metabolic acidosis.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005040'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis is a medical emergency requiring prompt treatment, and is different to a ketosis of pregnancy.'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'A serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis, often requiring urgent medical intervention.'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis (DKA) is a serious complication of diabetes characterized by hyperglycemia, ketonemia, and metabolic acidosis, often requiring urgent medical intervention.'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005040'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Resolution of DKA is defined as ketones less than 0.6 mmol/L and venous pH over 7.3'",
+    "complication/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs 'Diabetic ketoacidosis'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis (DKA) is a complex disordered metabolic state characterised by hyperglycaemia, ketonaemia, and acidosis.'",
+    "complication/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs 'Diabetic ketoacidosis'",
+    "complication/diabetic-ketoacidosis: mondoCode: 'MONDO:0005147' vs 'MONDO:0005075'",
+    "complication/diabetic-ketoacidosis: definition: 'The management of diabetic ketoacidosis in adults' vs 'Diabetic ketoacidosis is a common medical emergency and must be treated appropriately.'"
+  ]
+}

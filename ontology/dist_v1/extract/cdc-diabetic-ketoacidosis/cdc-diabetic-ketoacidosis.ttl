@@ -1,0 +1,293 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/cdc-diabetic-ketoacidosis.txt
+# 目标 named graph：urn:dmo:extract:cdc-diabetic-ketoacidosis
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:cdc-diabetic-ketoacidosis'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/cdc-diabetic-ketoacidosis.txt" ;
+    dmo:sha256 "cc31c4bd559df1b6f15593ac2d31060edbff76770be631e3f75bcee1374751dc" ;
+    dmo:byteSize "4310"^^xsd:integer .
+
+<urn:dmo:extract:cdc-diabetic-ketoacidosis> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T01:39:12+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "DKA is a serious complication of diabetes that can be life-threatening. DKA is most common among people with type 1 diabetes. People with type 2 diabetes can also develop DKA." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005040" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "DKA is a serious complication of diabetes that can be life-threatening. DKA is most common among people with type 1 diabetes. People with type 2 diabetes can also develop DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/device/ketone-test-kit> a dmo:Device ;
+    rdfs:label "Ketone Test Kit" ;
+    dmo:deviceCode "ketone-test-kit" ;
+    dmo:deviceType "KetoneTestKit" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Ketone Test Kit" ;
+    dmo:evidenceQuote "Ketone test kits are affordable and widely available over the counter to check your ketones at home." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "DKA is most common among people with type 1 diabetes." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "DKA is most common among people with type 1 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "People with type 2 diabetes can also develop DKA." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "People with type 2 diabetes can also develop DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/labTest/blood-glucose> a dmo:LabTest ;
+    rdfs:label "Blood Glucose" ;
+    dmo:definition "If you have diabetes and you're sick or your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones." ;
+    dmo:labTestCode "blood-glucose" ;
+    dmo:name "Blood Glucose" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg/dL" ;
+    dmo:evidenceQuote "If you have diabetes and you're sick or your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/labTest/urine-ketones> a dmo:LabTest ;
+    rdfs:label "Urine Ketones" ;
+    dmo:definition "Ketone test kits are affordable and widely available over the counter to check your ketones at home. You should also test for ketones if you have any of the symptoms of DKA. Elevated ketones are a sign of DKA." ;
+    dmo:labTestCode "urine-ketones" ;
+    dmo:name "Urine Ketones" ;
+    dmo:specimen "Urine" ;
+    dmo:evidenceQuote "If you have diabetes and you're sick or your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-management-education-and-support> a dmo:LifestyleIntervention ;
+    rdfs:label "Diabetes Self-Management Education and Support" ;
+    dmo:interventionCode "diabetes-self-management-education-and-support" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Diabetes Self-Management Education and Support" ;
+    dmo:evidenceQuote "Ask them for a referral to diabetes self-management education and support (DSMES) for individual guidance. DSMES services are a vital tool to help you manage and live well with diabetes while protecting your health." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/check-blood-sugar-often-when-sick> a dmo:Recommendation ;
+    rdfs:label "Check blood sugar often when sick" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "check-blood-sugar-often-when-sick" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check your blood sugar often, especially if you're sick." ;
+    dmo:evidenceQuote "Check your blood sugar often, especially if you're sick." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/go-to-emergency-room-or-call-911-for-high-ketones> a dmo:Recommendation ;
+    rdfs:label "Go to emergency room or call 911 for high ketones" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "go-to-emergency-room-or-call-911-for-high-ketones" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "High ketones can be an early sign of DKA, which is a medical emergency. Call 911 or go to the emergency room right away." ;
+    dmo:evidenceQuote "High ketones can be an early sign of DKA, which is a medical emergency. Call 911 or go to the emergency room right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/go-to-emergency-room-or-call-911-if-blood-sugar-stays-at-300-mg-dl-or-above> a dmo:Recommendation ;
+    rdfs:label "Go to emergency room or call 911 if blood sugar stays at 300 mg/dL or above" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "go-to-emergency-room-or-call-911-if-blood-sugar-stays-at-300-mg-dl-or-above" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Go to the emergency room or call 911 right away if you're having any of these signs: Your blood sugar stays at 300 mg/dL or above." ;
+    dmo:evidenceQuote "Go to the emergency room or call 911 right away if you're having any of these signs: Your blood sugar stays at 300 mg/dL or above." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/keep-blood-sugar-levels-in-target-range> a dmo:Recommendation ;
+    rdfs:label "Keep blood sugar levels in target range" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "keep-blood-sugar-levels-in-target-range" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Keep your blood sugar levels in your target range as much as possible." ;
+    dmo:evidenceQuote "Keep your blood sugar levels in your target range as much as possible." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/seek-referral-to-diabetes-self-management-education-and-support> a dmo:Recommendation ;
+    rdfs:label "Seek referral to diabetes self-management education and support" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "seek-referral-to-diabetes-self-management-education-and-support" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If you're concerned about DKA or have questions about how to manage your diabetes, talk to your diabetes care team. Ask them for a referral to diabetes self-management education and support (DSMES) for individual guidance." ;
+    dmo:evidenceQuote "If you're concerned about DKA or have questions about how to manage your diabetes, talk to your diabetes care team. Ask them for a referral to diabetes self-management education and support (DSMES) for individual guidance." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/take-medicines-as-prescribed> a dmo:Recommendation ;
+    rdfs:label "Take medicines as prescribed" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "take-medicines-as-prescribed" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Take medicines as prescribed, even if you feel fine." ;
+    dmo:evidenceQuote "Take medicines as prescribed, even if you feel fine." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/talk-to-doctor-about-insulin-adjustment> a dmo:Recommendation ;
+    rdfs:label "Talk to doctor about insulin adjustment" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "talk-to-doctor-about-insulin-adjustment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Talk to your doctor about how to adjust your insulin based on what you eat, how active you are, or if you're sick." ;
+    dmo:evidenceQuote "Talk to your doctor about how to adjust your insulin based on what you eat, how active you are, or if you're sick." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/test-for-ketones-if-experiencing-dka-symptoms> a dmo:Recommendation ;
+    rdfs:label "Test for ketones if experiencing DKA symptoms" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "test-for-ketones-if-experiencing-dka-symptoms" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "You should also test for ketones if you have any of the symptoms of DKA." ;
+    dmo:evidenceQuote "You should also test for ketones if you have any of the symptoms of DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/recommendation/test-for-ketones-when-blood-sugar-is-250-mg-dl-or-above> a dmo:Recommendation ;
+    rdfs:label "Test for ketones when blood sugar is 250 mg/dL or above" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "test-for-ketones-when-blood-sugar-is-250-mg-dl-or-above" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If you have diabetes and you're sick or your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones." ;
+    dmo:evidenceQuote "If you have diabetes and you're sick or your blood sugar is 250 mg/dL or above, you'll need to check your blood sugar every 4 to 6 hours and check your urine for ketones." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/riskFactor/certain-medicines> a dmo:RiskFactor ;
+    rdfs:label "Certain Medicines" ;
+    dmo:evidenceNote "文档中明确列出某些药物（如利尿剂和皮质类固醇）是 DKA 的其他原因之一。" ;
+    dmo:name "Certain Medicines" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "certain-medicines" ;
+    dmo:evidenceQuote "Certain medicines, such as some diuretics (water pills) and corticosteroids (used to treat inflammation in the body)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/riskFactor/clogged-insulin-pump> a dmo:RiskFactor ;
+    rdfs:label "Clogged Insulin Pump" ;
+    dmo:evidenceNote "文档中明确指出，胰岛素泵堵塞是导致 DKA 的两个最常见原因之一。" ;
+    dmo:name "Clogged Insulin Pump" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "clogged-insulin-pump" ;
+    dmo:evidenceQuote "Missing insulin shots, a clogged insulin pump, or the wrong insulin dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/riskFactor/illness> a dmo:RiskFactor ;
+    rdfs:label "Illness" ;
+    dmo:evidenceNote "文档中明确指出，生病时可能无法正常进食饮水，导致血糖难以控制，是 DKA 的两个最常见原因之一。" ;
+    dmo:name "Illness" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "illness" ;
+    dmo:evidenceQuote "Illness. You may not be able to eat or drink as much as usual, which can make blood sugar hard to manage." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/riskFactor/missing-insulin-shots> a dmo:RiskFactor ;
+    rdfs:label "Missing Insulin Shots" ;
+    dmo:evidenceNote "文档中明确指出，缺少胰岛素注射是导致 DKA 的两个最常见原因之一。" ;
+    dmo:name "Missing Insulin Shots" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "missing-insulin-shots" ;
+    dmo:evidenceQuote "Missing insulin shots, a clogged insulin pump, or the wrong insulin dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/riskFactor/physical-injury> a dmo:RiskFactor ;
+    rdfs:label "Physical Injury" ;
+    dmo:evidenceNote "文档中明确列出身体受伤是 DKA 的其他原因之一。" ;
+    dmo:name "Physical Injury" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "physical-injury" ;
+    dmo:evidenceQuote "Physical injury, such as from a car accident." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/riskFactor/wrong-insulin-dose> a dmo:RiskFactor ;
+    rdfs:label "Wrong Insulin Dose" ;
+    dmo:evidenceNote "文档中明确指出，胰岛素剂量错误是导致 DKA 的两个最常见原因之一。" ;
+    dmo:name "Wrong Insulin Dose" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "wrong-insulin-dose" ;
+    dmo:evidenceQuote "Missing insulin shots, a clogged insulin pump, or the wrong insulin dose." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/symptom/being-very-thirsty> a dmo:Symptom ;
+    rdfs:label "Being very thirsty" ;
+    dmo:name "Being very thirsty" ;
+    dmo:symptomCode "being-very-thirsty" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Early symptoms include: Being very thirsty." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/symptom/fast-deep-breathing> a dmo:Symptom ;
+    rdfs:label "Fast, deep breathing" ;
+    dmo:name "Fast, deep breathing" ;
+    dmo:symptomCode "fast-deep-breathing" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "If untreated, more severe symptoms can appear quickly, such as: Fast, deep breathing." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+<https://example.org/dmo/id/symptom/trouble-breathing> a dmo:Symptom ;
+    rdfs:label "Trouble breathing" ;
+    dmo:name "Trouble breathing" ;
+    dmo:symptomCode "trouble-breathing" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "You're having trouble breathing." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:presentsWith <https://example.org/dmo/id/symptom/being-very-thirsty> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:presentsWith <https://example.org/dmo/id/symptom/fast-deep-breathing> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:presentsWith <https://example.org/dmo/id/symptom/trouble-breathing> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:screenedByTest <https://example.org/dmo/id/labTest/urine-ketones> .
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> dmo:screenedByTest <https://example.org/dmo/id/labTest/blood-glucose> .
+<https://example.org/dmo/id/riskFactor/illness> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/riskFactor/illness> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-management-education-and-support> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/missing-insulin-shots> .
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-management-education-and-support> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/illness> .
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-management-education-and-support> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/wrong-insulin-dose> .
+<https://example.org/dmo/id/device/ketone-test-kit> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/urine-ketones> .
+<https://example.org/dmo/id/recommendation/check-blood-sugar-often-when-sick> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/check-blood-sugar-often-when-sick> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/go-to-emergency-room-or-call-911-for-high-ketones> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/go-to-emergency-room-or-call-911-if-blood-sugar-stays-at-300-mg-dl-or-above> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/keep-blood-sugar-levels-in-target-range> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/keep-blood-sugar-levels-in-target-range> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/seek-referral-to-diabetes-self-management-education-and-support> dmo:recommendsLifestyle <https://example.org/dmo/id/lifestyleIntervention/diabetes-self-management-education-and-support> .
+<https://example.org/dmo/id/recommendation/take-medicines-as-prescribed> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/take-medicines-as-prescribed> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-to-doctor-about-insulin-adjustment> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/talk-to-doctor-about-insulin-adjustment> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/test-for-ketones-if-experiencing-dka-symptoms> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/recommendation/test-for-ketones-when-blood-sugar-is-250-mg-dl-or-above> dmo:targetsComplication <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .

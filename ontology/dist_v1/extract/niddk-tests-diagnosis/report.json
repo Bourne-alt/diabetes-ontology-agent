@@ -1,0 +1,104 @@
+{
+  "source": {
+    "sourceId": "niddk-tests-diagnosis",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-tests-diagnosis",
+    "localFile": "ontology/knowledges/niddk-tests-diagnosis.txt",
+    "sha256": "122009a36c702dd16fd6ec7517ed7688d85de3154c6468fdeeff38960d52261d",
+    "byteSize": 10527,
+    "graphUri": "urn:dmo:extract:niddk-tests-diagnosis"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 2,
+  "counts": {
+    "rawRecords": 52,
+    "accepted": 48,
+    "rejected": 4,
+    "entities": 47,
+    "edges": 41,
+    "danglingRelations": 5,
+    "mergeConflicts": 12
+  },
+  "quality": {
+    "quoteHitRate": 0.9231,
+    "schemaSlotCoverage": 0.4839,
+    "danglingRelationRate": 0.1087,
+    "avgMentionsPerEntity": 1.02
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 3,
+    "quote_too_short": 1
+  },
+  "linkPass": {
+    "candidates": 41,
+    "accepted": 41,
+    "rejectedByReason": {}
+  },
+  "entitiesByType": {
+    "recommendation": 18,
+    "labTest": 8,
+    "diabetesType": 5,
+    "riskFactor": 5,
+    "contraindication": 4,
+    "monitoringSchedule": 4,
+    "symptom": 3
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/diabetesType/prediabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/oral-glucose-tolerance-test",
+      "predicate": "hasThreshold",
+      "target": "Oral Glucose Tolerance Test-2h"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/follow-up-ogtt-after-abnormal-glucose-challenge-test",
+      "predicate": "appliesToType",
+      "target": "Glucose Challenge Test for Gestational Diabetes Screening"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-of-ogtt-for-gestational-diabetes-diagnosis",
+      "predicate": "appliesToType",
+      "target": "Oral Glucose Tolerance Test for Type 2 and Gestational Diabetes Detection"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/autoantibody-testing-for-type-1-diabetes-risk-assessment-in-relatives",
+      "predicate": "appliesToType",
+      "target": "Autoantibody Testing for Type 1 Diabetes Identification"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/gestational-diabetes: definition: 'All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy.' vs 'If you are pregnant, your doctor might test you for gestational diabetes with the glucose challenge test.'",
+    "symptom/feeling-thirsty: name: 'Feeling Thirsty' vs 'feeling thirsty'",
+    "symptom/having-to-urinate-more-often: name: 'Having to Urinate More Often' vs 'having to urinate more often'",
+    "symptom/diabetic-ketoacidosis: name: 'Diabetic Ketoacidosis' vs 'diabetic ketoacidosis'",
+    "riskFactor/age-35-or-older: name: 'Age 35 or Older' vs 'age 35 or older'",
+    "riskFactor/overweight-or-have-obesity-and-have-at-least-one-other-risk-factor: name: 'Overweight or Have Obesity and Have at Least One Other Risk Factor' vs 'overweight or have obesity and have at least one other risk factor'",
+    "riskFactor/a-woman-who-had-gestational-diabetes: name: 'A Woman Who Had Gestational Diabetes' vs 'a woman who had gestational diabetes'",
+    "riskFactor/a-parent-who-had-diabetes-while-pregnant: name: 'A Parent Who Had Diabetes While Pregnant' vs 'a parent who had diabetes while pregnant'",
+    "monitoringSchedule/adults-and-children-with-normal-diabetes-test-results-should-be-retested-every-3-years: name: 'Adults and children with normal diabetes test results should be retested every 3 years' vs 'Retesting for diabetes in individuals with normal results'",
+    "monitoringSchedule/adults-and-children-diagnosed-with-prediabetes-should-be-tested-for-type-2-diabetes-every-year: name: 'Adults and children diagnosed with prediabetes should be tested for type 2 diabetes every year' vs 'Annual testing for type 2 diabetes in individuals diagnosed with prediabetes'",
+    "monitoringSchedule/all-pregnant-women-who-do-not-have-a-previous-diagnosis-of-diabetes-should-be-tested-for-gestational-diabetes-between-24-and-28-weeks-of-pregnancy: name: 'All pregnant women who do not have a previous diagnosis of diabetes should be tested for gestational diabetes between 24 and 28 weeks of pregnancy' vs 'Gestational diabetes screening in pregnant women'",
+    "monitoringSchedule/if-you-have-gestational-diabetes-you-should-get-tested-after-your-baby-is-born-to-see-if-you-have-type-2-diabetes-usually-within-12-weeks-after-delivery: name: 'If you have gestational diabetes, you should get tested after your baby is born to see if you have type 2 diabetes, usually within 12 weeks after delivery' vs 'Postpartum testing for type 2 diabetes in women with gestational diabetes'"
+  ]
+}

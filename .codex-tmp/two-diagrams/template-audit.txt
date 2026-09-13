@@ -1,0 +1,8 @@
+Source deck: output-claude/project-presentation-with-architecture.pptx
+Slide count: 11; 16:9 (1280 x 720).
+Visual system: white content slides, dark navy opening/closing slides, teal primary accent, amber caution accent, Arial typography, compact eyebrow, large claim title, pale gray description rail, and footer/page marker.
+Ontology workflow pattern: source slide 4. It contains a four-stage pipeline with two/three/three/two nodes, connectors, one governance callout, and one bottom takeaway rail. Rewrite inherited text only.
+Agent architecture pattern: source slide 7. It contains a four-node closed loop and a five-row guardrail stack. Duplicate it as a new slide immediately before the original agent-thinking slide, then rewrite inherited text only.
+Pagination contract: adding one content slide changes 01/10-10/10 to 01/11-11/11.
+Placeholder audit: source layout and master contain no inherited placeholders; visible content is slide-local.
+

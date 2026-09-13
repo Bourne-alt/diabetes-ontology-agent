@@ -1,0 +1,128 @@
+{
+  "source": {
+    "sourceId": "niddk-diabetic-foot-problems",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems",
+    "localFile": "ontology/knowledges/niddk-diabetic-foot-problems.txt",
+    "sha256": "9775da439bd65cd8de871539b3743ba9d34d0e14f6eb2acc926d1db18249edc9",
+    "byteSize": 12046,
+    "graphUri": "urn:dmo:extract:niddk-diabetic-foot-problems"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 3,
+  "counts": {
+    "rawRecords": 103,
+    "accepted": 71,
+    "rejected": 32,
+    "entities": 69,
+    "edges": 15,
+    "danglingRelations": 9,
+    "mergeConflicts": 13
+  },
+  "quality": {
+    "quoteHitRate": 0.6893,
+    "schemaSlotCoverage": 0.3871,
+    "danglingRelationRate": 0.375,
+    "avgMentionsPerEntity": 1.03
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 16,
+    "unknown_relation_predicate": 16
+  },
+  "linkPass": {
+    "candidates": 19,
+    "accepted": 12,
+    "rejectedByReason": {
+      "quote_not_found": 4,
+      "target_unresolved": 3
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 40,
+    "riskFactor": 7,
+    "complication": 6,
+    "lifestyleIntervention": 5,
+    "symptom": 5,
+    "contraindication": 4,
+    "monitoringSchedule": 2
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/gangrene",
+      "predicate": "presentsWith",
+      "target": "Foot Ulcers"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/charcot-s-foot",
+      "predicate": "presentsWith",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetic-neuropathy",
+      "predicate": "increasesRiskOf",
+      "target": "Foot Ulcers"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/diabetic-neuropathy",
+      "predicate": "increasesRiskOf",
+      "target": "Gangrene"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/poor-blood-flow-to-feet",
+      "predicate": "increasesRiskOf",
+      "target": "Foot Ulcers"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/poor-blood-flow-to-feet",
+      "predicate": "increasesRiskOf",
+      "target": "Gangrene"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Poor Blood Flow to Feet"
+    },
+    {
+      "from": "https://example.org/dmo/id/lifestyleIntervention/stop-smoking",
+      "predicate": "mitigatesRiskFactor",
+      "target": "Peripheral artery disease"
+    }
+  ],
+  "conflictSamples": [
+    "complication/gangrene: mondoCode: 'MONDO:0005150' vs 'MONDO:0005141'",
+    "complication/gangrene: onsetPattern: 'Chronic' vs 'Acute'",
+    "complication/gangrene: isEmergency: False vs True",
+    "complication/gangrene: definition: 'The infection might lead to gangrene.' vs 'a foot infection that becomes black and smelly—signs you might have gangrene'",
+    "riskFactor/diabetic-neuropathy: name: 'Diabetic Neuropathy' vs 'diabetic neuropathy'",
+    "riskFactor/poor-blood-flow-to-feet: name: 'Poor Blood Flow to Feet' vs 'poor blood flow to feet'",
+    "riskFactor/high-blood-glucose-levels: name: 'High Blood Glucose Levels' vs 'high blood glucose levels'",
+    "recommendation/wear-shoes-and-socks-at-all-times: statement: 'Wear shoes and socks at all times.' vs 'Wear shoes and socks at all times. Do not walk barefoot or in just socks – even when you are indoors. You could step on something and hurt your feet. You may not feel any pain and may not know that you hurt yourself.'",
+    "symptom/loss-of-feeling-in-feet: name: 'Loss of Feeling in Feet' vs 'loss of feeling in your feet'",
+    "symptom/red-warm-or-painful-skin-on-foot: name: 'Red, Warm, or Painful Skin on Foot' vs 'skin on your foot that becomes red, warm, or painful—signs of a possible infection'",
+    "symptom/cut-blister-or-bruise-on-foot-that-does-not-heal: name: 'Cut, Blister, or Bruise on Foot That Does Not Heal' vs 'a cut, blister, or bruise on your foot that does not start to heal after a few days'",
+    "symptom/callus-with-dried-blood-inside: name: 'Callus with Dried Blood Inside' vs 'a callus with dried blood inside of it,which often can be the first sign of a wound under the callus'",
+    "symptom/foot-infection-with-black-and-smelly-appearance: name: 'Foot Infection with Black and Smelly Appearance' vs 'a foot infection that becomes black and smelly—signs you might have gangrene'"
+  ]
+}

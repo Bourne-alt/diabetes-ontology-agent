@@ -1,0 +1,66 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/639e897a-b7db-56bb-ac79-1dd8c8643fd4> a dmo:Patient ;
+    dmo:birthYear 1960 ;
+    dmo:demoScenario "S06" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90007-DKD>,
+        <https://example.org/dmo/id/diagnosis/D90007-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90007-1> ;
+    dmo:hasMedicationUse <https://example.org/dmo/id/medicationUse/M90007-MET> ;
+    dmo:patientId "P90007" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/labResult/L90007-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-05T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S06" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90007-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 7.9 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/medicationUse/M90007-MET> a dmo:MedicationUse ;
+    dmo:demoScenario "S06" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:medicationUseId "M90007-MET" ;
+    dmo:regimenRole "口服降糖" ;
+    dmo:startDate "2016-04-01"^^xsd:date ;
+    dmo:status "Active" ;
+    dmo:treatsDiagnosis <https://example.org/dmo/id/diagnosis/D90007-DKD>,
+        <https://example.org/dmo/id/diagnosis/D90007-DM> ;
+    dmo:usesMedication <https://example.org/dmo/id/medication/metformin> .
+
+<https://example.org/dmo/id/diagnosis/D90007-DKD> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:demoScenario "S06" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90007-1> ;
+    dmo:diagnosedDate "2023-11-08"^^xsd:date ;
+    dmo:diagnosisComplication <https://example.org/dmo/id/DKD> ;
+    dmo:diagnosisId "D90007-DKD" ;
+    dmo:diagnosisKind "Complication" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/diagnosis/D90007-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S06" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90007-1> ;
+    dmo:diagnosedDate "2016-03-22"^^xsd:date ;
+    dmo:diagnosisId "D90007-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/E90007-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-05"^^xsd:date ;
+    dmo:encounterId "E90007-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90007-A1C> .
+

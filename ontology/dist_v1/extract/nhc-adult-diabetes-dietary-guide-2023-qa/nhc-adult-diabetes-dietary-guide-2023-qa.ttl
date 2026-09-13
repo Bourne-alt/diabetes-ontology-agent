@@ -1,0 +1,26 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/nhc-adult-diabetes-dietary-guide-2023-qa.pdf
+# 目标 named graph：urn:dmo:extract:nhc-adult-diabetes-dietary-guide-2023-qa
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:nhc-adult-diabetes-dietary-guide-2023-qa'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023-qa> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/nhc-adult-diabetes-dietary-guide-2023-qa.pdf" ;
+    dmo:sha256 "cf70b8c9d553001744a6e9a31f4aa9619332d81e48f63e078e9903330c858785" ;
+    dmo:byteSize "328128"^^xsd:integer .
+
+<urn:dmo:extract:nhc-adult-diabetes-dietary-guide-2023-qa> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-adult-diabetes-dietary-guide-2023-qa> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T12:10:52+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────

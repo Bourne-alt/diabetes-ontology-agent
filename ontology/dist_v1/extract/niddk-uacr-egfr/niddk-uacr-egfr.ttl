@@ -1,0 +1,188 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-uacr-egfr.txt
+# 目标 named graph：urn:dmo:extract:niddk-uacr-egfr
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-uacr-egfr'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-uacr-egfr.txt" ;
+    dmo:sha256 "196ec62270a6517e4084c9d1821a35bc97133ba1d133666176351f2f4adf0d0d" ;
+    dmo:byteSize "3022"^^xsd:integer .
+
+<urn:dmo:extract:niddk-uacr-egfr> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T04:24:58+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/chronic-kidney-disease> a dmo:Complication ;
+    rdfs:label "Chronic Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "chronic-kidney-disease" ;
+    dmo:definition "The two key markers for chronic kidney disease (CKD) are urine albumin and estimated glomerular filtration rate (eGFR)." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Chronic Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "The two key markers for chronic kidney disease (CKD) are urine albumin and estimated glomerular filtration rate (eGFR)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/complication/macroalbuminuria> a dmo:Complication ;
+    rdfs:label "Macroalbuminuria" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "macroalbuminuria" ;
+    dmo:definition "Macroalbuminuria is sometimes used to describe albumin levels more than 300mg/g." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Macroalbuminuria" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Macroalbuminuria is sometimes used to describe albumin levels more than 300mg/g." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/complication/microalbuminuria> a dmo:Complication ;
+    rdfs:label "Microalbuminuria" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "microalbuminuria" ;
+    dmo:definition "Microalbuminuria is a term used to describe urine albumin levels not detected by a dipstick test, i.e., 30 mg/g–300 mg/g." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Microalbuminuria" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Microalbuminuria is a term used to describe urine albumin levels not detected by a dipstick test, i.e., 30 mg/g–300 mg/g." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/complicationStage/albuminuria> a dmo:ComplicationStage ;
+    rdfs:label "Albuminuria" ;
+    dmo:name "Albuminuria" ;
+    dmo:stageCode "albuminuria" ;
+    dmo:stageCriteria "UACR is greater than 30 mg/g" ;
+    dmo:stageOrder "1"^^xsd:integer ;
+    dmo:evidenceQuote "Albuminuria1 is present when UACR is greater than 30 mg/g and is a marker for CKD." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "patients with type 1 diabetes for five years or more" ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "Assess urine albumin excretion yearly to diagnose and monitor kidney damage in patients with type 1 diabetes for five years or more or with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "patients with type 2 diabetes" ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Assess urine albumin excretion yearly to diagnose and monitor kidney damage in patients with type 1 diabetes for five years or more or with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate> a dmo:LabTest ;
+    rdfs:label "Estimated Glomerular Filtration Rate" ;
+    dmo:definition "eGFR is more accurate than serum creatinine alone. Serum creatinine is affected by muscle mass, and related factors of age, sex, and race." ;
+    dmo:labTestCode "estimated-glomerular-filtration-rate" ;
+    dmo:name "Estimated Glomerular Filtration Rate" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mL-per-min" ;
+    dmo:evidenceQuote "Calculate eGFR from stable serum creatinine levels at least once a year in all patients with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> a dmo:LabTest ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:definition "UACR is a ratio between two measured substances. Unlike a dipstick test for albumin, UACR is unaffected by variation in urine concentration." ;
+    dmo:labTestCode "urine-albumin-to-creatinine-ratio" ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "mg/g" ;
+    dmo:evidenceQuote "Albuminuria1 is present when UACR is greater than 30 mg/g and is a marker for CKD." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/monitoringSchedule/estimated-glomerular-filtration-rate> a dmo:MonitoringSchedule ;
+    rdfs:label "Estimated Glomerular Filtration Rate" ;
+    dmo:appliesTo "all patients with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Estimated Glomerular Filtration Rate" ;
+    dmo:scheduleId "estimated-glomerular-filtration-rate" ;
+    dmo:evidenceQuote "Calculate eGFR from stable serum creatinine levels at least once a year in all patients with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/monitoringSchedule/urine-albumin-to-creatinine-ratio> a dmo:MonitoringSchedule ;
+    rdfs:label "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:appliesTo "patients with type 1 diabetes for five years or more or with type 2 diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Urine Albumin-to-Creatinine Ratio" ;
+    dmo:scheduleId "urine-albumin-to-creatinine-ratio" ;
+    dmo:evidenceQuote "Assess urine albumin excretion yearly to diagnose and monitor kidney damage in patients with type 1 diabetes for five years or more or with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/recommendation/address-kidney-disease-as-part-of-comprehensive-diabetes-treatment> a dmo:Recommendation ;
+    rdfs:label "Address Kidney Disease as Part of Comprehensive Diabetes Treatment" ;
+    dmo:recommendationId "address-kidney-disease-as-part-of-comprehensive-diabetes-treatment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If kidney disease is detected, it should be addressed as part of a comprehensive approach to the treatment of diabetes." ;
+    dmo:evidenceQuote "If kidney disease is detected, it should be addressed as part of a comprehensive approach to the treatment of diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/recommendation/annual-assessment-of-urine-albumin-excretion> a dmo:Recommendation ;
+    rdfs:label "Annual Assessment of Urine Albumin Excretion" ;
+    dmo:populationScope "patients with type 1 diabetes for five years or more or with type 2 diabetes" ;
+    dmo:recommendationId "annual-assessment-of-urine-albumin-excretion" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Assess urine albumin excretion yearly to diagnose and monitor kidney damage in patients with type 1 diabetes for five years or more or with type 2 diabetes." ;
+    dmo:evidenceQuote "Assess urine albumin excretion yearly to diagnose and monitor kidney damage in patients with type 1 diabetes for five years or more or with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/recommendation/annual-calculation-of-egfr> a dmo:Recommendation ;
+    rdfs:label "Annual Calculation of eGFR" ;
+    dmo:populationScope "all patients with diabetes" ;
+    dmo:recommendationId "annual-calculation-of-egfr" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Calculate eGFR from stable serum creatinine levels at least once a year in all patients with diabetes." ;
+    dmo:evidenceQuote "Calculate eGFR from stable serum creatinine levels at least once a year in all patients with diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+<https://example.org/dmo/id/recommendation/use-of-spot-urine-albumin-to-creatinine-ratio-uacr> a dmo:Recommendation ;
+    rdfs:label "Use of Spot Urine Albumin-to-Creatinine Ratio (UACR)" ;
+    dmo:recommendationId "use-of-spot-urine-albumin-to-creatinine-ratio-uacr" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Use a spot urine albumin-to-creatinine ratio (UACR). UACR estimates 24-hour urine albumin excretion. Twenty-four-hour collection and timed specimens are not necessary." ;
+    dmo:evidenceQuote "Use a spot urine albumin-to-creatinine ratio (UACR). UACR estimates 24-hour urine albumin excretion. Twenty-four-hour collection and timed specimens are not necessary." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/chronic-kidney-disease> dmo:hasStage <https://example.org/dmo/id/complicationStage/albuminuria> .
+<https://example.org/dmo/id/complication/microalbuminuria> dmo:hasStage <https://example.org/dmo/id/complicationStage/albuminuria> .
+<https://example.org/dmo/id/complication/macroalbuminuria> dmo:hasStage <https://example.org/dmo/id/complicationStage/albuminuria> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/complication/chronic-kidney-disease> dmo:screenedByTest <https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> .
+<https://example.org/dmo/id/complication/chronic-kidney-disease> dmo:screenedByTest <https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate> .
+<https://example.org/dmo/id/monitoringSchedule/urine-albumin-to-creatinine-ratio> dmo:schedulesTest <https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio> .
+<https://example.org/dmo/id/monitoringSchedule/estimated-glomerular-filtration-rate> dmo:schedulesTest <https://example.org/dmo/id/labTest/estimated-glomerular-filtration-rate> .
+<https://example.org/dmo/id/recommendation/annual-assessment-of-urine-albumin-excretion> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/annual-assessment-of-urine-albumin-excretion> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/annual-calculation-of-egfr> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/annual-calculation-of-egfr> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/address-kidney-disease-as-part-of-comprehensive-diabetes-treatment> dmo:targetsComplication <https://example.org/dmo/id/complication/chronic-kidney-disease> .
+<https://example.org/dmo/id/recommendation/annual-assessment-of-urine-albumin-excretion> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/urine-albumin-to-creatinine-ratio> .
+<https://example.org/dmo/id/recommendation/annual-calculation-of-egfr> dmo:definesSchedule <https://example.org/dmo/id/monitoringSchedule/estimated-glomerular-filtration-rate> .

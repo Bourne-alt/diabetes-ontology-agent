@@ -1,0 +1,54 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/795df081-11cc-5574-8239-3a7a88ef52f3> a dmo:Patient ;
+    dmo:birthYear 1955 ;
+    dmo:demoScenario "S26" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90029-DKA>,
+        <https://example.org/dmo/id/diagnosis/D90029-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90029-1> ;
+    dmo:patientId "P90029" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/diagnosis/D90029-DKA> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:demoScenario "S26" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90029-1> ;
+    dmo:diagnosedDate "2026-02-20"^^xsd:date ;
+    dmo:diagnosisComplication <https://example.org/dmo/id/DKA> ;
+    dmo:diagnosisId "D90029-DKA" ;
+    dmo:diagnosisKind "AcuteEvent" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/diagnosis/D90029-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S26" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90029-1> ;
+    dmo:diagnosedDate "2001-04-02"^^xsd:date ;
+    dmo:diagnosisId "D90029-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T1DM> ;
+    dmo:externalCode "E10" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90029-GLU> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-20T03:40:00"^^xsd:dateTime ;
+    dmo:demoScenario "S26" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90029-GLU" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-GLU> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 320.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90029-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-20"^^xsd:date ;
+    dmo:encounterId "E90029-1" ;
+    dmo:encounterType "Emergency" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90029-GLU> .
+

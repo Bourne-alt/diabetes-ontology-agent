@@ -1,0 +1,138 @@
+{
+  "source": {
+    "sourceId": "niddk-diabetic-kidney-disease",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-diabetic-kidney-disease",
+    "localFile": "ontology/knowledges/niddk-diabetic-kidney-disease.txt",
+    "sha256": "4ae81fcb052899f65ac9de769d40690e888b9335b755c8bbeb61f8dac9a16b04",
+    "byteSize": 8779,
+    "graphUri": "urn:dmo:extract:niddk-diabetic-kidney-disease"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 2,
+  "counts": {
+    "rawRecords": 53,
+    "accepted": 34,
+    "rejected": 19,
+    "entities": 33,
+    "edges": 63,
+    "danglingRelations": 11,
+    "mergeConflicts": 10
+  },
+  "quality": {
+    "quoteHitRate": 0.6415,
+    "schemaSlotCoverage": 0.5161,
+    "danglingRelationRate": 0.1486,
+    "avgMentionsPerEntity": 1.03
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 16,
+    "quote_too_short": 3
+  },
+  "linkPass": {
+    "candidates": 77,
+    "accepted": 63,
+    "rejectedByReason": {
+      "quote_not_found": 2,
+      "target_unresolved": 7,
+      "quote_too_short": 4,
+      "duplicate": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 10,
+    "riskFactor": 9,
+    "lifestyleIntervention": 8,
+    "labTest": 2,
+    "diabetesType": 1,
+    "complication": 1,
+    "contraindication": 1,
+    "monitoringSchedule": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/labTest/a1c",
+      "predicate": "hasThreshold",
+      "target": "A1C Goal"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio",
+      "predicate": "hasThreshold",
+      "target": "UACR Threshold"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/having-diabetes-for-a-longer-time",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-glucose",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-blood-pressure",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/race-and-ethnicity-african-americans-american-indians-and-hispanics-latinos",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/high-salt-and-sodium-intake",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/physical-inactivity",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/obesity-or-overweight",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/poor-sleep",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/chronic-stress",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Kidney Disease"
+    }
+  ],
+  "conflictSamples": [
+    "riskFactor/having-diabetes-for-a-longer-time: name: 'Having Diabetes for a Longer Time' vs 'Having diabetes for a longer time'",
+    "riskFactor/high-blood-glucose: name: 'High Blood Glucose' vs 'high blood glucose'",
+    "riskFactor/high-blood-pressure: name: 'High Blood Pressure' vs 'high blood pressure'",
+    "riskFactor/race-and-ethnicity-african-americans-american-indians-and-hispanics-latinos: name: 'Race and Ethnicity: African Americans, American Indians, and Hispanics/Latinos' vs 'African Americans, American Indians, and Hispanics/Latinos'",
+    "contraindication/ace-inhibitors-and-arbs: rationale: 'ACE inhibitors and ARBs are not safe for women who are pregnant.' vs 'ACE inhibitors and ARBs are not safe for women who are pregnant'",
+    "riskFactor/high-salt-and-sodium-intake: name: 'High Salt and Sodium Intake' vs 'high salt and sodium intake'",
+    "riskFactor/physical-inactivity: name: 'Physical Inactivity' vs 'physical inactivity'",
+    "riskFactor/obesity-or-overweight: name: 'Obesity or Overweight' vs 'obesity or overweight'",
+    "riskFactor/poor-sleep: name: 'Poor Sleep' vs 'poor sleep'",
+    "riskFactor/chronic-stress: name: 'Chronic Stress' vs 'chronic stress'"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "outputSlides": [
+    {"outputSlide": 1, "sourceSlide": 1, "narrativeRole": "opening brand preserve-only", "reuseMode": "duplicate-slide", "editTargets": []},
+    {"outputSlide": 2, "sourceSlide": 2, "narrativeRole": "project definition", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/a10jqpsj"}]},
+    {"outputSlide": 3, "sourceSlide": 3, "narrativeRole": "overall architecture map", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/3ah8rqlg"}]},
+    {
+      "outputSlide": 4,
+      "sourceSlide": 4,
+      "narrativeRole": "ontology extraction workflow map",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [{"action": "rewrite", "sourceElementIds": [
+        "sh/1cj2d8b6", "sh/0ba143al", "sh/rm1k7yt4", "sh/ql8jytsj", "sh/sna103ap",
+        "sh/3ihk3et8", "sh/ih8ju9sn", "sh/kbm987y5", "sh/5cva1cfq",
+        "sh/jadsz2xk", "sh/w72947yt", "sh/a5kr2xg3", "sh/v6tsv2xo",
+        "sh/h4fa9wfy", "sh/p0batw72", "sh/3ytsrmpw", "sh/2xkrih8b", "sh/gv29g7q5", "sh/fu9sn2p0",
+        "sh/tsrqlc7u", "sh/sri9s7q9", "sh/jm5gze1g", "sh/knex8j21", "sh/axcf29kj", "sh/vy5gbe14",
+        "sh/xknyx4ja", "sh/mtcfypkn", "sh/fm5c3q54", "sh/elwba54j",
+        "sh/dknu10ny", "sh/sjut8vmd", "sh/idcb2lob"
+      ]}]
+    },
+    {"outputSlide": 5, "sourceSlide": 5, "narrativeRole": "data stores", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/yhkbe1o7"}]},
+    {"outputSlide": 6, "sourceSlide": 6, "narrativeRole": "answer flow", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/98rqt4r6"}]},
+    {
+      "outputSlide": 7,
+      "sourceSlide": 7,
+      "narrativeRole": "agent runtime architecture map",
+      "reuseMode": "duplicate-slide",
+      "editTargets": [{"action": "rewrite", "sourceElementIds": [
+        "sh/cb2tkvap", "sh/dcbud0ra", "sh/ydkbm5sv", "sh/zedcfa9g", "sh/l0vuh0rm",
+        "sh/fi9c369c", "sh/baxkjqlk", "sh/xcz2l03q", "sh/cbq1sv25", "sh/25ojml43", "sh/p8fih03e", "sh/f2d0b6lc", "sh/eh4jil4r", "sh/q143ylov",
+        "sh/r2dkrq5g", "sh/d4f2t0nm", "sh/e5o32lor", "sh/p0zmlk7u", "sh/ozq5szq9", "sh/2x8nqp83", "sh/x4j6p47q", "sh/b2h4nupk", "sh/a18nup8z", "sh/kra50jqh", "sh/wneps3ap", "sh/honq18ru"
+      ]}]
+    },
+    {"outputSlide": 8, "sourceSlide": 7, "narrativeRole": "agent reasoning loop", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/zedcfa9g"}]},
+    {"outputSlide": 9, "sourceSlide": 8, "narrativeRole": "case evidence", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/6h0fypgb"}]},
+    {"outputSlide": 10, "sourceSlide": 9, "narrativeRole": "disease inference", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/mdonql4z"}]},
+    {"outputSlide": 11, "sourceSlide": 10, "narrativeRole": "safety conclusion", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/ydcnatkn"}]},
+    {"outputSlide": 12, "sourceSlide": 11, "narrativeRole": "closing boundaries", "reuseMode": "duplicate-slide", "editTargets": [{"action": "rewrite", "sourceElementId": "sh/250zy18b"}]}
+  ],
+  "omittedSourceSlides": []
+}
+

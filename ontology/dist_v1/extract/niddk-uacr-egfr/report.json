@@ -1,0 +1,83 @@
+{
+  "source": {
+    "sourceId": "niddk-uacr-egfr",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-uacr-egfr",
+    "localFile": "ontology/knowledges/niddk-uacr-egfr.txt",
+    "sha256": "196ec62270a6517e4084c9d1821a35bc97133ba1d133666176351f2f4adf0d0d",
+    "byteSize": 3022,
+    "graphUri": "urn:dmo:extract:niddk-uacr-egfr"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 17,
+    "accepted": 14,
+    "rejected": 3,
+    "entities": 14,
+    "edges": 16,
+    "danglingRelations": 3,
+    "mergeConflicts": 0
+  },
+  "quality": {
+    "quoteHitRate": 0.8235,
+    "schemaSlotCoverage": 0.4194,
+    "danglingRelationRate": 0.1579,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {
+    "unknown_relation_predicate": 2,
+    "quote_not_found": 1
+  },
+  "linkPass": {
+    "candidates": 17,
+    "accepted": 15,
+    "rejectedByReason": {
+      "quote_not_found": 1,
+      "target_unresolved": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 4,
+    "complication": 3,
+    "diabetesType": 2,
+    "labTest": 2,
+    "monitoringSchedule": 2,
+    "complicationStage": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/labTest/urine-albumin-to-creatinine-ratio",
+      "predicate": "hasThreshold",
+      "target": "Albuminuria"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/chronic-kidney-disease",
+      "predicate": "presentsWith",
+      "target": "Urine Albumin-to-Creatinine Ratio"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/chronic-kidney-disease",
+      "predicate": "presentsWith",
+      "target": "Estimated Glomerular Filtration Rate"
+    }
+  ],
+  "conflictSamples": []
+}

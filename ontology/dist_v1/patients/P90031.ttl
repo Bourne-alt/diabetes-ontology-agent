@@ -1,0 +1,42 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/d896084b-b7fd-5ac7-be7f-3edcd9546633> a dmo:Patient ;
+    dmo:birthYear 1979 ;
+    dmo:demoScenario "S28" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90031-PRE> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90031-1> ;
+    dmo:patientId "P90031" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/diagnosis/D90031-PRE> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S28" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90031-1> ;
+    dmo:diagnosedDate "2026-05-12"^^xsd:date ;
+    dmo:diagnosisId "D90031-PRE" ;
+    dmo:diagnosisKind "Prediabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/Prediabetes> ;
+    dmo:externalCode "R73.03" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90031-FPG> a dmo:LabResult ;
+    dmo:collectedAt "2026-05-12T08:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S28" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90031-FPG" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-FPG> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 112.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90031-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-05-12"^^xsd:date ;
+    dmo:encounterId "E90031-1" ;
+    dmo:encounterType "Screening" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90031-FPG> .
+

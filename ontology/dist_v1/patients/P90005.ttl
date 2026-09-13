@@ -1,0 +1,40 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/40a399f1-6271-595d-a721-d57662de78fc> a dmo:Patient ;
+    dmo:birthYear 1994 ;
+    dmo:demoScenario "S04b" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90005-PREG> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90005-1> ;
+    dmo:patientId "P90005" ;
+    dmo:sex "Female" .
+
+<https://example.org/dmo/id/labResult/L90005-GCT> a dmo:LabResult ;
+    dmo:collectedAt "2026-03-10T10:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S04b" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90005-GCT" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-GCT1H> ;
+    dmo:resultUnit "mg-per-dL" ;
+    dmo:resultValue 142.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90005-PREG> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S04b" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90005-PREG" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90005-1> ;
+    dmo:observationType "PregnancyStatus" ;
+    dmo:observedAt "2026-03-10T10:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "NotPregnant" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/encounter/E90005-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-03-10"^^xsd:date ;
+    dmo:encounterId "E90005-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90005-GCT> .
+

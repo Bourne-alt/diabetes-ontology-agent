@@ -1,0 +1,117 @@
+{
+  "source": {
+    "sourceId": "cdc-diabetic-ketoacidosis",
+    "uri": "https://example.org/dmo/id/guidelineSource/cdc-diabetic-ketoacidosis",
+    "localFile": "ontology/knowledges/cdc-diabetic-ketoacidosis.txt",
+    "sha256": "cc31c4bd559df1b6f15593ac2d31060edbff76770be631e3f75bcee1374751dc",
+    "byteSize": 4310,
+    "graphUri": "urn:dmo:extract:cdc-diabetic-ketoacidosis"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 42,
+    "accepted": 25,
+    "rejected": 17,
+    "entities": 25,
+    "edges": 26,
+    "danglingRelations": 8,
+    "mergeConflicts": 6
+  },
+  "quality": {
+    "quoteHitRate": 0.5952,
+    "schemaSlotCoverage": 0.4839,
+    "danglingRelationRate": 0.2353,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 13,
+    "quote_too_short": 4
+  },
+  "linkPass": {
+    "candidates": 41,
+    "accepted": 26,
+    "rejectedByReason": {
+      "target_unresolved": 9,
+      "quote_too_short": 6
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 9,
+    "riskFactor": 6,
+    "symptom": 3,
+    "diabetesType": 2,
+    "labTest": 2,
+    "complication": 1,
+    "lifestyleIntervention": 1,
+    "device": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/labTest/urine-ketones",
+      "predicate": "hasThreshold",
+      "target": "Blood Glucose 250 mg/dL"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/blood-glucose",
+      "predicate": "hasThreshold",
+      "target": "Blood Glucose 250 mg/dL"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/missing-insulin-shots",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/clogged-insulin-pump",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/wrong-insulin-dose",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/illness",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/physical-injury",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Ketoacidosis"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/certain-medicines",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Ketoacidosis"
+    }
+  ],
+  "conflictSamples": [
+    "riskFactor/missing-insulin-shots: name: 'Missing Insulin Shots' vs 'Missing insulin shots'",
+    "riskFactor/clogged-insulin-pump: name: 'Clogged Insulin Pump' vs 'Clogged insulin pump'",
+    "riskFactor/wrong-insulin-dose: name: 'Wrong Insulin Dose' vs 'Wrong insulin dose'",
+    "riskFactor/physical-injury: name: 'Physical Injury' vs 'Physical injury'",
+    "riskFactor/certain-medicines: name: 'Certain Medicines' vs 'Certain medicines'",
+    "device/ketone-test-kit: name: 'Ketone Test Kit' vs 'Ketone test kit'"
+  ]
+}

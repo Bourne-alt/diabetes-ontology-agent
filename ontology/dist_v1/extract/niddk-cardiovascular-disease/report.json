@@ -1,0 +1,194 @@
+{
+  "source": {
+    "sourceId": "niddk-cardiovascular-disease",
+    "uri": "https://example.org/dmo/id/guidelineSource/niddk-cardiovascular-disease",
+    "localFile": "ontology/knowledges/niddk-cardiovascular-disease.txt",
+    "sha256": "ec34f8889d2d0662ad8913b7e4da22b03b140d4268f4d7927c62e9f2323994e2",
+    "byteSize": 18174,
+    "graphUri": "urn:dmo:extract:niddk-cardiovascular-disease"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 4,
+  "counts": {
+    "rawRecords": 111,
+    "accepted": 92,
+    "rejected": 19,
+    "entities": 91,
+    "edges": 31,
+    "danglingRelations": 97,
+    "mergeConflicts": 39
+  },
+  "quality": {
+    "quoteHitRate": 0.8288,
+    "schemaSlotCoverage": 0.6129,
+    "danglingRelationRate": 0.7578,
+    "avgMentionsPerEntity": 1.01
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 12,
+    "quote_too_short": 6,
+    "unknown_relation_predicate": 1
+  },
+  "linkPass": {
+    "candidates": 74,
+    "accepted": 28,
+    "rejectedByReason": {
+      "target_unresolved": 39,
+      "quote_not_found": 6,
+      "quote_too_short": 1
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 37,
+    "symptom": 19,
+    "riskFactor": 11,
+    "complication": 10,
+    "lifestyleIntervention": 8,
+    "labTest": 2,
+    "medication": 2,
+    "contraindication": 1,
+    "monitoringSchedule": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/heart-disease",
+      "predicate": "presentsWith",
+      "target": "High Blood Pressure"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/heart-disease",
+      "predicate": "presentsWith",
+      "target": "Abnormal Cholesterol Levels"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/heart-disease",
+      "predicate": "presentsWith",
+      "target": "Obesity and Belly Fat"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/heart-disease",
+      "predicate": "presentsWith",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/heart-disease",
+      "predicate": "presentsWith",
+      "target": "Smoking"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/chronic-kidney-disease",
+      "predicate": "presentsWith",
+      "target": "Heart Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/chronic-kidney-disease",
+      "predicate": "presentsWith",
+      "target": "Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/chronic-kidney-disease",
+      "predicate": "presentsWith",
+      "target": "High Blood Pressure"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/smoking",
+      "predicate": "presentsWith",
+      "target": "Heart Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/smoking",
+      "predicate": "presentsWith",
+      "target": "Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Attack"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Nerve Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Eye Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/smoking",
+      "predicate": "increasesRiskOf",
+      "target": "Amputation"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/abnormal-cholesterol-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Heart Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/abnormal-cholesterol-levels",
+      "predicate": "increasesRiskOf",
+      "target": "Stroke"
+    }
+  ],
+  "conflictSamples": [
+    "riskFactor/smoking: name: 'Smoking' vs 'smoking'",
+    "riskFactor/smoking: evidenceNote: 'Smoking raises your risk of developing heart disease. If you have diabetes, it is important to stop smoking, because both smoking and diabetes narrow blood vessels.' vs 'Smoking is a risk factor for heart disease in people with diabetes, and quitting can lower the risk of heart attack, stroke, and other complications.'",
+    "riskFactor/abnormal-cholesterol-levels: name: 'Abnormal Cholesterol Levels' vs 'Abnormal cholesterol levels'",
+    "riskFactor/obesity-and-belly-fat: name: 'Obesity and Belly Fat' vs 'Obesity and belly fat'",
+    "riskFactor/family-history-of-heart-disease: name: 'Family History of Heart Disease' vs 'Family history of heart disease'",
+    "riskFactor/male-sex: name: 'Male Sex' vs 'Male'",
+    "riskFactor/chronic-kidney-disease: name: 'Chronic Kidney Disease' vs 'Chronic kidney disease'",
+    "complication/heart-attack: name: 'Heart Attack' vs 'Heart attack'",
+    "complication/kidney-disease: name: 'Kidney Disease' vs 'Kidney disease'",
+    "complication/eye-disease: name: 'Eye Disease' vs 'Eye disease'",
+    "complication/high-blood-pressure: name: 'High Blood Pressure' vs 'High blood pressure'",
+    "complication/high-cholesterol: name: 'High Cholesterol' vs 'High cholesterol'",
+    "complication/high-blood-glucose: name: 'High Blood Glucose' vs 'High blood glucose'",
+    "riskFactor/high-blood-glucose: name: 'High Blood Glucose' vs 'high blood glucose'",
+    "riskFactor/high-blood-pressure: name: 'High Blood Pressure' vs 'high blood pressure'",
+    "riskFactor/high-cholesterol: name: 'High Cholesterol' vs 'high cholesterol'",
+    "riskFactor/physical-inactivity: name: 'Physical Inactivity' vs 'physical inactivity'",
+    "riskFactor/chronic-stress: name: 'Chronic Stress' vs 'chronic stress'",
+    "medication/statin: name: 'Statin' vs 'statin'",
+    "medication/aspirin: name: 'Aspirin' vs 'aspirin'"
+  ]
+}

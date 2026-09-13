@@ -1,0 +1,779 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-managing-diabetes.txt
+# 目标 named graph：urn:dmo:extract:niddk-managing-diabetes
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-managing-diabetes'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-managing-diabetes.txt" ;
+    dmo:sha256 "b4c9ee1844691b7781b7de94e42d47bf14c2e2820036351627fe4e3d5d6de6f0" ;
+    dmo:byteSize "21485"^^xsd:integer .
+
+<urn:dmo:extract:niddk-managing-diabetes> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T03:47:14+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/blindness> a dmo:Complication ;
+    rdfs:label "Blindness" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "blindness" ;
+    dmo:definition "Blindness is a health problem from diabetes that can be prevented or delayed by managing your ABCs." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Blindness" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Managing your ABCs may lower your chances of having health problems from diabetes, such as a heart attack, stroke, kidney disease, blindness, and foot or leg amputations." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "A dangerous condition that may develop if high levels of ketones are left untreated." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005075" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "If high levels of ketones are left untreated, you may develop a dangerous condition called diabetic ketoacidosis External link." ;
+    dmo:evidenceQuote "Diabetic ketoacidosis is a medical emergency that needs to be treated right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/eye-disease> a dmo:Complication ;
+    rdfs:label "Eye Disease" ;
+    dmo:affectedOrgan "Eye" ;
+    dmo:complicationCode "eye-disease" ;
+    dmo:definition "participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Eye Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/foot-or-leg-amputation> a dmo:Complication ;
+    rdfs:label "Foot or Leg Amputation" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "foot-or-leg-amputation" ;
+    dmo:definition "Foot or leg amputation is a health problem from diabetes that can be prevented or delayed by managing your ABCs." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Foot or Leg Amputation" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Managing your ABCs may lower your chances of having health problems from diabetes, such as a heart attack, stroke, kidney disease, blindness, and foot or leg amputations." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/heart-attack> a dmo:Complication ;
+    rdfs:label "Heart Attack" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "heart-attack" ;
+    dmo:definition "A heart attack is a health problem from diabetes that can be prevented or delayed by managing your ABCs." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Heart Attack" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Managing your ABCs may lower your chances of having health problems from diabetes, such as a heart attack, stroke, kidney disease, blindness, and foot or leg amputations." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/heart-disease> a dmo:Complication ;
+    rdfs:label "Heart Disease" ;
+    dmo:affectedOrgan "Heart" ;
+    dmo:complicationCode "heart-disease" ;
+    dmo:definition "EDIC has shown that there are long-term benefits of early and intensive blood glucose management on slowing or preventing the development of health problems such as heart, eye, kidney, and nerve diseases" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005146" ;
+    dmo:name "Heart Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "EDIC has shown that there are long-term benefits of early and intensive blood glucose management on slowing or preventing the development of health problems such as heart, eye, kidney, and nerve diseases" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/high-blood-glucose> a dmo:Complication ;
+    rdfs:label "High Blood Glucose" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "high-blood-glucose" ;
+    dmo:definition "Very high blood glucose may lead to confusion or fainting, and it may become a serious medical emergency that must be treated right away." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "High Blood Glucose" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Very high blood glucose may lead to confusion or fainting, and it may become a serious medical emergency that must be treated right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/hypoglycemia> a dmo:Complication ;
+    rdfs:label "Hypoglycemia" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "hypoglycemia" ;
+    dmo:definition "When your blood glucose level is too low, it is called hypoglycemia." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005076" ;
+    dmo:name "Hypoglycemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "When your blood glucose level is too low, it is called hypoglycemia. For most people with diabetes, the blood glucose level is too low when it is below 70 mg/dL." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/kidney-disease> a dmo:Complication ;
+    rdfs:label "Kidney Disease" ;
+    dmo:affectedOrgan "Kidney" ;
+    dmo:complicationCode "kidney-disease" ;
+    dmo:definition "Kidney disease is a health problem from diabetes that can be prevented or delayed by managing your ABCs." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Kidney Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Managing your ABCs may lower your chances of having health problems from diabetes, such as a heart attack, stroke, kidney disease, blindness, and foot or leg amputations." ;
+    dmo:evidenceQuote "participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/low-blood-glucose> a dmo:Complication ;
+    rdfs:label "Low Blood Glucose" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "low-blood-glucose" ;
+    dmo:definition "Very low blood glucose may lead to confusion or fainting NIH external link, and it can become a serious medical emergency that must be treated right away." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Low Blood Glucose" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Very low blood glucose may lead to confusion or fainting NIH external link, and it can become a serious medical emergency that must be treated right away." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/nerve-disease> a dmo:Complication ;
+    rdfs:label "Nerve Disease" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "nerve-disease" ;
+    dmo:definition "participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005149" ;
+    dmo:name "Nerve Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/complication/stroke> a dmo:Complication ;
+    rdfs:label "Stroke" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "stroke" ;
+    dmo:definition "A stroke is a health problem from diabetes that can be prevented or delayed by managing your ABCs." ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Stroke" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Managing your ABCs may lower your chances of having health problems from diabetes, such as a heart attack, stroke, kidney disease, blindness, and foot or leg amputations." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/device/artificial-pancreas> a dmo:Device ;
+    rdfs:label "Artificial Pancreas" ;
+    dmo:deviceCode "artificial-pancreas" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Artificial Pancreas" ;
+    dmo:evidenceQuote "Some people use a CGM as part of an artificial pancreas. An artificial pancreas is a system that mimics how a healthy pancreas controls blood glucose in the body. A CGM, an insulin pump, and a software program that shares information between the CGM and insulin pump make up the artificial pancreas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/device/artificial-pancreas-system> a dmo:Device ;
+    rdfs:label "Artificial Pancreas System" ;
+    dmo:deviceCode "artificial-pancreas-system" ;
+    dmo:deviceType "ArtificialPancreas" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Artificial Pancreas System" ;
+    dmo:evidenceQuote "NIDDK supported research that helped scientists develop the first continuous glucose monitor (CGM) that was approved by the U.S. Food and Drug Administration (FDA) in 1999. CGMs, which are part of artificial pancreas systems, help people track glucose levels in real-time with fewer finger pricks." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/device/blood-glucose-meter> a dmo:Device ;
+    rdfs:label "Blood Glucose Meter" ;
+    dmo:deviceCode "blood-glucose-meter" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Blood Glucose Meter" ;
+    dmo:evidenceQuote "You can check your blood glucose level at home with a blood glucose meter External link. The meter tests a drop of your blood, usually from a prick of your fingertip. The meter will show you how much glucose is in your blood at that moment." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/device/continuous-glucose-monitor> a dmo:Device ;
+    rdfs:label "Continuous Glucose Monitor" ;
+    dmo:deviceCode "continuous-glucose-monitor" ;
+    dmo:deviceType "CGM" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Continuous Glucose Monitor" ;
+    dmo:evidenceQuote "People who take insulin to manage their diabetes may benefit from using a continuous glucose monitor (CGM). A CGM uses a sensor in the tissue under your skin and shows changes in glucose levels throughout the day and night. Many CGM systems have alarms and warnings that let you know if your glucose level is too low or too high." ;
+    dmo:evidenceQuote "CGMs, which are part of artificial pancreas systems, help people track glucose levels in real-time with fewer finger pricks." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/device/insulin-pump> a dmo:Device ;
+    rdfs:label "Insulin Pump" ;
+    dmo:deviceCode "insulin-pump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "true"^^xsd:boolean ;
+    dmo:name "Insulin Pump" ;
+    dmo:evidenceQuote "Some people use a CGM as part of an artificial pancreas. An artificial pancreas is a system that mimics how a healthy pancreas controls blood glucose in the body. A CGM, an insulin pump, and a software program that shares information between the CGM and insulin pump make up the artificial pancreas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 1 Diabetes" ;
+    dmo:definition "If you have type 1 diabetes, your health care team may ask you to check your urine at home for substances called ketones." ;
+    dmo:diabetesTypeCode "type-1-diabetes" ;
+    dmo:insulinRequired "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 1 Diabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "Childhood" ;
+    dmo:evidenceQuote "If you have type 1 diabetes, your health care team may ask you to check your urine at home for substances called ketones." ;
+    dmo:evidenceQuote "Most often, ketoacidosis affects people with type 1 diabetes." ;
+    dmo:evidenceQuote "The study showed that participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "However, some people with type 2 diabetes can develop ketoacidosis if they do not produce enough insulin." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "However, some people with type 2 diabetes can develop ketoacidosis if they do not produce enough insulin." ;
+    dmo:evidenceQuote "The study found that people with less effective diabetes management during the first year after being diagnosed with diabetes had a higher risk of diabetes complications and death." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes in Adolescents and Youth" ;
+    dmo:definition "The TODAY studies, both funded by NIDDK, show the importance of early, intensive treatment and blood glucose management for children or adolescents diagnosed with type 2 diabetes." ;
+    dmo:diabetesTypeCode "type-2-diabetes-in-adolescents-and-youth" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0018750" ;
+    dmo:name "Type 2 Diabetes in Adolescents and Youth" ;
+    dmo:prevalenceShare "0.05"^^xsd:decimal ;
+    dmo:typicalOnset "Adolescence" ;
+    dmo:evidenceQuote "The TODAY studies, both funded by NIDDK, show the importance of early, intensive treatment and blood glucose management for children or adolescents diagnosed with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Replaces or supplements insulin in the body to lower blood glucose levels" ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "If you have type 1 diabetes, your health care team may ask you to check your urine at home for substances called ketones. A large amount of ketones in your urine may mean that you need to manage your diabetes more carefully. Work with your primary health care professional—who may be a doctor, physician assistant, or nurse practitioner—to change your diabetes care plan. If high levels of ketones are left untreated, you may develop a dangerous condition called diabetic ketoacidosis External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/labTest/a1c-blood-glucose-test> a dmo:LabTest ;
+    rdfs:label "A1C blood glucose test" ;
+    dmo:definition "The A1C test shows your average blood glucose level over the last 3 months." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c-blood-glucose-test" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C blood glucose test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "The A1C test shows your average blood glucose level over the last 3 months." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/labTest/a1c-test> a dmo:LabTest ;
+    rdfs:label "A1C test" ;
+    dmo:definition "A blood test that measures your average blood glucose level over the past 2 to 3 months." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c-test" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "You do not get the same level of detail from blood tests—such as the A1C test—that you take at a health care professional’s office." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/labTest/cholesterol-test> a dmo:LabTest ;
+    rdfs:label "cholesterol test" ;
+    dmo:definition "Cholesterol is a fat, also called lipid, that is produced by your liver. Unhealthy levels of cholesterol in your blood can build up and clog your blood vessels, which may result in a heart attack or a stroke." ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "cholesterol-test" ;
+    dmo:loincCode "2085-9" ;
+    dmo:name "cholesterol test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Ask your health care team how often you need a cholesterol test NIH external link, also called a lipid panel, and what your cholesterol level should be." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/labTest/urine-ketones> a dmo:LabTest ;
+    rdfs:label "Urine Ketones" ;
+    dmo:definition "Substances in the urine that indicate the body is breaking down fat for energy, which can happen when there is not enough insulin." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "urine-ketones" ;
+    dmo:loincCode "2339-0" ;
+    dmo:name "Urine Ketones" ;
+    dmo:specimen "Urine" ;
+    dmo:unitOfMeasure "trace / small / moderate / large" ;
+    dmo:evidenceQuote "If you have type 1 diabetes, your health care team may ask you to check your urine at home for substances called ketones. A large amount of ketones in your urine may mean that you need to manage your diabetes more carefully." ;
+    dmo:evidenceQuote "Your health care team may want you to check your urine for ketones if you have symptoms of diabetic ketoacidosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/create-a-healthy-meal-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Create a healthy meal plan" ;
+    dmo:expectedBenefit "may help keep your blood glucose, blood pressure, and cholesterol levels in the ranges recommended by your health care team" ;
+    dmo:interventionCode "create-a-healthy-meal-plan" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Create a healthy meal plan" ;
+    dmo:evidenceQuote "Create a healthy meal plan You may worry that having diabetes means going without foods you enjoy. The good news is that you can still eat your favorite foods, but you might need to eat smaller portions or enjoy them less often. Work with your health care team, which may include a registered dietitian or a diabetes educator, to create a meal plan that works for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-meal-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Diabetes meal plan" ;
+    dmo:interventionCode "diabetes-meal-plan" ;
+    dmo:interventionType "Nutrition" ;
+    dmo:name "Diabetes meal plan" ;
+    dmo:evidenceQuote "If you often have low blood glucose levels, you may need to change your diabetes meal plan, physical activity plan, or medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity> a dmo:LifestyleIntervention ;
+    rdfs:label "Physical Activity" ;
+    dmo:expectedBenefit "help you manage your diabetes" ;
+    dmo:interventionCode "physical-activity" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Physical Activity" ;
+    dmo:evidenceQuote "Being physically active can help you manage your diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/physical-activity-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Physical activity plan" ;
+    dmo:interventionCode "physical-activity-plan" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Physical activity plan" ;
+    dmo:evidenceQuote "If you often have low blood glucose levels, you may need to change your diabetes meal plan, physical activity plan, or medicines." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/lifestyleIntervention/reach-and-maintain-a-healthy-weight> a dmo:LifestyleIntervention ;
+    rdfs:label "Reach and maintain a healthy weight" ;
+    dmo:activityTarget "To lose weight, you may need to consume fewer calories or get more physical activity." ;
+    dmo:interventionCode "reach-and-maintain-a-healthy-weight" ;
+    dmo:interventionType "WeightManagement" ;
+    dmo:name "Reach and maintain a healthy weight" ;
+    dmo:evidenceQuote "Reach and maintain a healthy weight If you are overweight or have obesity, ask your health care team how you can manage your weight. To lose weight, you may need to consume fewer calories or get more physical activity. Your health care team may also recommend medicines or surgery to help manage your weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/medication/statin> a dmo:Medication ;
+    rdfs:label "Statin" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "false"^^xsd:boolean ;
+    dmo:medicationCode "statin" ;
+    dmo:name "Statin" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "Some people may need to take a medicine called a statin External link, or another medicine, to lower their cholesterol for heart health." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/monitoringSchedule/a1c-blood-glucose-test> a dmo:MonitoringSchedule ;
+    rdfs:label "A1C blood glucose test" ;
+    dmo:appliesTo "For most people with diabetes" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "A1C blood glucose test" ;
+    dmo:scheduleId "a1c-blood-glucose-test" ;
+    dmo:evidenceQuote "For most people with diabetes, their goal is an A1C level below 7%." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/a1c-blood-glucose-test> a dmo:Recommendation ;
+    rdfs:label "A1C blood glucose test" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "1" ;
+    dmo:populationScope "Most people with diabetes" ;
+    dmo:recommendationId "a1c-blood-glucose-test" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "The A1C test shows your average blood glucose level over the last 3 months. This test is done at a health care professional’s office or lab. For most people with diabetes, their goal is an A1C level below 7%.1 Your A1C goal may be different if you have other health problems.2 Ask your health care team how often you should have the test and what your goal should be." ;
+    dmo:evidenceQuote "The A1C test shows your average blood glucose level over the last 3 months. This test is done at a health care professional’s office or lab. For most people with diabetes, their goal is an A1C level below 7%.1 Your A1C goal may be different if you have other health problems.2 Ask your health care team how often you should have the test and what your goal should be." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/adjust-goals-for-adults-over-age-65-or-with-other-health-problems> a dmo:Recommendation ;
+    rdfs:label "Adjust goals for adults over age 65 or with other health problems" ;
+    dmo:populationScope "Adults over age 65 with long-standing diabetes, or those with other health problems such as heart disease, or frequent hypoglycemia" ;
+    dmo:recommendationId "adjust-goals-for-adults-over-age-65-or-with-other-health-problems" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Your blood glucose goals may be different if you are an adult over age 65 and have had diabetes for a long time. Your blood glucose goals may also be different if you have other health problems, like heart disease, or if your blood glucose often gets too low." ;
+    dmo:evidenceQuote "Your blood glucose goals may be different if you are an adult over age 65 and have had diabetes for a long time. Your blood glucose goals may also be different if you have other health problems, like heart disease, or if your blood glucose often gets too low." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/aim-for-blood-glucose-levels-before-a-meal-80-to-130-mg-dl> a dmo:Recommendation ;
+    rdfs:label "Aim for blood glucose levels before a meal: 80 to 130 mg/dL" ;
+    dmo:recommendationId "aim-for-blood-glucose-levels-before-a-meal-80-to-130-mg-dl" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Many people with diabetes aim to keep their blood glucose at these levels: Before a meal: 80 to 130 mg/dL" ;
+    dmo:evidenceQuote "Many people with diabetes aim to keep their blood glucose at these levels1 Before a meal: 80 to 130 mg/dL" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/be-physically-active-to-manage-diabetes> a dmo:Recommendation ;
+    rdfs:label "Be physically active to manage diabetes" ;
+    dmo:recommendationId "be-physically-active-to-manage-diabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Being physically active can help you manage your diabetes." ;
+    dmo:evidenceQuote "Being physically active can help you manage your diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/blood-pressure-goal-below-130-80-mm-hg> a dmo:Recommendation ;
+    rdfs:label "Blood pressure goal below 130/80 mm Hg" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "2,3" ;
+    dmo:populationScope "Some people with diabetes" ;
+    dmo:recommendationId "blood-pressure-goal-below-130-80-mm-hg" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Some people with diabetes have a blood pressure goal below 130/80 mm Hg.2,3 If you have heart disease or are at high risk for diabetes health problems, your goal may be lower. Ask your health care team what your goal should be." ;
+    dmo:evidenceQuote "Some people with diabetes have a blood pressure goal below 130/80 mm Hg.2,3 If you have heart disease or are at high risk for diabetes health problems, your goal may be lower. Ask your health care team what your goal should be." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/check-blood-glucose-level-at-home> a dmo:Recommendation ;
+    rdfs:label "Check blood glucose level at home" ;
+    dmo:recommendationId "check-blood-glucose-level-at-home" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If you take insulin or other diabetes medicines, checking your blood glucose level at home may help you avoid high or low blood glucose levels. Even if you do not use insulin, checking your blood glucose level at home can help you manage your diabetes. The test results may help you and your health care team make changes to your meal plan, physical activity level, or diabetes medicines. It may help you understand how certain types of food affect your blood glucose level." ;
+    dmo:evidenceQuote "If you take insulin or other diabetes medicines, checking your blood glucose level at home may help you avoid high or low blood glucose levels. Even if you do not use insulin, checking your blood glucose level at home can help you manage your diabetes. The test results may help you and your health care team make changes to your meal plan, physical activity level, or diabetes medicines. It may help you understand how certain types of food affect your blood glucose level." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/checking-urine-for-ketones> a dmo:Recommendation ;
+    rdfs:label "Checking urine for ketones" ;
+    dmo:populationScope "People with symptoms of diabetic ketoacidosis" ;
+    dmo:recommendationId "checking-urine-for-ketones" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "Your health care team may want you to check your urine for ketones if you have symptoms of diabetic ketoacidosis." ;
+    dmo:evidenceQuote "Your health care team may want you to check your urine for ketones if you have symptoms of diabetic ketoacidosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/cholesterol-test> a dmo:Recommendation ;
+    rdfs:label "Cholesterol test" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "N/A" ;
+    dmo:populationScope "Some people" ;
+    dmo:recommendationId "cholesterol-test" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ask your health care team how often you need a cholesterol test NIH external link, also called a lipid panel, and what your cholesterol level should be. Some people may need to take a medicine called a statin External link, or another medicine, to lower their cholesterol for heart health." ;
+    dmo:evidenceQuote "Ask your health care team how often you need a cholesterol test NIH external link, also called a lipid panel, and what your cholesterol level should be. Some people may need to take a medicine called a statin External link, or another medicine, to lower their cholesterol for heart health." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/compare-cgm-readings-with-blood-glucose-meter> a dmo:Recommendation ;
+    rdfs:label "Compare CGM readings with blood glucose meter" ;
+    dmo:recommendationId "compare-cgm-readings-with-blood-glucose-meter" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "For safety, you may sometimes need to compare your CGM glucose readings with results from a standard blood glucose meter. This could be needed if you doubt the accuracy of your CGM readings, if you are changing your insulin dose, or if your CGM gives a warning alert." ;
+    dmo:evidenceQuote "For safety, you may sometimes need to compare your CGM glucose readings with results from a standard blood glucose meter. This could be needed if you doubt the accuracy of your CGM readings, if you are changing your insulin dose, or if your CGM gives a warning alert." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/create-a-healthy-meal-plan> a dmo:Recommendation ;
+    rdfs:label "Create a healthy meal plan" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "N/A" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "create-a-healthy-meal-plan" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "You may worry that having diabetes means going without foods you enjoy. The good news is that you can still eat your favorite foods, but you might need to eat smaller portions or enjoy them less often. Work with your health care team, which may include a registered dietitian or a diabetes educator, to create a meal plan that works for you." ;
+    dmo:evidenceQuote "You may worry that having diabetes means going without foods you enjoy. The good news is that you can still eat your favorite foods, but you might need to eat smaller portions or enjoy them less often. Work with your health care team, which may include a registered dietitian or a diabetes educator, to create a meal plan that works for you." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/discuss-diabetes-self-care-plan-and-review-blood-glucose-chart-or-app> a dmo:Recommendation ;
+    rdfs:label "Discuss diabetes self-care plan and review blood glucose chart or app" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "discuss-diabetes-self-care-plan-and-review-blood-glucose-chart-or-app" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "When you see your health care professional, discuss your diabetes self-care plan, review your blood glucose chart or app, and ask questions." ;
+    dmo:evidenceQuote "When you see your health care professional, discuss your diabetes self-care plan, review your blood glucose chart or app, and ask questions." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management> a dmo:Recommendation ;
+    rdfs:label "Early and intensive blood glucose management" ;
+    dmo:gradingSystem "DCCT/EDIC study" ;
+    dmo:nativeEvidenceGrade "High" ;
+    dmo:populationScope "People with type 1 diabetes" ;
+    dmo:recommendationId "early-and-intensive-blood-glucose-management" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease." ;
+    dmo:evidenceQuote "The study showed that participants with type 1 diabetes who kept their blood glucose levels close to normal greatly lowered their chances of developing eye, kidney, and nerve disease." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management-for-people-with-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Early and intensive blood glucose management for people with type 2 diabetes" ;
+    dmo:gradingSystem "Diabetes & Aging Study" ;
+    dmo:nativeEvidenceGrade "High" ;
+    dmo:populationScope "People with type 2 diabetes" ;
+    dmo:recommendationId "early-and-intensive-blood-glucose-management-for-people-with-type-2-diabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "People with less effective diabetes management during the first year after being diagnosed with diabetes had a higher risk of diabetes complications and death." ;
+    dmo:evidenceQuote "The study found that people with less effective diabetes management during the first year after being diagnosed with diabetes had a higher risk of diabetes complications and death." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/early-and-intensive-treatment-and-blood-glucose-management-for-children-or-adolescents-with-type-2-diabetes> a dmo:Recommendation ;
+    rdfs:label "Early and intensive treatment and blood glucose management for children or adolescents with type 2 diabetes" ;
+    dmo:gradingSystem "TODAY and TODAY2 studies" ;
+    dmo:nativeEvidenceGrade "High" ;
+    dmo:populationScope "Children or adolescents with type 2 diabetes" ;
+    dmo:recommendationId "early-and-intensive-treatment-and-blood-glucose-management-for-children-or-adolescents-with-type-2-diabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The TODAY studies, both funded by NIDDK, show the importance of early, intensive treatment and blood glucose management for children or adolescents diagnosed with type 2 diabetes." ;
+    dmo:evidenceQuote "The TODAY studies, both funded by NIDDK, show the importance of early, intensive treatment and blood glucose management for children or adolescents diagnosed with type 2 diabetes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/get-enough-sleep> a dmo:Recommendation ;
+    rdfs:label "Get enough sleep" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "5" ;
+    dmo:populationScope "Most adults" ;
+    dmo:recommendationId "get-enough-sleep" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Getting enough sleep may improve your mood, energy level, and blood glucose level. Most adults should aim for about 7 to 8 hours each night.5 Children and adolescents may need more sleep." ;
+    dmo:evidenceQuote "Getting enough sleep may improve your mood, energy level, and blood glucose level. Most adults should aim for about 7 to 8 hours each night.5 Children and adolescents may need more sleep." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/get-physical-activity> a dmo:Recommendation ;
+    rdfs:label "Get physical activity" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "4" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "get-physical-activity" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Physical activity may help you lower blood glucose, blood pressure, and cholesterol levels. Being active may also help you get better sleep and improve your mood. Try to get at least 150 minutes of moderate-intensity External link physical activity, such as brisk walking, each week. If you can, try to do muscle-strengthening activities, such as wall push-ups or seated arm raises, two days a week.4" ;
+    dmo:evidenceQuote "Physical activity may help you lower blood glucose, blood pressure, and cholesterol levels. Being active may also help you get better sleep and improve your mood. Try to get at least 150 minutes of moderate-intensity External link physical activity, such as brisk walking, each week. If you can, try to do muscle-strengthening activities, such as wall push-ups or seated arm raises, two days a week.4" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/keep-a-record-of-blood-glucose-self-checks> a dmo:Recommendation ;
+    rdfs:label "Keep a record of blood glucose self-checks" ;
+    dmo:recommendationId "keep-a-record-of-blood-glucose-self-checks" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Make sure to keep a record of your blood glucose self-checks, including the date and time you checked it, the results, and other information, such as what you ate or what physical activity you did that day. You can use a chart or a smartphone app to help you keep track. Take this information with you when you visit your health care team." ;
+    dmo:evidenceQuote "Make sure to keep a record of your blood glucose self-checks, including the date and time you checked it, the results, and other information, such as what you ate or what physical activity you did that day. You can use a chart or a smartphone app to help you keep track. Take this information with you when you visit your health care team." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/keep-track-of-abcs-and-other-health-information> a dmo:Recommendation ;
+    rdfs:label "Keep track of ABCs and other health information" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "keep-track-of-abcs-and-other-health-information" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "You may find it helpful to keep track of your ABCs and other important health information that you get during checkups with your primary care professional or other health care professionals." ;
+    dmo:evidenceQuote "You may find it helpful to keep track of your ABCs and other important health information that you get during checkups with your primary care professional or other health care professionals." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/reach-and-maintain-a-healthy-weight> a dmo:Recommendation ;
+    rdfs:label "Reach and maintain a healthy weight" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "N/A" ;
+    dmo:populationScope "People who are overweight or have obesity" ;
+    dmo:recommendationId "reach-and-maintain-a-healthy-weight" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you are overweight or have obesity, ask your health care team how you can manage your weight. To lose weight, you may need to consume fewer calories or get more physical activity. Your health care team may also recommend medicines or surgery to help manage your weight." ;
+    dmo:evidenceQuote "If you are overweight or have obesity, ask your health care team how you can manage your weight. To lose weight, you may need to consume fewer calories or get more physical activity. Your health care team may also recommend medicines or surgery to help manage your weight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/stop-smoking> a dmo:Recommendation ;
+    rdfs:label "Stop smoking" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "N/A" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "stop-smoking" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Not smoking is important for your health, especially if you have diabetes. Both smoking and diabetes can make your blood vessels narrow. E-cigarettes aren’t a safe option either. If you smoke, vape, or use other tobacco products, stop. Ask for help External link so you don’t have to do it alone." ;
+    dmo:evidenceQuote "Not smoking is important for your health, especially if you have diabetes. Both smoking and diabetes can make your blood vessels narrow. E-cigarettes aren’t a safe option either. If you smoke, vape, or use other tobacco products, stop. Ask for help External link so you don’t have to do it alone." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/take-care-of-your-mental-health> a dmo:Recommendation ;
+    rdfs:label "Take care of your mental health" ;
+    dmo:gradingSystem "N/A" ;
+    dmo:nativeEvidenceGrade "N/A" ;
+    dmo:populationScope "People with diabetes" ;
+    dmo:recommendationId "take-care-of-your-mental-health" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Feeling stressed, sad, or angry can be common for people with diabetes. Many people with chronic, or long-term, illnesses such as diabetes develop anxiety or other mental health conditions NIH external link. Learn healthy ways to lower your stress NIH external link, and ask for help from your health care team or a mental health professional." ;
+    dmo:evidenceQuote "Feeling stressed, sad, or angry can be common for people with diabetes. Many people with chronic, or long-term, illnesses such as diabetes develop anxiety or other mental health conditions NIH external link. Learn healthy ways to lower your stress NIH external link, and ask for help from your health care team or a mental health professional." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/take-medicines-as-prescribed> a dmo:Recommendation ;
+    rdfs:label "Take medicines as prescribed" ;
+    dmo:recommendationId "take-medicines-as-prescribed" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Take your medicines as they were prescribed, even if you feel good or have reached your blood glucose, blood pressure, or cholesterol goals. Avoid rationing your medicines or skipping taking your medicines if you have trouble paying for them. Talk with your health care team if you can’t afford your medicines or if you experience any side effects." ;
+    dmo:evidenceQuote "Take your medicines as they were prescribed, even if you feel good or have reached your blood glucose, blood pressure, or cholesterol goals. Avoid rationing your medicines or skipping taking your medicines if you have trouble paying for them. Talk with your health care team if you can’t afford your medicines or if you experience any side effects." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/talk-with-your-health-care-team-about-blood-glucose-targets> a dmo:Recommendation ;
+    rdfs:label "Talk with your health care team about blood glucose targets" ;
+    dmo:recommendationId "talk-with-your-health-care-team-about-blood-glucose-targets" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Talk with your health care team about the blood glucose range that is healthy for you. Be sure to tell your health care team if your glucose levels frequently go above or below your target range." ;
+    dmo:evidenceQuote "Talk with your health care team about the blood glucose range that is healthy for you. Be sure to tell your health care team if your glucose levels frequently go above or below your target range." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/teach-family-friends-and-coworkers-how-to-use-glucagon> a dmo:Recommendation ;
+    rdfs:label "Teach family, friends, and coworkers how to use glucagon" ;
+    dmo:populationScope "People with a glucagon prescription" ;
+    dmo:recommendationId "teach-family-friends-and-coworkers-how-to-use-glucagon" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you have a glucagon prescription, you should teach your family, friends, and coworkers when and how to give you glucagon in case you are not able to do it yourself." ;
+    dmo:evidenceQuote "If you have a glucagon prescription, you should teach your family, friends, and coworkers when and how to give you glucagon in case you are not able to do it yourself." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/track-time-in-range-for-cgm-users> a dmo:Recommendation ;
+    rdfs:label "Track time in range for CGM users" ;
+    dmo:populationScope "People who use a CGM" ;
+    dmo:recommendationId "track-time-in-range-for-cgm-users" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If you use a CGM, your health care team may ask you to keep track of your time in range. Time in range is the percentage of time that your glucose level stays in your target range. For many people with diabetes, the target range is between 70 and 180 mg/dL. Your health care team may adjust your diabetes care plan to help you stay in your target range at least 70% of the time." ;
+    dmo:evidenceQuote "If you use a CGM, your health care team may ask you to keep track of your time in range. Time in range is the percentage of time that your glucose level stays in your target range. For many people with diabetes, the target range is between 70 and 180 mg/dL. Your health care team may adjust your diabetes care plan to help you stay in your target range at least 70% of the time." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-a-cgm-as-part-of-an-artificial-pancreas> a dmo:Recommendation ;
+    rdfs:label "Use a CGM as part of an artificial pancreas" ;
+    dmo:recommendationId "use-a-cgm-as-part-of-an-artificial-pancreas" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Some people use a CGM as part of an artificial pancreas. An artificial pancreas is a system that mimics how a healthy pancreas controls blood glucose in the body. A CGM, an insulin pump, and a software program that shares information between the CGM and insulin pump make up the artificial pancreas." ;
+    dmo:evidenceQuote "Some people use a CGM as part of an artificial pancreas. An artificial pancreas is a system that mimics how a healthy pancreas controls blood glucose in the body. A CGM, an insulin pump, and a software program that shares information between the CGM and insulin pump make up the artificial pancreas." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/recommendation/use-a-continuous-glucose-monitor-cgm> a dmo:Recommendation ;
+    rdfs:label "Use a continuous glucose monitor (CGM)" ;
+    dmo:populationScope "People who take insulin to manage their diabetes" ;
+    dmo:recommendationId "use-a-continuous-glucose-monitor-cgm" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "People who take insulin to manage their diabetes may benefit from using a continuous glucose monitor (CGM). A CGM uses a sensor in the tissue under your skin and shows changes in glucose levels throughout the day and night. Many CGM systems have alarms and warnings that let you know if your glucose level is too low or too high." ;
+    dmo:evidenceQuote "People who take insulin to manage their diabetes may benefit from using a continuous glucose monitor (CGM). A CGM uses a sensor in the tissue under your skin and shows changes in glucose levels throughout the day and night. Many CGM systems have alarms and warnings that let you know if your glucose level is too low or too high." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/cold-sweat> a dmo:Symptom ;
+    rdfs:label "Cold Sweat" ;
+    dmo:name "Cold Sweat" ;
+    dmo:symptomCode "cold-sweat" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with low blood glucose experience symptoms such as feeling shaky or jittery headache cold sweat" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/fainting> a dmo:Symptom ;
+    rdfs:label "Fainting" ;
+    dmo:name "Fainting" ;
+    dmo:symptomCode "fainting" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Symptoms of diabetic ketoacidosis include feeling very tired having trouble breathing having fruity-smelling breath fainting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/feeling-shaky-or-jittery> a dmo:Symptom ;
+    rdfs:label "Feeling Shaky or Jittery" ;
+    dmo:name "Feeling Shaky or Jittery" ;
+    dmo:symptomCode "feeling-shaky-or-jittery" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with low blood glucose experience symptoms such as feeling shaky or jittery" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/feeling-thirsty> a dmo:Symptom ;
+    rdfs:label "Feeling Thirsty" ;
+    dmo:name "Feeling Thirsty" ;
+    dmo:symptomCode "feeling-thirsty" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with high blood glucose have symptoms such as feeling tired feeling thirsty having blurry vision urinating too often" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/feeling-tired> a dmo:Symptom ;
+    rdfs:label "Feeling Tired" ;
+    dmo:name "Feeling Tired" ;
+    dmo:symptomCode "feeling-tired" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with high blood glucose have symptoms such as feeling tired feeling thirsty having blurry vision urinating too often" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/feeling-very-tired> a dmo:Symptom ;
+    rdfs:label "Feeling Very Tired" ;
+    dmo:name "Feeling Very Tired" ;
+    dmo:symptomCode "feeling-very-tired" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Symptoms of diabetic ketoacidosis include feeling very tired having trouble breathing having fruity-smelling breath fainting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/having-blurry-vision> a dmo:Symptom ;
+    rdfs:label "Having Blurry Vision" ;
+    dmo:name "Having Blurry Vision" ;
+    dmo:symptomCode "having-blurry-vision" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with high blood glucose have symptoms such as feeling tired feeling thirsty having blurry vision urinating too often" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/having-fruity-smelling-breath> a dmo:Symptom ;
+    rdfs:label "Having Fruity-Smelling Breath" ;
+    dmo:name "Having Fruity-Smelling Breath" ;
+    dmo:symptomCode "having-fruity-smelling-breath" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Symptoms of diabetic ketoacidosis include feeling very tired having trouble breathing having fruity-smelling breath fainting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/having-trouble-breathing> a dmo:Symptom ;
+    rdfs:label "Having Trouble Breathing" ;
+    dmo:name "Having Trouble Breathing" ;
+    dmo:symptomCode "having-trouble-breathing" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "Symptoms of diabetic ketoacidosis include feeling very tired having trouble breathing having fruity-smelling breath fainting" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/headache> a dmo:Symptom ;
+    rdfs:label "Headache" ;
+    dmo:name "Headache" ;
+    dmo:symptomCode "headache" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with low blood glucose experience symptoms such as feeling shaky or jittery headache cold sweat" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+<https://example.org/dmo/id/symptom/urinating-too-often> a dmo:Symptom ;
+    rdfs:label "Urinating Too Often" ;
+    dmo:name "Urinating Too Often" ;
+    dmo:symptomCode "urinating-too-often" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "Some people with high blood glucose have symptoms such as feeling tired feeling thirsty having blurry vision urinating too often" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-managing-diabetes> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-1-diabetes> .
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management> dmo:targetsComplication <https://example.org/dmo/id/complication/eye-disease> .
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management> dmo:targetsComplication <https://example.org/dmo/id/complication/kidney-disease> .
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management> dmo:targetsComplication <https://example.org/dmo/id/complication/nerve-disease> .
+<https://example.org/dmo/id/recommendation/early-and-intensive-blood-glucose-management-for-people-with-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/early-and-intensive-treatment-and-blood-glucose-management-for-children-or-adolescents-with-type-2-diabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/diabetesType/type-1-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> dmo:predisposesTo <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/high-blood-glucose> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/heart-disease> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/kidney-disease> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/nerve-disease> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/eye-disease> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/stroke> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/foot-or-leg-amputation> .
+<https://example.org/dmo/id/diabetesType/type-2-diabetes-in-adolescents-and-youth> dmo:predisposesTo <https://example.org/dmo/id/complication/blindness> .
+<https://example.org/dmo/id/complication/low-blood-glucose> dmo:presentsWith <https://example.org/dmo/id/symptom/fainting> .
+<https://example.org/dmo/id/medication/statin> dmo:belongsToDrugClass <https://example.org/dmo/id/drugClass/insulin> .
+<https://example.org/dmo/id/device/continuous-glucose-monitor> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/a1c-blood-glucose-test> .
+<https://example.org/dmo/id/device/blood-glucose-meter> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/a1c-blood-glucose-test> .
+<https://example.org/dmo/id/device/continuous-glucose-monitor> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/urine-ketones> .
+<https://example.org/dmo/id/device/artificial-pancreas-system> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/a1c-blood-glucose-test> .
+<https://example.org/dmo/id/device/insulin-pump> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/a1c-blood-glucose-test> .
+<https://example.org/dmo/id/monitoringSchedule/a1c-blood-glucose-test> dmo:schedulesTest <https://example.org/dmo/id/labTest/a1c-blood-glucose-test> .

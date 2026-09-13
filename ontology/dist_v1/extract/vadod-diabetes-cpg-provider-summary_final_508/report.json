@@ -1,0 +1,203 @@
+{
+  "source": {
+    "sourceId": "vadod-diabetes-cpg-provider-summary_final_508",
+    "uri": "https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-provider-summary_final_508",
+    "localFile": "ontology/knowledges/pdfs/VADOD-Diabetes-CPG-Provider-Summary_final_508.pdf",
+    "sha256": "43a6448d712f9189d951ced3701787c19e27e888a3c3488d10e108a9cdd16eae",
+    "byteSize": 1304085,
+    "graphUri": "urn:dmo:extract:vadod-diabetes-cpg-provider-summary_final_508",
+    "documentFormat": "pdf",
+    "pageCount": 36,
+    "textPageCount": 35
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 15,
+  "counts": {
+    "rawRecords": 446,
+    "accepted": 309,
+    "rejected": 137,
+    "entities": 274,
+    "edges": 68,
+    "danglingRelations": 69,
+    "mergeConflicts": 114
+  },
+  "quality": {
+    "quoteHitRate": 0.6928,
+    "schemaSlotCoverage": 0.9355,
+    "danglingRelationRate": 0.5036,
+    "avgMentionsPerEntity": 1.13
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 74,
+    "quote_too_short": 60,
+    "unknown_relation_predicate": 3
+  },
+  "linkPass": {
+    "candidates": 122,
+    "accepted": 39,
+    "rejectedByReason": {
+      "quote_not_found": 7,
+      "target_unresolved": 53,
+      "source_unresolved": 17,
+      "quote_too_short": 6
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 67,
+    "riskFactor": 61,
+    "complication": 34,
+    "symptom": 20,
+    "contraindication": 19,
+    "adverseEffect": 18,
+    "drugClass": 15,
+    "labTest": 10,
+    "medication": 9,
+    "diabetesType": 6,
+    "lifestyleIntervention": 6,
+    "monitoringSchedule": 4,
+    "complicationStage": 3,
+    "device": 2
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/riskFactor/hypertension",
+      "predicate": "increasesRiskOf",
+      "target": "Diabetic Nephropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Non-alcoholic Fatty Liver Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Obstructive Sleep Apnea"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Hypertension"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Hyperlipidemia"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Obesity"
+    },
+    {
+      "from": "https://example.org/dmo/id/diabetesType/type-2-diabetes",
+      "predicate": "predisposesTo",
+      "target": "Mortality from COVID-19 Infection"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/retinopathy",
+      "predicate": "hasStage",
+      "target": "Diabetic Retinopathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/nephropathy",
+      "predicate": "hasStage",
+      "target": "Diabetic Kidney Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/neuropathy",
+      "predicate": "hasStage",
+      "target": "Diabetic Peripheral Neuropathy"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/atherosclerotic-cvd",
+      "predicate": "presentsWith",
+      "target": "Ischemic Heart Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/atherosclerotic-cvd",
+      "predicate": "presentsWith",
+      "target": "Stroke"
+    },
+    {
+      "from": "https://example.org/dmo/id/complication/atherosclerotic-cvd",
+      "predicate": "presentsWith",
+      "target": "Peripheral Vascular Disease"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/poor-glycemic-control",
+      "predicate": "increasesRiskOf",
+      "target": "Mortality from COVID-19 Infection"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/management-of-comorbidities-in-type-2-diabetes-mellitus",
+      "predicate": "citesSource",
+      "target": "VA/DoD Clinical Practice Guideline for the Management of Chronic Obstructive Pulmonary Disease (COPD)"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/management-of-comorbidities-in-type-2-diabetes-mellitus",
+      "predicate": "citesSource",
+      "target": "VA/DoD Clinical Practice Guideline for the Management of Substance Use Disorders (SUD)"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/management-of-comorbidities-in-type-2-diabetes-mellitus",
+      "predicate": "citesSource",
+      "target": "VA/DoD Clinical Practice Guideline for the Management of Adult Overweight and Obesity (OBE)"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/management-of-comorbidities-in-type-2-diabetes-mellitus",
+      "predicate": "citesSource",
+      "target": "VA/DoD Clinical Practice Guideline for the Management of Major Depressive Disorder (MDD)"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/shared-decision-making",
+      "predicate": "definesTarget",
+      "target": "Shared decision making"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/shared-decision-making",
+      "predicate": "citesSource",
+      "target": "VA/DoD Clinical Practice Guideline for the Management of Type 2 Diabetes Mellitus – Provider Summary"
+    }
+  ],
+  "conflictSamples": [
+    "diabetesType/type-2-diabetes-mellitus: mondoCode: 'MONDO:0001513' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes-mellitus: definition: 'In contrast, Type 2 DM (T2DM) is due to progressive insulin deficiency on a background of insulin resistance.' vs 'Type 2 Diabetes Mellitus – Provider Summary'",
+    "diabetesType/type-2-diabetes-mellitus: mondoCode: 'MONDO:0001513' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes-mellitus: definition: 'In contrast, Type 2 DM (T2DM) is due to progressive insulin deficiency on a background of insulin resistance.' vs 'Type 2 diabetes mellitus (T2DM) is a chronic metabolic disorder characterized by insulin resistance and relative insulin deficiency, leading to hyperglycemia.'",
+    "diabetesType/type-2-diabetes-mellitus: mondoCode: 'MONDO:0001513' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes-mellitus: definition: 'In contrast, Type 2 DM (T2DM) is due to progressive insulin deficiency on a background of insulin resistance.' vs 'Type 2 diabetes mellitus'",
+    "diabetesType/type-2-diabetes-mellitus: mondoCode: 'MONDO:0001513' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes-mellitus: definition: 'In contrast, Type 2 DM (T2DM) is due to progressive insulin deficiency on a background of insulin resistance.' vs 'Type 2 Diabetes Mellitus'",
+    "diabetesType/type-2-diabetes-mellitus: mondoCode: 'MONDO:0001513' vs 'MONDO:0005147'",
+    "diabetesType/type-2-diabetes-mellitus: definition: 'In contrast, Type 2 DM (T2DM) is due to progressive insulin deficiency on a background of insulin resistance.' vs 'The VA/DoD Clinical Practice Guideline for the Management of Type 2 Diabetes Mellitus – Provider Summary'",
+    "riskFactor/first-degree-relative-with-dm: name: 'First-Degree Relative with DM' vs 'First-degree relative with DM'",
+    "riskFactor/hypertension: evidenceNote: 'The guideline recommends considering screening for diabetes or prediabetes in adults who are overweight or obese (body mass index [BMI] ≥ 25 kg/m2 or ≥ 23 kg/m2 in Asian Americans) and have additional risk factors, including: · Hypertension (blood pressure ≥ 140/90 mmHg or on therapy for hypertension)(2)' vs 'Hypertension (blood pressure ≥ 140/90 mmHg or on therapy for hypertension)'",
+    "riskFactor/hypertension: name: 'Hypertension' vs 'hypertension'",
+    "riskFactor/hypertension: evidenceNote: 'The guideline recommends considering screening for diabetes or prediabetes in adults who are overweight or obese (body mass index [BMI] ≥ 25 kg/m2 or ≥ 23 kg/m2 in Asian Americans) and have additional risk factors, including: · Hypertension (blood pressure ≥ 140/90 mmHg or on therapy for hypertension)(2)' vs 'Document recommends ACEi/ARB use in patients with HTN and moderately increased albuminuria, indicating hypertension is a modifiable risk factor.'",
+    "riskFactor/history-of-cardiovascular-disease: name: 'History of Cardiovascular Disease' vs 'History of cardiovascular disease (CVD)'",
+    "riskFactor/history-of-cardiovascular-disease: name: 'History of Cardiovascular Disease' vs 'History of cardiovascular disease'",
+    "riskFactor/history-of-cardiovascular-disease: evidenceNote: 'The guideline recommends considering screening for diabetes or prediabetes in adults who are overweight or obese (body mass index [BMI] ≥ 25 kg/m2 or ≥ 23 kg/m2 in Asian Americans) and have additional risk factors, including: · History of cardiovascular disease (CVD)(2)' vs 'History of cardiovascular disease (CVD)'",
+    "riskFactor/polycystic-ovary-syndrome: name: 'Polycystic Ovary Syndrome' vs 'Polycystic ovary syndrome (PCOS)'",
+    "riskFactor/polycystic-ovary-syndrome: name: 'Polycystic Ovary Syndrome' vs 'Polycystic ovary syndrome'",
+    "riskFactor/polycystic-ovary-syndrome: evidenceNote: 'The guideline recommends considering screening for diabetes or prediabetes in adults who are overweight or obese (body mass index [BMI] ≥ 25 kg/m2 or ≥ 23 kg/m2 in Asian Americans) and have additional risk factors, including: · Women with polycystic ovary syndrome (PCOS)(2)' vs 'Women with polycystic ovary syndrome (PCOS)'"
+  ]
+}

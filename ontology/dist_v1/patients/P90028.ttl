@@ -1,0 +1,17 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/55ec6866-8cba-5b97-9a92-912277023eec> a dmo:Patient ;
+    dmo:birthYear 1988 ;
+    dmo:demoScenario "S25" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90028-1> ;
+    dmo:patientId "P90028" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/encounter/E90028-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-18"^^xsd:date ;
+    dmo:encounterId "E90028-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" .
+

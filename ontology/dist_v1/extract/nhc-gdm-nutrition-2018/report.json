@@ -1,0 +1,54 @@
+{
+  "source": {
+    "sourceId": "nhc-gdm-nutrition-2018",
+    "uri": "https://example.org/dmo/id/guidelineSource/nhc-gdm-nutrition-2018",
+    "localFile": "ontology/knowledges/nhc-gdm-nutrition-2018.txt",
+    "sha256": "196059255611cf370b443a4acb71f624a19195768478c5a1a33d51eb03e08636",
+    "byteSize": 775,
+    "graphUri": "urn:dmo:extract:nhc-gdm-nutrition-2018"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "entities": 0,
+    "edges": 0,
+    "danglingRelations": 0,
+    "mergeConflicts": 0
+  },
+  "quality": {
+    "quoteHitRate": null,
+    "schemaSlotCoverage": 0.0,
+    "danglingRelationRate": null,
+    "avgMentionsPerEntity": null
+  },
+  "rejectionsByReason": {},
+  "linkPass": {
+    "candidates": 0,
+    "accepted": 0,
+    "rejectedByReason": {}
+  },
+  "entitiesByType": {},
+  "danglingSamples": [],
+  "conflictSamples": []
+}

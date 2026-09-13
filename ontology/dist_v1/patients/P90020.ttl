@@ -1,0 +1,116 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/b7ba5be6-b45b-5347-aa3d-861bea260b3f> a dmo:Patient ;
+    dmo:birthYear 1969 ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90020-ACT>,
+        <https://example.org/dmo/id/observation/O90020-BMI>,
+        <https://example.org/dmo/id/observation/O90020-FAM>,
+        <https://example.org/dmo/id/observation/O90020-SMOKE> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90020-DM>,
+        <https://example.org/dmo/id/diagnosis/D90020-OBE> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:hasMedicationUse <https://example.org/dmo/id/medicationUse/M90020-MET> ;
+    dmo:patientId "P90020" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/diagnosis/D90020-OBE> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S17" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:diagnosedDate "2019-06-08"^^xsd:date ;
+    dmo:diagnosisId "D90020-OBE" ;
+    dmo:diagnosisKind "Comorbidity" ;
+    dmo:externalCode "E66" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/labResult/L90020-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90020-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 7.8 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/medicationUse/M90020-MET> a dmo:MedicationUse ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:medicationUseId "M90020-MET" ;
+    dmo:regimenRole "口服降糖" ;
+    dmo:startDate "2020-02-01"^^xsd:date ;
+    dmo:status "Active" ;
+    dmo:treatsDiagnosis <https://example.org/dmo/id/diagnosis/D90020-DM> ;
+    dmo:usesMedication <https://example.org/dmo/id/medication/metformin> .
+
+<https://example.org/dmo/id/observation/O90020-ACT> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90020-ACT" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:observationType "PhysicalActivityPerWeek" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "per-week" ;
+    dmo:valueDecimal 1.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90020-BMI> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90020-BMI" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:observationType "BMI" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "kg-per-m2" ;
+    dmo:valueDecimal 31.2 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90020-FAM> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90020-FAM" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:observationType "FamilyHistory" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "T2DM" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90020-SMOKE> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S17" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90020-SMOKE" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:observationType "SmokingStatus" ;
+    dmo:observedAt "2026-02-09T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "Current" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/diagnosis/D90020-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S17" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90020-1> ;
+    dmo:diagnosedDate "2020-01-14"^^xsd:date ;
+    dmo:diagnosisId "D90020-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/E90020-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-09"^^xsd:date ;
+    dmo:encounterId "E90020-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90020-A1C> .
+

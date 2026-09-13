@@ -1,0 +1,1712 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/JBDS_02_Nursing_Management_for_DKA_v1_20122022.pdf
+# 目标 named graph：urn:dmo:extract:jbds_02_nursing_management_for_dka_v1_20122022
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:jbds_02_nursing_management_for_dka_v1_20122022'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/JBDS_02_Nursing_Management_for_DKA_v1_20122022.pdf" ;
+    dmo:sha256 "446ccba661df3bfea39e90e94e9ac399bcd75553521ec520e1716c09d690de02" ;
+    dmo:byteSize "490895"^^xsd:integer .
+
+<urn:dmo:extract:jbds_02_nursing_management_for_dka_v1_20122022> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T23:47:54+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/adverseEffect/hypoglycaemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypoglycaemia" ;
+    dmo:adverseEffectCode "hypoglycaemia" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Hypoglycaemia" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "to avoid the risk of developing hypoglycaemia and hypokalaemia." ;
+    dmo:evidenceQuote "Describe the symptoms of hypoglycaemia and actions required should this happen, in terms of hypoglycaemia management" ;
+    dmo:evidenceQuote "Describe the symptoms of hypoglycaemia and actions required should this happen, in relation to the treatment of DKA" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/adverseEffect/hypokalaemia> a dmo:AdverseEffect ;
+    rdfs:label "Hypokalaemia" ;
+    dmo:adverseEffectCode "hypokalaemia" ;
+    dmo:frequencyCategory "Unknown" ;
+    dmo:name "Hypokalaemia" ;
+    dmo:severity "Unknown" ;
+    dmo:evidenceQuote "to avoid the risk of developing hypoglycaemia and hypokalaemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/complication/diabetic-ketoacidosis> a dmo:Complication ;
+    rdfs:label "Diabetic Ketoacidosis" ;
+    dmo:affectedOrgan "Systemic" ;
+    dmo:complicationCode "diabetic-ketoacidosis" ;
+    dmo:definition "The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Diabetic Ketoacidosis" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "The 'D' is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The 'K' is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The 'A' is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3" ;
+    dmo:evidenceQuote "The severity of the DKA presentation will also provide a valuable clue in terms of where the individual should be appropriately managed." ;
+    dmo:evidenceQuote "Nursing management for Diabetic Ketoacidosis (DKA) V1.0 12th December 2022" ;
+    dmo:evidenceQuote "The ‘D’ is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus The ‘K’ is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks) The ‘A’ is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/complication/hypoglycaemia> a dmo:Complication ;
+    rdfs:label "Hypoglycaemia" ;
+    dmo:affectedOrgan "Brain" ;
+    dmo:complicationCode "hypoglycaemia" ;
+    dmo:definition "Describe the symptoms of hypoglycaemia and actions required should this happen, in terms of hypoglycaemia management" ;
+    dmo:isEmergency "true"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Hypoglycaemia" ;
+    dmo:onsetPattern "Acute" ;
+    dmo:evidenceQuote "Describe the symptoms of hypoglycaemia and actions required should this happen, in terms of hypoglycaemia management" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/elderly-with-comorbidities> a dmo:Contraindication ;
+    rdfs:label "Elderly with Comorbidities" ;
+    dmo:contraCode "elderly-with-comorbidities" ;
+    dmo:rationale "In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure." ;
+    dmo:evidenceQuote "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure. In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/heart-failure> a dmo:Contraindication ;
+    rdfs:label "Heart Failure" ;
+    dmo:contraCode "heart-failure" ;
+    dmo:rationale "In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure." ;
+    dmo:evidenceQuote "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure. In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/inadequate-nursing-ratios> a dmo:Contraindication ;
+    rdfs:label "Inadequate Nursing Ratios" ;
+    dmo:contraCode "inadequate-nursing-ratios" ;
+    dmo:rationale "Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met. If this is not the case, patients with DKA will need Level 2 (High Dependency Unit) care." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met. If this is not the case, patients with DKA will need Level 2 (High Dependency Unit) care." ;
+    dmo:evidenceQuote "Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met. If this is not the case , patients with DKA will need Level 2 (High Dependency Unit) care." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/pregnant-with-comorbidities> a dmo:Contraindication ;
+    rdfs:label "Pregnant with Comorbidities" ;
+    dmo:contraCode "pregnant-with-comorbidities" ;
+    dmo:rationale "In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure." ;
+    dmo:evidenceQuote "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure. In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/renal-failure> a dmo:Contraindication ;
+    rdfs:label "Renal Failure" ;
+    dmo:contraCode "renal-failure" ;
+    dmo:rationale "In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure." ;
+    dmo:evidenceQuote "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure. In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/transition-from-friii-vriii-to-csii-at-bedtime> a dmo:Contraindication ;
+    rdfs:label "Transition from FRIII/VRIII to CSII at bedtime" ;
+    dmo:contraCode "transition-from-friii-vriii-to-csii-at-bedtime" ;
+    dmo:rationale "In case of set failure, transitioning at bedtime could lead to dangerous insulin deficiency during sleep" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "Transition from FRIII/VRIII to CSII is not recommended at bedtime in case of set failure" ;
+    dmo:evidenceQuote "Transition from FRIII/VRIII to CSII is not recommended at bedtime in case of set failure." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/contraindication/young-adult-with-comorbidities> a dmo:Contraindication ;
+    rdfs:label "Young Adult with Comorbidities" ;
+    dmo:contraCode "young-adult-with-comorbidities" ;
+    dmo:rationale "In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    dmo:severity "Relative" ;
+    dmo:triggerCriteria "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure." ;
+    dmo:evidenceQuote "Seek medical clarification if the individual is a young adult, elderly, pregnant or has other serious co-morbidities including heart and renal failure. In these situations, admission to a Level 2/HDU facility should be considered. Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/blood-gas-analyser> a dmo:Device ;
+    rdfs:label "blood gas analyser" ;
+    dmo:deviceCode "blood-gas-analyser" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "blood gas analyser" ;
+    dmo:evidenceQuote "If meter reads “over POCT QA range ie >27.8mmol/L\" or “Hi\", venous blood should be sent to the laboratory hourly or measured using venous blood in a blood gas analyser." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/capillary-or-blood-ketone-concentration> a dmo:Device ;
+    rdfs:label "capillary or blood ketone concentration" ;
+    dmo:deviceCode "capillary-or-blood-ketone-concentration" ;
+    dmo:deviceType "KetoneTestKit" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "capillary or blood ketone concentration" ;
+    dmo:evidenceQuote "a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/continuous-subcutaneous-insulin-infusion-pump> a dmo:Device ;
+    rdfs:label "Continuous Subcutaneous Insulin Infusion Pump" ;
+    dmo:deviceCode "continuous-subcutaneous-insulin-infusion-pump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Continuous Subcutaneous Insulin Infusion Pump" ;
+    dmo:evidenceQuote "If the patient presents with DKA and using a continuous subcutaneous insulin infusion pump (CSII) then refer to local policy on management." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/infusion-pump> a dmo:Device ;
+    rdfs:label "infusion pump" ;
+    dmo:deviceCode "infusion-pump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "infusion pump" ;
+    dmo:evidenceQuote "Start a continuous fixed rate intravenous insulin infusion (FRIII) via an infusion pump." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/infusion-pump-for-fluids> a dmo:Device ;
+    rdfs:label "Infusion pump for fluids" ;
+    dmo:deviceCode "infusion-pump-for-fluids" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Infusion pump for fluids" ;
+    dmo:evidenceQuote "•Infusion pump for fluids" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/infusion-pump-for-iv-insulin> a dmo:Device ;
+    rdfs:label "Infusion pump for IV insulin" ;
+    dmo:deviceCode "infusion-pump-for-iv-insulin" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Infusion pump for IV insulin" ;
+    dmo:evidenceQuote "•Infusion pump for IV insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/insulinpump> a dmo:Device ;
+    rdfs:label "InsulinPump" ;
+    dmo:deviceCode "insulinpump" ;
+    dmo:deviceType "InsulinPump" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "InsulinPump" ;
+    dmo:evidenceQuote "Ensure availability of insulin and other necessary supplies/consumables" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/point-of-care-glucose-and-ketone-testing-equipment> a dmo:Device ;
+    rdfs:label "Point of care glucose and ketone testing equipment" ;
+    dmo:deviceCode "point-of-care-glucose-and-ketone-testing-equipment" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Point of care glucose and ketone testing equipment" ;
+    dmo:evidenceQuote "•Point of care glucose and ketone testing equipment" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/standard-urine-sticks> a dmo:Device ;
+    rdfs:label "standard urine sticks" ;
+    dmo:deviceCode "standard-urine-sticks" ;
+    dmo:deviceType "KetoneTestKit" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "standard urine sticks" ;
+    dmo:evidenceQuote "a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/device/trust-approved-meter> a dmo:Device ;
+    rdfs:label "Trust approved meter" ;
+    dmo:deviceCode "trust-approved-meter" ;
+    dmo:deviceType "GlucoseMeter" ;
+    dmo:isRealTime "false"^^xsd:boolean ;
+    dmo:name "Trust approved meter" ;
+    dmo:evidenceQuote "Monitor Capillary Blood Glucose hourly using Trust approved meter." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/basal-insulin> a dmo:DrugClass ;
+    rdfs:label "Basal Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "basal-insulin" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Provides a continuous background level of insulin to control fasting blood glucose." ;
+    dmo:name "Basal Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    dmo:evidenceQuote "Ensure basal insulin prescribed subcutaneously alongside FRIII; If patient usually takes basal insulin, ensure this is prescribed and continued otherwise refer to local guideline for commencing basal insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/fixed-rate-intravenous-insulin-infusion> a dmo:DrugClass ;
+    rdfs:label "Fixed Rate Intravenous Insulin Infusion" ;
+    dmo:adminRoute "Intravenous" ;
+    dmo:drugClassCode "fixed-rate-intravenous-insulin-infusion" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Insulin is administered continuously via intravenous infusion to lower blood glucose and reduce ketone production in diabetic ketoacidosis." ;
+    dmo:name "Fixed Rate Intravenous Insulin Infusion" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Ensure FIXED rate intravenous insulin infusion (FRIII) prescribed and commenced" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/insulin> a dmo:DrugClass ;
+    rdfs:label "Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Promotes glucose uptake by cells and inhibits hepatic glucose production, thereby lowering blood glucose levels." ;
+    dmo:name "Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Insulin may be infused initially in the same line as the intravenous replacement fluid , provided that a Y connector with a one-way, anti-siphon valve is used." ;
+    dmo:evidenceQuote "Correctly identifies when the next glucose and ketone check is required for rate review" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/intermediate-human-insulin> a dmo:DrugClass ;
+    rdfs:label "Intermediate (human) Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "intermediate-human-insulin" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Provides intermediate duration of action for basal insulin coverage" ;
+    dmo:name "Intermediate (human) Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Onset   0mins Peak  2 8 hrs ura on  1  20hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/intravenous-insulin-infusion> a dmo:DrugClass ;
+    rdfs:label "Intravenous Insulin Infusion" ;
+    dmo:adminRoute "Intravenous" ;
+    dmo:drugClassCode "intravenous-insulin-infusion" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Insulin is administered intravenously to rapidly lower blood glucose levels in patients with diabetic ketoacidosis (DKA). It promotes glucose uptake by cells and inhibits hepatic glucose production." ;
+    dmo:name "Intravenous Insulin Infusion" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "The participant will be able to: Describe the clinical indications for the use of fixed rate vs variable rate intravenous insulin in DKA" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/long-acting-analogue-insulin> a dmo:DrugClass ;
+    rdfs:label "Long Acting (analogue) Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "long-acting-analogue-insulin" ;
+    dmo:hypoglycemiaRisk "Low" ;
+    dmo:mechanism "Sustained release to provide basal insulin coverage" ;
+    dmo:name "Long Acting (analogue) Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Onset  1 2 hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/rapid-acting-analogue-insulin> a dmo:DrugClass ;
+    rdfs:label "Rapid Acting (analogue) Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "rapid-acting-analogue-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Rapid onset of action to lower blood glucose levels" ;
+    dmo:name "Rapid Acting (analogue) Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/rapid-acting-insulin> a dmo:DrugClass ;
+    rdfs:label "Rapid Acting Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "rapid-acting-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Acts quickly to lower blood glucose after meals." ;
+    dmo:name "Rapid Acting Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/short-acting-soluble-human-insulin> a dmo:DrugClass ;
+    rdfs:label "Short Acting (Soluble/Human) Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "short-acting-soluble-human-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Rapid onset to control postprandial glucose levels" ;
+    dmo:name "Short Acting (Soluble/Human) Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/drugClass/twice-daily-fixed-mix-insulin> a dmo:DrugClass ;
+    rdfs:label "Twice Daily Fixed-Mix Insulin" ;
+    dmo:adminRoute "Subcutaneous" ;
+    dmo:drugClassCode "twice-daily-fixed-mix-insulin" ;
+    dmo:hypoglycemiaRisk "High" ;
+    dmo:mechanism "Combines a fixed ratio of rapid-acting and intermediate-acting insulin to cover both mealtime and background insulin needs." ;
+    dmo:name "Twice Daily Fixed-Mix Insulin" ;
+    dmo:weightEffect "Neutral" ;
+    dmo:evidenceQuote "If they were on twice daily fixed-mix insulin (e.g., Novomix 30®, Humalog Mix 50®, Humalin M3®)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/anion-gap> a dmo:LabTest ;
+    rdfs:label "Anion gap" ;
+    dmo:definition "Anion gap above 16 [Anion Gap = (Na+ + K+) – (Cl- + HCO3-)] may indicate severe DKA." ;
+    dmo:labTestCode "anion-gap" ;
+    dmo:name "Anion gap" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "• Anion gap above16 [Anion Gap = (Na+ + K+) – (Cl- + HCO3-)]" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/bicarbonate-concentration> a dmo:LabTest ;
+    rdfs:label "Bicarbonate Concentration" ;
+    dmo:definition "a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3" ;
+    dmo:labTestCode "bicarbonate-concentration" ;
+    dmo:name "Bicarbonate Concentration" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "The ‘A’ is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/bicarbonate-level> a dmo:LabTest ;
+    rdfs:label "Bicarbonate level" ;
+    dmo:definition "Bicarbonate level below 5.0mmol/L may indicate severe DKA." ;
+    dmo:labTestCode "bicarbonate-level" ;
+    dmo:name "Bicarbonate level" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "• Bicarbonate level below 5.0mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/blood-glucose-concentration> a dmo:LabTest ;
+    rdfs:label "Blood Glucose Concentration" ;
+    dmo:definition "A blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus" ;
+    dmo:labTestCode "blood-glucose-concentration" ;
+    dmo:name "Blood Glucose Concentration" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "The ‘D’ is for Diabetes- a blood glucose concentration of >11.0mmol/L or known to have diabetes mellitus" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/blood-glucose-level> a dmo:LabTest ;
+    rdfs:label "Blood glucose level" ;
+    dmo:definition "Blood glucose level checked in line with local policy and information used appropriately" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-glucose-level" ;
+    dmo:name "Blood glucose level" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Blood glucose level checked in line with local policy and information used appropriately" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/blood-ketone> a dmo:LabTest ;
+    rdfs:label "Blood Ketone" ;
+    dmo:definition "Monitoring of blood ketone levels is required to assess the resolution of diabetic ketoacidosis and guide insulin therapy adjustments." ;
+    dmo:labTestCode "blood-ketone" ;
+    dmo:name "Blood Ketone" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Check the blood ketone and glucose levels regularly." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/blood-ketone-concentration> a dmo:LabTest ;
+    rdfs:label "Blood Ketone Concentration" ;
+    dmo:definition "A measure of ketone levels in blood, used to assess ketonaemia in DKA." ;
+    dmo:labTestCode "blood-ketone-concentration" ;
+    dmo:name "Blood Ketone Concentration" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "If the blood ketone concentration does not reduce by 0.5mmol/L/hour" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/blood-ketone-level> a dmo:LabTest ;
+    rdfs:label "Blood ketone level" ;
+    dmo:definition "Blood ketone level checked in line with local policy and information used appropriately" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-ketone-level" ;
+    dmo:name "Blood ketone level" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Blood ketone level checked in line with local policy and information used appropriately" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/blood-ketones> a dmo:LabTest ;
+    rdfs:label "Blood ketones" ;
+    dmo:definition "Blood ketones over 6.0mmol/L may indicate severe DKA." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-ketones" ;
+    dmo:name "Blood ketones" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "• Blood ketones over 6.0mmol/L" ;
+    dmo:evidenceQuote "Monitor blood ketones hourly using Trust approved meter until <0.6 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/capillary-blood-glucose> a dmo:LabTest ;
+    rdfs:label "Capillary Blood Glucose" ;
+    dmo:definition "Capillary blood glucose is monitored hourly using Trust approved meter. If meter reads “over POCT QA range ie >27.8mmol/L\" or “Hi\", venous blood should be sent to the laboratory hourly or measured using venous blood in a blood gas analyser." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "capillary-blood-glucose" ;
+    dmo:name "Capillary Blood Glucose" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Monitor Capillary Blood Glucose hourly using Trust approved meter.  If meter reads “over POCT QA range ie >27.8mmol/L\" or “Hi\", venous blood should be sent to the laboratory hourly or measured using venous blood in a blood gas analyser." ;
+    dmo:evidenceQuote "If the capillary blood glucose remains > 14 mmol/L and does not reduce by 3.0mmol/L/hour" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/capillary-or-blood-ketone-concentration> a dmo:LabTest ;
+    rdfs:label "Capillary or Blood Ketone Concentration" ;
+    dmo:definition "a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    dmo:labTestCode "capillary-or-blood-ketone-concentration" ;
+    dmo:name "Capillary or Blood Ketone Concentration" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "The ‘K’  is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    dmo:evidenceQuote "The ‘K’ is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/gcs> a dmo:LabTest ;
+    rdfs:label "GCS" ;
+    dmo:definition "GCS less than 12 or abnormal AVPU scale may indicate severe DKA." ;
+    dmo:labTestCode "gcs" ;
+    dmo:name "GCS" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "• GCS less than 12 or abnormal AVPU scale" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/glucose> a dmo:LabTest ;
+    rdfs:label "Glucose" ;
+    dmo:definition "Monitoring of blood glucose levels is required to assess the resolution of diabetic ketoacidosis and guide insulin therapy adjustments." ;
+    dmo:labTestCode "glucose" ;
+    dmo:name "Glucose" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Check the blood ketone and glucose levels regularly." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/hourly-blood-glucose-monitoring> a dmo:LabTest ;
+    rdfs:label "Hourly Blood Glucose Monitoring" ;
+    dmo:definition "the value of hourly blood glucose and ketone monitoring and recording" ;
+    dmo:labTestCode "hourly-blood-glucose-monitoring" ;
+    dmo:name "Hourly Blood Glucose Monitoring" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Explain the value of hourly blood glucose and ketone monitoring and recording" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/hourly-ketone-monitoring> a dmo:LabTest ;
+    rdfs:label "Hourly Ketone Monitoring" ;
+    dmo:definition "the value of hourly blood glucose and ketone monitoring and recording" ;
+    dmo:labTestCode "hourly-ketone-monitoring" ;
+    dmo:name "Hourly Ketone Monitoring" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Explain the value of hourly blood glucose and ketone monitoring and recording" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/hypokalaemia-on-admission> a dmo:LabTest ;
+    rdfs:label "Hypokalaemia on admission" ;
+    dmo:definition "Hypokalaemia on admission (under 3.5mmol/L) may indicate severe DKA." ;
+    dmo:labTestCode "hypokalaemia-on-admission" ;
+    dmo:name "Hypokalaemia on admission" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "• Hypokalaemia on admission (under 3.5mmol/L)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/oxygen-saturation> a dmo:LabTest ;
+    rdfs:label "Oxygen saturation" ;
+    dmo:definition "Oxygen saturation below 92% on air (assuming normal baseline respiratory function) may indicate severe DKA." ;
+    dmo:labTestCode "oxygen-saturation" ;
+    dmo:name "Oxygen saturation" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "%" ;
+    dmo:evidenceQuote "• Oxygen saturation below 92% on air (assuming normal baseline respiratory f unction)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/potassium> a dmo:LabTest ;
+    rdfs:label "Potassium" ;
+    dmo:definition "A measure of serum potassium concentration, critical in monitoring electrolyte balance during DKA management." ;
+    dmo:labTestCode "potassium" ;
+    dmo:name "Potassium" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "If the potassium is not maintained between 4.0 and 5.5mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/pulse> a dmo:LabTest ;
+    rdfs:label "Pulse" ;
+    dmo:definition "Pulse over 100 or below 60 bpm may indicate severe DKA." ;
+    dmo:labTestCode "pulse" ;
+    dmo:name "Pulse" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "bpm" ;
+    dmo:evidenceQuote "• Pulse over 100 or below 60 bpm" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/serum-potassium> a dmo:LabTest ;
+    rdfs:label "Serum Potassium" ;
+    dmo:definition "Serum potassium is often high on admission (although total body potassium is low) but falls precipitously upon treatment with insulin. Regular monitoring is mandatory." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "serum-potassium" ;
+    dmo:name "Serum Potassium" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Serum potassium is often high on admission (although total body potassium is low) but falls precipitously upon treatment with insulin. Regular monitoring is mandatory." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/systolic-bp> a dmo:LabTest ;
+    rdfs:label "Systolic BP" ;
+    dmo:definition "Systolic BP below 90 mmHg may indicate severe DKA." ;
+    dmo:labTestCode "systolic-bp" ;
+    dmo:name "Systolic BP" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mmHg" ;
+    dmo:evidenceQuote "• Systolic BP below 90 mmHg" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/urine-ketone> a dmo:LabTest ;
+    rdfs:label "Urine Ketone" ;
+    dmo:definition "significant ketonuria (more than 2+ on standard urine sticks)" ;
+    dmo:labTestCode "urine-ketone" ;
+    dmo:name "Urine Ketone" ;
+    dmo:specimen "Urine" ;
+    dmo:evidenceQuote "The ‘K’  is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    dmo:evidenceQuote "The ‘K’ is for Ketonaemia or ketonuria - a capillary or blood ketone concentration of > 3.0mmol/L or significant ketonuria (more than 2+ on standard urine sticks)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/vbg-testing> a dmo:LabTest ;
+    rdfs:label "VBG Testing" ;
+    dmo:definition "the value of VBG testing in line with guidance" ;
+    dmo:labTestCode "vbg-testing" ;
+    dmo:name "VBG Testing" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "Explain the value of VBG testing in line with guidance" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/venous-bicarbonate> a dmo:LabTest ;
+    rdfs:label "Venous Bicarbonate" ;
+    dmo:definition "Assess the resolution of ketoacidosis: If blood ketone measurement is available and blood ketones are not falling by at least 0.5mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until the ketones are falling at target rates (also check infusion**)" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "venous-bicarbonate" ;
+    dmo:name "Venous Bicarbonate" ;
+    dmo:unitOfMeasure "mmol/L" ;
+    dmo:evidenceQuote "Assess the resolution of ketoacidosis: \n• If blood ketone measurement is available and blood ketones are not falling by at least 0.5mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until the ketones are falling at target rates (also check infusion**)" ;
+    dmo:evidenceQuote "If there is NOT an increase the venous bicarbonate by 3.0mmol/L/hour" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/labTest/venous-ph> a dmo:LabTest ;
+    rdfs:label "Venous pH" ;
+    dmo:definition "venous pH <7.3" ;
+    dmo:labTestCode "venous-ph" ;
+    dmo:name "Venous pH" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "The ‘A’ is for Acidaemia/acidosis– a bicarbonate concentration of ≤15.0mmol/L and/or venous pH <7.3" ;
+    dmo:evidenceQuote "• Venous/arterial pH below 7.0" ;
+    dmo:evidenceQuote "Resolution of DKA is defined as ketones less than 0.6mmol/L, and venous pH over 7.3" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/abasaglar> a dmo:Medication ;
+    rdfs:label "Abasaglar®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "abasaglar" ;
+    dmo:name "Abasaglar®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/abasaglar-biosimilar-glargine> a dmo:Medication ;
+    rdfs:label "Abasaglar (Biosimilar Glargine)" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "abasaglar-biosimilar-glargine" ;
+    dmo:name "Abasaglar (Biosimilar Glargine)" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  1 2 hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/actrapid> a dmo:Medication ;
+    rdfs:label "Actrapid" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "ShortActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "actrapid" ;
+    dmo:name "Actrapid" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/apidra> a dmo:Medication ;
+    rdfs:label "Apidra" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "apidra" ;
+    dmo:name "Apidra" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Ensure that the rapid-acting insulin (e.g., Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®) is prescribed appropriately." ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/basal-insulin> a dmo:Medication ;
+    rdfs:label "Basal Insulin" ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "basal-insulin" ;
+    dmo:name "Basal Insulin" ;
+    dmo:evidenceQuote "Ensure basal insulin prescribed subcutaneously alongside FRIII; If patient usually takes basal insulin, ensure this is prescribed and continued otherwise refer to local guideline for commencing basal insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/degludec> a dmo:Medication ;
+    rdfs:label "Degludec" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "degludec" ;
+    dmo:name "Degludec" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time." ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/fiasp> a dmo:Medication ;
+    rdfs:label "FiAsp" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "fiasp" ;
+    dmo:name "FiAsp" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Ensure that the rapid-acting insulin (e.g., Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®) is prescribed appropriately." ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/fixed-rate-intravenous-insulin-infusion> a dmo:Medication ;
+    rdfs:label "Fixed Rate Intravenous Insulin Infusion" ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "fixed-rate-intravenous-insulin-infusion" ;
+    dmo:name "Fixed Rate Intravenous Insulin Infusion" ;
+    dmo:evidenceQuote "Ensure FIXED rate intravenous insulin infusion (FRIII) prescribed and commenced" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalin-i> a dmo:Medication ;
+    rdfs:label "Humalin I®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalin-i" ;
+    dmo:name "Humalin I®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalin-s> a dmo:Medication ;
+    rdfs:label "Humalin S" ;
+    dmo:durationHours "12"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalin-s" ;
+    dmo:name "Humalin S" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalog> a dmo:Medication ;
+    rdfs:label "Humalog" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog" ;
+    dmo:name "Humalog" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Ensure that the rapid-acting insulin (e.g., Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®) is prescribed appropriately." ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalog-100-units-ml> a dmo:Medication ;
+    rdfs:label "HumALOG (100 units/ml)" ;
+    dmo:durationHours "2"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog-100-units-ml" ;
+    dmo:name "HumALOG (100 units/ml)" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalog-200-units-ml> a dmo:Medication ;
+    rdfs:label "HumALOG (200 units/ml)" ;
+    dmo:durationHours "2"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog-200-units-ml" ;
+    dmo:name "HumALOG (200 units/ml)" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalog-mix25> a dmo:Medication ;
+    rdfs:label "HumALOG Mix25" ;
+    dmo:durationHours "2.5"^^xsd:decimal ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog-mix25" ;
+    dmo:name "HumALOG Mix25" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humalog-mix50> a dmo:Medication ;
+    rdfs:label "HumALOG Mix50" ;
+    dmo:durationHours "2.5"^^xsd:decimal ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humalog-mix50" ;
+    dmo:name "HumALOG Mix50" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/human-soluble-insulin> a dmo:Medication ;
+    rdfs:label "Human Soluble Insulin" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "human-soluble-insulin" ;
+    dmo:name "Human Soluble Insulin" ;
+    dmo:onsetMinutes "15"^^xsd:integer ;
+    dmo:evidenceQuote "Start a continuous fixed rate intravenous insulin infusion (FRIII) via an infusion pump. This is made of 50 units of human soluble insulin (Actrapid®, Humulin S®) made up to 50ml with 0.9% sodium chloride solution." ;
+    dmo:evidenceQuote "This is made of 50 units of human soluble insulin (Actrapid®, Humulin S®) made up to 50ml with 0.9% sodium chloride solution." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humulin-i> a dmo:Medication ;
+    rdfs:label "Humulin I" ;
+    dmo:durationHours "12"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humulin-i" ;
+    dmo:name "Humulin I" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0mins Peak  2 8 hrs ura on  1  20hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humulin-m> a dmo:Medication ;
+    rdfs:label "Humulin M" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humulin-m" ;
+    dmo:name "Humulin M" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/humulin-s> a dmo:Medication ;
+    rdfs:label "Humulin S" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "ShortActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "humulin-s" ;
+    dmo:name "Humulin S" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/iasp> a dmo:Medication ;
+    rdfs:label "iAsp" ;
+    dmo:durationHours "2"^^xsd:integer ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "iasp" ;
+    dmo:name "iAsp" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1   hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulatard> a dmo:Medication ;
+    rdfs:label "Insulatard" ;
+    dmo:durationHours "12"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard" ;
+    dmo:name "Insulatard" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time." ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    dmo:evidenceQuote "Onset   0mins Peak  2 8 hrs ura on  1  20hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulatard-basal> a dmo:Medication ;
+    rdfs:label "Insulatard Basal" ;
+    dmo:durationHours "12"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard-basal" ;
+    dmo:name "Insulatard Basal" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0mins Peak  2 8 hrs ura on  1  20hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulatard-combi-15> a dmo:Medication ;
+    rdfs:label "Insulatard Combi 15" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard-combi-15" ;
+    dmo:name "Insulatard Combi 15" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulatard-combi-25> a dmo:Medication ;
+    rdfs:label "Insulatard Combi 25" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard-combi-25" ;
+    dmo:name "Insulatard Combi 25" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulatard-combi-50> a dmo:Medication ;
+    rdfs:label "Insulatard Combi 50" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard-combi-50" ;
+    dmo:name "Insulatard Combi 50" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulatard-rapid> a dmo:Medication ;
+    rdfs:label "Insulatard Rapid" ;
+    dmo:durationHours "8"^^xsd:integer ;
+    dmo:insulinAction "ShortActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulatard-rapid" ;
+    dmo:name "Insulatard Rapid" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "Onset   0 mins Peak  2   hrs ura on  up to 8 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insulin> a dmo:Medication ;
+    rdfs:label "Insulin" ;
+    dmo:insulinAction "NotApplicable" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insulin" ;
+    dmo:name "Insulin" ;
+    dmo:evidenceQuote "On the vial of insulin, check: • Insulin name • Insulin strength • Expiry date • Visual confirmation of the insulin product to ensure it has not been tampered with • Insulin was stored as recommended" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/insuman-basal> a dmo:Medication ;
+    rdfs:label "Insuman basal®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "Intermediate" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "insuman-basal" ;
+    dmo:name "Insuman basal®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "This will provide essential basal insulin until the usual basal can be recommenced. Check the blood ketone and glucose levels regularly." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/lantus> a dmo:Medication ;
+    rdfs:label "Lantus" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "lantus" ;
+    dmo:name "Lantus" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time." ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/lantus-glargine> a dmo:Medication ;
+    rdfs:label "Lantus (Glargine)" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "lantus-glargine" ;
+    dmo:name "Lantus (Glargine)" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  1 2 hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/levemir> a dmo:Medication ;
+    rdfs:label "Levemir" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "levemir" ;
+    dmo:name "Levemir" ;
+    dmo:onsetMinutes "30"^^xsd:integer ;
+    dmo:evidenceQuote "If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time." ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/levemir-detemir> a dmo:Medication ;
+    rdfs:label "Levemir (Detemir)" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "levemir-detemir" ;
+    dmo:name "Levemir (Detemir)" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  1 2 hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/novomix-30> a dmo:Medication ;
+    rdfs:label "NovoMix 30" ;
+    dmo:durationHours "2.5"^^xsd:decimal ;
+    dmo:insulinAction "Premixed" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "novomix-30" ;
+    dmo:name "NovoMix 30" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1  hrs ura on  2 5hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/novorapid> a dmo:Medication ;
+    rdfs:label "Novorapid" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "novorapid" ;
+    dmo:name "Novorapid" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Ensure that the rapid-acting insulin (e.g., Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®) is prescribed appropriately." ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    dmo:evidenceQuote "Onset  10 20mins Peak  1   hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/rapid-acting-mixed-insulin> a dmo:Medication ;
+    rdfs:label "Rapid Acting/Mixed Insulin" ;
+    dmo:insulinAction "RapidActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "rapid-acting-mixed-insulin" ;
+    dmo:name "Rapid Acting/Mixed Insulin" ;
+    dmo:evidenceQuote "Eating: There should be an overlap between the insulin infusion and first administration of rapid acting/ mixed insulin (preferably via the patients usual method i.e. injection or insulin pump)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/semglee> a dmo:Medication ;
+    rdfs:label "Semglee®" ;
+    dmo:durationHours "0"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "semglee" ;
+    dmo:name "Semglee®" ;
+    dmo:onsetMinutes "0"^^xsd:integer ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/toujeo-300-units-ml> a dmo:Medication ;
+    rdfs:label "Toujeo (300 units/ml)" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "toujeo-300-units-ml" ;
+    dmo:name "Toujeo (300 units/ml)" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  1 2 hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/tresiba-degludec> a dmo:Medication ;
+    rdfs:label "Tresiba (Degludec)" ;
+    dmo:durationHours "24"^^xsd:integer ;
+    dmo:insulinAction "LongActing" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "tresiba-degludec" ;
+    dmo:name "Tresiba (Degludec)" ;
+    dmo:onsetMinutes "120"^^xsd:integer ;
+    dmo:evidenceQuote "Onset  1 2 hrs ura on  up to 2 hrs" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/medication/trurapi> a dmo:Medication ;
+    rdfs:label "Trurapi" ;
+    dmo:durationHours "3"^^xsd:integer ;
+    dmo:insulinAction "UltraRapid" ;
+    dmo:isInsulin "true"^^xsd:boolean ;
+    dmo:medicationCode "trurapi" ;
+    dmo:name "Trurapi" ;
+    dmo:onsetMinutes "10"^^xsd:integer ;
+    dmo:evidenceQuote "Ensure that the rapid-acting insulin (e.g., Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®) is prescribed appropriately." ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/blood-ketone-and-glucose-levels> a dmo:MonitoringSchedule ;
+    rdfs:label "Blood Ketone and Glucose Levels" ;
+    dmo:appliesTo "During insulin infusion and transition to subcutaneous insulin" ;
+    dmo:frequencyMonths "1"^^xsd:integer ;
+    dmo:name "Blood Ketone and Glucose Levels" ;
+    dmo:scheduleId "blood-ketone-and-glucose-levels" ;
+    dmo:evidenceQuote "Check the blood ketone and glucose levels regularly." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/blood-ketones> a dmo:MonitoringSchedule ;
+    rdfs:label "Blood Ketones" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "Blood Ketones" ;
+    dmo:scheduleId "blood-ketones" ;
+    dmo:triggerWindow "hourly" ;
+    dmo:evidenceQuote "Monitor blood ketones hourly using Trust approved meter until <0.6 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/capillary-blood-glucose> a dmo:MonitoringSchedule ;
+    rdfs:label "Capillary Blood Glucose" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "Capillary Blood Glucose" ;
+    dmo:scheduleId "capillary-blood-glucose" ;
+    dmo:triggerWindow "hourly" ;
+    dmo:evidenceQuote "Monitor Capillary Blood Glucose hourly using Trust approved meter." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/hourly-blood-glucose-monitoring> a dmo:MonitoringSchedule ;
+    rdfs:label "Hourly Blood Glucose Monitoring" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "Hourly Blood Glucose Monitoring" ;
+    dmo:scheduleId "hourly-blood-glucose-monitoring" ;
+    dmo:evidenceQuote "Explain the value of hourly blood glucose and ketone monitoring and recording" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/hourly-ketone-monitoring> a dmo:MonitoringSchedule ;
+    rdfs:label "Hourly Ketone Monitoring" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "Hourly Ketone Monitoring" ;
+    dmo:scheduleId "hourly-ketone-monitoring" ;
+    dmo:evidenceQuote "Explain the value of hourly blood glucose and ketone monitoring and recording" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/hourly-point-of-care-glucose-and-ketone-testing> a dmo:MonitoringSchedule ;
+    rdfs:label "Hourly point of care glucose and ketone testing" ;
+    dmo:appliesTo "During management of Diabetic Ketoacidosis (DKA)" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "Hourly point of care glucose and ketone testing" ;
+    dmo:scheduleId "hourly-point-of-care-glucose-and-ketone-testing" ;
+    dmo:triggerWindow "Hourly" ;
+    dmo:evidenceQuote "•Hourly point of care glucose (Lab if ‘HI’) and ketone testing" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/vbg-for-ph-bicarbonate-and-potassium-at-60-minutes-2-hours-and-2-hourly-thereafter> a dmo:MonitoringSchedule ;
+    rdfs:label "VBG for pH, bicarbonate and potassium at 60 minutes; 2 hours and 2 hourly thereafter" ;
+    dmo:appliesTo "During management of Diabetic Ketoacidosis (DKA)" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "VBG for pH, bicarbonate and potassium at 60 minutes; 2 hours and 2 hourly thereafter" ;
+    dmo:scheduleId "vbg-for-ph-bicarbonate-and-potassium-at-60-minutes-2-hours-and-2-hourly-thereafter" ;
+    dmo:triggerWindow "60 minutes; 2 hours and 2 hourly thereafter" ;
+    dmo:evidenceQuote "•VBG for pH, bicarbonate and potassium at 60 minutes; 2 hours and 2 hourly thereafter" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/monitoringSchedule/vbg-testing> a dmo:MonitoringSchedule ;
+    rdfs:label "VBG Testing" ;
+    dmo:frequencyMonths "0"^^xsd:integer ;
+    dmo:name "VBG Testing" ;
+    dmo:scheduleId "vbg-testing" ;
+    dmo:evidenceQuote "Explain the value of VBG testing in line with guidance" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/add-10-dextrose-infusion> a dmo:Recommendation ;
+    rdfs:label "Add 10% Dextrose Infusion" ;
+    dmo:recommendationId "add-10-dextrose-infusion" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Once CBG improves to <14 mmol/L, 10% dextrose infusion should be added to act as the substrate for the insulin, to prevent hypoglycaemia." ;
+    dmo:evidenceQuote "Once CBG improves to <14 mmol/L, 10% dextrose infusion should be added to act as the substrate for the insulin, to prevent hypoglycaemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/administer-basal-insulin-alongside-friii> a dmo:Recommendation ;
+    rdfs:label "Administer Basal Insulin Alongside FRIII" ;
+    dmo:recommendationId "administer-basal-insulin-alongside-friii" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Basal insulin should always be administered alongside the FRIII. If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time. If the patient is not normally on basal insulin (i.e., new diagnosis or usually takes mixed insulin), please refer to medical team and local guideline to commence it alongside the FRIII as soon as possible." ;
+    dmo:evidenceQuote "Basal insulin should always be administered alongside the FRIII. If the individual normally takes basal insulin (e.g. Lantus®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin S®) continue this at the usual dose and usual time. If the patient is not normally on basal insulin (i.e., new diagnosis or usually takes mixed insulin), please refer to medical team and local guideline to commence it alongside the FRIII as soon as possible." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/administer-fluids-in-stages-for-dka> a dmo:Recommendation ;
+    rdfs:label "Administer Fluids in Stages for DKA" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "administer-fluids-in-stages-for-dka" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The table below outlines a typical fluid replacement regimen." ;
+    dmo:evidenceQuote "Fluid Volume 0.9% sodium chloride 1L * 1000ml over 1st hour 0.9% sodium chloride 1L with potassium chloride 1000ml over next 2 hours 0.9% sodium chloride 1L with potassium chloride 1000ml over next 2 hours 0.9% sodium chloride 1L with potassium chloride 1000ml over next 4 hours 0.9% sodium chloride 1L with potassium chloride 1000ml over next 4 hours 0.9% sodium chloride 1L with potassium chloride 1000ml over next 6 hours" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/arrangement-of-follow-up-post-discharge> a dmo:Recommendation ;
+    rdfs:label "Arrangement of Follow-Up Post Discharge" ;
+    dmo:recommendationId "arrangement-of-follow-up-post-discharge" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ensure follow up arranged with the diabetes team or usual diabetes care provider post discharge" ;
+    dmo:evidenceQuote "Ensure follow up arranged with the diabetes team or usual diabetes care provider post discharge" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/assess-for-severe-dka-indicators> a dmo:Recommendation ;
+    rdfs:label "Assess for Severe DKA Indicators" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "assess-for-severe-dka-indicators" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "The presence of one or more of the following may indicate severe DKA." ;
+    dmo:evidenceQuote "The presence of one or more of the following may indicate severe DKA." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/avoid-stopping-insulin-infusion-before-basal-insulin-is-reinstated> a dmo:Recommendation ;
+    rdfs:label "Avoid Stopping Insulin Infusion Before Basal Insulin is Reinstated" ;
+    dmo:recommendationId "avoid-stopping-insulin-infusion-before-basal-insulin-is-reinstated" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If the basal insulin had been stopped in error, the insulin infusion should not be stopped until some form of basal insulin has been given" ;
+    dmo:evidenceQuote "If the basal insulin had been stopped in error, the insulin infusion should not be stopped until some form of basal insulin has been given" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/call-for-help-if-blood-ketone-does-not-reduce-by-0-5-mmol-l-hour> a dmo:Recommendation ;
+    rdfs:label "Call for Help if Blood Ketone Does Not Reduce by 0.5 mmol/L/hour" ;
+    dmo:recommendationId "call-for-help-if-blood-ketone-does-not-reduce-by-0-5-mmol-l-hour" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "If the blood ketone concentration does not reduce by 0.5mmol/L/hour" ;
+    dmo:evidenceQuote "If the blood ketone concentration does not reduce by 0.5mmol/L/hour" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/call-for-help-if-capillary-blood-glucose-remains-14-mmol-l-and-does-not-reduce-by-3-0-mmol-l-hour> a dmo:Recommendation ;
+    rdfs:label "Call for Help if Capillary Blood Glucose Remains > 14 mmol/L and Does Not Reduce by 3.0 mmol/L/hour" ;
+    dmo:recommendationId "call-for-help-if-capillary-blood-glucose-remains-14-mmol-l-and-does-not-reduce-by-3-0-mmol-l-hour" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "If the capillary blood glucose remains > 14 mmol/L and does not reduce by 3.0mmol/L/hour" ;
+    dmo:evidenceQuote "If the capillary blood glucose remains > 14 mmol/L and does not reduce by 3.0mmol/L/hour" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/call-for-help-if-change-in-cognition-or-fluid-balance-concerns> a dmo:Recommendation ;
+    rdfs:label "Call for Help if Change in Cognition or Fluid Balance Concerns" ;
+    dmo:recommendationId "call-for-help-if-change-in-cognition-or-fluid-balance-concerns" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Change in cognition or concerns in relation to fluid balance" ;
+    dmo:evidenceQuote "Change in cognition or concerns in relation to fluid balance" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/call-for-help-if-potassium-not-maintained-between-4-0-and-5-5-mmol-l> a dmo:Recommendation ;
+    rdfs:label "Call for Help if Potassium Not Maintained Between 4.0 and 5.5 mmol/L" ;
+    dmo:recommendationId "call-for-help-if-potassium-not-maintained-between-4-0-and-5-5-mmol-l" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "If the potassium is not maintained between 4.0 and 5.5mmol/L" ;
+    dmo:evidenceQuote "If the potassium is not maintained between 4.0 and 5.5mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/call-for-help-if-venous-bicarbonate-does-not-increase-by-3-0-mmol-l-hour> a dmo:Recommendation ;
+    rdfs:label "Call for Help if Venous Bicarbonate Does Not Increase by 3.0 mmol/L/hour" ;
+    dmo:recommendationId "call-for-help-if-venous-bicarbonate-does-not-increase-by-3-0-mmol-l-hour" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "If there is NOT an increase the venous bicarbonate by 3.0mmol/L/hour" ;
+    dmo:evidenceQuote "If there is NOT an increase the venous bicarbonate by 3.0mmol/L/hour" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/check-insulin-infusion-pump-function> a dmo:Recommendation ;
+    rdfs:label "Check Insulin Infusion Pump Function" ;
+    dmo:recommendationId "check-insulin-infusion-pump-function" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "** If ketones and glucose are not falling as expected always check the insulin infusion pump is working and connected and that the correct insulin residual volume is present (to check for pump malfunction)" ;
+    dmo:evidenceQuote "** If ketones and glucose are not falling as expected always check the insulin infusion pump is working and connected and that the correct insulin residual volume is present (to check for pump malfunction)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/check-insulin-infusion-pump-function-if-ketones-and-glucose-not-falling> a dmo:Recommendation ;
+    rdfs:label "Check Insulin Infusion Pump Function if Ketones and Glucose Not Falling" ;
+    dmo:recommendationId "check-insulin-infusion-pump-function-if-ketones-and-glucose-not-falling" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If ketones and glucose are not falling as expected always check the insulin infusion pump is working and connected and that the correct insulin residual volume is present (to check for pump malfunction)" ;
+    dmo:evidenceQuote "If ketones and glucose are not falling as expected always check the insulin infusion pump is working and connected and that the correct insulin residual volume is present (to check for pump malfunction)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/consider-alternative-causes-for-deterioration-in-dka> a dmo:Recommendation ;
+    rdfs:label "Consider Alternative Causes for Deterioration in DKA" ;
+    dmo:populationScope "Individuals with DKA exhibiting deterioration" ;
+    dmo:recommendationId "consider-alternative-causes-for-deterioration-in-dka" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "It may also be necessary to consider other causes for the deterioration, including surgical." ;
+    dmo:evidenceQuote "It may also be necessary to consider other causes for the deterioration, including surgical." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/consider-level-2-hdu-admission-for-high-risk-dka-patients> a dmo:Recommendation ;
+    rdfs:label "Consider Level 2/HDU Admission for High-Risk DKA Patients" ;
+    dmo:populationScope "Young adults, elderly, pregnant individuals, or those with heart and renal failure" ;
+    dmo:recommendationId "consider-level-2-hdu-admission-for-high-risk-dka-patients" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "In these situations, admission to a Level 2/HDU facility should be considered." ;
+    dmo:evidenceQuote "In these situations, admission to a Level 2/HDU facility should be considered." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/continuation-of-basal-insulin-after-dka-resolution> a dmo:Recommendation ;
+    rdfs:label "Continuation of Basal Insulin After DKA Resolution" ;
+    dmo:recommendationId "continuation-of-basal-insulin-after-dka-resolution" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If the person was previously on a basal insulin this should have been continued" ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin this should have been continued" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/continuation-of-basal-insulin-during-friii> a dmo:Recommendation ;
+    rdfs:label "Continuation of Basal Insulin During FRIII" ;
+    dmo:recommendationId "continuation-of-basal-insulin-during-friii" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Ensure basal insulin prescribed subcutaneously alongside FRIII; If patient usually takes basal insulin, ensure this is prescribed and continued otherwise refer to local guideline for commencing basal insulin" ;
+    dmo:evidenceQuote "Ensure basal insulin prescribed subcutaneously alongside FRIII; If patient usually takes basal insulin, ensure this is prescribed and continued otherwise refer to local guideline for commencing basal insulin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/diagnosis-of-diabetic-ketoacidosis-dka> a dmo:Recommendation ;
+    rdfs:label "Diagnosis of Diabetic Ketoacidosis (DKA)" ;
+    dmo:recommendationId "diagnosis-of-diabetic-ketoacidosis-dka" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Ensure that the criteria for DKA are satisfied. This is to safeguard the use of the Fixed Rate Intravenous Insulin infusion (FRIII) only for patients who clinically require it. Using this protocol in patients without DKA could lead to unnecessary complications including increased risk of fluid overload, hypokalaemia, and hypoglycaemia. Conversely, managing DKA using inappropriate protocol could lead to delay in its resolution and may result to harm." ;
+    dmo:evidenceQuote "Ensure that the criteria for DKA are satisfied. This is to safeguard the use of the Fixed Rate Intravenous Insulin infusion (FRIII) only for patients who clinically require it. Using this protocol in patients without DKA could lead to unnecessary complications including increased risk of fluid overload, hypokalaemia, and hypoglycaemia. Conversely, managing DKA using inappropriate protocol could lead to delay in its resolutio n and may result to harm." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/discuss-management-plan-with-medical-and-nursing-teams> a dmo:Recommendation ;
+    rdfs:label "Discuss Management Plan with Medical and Nursing Teams" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "discuss-management-plan-with-medical-and-nursing-teams" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Ensure that the management plan is discussed by the medical team with the nursing staff in charge of the individual with DKA and agreed." ;
+    dmo:evidenceQuote "Ensure that the management plan is discussed by the medical team with the nursing staff in charge of the individual with DKA and agreed." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/education-provision-prior-to-discharge> a dmo:Recommendation ;
+    rdfs:label "Education Provision Prior to Discharge" ;
+    dmo:recommendationId "education-provision-prior-to-discharge" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Ensure education provided as required by the appropriate teams (such as DSN/dietitians) prior to discharge" ;
+    dmo:evidenceQuote "Ensure education provided as required by the appropriate teams (such as DSN/dietitians) prior to discharge" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/guide-fluid-replacement-by-central-venous-pressure-in-high-risk-cases> a dmo:Recommendation ;
+    rdfs:label "Guide Fluid Replacement by Central Venous Pressure in High-Risk Cases" ;
+    dmo:populationScope "Individuals with DKA and high-risk comorbidities" ;
+    dmo:recommendationId "guide-fluid-replacement-by-central-venous-pressure-in-high-risk-cases" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    dmo:evidenceQuote "Fluids should be replaced cautiously, and if appropriate, guided by the central venous pressure measurements." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/hourly-point-of-care-glucose-and-ketone-testing> a dmo:Recommendation ;
+    rdfs:label "Hourly Point of Care Glucose and Ketone Testing" ;
+    dmo:recommendationId "hourly-point-of-care-glucose-and-ketone-testing" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Hourly point of care glucose (Lab if ‘HI’) and ketone testing" ;
+    dmo:evidenceQuote "Hourly point of care glucose (Lab if ‘HI’) and ketone testing" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/increase-insulin-infusion-rate-if-bicarbonate-not-rising> a dmo:Recommendation ;
+    rdfs:label "Increase Insulin Infusion Rate if Bicarbonate Not Rising" ;
+    dmo:recommendationId "increase-insulin-infusion-rate-if-bicarbonate-not-rising" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If blood ketone measurement is not available, use venous bicarbonate. If the bicarbonate is not rising by at least 3.0mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1 unit/hr increments hourly until the bicarbonate is rising at this rate**" ;
+    dmo:evidenceQuote "If blood ketone measurement is not available, use venous bicarbonate. If the bicarbonate is not rising by at least 3.0mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1 unit/hr increments hourly until the bicarbonate is rising at this rate**" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/increase-insulin-infusion-rate-if-glucose-not-falling> a dmo:Recommendation ;
+    rdfs:label "Increase Insulin Infusion Rate if Glucose Not Falling" ;
+    dmo:recommendationId "increase-insulin-infusion-rate-if-glucose-not-falling" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Alternatively use plasma glucose. If the glucose is not falling by at least 3.0mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until glucose falls at this rate. Glucose level is not an accurate indicator of resolution of acidosis, so the acidosis resolution should be verified by venous gas analysis**" ;
+    dmo:evidenceQuote "Alternatively use plasma glucose. If the glucose is not falling by at least 3.0mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until glucose falls at this rate. Glucose level is not an accurate indicator of resolution of acidosis, so the acidosis resolution should be verified by venous gas analysis**" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/increase-insulin-infusion-rate-if-ketones-not-falling> a dmo:Recommendation ;
+    rdfs:label "Increase Insulin Infusion Rate if Ketones Not Falling" ;
+    dmo:recommendationId "increase-insulin-infusion-rate-if-ketones-not-falling" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If blood ketone measurement is available and blood ketones are not falling by at least 0.5mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until the ketones are falling at target rates (also check infusion**)" ;
+    dmo:evidenceQuote "If blood ketone measurement is available and blood ketones are not falling by at least 0.5mmol/L/hr call a prescribing clinician to increase the insulin infusion rate by 1.0 unit/hr increments hourly until the ketones are falling at target rates (also check infusion**)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/insulin-infusion-rate-at-0-05-unit-kg-hr> a dmo:Recommendation ;
+    rdfs:label "Insulin Infusion Rate at 0.05 unit/kg/hr" ;
+    dmo:recommendationId "insulin-infusion-rate-at-0-05-unit-kg-hr" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Once the glucose drops to <14mmol/L, in addition to adding a 10% dextrose infusion, the medical team may consider reducing the rate of intravenous insulin infusion to 0.05units/kg/hr to avoid the risk of developing hypoglycaemia and hypokalaemia." ;
+    dmo:evidenceQuote "Once the glucose drops to <14mmol/L, in addition to adding a 10% dextrose infusion, the medical team may consider reducing the rate of intravenous insulin infusion to 0.05units/kg/hr to avoid the risk of developing hypoglycaemia and hypokalaemia." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/insulin-infusion-rate-at-0-1-unit-kg-hr> a dmo:Recommendation ;
+    rdfs:label "Insulin Infusion Rate at 0.1 unit/kg/hr" ;
+    dmo:recommendationId "insulin-infusion-rate-at-0-1-unit-kg-hr" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The rate of infusion is calculated using 0.1 unit/kg/hr." ;
+    dmo:evidenceQuote "The rate of infusion is calculated using 0.1 unit/kg/hr." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/manage-csii-in-dka-patients> a dmo:Recommendation ;
+    rdfs:label "Manage CSII in DKA Patients" ;
+    dmo:populationScope "Patients with DKA using CSII" ;
+    dmo:recommendationId "manage-csii-in-dka-patients" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If the patient presents with DKA and using a continuous subcutaneous insulin infusion pump (CSII) then refer to local policy on management." ;
+    dmo:evidenceQuote "If the patient presents with DKA and using a continuous subcutaneous insulin infusion pump (CSII) then refer to local policy on management." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/management-of-diabetic-ketoacidosis-on-ward> a dmo:Recommendation ;
+    rdfs:label "Management of Diabetic Ketoacidosis on Ward" ;
+    dmo:populationScope "Patients with DKA" ;
+    dmo:recommendationId "management-of-diabetic-ketoacidosis-on-ward" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met." ;
+    dmo:evidenceQuote "Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/management-of-dka-in-ward-setting> a dmo:Recommendation ;
+    rdfs:label "Management of DKA in Ward Setting" ;
+    dmo:recommendationId "management-of-dka-in-ward-setting" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Some individuals can be safely managed in the ward, but others may need Level 2 (High Dependency Unit) care. Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met. If this is not the case, patients with DKA will need Level 2 (High Dependency Unit) care." ;
+    dmo:evidenceQuote "Some individuals can be safely managed in the ward, but others may need Level 2 (High Dependency Unit) care. Patients with DKA should only be managed on the ward if safe nursing to patient ratios are in place to ensure the timely requirements of DKA treatment are met. If this is not the case , patients with DKA will need Level 2 (High Dependency Unit) care." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/monitor-blood-ketones-hourly> a dmo:Recommendation ;
+    rdfs:label "Monitor Blood Ketones Hourly" ;
+    dmo:recommendationId "monitor-blood-ketones-hourly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Monitor blood ketones hourly using Trust approved meter until <0.6 mmol/L" ;
+    dmo:evidenceQuote "Monitor blood ketones hourly using Trust approved meter until <0.6 mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/monitor-capillary-blood-glucose-hourly> a dmo:Recommendation ;
+    rdfs:label "Monitor Capillary Blood Glucose Hourly" ;
+    dmo:recommendationId "monitor-capillary-blood-glucose-hourly" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Monitor Capillary Blood Glucose hourly using Trust approved meter. If meter reads “over POCT QA range ie >27.8mmol/L\" or “Hi\", venous blood should be sent to the laboratory hourly or measured using venous blood in a blood gas analyser." ;
+    dmo:evidenceQuote "Monitor Capillary Blood Glucose hourly using Trust approved meter. If meter reads “over POCT QA range ie >27.8mmol/L\" or “Hi\", venous blood should be sent to the laboratory hourly or measured using venous blood in a blood gas analyser." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/overlap-between-insulin-infusion-and-first-rapid-acting-mixed-insulin> a dmo:Recommendation ;
+    rdfs:label "Overlap Between Insulin Infusion and First Rapid-Acting/Mixed Insulin" ;
+    dmo:recommendationId "overlap-between-insulin-infusion-and-first-rapid-acting-mixed-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Eating: There should be an overlap between the insulin infusion and first administration of rapid acting/ mixed insulin (preferably via the patients usual method i.e. injection or insulin pump)" ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first administration of rapid acting/ mixed insulin (preferably via the patients usual method i.e. injection or insulin pump)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/overlap-between-insulin-infusion-and-rapid-acting-insulin> a dmo:Recommendation ;
+    rdfs:label "Overlap Between Insulin Infusion and Rapid Acting Insulin" ;
+    dmo:populationScope "Patients transitioning from IV insulin infusion to subcutaneous rapid acting insulin" ;
+    dmo:recommendationId "overlap-between-insulin-infusion-and-rapid-acting-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    dmo:evidenceQuote "There should be an overlap between the insulin infusion and first injection of rapid acting insulin (e.g. Novorapid®, Trurapi®, Humalog®, Apidra®, FiAsp®). The rapid acting insulin should be injected with the meal and the intravenous insulin and fluids discontinued 30 to 60 minutes later" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/potassium-replacement-based-on-serum-level> a dmo:Recommendation ;
+    rdfs:label "Potassium Replacement Based on Serum Level" ;
+    dmo:recommendationId "potassium-replacement-based-on-serum-level" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Potassium level in first 24 hours (mmol/L) Potassium replacement in mmol/L of infusion solution Over 5.5 Nil 3.5-5.5 40 Below 3.5 Senior review as additional potassium needs to be given" ;
+    dmo:evidenceQuote "Potassium level in first 24 hours (mmol/L) Potassium replacement in mmol/L of infusion solution Over 5.5 Nil 3.5-5.5 40 Below 3.5 Senior review as additional potassium needs to be given" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/prepare-insulin-infusion-with-human-soluble-insulin-in-0-9-sodium-chloride> a dmo:Recommendation ;
+    rdfs:label "Prepare Insulin Infusion with Human Soluble Insulin in 0.9% Sodium Chloride" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "prepare-insulin-infusion-with-human-soluble-insulin-in-0-9-sodium-chloride" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "This is made of 50 units of human soluble insulin (Actrapid®, Humulin S®) made up to 50ml with 0.9% sodium chloride solution." ;
+    dmo:evidenceQuote "This is made of 50 units of human soluble insulin (Actrapid®, Humulin S®) made up to 50ml with 0.9% sodium chloride solution." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/prescribe-and-date-intravenous-insulin-and-fluid-management-protocols> a dmo:Recommendation ;
+    rdfs:label "Prescribe and Date Intravenous Insulin and Fluid Management Protocols" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "prescribe-and-date-intravenous-insulin-and-fluid-management-protocols" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Ensure that the intravenous insulin regimen, rate of insulin infusion, fluid management protocol is all prescribed and dated, and appropriate care plan is used." ;
+    dmo:evidenceQuote "Ensure that the intravenous insulin regimen, rate of insulin infusion, fluid management protocol is all prescribed and dated, and appropriate care plan is used." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/provision-of-required-consumables-before-discharge> a dmo:Recommendation ;
+    rdfs:label "Provision of Required Consumables Before Discharge" ;
+    dmo:recommendationId "provision-of-required-consumables-before-discharge" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Ensure they have required consumables including new insulin pens, cartridges or vials (if on CSII), BG and ketone meter with strips, needles)" ;
+    dmo:evidenceQuote "Ensure they have required consumables including new insulin pens, cartridges or vials (if on CSII), BG and ketone meter with strips, needles)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/psychological-wellbeing-assessment> a dmo:Recommendation ;
+    rdfs:label "Psychological Wellbeing Assessment" ;
+    dmo:recommendationId "psychological-wellbeing-assessment" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Psychological wellbeing if appropriate" ;
+    dmo:evidenceQuote "Psychological wellbeing if appropriate" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/referral-to-diabetes-inpatient-specialist-nurse-if-insulin-pump-user> a dmo:Recommendation ;
+    rdfs:label "Referral to Diabetes Inpatient Specialist Nurse if Insulin Pump User" ;
+    dmo:recommendationId "referral-to-diabetes-inpatient-specialist-nurse-if-insulin-pump-user" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If the patient used an insulin pump always refer to the diabetes inpatient specialist nurse" ;
+    dmo:evidenceQuote "If the patient used an insulin pump always refer to the diabetes inpatient specialist nurse" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/referral-to-diabetes-inpatient-specialist-nurses> a dmo:Recommendation ;
+    rdfs:label "Referral to Diabetes Inpatient Specialist Nurses" ;
+    dmo:recommendationId "referral-to-diabetes-inpatient-specialist-nurses" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Referral to diabetes inpatient specialist nurses in accordance with local pathway" ;
+    dmo:evidenceQuote "Referral to diabetes inpatient specialist nurses in accordance with local pathway" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/reintroducing-subcutaneous-insulin-after-fixed-mix-insulin> a dmo:Recommendation ;
+    rdfs:label "Reintroducing Subcutaneous Insulin After Fixed-Mix Insulin" ;
+    dmo:populationScope "Patients previously on twice daily fixed-mix insulin (e.g., Novomix 30®, Humalog Mix 50®, Humalin M3®)" ;
+    dmo:recommendationId "reintroducing-subcutaneous-insulin-after-fixed-mix-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Re-introduce the subcutaneous insulin before breakfast or before the evening meal. Do not change at any other time. Maintain the insulin infusion for 30 to 60 minutes after the subcutaneous insulin was given" ;
+    dmo:evidenceQuote "Re-introduce the subcutaneous insulin before breakfast or before the evening meal. Do not change at any other time. Maintain the insulin infusion for 30 to 60 minutes after the subcutaneous insulin was given" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/remove-csii-and-replace-with-subcutaneous-basal-insulin-if-no-local-policy> a dmo:Recommendation ;
+    rdfs:label "Remove CSII and Replace with Subcutaneous Basal Insulin if No Local Policy" ;
+    dmo:populationScope "Patients with DKA using CSII and no local policy" ;
+    dmo:recommendationId "remove-csii-and-replace-with-subcutaneous-basal-insulin-if-no-local-policy" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If no local policy exists, escalate to the Drs, explain to the individual patient that their CSII needs to be removed and stored safely and replaced with subcutaneous basal insulin which the Drs should prescribe in line with local policy." ;
+    dmo:evidenceQuote "If no local policy exists, escalate to the Drs, explain to the individual patient that their CSII needs to be removed and stored safely and replaced with subcutaneous basal insulin which the Drs should prescribe in line with local policy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/resolution-of-dka-defined-by-ketones-and-ph> a dmo:Recommendation ;
+    rdfs:label "Resolution of DKA Defined by Ketones and pH" ;
+    dmo:recommendationId "resolution-of-dka-defined-by-ketones-and-ph" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Resolution of DKA is defined as ketones less than 0.6mmol/L, and venous pH over 7.3" ;
+    dmo:evidenceQuote "Resolution of DKA is defined as ketones less than 0.6mmol/L, and venous pH over 7.3" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/restarting-short-acting-insulin-after-basal-insulin> a dmo:Recommendation ;
+    rdfs:label "Restarting Short Acting Insulin After Basal Insulin" ;
+    dmo:populationScope "Patients previously on once or twice daily basal insulin" ;
+    dmo:recommendationId "restarting-short-acting-insulin-after-basal-insulin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued and thus the only action should be to restart their normal short acting insulin at the next meal" ;
+    dmo:evidenceQuote "If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued and thus the only action should be to restart their normal short acting insulin at the next meal" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/review-by-consultant-physician-for-severe-dka-signs> a dmo:Recommendation ;
+    rdfs:label "Review by Consultant Physician for Severe DKA Signs" ;
+    dmo:populationScope "Individuals with DKA exhibiting severe signs" ;
+    dmo:recommendationId "review-by-consultant-physician-for-severe-dka-signs" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If the individual exhibits any of these signs they should be reviewed by a consultant physician and considered for referral to a Level 2/HDU (High Dependency Unit) environment." ;
+    dmo:evidenceQuote "If the individual exhibits any of these signs they should be reviewed by a consultant physician and considered for referral to a Level 2/HDU (High Dependency Unit) environment." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/start-continuous-fixed-rate-intravenous-insulin-infusion-friii> a dmo:Recommendation ;
+    rdfs:label "Start Continuous Fixed Rate Intravenous Insulin Infusion (FRIII)" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "start-continuous-fixed-rate-intravenous-insulin-infusion-friii" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Start a continuous fixed rate intravenous insulin infusion (FRIII) via an infusion pump." ;
+    dmo:evidenceQuote "Start a continuous fixed rate intravenous insulin infusion (FRIII) via an infusion pump." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/stop-intravenous-insulin-infusion-when-eating-and-drinking-reliably> a dmo:Recommendation ;
+    rdfs:label "Stop Intravenous Insulin Infusion When Eating and Drinking Reliably" ;
+    dmo:recommendationId "stop-intravenous-insulin-infusion-when-eating-and-drinking-reliably" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Stopping intravenous insulin infusion: eating and drinking reliably If they were on basal bolus insulin • If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued and thus the only action should be to restart their normal short acting insulin at th" ;
+    dmo:evidenceQuote "Stopping intravenous insulin infusion: eating and drinking reliably If they were on basal bolus insulin • If the person was previously on a basal insulin once or twice a day (e.g., Lantus®, Semglee®, Abasaglar®, Degludec®, Levemir®, or human isophane insulin such as Insulatard® or Humalin I®) this should have been continued and thus the only action should be to restart their normal short acting insulin at th" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/stopping-additional-basal-insulin-after-mixed-insulin-reintroduction> a dmo:Recommendation ;
+    rdfs:label "Stopping Additional Basal Insulin After Mixed Insulin Reintroduction" ;
+    dmo:populationScope "Patients who had additional basal insulin started alongside fixed-ratio insulin (FRII)" ;
+    dmo:recommendationId "stopping-additional-basal-insulin-after-mixed-insulin-reintroduction" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Ensure any additional basal insulin started alongside FRII have been stopped once the usual mixed insulin recommenced" ;
+    dmo:evidenceQuote "Ensure any additional basal insulin started alongside FRII have been stopped once the usual mixed insulin recommenced" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/transition-to-vriii-after-dka-resolution> a dmo:Recommendation ;
+    rdfs:label "Transition to VRIII After DKA Resolution" ;
+    dmo:recommendationId "transition-to-vriii-after-dka-resolution" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Not eating once DKA has resolved: move to a VRIII as per local guidelines" ;
+    dmo:evidenceQuote "Not eating once DKA has resolved: move to a VRIII as per local guidelines" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/transitioning-from-iv-insulin-infusion-to-csii> a dmo:Recommendation ;
+    rdfs:label "Transitioning from IV Insulin Infusion to CSII" ;
+    dmo:populationScope "Patients on CSII (Continuous Subcutaneous Insulin Infusion) who are transitioning from IV insulin infusion" ;
+    dmo:recommendationId "transitioning-from-iv-insulin-infusion-to-csii" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Transition from FRIII/VRIII to CSII is not recommended at bedtime in case of set failure. CSIII can be recommenced as basal only alongside FRIII/VRIII with transition taking place at a mealtime" ;
+    dmo:evidenceQuote "Transition from FRIII/VRIII to CSII is not recommended at bedtime in case of set failure. CSIII can be recommenced as basal only alongside FRIII/VRIII with transition taking place at a mealtime" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/urgent-referral-to-diabetes-specialist-team> a dmo:Recommendation ;
+    rdfs:label "Urgent Referral to Diabetes Specialist Team" ;
+    dmo:recommendationId "urgent-referral-to-diabetes-specialist-team" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Urgent Referral to the diabetes specialist team (if not primary medical team)" ;
+    dmo:evidenceQuote "Urgent Referral to the diabetes specialist team (if not primary medical team)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/urgent-senior-multidisciplinary-discussion-for-surgical-needs> a dmo:Recommendation ;
+    rdfs:label "Urgent Senior Multidisciplinary Discussion for Surgical Needs" ;
+    dmo:populationScope "Individuals with DKA requiring surgery" ;
+    dmo:recommendationId "urgent-senior-multidisciplinary-discussion-for-surgical-needs" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "If surgery is required there will need to be an urgent senior multidisciplinary discussion on the optimum time to operate." ;
+    dmo:evidenceQuote "If surgery is required there will need to be an urgent senior multidisciplinary discussion on the optimum time to operate." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/use-of-fixed-rate-intravenous-insulin-infusion-friii> a dmo:Recommendation ;
+    rdfs:label "Use of Fixed Rate Intravenous Insulin Infusion (FRIII)" ;
+    dmo:recommendationId "use-of-fixed-rate-intravenous-insulin-infusion-friii" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "Ensure FIXED rate intravenous insulin infusion (FRIII) prescribed and commenced" ;
+    dmo:evidenceQuote "Ensure FIXED rate intravenous insulin infusion (FRIII) prescribed and commenced" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/use-two-large-bore-iv-cannulae-for-dka-management> a dmo:Recommendation ;
+    rdfs:label "Use Two Large Bore IV Cannulae for DKA Management" ;
+    dmo:populationScope "Individuals with DKA" ;
+    dmo:recommendationId "use-two-large-bore-iv-cannulae-for-dka-management" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The individual with diabetes will need 2 large bore IV cannula, one for intravenous insulin management and substrate (via Y connector with a one-way, anti-siphon valve) and another for fluid replacement." ;
+    dmo:evidenceQuote "The individual with diabetes will need 2 large bore IV cannula, one for intravenous insulin management and substrate (via Y connector with a one-way, anti-siphon valve) and another for fluid replacement." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/recommendation/vbg-testing-at-60-minutes-2-hours-and-2-hourly-thereafter> a dmo:Recommendation ;
+    rdfs:label "VBG Testing at 60 Minutes, 2 Hours, and 2 Hourly Thereafter" ;
+    dmo:recommendationId "vbg-testing-at-60-minutes-2-hours-and-2-hourly-thereafter" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "VBG for pH, bicarbonate and potassium at 60 minutes; 2 hours and 2 hourly thereafter" ;
+    dmo:evidenceQuote "VBG for pH, bicarbonate and potassium at 60 minutes; 2 hours and 2 hourly thereafter" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/anion-gap-above-16-anion-gap-na-k-cl-hco3> a dmo:Symptom ;
+    rdfs:label "Anion gap above 16 [Anion Gap = (Na+ + K+) – (Cl- + HCO3-)]" ;
+    dmo:name "Anion gap above 16 [Anion Gap = (Na+ + K+) – (Cl- + HCO3-)]" ;
+    dmo:symptomCode "anion-gap-above-16-anion-gap-na-k-cl-hco3" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Anion gap above16 [Anion Gap = (Na+ + K+) – (Cl- + HCO3-)]" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/bicarbonate-level-below-5-0mmol-l> a dmo:Symptom ;
+    rdfs:label "Bicarbonate level below 5.0mmol/L" ;
+    dmo:name "Bicarbonate level below 5.0mmol/L" ;
+    dmo:symptomCode "bicarbonate-level-below-5-0mmol-l" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Bicarbonate level below 5.0mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/blood-ketones-over-6-0mmol-l> a dmo:Symptom ;
+    rdfs:label "Blood Ketones over 6.0mmol/L" ;
+    dmo:name "Blood Ketones over 6.0mmol/L" ;
+    dmo:symptomCode "blood-ketones-over-6-0mmol-l" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Blood ketones over 6.0mmol/L" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/gcs-less-than-12-or-abnormal-avpu-scale> a dmo:Symptom ;
+    rdfs:label "GCS less than 12 or abnormal AVPU scale" ;
+    dmo:name "GCS less than 12 or abnormal AVPU scale" ;
+    dmo:symptomCode "gcs-less-than-12-or-abnormal-avpu-scale" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• GCS less than 12 or abnormal AVPU scale" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/hypokalaemia-on-admission-under-3-5mmol-l> a dmo:Symptom ;
+    rdfs:label "Hypokalaemia on admission (under 3.5mmol/L)" ;
+    dmo:name "Hypokalaemia on admission (under 3.5mmol/L)" ;
+    dmo:symptomCode "hypokalaemia-on-admission-under-3-5mmol-l" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Hypokalaemia on admission (under 3.5mmol/L)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/pulse-over-100-or-below-60-bpm> a dmo:Symptom ;
+    rdfs:label "Pulse over 100 or below 60 bpm" ;
+    dmo:name "Pulse over 100 or below 60 bpm" ;
+    dmo:symptomCode "pulse-over-100-or-below-60-bpm" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Pulse over 100 or below 60 bpm" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/systolic-bp-below-90-mmhg> a dmo:Symptom ;
+    rdfs:label "Systolic BP below 90 mmHg" ;
+    dmo:name "Systolic BP below 90 mmHg" ;
+    dmo:symptomCode "systolic-bp-below-90-mmhg" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Systolic BP below 90 mmHg" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+<https://example.org/dmo/id/symptom/venous-arterial-ph-below-7-0> a dmo:Symptom ;
+    rdfs:label "Venous/arterial pH below 7.0" ;
+    dmo:name "Venous/arterial pH below 7.0" ;
+    dmo:symptomCode "venous-arterial-ph-below-7-0" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "• Venous/arterial pH below 7.0" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/jbds_02_nursing_management_for_dka_v1_20122022> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/inadequate-nursing-ratios> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/young-adult-with-comorbidities> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/elderly-with-comorbidities> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/pregnant-with-comorbidities> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/heart-failure> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/renal-failure> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/contraindication/transition-from-friii-vriii-to-csii-at-bedtime> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-ketoacidosis> .
+<https://example.org/dmo/id/device/infusion-pump-for-iv-insulin> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/device/infusion-pump-for-iv-insulin> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketone> .
+<https://example.org/dmo/id/device/infusion-pump-for-fluids> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/systolic-bp> .
+<https://example.org/dmo/id/device/infusion-pump-for-fluids> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/pulse> .
+<https://example.org/dmo/id/device/point-of-care-glucose-and-ketone-testing-equipment> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/device/point-of-care-glucose-and-ketone-testing-equipment> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketone> .
+<https://example.org/dmo/id/device/trust-approved-meter> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/device/trust-approved-meter> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketone> .
+<https://example.org/dmo/id/device/blood-gas-analyser> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/venous-ph> .
+<https://example.org/dmo/id/device/blood-gas-analyser> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/venous-bicarbonate> .
+<https://example.org/dmo/id/device/blood-gas-analyser> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/serum-potassium> .
+<https://example.org/dmo/id/device/capillary-or-blood-ketone-concentration> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketone> .
+<https://example.org/dmo/id/device/infusion-pump> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/device/infusion-pump> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/blood-ketone> .
+<https://example.org/dmo/id/device/standard-urine-sticks> dmo:deviceMeasuresTest <https://example.org/dmo/id/labTest/urine-ketone> .
+<https://example.org/dmo/id/monitoringSchedule/hourly-blood-glucose-monitoring> dmo:schedulesTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/monitoringSchedule/hourly-ketone-monitoring> dmo:schedulesTest <https://example.org/dmo/id/labTest/blood-ketones> .
+<https://example.org/dmo/id/monitoringSchedule/hourly-point-of-care-glucose-and-ketone-testing> dmo:schedulesTest <https://example.org/dmo/id/labTest/capillary-blood-glucose> .
+<https://example.org/dmo/id/monitoringSchedule/hourly-point-of-care-glucose-and-ketone-testing> dmo:schedulesTest <https://example.org/dmo/id/labTest/blood-ketones> .
+<https://example.org/dmo/id/monitoringSchedule/vbg-testing> dmo:schedulesTest <https://example.org/dmo/id/labTest/venous-bicarbonate> .
+<https://example.org/dmo/id/monitoringSchedule/vbg-testing> dmo:schedulesTest <https://example.org/dmo/id/labTest/venous-ph> .
+<https://example.org/dmo/id/monitoringSchedule/vbg-testing> dmo:schedulesTest <https://example.org/dmo/id/labTest/serum-potassium> .
+<https://example.org/dmo/id/monitoringSchedule/blood-ketone-and-glucose-levels> dmo:schedulesTest <https://example.org/dmo/id/labTest/blood-ketone-concentration> .
+<https://example.org/dmo/id/monitoringSchedule/blood-ketone-and-glucose-levels> dmo:schedulesTest <https://example.org/dmo/id/labTest/blood-glucose-concentration> .

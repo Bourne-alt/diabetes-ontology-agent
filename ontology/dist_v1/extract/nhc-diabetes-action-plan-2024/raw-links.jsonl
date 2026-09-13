@@ -1,0 +1,73 @@
+{"source": "2型糖尿病", "predicate": "predisposesTo", "target": "Diabetic Foot Disease", "quote": "提高医务人员对糖尿病慢性并发症的早期发现、规范化诊断和治疗能力，及早干预治疗糖尿病肾脏病、糖尿病视网膜病变、糖尿病足病等并发症，延缓并发症进展，降低致残率和致死率。", "sourceType": "diabetesType"}
+{"source": "2型糖尿病", "predicate": "predisposesTo", "target": "Diabetic Kidney Disease", "quote": "提高医务人员对糖尿病慢性并发症的早期发现、规范化诊断和治疗能力，及早干预治疗糖尿病肾脏病、糖尿病视网膜病变、糖尿病足病等并发症，延缓并发症进展，降低致残率和致死率。", "sourceType": "diabetesType"}
+{"source": "2型糖尿病", "predicate": "predisposesTo", "target": "Diabetic Retinopathy", "quote": "提高医务人员对糖尿病慢性并发症的早期发现、规范化诊断和治疗能力，及早干预治疗糖尿病肾脏病、糖尿病视网膜病变、糖尿病足病等并发症，延缓并发症进展，降低致残率和致死率。", "sourceType": "diabetesType"}
+{"source": "Diabetes前期", "predicate": "predisposesTo", "target": "2型糖尿病", "quote": "开展糖尿病高危人群危险因素干预，以糖尿病前期人群、肥胖人群等为重点，开发营养及运动等干预适宜技术。", "sourceType": "diabetesType"}
+{"source": "Diabetic Foot Disease", "predicate": "screenedByTest", "target": "糖尿病风险评估", "quote": "提高医务人员对糖尿病慢性并发症的早期发现、规范化诊断和治疗能力，及早干预治疗糖尿病肾脏病、糖尿病视网膜病变、糖尿病足病等并发症，延缓并发症进展，降低致残率和致死率。", "sourceType": "complication"}
+{"source": "Diabetic Kidney Disease", "predicate": "screenedByTest", "target": "糖尿病风险评估", "quote": "提高医务人员对糖尿病慢性并发症的早期发现、规范化诊断和治疗能力，及早干预治疗糖尿病肾脏病、糖尿病视网膜病变、糖尿病足病等并发症，延缓并发症进展，降低致残率和致死率。", "sourceType": "complication"}
+{"source": "Diabetic Retinopathy", "predicate": "screenedByTest", "target": "糖尿病风险评估", "quote": "提高医务人员对糖尿病慢性并发症的早期发现、规范化诊断和治疗能力，及早干预治疗糖尿病肾脏病、糖尿病视网膜病变、糖尿病足病等并发症，延缓并发症进展，降低致残率和致死率。", "sourceType": "complication"}
+{"source": "Diabetic Foot Disease", "predicate": "screenedByTest", "target": "空腹血糖", "quote": "提倡40岁及以上人群每年至少检测1次空腹血糖。", "sourceType": "complication"}
+{"source": "Diabetic Kidney Disease", "predicate": "screenedByTest", "target": "空腹血糖", "quote": "提倡40岁及以上人群每年至少检测1次空腹血糖。", "sourceType": "complication"}
+{"source": "Diabetic Retinopathy", "predicate": "screenedByTest", "target": "空腹血糖", "quote": "提倡40岁及以上人群每年至少检测1次空腹血糖。", "sourceType": "complication"}
+{"source": "Diabetic Foot Disease", "predicate": "screenedByTest", "target": "餐后2小时血糖", "quote": "引导糖尿病前期人群每半年检测1次空腹或餐后2小时血糖，每年到医疗机构进行1次糖尿病风险评估；", "sourceType": "complication"}
+{"source": "Diabetic Kidney Disease", "predicate": "screenedByTest", "target": "餐后2小时血糖", "quote": "引导糖尿病前期人群每半年检测1次空腹或餐后2小时血糖，每年到医疗机构进行1次糖尿病风险评估；", "sourceType": "complication"}
+{"source": "Diabetic Retinopathy", "predicate": "screenedByTest", "target": "餐后2小时血糖", "quote": "引导糖尿病前期人群每半年检测1次空腹或餐后2小时血糖，每年到医疗机构进行1次糖尿病风险评估；", "sourceType": "complication"}
+{"source": "Obesity", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "riskFactor"}
+{"source": "Overweight", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "riskFactor"}
+{"source": "Physical Inactivity", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "riskFactor"}
+{"source": "Unhealthy Diet", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "riskFactor"}
+{"source": "Smoking", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "riskFactor"}
+{"source": "Gestational Diabetes Mellitus", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "开展糖尿病高危人群危险因素干预，以糖尿病前期人群、肥胖人群等为重点，开发营养及运动等干预适宜技术。", "sourceType": "riskFactor"}
+{"source": "Family History of Diabetes", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "开展糖尿病高危人群危险因素干预，以糖尿病前期人群、肥胖人群等为重点，开发营养及运动等干预适宜技术。", "sourceType": "riskFactor"}
+{"source": "Polycystic Ovary Syndrome", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "开展糖尿病高危人群危险因素干预，以糖尿病前期人群、肥胖人群等为重点，开发营养及运动等干预适宜技术。", "sourceType": "riskFactor"}
+{"source": "Excessive Alcohol Consumption", "predicate": "increasesRiskOf", "target": "2型糖尿病", "quote": "开展糖尿病高危人群危险因素干预，以糖尿病前期人群、肥胖人群等为重点，开发营养及运动等干预适宜技术。", "sourceType": "riskFactor"}
+{"source": "三减三健", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "三减三健", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "三减三健", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "中医养生保健", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "中医养生保健", "predicate": "mitigatesRiskFactor", "target": "Physical Inactivity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "中医养生保健", "predicate": "mitigatesRiskFactor", "target": "Psychological Stress", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "体育健身", "predicate": "mitigatesRiskFactor", "target": "Physical Inactivity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "体育健身", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "体育健身", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "体重管理年", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "体重管理年", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康体重", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康体重", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康教育", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "健康教育", "predicate": "mitigatesRiskFactor", "target": "Physical Inactivity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "健康教育", "predicate": "mitigatesRiskFactor", "target": "Smoking", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "健康教育", "predicate": "mitigatesRiskFactor", "target": "Psychological Stress", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "健康生活方式", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "强化每个人是自己健康第一责任人的理念，树立主动健康观念，提高居民对糖尿病危险因素的认识，指导大众科学开展自我健康管理。推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康生活方式", "predicate": "mitigatesRiskFactor", "target": "Physical Inactivity", "quote": "强化每个人是自己健康第一责任人的理念，树立主动健康观念，提高居民对糖尿病危险因素的认识，指导大众科学开展自我健康管理。推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康生活方式", "predicate": "mitigatesRiskFactor", "target": "Smoking", "quote": "强化每个人是自己健康第一责任人的理念，树立主动健康观念，提高居民对糖尿病危险因素的认识，指导大众科学开展自我健康管理。推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康生活方式", "predicate": "mitigatesRiskFactor", "target": "Psychological Stress", "quote": "强化每个人是自己健康第一责任人的理念，树立主动健康观念，提高居民对糖尿病危险因素的认识，指导大众科学开展自我健康管理。推进全民健康生活方式行动，深入开展“三减三健”（减盐、减油、减糖、健康口腔、健康体重、健康骨骼）和“体重管理年”等专项行动，开发推广健康适宜技术和支持工具，增强群众促进和维护自身健康的能力。", "sourceType": "lifestyleIntervention"}
+{"source": "健康膳食", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "健康膳食", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "健康膳食", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "合理膳食", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "合理膳食", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "合理膳食", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "心理减压", "predicate": "mitigatesRiskFactor", "target": "Psychological Stress", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "心理平衡", "predicate": "mitigatesRiskFactor", "target": "Psychological Stress", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "戒烟限酒", "predicate": "mitigatesRiskFactor", "target": "Smoking", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "戒烟限酒", "predicate": "mitigatesRiskFactor", "target": "Excessive Alcohol Consumption", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "控烟宣传", "predicate": "mitigatesRiskFactor", "target": "Smoking", "quote": "积极推进无烟环境建设，深入开展控烟宣传，持续推进控烟措施。", "sourceType": "lifestyleIntervention"}
+{"source": "无烟环境建设", "predicate": "mitigatesRiskFactor", "target": "Smoking", "quote": "积极推进无烟环境建设，深入开展控烟宣传，持续推进控烟措施。", "sourceType": "lifestyleIntervention"}
+{"source": "科学运动", "predicate": "mitigatesRiskFactor", "target": "Physical Inactivity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "科学运动", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "科学运动", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "发布糖尿病防治核心信息和知识要点，广泛宣传合理膳食、科学运动、戒烟限酒、心理平衡、中医养生保健等健康科普知识。", "sourceType": "lifestyleIntervention"}
+{"source": "糖尿病前期治未病干预", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "综合运用现代诊疗技术和中医四诊（望、闻、问、切）等检测方法，早期发现高危人群，推广应用糖尿病前期治未病干预指南。", "sourceType": "lifestyleIntervention"}
+{"source": "糖尿病前期治未病干预", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "综合运用现代诊疗技术和中医四诊（望、闻、问、切）等检测方法，早期发现高危人群，推广应用糖尿病前期治未病干预指南。", "sourceType": "lifestyleIntervention"}
+{"source": "糖尿病前期治未病干预", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "综合运用现代诊疗技术和中医四诊（望、闻、问、切）等检测方法，早期发现高危人群，推广应用糖尿病前期治未病干预指南。", "sourceType": "lifestyleIntervention"}
+{"source": "糖尿病高危人群定期测量血糖、血脂和血压", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "lifestyleIntervention"}
+{"source": "糖尿病高危人群定期测量血糖、血脂和血压", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "lifestyleIntervention"}
+{"source": "糖尿病高危人群定期测量血糖、血脂和血压", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "lifestyleIntervention"}
+{"source": "维持健康体重", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "lifestyleIntervention"}
+{"source": "维持健康体重", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "倡导糖尿病高危人群和患者定期测量血糖、血脂和血压，维持健康体重，普及健康生活方式，降低糖尿病发病风险。", "sourceType": "lifestyleIntervention"}
+{"source": "肥胖防控行动", "predicate": "mitigatesRiskFactor", "target": "Obesity", "quote": "开展肥胖防控行动，加强以控制超重和肥胖等为重点的健康知识教育和主动健康管理。", "sourceType": "lifestyleIntervention"}
+{"source": "肥胖防控行动", "predicate": "mitigatesRiskFactor", "target": "Overweight", "quote": "开展肥胖防控行动，加强以控制超重和肥胖等为重点的健康知识教育和主动健康管理。", "sourceType": "lifestyleIntervention"}
+{"source": "营养促进", "predicate": "mitigatesRiskFactor", "target": "Unhealthy Diet", "quote": "加快完善营养促进支持性政策，促进居民营养均衡，改善糖尿病患者膳食结构。", "sourceType": "lifestyleIntervention"}
+{"source": "运动评估干预", "predicate": "mitigatesRiskFactor", "target": "Physical Inactivity", "quote": "加强运动评估干预，支持引导群众积极参与健身活动。", "sourceType": "lifestyleIntervention"}
+{"source": "空腹血糖检测", "predicate": "schedulesTest", "target": "空腹血糖", "quote": "引导糖尿病高危人群每年至少测量1次空腹血糖，并接受医务人员的健康指导", "sourceType": "monitoringSchedule"}
+{"source": "空腹或餐后2小时血糖检测", "predicate": "schedulesTest", "target": "餐后2小时血糖", "quote": "引导糖尿病前期人群每半年检测1次空腹或餐后2小时血糖，每年到医疗机构进行1次糖尿病风险评估", "sourceType": "monitoringSchedule"}
+{"source": "糖尿病风险评估", "predicate": "schedulesTest", "target": "糖尿病风险评估", "quote": "引导糖尿病前期人群每半年检测1次空腹或餐后2小时血糖，每年到医疗机构进行1次糖尿病风险评估", "sourceType": "monitoringSchedule"}

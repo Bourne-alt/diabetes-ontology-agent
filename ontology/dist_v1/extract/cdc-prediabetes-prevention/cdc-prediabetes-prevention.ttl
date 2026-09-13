@@ -1,0 +1,185 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/cdc-prediabetes-prevention.txt
+# 目标 named graph：urn:dmo:extract:cdc-prediabetes-prevention
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:cdc-prediabetes-prevention'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/cdc-prediabetes-prevention.txt" ;
+    dmo:sha256 "8536e3864367d332294f6bafe58b847c9b22e18290ca638fc99f980fb5a96971" ;
+    dmo:byteSize "3139"^^xsd:integer .
+
+<urn:dmo:extract:cdc-prediabetes-prevention> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T01:43:44+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "With prediabetes, blood sugar levels are higher than normal but not high enough for a type 2 diabetes diagnosis." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:name "Prediabetes" ;
+    dmo:evidenceQuote "With prediabetes, blood sugar levels are higher than normal but not high enough for a type 2 diabetes diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "Prediabetes is a serious health condition that increases your risk of developing type 2 diabetes, heart disease, and stroke." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:evidenceQuote "Prediabetes is a serious health condition that increases your risk of developing type 2 diabetes, heart disease, and stroke." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/labTest/blood-sugar-test> a dmo:LabTest ;
+    rdfs:label "Blood Sugar Test" ;
+    dmo:definition "A simple blood sugar test to find out if you have prediabetes." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "blood-sugar-test" ;
+    dmo:name "Blood Sugar Test" ;
+    dmo:specimen "Blood" ;
+    dmo:evidenceQuote "You can get a simple blood sugar test to find out if you have prediabetes. Ask your doctor if you should be tested." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/recommendation/150-minutes-per-week-of-brisk-walking> a dmo:Recommendation ;
+    rdfs:label "150 minutes per week of brisk walking" ;
+    dmo:populationScope "People with prediabetes" ;
+    dmo:recommendationId "150-minutes-per-week-of-brisk-walking" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Regular physical activity means getting at least 150 minutes a week of brisk walking or a similar activity. That's 30 minutes a day, 5 days a week." ;
+    dmo:evidenceQuote "Regular physical activity means getting at least 150 minutes a week of brisk walking or a similar activity. That's 30 minutes a day, 5 days a week." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/recommendation/5-to-7-body-weight-loss> a dmo:Recommendation ;
+    rdfs:label "5% to 7% body weight loss" ;
+    dmo:populationScope "People with prediabetes and overweight" ;
+    dmo:recommendationId "5-to-7-body-weight-loss" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "A small amount of weight loss means around 5% to 7% of your body weight. That's around 10 to 14 pounds for a 200-pound person." ;
+    dmo:evidenceQuote "A small amount of weight loss means around 5% to 7% of your body weight. That's around 10 to 14 pounds for a 200-pound person." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/recommendation/cdc-led-national-diabetes-prevention-program> a dmo:Recommendation ;
+    rdfs:label "CDC-led National Diabetes Prevention Program" ;
+    dmo:populationScope "People with prediabetes" ;
+    dmo:recommendationId "cdc-led-national-diabetes-prevention-program" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Treatment" ;
+    dmo:statement "The CDC-led National Diabetes Prevention Program can help you make those changes—and make them stick. Through the program, you can lower your risk for type 2 diabetes by 58% (71% if you're over age 60)." ;
+    dmo:evidenceQuote "The CDC-led National Diabetes Prevention Program can help you make those changes—and make them stick. Through the program, you can lower your risk for type 2 diabetes by 58% (71% if you're over age 60)." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/recommendation/lifestyle-changes-to-prevent-type-2-diabetes-in-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Lifestyle changes to prevent type 2 diabetes in prediabetes" ;
+    dmo:populationScope "People with prediabetes" ;
+    dmo:recommendationId "lifestyle-changes-to-prevent-type-2-diabetes-in-prediabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Making lifestyle changes can cut your risk of type 2 diabetes in half." ;
+    dmo:evidenceQuote "Making lifestyle changes can cut your risk of type 2 diabetes in half." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/recommendation/physical-activity-for-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Physical activity for prediabetes" ;
+    dmo:populationScope "People with prediabetes" ;
+    dmo:recommendationId "physical-activity-for-prediabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Getting regular physical activity." ;
+    dmo:evidenceQuote "Getting regular physical activity." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/recommendation/weight-loss-for-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Weight loss for prediabetes" ;
+    dmo:populationScope "People with prediabetes and overweight" ;
+    dmo:recommendationId "weight-loss-for-prediabetes" ;
+    dmo:recommendationStrength "Strong" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Losing a small amount of weight if you have overweight." ;
+    dmo:evidenceQuote "Losing a small amount of weight if you have overweight." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Family History of Type 2 Diabetes" ;
+    dmo:evidenceNote "文档中明确指出有父母、兄弟或姐妹患有2型糖尿病是风险因素，且无法改变。" ;
+    dmo:name "Family History of Type 2 Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "family-history-of-type-2-diabetes" ;
+    dmo:evidenceQuote "Having a parent, brother, or sister with type 2 diabetes" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/riskFactor/gestational-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Gestational Diabetes" ;
+    dmo:evidenceNote "文档中明确指出曾患有妊娠期糖尿病是风险因素，属于妊娠相关因素。" ;
+    dmo:name "Gestational Diabetes" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "gestational-diabetes" ;
+    dmo:evidenceQuote "Ever having gestational diabetes (diabetes during pregnancy)" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/riskFactor/history-of-giving-birth-to-a-baby-weighing-more-than-9-pounds> a dmo:RiskFactor ;
+    rdfs:label "History of Giving Birth to a Baby Weighing More Than 9 Pounds" ;
+    dmo:evidenceNote "文档中明确指出曾生育体重超过9磅的婴儿是风险因素，属于妊娠相关因素。" ;
+    dmo:name "History of Giving Birth to a Baby Weighing More Than 9 Pounds" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "history-of-giving-birth-to-a-baby-weighing-more-than-9-pounds" ;
+    dmo:evidenceQuote "Giving birth to a baby who weighed more than 9 pounds" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/riskFactor/physical-inactivity-less-than-3-times-a-week> a dmo:RiskFactor ;
+    rdfs:label "Physical Inactivity Less Than 3 Times a Week" ;
+    dmo:evidenceNote "文档中明确指出每周体力活动少于3次是风险因素，并且建议通过增加活动来降低风险。" ;
+    dmo:name "Physical Inactivity Less Than 3 Times a Week" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "physical-inactivity-less-than-3-times-a-week" ;
+    dmo:evidenceQuote "Being physically active less than 3 times a week" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/riskFactor/polycystic-ovary-syndrome> a dmo:RiskFactor ;
+    rdfs:label "Polycystic Ovary Syndrome" ;
+    dmo:evidenceNote "文档中明确指出多囊卵巢综合征是风险因素，属于妊娠相关因素。" ;
+    dmo:name "Polycystic Ovary Syndrome" ;
+    dmo:riskCategory "Obstetric" ;
+    dmo:riskFactorCode "polycystic-ovary-syndrome" ;
+    dmo:evidenceQuote "Having polycystic ovary syndrome" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+<https://example.org/dmo/id/riskFactor/race-and-ethnicity> a dmo:RiskFactor ;
+    rdfs:label "Race and Ethnicity" ;
+    dmo:evidenceNote "文档中明确指出非洲裔、西班牙裔/拉丁裔、美洲原住民、阿拉斯加原住民、太平洋岛民及部分亚裔美国人风险更高，属于社会人口学因素。" ;
+    dmo:name "Race and Ethnicity" ;
+    dmo:riskCategory "SocioDemographic" ;
+    dmo:riskFactorCode "race-and-ethnicity" ;
+    dmo:evidenceQuote "Race and ethnicity are also a factor. African American, Hispanic/Latino American, American Indian, Alaska Native, Pacific Islander, and some Asian American people are at higher risk." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/cdc-prediabetes-prevention> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/riskFactor/physical-inactivity-less-than-3-times-a-week> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/riskFactor/gestational-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/riskFactor/history-of-giving-birth-to-a-baby-weighing-more-than-9-pounds> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/riskFactor/polycystic-ovary-syndrome> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/riskFactor/race-and-ethnicity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/lifestyle-changes-to-prevent-type-2-diabetes-in-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/weight-loss-for-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/physical-activity-for-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/cdc-led-national-diabetes-prevention-program> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/riskFactor/family-history-of-type-2-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/gestational-diabetes> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/history-of-giving-birth-to-a-baby-weighing-more-than-9-pounds> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/physical-inactivity-less-than-3-times-a-week> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/polycystic-ovary-syndrome> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/riskFactor/race-and-ethnicity> dmo:increasesRiskOf <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/5-to-7-body-weight-loss> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/150-minutes-per-week-of-brisk-walking> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .

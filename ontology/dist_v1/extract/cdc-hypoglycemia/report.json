@@ -1,0 +1,155 @@
+{
+  "source": {
+    "sourceId": "cdc-hypoglycemia",
+    "uri": "https://example.org/dmo/id/guidelineSource/cdc-hypoglycemia",
+    "localFile": "ontology/knowledges/cdc-hypoglycemia.txt",
+    "sha256": "78367648b51015f62bf558a29fdd7546899452d639220bb5b48c4e4925b4d9fa",
+    "byteSize": 3618,
+    "graphUri": "urn:dmo:extract:cdc-hypoglycemia"
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 1,
+  "counts": {
+    "rawRecords": 42,
+    "accepted": 27,
+    "rejected": 15,
+    "entities": 27,
+    "edges": 13,
+    "danglingRelations": 15,
+    "mergeConflicts": 8
+  },
+  "quality": {
+    "quoteHitRate": 0.6429,
+    "schemaSlotCoverage": 0.5,
+    "danglingRelationRate": 0.5357,
+    "avgMentionsPerEntity": 1.0
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 11,
+    "quote_too_short": 3,
+    "unknown_relation_predicate": 1
+  },
+  "linkPass": {
+    "candidates": 26,
+    "accepted": 12,
+    "rejectedByReason": {
+      "quote_not_found": 5,
+      "target_unresolved": 9
+    }
+  },
+  "entitiesByType": {
+    "riskFactor": 8,
+    "lifestyleIntervention": 5,
+    "recommendation": 5,
+    "complication": 3,
+    "symptom": 3,
+    "diabetesType": 1,
+    "complicationStage": 1,
+    "device": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/complication/hypoglycemia-unawareness",
+      "predicate": "presentsWith",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/having-diabetes-for-more-than-5-10-years",
+      "predicate": "increasesRiskOf",
+      "target": "Hypoglycemia Unawareness"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/taking-too-much-insulin",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/not-eating-enough-carbohydrates-for-how-much-insulin-you-take",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/timing-of-when-you-take-your-insulin",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/the-amount-and-timing-of-physical-activity",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/unexpected-changes-in-your-schedule",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/spending-time-at-a-high-altitude",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/riskFactor/having-your-period-menstruation",
+      "predicate": "increasesRiskOf",
+      "target": "Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/check-blood-sugar-more-often",
+      "predicate": "appliesToType",
+      "target": "Hypoglycemia Unawareness"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/check-blood-sugar-more-often",
+      "predicate": "definesTarget",
+      "target": "Blood Sugar Level Below 70 mg/dL"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/have-a-snack-before-bed",
+      "predicate": "appliesToType",
+      "target": "Nighttime Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-continuous-glucose-monitor-cgm",
+      "predicate": "appliesToType",
+      "target": "Nighttime Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/eat-when-drinking-alcohol",
+      "predicate": "appliesToType",
+      "target": "Nighttime Low Blood Sugar"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/eat-regular-meals",
+      "predicate": "appliesToType",
+      "target": "Nighttime Low Blood Sugar"
+    }
+  ],
+  "conflictSamples": [
+    "riskFactor/having-diabetes-for-more-than-5-10-years: name: 'Having Diabetes for More Than 5–10 Years' vs 'Having diabetes for more than 5–10 years'",
+    "riskFactor/taking-too-much-insulin: name: 'Taking Too Much Insulin' vs 'Taking too much insulin'",
+    "riskFactor/not-eating-enough-carbohydrates-for-how-much-insulin-you-take: name: 'Not Eating Enough Carbohydrates for How Much Insulin You Take' vs 'Not eating enough carbohydrates for how much insulin you take'",
+    "riskFactor/timing-of-when-you-take-your-insulin: name: 'Timing of When You Take Your Insulin' vs 'Timing of when you take your insulin'",
+    "riskFactor/the-amount-and-timing-of-physical-activity: name: 'The Amount and Timing of Physical Activity' vs 'The amount and timing of physical activity'",
+    "riskFactor/unexpected-changes-in-your-schedule: name: 'Unexpected Changes in Your Schedule' vs 'Unexpected changes in your schedule'",
+    "riskFactor/spending-time-at-a-high-altitude: name: 'Spending Time at a High Altitude' vs 'Spending time at a high altitude'",
+    "riskFactor/having-your-period-menstruation: name: 'Having Your Period (Menstruation)' vs 'Having your period (menstruation)'"
+  ]
+}

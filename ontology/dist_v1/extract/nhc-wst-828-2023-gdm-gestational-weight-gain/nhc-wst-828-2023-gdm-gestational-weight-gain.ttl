@@ -1,0 +1,79 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/pdfs/nhc-wst-828-2023-gdm-gestational-weight-gain.pdf
+# 目标 named graph：urn:dmo:extract:nhc-wst-828-2023-gdm-gestational-weight-gain
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:nhc-wst-828-2023-gdm-gestational-weight-gain'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/pdfs/nhc-wst-828-2023-gdm-gestational-weight-gain.pdf" ;
+    dmo:sha256 "00f3244f099e131ac83c4df705267407083526540624230731bb2e0ea4ec6de2" ;
+    dmo:byteSize "508285"^^xsd:integer .
+
+<urn:dmo:extract:nhc-wst-828-2023-gdm-gestational-weight-gain> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-14T12:31:20+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/妊娠前体重高于125-kg> a dmo:Contraindication ;
+    rdfs:label "妊娠前体重高于125 kg" ;
+    dmo:contraCode "妊娠前体重高于125-kg" ;
+    dmo:rationale "本标准不适用于身高低于140 cm，或者妊娠前体重高于125 kg的妇女。" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "妊娠前体重高于125 kg" ;
+    dmo:evidenceQuote "本标准不适用于身高低于140 cm，或者妊娠前体重高于125 kg的妇女。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> .
+
+<https://example.org/dmo/id/contraindication/身高低于140-cm> a dmo:Contraindication ;
+    rdfs:label "身高低于140 cm" ;
+    dmo:contraCode "身高低于140-cm" ;
+    dmo:rationale "本标准不适用于身高低于140 cm，或者妊娠前体重高于125 kg的妇女。" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "身高低于140 cm" ;
+    dmo:evidenceQuote "本标准不适用于身高低于140 cm，或者妊娠前体重高于125 kg的妇女。" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> .
+
+<https://example.org/dmo/id/recommendation/gdm诊断前妊娠中期每周体重增长值> a dmo:Recommendation ;
+    rdfs:label "GDM诊断前妊娠中期每周体重增长值" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女" ;
+    dmo:recommendationId "gdm诊断前妊娠中期每周体重增长值" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "妊娠期糖尿病妇女在GDM诊断前妊娠中期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。" ;
+    dmo:evidenceQuote "GDM诊断前 妊娠中期每周体重增长值   gestational weight gain every week in second trimester before diagnosis of GDM" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> .
+
+<https://example.org/dmo/id/recommendation/gdm诊断后妊娠中期和妊娠晚期每周体重增长值> a dmo:Recommendation ;
+    rdfs:label "GDM诊断后妊娠中期和妊娠晚期每周体重增长值" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "低体重（BMI＜18.5 kg/m²）的妊娠期糖尿病妇女" ;
+    dmo:recommendationId "gdm诊断后妊娠中期和妊娠晚期每周体重增长值" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "妊娠期糖尿病妇女在GDM诊断后妊娠中期和妊娠晚期的每周体重增长值推荐为0.46（0.37～0.56）kg/week，适用于低体重（BMI＜18.5 kg/m²）者。" ;
+    dmo:evidenceQuote "GDM诊断后妊娠中期和妊娠晚期 每周体重增长值  gestational weight gain every week in second and third trimester after diagnosis of GDM" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> .
+
+<https://example.org/dmo/id/recommendation/妊娠早期体重增长值> a dmo:Recommendation ;
+    rdfs:label "妊娠早期体重增长值" ;
+    dmo:gradingSystem "Unspecified" ;
+    dmo:nativeEvidenceGrade "Unspecified" ;
+    dmo:populationScope "所有妊娠前体质指数分类的妊娠期糖尿病妇女" ;
+    dmo:recommendationId "妊娠早期体重增长值" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "妊娠期糖尿病妇女在妊娠早期的体重增长值推荐为0～2.0 kg，适用于所有妊娠前体质指数分类的妇女。" ;
+    dmo:evidenceQuote "妊娠早期体重增长值  gestational weight gain in first trimester" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/nhc-wst-828-2023-gdm-gestational-weight-gain> .

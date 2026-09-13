@@ -1,0 +1,681 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-diabetic-foot-problems.txt
+# 目标 named graph：urn:dmo:extract:niddk-diabetic-foot-problems
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-diabetic-foot-problems'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-diabetic-foot-problems.txt" ;
+    dmo:sha256 "9775da439bd65cd8de871539b3743ba9d34d0e14f6eb2acc926d1db18249edc9" ;
+    dmo:byteSize "12046"^^xsd:integer .
+
+<urn:dmo:extract:niddk-diabetic-foot-problems> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:52:48+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/complication/charcot-s-foot> a dmo:Complication ;
+    rdfs:label "Charcot’s Foot" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "charcot-s-foot" ;
+    dmo:definition "Although rare, nerve damage from diabetes can lead to changes in the shape of your feet, such as Charcot’s foot. Charcot’s foot may start with redness, warmth, and swelling. Later, bones in your feet and toes can shift or break, which can cause your feet to have an odd shape, such as a “rocker bottom.”" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005151" ;
+    dmo:name "Charcot’s Foot" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Although rare, nerve damage from diabetes can lead to changes in the shape of your feet, such as Charcot’s foot. Charcot’s foot may start with redness, warmth, and swelling. Later, bones in your feet and toes can shift or break, which can cause your feet to have an odd shape, such as a “rocker bottom.”" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/complication/diabetic-neuropathy> a dmo:Complication ;
+    rdfs:label "Diabetic Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "diabetic-neuropathy" ;
+    dmo:definition "Over time, diabetes may cause nerve damage, also called diabetic neuropathy, that can cause tingling and pain, and can make you lose feeling in your feet." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Diabetic Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "Over time, diabetes may cause nerve damage, also called diabetic neuropathy, that can cause tingling and pain, and can make you lose feeling in your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/complication/foot-ulcer> a dmo:Complication ;
+    rdfs:label "Foot Ulcer" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "foot-ulcer" ;
+    dmo:definition "a cut, blister, or bruise on your foot that does not start to heal after a few days" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005140" ;
+    dmo:name "Foot Ulcer" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "a cut, blister, or bruise on your foot that does not start to heal after a few days" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/complication/gangrene> a dmo:Complication ;
+    rdfs:label "Gangrene" ;
+    dmo:affectedOrgan "Foot" ;
+    dmo:complicationCode "gangrene" ;
+    dmo:definition "The infection might lead to gangrene." ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005150" ;
+    dmo:name "Gangrene" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "The infection might lead to gangrene." ;
+    dmo:evidenceQuote "a foot infection that becomes black and smelly—signs you might have gangrene" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/complication/peripheral-artery-disease> a dmo:Complication ;
+    rdfs:label "Peripheral Artery Disease" ;
+    dmo:affectedOrgan "Vessel" ;
+    dmo:complicationCode "peripheral-artery-disease" ;
+    dmo:definition "peripheral artery disease" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005143" ;
+    dmo:name "Peripheral Artery Disease" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "peripheral artery disease" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/complication/peripheral-neuropathy> a dmo:Complication ;
+    rdfs:label "Peripheral Neuropathy" ;
+    dmo:affectedOrgan "Nerve" ;
+    dmo:complicationCode "peripheral-neuropathy" ;
+    dmo:definition "you may burn your feet and not know you did" ;
+    dmo:isEmergency "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005142" ;
+    dmo:name "Peripheral Neuropathy" ;
+    dmo:onsetPattern "Chronic" ;
+    dmo:evidenceQuote "If you have nerve damage from diabetes, you may burn your feet and not know you did" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/contraindication/cutting-corns-and-calluses> a dmo:Contraindication ;
+    rdfs:label "Cutting corns and calluses" ;
+    dmo:contraCode "cutting-corns-and-calluses" ;
+    dmo:rationale "Cutting and over-the-counter corn removal products can damage your skin and cause an infection." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "If you have nerve damage" ;
+    dmo:evidenceQuote "Do NOT cut corns and calluses" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/contraindication/putting-lotion-or-cream-between-toes> a dmo:Contraindication ;
+    rdfs:label "Putting lotion or cream between toes" ;
+    dmo:contraCode "putting-lotion-or-cream-between-toes" ;
+    dmo:rationale "Do not put lotion or cream between your toes because moistness might cause an infection." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "To prevent infection" ;
+    dmo:evidenceQuote "Do not put lotion or cream between your toes because moistness might cause an infection." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/contraindication/using-corn-plasters> a dmo:Contraindication ;
+    rdfs:label "Using corn plasters" ;
+    dmo:contraCode "using-corn-plasters" ;
+    dmo:rationale "Cutting and over-the-counter corn removal products can damage your skin and cause an infection." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "If you have nerve damage" ;
+    dmo:evidenceQuote "use corn plasters, which are medicated pads" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/contraindication/using-liquid-corn-and-callus-removers> a dmo:Contraindication ;
+    rdfs:label "Using liquid corn and callus removers" ;
+    dmo:contraCode "using-liquid-corn-and-callus-removers" ;
+    dmo:rationale "Cutting and over-the-counter corn removal products can damage your skin and cause an infection." ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "If you have nerve damage" ;
+    dmo:evidenceQuote "use liquid corn and callus removers" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/be-more-physically-active> a dmo:LifestyleIntervention ;
+    rdfs:label "Be more physically active" ;
+    dmo:activityTarget "Choose activities that are easy on your feet, such as walking, dancing, yoga or stretching, swimming, or bike riding." ;
+    dmo:expectedBenefit "Improve blood flow to your feet" ;
+    dmo:interventionCode "be-more-physically-active" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Be more physically active" ;
+    dmo:evidenceQuote "Be more physically active. Choose activities that are easy on your feet, such as walking, dancing, yoga or stretching, swimming, or bike riding." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-care-plan> a dmo:LifestyleIntervention ;
+    rdfs:label "Diabetes Self-Care Plan" ;
+    dmo:interventionCode "diabetes-self-care-plan" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Diabetes Self-Care Plan" ;
+    dmo:evidenceQuote "Work with your health care team to make a diabetes self-care plan, which is an action plan for how you will manage your diabetes. Your plan should include foot care." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/stop-smoking> a dmo:LifestyleIntervention ;
+    rdfs:label "Stop smoking" ;
+    dmo:activityTarget "Stop smoking." ;
+    dmo:expectedBenefit "Smoking can lower the amount of blood flow to your feet" ;
+    dmo:interventionCode "stop-smoking" ;
+    dmo:interventionType "SmokingCessation" ;
+    dmo:name "Stop smoking" ;
+    dmo:evidenceQuote "Stop smoking. Smoking can lower the amount of blood flow to your feet. If you smoke, ask for help to stop. You can get help by calling the national quitline at 1-800-QUITNOW or 1-800-784-8669. For tips on quitting, go to SmokeFree.gov External link." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/trim-your-toenails-straight-across> a dmo:LifestyleIntervention ;
+    rdfs:label "Trim your toenails straight across" ;
+    dmo:activityTarget "Using toenail clippers, trim your toenails straight across. Do not cut into the corners of your toenail. Gently smooth each nail with an emery board or nonsharp nail file." ;
+    dmo:expectedBenefit "Helps prevent cutting your skin and keeps the nails from growing into your skin" ;
+    dmo:interventionCode "trim-your-toenails-straight-across" ;
+    dmo:interventionType "SelfManagementEd" ;
+    dmo:name "Trim your toenails straight across" ;
+    dmo:evidenceQuote "Using toenail clippers, trim your toenails straight across. Do not cut into the corners of your toenail. Gently smooth each nail with an emery board or nonsharp nail file. Trimming this way helps prevent cutting your skin and keeps the nails from growing into your skin." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/lifestyleIntervention/wear-shoes-and-socks-at-all-times> a dmo:LifestyleIntervention ;
+    rdfs:label "Wear shoes and socks at all times" ;
+    dmo:activityTarget "Wear shoes and socks at all times. Do not walk barefoot or in just socks – even when you are indoors." ;
+    dmo:expectedBenefit "Prevent injury from stepping on something and not feeling pain due to nerve damage" ;
+    dmo:interventionCode "wear-shoes-and-socks-at-all-times" ;
+    dmo:interventionType "PhysicalActivity" ;
+    dmo:name "Wear shoes and socks at all times" ;
+    dmo:evidenceQuote "Wear shoes and socks at all times. Do not walk barefoot or in just socks – even when you are indoors. You could step on something and hurt your feet. You may not feel any pain and may not know that you hurt yourself." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/monitoringSchedule/foot-check-at-every-health-care-visit> a dmo:MonitoringSchedule ;
+    rdfs:label "Foot Check at Every Health Care Visit" ;
+    dmo:appliesTo "people with diabetes" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Foot Check at Every Health Care Visit" ;
+    dmo:scheduleId "foot-check-at-every-health-care-visit" ;
+    dmo:evidenceQuote "Get a foot check at every health care visit." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/monitoringSchedule/thorough-foot-exam> a dmo:MonitoringSchedule ;
+    rdfs:label "Thorough Foot Exam" ;
+    dmo:appliesTo "people with changes in the shape of their feet, loss of feeling in their feet, peripheral artery disease, or history of foot ulcers or amputation" ;
+    dmo:frequencyMonths "12"^^xsd:integer ;
+    dmo:name "Thorough Foot Exam" ;
+    dmo:scheduleId "thorough-foot-exam" ;
+    dmo:evidenceQuote "At least once a year, get a thorough foot exam, including a check of the feeling and pulses in your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/apply-lotion-cream-or-petroleum-jelly-to-the-tops-and-bottoms-of-your-feet> a dmo:Recommendation ;
+    rdfs:label "Apply lotion, cream, or petroleum jelly to the tops and bottoms of your feet" ;
+    dmo:recommendationId "apply-lotion-cream-or-petroleum-jelly-to-the-tops-and-bottoms-of-your-feet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "To keep your skin smooth and soft, rub a thin coat of lotion, cream, or petroleum jelly on the tops and bottoms of your feet." ;
+    dmo:evidenceQuote "To keep your skin smooth and soft, rub a thin coat of lotion, cream, or petroleum jelly on the tops and bottoms of your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/ask-health-care-team-to-show-how-to-care-for-feet> a dmo:Recommendation ;
+    rdfs:label "Ask health care team to show how to care for feet" ;
+    dmo:recommendationId "ask-health-care-team-to-show-how-to-care-for-feet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Ask your health care team to show you how to care for your feet." ;
+    dmo:evidenceQuote "Ask your health care team to show you how to care for your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/ask-provider-to-refer-to-a-foot-doctor-podiatrist> a dmo:Recommendation ;
+    rdfs:label "Ask provider to refer to a foot doctor (podiatrist)" ;
+    dmo:recommendationId "ask-provider-to-refer-to-a-foot-doctor-podiatrist" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Ask your provider to refer you to a foot doctor, or podiatrist, if needed." ;
+    dmo:evidenceQuote "Ask your provider to refer you to a foot doctor, or podiatrist, if needed." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/be-more-physically-active-with-foot-friendly-activities> a dmo:Recommendation ;
+    rdfs:label "Be more physically active with foot-friendly activities" ;
+    dmo:recommendationId "be-more-physically-active-with-foot-friendly-activities" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Be more physically active. Choose activities that are easy on your feet, such as walking, dancing, yoga or stretching, swimming, or bike riding." ;
+    dmo:evidenceQuote "Be more physically active. Choose activities that are easy on your feet, such as walking, dancing, yoga or stretching, swimming, or bike riding." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/break-in-new-shoes-gradually> a dmo:Recommendation ;
+    rdfs:label "Break in new shoes gradually" ;
+    dmo:recommendationId "break-in-new-shoes-gradually" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "When breaking in new shoes, only wear them for a few hours at first and then check your feet for areas of soreness." ;
+    dmo:evidenceQuote "When breaking in new shoes, only wear them for a few hours at first and then check your feet for areas of soreness." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/bring-your-own-nail-tools-to-a-salon-to-prevent-infection> a dmo:Recommendation ;
+    rdfs:label "Bring your own nail tools to a salon to prevent infection" ;
+    dmo:recommendationId "bring-your-own-nail-tools-to-a-salon-to-prevent-infection" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you want to get a pedicure at a salon, you should bring your own nail tools to prevent getting an infection." ;
+    dmo:evidenceQuote "If you want to get a pedicure at a salon, you should bring your own nail tools to prevent getting an infection." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/buy-shoes-at-the-end-of-the-day-for-best-fit> a dmo:Recommendation ;
+    rdfs:label "Buy shoes at the end of the day for best fit" ;
+    dmo:recommendationId "buy-shoes-at-the-end-of-the-day-for-best-fit" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "When buying shoes, make sure they feel good and have enough room for your toes. Buy shoes at the end of the day, when your feet are the largest, so that you can find the best fit." ;
+    dmo:evidenceQuote "When buying shoes, make sure they feel good and have enough room for your toes. Buy shoes at the end of the day, when your feet are the largest, so that you can find the best fit." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/call-health-care-provider-for-non-healing-foot-cut-blister-or-bruise> a dmo:Recommendation ;
+    rdfs:label "Call health care provider for non-healing foot cut, blister, or bruise" ;
+    dmo:recommendationId "call-health-care-provider-for-non-healing-foot-cut-blister-or-bruise" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Referral" ;
+    dmo:statement "Call your health care provider right away if you have a cut, blister, or bruise on your foot that does not start to heal after a few days" ;
+    dmo:evidenceQuote "Call your health care provider right away if you have a cut, blister, or bruise on your foot that does not start to heal after a few days" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/check-the-inside-of-shoes-before-wearing> a dmo:Recommendation ;
+    rdfs:label "Check the inside of shoes before wearing" ;
+    dmo:recommendationId "check-the-inside-of-shoes-before-wearing" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Check the inside of your shoes before putting them on, to make sure the lining is smooth and free of pebbles or other objects." ;
+    dmo:evidenceQuote "Check the inside of your shoes before putting them on, to make sure the lining is smooth and free of pebbles or other objects." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/check-your-feet-every-day> a dmo:Recommendation ;
+    rdfs:label "Check your feet every day" ;
+    dmo:recommendationId "check-your-feet-every-day" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Check your feet each day will help you spot problems early before they get worse." ;
+    dmo:evidenceQuote "Checking your feet each day will help you spot problems early before they get worse." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/do-not-cut-corns-and-calluses> a dmo:Recommendation ;
+    rdfs:label "Do not cut corns and calluses" ;
+    dmo:recommendationId "do-not-cut-corns-and-calluses" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Do NOT cut corns and calluses" ;
+    dmo:evidenceQuote "Do NOT cut corns and calluses" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/do-not-put-a-hot-water-bottle-or-heating-pad-on-your-feet> a dmo:Recommendation ;
+    rdfs:label "Do not put a hot water bottle or heating pad on your feet" ;
+    dmo:recommendationId "do-not-put-a-hot-water-bottle-or-heating-pad-on-your-feet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Do not put a hot water bottle or heating pad on your feet." ;
+    dmo:evidenceQuote "Do not put a hot water bottle or heating pad on your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/do-not-put-lotion-or-cream-between-your-toes> a dmo:Recommendation ;
+    rdfs:label "Do not put lotion or cream between your toes" ;
+    dmo:recommendationId "do-not-put-lotion-or-cream-between-your-toes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Safety" ;
+    dmo:statement "Do not put lotion or cream between your toes because moistness might cause an infection." ;
+    dmo:evidenceQuote "Do not put lotion or cream between your toes because moistness might cause an infection." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/do-not-wear-shoes-with-pointed-toes-or-high-heels> a dmo:Recommendation ;
+    rdfs:label "Do not wear shoes with pointed toes or high heels" ;
+    dmo:recommendationId "do-not-wear-shoes-with-pointed-toes-or-high-heels" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Do not wear shoes with pointed toes or high heels, because they put too much pressure on your toes." ;
+    dmo:evidenceQuote "Do not wear shoes with pointed toes or high heels, because they put too much pressure on your toes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/do-not-wear-tight-socks-or-elastic-stockings> a dmo:Recommendation ;
+    rdfs:label "Do not wear tight socks or elastic stockings" ;
+    dmo:recommendationId "do-not-wear-tight-socks-or-elastic-stockings" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Do not wear tight socks or elastic stockings. Do not try to hold up loose socks with rubber bands." ;
+    dmo:evidenceQuote "Do not wear tight socks or elastic stockings. Do not try to hold up loose socks with rubber bands." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/do-not-wear-vinyl-or-plastic-shoes> a dmo:Recommendation ;
+    rdfs:label "Do not wear vinyl or plastic shoes" ;
+    dmo:recommendationId "do-not-wear-vinyl-or-plastic-shoes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Do not wear vinyl or plastic shoes, because they do not stretch or “breathe.”" ;
+    dmo:evidenceQuote "Do not wear vinyl or plastic shoes, because they do not stretch or “breathe.”" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/get-a-foot-check-at-every-health-care-visit> a dmo:Recommendation ;
+    rdfs:label "Get a foot check at every health care visit" ;
+    dmo:recommendationId "get-a-foot-check-at-every-health-care-visit" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Get a foot check at every health care visit." ;
+    dmo:evidenceQuote "Get a foot check at every health care visit." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/get-a-thorough-foot-exam-at-least-once-a-year> a dmo:Recommendation ;
+    rdfs:label "Get a thorough foot exam at least once a year" ;
+    dmo:recommendationId "get-a-thorough-foot-exam-at-least-once-a-year" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "At least once a year, get a thorough foot exam, including a check of the feeling and pulses in your feet." ;
+    dmo:evidenceQuote "At least once a year, get a thorough foot exam, including a check of the feeling and pulses in your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/get-a-thorough-foot-exam-if-you-have-foot-shape-changes> a dmo:Recommendation ;
+    rdfs:label "Get a thorough foot exam if you have foot shape changes" ;
+    dmo:recommendationId "get-a-thorough-foot-exam-if-you-have-foot-shape-changes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "Get a thorough foot exam at each health care visit if you have changes in the shape of your feet" ;
+    dmo:evidenceQuote "Get a thorough foot exam at each health care visit if you have changes in the shape of your feet" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/have-a-foot-doctor-trim-toenails-if-nails-are-thick-or-yellowed> a dmo:Recommendation ;
+    rdfs:label "Have a foot doctor trim toenails if nails are thick or yellowed" ;
+    dmo:recommendationId "have-a-foot-doctor-trim-toenails-if-nails-are-thick-or-yellowed" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "your toenails are thick or yellowed" ;
+    dmo:evidenceQuote "your toenails are thick or yellowed" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/have-a-foot-doctor-trim-toenails-if-nails-curve-and-grow-into-skin> a dmo:Recommendation ;
+    rdfs:label "Have a foot doctor trim toenails if nails curve and grow into skin" ;
+    dmo:recommendationId "have-a-foot-doctor-trim-toenails-if-nails-curve-and-grow-into-skin" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "your nails curve and grow into the skin" ;
+    dmo:evidenceQuote "your nails curve and grow into the skin" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/have-a-foot-doctor-trim-toenails-if-unable-to-do-so> a dmo:Recommendation ;
+    rdfs:label "Have a foot doctor trim toenails if unable to do so" ;
+    dmo:recommendationId "have-a-foot-doctor-trim-toenails-if-unable-to-do-so" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Have a foot doctor trim your toenails if you cannot see, feel, or reach your feet" ;
+    dmo:evidenceQuote "Have a foot doctor trim your toenails if you cannot see, feel, or reach your feet" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/keep-feet-away-from-heaters-and-open-fires> a dmo:Recommendation ;
+    rdfs:label "Keep feet away from heaters and open fires" ;
+    dmo:recommendationId "keep-feet-away-from-heaters-and-open-fires" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Keep your feet away from heaters and open fires." ;
+    dmo:evidenceQuote "Keep your feet away from heaters and open fires." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/keep-the-blood-flowing-to-your-feet> a dmo:Recommendation ;
+    rdfs:label "Keep the blood flowing to your feet" ;
+    dmo:recommendationId "keep-the-blood-flowing-to-your-feet" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Keep the blood flowing to your feet." ;
+    dmo:evidenceQuote "Keep the blood flowing to your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/protect-your-feet-from-hot-and-cold> a dmo:Recommendation ;
+    rdfs:label "Protect your feet from hot and cold" ;
+    dmo:recommendationId "protect-your-feet-from-hot-and-cold" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Protect your feet from hot and cold." ;
+    dmo:evidenceQuote "Protect your feet from hot and cold." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/put-feet-up-when-sitting-to-improve-blood-flow> a dmo:Recommendation ;
+    rdfs:label "Put feet up when sitting to improve blood flow" ;
+    dmo:recommendationId "put-feet-up-when-sitting-to-improve-blood-flow" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Put your feet up when you are sitting." ;
+    dmo:evidenceQuote "Put your feet up when you are sitting." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/put-sunscreen-on-the-tops-of-your-feet-to-prevent-sunburn> a dmo:Recommendation ;
+    rdfs:label "Put sunscreen on the tops of your feet to prevent sunburn" ;
+    dmo:recommendationId "put-sunscreen-on-the-tops-of-your-feet-to-prevent-sunburn" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Put sunscreen on the tops of your feet to prevent sunburn." ;
+    dmo:evidenceQuote "Put sunscreen on the tops of your feet to prevent sunburn." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/smooth-corns-and-calluses-gently> a dmo:Recommendation ;
+    rdfs:label "Smooth corns and calluses gently" ;
+    dmo:recommendationId "smooth-corns-and-calluses-gently" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you have corns or calluses, talk with your foot doctor about the best way to care for these foot problems." ;
+    dmo:evidenceQuote "If you have corns or calluses, talk with your foot doctor about the best way to care for these foot problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/trim-toenails-straight-across> a dmo:Recommendation ;
+    rdfs:label "Trim toenails straight across" ;
+    dmo:recommendationId "trim-toenails-straight-across" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Using toenail clippers, trim your toenails straight across. Do not cut into the corners of your toenail. Gently smooth each nail with an emery board or nonsharp nail file." ;
+    dmo:evidenceQuote "Using toenail clippers, trim your toenails straight across. Do not cut into the corners of your toenail. Gently smooth each nail with an emery board or nonsharp nail file." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/trim-your-toenails-straight-across> a dmo:Recommendation ;
+    rdfs:label "Trim your toenails straight across" ;
+    dmo:recommendationId "trim-your-toenails-straight-across" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Trim your toenails, when needed, after you wash and dry your feet. Using toenail clippers, trim your toenails straight across." ;
+    dmo:evidenceQuote "Trim your toenails, when needed, after you wash and dry your feet. Using toenail clippers, trim your toenails straight across." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/use-a-pumice-stone-to-smooth-corns-and-calluses-after-bathing-or-showering> a dmo:Recommendation ;
+    rdfs:label "Use a pumice stone to smooth corns and calluses after bathing or showering" ;
+    dmo:recommendationId "use-a-pumice-stone-to-smooth-corns-and-calluses-after-bathing-or-showering" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If your doctor tells you to, use a pumice stone to smooth corns and calluses after bathing or showering." ;
+    dmo:evidenceQuote "If your doctor tells you to, use a pumice stone to smooth corns and calluses after bathing or showering." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wash-your-feet-every-day> a dmo:Recommendation ;
+    rdfs:label "Wash your feet every day" ;
+    dmo:recommendationId "wash-your-feet-every-day" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Wash your feet with soap in warm, not hot, water. Test the water to make sure it is not too hot." ;
+    dmo:evidenceQuote "Wash your feet with soap in warm, not hot, water. Test the water to make sure it is not too hot." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-clean-lightly-padded-seamless-socks-with-shoes> a dmo:Recommendation ;
+    rdfs:label "Wear clean, lightly padded, seamless socks with shoes" ;
+    dmo:recommendationId "wear-clean-lightly-padded-seamless-socks-with-shoes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Make sure you wear socks, stockings, or nylons with your shoes to keep from getting blisters and sores. Choose clean, lightly padded socks that fit well. Socks with no seams are best." ;
+    dmo:evidenceQuote "Make sure you wear socks, stockings, or nylons with your shoes to keep from getting blisters and sores. Choose clean, lightly padded socks that fit well. Socks with no seams are best." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-extra-wide-or-deep-shoes-if-you-have-bunions-or-hammertoes> a dmo:Recommendation ;
+    rdfs:label "Wear extra-wide or deep shoes if you have bunions or hammertoes" ;
+    dmo:recommendationId "wear-extra-wide-or-deep-shoes-if-you-have-bunions-or-hammertoes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If you have a bunion, or hammertoes, which are toes that curl under your feet, you may need extra-wide or deep shoes." ;
+    dmo:evidenceQuote "If you have a bunion, or hammertoes, which are toes that curl under your feet, you may need extra-wide or deep shoes." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-shoes-and-socks-at-all-times> a dmo:Recommendation ;
+    rdfs:label "Wear shoes and socks at all times" ;
+    dmo:recommendationId "wear-shoes-and-socks-at-all-times" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Wear shoes and socks at all times." ;
+    dmo:evidenceQuote "Wear shoes and socks at all times." ;
+    dmo:evidenceQuote "Wear shoes and socks at all times. Do not walk barefoot or in just socks – even when you are indoors. You could step on something and hurt your feet. You may not feel any pain and may not know that you hurt yourself." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-shoes-at-the-beach-and-on-hot-pavement> a dmo:Recommendation ;
+    rdfs:label "Wear shoes at the beach and on hot pavement" ;
+    dmo:recommendationId "wear-shoes-at-the-beach-and-on-hot-pavement" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Wear shoes at the beach and on hot pavement." ;
+    dmo:evidenceQuote "Wear shoes at the beach and on hot pavement." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-socks-in-bed-if-feet-get-cold> a dmo:Recommendation ;
+    rdfs:label "Wear socks in bed if feet get cold" ;
+    dmo:recommendationId "wear-socks-in-bed-if-feet-get-cold" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Wear socks in bed if your feet get cold. In the winter, wear lined, waterproof boots to keep your feet warm and dry." ;
+    dmo:evidenceQuote "Wear socks in bed if your feet get cold. In the winter, wear lined, waterproof boots to keep your feet warm and dry." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-special-shoes-or-orthotics-if-feet-have-changed-shape> a dmo:Recommendation ;
+    rdfs:label "Wear special shoes or orthotics if feet have changed shape" ;
+    dmo:recommendationId "wear-special-shoes-or-orthotics-if-feet-have-changed-shape" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "If your feet have changed shape, such as from Charcot’s foot, you may need special shoes or shoe inserts, called orthotics. You also may need inserts if you have bunions, hammertoes, or other foot problems." ;
+    dmo:evidenceQuote "If your feet have changed shape, such as from Charcot’s foot, you may need special shoes or shoe inserts, called orthotics. You also may need inserts if you have bunions, hammertoes, or other foot problems." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wear-walking-or-athletic-shoes-for-daily-wear> a dmo:Recommendation ;
+    rdfs:label "Wear walking or athletic shoes for daily wear" ;
+    dmo:recommendationId "wear-walking-or-athletic-shoes-for-daily-wear" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Walking shoes and athletic shoes are good for daily wear. They support your feet and allow them to “breathe.”" ;
+    dmo:evidenceQuote "Walking shoes and athletic shoes are good for daily wear. They support your feet and allow them to “breathe.”" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/recommendation/wiggle-toes-and-move-ankles-to-help-blood-flow> a dmo:Recommendation ;
+    rdfs:label "Wiggle toes and move ankles to help blood flow" ;
+    dmo:recommendationId "wiggle-toes-and-move-ankles-to-help-blood-flow" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Lifestyle" ;
+    dmo:statement "Wiggle your toes for a few minutes throughout the day. Move your ankles up and down and in and out to help blood flow in your feet and legs." ;
+    dmo:evidenceQuote "Wiggle your toes for a few minutes throughout the day. Move your ankles up and down and in and out to help blood flow in your feet and legs." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/changes-in-the-shape-of-your-feet> a dmo:RiskFactor ;
+    rdfs:label "Changes in the Shape of Your Feet" ;
+    dmo:evidenceNote "You may need special shoes or inserts if you have changes in the shape of your feet, such as from Charcot’s foot." ;
+    dmo:name "Changes in the Shape of Your Feet" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "changes-in-the-shape-of-your-feet" ;
+    dmo:evidenceQuote "If your feet have changed shape, such as from Charcot’s foot, you may need special shoes or shoe inserts, called orthotics." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/diabetic-neuropathy> a dmo:RiskFactor ;
+    rdfs:label "Diabetic Neuropathy" ;
+    dmo:evidenceNote "Diabetes may cause nerve damage, also called diabetic neuropathy, that can cause tingling and pain, and can make you lose feeling in your feet." ;
+    dmo:name "Diabetic Neuropathy" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "diabetic-neuropathy" ;
+    dmo:evidenceQuote "Over time, diabetes may cause nerve damage, also called diabetic neuropathy, that can cause tingling and pain, and can make you lose feeling in your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/high-blood-glucose-levels> a dmo:RiskFactor ;
+    rdfs:label "High Blood Glucose Levels" ;
+    dmo:evidenceNote "Managing your blood glucose levels, also called blood sugar, can also help keep your feet healthy." ;
+    dmo:name "High Blood Glucose Levels" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "high-blood-glucose-levels" ;
+    dmo:evidenceQuote "Managing your blood glucose levels, also called blood sugar, can also help keep your feet healthy." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/history-of-foot-ulcers-or-amputation> a dmo:RiskFactor ;
+    rdfs:label "History of Foot Ulcers or Amputation" ;
+    dmo:evidenceNote "You may need a thorough foot exam if you had foot ulcers or an amputation in the past." ;
+    dmo:name "History of Foot Ulcers or Amputation" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "history-of-foot-ulcers-or-amputation" ;
+    dmo:evidenceQuote "had foot ulcers or an amputation in the past1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/nerve-damage-from-diabetes> a dmo:RiskFactor ;
+    rdfs:label "Nerve Damage from Diabetes" ;
+    dmo:evidenceNote "If you have nerve damage from diabetes, you may burn your feet and not know you did." ;
+    dmo:name "Nerve Damage from Diabetes" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "nerve-damage-from-diabetes" ;
+    dmo:evidenceQuote "If you have nerve damage from diabetes, you may burn your feet and not know you did." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/poor-blood-flow-to-feet> a dmo:RiskFactor ;
+    rdfs:label "Poor Blood Flow to Feet" ;
+    dmo:evidenceNote "Diabetes also can lower the amount of blood flow in your feet. Not having enough blood flowing to your legs and feet can make it hard for a sore or an infection to heal." ;
+    dmo:name "Poor Blood Flow to Feet" ;
+    dmo:riskCategory "NonModifiable" ;
+    dmo:riskFactorCode "poor-blood-flow-to-feet" ;
+    dmo:evidenceQuote "Diabetes also can lower the amount of blood flow in your feet. Not having enough blood flowing to your legs and feet can make it hard for a sore or an infection to heal." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/riskFactor/smoking> a dmo:RiskFactor ;
+    rdfs:label "Smoking" ;
+    dmo:evidenceNote "Smoking can lower the amount of blood flow to your feet." ;
+    dmo:name "Smoking" ;
+    dmo:riskCategory "Modifiable" ;
+    dmo:riskFactorCode "smoking" ;
+    dmo:evidenceQuote "Smoking can lower the amount of blood flow to your feet." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/symptom/callus-with-dried-blood-inside> a dmo:Symptom ;
+    rdfs:label "Callus with Dried Blood Inside" ;
+    dmo:name "Callus with Dried Blood Inside" ;
+    dmo:symptomCode "callus-with-dried-blood-inside" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "a callus with dried blood inside of it,which often can be the first sign of a wound under the callus" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/symptom/cut-blister-or-bruise-on-foot-that-does-not-heal> a dmo:Symptom ;
+    rdfs:label "Cut, Blister, or Bruise on Foot That Does Not Heal" ;
+    dmo:name "Cut, Blister, or Bruise on Foot That Does Not Heal" ;
+    dmo:symptomCode "cut-blister-or-bruise-on-foot-that-does-not-heal" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "a cut, blister, or bruise on your foot that does not start to heal after a few days" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/symptom/foot-infection-with-black-and-smelly-appearance> a dmo:Symptom ;
+    rdfs:label "Foot Infection with Black and Smelly Appearance" ;
+    dmo:name "Foot Infection with Black and Smelly Appearance" ;
+    dmo:symptomCode "foot-infection-with-black-and-smelly-appearance" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "a foot infection that becomes black and smelly—signs you might have gangrene" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/symptom/loss-of-feeling-in-feet> a dmo:Symptom ;
+    rdfs:label "Loss of Feeling in Feet" ;
+    dmo:name "Loss of Feeling in Feet" ;
+    dmo:symptomCode "loss-of-feeling-in-feet" ;
+    dmo:urgency "Urgent" ;
+    dmo:evidenceQuote "loss of feeling in your feet" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+<https://example.org/dmo/id/symptom/red-warm-or-painful-skin-on-foot> a dmo:Symptom ;
+    rdfs:label "Red, Warm, or Painful Skin on Foot" ;
+    dmo:name "Red, Warm, or Painful Skin on Foot" ;
+    dmo:symptomCode "red-warm-or-painful-skin-on-foot" ;
+    dmo:urgency "Emergency" ;
+    dmo:evidenceQuote "skin on your foot that becomes red, warm, or painful—signs of a possible infection" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetic-foot-problems> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/cutting-corns-and-calluses> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/contraindication/using-corn-plasters> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/contraindication/using-liquid-corn-and-callus-removers> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/complication/diabetic-neuropathy> dmo:presentsWith <https://example.org/dmo/id/symptom/loss-of-feeling-in-feet> .
+<https://example.org/dmo/id/complication/foot-ulcer> dmo:presentsWith <https://example.org/dmo/id/symptom/cut-blister-or-bruise-on-foot-that-does-not-heal> .
+<https://example.org/dmo/id/complication/gangrene> dmo:presentsWith <https://example.org/dmo/id/symptom/foot-infection-with-black-and-smelly-appearance> .
+<https://example.org/dmo/id/complication/peripheral-artery-disease> dmo:presentsWith <https://example.org/dmo/id/symptom/loss-of-feeling-in-feet> .
+<https://example.org/dmo/id/complication/charcot-s-foot> dmo:presentsWith <https://example.org/dmo/id/symptom/loss-of-feeling-in-feet> .
+<https://example.org/dmo/id/contraindication/putting-lotion-or-cream-between-toes> dmo:triggeredByCondition <https://example.org/dmo/id/complication/diabetic-neuropathy> .
+<https://example.org/dmo/id/lifestyleIntervention/be-more-physically-active> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/poor-blood-flow-to-feet> .
+<https://example.org/dmo/id/lifestyleIntervention/stop-smoking> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/poor-blood-flow-to-feet> .
+<https://example.org/dmo/id/lifestyleIntervention/stop-smoking> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/nerve-damage-from-diabetes> .
+<https://example.org/dmo/id/lifestyleIntervention/wear-shoes-and-socks-at-all-times> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/changes-in-the-shape-of-your-feet> .
+<https://example.org/dmo/id/lifestyleIntervention/wear-shoes-and-socks-at-all-times> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/diabetic-neuropathy> .
+<https://example.org/dmo/id/lifestyleIntervention/diabetes-self-care-plan> dmo:mitigatesRiskFactor <https://example.org/dmo/id/riskFactor/high-blood-glucose-levels> .

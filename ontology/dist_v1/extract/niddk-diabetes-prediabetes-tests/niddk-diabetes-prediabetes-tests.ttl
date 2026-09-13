@@ -1,0 +1,257 @@
+# 由 semantic_extract.py 生成，不要手改。源：ontology/knowledges/niddk-diabetes-prediabetes-tests.txt
+# 目标 named graph：urn:dmo:extract:niddk-diabetes-prediabetes-tests
+# 装载：curl -X PUT -H 'Content-Type: text/turtle' --data-binary @<此文件> \
+#        'http://localhost:7200/repositories/dmo/rdf-graphs/service?graph=urn:dmo:extract:niddk-diabetes-prediabetes-tests'
+
+@prefix dmo:   <https://example.org/dmo#> .   # 词汇：类与属性
+@prefix dmoid: <https://example.org/dmo/id/> .   # 实例
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ─── 出处（PROV-O）───────────────────────────────────────────
+<https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> a dmo:GuidelineSource ;
+    dmo:localFile "ontology/knowledges/niddk-diabetes-prediabetes-tests.txt" ;
+    dmo:sha256 "9a3b9cdc52c8fce00d1facab1734426193f4a3569cab41dde45da2fc041e1f93" ;
+    dmo:byteSize "10846"^^xsd:integer .
+
+<urn:dmo:extract:niddk-diabetes-prediabetes-tests> a prov:Entity ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> ;
+    prov:wasGeneratedBy [ a prov:Activity ;
+        dmo:model "Qwen/Qwen3-30B-A3B-Instruct-2507" ;
+        dmo:promptVersion "extract-v1" ;
+        dmo:schemaSource "diabetes-ontology-v2.json" ;
+        prov:endedAtTime "2026-08-13T02:34:30+00:00"^^xsd:dateTime ] .
+
+# ─── 抽取实例 ────────────────────────────────────────────────
+<https://example.org/dmo/id/contraindication/cystic-fibrosis-related-diabetes> a dmo:Contraindication ;
+    rdfs:label "Cystic Fibrosis-Related Diabetes" ;
+    dmo:contraCode "cystic-fibrosis-related-diabetes" ;
+    dmo:rationale "Not recommended for screening cystic fibrosis NIH external link-related diabetes1" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "screening cystic fibrosis NIH external link-related diabetes" ;
+    dmo:evidenceQuote "Not recommended for screening cystic fibrosis NIH external link-related diabetes1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/contraindication/rapidly-progressing-diabetes-in-children> a dmo:Contraindication ;
+    rdfs:label "Rapidly Progressing Diabetes in Children" ;
+    dmo:contraCode "rapidly-progressing-diabetes-in-children" ;
+    dmo:rationale "Not recommended for rapidly progressing diabetes, e.g., type 1 diabetes in children1" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "rapidly progressing diabetes, e.g., type 1 diabetes in children" ;
+    dmo:evidenceQuote "Not recommended for rapidly progressing diabetes, e.g., type 1 diabetes in children1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/contraindication/sickle-cell-disease> a dmo:Contraindication ;
+    rdfs:label "Sickle Cell Disease" ;
+    dmo:contraCode "sickle-cell-disease" ;
+    dmo:rationale "Altered relationship between A1C and glycemia in certain conditions" ;
+    dmo:severity "Absolute" ;
+    dmo:triggerCriteria "sickle cell disease" ;
+    dmo:evidenceQuote "Altered relationship between A1C and glycemia in certain conditions1\nsickle cell disease1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/diabetesType/prediabetes> a dmo:DiabetesType ;
+    rdfs:label "Prediabetes" ;
+    dmo:definition "If the patient’s diabetes test results are close to—but not within—the diagnostic range of the test, the patient may have prediabetes." ;
+    dmo:diabetesTypeCode "prediabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005148" ;
+    dmo:name "Prediabetes" ;
+    dmo:prevalenceShare "0.1"^^xsd:decimal ;
+    dmo:typicalOnset "AnyAge" ;
+    dmo:evidenceQuote "If the patient’s diabetes test results are close to—but not within—the diagnostic range of the test, the patient may have prediabetes." ;
+    dmo:evidenceQuote "Screening and diagnosis of prediabetes1 5.7–6.4%1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/diabetesType/type-2-diabetes> a dmo:DiabetesType ;
+    rdfs:label "Type 2 Diabetes" ;
+    dmo:definition "Diagnosis of type 2 diabetes is definitively made by blood tests. Diagnosis requires two abnormal test results from the same sample or from two different samples." ;
+    dmo:diabetesTypeCode "type-2-diabetes" ;
+    dmo:insulinRequired "false"^^xsd:boolean ;
+    dmo:mondoCode "MONDO:0005147" ;
+    dmo:name "Type 2 Diabetes" ;
+    dmo:prevalenceShare "0.9"^^xsd:decimal ;
+    dmo:typicalOnset "Adulthood" ;
+    dmo:evidenceQuote "Diagnosis of type 2 diabetes is definitively made by blood tests. Diagnosis requires two abnormal test results from the same sample or from two different samples." ;
+    dmo:evidenceQuote "Screening and diagnosis of type 2 diabetes1 6.5% or higher1 repeat for confirmation of diagnosis" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/labTest/a1c-test> a dmo:LabTest ;
+    rdfs:label "A1C Test" ;
+    dmo:definition "Screening and diagnosis of prediabetes; Screening and diagnosis of type 2 diabetes; Monitoring of diabetes" ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "a1c-test" ;
+    dmo:loincCode "4548-4" ;
+    dmo:name "A1C Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "percent" ;
+    dmo:evidenceQuote "A1C test\nThe A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test.\nUses\nScreening and diagnosis of prediabetes1\n5.7–6.4%1\nScreening and diagnosis of type 2 diabetes1\n6.5% or higher1" ;
+    dmo:evidenceQuote "The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/labTest/fasting-plasma-glucose-fpg-test> a dmo:LabTest ;
+    rdfs:label "Fasting Plasma Glucose (FPG) Test" ;
+    dmo:definition "Screening and diagnosis of prediabetes or impaired fasting glucose (IFG); Screening and diagnosis of diabetes" ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "fasting-plasma-glucose-fpg-test" ;
+    dmo:loincCode "15577-6" ;
+    dmo:name "Fasting Plasma Glucose (FPG) Test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Fasting plasma glucose (FPG) test\nUses\nScreening and diagnosis of prediabetes1 or impaired fasting glucose (IFG)\n100–125 mg/dL3\nScreening and diagnosis of diabetes1\n126 mg/dL or higher1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/labTest/oral-glucose-tolerance-test-ogtt> a dmo:LabTest ;
+    rdfs:label "Oral Glucose Tolerance Test (OGTT)" ;
+    dmo:definition "Screening and diagnosis of prediabetes or impaired glucose tolerance (IGT); Screening and diagnosis of diabetes" ;
+    dmo:fastingRequired "true"^^xsd:boolean ;
+    dmo:labTestCode "oral-glucose-tolerance-test-ogtt" ;
+    dmo:loincCode "15578-4" ;
+    dmo:name "Oral Glucose Tolerance Test (OGTT)" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Oral glucose tolerance test (OGTT)\nUses\nScreening and diagnosis of prediabetes or impaired glucose tolerance (IGT)1\n140 to 199 mg/dL at 2 hours1\nScreening and diagnosis of diabetes1\n≥200 mg/dL or higher at 2 hours1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/labTest/random-plasma-glucose-rpg-test> a dmo:LabTest ;
+    rdfs:label "Random plasma glucose (RPG) test" ;
+    dmo:definition "Random plasma glucose (RPG) test is used only with classic symptoms of hyperglycemia or hyperglycemic crisis." ;
+    dmo:fastingRequired "false"^^xsd:boolean ;
+    dmo:labTestCode "random-plasma-glucose-rpg-test" ;
+    dmo:loincCode "15577-2" ;
+    dmo:name "Random plasma glucose (RPG) test" ;
+    dmo:specimen "Blood" ;
+    dmo:unitOfMeasure "mg-per-dL" ;
+    dmo:evidenceQuote "Diagnosis of diabetes—used only with classic symptoms of hyperglycemia or hyperglycemic crisis polyuria, polydypsia, and unexplained weight loss 200 mg/dL or higher1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/monitoringSchedule/a1c> a dmo:MonitoringSchedule ;
+    rdfs:label "A1C" ;
+    dmo:appliesTo "patients with diabetes" ;
+    dmo:frequencyMonths "3"^^xsd:integer ;
+    dmo:name "A1C" ;
+    dmo:scheduleId "a1c" ;
+    dmo:evidenceQuote "Monitoring of diabetes\n\nTechnical features\n\nDiagnosis requires a laboratory test certified by the NGSP and standardized to the DCCT assay." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/a1c-test> a dmo:Recommendation ;
+    rdfs:label "A1C test" ;
+    dmo:recommendationId "a1c-test" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test." ;
+    dmo:evidenceQuote "The A1C test is sometimes called the hemoglobin A1C, HbA1c, glycated hemoglobin, or glycohemoglobin test." ;
+    dmo:evidenceQuote "Screening and diagnosis of prediabetes1" ;
+    dmo:evidenceQuote "Screening and diagnosis of type 2 diabetes1" ;
+    dmo:evidenceQuote "repeat for confirmation of diagnosis" ;
+    dmo:evidenceQuote "Diagnosis requires a laboratory test certified by the NGSP and standardized to the DCCT assay." ;
+    dmo:evidenceQuote "Some point-of-care A1C assays may be certified by the NGSP or approved by the U.S. Food and Drug Administration for diagnosis; however, they should only be considered in laboratories that are certified to perform moderate-to-high complexity tests to ensure testing proficiency." ;
+    dmo:evidenceQuote "Not recommended for rapidly progressing diabetes, e.g., type 1 diabetes in children1" ;
+    dmo:evidenceQuote "Not recommended for screening cystic fibrosis NIH external link-related diabetes1" ;
+    dmo:evidenceQuote "Because of these variations in test results, health care professionals should repeat tests before making a diagnosis." ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/confirming-diagnosis-of-type-2-diabetes-and-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Confirming diagnosis of type 2 diabetes and prediabetes" ;
+    dmo:recommendationId "confirming-diagnosis-of-type-2-diabetes-and-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Diagnosis of type 2 diabetes is definitively made by blood tests. Diagnosis requires two abnormal test results from the same sample or from two different samples. Repeat the test using one of the following methods: Repeat the same test or run a different test.1 The second test should be done immediately.1 If two test results indicate diabetes, consider the diagnosis confirmed.1 If the two different tests conflict, repeat the test that is above the diagnostic threshold. Diagnosis is made based on the confirmed test.1" ;
+    dmo:evidenceQuote "Diagnosis of type 2 diabetes is definitively made by blood tests. Diagnosis requires two abnormal test results from the same sample or from two different samples. Repeat the test using one of the following methods Repeat the same test or run a different test.1 The second test should be done immediately.1 If two test results indicate diabetes, consider the diagnosis confirmed.1 If the two different tests conflict, repeat the test that is above the diagnostic threshold. Diagnosis is made based on the confirmed test.1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/considering-interference-in-a1c-test> a dmo:Recommendation ;
+    rdfs:label "Considering interference in A1C test" ;
+    dmo:recommendationId "considering-interference-in-a1c-test" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "consider the possibility of interference in the A1C test when a result is below 4%, above 15%, or is at odds with other diabetes test results1" ;
+    dmo:evidenceQuote "consider the possibility of interference in the A1C test when a result is below 4%, above 15%, or is at odds with other diabetes test results1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/individualizing-diagnosis-and-treatment-decisions> a dmo:Recommendation ;
+    rdfs:label "Individualizing diagnosis and treatment decisions" ;
+    dmo:recommendationId "individualizing-diagnosis-and-treatment-decisions" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "consider each patient’s profile, including risk factors and history, and individualize diagnosis and treatment decisions in discussion with the patient1" ;
+    dmo:evidenceQuote "consider each patient’s profile, including risk factors and history, and individualize diagnosis and treatment decisions in discussion with the patient1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/observing-patients-with-prediabetes> a dmo:Recommendation ;
+    rdfs:label "Observing patients with prediabetes" ;
+    dmo:recommendationId "observing-patients-with-prediabetes" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Monitoring" ;
+    dmo:statement "If the patient’s diabetes test results are close to—but not within—the diagnostic range of the test, the patient may have prediabetes. Health care professionals may wish to observe patients with prediabetes whose condition is likely to progress, recommend lifestyle modifications, and retest in 3 to 6 months.1" ;
+    dmo:evidenceQuote "If the patient’s diabetes test results are close to—but not within—the diagnostic range of the test, the patient may have prediabetes. Health care professionals may wish to observe patients with prediabetes whose condition is likely to progress, recommend lifestyle modifications, and retest in 3 to 6 months.1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/random-plasma-glucose-rpg-test> a dmo:Recommendation ;
+    rdfs:label "Random plasma glucose (RPG) test" ;
+    dmo:recommendationId "random-plasma-glucose-rpg-test" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "Diagnosis of diabetes—used only with classic symptoms of hyperglycemia or hyperglycemic crisis" ;
+    dmo:evidenceQuote "Diagnosis of diabetes—used only with classic symptoms of hyperglycemia or hyperglycemic crisis" ;
+    dmo:evidenceQuote "Used only in symptomatic patients, not recommended for screening" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/repeating-test-when-results-conflict> a dmo:Recommendation ;
+    rdfs:label "Repeating test when results conflict" ;
+    dmo:recommendationId "repeating-test-when-results-conflict" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Diagnosis" ;
+    dmo:statement "If the two different tests conflict, repeat the test that is above the diagnostic threshold. Diagnosis is made based on the confirmed test.1" ;
+    dmo:evidenceQuote "If the two different tests conflict, repeat the test that is above the diagnostic threshold. Diagnosis is made based on the confirmed test.1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/recommendation/using-ngsp-certified-a1c-assay-method> a dmo:Recommendation ;
+    rdfs:label "Using NGSP-certified A1C assay method" ;
+    dmo:recommendationId "using-ngsp-certified-a1c-assay-method" ;
+    dmo:recommendationStrength "Unspecified" ;
+    dmo:recommendationType "Screening" ;
+    dmo:statement "send blood samples to be tested by a laboratory that uses an A1C analysis method certified by the NGSP to ensure the results are standardized to the Diabetes Control and Complications Trial (DCCT) assay1" ;
+    dmo:evidenceQuote "send blood samples to be tested by a laboratory that uses an A1C analysis method certified by the NGSP to ensure the results are standardized to the Diabetes Control and Complications Trial (DCCT) assay1" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/symptom/polydypsia> a dmo:Symptom ;
+    rdfs:label "Polydypsia" ;
+    dmo:hpoCode "HP:0001930" ;
+    dmo:name "Polydypsia" ;
+    dmo:symptomCode "polydypsia" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "polyuria, polydypsia, and unexplained weight loss" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/symptom/polyuria> a dmo:Symptom ;
+    rdfs:label "Polyuria" ;
+    dmo:hpoCode "HP:0000098" ;
+    dmo:name "Polyuria" ;
+    dmo:symptomCode "polyuria" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "polyuria, polydypsia, and unexplained weight loss" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+<https://example.org/dmo/id/symptom/unexplained-weight-loss> a dmo:Symptom ;
+    rdfs:label "Unexplained Weight Loss" ;
+    dmo:hpoCode "HP:0001829" ;
+    dmo:name "Unexplained Weight Loss" ;
+    dmo:symptomCode "unexplained-weight-loss" ;
+    dmo:urgency "Routine" ;
+    dmo:evidenceQuote "polyuria, polydypsia, and unexplained weight loss" ;
+    prov:wasDerivedFrom <https://example.org/dmo/id/guidelineSource/niddk-diabetes-prediabetes-tests> .
+
+# ─── 关系 ────────────────────────────────────────────────────
+<https://example.org/dmo/id/recommendation/a1c-test> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/a1c-test> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/considering-interference-in-a1c-test> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/considering-interference-in-a1c-test> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/individualizing-diagnosis-and-treatment-decisions> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/individualizing-diagnosis-and-treatment-decisions> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/observing-patients-with-prediabetes> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/repeating-test-when-results-conflict> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/repeating-test-when-results-conflict> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .
+<https://example.org/dmo/id/recommendation/using-ngsp-certified-a1c-assay-method> dmo:appliesToType <https://example.org/dmo/id/diabetesType/type-2-diabetes> .
+<https://example.org/dmo/id/recommendation/using-ngsp-certified-a1c-assay-method> dmo:appliesToType <https://example.org/dmo/id/diabetesType/prediabetes> .

@@ -1,0 +1,113 @@
+@prefix dmo: <https://example.org/dmo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/dmo/id/patient/924d7d4b-8093-586e-b006-e9187a63e15f> a dmo:Patient ;
+    dmo:birthYear 1961 ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:hasClinicalObservation <https://example.org/dmo/id/observation/O90024-ACT>,
+        <https://example.org/dmo/id/observation/O90024-BMI>,
+        <https://example.org/dmo/id/observation/O90024-SMOKE> ;
+    dmo:hasDiagnosis <https://example.org/dmo/id/diagnosis/D90024-DM> ;
+    dmo:hasEncounter <https://example.org/dmo/id/encounter/E90024-1> ;
+    dmo:hasMedicationUse <https://example.org/dmo/id/medicationUse/M90024-MET> ;
+    dmo:patientId "P90024" ;
+    dmo:sex "Male" .
+
+<https://example.org/dmo/id/labResult/L90024-A1C> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-13T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90024-A1C" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-A1C> ;
+    dmo:resultUnit "percent" ;
+    dmo:resultValue 6.6 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90024-EGFR> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-13T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90024-EGFR" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-EGFR> ;
+    dmo:resultUnit "mL-per-min" ;
+    dmo:resultValue 88.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/labResult/L90024-UACR> a dmo:LabResult ;
+    dmo:collectedAt "2026-02-13T09:00:00"^^xsd:dateTime ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:labResultId "L90024-UACR" ;
+    dmo:measuredByTest <https://example.org/dmo/id/LabTest-UACR> ;
+    dmo:resultUnit "mg-per-g" ;
+    dmo:resultValue 18.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/medicationUse/M90024-MET> a dmo:MedicationUse ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:medicationUseId "M90024-MET" ;
+    dmo:regimenRole "口服降糖" ;
+    dmo:startDate "2021-03-01"^^xsd:date ;
+    dmo:status "Active" ;
+    dmo:treatsDiagnosis <https://example.org/dmo/id/diagnosis/D90024-DM> ;
+    dmo:usesMedication <https://example.org/dmo/id/medication/metformin> .
+
+<https://example.org/dmo/id/observation/O90024-ACT> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90024-ACT" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90024-1> ;
+    dmo:observationType "PhysicalActivityPerWeek" ;
+    dmo:observedAt "2026-02-13T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "per-week" ;
+    dmo:valueDecimal 5.0 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90024-BMI> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90024-BMI" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90024-1> ;
+    dmo:observationType "BMI" ;
+    dmo:observedAt "2026-02-13T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:unitCode "kg-per-m2" ;
+    dmo:valueDecimal 23.1 ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/observation/O90024-SMOKE> a dmo:ClinicalObservation ;
+    dmo:demoScenario "S21" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:observationId "O90024-SMOKE" ;
+    dmo:observationRecordedAt <https://example.org/dmo/id/encounter/E90024-1> ;
+    dmo:observationType "SmokingStatus" ;
+    dmo:observedAt "2026-02-13T09:00:00"^^xsd:dateTime ;
+    dmo:status "Final" ;
+    dmo:valueText "Never" ;
+    dmo:valueTrustLevel "Curated" .
+
+<https://example.org/dmo/id/diagnosis/D90024-DM> a dmo:Diagnosis ;
+    dmo:clinicalStatus "Active" ;
+    dmo:codeSystem "ICD-10" ;
+    dmo:demoScenario "S21" ;
+    dmo:diagnosedAt <https://example.org/dmo/id/encounter/E90024-1> ;
+    dmo:diagnosedDate "2021-02-08"^^xsd:date ;
+    dmo:diagnosisId "D90024-DM" ;
+    dmo:diagnosisKind "Diabetes" ;
+    dmo:diagnosisType <https://example.org/dmo/id/T2DM> ;
+    dmo:externalCode "E11" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:verificationStatus "Confirmed" .
+
+<https://example.org/dmo/id/encounter/E90024-1> a dmo:ClinicalEncounter ;
+    dmo:encounterDate "2026-02-13"^^xsd:date ;
+    dmo:encounterId "E90024-1" ;
+    dmo:encounterType "Routine" ;
+    dmo:factOrigin "demo-cohort" ;
+    dmo:producesLabResult <https://example.org/dmo/id/labResult/L90024-A1C>,
+        <https://example.org/dmo/id/labResult/L90024-EGFR>,
+        <https://example.org/dmo/id/labResult/L90024-UACR> .
+

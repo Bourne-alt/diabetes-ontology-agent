@@ -1,0 +1,125 @@
+{
+  "source": {
+    "sourceId": "vadod-diabetes-cpg-patient-summary_final_508",
+    "uri": "https://example.org/dmo/id/guidelineSource/vadod-diabetes-cpg-patient-summary_final_508",
+    "localFile": "ontology/knowledges/pdfs/VADOD-Diabetes-CPG-Patient-Summary_final_508.pdf",
+    "sha256": "d81bc580c61f8a5a456fa820a8822b87b25f0b6e09779b4cd2c422d2ed57fa4d",
+    "byteSize": 684822,
+    "graphUri": "urn:dmo:extract:vadod-diabetes-cpg-patient-summary_final_508",
+    "documentFormat": "pdf",
+    "pageCount": 5,
+    "textPageCount": 5
+  },
+  "schema": {
+    "graph": "ontology/graph/diabetes-ontology-v2.json",
+    "targets": [
+      "diabetesType",
+      "labTest",
+      "complication",
+      "complicationStage",
+      "symptom",
+      "riskFactor",
+      "drugClass",
+      "medication",
+      "contraindication",
+      "adverseEffect",
+      "lifestyleIntervention",
+      "device",
+      "monitoringSchedule",
+      "recommendation"
+    ]
+  },
+  "chunks": 2,
+  "counts": {
+    "rawRecords": 72,
+    "accepted": 63,
+    "rejected": 9,
+    "entities": 62,
+    "edges": 44,
+    "danglingRelations": 7,
+    "mergeConflicts": 13
+  },
+  "quality": {
+    "quoteHitRate": 0.875,
+    "schemaSlotCoverage": 0.6935,
+    "danglingRelationRate": 0.1373,
+    "avgMentionsPerEntity": 1.02
+  },
+  "rejectionsByReason": {
+    "quote_not_found": 6,
+    "quote_too_short": 3
+  },
+  "linkPass": {
+    "candidates": 64,
+    "accepted": 40,
+    "rejectedByReason": {
+      "target_unresolved": 14,
+      "source_unresolved": 6,
+      "quote_not_found": 4
+    }
+  },
+  "entitiesByType": {
+    "recommendation": 14,
+    "riskFactor": 13,
+    "monitoringSchedule": 9,
+    "lifestyleIntervention": 8,
+    "labTest": 7,
+    "diabetesType": 4,
+    "complication": 4,
+    "complicationStage": 1,
+    "symptom": 1,
+    "device": 1
+  },
+  "danglingSamples": [
+    {
+      "from": "https://example.org/dmo/id/diabetesType/prediabetes",
+      "predicate": "predisposesTo",
+      "target": "Type 2 Diabetes Mellitus"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/hba1c",
+      "predicate": "hasThreshold",
+      "target": "HbA1c ≥ 6.5%"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/fasting-blood-sugar",
+      "predicate": "hasThreshold",
+      "target": "Fasting Blood Sugar 100–125 mg/dL"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/blood-pressure",
+      "predicate": "hasThreshold",
+      "target": "Blood Pressure >140/90 mmHg"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/high-density-lipoprotein-cholesterol",
+      "predicate": "hasThreshold",
+      "target": "HDL Cholesterol <35 mg/dL"
+    },
+    {
+      "from": "https://example.org/dmo/id/labTest/triglycerides",
+      "predicate": "hasThreshold",
+      "target": "Triglycerides >250 mg/dL"
+    },
+    {
+      "from": "https://example.org/dmo/id/recommendation/use-the-rule-of-15",
+      "predicate": "definesTarget",
+      "target": "Blood sugar less than 70mg/dl"
+    }
+  ],
+  "conflictSamples": [
+    "labTest/hba1c: definition: 'A measure of average blood glucose over the past 2-3 months, used to diagnose diabetes and monitor long-term glucose control.' vs 'A measure of average blood glucose over the past 2-3 months.'",
+    "riskFactor/overweight-or-obesity: name: 'Overweight or Obesity' vs 'Overweight or obesity'",
+    "riskFactor/history-of-prediabetes: name: 'History of Prediabetes' vs 'History of prediabetes'",
+    "riskFactor/first-degree-relative-with-type-2-diabetes-mellitus: name: 'First-Degree Relative with Type 2 Diabetes Mellitus' vs 'First-degree relative with T2DM'",
+    "riskFactor/high-prevalence-population: name: 'High Prevalence Population' vs 'High prevalence population'",
+    "riskFactor/high-blood-pressure: name: 'High Blood Pressure' vs 'High blood pressure'",
+    "riskFactor/high-density-lipoprotein-cholesterol-level-35-mg-dl-and-or-triglyceride-level-250-mg-dl: name: 'High-Density Lipoprotein Cholesterol Level <35 mg/dL and/or Triglyceride Level >250 mg/dL' vs 'Lipids'",
+    "riskFactor/gestational-diabetes-or-history-of-delivering-a-baby-weighing-9-pounds: name: 'Gestational Diabetes or History of Delivering a Baby Weighing >9 Pounds' vs 'Gestational diabetes or a history of delivering a baby weighing >9 pounds'",
+    "riskFactor/history-of-cardiovascular-disease: name: 'History of Cardiovascular Disease' vs 'History of cardiovascular disease'",
+    "riskFactor/polycystic-ovary-syndrome: name: 'Polycystic Ovary Syndrome' vs 'Polycystic ovary syndrome'",
+    "riskFactor/physical-inactivity-or-a-sedentary-lifestyle: name: 'Physical Inactivity or a Sedentary Lifestyle' vs 'Physical inactivity or a sedentary lifestyle'",
+    "riskFactor/patients-using-certain-medications-for-human-immunodeficiency-virus: name: 'Patients Using Certain Medications for Human Immunodeficiency Virus' vs 'Patients using certain medications for human immunodeficiency virus'",
+    "riskFactor/patients-using-antipsychotic-or-statin-medications: name: 'Patients Using Antipsychotic or Statin Medications' vs 'Patients using antipsychotic or statin medications'"
+  ]
+}
