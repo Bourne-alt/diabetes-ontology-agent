@@ -228,3 +228,151 @@ Accept: application/json
 # 33. 比较尿蛋白的字符串匹配与本体结果
 GET {{baseUrl}}/demo/compare?term=%E5%B0%BF%E8%9B%8B%E7%99%BD
 Accept: application/json
+
+###
+# 34. 初始化模型的单指标演示预测
+POST {{baseUrl}}/patients/P1/forecasts
+Accept: application/json
+Content-Type: application/json
+
+{
+  "snapshot": {
+    "clinical_as_of": "2026-09-13T10:00:00+08:00",
+    "knowledge_cutoff": "2026-09-13T10:00:00+08:00",
+    "events": [
+      {
+        "event_id": "e1",
+        "patient_id": "P1",
+        "source": "lis",
+        "record_id": "r1",
+        "revision": 1,
+        "event_time": "2026-09-13T08:00:00+08:00",
+        "available_at": "2026-09-13T09:00:00+08:00",
+        "ingested_at": "2026-09-13T09:01:00+08:00",
+        "metric": "FPG",
+        "value": 9.0,
+        "unit": "mmol/L"
+      }
+    ]
+  },
+  "action": {
+    "start_at": "2026-09-13T10:00:00+08:00",
+    "medication_code": "external-demo-drug"
+  }
+}
+
+###
+# 35. 有依据的治疗措施综合评估（合成患者、模板模式）
+POST {{baseUrl}}/patients/SYNTHETIC/treatment-assessments
+Accept: application/json
+Content-Type: application/json
+
+{
+  "mode": "prospective",
+  "composer": "template",
+  "knowledge_mode": "current",
+  "baseline_snapshot": {
+    "clinical_as_of": "2026-09-13T10:00:00+08:00",
+    "knowledge_cutoff": "2026-09-13T10:00:00+08:00",
+    "source_coverage": {
+      "lis": "合成数据：近期检查",
+      "pacs": "合成数据：一份报告",
+      "emr": "合成病史",
+      "medication": "未提供既往给药记录"
+    },
+    "events": [
+      {
+        "event_id": "SYN-A1C",
+        "record_id": "SYN-A1C",
+        "revision": 1,
+        "patient_id": "SYNTHETIC",
+        "source": "lis",
+        "domain": "glycemic",
+        "event_time": "2026-09-12T08:00:00+08:00",
+        "available_at": "2026-09-12T10:00:00+08:00",
+        "ingested_at": "2026-09-12T10:05:00+08:00",
+        "metric": "A1C",
+        "value": 8.0,
+        "unit": "percent",
+        "context": "routine",
+        "population_context": "NonPregnant",
+        "value_trust": "verified"
+      },
+      {
+        "event_id": "SYN-FPG",
+        "record_id": "SYN-FPG",
+        "revision": 1,
+        "patient_id": "SYNTHETIC",
+        "source": "lis",
+        "domain": "glycemic",
+        "event_time": "2026-09-12T08:00:00+08:00",
+        "available_at": "2026-09-12T10:00:00+08:00",
+        "ingested_at": "2026-09-12T10:05:00+08:00",
+        "metric": "FPG",
+        "value": 9.0,
+        "unit": "mmol/L",
+        "context": "fasting",
+        "population_context": "NonPregnant",
+        "value_trust": "verified"
+      },
+      {
+        "event_id": "SYN-UACR",
+        "record_id": "SYN-UACR",
+        "revision": 1,
+        "patient_id": "SYNTHETIC",
+        "source": "lis",
+        "domain": "renal",
+        "event_time": "2026-09-12T08:00:00+08:00",
+        "available_at": "2026-09-12T10:00:00+08:00",
+        "ingested_at": "2026-09-12T10:05:00+08:00",
+        "metric": "UACR",
+        "value": 45.0,
+        "unit": "mg/g",
+        "context": "routine",
+        "population_context": "NonPregnant",
+        "value_trust": "verified"
+      },
+      {
+        "event_id": "SYN-CKD",
+        "record_id": "SYN-CKD",
+        "revision": 1,
+        "patient_id": "SYNTHETIC",
+        "source": "emr",
+        "domain": "renal",
+        "event_time": "2026-09-10T08:00:00+08:00",
+        "available_at": "2026-09-10T08:00:00+08:00",
+        "ingested_at": "2026-09-10T08:05:00+08:00",
+        "concept_code": "CKD",
+        "verification": "confirmed",
+        "assertion": "present",
+        "clinical_status": "active",
+        "text": "合成场景：既往慢性肾脏病诊断，当前仍活动。"
+      },
+      {
+        "event_id": "SYN-PACS",
+        "record_id": "SYN-PACS",
+        "revision": 1,
+        "patient_id": "SYNTHETIC",
+        "source": "pacs",
+        "domain": "cardiovascular",
+        "event_time": "2026-09-10T08:00:00+08:00",
+        "available_at": "2026-09-10T10:00:00+08:00",
+        "ingested_at": "2026-09-10T10:05:00+08:00",
+        "assertion": "uncertain",
+        "text": "合成影像报告：未见明显心脏扩大，局部改变性质待定。"
+      }
+    ]
+  },
+  "interventions": [
+    {
+      "action_id": "START-METFORMIN",
+      "kind": "medication",
+      "operation": "start",
+      "code": "metformin",
+      "start_at": "2026-09-13T10:00:00+08:00",
+      "execution_status": "planned"
+    }
+  ],
+  "include_demo_appendix": false,
+  "extract_pacs": false
+}

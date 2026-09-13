@@ -23,6 +23,8 @@ from typing import Any
 from fastapi import FastAPI, HTTPException, Query
 
 from . import config as config_mod
+from .assessment.contracts import TreatmentAssessmentRequest
+from .forecast.contracts import ForecastRequest
 from .query import hybrid, templates
 
 app = FastAPI(
@@ -573,3 +575,39 @@ def serve(port: int = 8100) -> int:
 
     uvicorn.run(app, host="127.0.0.1", port=port, log_level="info")
     return 0
+
+
+# Independent untrained forecast API; existing /simulate implementation is unchanged.
+@app.post("/patients/{pid}/forecasts")
+def forecast_patient(pid: str, body: ForecastRequest) -> dict[str, Any]:
+    from .forecast.service import forecast
+
+    return forecast(pid, body)
+
+
+@app.post("/patients/{pid}/treatment-assessments")
+def treatment_assessment(pid: str, body: TreatmentAssessmentRequest) -> dict[str, Any]:
+    """Evidence-backed multidomain report; optional LLM with validated template fallback."""
+    import os
+    from pathlib import Path
+
+    from .assessment.service import assess
+    from .assessment.storage import archive
+
+    # Validate caller identity/timeline outside internal knowledge/composition errors.
+    snapshots = [body.baseline_snapshot]
+    if body.follow_up_snapshot:
+        snapshots.append(body.follow_up_snapshot)
+    if any(e.patient_id != pid for snapshot in snapshots for e in snapshot.events):
+        raise HTTPException(422, "snapshot contains a different patient")
+    report = assess(pid, body)
+    directory = os.environ.get("DMO_ASSESSMENT_REPORT_DIR")
+    if directory:
+        try:
+            archive(report, Path(directory))
+            report["archive_status"] = "saved"
+        except OSError:
+            report["archive_status"] = "failed"
+    else:
+        report["archive_status"] = "disabled"
+    return report

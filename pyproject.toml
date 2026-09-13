@@ -28,7 +28,7 @@ net = ["httpx>=0.28.1"]
 db = ["psycopg[binary]>=3.2"]
 
 # 融合查询 API。
-serve = ["fastapi>=0.115", "uvicorn>=0.32"]
+serve = ["fastapi>=0.115", "uvicorn>=0.32", "pydantic>=2.0"]
 
 # eval 用例是 YAML。
 eval = ["pyyaml>=6.0.3"]

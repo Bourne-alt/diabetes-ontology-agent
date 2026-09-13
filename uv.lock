@@ -104,6 +104,7 @@ net = [
 ]
 serve = [
     { name = "fastapi" },
+    { name = "pydantic" },
     { name = "uvicorn" },
 ]
 
@@ -111,6 +112,7 @@ serve = [
 requires-dist = [
     { name = "fastapi", marker = "extra == 'dev'", specifier = ">=0.115" },
     { name = "fastapi", marker = "extra == 'serve'", specifier = ">=0.115" },
+    { name = "pydantic", marker = "extra == 'serve'", specifier = ">=2.0" },
     { name = "httpx", marker = "extra == 'dev'", specifier = ">=0.28.1" },
     { name = "httpx", marker = "extra == 'net'", specifier = ">=0.28.1" },
     { name = "openai", marker = "extra == 'extract'", specifier = ">=3.0.0" },

@@ -1,0 +1,25 @@
+{
+  "snapshot": {
+    "clinical_as_of": "2026-09-13T10:00:00+08:00",
+    "knowledge_cutoff": "2026-09-13T10:00:00+08:00",
+    "events": [
+      {
+        "event_id": "e1",
+        "patient_id": "P1",
+        "source": "lis",
+        "record_id": "r1",
+        "revision": 1,
+        "event_time": "2026-09-13T08:00:00+08:00",
+        "available_at": "2026-09-13T09:00:00+08:00",
+        "ingested_at": "2026-09-13T09:01:00+08:00",
+        "metric": "FPG",
+        "value": 9.0,
+        "unit": "mmol/L"
+      }
+    ]
+  },
+  "action": {
+    "start_at": "2026-09-13T10:00:00+08:00",
+    "medication_code": "external-demo-drug"
+  }
+}
