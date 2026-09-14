@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+  <style>
+    body { margin: 0; background: #fcfaf6; }
+    * { box-sizing: border-box; }
+    a { color: #34477a; } a:hover { color: #22305a; }
+    .serif { font-family: "Newsreader", "Songti SC", "STSong", "SimSun", Georgia, serif; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; font-variant-ligatures: none; }
+    .sans { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif; }
+    .lbl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  </style>
+</helmet>
+
+<div class="sans" style="width: 520px; height: 980px; display: flex; flex-direction: column; background: #fcfaf6; color: #1c1a17; font-size: 14px; line-height: 1.65; overflow: hidden; border: 1px solid #e7e1d5">
+
+  <div style="flex: none; padding: 22px 22px 0">
+    <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 7px">
+      <h1 class="serif" style="margin: 0; font-size: 20px; font-weight: 600">工具调用检查器</h1>
+      <div style="flex-grow: 1"></div>
+      <span class="mono" style="font-size: 10.5px; color: #a39b8c">24 events</span>
+    </div>
+    <p style="margin: 0 0 16px; font-size: 12.5px; color: #7b7468; line-height: 1.75">事件按 <span class="mono" style="color: #413d36">call_id</span> 配对，不按到达顺序。并行调用交错时，按顺序渲染会把配对关系画错。</p>
+
+    <div style="display: flex; gap: 2px; border-bottom: 1px solid #e7e1d5">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="2">
+        <span onClick="{{ t.pick }}" style="flex-grow: 1; text-align: center; font-size: 12.5px; min-height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: {{ t.ink }}; border-bottom: 2px solid {{ t.mark }}; margin-bottom: -1px">{{ t.label }}</span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; overflow-y: auto; padding: 16px 22px 22px; display: flex; flex-direction: column; gap: 12px">
+
+    <sc-if value="{{ grouped }}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{ calls }}" as="c" hint-placeholder-count="4">
+        <div style="border: 1px solid {{ c.line }}; background: {{ c.fill }}; border-radius: 8px; overflow: hidden">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 13px 15px; border-bottom: 1px solid {{ c.line }}">
+            <span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: {{ c.dot }}"></span>
+            <span class="mono" style="font-size: 12.5px; color: #1c1a17">{{ c.tool }}</span>
+            <div style="flex-grow: 1"></div>
+            <span class="mono lbl" style="color: {{ c.ink }}">{{ c.badge }}</span>
+            <span class="mono" style="font-size: 10px; color: #bdb5a5">{{ c.ms }}</span>
+          </div>
+
+          <div style="padding: 13px 15px; display: flex; flex-direction: column; gap: 12px">
+            <div>
+              <div class="mono" style="font-size: 10px; color: #a39b8c; margin-bottom: 6px">call_id {{ c.callId }} · seq {{ c.seqs }}</div>
+              <div class="mono" style="font-size: 10.5px; line-height: 1.8; color: #413d36; background: #ffffff; border: 1px solid #eee9df; border-radius: 5px; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere">{{ c.args }}</div>
+            </div>
+            <div>
+              <div class="mono" style="font-size: 10px; color: #a39b8c; margin-bottom: 6px">{{ c.resultLabel }}</div>
+              <div class="mono" style="font-size: 10.5px; line-height: 1.8; color: {{ c.resultInk }}; background: #ffffff; border: 1px solid #eee9df; border-radius: 5px; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere">{{ c.result }}</div>
+            </div>
+            <sc-if value="{{ c.hasNote }}" hint-placeholder-val="{{ true }}">
+              <div style="font-size: 11.5px; line-height: 1.75; color: {{ c.ink }}">{{ c.note }}</div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ flat }}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{ events }}" as="e" hint-placeholder-count="11">
+        <div style="display: flex; align-items: center; gap: 11px; padding: 10px 12px; min-height: 44px; background: {{ e.fill }}; border-radius: 6px">
+          <span class="mono" style="flex: none; width: 22px; text-align: right; font-size: 10.5px; color: #bdb5a5">{{ e.seq }}</span>
+          <span style="flex: none; width: 5px; height: 5px; border-radius: 50%; background: {{ e.dot }}"></span>
+          <span class="mono" style="flex: none; width: 90px; font-size: 11px; color: {{ e.ink }}">{{ e.type }}</span>
+          <span class="mono" style="flex-grow: 1; min-width: 0; font-size: 11px; color: #7b7468; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ e.detail }}</span>
+          <span class="mono" style="flex: none; font-size: 10px; color: #bdb5a5">{{ e.callId }}</span>
+        </div>
+      </sc-for>
+    </sc-if>
+  </div>
+
+  <div style="flex: none; padding: 15px 22px; border-top: 1px solid #e7e1d5; background: #ffffff; display: flex; flex-direction: column; gap: 9px">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span class="mono" style="flex: none; font-size: 10px; color: #7b7468; background: #f6f3ed; border: 1px solid #e7e1d5; border-radius: 3px; padding: 2px 7px">[redacted]</span>
+      <span style="font-size: 11.5px; color: #7b7468; line-height: 1.6">连接串、密钥与 sk- 前缀值在进入事件前已被替换。</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span class="mono" style="flex: none; font-size: 10px; color: #8e3b34; background: #faedeb; border: 1px solid #ebd1cc; border-radius: 3px; padding: 2px 7px">ok=false</span>
+      <span style="font-size: 11.5px; color: #7b7468; line-height: 1.6">工具失败是执行问题，不是查无数据——文案必须分开。</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":520,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'grouped' };
+  }
+
+  renderVals() {
+    const OK  = { dot: '#34477a', ink: '#34477a', line: '#eee9df', fill: '#ffffff' };
+    const BAD = { dot: '#8e3b34', ink: '#8e3b34', line: '#ebd1cc', fill: '#faedeb' };
+    const RUN = { dot: '#a3562a', ink: '#a3562a', line: '#ecd5bc', fill: '#fbf0e6' };
+
+    const CALLS = [
+      { tool: 'write_todos', callId: 'c_0f31', seqs: '4 → 5', ms: '18ms', tone: OK, badge: 'ok',
+        args: '{\n  "todos": [\n    { "content": "读取 manifest…", "status": "in_progress" },\n    { "content": "解析表面形式…", "status": "pending" }\n  ]\n}',
+        resultLabel: 'tool_end → 随后单独发 todo_update (seq 6)',
+        result: '{\n  "todos": [4 项]\n}',
+        note: '清单是 LangGraph 的状态更新，不是普通工具返回；界面渲染 todo_update 事件，而不是从 tool_end 里解析。' },
+
+      { tool: 'search_concepts', callId: 'c_7a1e', seqs: '9 → 10', ms: '0.4s', tone: OK, badge: 'ok',
+        args: '{\n  "q": "糖化血红蛋白",\n  "limit": 10\n}',
+        resultLabel: 'tool_end · result',
+        result: '{\n  "hits": 1,\n  "iri": "dmo:HbA1cMeasurement",\n  "usable": true\n}' },
+
+      { tool: 'query_patient_facts', callId: 'c_93b0', seqs: '12 → 13', ms: '2.1s', tone: BAD, badge: 'ok=false',
+        args: '{\n  "database": "original",\n  "table": "cdr_lis_result",\n  "columns": [6],\n  "limit": 100\n}',
+        resultLabel: 'tool_end · 被结果预算拦下',
+        result: '{\n  "ok": false,\n  "error": "result_too_large",\n  "hint": "请缩小查询范围或分页。"\n}',
+        note: '超过 24000 字符的结果不截断后交给模型，避免把半截引文当完整证据。' },
+
+      { tool: 'search_passages', callId: 'c_10f2', seqs: '20 → ?', ms: '1.2s', tone: RUN, badge: '进行中',
+        args: '{\n  "cited_by": "RULE-DX-A1C-001",\n  "limit": 10\n}',
+        resultLabel: 'tool_end 尚未到达',
+        result: '等待配对事件。并行调用会交错到达，\n在收到同 call_id 的 tool_end 前保持此状态。' },
+    ];
+
+    const EVENTS = [
+      { seq: 1,  type: 'run_start',   detail: '开始查询 · zai-org/GLM-5.2', callId: '—', tone: OK },
+      { seq: 2,  type: 'model_start', detail: '正在选择查询或组织回答', callId: '—', tone: OK },
+      { seq: 4,  type: 'tool_start',  detail: 'write_todos', callId: 'c_0f31', tone: OK },
+      { seq: 6,  type: 'todo_update', detail: '4 项 · 1 in_progress', callId: '—', tone: OK },
+      { seq: 9,  type: 'tool_start',  detail: 'search_concepts', callId: 'c_7a1e', tone: OK },
+      { seq: 10, type: 'tool_end',    detail: 'search_concepts · ok', callId: 'c_7a1e', tone: OK },
+      { seq: 13, type: 'tool_end',    detail: 'result_too_large', callId: 'c_93b0', tone: BAD },
+      { seq: 15, type: 'tool_start',  detail: 'patient_evidence', callId: 'c_44cd', tone: OK },
+      { seq: 20, type: 'tool_start',  detail: 'search_passages', callId: 'c_10f2', tone: RUN },
+      { seq: 16, type: 'tool_end',    detail: 'patient_evidence · ok（交错到达）', callId: 'c_44cd', tone: OK },
+      { seq: 24, type: 'done',        detail: 'status completed · 14.2s', callId: '—', tone: OK },
+    ];
+
+    const TABS = [
+      { key: 'grouped', label: '按 call_id 归组' },
+      { key: 'flat', label: '原始事件流' },
+    ];
+
+    return {
+      grouped: this.state.view === 'grouped',
+      flat: this.state.view === 'flat',
+
+      tabs: TABS.map((t) => {
+        const on = this.state.view === t.key;
+        return {
+          label: t.label,
+          ink: on ? '#1c1a17' : '#a39b8c',
+          mark: on ? '#34477a' : 'transparent',
+          pick: () => this.setState({ view: t.key }),
+        };
+      }),
+
+      calls: CALLS.map((c) => ({
+        tool: c.tool, callId: c.callId, seqs: c.seqs, ms: c.ms, badge: c.badge,
+        args: c.args, result: c.result, resultLabel: c.resultLabel,
+        dot: c.tone.dot, ink: c.tone.ink, line: c.tone.line, fill: c.tone.fill,
+        resultInk: c.tone === BAD ? '#8e3b34' : '#413d36',
+        hasNote: !!c.note, note: c.note || '',
+      })),
+
+      events: EVENTS.map((e) => ({
+        seq: e.seq, type: e.type, detail: e.detail, callId: e.callId,
+        dot: e.tone.dot, ink: e.tone.ink,
+        fill: e.tone === BAD ? '#faedeb' : 'transparent',
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

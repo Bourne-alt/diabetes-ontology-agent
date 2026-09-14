@@ -123,3 +123,14 @@ dmo serve   [--port 8100]
 
 > ⚠️ 本项目仅用于技术学习，不是医疗器械，不构成任何医疗建议。
 > 所有输出均不包含具体用药剂量；风险分层为规则式定性分层，非概率预测。
+
+### LangChain 查询 Agent
+
+`src/agent` 提供只读本体/患者查询工具、本地网页、CLI 与透明 SSE 过程事件。安装运行：
+
+```bash
+uv sync --extra agent
+uv run --extra agent dmo-agent --serve
+```
+
+访问 `http://127.0.0.1:8200`；配置、执行边界与事件协议见 [Agent 使用说明](src/agent/README.md)。

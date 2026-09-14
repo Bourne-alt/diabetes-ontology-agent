@@ -1,0 +1,17 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "主工作台 · 桌面 1440", "x": 0, "y": 0, "w": 1440, "h": 980, "is_interactive": true },
+    { "file": "Trace.dc.html", "title": "工具调用检查器", "x": 1560, "y": 0, "w": 520, "h": 980, "is_interactive": true },
+    { "file": "Evidence.dc.html", "title": "证据链抽屉", "x": 2180, "y": 0, "w": 560, "h": 980, "is_interactive": true },
+    { "file": "States.dc.html", "title": "状态机 · 全部结局", "x": 0, "y": 1120, "w": 1180, "h": 760, "is_interactive": true },
+    { "file": "Mobile.dc.html", "title": "移动端 390", "x": 1340, "y": 1120, "w": 390, "h": 844, "is_interactive": true },
+    { "file": "Tokens.dc.html", "title": "配色与字体系统", "x": 1840, "y": 1120, "w": 880, "h": 800 }
+  ],
+  "annotations": [
+    { "id": "note-brief", "x": 0, "y": -200, "w": 620, "text": "糖尿病本体 · Agent 证据工作台（比赛演示版）\n配色：象牙纸底 + 墨蓝主强调 + 赭石警示；标题衬线（Newsreader / 宋体），数据等宽（IBM Plex Mono）。\n接口依据：POST /chat/stream 的 SSE 事件契约，含新增的 write_todos / todo_update。\n界面中的患者与数值均为示例数据。" },
+    { "id": "note-why", "x": 1560, "y": -200, "w": 560, "text": "为什么不做成聊天界面：AgentHarness 每轮独立执行，不保留患者上下文。对话气泡会让人以为系统记得上一轮，第二轮就会拿到错答案。" },
+    { "id": "note-states", "x": 0, "y": 1930, "w": 620, "text": "SSE 开流后 HTTP 永远是 200，成功与失败只能从事件读。八种结局各有文案——其中「已停止」最容易写错：前端 abort 只断连接，后端同步工作会跑到各自超时。" },
+    { "id": "note-tokens", "x": 1840, "y": 1990, "w": 620, "text": "整套颜色只有两个强调色在干活：墨蓝=可核验，赭石=不可信或未排除。演示队列的紫和失败的红只做小标签，不铺面积。" }
+  ],
+  "launch": { "view": "canvas" }
+}

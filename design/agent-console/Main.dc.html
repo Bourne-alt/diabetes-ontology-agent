@@ -1,0 +1,401 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+  <style>
+    body { margin: 0; background: #f6f3ed; }
+    * { box-sizing: border-box; }
+    a { color: #34477a; text-decoration: none; }
+    a:hover { color: #22305a; text-decoration: underline; }
+    .serif { font-family: "Newsreader", "Songti SC", "STSong", "SimSun", Georgia, serif; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; font-variant-ligatures: none; }
+    .sans { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif; }
+    .lbl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+    @keyframes dcpulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.82); } }
+    .pulse { animation: dcpulse 1.5s ease-in-out infinite; }
+    .scroll::-webkit-scrollbar { width: 7px; }
+    .scroll::-webkit-scrollbar-thumb { background: #ddd6c8; border-radius: 4px; }
+  </style>
+</helmet>
+
+<div class="sans" style="width: 1440px; height: 980px; display: flex; flex-direction: column; background: #f6f3ed; color: #1c1a17; font-size: 14px; line-height: 1.65; overflow: hidden">
+
+  <header style="flex: none; height: 72px; display: flex; align-items: center; gap: 20px; padding: 0 30px; background: #ffffff; border-bottom: 1px solid #e7e1d5">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34477a" stroke-width="1.2" stroke-linecap="round">
+        <circle cx="12" cy="4.6" r="2.3"></circle>
+        <circle cx="4.6" cy="17.6" r="2.3"></circle>
+        <circle cx="19.4" cy="17.6" r="2.3"></circle>
+        <circle cx="12" cy="11.6" r="1.4" fill="#a3562a" stroke="none"></circle>
+        <path d="M12 6.9v3.3M10.8 12.6 6.2 16.1M13.2 12.6l4.6 3.5M6.9 17.6h10.2"></path>
+      </svg>
+      <div>
+        <div class="serif" style="font-size: 20px; font-weight: 600; letter-spacing: 0.005em; line-height: 1.25">糖尿病本体 · 证据工作台</div>
+        <div class="lbl mono" style="color: #a39b8c; margin-top: 1px">Ontology Evidence Console</div>
+      </div>
+    </div>
+
+    <div style="flex-grow: 1"></div>
+
+    <div style="display: flex; align-items: center; gap: 16px">
+      <span class="mono" style="font-size: 11px; color: #6e4a6b; background: #f6eff5; border: 1px solid #e3d2e0; border-radius: 3px; padding: 4px 9px">示例数据 · 非真实患者</span>
+      <span class="mono" style="font-size: 11px; color: #7b7468; background: #fcfaf6; border: 1px solid #e7e1d5; border-radius: 3px; padding: 4px 9px">zai-org/GLM-5.2</span>
+      <div style="width: 1px; height: 26px; background: #e7e1d5"></div>
+      <div style="display: flex; flex-direction: column; gap: 5px">
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 11px; color: #7b7468">
+          <span>模型 <b class="mono" style="color: #1c1a17; font-weight: 500">4</b>/12</span>
+          <span>工具 <b class="mono" style="color: #1c1a17; font-weight: 500">9</b>/24</span>
+        </div>
+        <div style="display: flex; gap: 7px">
+          <div style="width: 68px; height: 2px; background: #e7e1d5"><div style="width: 33%; height: 2px; background: #34477a"></div></div>
+          <div style="width: 68px; height: 2px; background: #e7e1d5"><div style="width: 37%; height: 2px; background: #34477a"></div></div>
+        </div>
+      </div>
+      <div style="width: 1px; height: 26px; background: #e7e1d5"></div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #34477a"></span>
+        <span style="font-size: 12.5px; color: #413d36">查询完成 · 14.2s</span>
+      </div>
+    </div>
+  </header>
+
+  <div style="flex-grow: 1; display: flex; min-height: 0">
+
+    <aside class="scroll" style="flex: none; width: 286px; padding: 24px 22px; border-right: 1px solid #e7e1d5; overflow-y: auto; display: flex; flex-direction: column; gap: 26px">
+
+      <section>
+        <div class="lbl mono" style="color: #a3562a; margin-bottom: 12px">本轮边界</div>
+        <div style="border-left: 2px solid #a3562a; padding-left: 14px; display: flex; flex-direction: column; gap: 9px">
+          <sc-for list="{{ bounds }}" as="b" hint-placeholder-count="4">
+            <div style="font-size: 12.5px; line-height: 1.75; color: #555047">{{ b.text }}</div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section>
+        <div class="lbl mono" style="color: #a39b8c; margin-bottom: 12px">常用问法</div>
+        <div style="display: flex; flex-direction: column; gap: 3px">
+          <sc-for list="{{ samples }}" as="s" hint-placeholder-count="4">
+            <div onClick="{{ s.pick }}" style="border-radius: 6px; padding: 11px 12px; cursor: pointer; min-height: 44px; display: flex; flex-direction: column; gap: 5px; background: {{ s.fill }}; border-left: 2px solid {{ s.mark }}">
+              <div style="font-size: 12.5px; line-height: 1.6; color: {{ s.ink }}">{{ s.text }}</div>
+              <div class="mono" style="font-size: 10px; color: #a39b8c">{{ s.route }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <div style="flex-grow: 1"></div>
+
+      <section style="border-top: 1px solid #e7e1d5; padding-top: 16px">
+        <div class="mono" style="font-size: 10.5px; line-height: 1.9; color: #a39b8c">
+          run_id 4f2a8e71-…-9c03<br>
+          seq 递增 · 不实现断线重放
+        </div>
+      </section>
+    </aside>
+
+    <main class="scroll" style="flex-grow: 1; min-width: 0; overflow-y: auto; padding: 26px 32px 32px; display: flex; flex-direction: column; gap: 22px">
+
+      <section style="background: #ffffff; border: 1px solid #e7e1d5; border-radius: 10px; padding: 20px 22px 16px; box-shadow: 0 1px 2px rgba(28,26,23,0.03), 0 10px 28px -18px rgba(28,26,23,0.16)">
+        <div class="serif" style="font-size: 17px; line-height: 1.7; color: #1c1a17; min-height: 52px">{{ query }}</div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid #f0ece3">
+          <button style="border: 0; border-radius: 6px; background: #34477a; color: #ffffff; font: inherit; font-size: 13.5px; font-weight: 500; padding: 0 24px; min-height: 44px; cursor: pointer; letter-spacing: 0.02em">开始查询</button>
+          <button style="border: 1px solid #d6cdbd; border-radius: 6px; background: transparent; color: #7b7468; font: inherit; font-size: 13.5px; padding: 0 20px; min-height: 44px; cursor: pointer">停止</button>
+          <div style="flex-grow: 1"></div>
+          <span class="mono" style="font-size: 11px; color: #a39b8c">{{ qlen }} / 12000</span>
+        </div>
+      </section>
+
+      <section style="background: #ffffff; border: 1px solid #e7e1d5; border-radius: 10px; padding: 20px 22px; box-shadow: 0 1px 2px rgba(28,26,23,0.03), 0 10px 28px -18px rgba(28,26,23,0.16)">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px">
+          <span class="lbl mono" style="color: #a39b8c">待办清单</span>
+          <span class="mono" style="font-size: 10px; color: #34477a; background: #edf0f7; border: 1px solid #cbd5e8; border-radius: 3px; padding: 2px 7px">todo_update · seq 6</span>
+          <div style="flex-grow: 1"></div>
+          <span class="serif" style="font-size: 19px; font-weight: 600; color: #34477a; line-height: 1">{{ pct }}</span>
+          <span style="font-size: 11.5px; color: #a39b8c">{{ ratio }}</span>
+        </div>
+        <div style="height: 3px; border-radius: 2px; background: #eee9df; overflow: hidden; margin-bottom: 16px">
+          <div style="width: {{ pct }}; height: 3px; background: #34477a"></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <sc-for list="{{ todos }}" as="t" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 6px; background: {{ t.fill }}; opacity: {{ t.dim }}">
+              <span style="flex: none; width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid {{ t.ring }}; background: {{ t.dotFill }}; display: flex; align-items: center; justify-content: center">
+                <sc-if value="{{ t.isDone }}" hint-placeholder-val="{{ true }}">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"></path></svg>
+                </sc-if>
+                <sc-if value="{{ t.isRunning }}" hint-placeholder-val="{{ true }}">
+                  <span class="pulse" style="width: 6px; height: 6px; border-radius: 50%; background: #34477a"></span>
+                </sc-if>
+              </span>
+              <span style="flex-grow: 1; min-width: 0; font-size: 13px; line-height: 1.6; color: {{ t.ink }}">{{ t.content }}</span>
+              <span class="mono lbl" style="flex: none; color: {{ t.tagInk }}">{{ t.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="background: #ffffff; border: 1px solid #e7e1d5; border-radius: 10px; box-shadow: 0 1px 2px rgba(28,26,23,0.03), 0 10px 28px -18px rgba(28,26,23,0.16); overflow: hidden">
+        <div style="padding: 22px 24px 0">
+          <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px">
+            <h2 class="serif" style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: 0.005em">回答</h2>
+            <span class="mono" style="font-size: 10.5px; color: #a39b8c">event answer · seq 24</span>
+          </div>
+
+          <div style="display: flex; gap: 16px; padding: 16px 18px; border-radius: 8px; background: #edf0f7; margin-bottom: 20px">
+            <span style="flex: none; width: 2px; background: #34477a; align-self: stretch"></span>
+            <div>
+              <div class="lbl mono" style="color: #34477a; margin-bottom: 7px">结论与边界</div>
+              <div class="serif" style="font-size: 16px; line-height: 1.8; color: #1c1a17; text-wrap: pretty">该患者满足本体阈值规则的确诊判定（<span class="mono" style="font-size: 14px">Confirmed</span>）。判定由规则推出，<b style="font-weight: 600">不是概率、不含分期、不含用药建议</b>；风险档位是有序枚举，不可当作发生率解读。</div>
+            </div>
+          </div>
+
+          <div class="lbl mono" style="color: #a39b8c; margin-bottom: 10px">患者与数据来源</div>
+          <div style="margin-bottom: 22px">
+            <sc-for list="{{ sources }}" as="s" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 14px; padding: 11px 2px; border-bottom: 1px solid #f0ece3">
+                <span style="flex: none; width: 74px; font-size: 12px; color: #7b7468">{{ s.label }}</span>
+                <span class="mono" style="flex-grow: 1; font-size: 12px; color: #1c1a17">{{ s.value }}</span>
+                <span class="mono" style="flex: none; font-size: 10px; color: {{ s.tone }}; background: {{ s.tfill }}; border: 1px solid {{ s.tline }}; border-radius: 3px; padding: 2px 7px">{{ s.tag }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="padding: 0 24px 24px">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 13px">
+            <span class="lbl mono" style="color: #a39b8c">证据链与出处</span>
+            <div style="display: flex; gap: 4px">
+              <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+                <span onClick="{{ f.pick }}" style="font-size: 11.5px; cursor: pointer; border-radius: 4px; padding: 5px 12px; background: {{ f.fill }}; color: {{ f.ink }}; border: 1px solid {{ f.line }}">{{ f.label }}</span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <sc-for list="{{ evidence }}" as="e" hint-placeholder-count="4">
+              <div style="display: flex; gap: 16px; border-radius: 8px; background: {{ e.fill }}; border: 1px solid {{ e.line }}; padding: 15px 17px">
+                <span style="flex: none; width: 2px; background: {{ e.bar }}; align-self: stretch"></span>
+                <div style="flex-grow: 1; min-width: 0">
+                  <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px">
+                    <span class="lbl mono" style="color: {{ e.bar }}">{{ e.kind }}</span>
+                    <span class="mono" style="font-size: 11.5px; color: #413d36">{{ e.id }}</span>
+                    <div style="flex-grow: 1"></div>
+                    <span class="mono" style="font-size: 10px; color: #7b7468">{{ e.via }}</span>
+                  </div>
+                  <sc-if value="{{ e.isQuote }}" hint-placeholder-val="{{ true }}">
+                    <div class="serif" style="font-size: 16px; line-height: 1.85; color: #1c1a17; border-left: 2px solid #34477a; padding-left: 14px; margin: 6px 0 10px">{{ e.body }}</div>
+                  </sc-if>
+                  <sc-if value="{{ e.isPlain }}" hint-placeholder-val="{{ true }}">
+                    <div style="font-size: 13px; line-height: 1.75; color: #413d36; margin-bottom: 8px">{{ e.body }}</div>
+                  </sc-if>
+                  <div class="mono" style="font-size: 10.5px; line-height: 1.7; color: #a39b8c; overflow-wrap: anywhere">{{ e.meta }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="background: #fbf0e6; border: 1px solid #ecd5bc; border-radius: 10px; padding: 20px 22px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a3562a" stroke-width="1.6" stroke-linecap="round"><path d="M12 3.5 2.8 20h18.4L12 3.5ZM12 10.2v4.1M12 17.2v.01"></path></svg>
+          <span class="serif" style="font-size: 16px; font-weight: 600; color: #8a4620">数据缺口与下一步 · 尚未排除</span>
+          <span class="mono" style="font-size: 10.5px; color: #a3562a; background: #f6e4d1; border-radius: 3px; padding: 2px 8px">3 项</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <sc-for list="{{ gaps }}" as="g" hint-placeholder-count="3">
+            <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #f0dcc6">
+              <span class="mono" style="flex: none; width: 130px; font-size: 10.5px; color: #a3562a">{{ g.field }}</span>
+              <span style="flex-grow: 1; font-size: 12.5px; line-height: 1.7; color: #555047">{{ g.text }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size: 12px; line-height: 1.75; color: #8a6a45; margin-top: 13px">上述条目不代表患者不存在相应情况，只表示本轮工具返回的证据不足以判定。</div>
+      </section>
+    </main>
+
+    <aside class="scroll" style="flex: none; width: 388px; background: #fcfaf6; border-left: 1px solid #e7e1d5; overflow-y: auto; display: flex; flex-direction: column">
+      <div style="flex: none; padding: 22px 22px 14px; border-bottom: 1px solid #e7e1d5">
+        <div style="display: flex; align-items: baseline; gap: 10px">
+          <h2 class="serif" style="margin: 0; font-size: 17px; font-weight: 600">执行轨迹</h2>
+          <div style="flex-grow: 1"></div>
+          <span class="mono" style="font-size: 10.5px; color: #a39b8c">24 events</span>
+        </div>
+      </div>
+
+      <div style="padding: 12px 16px 22px; display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{ trace }}" as="t" hint-placeholder-count="9">
+          <div style="border-radius: 6px; background: {{ t.fill }}">
+            <div onClick="{{ t.toggle }}" style="display: flex; align-items: center; gap: 10px; padding: 9px 11px; cursor: pointer; min-height: 44px">
+              <span class="mono" style="flex: none; width: 20px; text-align: right; font-size: 10.5px; color: #bdb5a5">{{ t.seq }}</span>
+              <span style="flex: none; width: 5px; height: 5px; border-radius: 50%; background: {{ t.dot }}"></span>
+              <span class="mono" style="flex: none; font-size: 11px; color: {{ t.ink }}">{{ t.type }}</span>
+              <span class="mono" style="flex-grow: 1; min-width: 0; font-size: 11px; color: #7b7468; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ t.tool }}</span>
+              <span class="mono" style="flex: none; font-size: 10px; color: #bdb5a5">{{ t.ms }}</span>
+            </div>
+            <sc-if value="{{ t.open }}" hint-placeholder-val="{{ true }}">
+              <div style="padding: 0 11px 11px 46px">
+                <div class="mono" style="font-size: 10.5px; line-height: 1.75; color: #413d36; background: #ffffff; border: 1px solid #e7e1d5; border-radius: 5px; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere">{{ t.payload }}</div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { query: 'P-DEMO-0137 的糖化血红蛋白判定依据是什么？给出规则号、版本与逐字出处，并说明哪些数据不可用于临床判断。', open: 15, filter: 'all' };
+  }
+
+  renderVals() {
+    const SAMPLES = [
+      { text: 'P-DEMO-0137 的糖化血红蛋白判定依据与逐字出处', route: 'patient_evidence · search_passages' },
+      { text: '二甲双胍在 eGFR 下降患者中的用药安全信号', route: 'patient_evidence(safety)' },
+      { text: '为什么「糖尿病足」查不到映射？', route: 'explain_term' },
+      { text: 'ICD-10 E11 的 ehr-legacy 患者按风险档位分页', route: 'find_patients' },
+    ];
+
+    const TODOS = [
+      { content: '读取 manifest 确认能力边界与调用顺序', status: 'completed' },
+      { content: '解析「糖化血红蛋白」表面形式为可用 IRI', status: 'completed' },
+      { content: '取该患者的阈值判定、推理事实与缺口', status: 'in_progress' },
+      { content: '按 ruleId 回查逐字原文与完整哈希', status: 'pending' },
+    ];
+
+    const TODO_STYLE = {
+      completed:   { label: 'completed',   fill: 'transparent', ring: '#34477a', dotFill: '#34477a', ink: '#7b7468', tagInk: '#a39b8c', dim: '0.58' },
+      in_progress: { label: 'in progress', fill: '#edf0f7',     ring: '#34477a', dotFill: '#ffffff', ink: '#1c1a17', tagInk: '#34477a', dim: '1' },
+      pending:     { label: 'pending',     fill: 'transparent', ring: '#d6cdbd', dotFill: '#ffffff', ink: '#555047', tagInk: '#bdb5a5', dim: '1' },
+    };
+    const doneCount = TODOS.filter((t) => t.status === 'completed').length;
+
+    const ALL = [
+      { key: 'rule', kind: 'RULE', id: 'RULE-DX-A1C-001 · v2.1', via: 'SPARQL',
+        body: '阈值规则：糖化血红蛋白 ≥ 6.5% 触发 T2DM 诊断判定，结果写入 inferredFacts。',
+        meta: 'ruleVersion 2.1 · 由 /graph/rules/{id} 展开 · 推理机推出的边已标注',
+        bar: '#34477a', line: '#eee9df', fill: '#ffffff' },
+      { key: 'passage', kind: 'QUOTE', id: 'passage#a31c', via: '指南原文',
+        body: '空腹血糖 ≥ 7.0 mmol/L，或糖化血红蛋白 ≥ 6.5%，可作为糖尿病的诊断依据。',
+        meta: 'sha256 3f9c41d6e8b27a05c19f4d3b8e6a27c04f1d9b83e5c7a260d4f8b1e93a7c05d2 · citedBy RULE-DX-A1C-001 · 逐字复制，未改写',
+        bar: '#34477a', line: '#eee9df', fill: '#ffffff' },
+      { key: 'fact', kind: 'FACT', id: 'cdr_lis_result', via: 'SQL',
+        body: 'testcode = HBA1C · value 7.4 · unit % · 采集于 2025-06-18',
+        meta: 'trust_level Verified · fact_origin demo-cohort · source_pk 可回查原始行',
+        bar: '#34477a', line: '#eee9df', fill: '#ffffff' },
+      { key: 'fact', kind: 'UNVERIFIED', id: 'stg_obs_raw', via: 'SQL',
+        body: '同一指标存在一条未过质量门槛的记录，值与单位不一致。',
+        meta: 'trust_level Unverified · 不可作为可信测量或临床判断依据 · 仅供溯源',
+        bar: '#a3562a', line: '#ecd5bc', fill: '#fbf0e6' },
+    ];
+
+    const F = [
+      { key: 'all', label: '全部 4' },
+      { key: 'rule', label: '语义规则 1' },
+      { key: 'passage', label: '指南原文 1' },
+      { key: 'fact', label: '事实行 2' },
+    ];
+
+    const TRACE = [
+      { seq: 1,  type: 'run_start',   tool: '开始查询 · GLM-5.2', ms: '0ms',  bad: false, payload: '{\n  "type": "run_start",\n  "model": "zai-org/GLM-5.2"\n}' },
+      { seq: 4,  type: 'tool_start',  tool: 'write_todos',        ms: '18ms', bad: false, payload: '{\n  "todos": [4 项]\n}' },
+      { seq: 6,  type: 'todo_update', tool: '4 项 · 0 已完成',     ms: '20ms', bad: false, payload: '{\n  "type": "todo_update",\n  "todos": [\n    { "content": "…", "status": "in_progress" }\n  ]\n}' },
+      { seq: 9,  type: 'tool_start',  tool: 'search_concepts',    ms: '0.4s', bad: false, payload: '{\n  "q": "糖化血红蛋白",\n  "limit": 10\n}' },
+      { seq: 10, type: 'tool_end',    tool: 'search_concepts · ok', ms: '0.4s', bad: false, payload: '{\n  "ok": true,\n  "hits": 1,\n  "usable": true\n}' },
+      { seq: 13, type: 'tool_end',    tool: 'query_patient_facts · 失败', ms: '2.1s', bad: true, payload: '{\n  "ok": false,\n  "error": "result_too_large",\n  "hint": "请缩小查询范围或分页。"\n}' },
+      { seq: 15, type: 'tool_start',  tool: 'patient_evidence',   ms: '3.6s', bad: false, payload: '{\n  "patient_id": "P-DEMO-0137",\n  "section": "assessment",\n  "dsn": "[redacted]"\n}' },
+      { seq: 16, type: 'tool_end',    tool: 'patient_evidence · ok', ms: '3.6s', bad: false, payload: '{\n  "ok": true,\n  "inferredFacts": 2,\n  "unmapped": 2\n}' },
+      { seq: 20, type: 'tool_start',  tool: 'search_passages',    ms: '1.2s', bad: false, payload: '{\n  "cited_by": "RULE-DX-A1C-001"\n}' },
+      { seq: 24, type: 'done',        tool: 'status completed',   ms: '14.2s', bad: false, payload: '{\n  "type": "done",\n  "status": "completed"\n}' },
+    ];
+
+    return {
+      query: this.state.query,
+      qlen: String(this.state.query.length),
+
+      bounds: [
+        { text: '每轮独立执行，不保留上一轮患者上下文' },
+        { text: '患者编号需在本轮文本中明确给出' },
+        { text: '全部工具只读；不输出剂量、概率与时间窗' },
+        { text: '零行 ≠ 正常，未排除原因单独列出' },
+      ],
+
+      samples: SAMPLES.map((s) => {
+        const on = this.state.query === s.text;
+        return {
+          ...s,
+          fill: on ? '#edf0f7' : 'transparent',
+          mark: on ? '#34477a' : '#e7e1d5',
+          ink: on ? '#1c1a17' : '#555047',
+          pick: () => this.setState({ query: s.text }),
+        };
+      }),
+
+      pct: Math.round((doneCount / TODOS.length) * 100) + '%',
+      ratio: doneCount + ' / ' + TODOS.length + ' 已完成',
+
+      todos: TODOS.map((t) => {
+        const st = TODO_STYLE[t.status];
+        return {
+          content: t.content,
+          status: st.label,
+          fill: st.fill, ring: st.ring, dotFill: st.dotFill, ink: st.ink, tagInk: st.tagInk, dim: st.dim,
+          isDone: t.status === 'completed',
+          isRunning: t.status === 'in_progress',
+        };
+      }),
+
+      sources: [
+        { label: '患者', value: 'P-DEMO-0137', tag: 'demo-cohort', tone: '#6e4a6b', tfill: '#f6eff5', tline: '#e3d2e0' },
+        { label: '判定来源', value: 'SPARQL · /patients/{pid}/assessment', tag: 'inferred', tone: '#34477a', tfill: '#edf0f7', tline: '#cbd5e8' },
+        { label: '原始取值', value: 'SQL · patient_analysis.cdr_lis_result', tag: 'Verified', tone: '#34477a', tfill: '#edf0f7', tline: '#cbd5e8' },
+      ],
+
+      filters: F.map((f) => {
+        const on = this.state.filter === f.key;
+        return {
+          label: f.label,
+          fill: on ? '#34477a' : 'transparent',
+          ink: on ? '#ffffff' : '#7b7468',
+          line: on ? '#34477a' : '#e7e1d5',
+          pick: () => this.setState({ filter: f.key }),
+        };
+      }),
+
+      evidence: ALL.filter((e) => this.state.filter === 'all' || e.key === this.state.filter)
+        .map((e) => ({ ...e, isQuote: e.key === 'passage', isPlain: e.key !== 'passage' })),
+
+      gaps: [
+        { field: 'unmapped', text: '「餐后 2h 血糖」在本轮未命中任何映射，未做编辑距离或向量猜测。' },
+        { field: 'unmapped', text: '一条自由文本诊断无对应 ICD-10 编码，已单独记账。' },
+        { field: 'monitoringGaps', text: '眼底检查无记录，无法判断是否已到期；缺记录不等于未发生。' },
+      ],
+
+      trace: TRACE.map((t) => {
+        const open = this.state.open === t.seq;
+        return {
+          seq: t.seq, type: t.type, tool: t.tool, ms: t.ms, payload: t.payload, open,
+          dot: t.bad ? '#8e3b34' : '#34477a',
+          ink: t.bad ? '#8e3b34' : '#413d36',
+          fill: open ? '#ffffff' : (t.bad ? '#faedeb' : 'transparent'),
+          toggle: () => this.setState({ open: open ? null : t.seq }),
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

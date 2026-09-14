@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+  <style>
+    body { margin: 0; background: #f6f3ed; }
+    * { box-sizing: border-box; }
+    a { color: #34477a; } a:hover { color: #22305a; }
+    .serif { font-family: "Newsreader", "Songti SC", "STSong", "SimSun", Georgia, serif; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; font-variant-ligatures: none; }
+    .sans { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif; }
+    .lbl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  </style>
+</helmet>
+
+<div class="sans" style="width: 1180px; height: 760px; display: flex; flex-direction: column; background: #f6f3ed; color: #1c1a17; font-size: 14px; line-height: 1.65; overflow: hidden">
+
+  <div style="flex: none; padding: 26px 30px 20px; border-bottom: 1px solid #e7e1d5; background: #ffffff">
+    <h1 class="serif" style="margin: 0 0 7px; font-size: 24px; font-weight: 600; letter-spacing: 0.005em">状态机 · 一次查询的全部结局</h1>
+    <p style="margin: 0; font-size: 13px; color: #7b7468; max-width: 780px; line-height: 1.75; text-wrap: pretty">SSE 一旦开流，HTTP 就永远是 200。成功与失败只能从事件里读，所以每一种结局都必须有自己的文案与视觉，不能共用一个「出错了」。</p>
+  </div>
+
+  <div style="flex-grow: 1; display: flex; min-height: 0">
+
+    <div style="flex: none; width: 306px; padding: 16px 14px; border-right: 1px solid #e7e1d5; background: #ffffff; display: flex; flex-direction: column; gap: 1px; overflow-y: auto">
+      <sc-for list="{{ list }}" as="s" hint-placeholder-count="8">
+        <div onClick="{{ s.pick }}" style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; min-height: 44px; border-radius: 6px; cursor: pointer; background: {{ s.navFill }}; border-left: 2px solid {{ s.navMark }}">
+          <span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: {{ s.dot }}"></span>
+          <div style="flex-grow: 1; min-width: 0">
+            <div style="font-size: 13px; color: {{ s.navInk }}">{{ s.name }}</div>
+            <div class="mono" style="font-size: 10px; color: #a39b8c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ s.event }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex-grow: 1; min-width: 0; padding: 26px 30px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto">
+
+      <div style="border: 1px solid {{ cur.line }}; background: {{ cur.fill }}; border-radius: 10px; padding: 20px 24px">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 13px">
+          <span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: {{ cur.dot }}"></span>
+          <span class="serif" style="font-size: 19px; font-weight: 600; color: {{ cur.ink }}">{{ cur.status }}</span>
+          <div style="flex-grow: 1"></div>
+          <span class="mono" style="font-size: 10.5px; color: {{ cur.ink }}; background: #ffffff; border: 1px solid {{ cur.line }}; border-radius: 3px; padding: 3px 9px">{{ cur.event }}</span>
+        </div>
+        <div style="font-size: 14px; line-height: 1.85; color: #413d36; text-wrap: pretty">{{ cur.copy }}</div>
+      </div>
+
+      <div style="display: flex; gap: 16px">
+        <div style="flex-grow: 1; flex-basis: 0; border: 1px solid #e7e1d5; background: #ffffff; border-radius: 10px; padding: 17px 20px">
+          <div class="lbl mono" style="color: #a39b8c; margin-bottom: 11px">界面此刻做什么</div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <sc-for list="{{ cur.ui }}" as="u" hint-placeholder-count="3">
+              <div style="display: flex; gap: 10px; font-size: 12.5px; line-height: 1.7; color: #413d36">
+                <span style="flex: none; color: #34477a">—</span>
+                <span>{{ u.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex-grow: 1; flex-basis: 0; border: 1px solid #ecd5bc; background: #fbf0e6; border-radius: 10px; padding: 17px 20px">
+          <div class="lbl mono" style="color: #a3562a; margin-bottom: 11px">不能对用户暗示什么</div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <sc-for list="{{ cur.never }}" as="n" hint-placeholder-count="2">
+              <div style="display: flex; gap: 10px; font-size: 12.5px; line-height: 1.7; color: #6b533a">
+                <span style="flex: none; color: #a3562a">×</span>
+                <span>{{ n.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e7e1d5; background: #ffffff; border-radius: 10px; padding: 17px 20px">
+        <div class="lbl mono" style="color: #a39b8c; margin-bottom: 13px">事件顺序</div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{ cur.flow }}" as="f" hint-placeholder-count="5">
+            <span class="mono" style="font-size: 10.5px; border-radius: 4px; padding: 5px 10px; border: 1px solid {{ f.line }}; background: {{ f.fill }}; color: {{ f.ink }}">{{ f.label }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":1180,"height":760}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { pick: 'stopped' };
+  }
+
+  renderVals() {
+    const DONE = { dot: '#34477a', ink: '#2a3c68', line: '#cbd5e8', fill: '#edf0f7' };
+    const WAIT = { dot: '#bdb5a5', ink: '#7b7468', line: '#eee9df', fill: '#fcfaf6' };
+    const WARN = { dot: '#a3562a', ink: '#8a4620', line: '#ecd5bc', fill: '#fbf0e6' };
+    const BAD  = { dot: '#8e3b34', ink: '#8e3b34', line: '#ebd1cc', fill: '#faedeb' };
+    const BUSY = { dot: '#6b7cad', ink: '#34477a', line: '#cbd5e8', fill: '#edf0f7' };
+
+    const S = [
+      { key: 'idle', name: '等待查询', event: '—', tone: WAIT,
+        status: '等待查询',
+        copy: '输入框是唯一焦点。因为每轮独立执行，这里必须显式提示「患者编号需要在本轮写明」，不能让上一轮的内容留在屏幕上假装还有上下文。',
+        ui: ['清空上一轮的待办清单、回答与轨迹', '停止按钮禁用', '左栏显示本轮边界'],
+        never: ['不显示上一轮患者信息', '不出现「继续上次查询」入口'],
+        flow: ['idle'] },
+
+      { key: 'connecting', name: '正在连接', event: 'HTTP 请求已发出', tone: BUSY,
+        status: '正在连接',
+        copy: '请求已发出但尚未收到首个事件。这一段有可能直接以 HTTP 503 结束（Agent 初始化失败），所以不能提前渲染任何回答骨架。',
+        ui: ['状态点进入活动态', '停止按钮启用', '回答区保持空白'],
+        never: ['不渲染空的回答卡片占位', '不显示进度百分比'],
+        flow: ['POST /chat/stream', 'HTTP 200 或 503'] },
+
+      { key: 'todos', name: '清单已发布', event: 'todo_update', tone: BUSY,
+        status: '正在按清单执行',
+        copy: '多步骤查询会先发布待办清单，随后每次状态变化都重发完整清单。界面按最后一次 todo_update 整体替换，不做增量合并——清单是状态快照，不是事件日志。',
+        ui: ['整体替换而非追加，清单是状态快照', '只脉冲一个 in_progress，已完成项降权', '清单为空但仍在执行时显示「正在生成计划…」，不是空白'],
+        never: ['不把清单当成已完成的查询结果', '不在清单里显示尚未返回的证据'],
+        flow: ['tool_start write_todos', 'todo_update', '…', 'todo_update'] },
+
+      { key: 'streaming', name: '流式输出中', event: 'text_delta', tone: BUSY,
+        status: '正在组织回答',
+        copy: 'text_delta 是模型公开文本增量。最终 answer 事件会整段替换这块区域，避免重复——所以增量区在视觉上要标为草稿态，不能和最终回答长得一模一样。',
+        ui: ['增量文本以略低对比度呈现', '轨迹面板同步追加事件', '标记为未定稿'],
+        never: ['不把增量当成最终结论去引用', '不展示供应商 reasoning 字段'],
+        flow: ['run_start', 'model_start', 'text_delta ×n', 'answer'] },
+
+      { key: 'tool', name: '工具调用中', event: 'tool_start / tool_end', tone: BUSY,
+        status: '正在调用 patient_evidence',
+        copy: '工具事件用 call_id 配对，支持并行调用交错。界面按 call_id 归组，未收到 tool_end 的调用保持进行中，不能因为后到的事件把它顶掉。',
+        ui: ['显示真实调用参数（已脱敏）', '按 call_id 配对而非按顺序', '预算计数实时推进'],
+        never: ['不把 [redacted] 当成真实值展示', '不猜测未返回的结果'],
+        flow: ['tool_start', '…', 'tool_end ok / ok=false'] },
+
+      { key: 'stopped', name: '用户停止', event: 'AbortError', tone: WARN,
+        status: '已停止请求 · 后台可能仍在收尾',
+        copy: '前端 abort 只断开 HTTP 连接。取消会向模型流传播，但已经开始的同步 DMO / SQL 工作会继续跑到各自超时。写成「已停止」是半真话——必须说清楚停的是什么。',
+        ui: ['保留已收到的部分轨迹与清单', '标注本轮无最终回答', '说明后台工作由超时兜底'],
+        never: ['不显示单纯的「已取消」', '不把已收到的增量当作完整回答保存'],
+        flow: ['abort()', '连接关闭', '无 done 事件'] },
+
+      { key: 'failed', name: '执行失败', event: 'error → done(failed)', tone: BAD,
+        status: '本轮未完成',
+        copy: '模型余额不足、限流、认证失败、数据服务不可达都走这里。error.message 已经是面向用户的中文文案，直接呈现即可；code 归入轨迹，不放进主视线。',
+        ui: ['错误条目默认展开', '给出可执行的下一步', '保留已完成的工具证据'],
+        never: ['不把 HTTP 200 当成功', '不用「查无数据」解释服务故障'],
+        flow: ['error', 'done(status=failed)'] },
+
+      { key: 'timeout', name: '达到执行预算', event: 'done(failed)', tone: WARN,
+        status: '本轮已达到执行时限，查询未完成',
+        copy: '单轮 180 秒、12 次模型调用、24 次工具调用是硬边界。达到上限不是「没查到」，而是「没查完」——必须提示用户缩小范围，而不是重试同一句话。',
+        ui: ['预算计数条标红', '建议收窄患者集合或分页', '清单保留未完成状态'],
+        never: ['不呈现为空结果', '不自动重试同一查询'],
+        flow: ['预算耗尽', 'error', 'done(failed)'] },
+
+      { key: 'broken', name: '连接中断', event: '无 done 事件', tone: BAD,
+        status: '连接中断，本轮未完成',
+        copy: '流结束了但从没收到 done。当前契约不实现断线重放，seq 不可续传，所以唯一诚实的处理是判定本轮作废并让用户重发。',
+        ui: ['明确标为未完成', '提供重新发起入口', '保留轨迹供排查'],
+        never: ['不假装已完成', '不承诺自动续传'],
+        flow: ['最后一个事件', '流关闭', '缺 done'] },
+    ];
+
+    const cur = S.find((s) => s.key === this.state.pick) || S[0];
+
+    return {
+      list: S.map((s) => {
+        const on = s.key === this.state.pick;
+        return {
+          name: s.name, event: s.event, dot: s.tone.dot,
+          navFill: on ? '#f6f3ed' : 'transparent',
+          navMark: on ? '#34477a' : 'transparent',
+          navInk: on ? '#1c1a17' : '#555047',
+          pick: () => this.setState({ pick: s.key }),
+        };
+      }),
+      cur: {
+        status: cur.status, copy: cur.copy, event: cur.event,
+        dot: cur.tone.dot, ink: cur.tone.ink, line: cur.tone.line, fill: cur.tone.fill,
+        ui: cur.ui.map((text) => ({ text })),
+        never: cur.never.map((text) => ({ text })),
+        flow: cur.flow.map((label) => ({ label, line: cur.tone.line, fill: '#ffffff', ink: cur.tone.ink })),
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

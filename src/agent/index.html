@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>糖尿病本体 · 证据查询</title>
+<style>
+body{font:16px/1.65 system-ui;max-width:960px;margin:48px auto;padding:0 24px;color:#183333;background:#f6f8f7}h1{font-size:28px}textarea{box-sizing:border-box;width:100%;padding:16px;border:1px solid #baccc3;border-radius:8px;font:inherit}button{padding:10px 22px;margin:12px 8px 16px 0;background:#206755;color:white;border:0;border-radius:6px;cursor:pointer}button:disabled{opacity:.5}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 ui-monospace}section{background:white;border:1px solid #dce5df;padding:20px;border-radius:10px;margin:18px 0}summary{cursor:pointer}#answer{white-space:pre-wrap}small{color:#546a60}
+</style>
+<h1>糖尿病本体 · 证据查询</h1><p>查看患者事实、本体规则与原文出处，跟踪每次工具调用。</p>
+<small>每次查询独立执行。患者信息需要在本轮明确提供。</small>
+<form id="form"><textarea id="message" aria-label="查询内容" rows="3" required maxlength="12000" placeholder="例如：查询糖化血红蛋白对应的本体概念与规则出处"></textarea><button id="send">开始查询</button><button id="stop" type="button" disabled>停止</button></form>
+<p id="status" role="status">等待查询</p>
+<section><h2>待办清单</h2><p id="todo-empty">多步骤查询开始后显示计划。</p><ul id="todos" aria-live="polite"></ul></section>
+<section><h2>执行过程</h2><div id="trace"></div></section>
+<section><h2>回答</h2><div id="answer" aria-live="polite"></div></section>
+<script>
+const $=id=>document.getElementById(id);let controller,lastError='';
+function show(e){
+ if(e.type==='todo_update'){
+  $('todos').replaceChildren();$('todo-empty').hidden=e.todos.length>0;
+  const labels={pending:'待处理',in_progress:'进行中',completed:'已完成'};
+  for(const todo of e.todos){const li=document.createElement('li');li.textContent=`${labels[todo.status]||todo.status} · ${todo.content}`;$('todos').append(li);}
+ }
+ else if(e.type==='text_delta')$('answer').textContent+=e.text;
+ else if(e.type==='answer')$('answer').textContent=e.text;
+ else if(e.type==='done')$('status').textContent=e.status==='completed'?'查询完成':('查询未完成'+(lastError?'：'+lastError:''));
+ else{if(e.type==='error'){lastError=e.message;$('status').textContent=lastError;}const d=document.createElement('details'),s=document.createElement('summary'),p=document.createElement('pre');s.textContent=`${e.seq} · ${e.type}${e.tool?' · '+e.tool:''}`;p.textContent=JSON.stringify(e,null,2);d.open=e.type==='error';d.append(s,p);$('trace').append(d);if(e.type==='tool_start')$('status').textContent='正在调用 '+e.tool;}
+}
+$('stop').onclick=()=>controller?.abort();
+$('form').onsubmit=async ev=>{
+ ev.preventDefault();lastError='';controller=new AbortController();$('trace').replaceChildren();$('todos').replaceChildren();$('todo-empty').hidden=false;$('answer').textContent='';$('send').disabled=true;$('stop').disabled=false;$('status').textContent='正在连接';
+ try{const response=await fetch('/chat/stream',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:$('message').value}),signal:controller.signal});if(!response.ok)throw Error('请求失败：HTTP '+response.status);
+ const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='',doneEvent=false;
+ while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});let split;
+ while((split=buffer.indexOf('\n\n'))>=0){const frame=buffer.slice(0,split);buffer=buffer.slice(split+2);const line=frame.split('\n').find(x=>x.startsWith('data: '));if(line){const e=JSON.parse(line.slice(6));show(e);if(e.type==='done')doneEvent=true;}}}
+ if(!doneEvent)throw Error('连接中断，本轮未完成');
+ }catch(e){$('status').textContent=e.name==='AbortError'?'已停止':e.message;}finally{$('send').disabled=false;$('stop').disabled=true;}
+};
+</script></html>

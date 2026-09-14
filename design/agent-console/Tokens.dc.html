@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+  <style>
+    body { margin: 0; background: #ffffff; }
+    * { box-sizing: border-box; }
+    a { color: #34477a; } a:hover { color: #22305a; }
+    .serif { font-family: "Newsreader", "Songti SC", "STSong", "SimSun", Georgia, serif; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; font-variant-ligatures: none; }
+    .sans { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif; }
+    .lbl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  </style>
+</helmet>
+
+<div class="sans" style="width: 880px; height: 800px; background: #ffffff; color: #1c1a17; font-size: 14px; line-height: 1.65; padding: 30px 34px; overflow: hidden; display: flex; flex-direction: column; gap: 22px">
+
+  <div>
+    <h1 class="serif" style="margin: 0 0 7px; font-size: 24px; font-weight: 600">墨蓝 · 赭石 · 象牙</h1>
+    <p style="margin: 0; font-size: 13px; color: #7b7468; line-height: 1.75; max-width: 700px; text-wrap: pretty">一个强调色（墨蓝）承担全部可核验内容，一个暖色（赭石）只承担「不可信 / 未排除」。颜色不做装饰，只区分证据等级——这也是评委一眼能看出的差异。</p>
+  </div>
+
+  <div style="display: flex; gap: 10px">
+    <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="5">
+      <div style="flex-grow: 1; flex-basis: 0">
+        <div style="height: 56px; border-radius: 7px; background: {{ s.hex }}; border: 1px solid {{ s.edge }}"></div>
+        <div class="mono" style="font-size: 10px; color: #413d36; margin-top: 7px">{{ s.hex }}</div>
+        <div style="font-size: 11.5px; color: #7b7468">{{ s.name }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 1px">
+    <sc-for list="{{ levels }}" as="l" hint-placeholder-count="5">
+      <div style="display: flex; align-items: stretch; gap: 16px; background: {{ l.fill }}; border-radius: 7px; padding: 13px 16px; border-left: 2px solid {{ l.bar }}">
+        <div style="flex: none; width: 128px">
+          <div class="lbl mono" style="color: {{ l.bar }}; margin-bottom: 2px">{{ l.tag }}</div>
+        </div>
+        <div style="flex-grow: 1; min-width: 0; font-size: 12.5px; line-height: 1.7; color: #413d36">{{ l.rule }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; gap: 22px; flex-grow: 1; min-height: 0">
+
+    <div style="flex: none; width: 340px; display: flex; flex-direction: column; gap: 13px">
+      <div class="lbl mono" style="color: #a39b8c">字体</div>
+      <div style="display: flex; flex-direction: column; gap: 13px">
+        <div>
+          <div class="serif" style="font-size: 25px; font-weight: 600; line-height: 1.3">标题走衬线 · Serif</div>
+          <div class="mono" style="font-size: 10px; color: #a39b8c; margin-top: 4px">Newsreader → 宋体 / STSong 回退</div>
+        </div>
+        <div style="height: 1px; background: #eee9df"></div>
+        <div>
+          <div style="font-size: 14px; line-height: 1.75">正文与界面文字走系统无衬线，中文字形最稳。</div>
+          <div class="mono" style="font-size: 10px; color: #a39b8c; margin-top: 4px">PingFang SC / Hiragino Sans GB</div>
+        </div>
+        <div style="height: 1px; background: #eee9df"></div>
+        <div>
+          <div class="mono" style="font-size: 14px">IRI · sha256 · ruleId · 7.4 %</div>
+          <div class="mono" style="font-size: 10px; color: #a39b8c; margin-top: 4px">IBM Plex Mono — 可核验标识一律等宽，不截断、可整段复制</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 13px">
+      <div class="lbl mono" style="color: #a39b8c">三条不可让步的规则</div>
+      <div style="display: flex; flex-direction: column; gap: 11px">
+        <sc-for list="{{ laws }}" as="w" hint-placeholder-count="3">
+          <div style="border-top: 1px solid #eee9df; padding-top: 11px">
+            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 5px">
+              <span class="mono serif" style="font-size: 14px; color: #34477a">{{ w.n }}</span>
+              <span class="serif" style="font-size: 15.5px; font-weight: 600">{{ w.title }}</span>
+            </div>
+            <div style="font-size: 12.5px; line-height: 1.75; color: #555047">{{ w.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":880,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      swatches: [
+        { hex: '#f6f3ed', name: '象牙纸底', edge: '#e7e1d5' },
+        { hex: '#1c1a17', name: '墨黑正文', edge: '#1c1a17' },
+        { hex: '#34477a', name: '墨蓝 · 主强调', edge: '#34477a' },
+        { hex: '#a3562a', name: '赭石 · 警示', edge: '#a3562a' },
+        { hex: '#6e4a6b', name: '紫 · 演示数据', edge: '#6e4a6b' },
+      ],
+      levels: [
+        { tag: 'verified', bar: '#34477a', fill: '#fcfaf6',
+          rule: '有逐字出处与完整 sha256 的结论与事实。墨蓝竖线 · 白底 · 最高对比。' },
+        { tag: 'inferred', bar: '#34477a', fill: '#edf0f7',
+          rule: '推理机推出的类型与边。浅墨蓝底区分「查到的」与「推出来的」，规则号必须同时出现。' },
+        { tag: 'unverified', bar: '#a3562a', fill: '#fbf0e6',
+          rule: 'stg_* 与未过质量门槛的值。赭石底 · 永远不与确诊结论共用白底卡片。' },
+        { tag: 'demo-cohort', bar: '#6e4a6b', fill: '#f6eff5',
+          rule: '演示队列。标签跟随患者编号出现在每一处，统计不与 ehr-legacy 合并。' },
+        { tag: 'failed', bar: '#8e3b34', fill: '#faedeb',
+          rule: 'ok=false 与 error 事件。默认展开，文案说明这是执行失败而非查无数据。' },
+      ],
+      laws: [
+        { n: 'I', title: '空集必须有视觉重量', text: 'unmapped、monitoringGaps、brokenLinks 的区块尺寸与结论区相当，不折叠成小字。零行不是正常，界面不能让它看起来像正常。' },
+        { n: 'II', title: '原文一个字都不动', text: 'quote 用衬线体加左竖线区隔并原样排版，sha256 全 64 位展示不省略，caveat 与 disclaimer 不改写、不摘要、不放进折叠层。' },
+        { n: 'III', title: '不给不存在的东西留位置', text: '没有剂量位、没有概率条、没有时间窗滑块、没有趋势预测图。schema 里没有的东西，界面上不能有它的容器。' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

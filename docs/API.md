@@ -82,6 +82,7 @@ PYTHONPATH=src python scripts/export_openapi.py
 | GET | `/patients/{pid}/safety` | SPARQL | 用药安全信号 |
 | POST | `/patients/{pid}/simulate` | **内存推演** | 确定性病程推演 + 推导树 |
 | POST | `/simulate` | **内存推演** | 同上，`patientId` 走 body（静态路径，给 MCP 用） |
+| POST | `/patients/{pid}/treatment-assessments` | **都不走**（内联快照 + 本地知识文件） | 治疗措施综合评估报告：六维 claim + 证据索引 + Markdown |
 | GET | `/query/templates` | — | 列出模板白名单 |
 | POST | `/query/{template}` | SPARQL | 跑参数化模板 |
 | GET | `/terms/unmapped` | SQL | 全部未命中/不可用术语 |
@@ -501,7 +502,7 @@ FastAPI 标准形状：
 |---|---|
 | 400 | `POST /query/{template}` 给了空患者数组；`/simulate` 的假设不合法（术语不在白名单、缺单位）；`/adjudicate/*` 的入参不成立；`/graph/*` 的 `iri` 不是完整 IRI；`POST /graph/sparql` **未通过静态检查** |
 | 404 | 患者不存在；模板名不在白名单；`/graph/rules/{id}` 无此规则 |
-| 422 | 参数类型不合法（FastAPI 自动校验） |
+| 422 | 参数类型不合法（FastAPI 自动校验）；`/patients/{pid}/treatment-assessments` 的快照患者不一致与时间线矛盾也走这里，见 §12.14 |
 | 500 | 本服务自身出错 |
 | 503 | **GraphDB 不可用**。返回体带 `hint`，先查 `/health` |
 
@@ -544,6 +545,10 @@ FastAPI 标准形状：
 | 拿 `/adjudicate/scope` 里 `status: planned` 的类型当"判过了没问题" | planned = 没接线。真调用会返 `not-adjudicable` |
 | 先写 SPARQL 再想办法拿 IRI | 反了。`GET /graph/concepts` 是图探索的唯一入口，拼错的 IRI 查出来是空集，和"没有数据"长得一模一样 |
 | 拿 `POST /graph/sparql` 当默认查询手段 | 它是第 13 个工具不是第 1 个。前 12 个的 GRAPH 子句由服务端拼，不会静默少返 |
+| 把 `treatment-assessments` 的 `status: partial` 当接口失败 | 只要还有一条 `data_gap` 就是 partial。缺口可见是设计，见 §12.14 |
+| 把 `domains[].status: assessed` 当「这个维度没问题」 | 它只说明**已覆盖的那几条规则**跑完了。`coverage.full_clinical_assessment` 恒为 `false` |
+| 指望 `treatment-assessments` 自己去库里取患者数据 | 它只用 `pid` 校验快照一致性，不读 PG/GraphDB。事实由调用方内联提交，漏了就是 `data_gap` |
+| 把 `knowledge_expectation` 当成对这个患者的结论 | 那是资料里的一般性说明，触发条件尚未证实。只有 `rule_conclusion` 的条件在快照里被确认过 |
 
 ---
 
@@ -950,6 +955,252 @@ Diagnosis(Provisional)
 - `prohibitions` 七条硬禁令（不剂量、不概率、不猜术语、不编出处、不把 Provisional 当确诊…）；
 - `determinism` 说明哪些端点确定、哪些不确定（当前**没有**任何由模型规划路径的端点）；
 - `coverage` **能力与边界一起给** —— 只给能力不给边界，等于鼓励越界使用。
+
+---
+
+## 12.14 `POST /patients/{pid}/treatment-assessments` — 治疗措施综合评估
+
+回答「围绕这项治疗措施，手上的证据能支撑到哪一步、还差什么」。输出六个维度的 claim 清单、
+证据索引，以及一份可直接存盘的 Markdown 报告。
+
+**和 `/patients/{pid}/assessment` 不是一回事。** 后者是「库里这个患者现在判成什么」；
+这里是「调用方把一份带时间语义的快照交进来，按同一套本地知识判一遍，并把判不了的部分逐条点名」。
+
+### ⚠️ 唯一一个不读库的患者端点
+
+`pid` 只用来校验快照里每条事件的 `patient_id` 是否一致，**不去 `core_patient` 查任何东西**。
+患者事实全部由调用方内联提交，整条路径不碰 PostgreSQL、不碰 GraphDB，
+知识侧只读两个本地文件（`ontology/src/dmo-threshold-seed.ttl`、`dmo-axioms.ttl`）
+和 `ontology/knowledges/*.txt` 的原文。`template` 模式下也不碰大模型。
+
+代价是诚实的：**这个端点不知道这个患者是谁。** 它不会去补 `/patients/{pid}` 那七段，
+也无从判断快照漏了什么 —— 漏掉的维度只会变成 `data_gap`，不会变成「正常」。
+
+### 调用
+
+```bash
+curl -X POST http://localhost:8100/patients/SYNTHETIC/treatment-assessments \
+     -H 'Content-Type: application/json' \
+     --data-binary @docs/treatment-assessment-example.json
+```
+
+示例是合成患者：A1C 8.0%、FPG 9.0 mmol/L、UACR 45 mg/g、既往活动性 CKD、一份影像报告，
+拟开始 metformin。默认 `composer=template`，不产生任何外部模型调用。
+
+| 字段 | 取值 | 说明 |
+|---|---|---|
+| `mode` | `prospective` / `follow_up` | 措施实施前评估 / 治疗后随访 |
+| `baseline_snapshot` | 必填 | 评估起点 + 当时的知识截点 + 完整事件历史 |
+| `follow_up_snapshot` | `follow_up` 必填 | 必须晚于基线；事件 ID 与记录修订版跨快照不可变 |
+| `interventions` | 1–10 条 | 编码、操作、开始时间、实施状态、支撑事件 |
+| `assessment_domains` | 六选若干 | `glycemic renal cardiovascular hepatic safety lifestyle`；**`safety` 永远保留** |
+| `composer` | `auto` / `template` / `llm` | 见下文「综合说明是可选的」 |
+| `knowledge_mode` | `current` / `historical` | `historical` 当前无历史知识版本，只保留患者事实并报缺口 |
+| `max_fact_age_days` | 默认 90 | 超窗的记录仍列入历史，但不参与阈值与趋势 |
+| `extract_pacs` | 默认 `false` | 唯一会把报告原文发给模型的开关 |
+| `include_demo_appendix` | 默认 `false` | 初始化 forecast 数值，仅作独立附件 |
+
+请求体是 `extra="forbid"` 的严格 schema：多写一个字段就是 422，不静默丢弃。
+
+### 返回体节选（`composer=template`，未经编辑）
+
+```jsonc
+{
+  "report_id": "TA-dd7fdb5735ab6ab0b842248e13f9d1a2",
+  "status": "partial",
+  "service_version": "treatment-assessment-v1",
+  "ontology_sha256": "31f65144819bbf6a…",
+  "knowledge_version": "4c2e88806aa0422e…",
+  "snapshot_refs": { "baseline": {
+      "hash": "da421321dc243020…", "clinical_as_of": "2026-09-13T10:00:00+08:00",
+      "knowledge_cutoff": "2026-09-13T10:00:00+08:00", "excluded": [] } },
+  "domains": [
+    { "domain": "glycemic", "status": "partial",   "claim_ids": ["C-72ea…", "C-8974…"] },
+    { "domain": "renal",    "status": "assessed",  "claim_ids": ["C-571a…", "C-a993…"] },
+    { "domain": "hepatic",  "status": "unknown",   "claim_ids": ["C-b6eb…"] }
+  ],
+  "coverage": {
+    "full_clinical_assessment": false,
+    "quantitative_prediction": false,
+    "historical_knowledge_available": false,
+    "llm_egress": "structured_claims_only_no_raw_emr_or_pacs_notes"
+  }
+}
+```
+
+`status: "partial"` **是常态，不是失败** —— 只要还有一条 `data_gap` 就是 partial。
+和 §6 的 `Insufficient-Evidence` 同一条口径：说不知道比给个好看的结论值钱。
+
+### 六种 claim，`kind` 是最重要的字段
+
+| kind | 含义 |
+|---|---|
+| `observed_fact` | 快照里的一条记录，原样列出，**不含任何判断** |
+| `rule_conclusion` | 命中本地知识里**有逐字出处**的阈值或注意事项，带 `rule_id` |
+| `knowledge_expectation` | 资料里的一般性说明（机制、条件性注意事项）。**患者是否适用尚未证实** |
+| `observed_change` | 随访模式下同指标 / 同单位 / 同语境的前后差值。`data.causal_effect` 恒为 `null` |
+| `extracted_finding` | 影像原文片段（需 `extract_pacs=true`）。`extraction_verified` 恒为 `false` |
+| `data_gap` | 判不了。`missing_premises` 说清差什么 |
+
+`support_status` 只有两个值：`supported` / `insufficient`。**没有分数、没有置信度。**
+
+`rule_conclusion` 与 `knowledge_expectation` 的区别是这个端点的主线：
+前者的触发条件在这份快照里被确认了，后者只是资料里写着这么一句。
+校验在返回前强制执行 —— 这两类 claim 若没有一条 `kind: "knowledge"` 的证据撑着，
+服务直接内部报错，而不是把一条没出处的结论发出去。
+
+### `domains[].status` 三态
+
+| 取值 | 含义 |
+|---|---|
+| `assessed` | 该维度**已覆盖的规则**跑完了，且没有缺口 |
+| `partial` | 有结论，但同时存在缺口或缺失前提 |
+| `unknown` | 快照里这个维度一条患者资料都没有 |
+
+⚠️ **`assessed` 不等于「这个维度没问题」。** 它的含义严格限定为「本仓库已覆盖的那几条规则判完了」。
+`coverage.full_clinical_assessment` 恒为 `false`，就是为了堵住这个误读。
+
+### 证据索引：三个前缀
+
+| 前缀 | kind | 内容 |
+|---|---|---|
+| `K-` | `knowledge` | `exact_quote` + `content_hash` + `document_hash` + `locator`，外加 `currency: "not_verified"` |
+| `F-` | `patient_fact` | 快照原事件 + `time_scope`（baseline / follow_up） |
+| `A-` | 见下方已知问题 | 措施输入本身 |
+
+```jsonc
+{
+  "evidence_id": "K-607caae5ce48fa99946d",
+  "kind": "knowledge",
+  "source_file": "ontology/knowledges/niddk-tests-diagnosis.txt",
+  "exact_quote": "6.5% or above",
+  "content_hash": "96495c7d996a92b5bee7132029744f08e5154be98dd1be7e177399320d7d1447",
+  "document_hash": "122009a36c702dd16fd6ec7517ed7688d85de3154c6468fdeeff38960d52261d",
+  "locator": "Diagnosis 表 · A1C 列 · Diabetes 行",
+  "verification": "quote_matches_local_source",
+  "currency": "not_verified",
+  "population_scope": "以原始来源的适用人群为准，尚未确认适用于该患者"
+}
+```
+
+`content_hash` 与 §5、§12.7 用的是同一条出处、同一个 sha256 —— 这条引文可以直接丢进
+`POST /adjudicate/citations` 复核。**但 `currency: "not_verified"` 同样重要**：
+逐字属实不等于这份资料是当前适用的临床指南，这个端点从不发那枚印章。
+
+### ⚠️ 单位不换算，和 §5 的口径**故意不同**
+
+示例里 FPG = 9.0 mmol/L，seed 里 FPG 的三条切点只有 `mg-per-dL`，于是：
+
+```jsonc
+{ "kind": "data_gap", "statement": "FPG 未匹配可核验且语境适用的阈值。",
+  "missing_premises": ["applicable_threshold_or_context"] }
+```
+
+不是漏判，是拒绝在这一层做换算。§5 的那条链在 ETL 里换算（葡萄糖 ×18.0182）并保留
+`sourceValue`/`sourceUnit`；这个端点收的是调用方内联的数字，没有 ETL 那一层的核实，
+所以只做**同义标识映射**（`mg/dL` → `mg-per-dL`），浓度一律不隐式换算。
+调用方要 FPG 参与判定，就自己按 `mg/dL` 报，并为这次换算负责。
+
+### 与 §7 同一条硬骨头：metformin + CKD
+
+示例患者有活动性 CKD，命中的是 `BIGUANIDE-RENAL-ALCOHOL`：
+
+> 原文：People who drink a lot of alcohol and people with kidney problems may have a rare
+> side effect called lactic acidosis (acid to build up in the blood).
+
+注意它是 `rule_conclusion`、`severity: "review"`、`data.local_severity: "Caution"`，
+**不是绝对禁忌**。理由和 §7 里
+「P90009（ESRD + 二甲双胍）必须零绝对禁忌」完全一样：语料对二甲双胍只有定性表述，
+没有任何 eGFR 数值切点。这里补一个切点就是编造出处。
+
+触发条件的门槛也写死了：必须 `verification=confirmed` + `assertion=present` +
+`clinical_status=active` + `concept_code` 能沿**已断言的** `rdfs:subClassOf` 链接上。
+疑似、否定、已缓解、状态冲突一律不升级为触发 —— 冲突还会自己产出一条 `data_gap`。
+
+而且引文必须落在**这个药自己的段落里**：拿另一个药的真引文来撑结论，会被
+`collapse_text(quote) not in collapse_text(section)` 挡掉。这正是 §12.8 `misattributed`
+在报告侧的对应物。
+
+### 时间语义：三个排除码
+
+快照按 `knowledge_cutoff` 还原「当时知道什么」，被排除的事件在 `snapshot_refs[*].excluded` 里点名：
+
+| code | 含义 |
+|---|---|
+| `NOT_YET_KNOWN` | `available_at` 或 `ingested_at` 晚于知识截点 —— 当时还看不到 |
+| `SUPERSEDED` | 同一 `(source, record_id)` 有更高修订版 |
+| `NOT_USABLE` | `status` 不是 `final`，或 `event_time` 晚于 `clinical_as_of` |
+
+**不能先取数据库全局最新版再倒推。** 随访模式还额外锁死：事件 ID 与
+`(source, record_id, revision)` 跨快照不可变 —— 改了就是 422。旧报告的更正因此不会被算成治疗响应。
+
+同理，`follow_up` 下「有医嘱」不等于「给了药」：实际实施必须有一条 `source=medication`、
+`action_id` 与 `code` 对得上、`execution_status=administered`、时间不早于 `start_at`
+的事件，否则产出 `missing: ["administration_evidence"]`。
+
+### 综合说明是可选的，且失败不影响主体
+
+| composer | 行为 |
+|---|---|
+| `template` | 全离线。`generation_metadata.items` 为空，报告由确定性 claims 渲染 |
+| `auto` / `llm` | 调模型综合一段说明，两次尝试，每次都过一遍确定性校验 + 一次模型辅助语义核对 |
+
+模型**只能重排已有 claims**：校验会拦下未知 `claim_id`、新出现的数值、URL/Markdown、
+拿 demo 当证据、以及语义核对不通过。任何一环没过就退回模板，理由写进 `fallback_reason`。
+实测一次真实降级：
+
+```jsonc
+{ "composer": "template", "requested_model": "glm-5.2",
+  "resolved_model": "zai-org/GLM-5.2", "attempts": 1,
+  "fallback_reason": "MODEL_HTTP_402" }
+```
+
+**降级后 `claims` / `evidence` / `rendered_markdown` 一个字不少。** 摘要没生成出来，
+报告照样完整 —— 这是「模型是装饰不是地基」的落地写法。
+
+默认发给模型的只有结构化 claims（`coverage.llm_egress` 会写明），原始 EMR/PACS 自由文本不出境；
+`extract_pacs=true` 是唯一的开关，且只做了邮箱/长数字的基础脱敏 ——
+**那不等于能识别全部个人身份信息**，调用方要自己先脱敏。
+
+模型配置读根目录 `.env.assessment`，或 `DMO_ASSESSMENT_{API_KEY,BASE_URL,MODEL}` 三个环境变量；
+详见 [TREATMENT-ASSESSMENT-API.md](TREATMENT-ASSESSMENT-API.md)。
+
+### 归档与可重现
+
+`report_id = "TA-" + sha256(报告内容)[:32]`，同输入 + 同知识版本 + 模板模式 ⟹ 同 ID。
+`llm` 模式不保证文字逐字相同，所以要归档就设 `DMO_ASSESSMENT_REPORT_DIR`：
+返回体的 `archive_status` 三态 `saved` / `failed` / `disabled`，写 `<report_id>.json` 与 `.md`，
+目录 0700，原子替换。**归档失败不影响返回** —— 报告已经算出来了，落盘是另一回事。
+
+### 错误响应
+
+| 状态码 | 场景 |
+|---|---|
+| 422 | 快照里混进了别的患者（`{"detail": "snapshot contains a different patient"}`）；schema 不合法；时间线自相矛盾（如 `prospective` 却带 `administered`）；多传了字段 |
+| 500 | 内部证据引用断裂 —— 这是不变量被破坏，不是调用方的错 |
+
+⚠️ **本端点的 422 里有一批是业务判断**，和 §11 说的「参数类型不合法」不是一回事。
+`prospective actions must be future plans or orders` 这种消息本身就是答案。
+
+### 这个端点不做什么
+
+- 不输出剂量、概率、时间窗、健康评分 —— 与全库口径一致
+- 不做因果归因：`observed_change` 只报差值，`causal_effect` 恒为 `null`
+- 不覆盖相互作用、过敏、停药影响、联合作用 —— 每一项都有固定的 `data_gap` 兜底，
+  **未命中规则不代表安全**
+- 不写任何库，不改 `/simulate` 与 forecast 的任何一行
+
+### ⚠️ 已知问题
+
+1. **`A-` 证据的 `kind` 被措施自己的 `kind` 覆盖。** `service.py` 先写 `"kind": "intervention"`
+   再 `**action.model_dump()`，而 `Intervention.kind` 同名，于是实际返回的是
+   `medication` / `lifestyle` / `device` / `other`。按 `kind == "intervention"` 过滤**一条也筛不到**。
+   `render.py` 目前靠 else 分支兜住，属于巧合而非设计。
+2. **pydantic 的 422 会把整个请求体回显在 `detail[].input` 里**，其中包含快照全文。
+   这个端点的入参就是患者资料，日志与错误上报要按敏感数据处理。
+
+更细的输入语义、模型配置、覆盖范围见 [TREATMENT-ASSESSMENT-API.md](TREATMENT-ASSESSMENT-API.md)；
+报告结构的设计取舍见 [TREATMENT-ASSESSMENT-REPORT-DESIGN.md](TREATMENT-ASSESSMENT-REPORT-DESIGN.md)。
 
 ---
 

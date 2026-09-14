@@ -18,3 +18,4 @@ src/skills/*.zip
 outputs/
 .codex-ppt-build/
 output-codex/
+node_modules/
