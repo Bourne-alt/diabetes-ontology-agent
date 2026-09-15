@@ -1,10 +1,15 @@
 """Environment-only credentials; no secret values in repr or error events."""
 
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urlsplit
 
 from dmo.config import ENV_FILE, _get, _parse_env_file
+
+from .logs import get_logger, log_event
+
+log = get_logger("settings")
 
 
 @dataclass(frozen=True)
@@ -33,10 +38,24 @@ class AgentSettings:
         # SiliconFlow's /models advertises the qualified ID, not the short alias.
         if urlsplit(base_url).hostname == "api.siliconflow.cn" and model.lower() == "glm-5.2":
             model = "zai-org/GLM-5.2"
-        return cls(
+        settings = cls(
             api_key=key,
             base_url=base_url,
             model=model,
             model_timeout=float(get("AGENT_MODEL_TIMEOUT", 60)),
             run_timeout=float(get("AGENT_RUN_TIMEOUT", 180)),
         )
+        # 「连的是哪个端点、哪个模型、密钥是不是另一个」是排查第一问。
+        # 只记密钥长度与后 4 位 —— 足以判断是否拿错 key，又不泄露密钥本身。
+        log_event(
+            log,
+            logging.INFO,
+            "settings.loaded",
+            base_url=settings.base_url,
+            model=settings.model,
+            api_key_hint=f"len={len(key)} …{key[-4:]}" if len(key) > 8 else "len<=8",
+            env_file=str(env_file),
+            model_timeout=settings.model_timeout,
+            run_timeout=settings.run_timeout,
+        )
+        return settings

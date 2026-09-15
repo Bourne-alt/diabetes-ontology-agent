@@ -82,7 +82,7 @@ PYTHONPATH=src python scripts/export_openapi.py
 | GET | `/patients/{pid}/safety` | SPARQL | 用药安全信号 |
 | POST | `/patients/{pid}/simulate` | **内存推演** | 确定性病程推演 + 推导树 |
 | POST | `/simulate` | **内存推演** | 同上，`patientId` 走 body（静态路径，给 MCP 用） |
-| POST | `/patients/{pid}/treatment-assessments` | **都不走**（内联快照 + 本地知识文件） | 治疗措施综合评估报告：六维 claim + 证据索引 + Markdown |
+| POST | `/patients/{pid}/treatment-assessments` | PostgreSQL 患者镜像 + 本地知识文件 | 治疗措施综合评估报告：六维 claim + 证据索引 + Markdown |
 | GET | `/query/templates` | — | 列出模板白名单 |
 | POST | `/query/{template}` | SPARQL | 跑参数化模板 |
 | GET | `/terms/unmapped` | SQL | 全部未命中/不可用术语 |
@@ -502,7 +502,7 @@ FastAPI 标准形状：
 |---|---|
 | 400 | `POST /query/{template}` 给了空患者数组；`/simulate` 的假设不合法（术语不在白名单、缺单位）；`/adjudicate/*` 的入参不成立；`/graph/*` 的 `iri` 不是完整 IRI；`POST /graph/sparql` **未通过静态检查** |
 | 404 | 患者不存在；模板名不在白名单；`/graph/rules/{id}` 无此规则 |
-| 422 | 参数类型不合法（FastAPI 自动校验）；`/patients/{pid}/treatment-assessments` 的快照患者不一致与时间线矛盾也走这里，见 §12.14 |
+| 422 | 参数类型不合法（FastAPI 自动校验）；`/patients/{pid}/treatment-assessments` 的镜像格式或数量不满足内部契约也走这里，见 §12.14 |
 | 500 | 本服务自身出错 |
 | 503 | **GraphDB 不可用**。返回体带 `hint`，先查 `/health` |
 
@@ -547,7 +547,7 @@ FastAPI 标准形状：
 | 拿 `POST /graph/sparql` 当默认查询手段 | 它是第 13 个工具不是第 1 个。前 12 个的 GRAPH 子句由服务端拼，不会静默少返 |
 | 把 `treatment-assessments` 的 `status: partial` 当接口失败 | 只要还有一条 `data_gap` 就是 partial。缺口可见是设计，见 §12.14 |
 | 把 `domains[].status: assessed` 当「这个维度没问题」 | 它只说明**已覆盖的那几条规则**跑完了。`coverage.full_clinical_assessment` 恒为 `false` |
-| 指望 `treatment-assessments` 自己去库里取患者数据 | 它只用 `pid` 校验快照一致性，不读 PG/GraphDB。事实由调用方内联提交，漏了就是 `data_gap` |
+| 向 `treatment-assessments` 上传整份快照 | HTTP 接口仅使用路径 `pid`，内部读取 PostgreSQL 规范镜像；显式快照请使用离线脚本 |
 | 把 `knowledge_expectation` 当成对这个患者的结论 | 那是资料里的一般性说明，触发条件尚未证实。只有 `rule_conclusion` 的条件在快照里被确认过 |
 
 ---
@@ -963,44 +963,26 @@ Diagnosis(Provisional)
 回答「围绕这项治疗措施，手上的证据能支撑到哪一步、还差什么」。输出六个维度的 claim 清单、
 证据索引，以及一份可直接存盘的 Markdown 报告。
 
-**和 `/patients/{pid}/assessment` 不是一回事。** 后者是「库里这个患者现在判成什么」；
-这里是「调用方把一份带时间语义的快照交进来，按同一套本地知识判一遍，并把判不了的部分逐条点名」。
-
-### ⚠️ 唯一一个不读库的患者端点
-
-`pid` 只用来校验快照里每条事件的 `patient_id` 是否一致，**不去 `core_patient` 查任何东西**。
-患者事实全部由调用方内联提交，整条路径不碰 PostgreSQL、不碰 GraphDB，
-知识侧只读两个本地文件（`ontology/src/dmo-threshold-seed.ttl`、`dmo-axioms.ttl`）
-和 `ontology/knowledges/*.txt` 的原文。`template` 模式下也不碰大模型。
-
-代价是诚实的：**这个端点不知道这个患者是谁。** 它不会去补 `/patients/{pid}` 那七段，
-也无从判断快照漏了什么 —— 漏掉的维度只会变成 `data_gap`，不会变成「正常」。
+服务端按患者编号读取 PostgreSQL 中的规范镜像，组织检验、观察、诊断和用药记录，
+再用本地规则及可核验知识生成报告。缺少资料的维度以 `data_gap` 返回。
+当前镜像缺少历史修订、发布和实际给药信息，不能用于重建历史随访或证明疗效。
 
 ### 调用
 
 ```bash
-curl -X POST http://localhost:8100/patients/SYNTHETIC/treatment-assessments \
-     -H 'Content-Type: application/json' \
-     --data-binary @docs/treatment-assessment-example.json
+curl -X POST http://localhost:8100/patients/P90002/treatment-assessments
 ```
 
-示例是合成患者：A1C 8.0%、FPG 9.0 mmol/L、UACR 45 mg/g、既往活动性 CKD、一份影像报告，
-拟开始 metformin。默认 `composer=template`，不产生任何外部模型调用。
+请求只需路径参数 `pid`。服务端从 `core_patient`、`core_lab_result`、
+`core_observation`、`core_diagnosis` 和 `core_medication_use` 组装当前患者镜像，
+并使用 `template` 生成报告，不产生外部模型调用。
 
 | 字段 | 取值 | 说明 |
 |---|---|---|
-| `mode` | `prospective` / `follow_up` | 措施实施前评估 / 治疗后随访 |
-| `baseline_snapshot` | 必填 | 评估起点 + 当时的知识截点 + 完整事件历史 |
-| `follow_up_snapshot` | `follow_up` 必填 | 必须晚于基线；事件 ID 与记录修订版跨快照不可变 |
-| `interventions` | 1–10 条 | 编码、操作、开始时间、实施状态、支撑事件 |
-| `assessment_domains` | 六选若干 | `glycemic renal cardiovascular hepatic safety lifestyle`；**`safety` 永远保留** |
-| `composer` | `auto` / `template` / `llm` | 见下文「综合说明是可选的」 |
-| `knowledge_mode` | `current` / `historical` | `historical` 当前无历史知识版本，只保留患者事实并报缺口 |
-| `max_fact_age_days` | 默认 90 | 超窗的记录仍列入历史，但不参与阈值与趋势 |
-| `extract_pacs` | 默认 `false` | 唯一会把报告原文发给模型的开关 |
-| `include_demo_appendix` | 默认 `false` | 初始化 forecast 数值，仅作独立附件 |
+| `pid` | 路径参数 | 患者业务编号；不存在时返回 404 |
 
-请求体是 `extra="forbid"` 的严格 schema：多写一个字段就是 422，不静默丢弃。
+该端点没有请求体。Active 且未过期、未在未来开始的用药会被组装成继续措施的条件评估；没有当前治疗措施时，
+报告仍会返回，并在 `data_gap` 中明确标记 `current_intervention` 缺失。
 
 ### 返回体节选（`composer=template`，未经编辑）
 

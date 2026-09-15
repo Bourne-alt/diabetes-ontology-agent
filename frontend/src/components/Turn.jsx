@@ -3,7 +3,7 @@ import Alert from './Alert.jsx';
 import TodoList from './TodoList.jsx';
 import Answer from './Answer.jsx';
 import Evidence from './Evidence.jsx';
-import Gaps from './Gaps.jsx';
+import Citations from './Citations.jsx';
 import { bagSize } from '../lib/evidence.js';
 
 function shortId(id) {
@@ -44,8 +44,8 @@ export default function Turn({ index, asked, run, live, busy }) {
           <Alert alert={run.alert} />
           <TodoList todos={run.todos} seq={run.todoSeq} planning={planning} />
           <Answer draft={run.draft} answer={run.answer} />
+          {run.bag.quotes.length > 0 && <Citations quotes={run.bag.quotes}/>}
           <Evidence bag={run.bag} />
-          <Gaps gaps={run.bag.gaps} />
         </div>
       </div>
     </div>

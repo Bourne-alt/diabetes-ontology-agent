@@ -119,7 +119,7 @@ def build_tools(backend: DmoBackend, facts: FactStore):
         page: Annotated[int, Field(ge=1)] = 1,
         size: Limit = 10,
     ):
-        """先收敛患者集合并分页；默认真实患者，演示队列必须单独明确查询。"""
+        """先收敛患者集合并分页；默认真实患者，合成队列必须单独明确查询。"""
         return await backend.request(
             "/patients",
             {"icd10": icd10, "origin": origin, "tier": tier, "page": page, "size": size},
@@ -161,6 +161,18 @@ def build_tools(backend: DmoBackend, facts: FactStore):
         )
 
     @tool
+    async def assess_patient_treatment(pid: str):
+        """按患者 ID 读取内部患者镜像，生成当前治疗措施的多维证据评估报告。"""
+        from langchain_core.callbacks.manager import adispatch_custom_event
+
+        async def publish(report):
+            await adispatch_custom_event("harness_assessment_report", {"patient_id": pid, "report": report})
+
+        return await backend.request(
+            f"/patients/{quote(pid, safe='')}/treatment-assessments", body={}, assessment_observer=publish
+        )
+
+    @tool
     async def inspect_fact_schema(database: Database, table: str | None = None):
         """读取 original 原始库或 ontology 本体关系库的可查表、列、类型与注释。"""
         return await asyncio.to_thread(facts.catalog, database, table)
@@ -196,6 +208,7 @@ def build_tools(backend: DmoBackend, facts: FactStore):
         find_patients,
         patient_evidence,
         simulate_patient_course,
+        assess_patient_treatment,
         inspect_fact_schema,
         query_patient_facts,
     ]

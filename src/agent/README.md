@@ -54,6 +54,10 @@ curl -N http://127.0.0.1:8200/chat/stream \
 | `DMO_GRAPHDB_TIMEOUT` | 30 秒 |
 | `AGENT_MODEL_TIMEOUT` | 模型请求 60 秒 |
 | `AGENT_RUN_TIMEOUT` | 单轮总时限 180 秒 |
+| `AGENT_LOG_LEVEL` | `INFO`；排查时用 `DEBUG` |
+| `AGENT_LOG_FILE` | 留空只写 stderr；给路径则另写文件，10MB × 5 轮转 |
+| `AGENT_LOG_FORMAT` | `text`（人读）或 `json`（一行一对象，给 jq / 采集） |
+| `AGENT_LOG_PAYLOAD` | `0`。置 `1` 才记录工具参数与返回 —— **含患者数据** |
 
 两个数据库和 GraphDB 继续由 `dmo.config` 加载。Schema 在进程启动时确定，修改后需重启。现有 DMO 部分查询固定使用 diabetes，因此部署应保持本项目提供的 schema。
 
@@ -72,6 +76,7 @@ curl -N http://127.0.0.1:8200/chat/stream \
 - 默认检索 ehr-legacy 患者，演示数据单独指定来源。原始结果带质量提醒，不能代替语义规则判定。
 - 图工具使用 DMO 固定的只读端点；不暴露任意 URL、自由 SQL、自由 SPARQL、写入、ETL 或预测端点。
 - `simulate_patient_course` 走 `POST /patients/{pid}/simulate`，但**仍然只读**：推演全程在内存跑，对 GraphDB 只发 CONSTRUCT，三元组数量不变。假设项 `{term, value, unit, date}` 四个字段在工具 schema 层就是必填，一次最多 10 条 —— 服务端不猜术语、不默认单位、不补日期（30 天规则靠日期区分 Provisional 与 Confirmed）。假设值必须由用户给出，模型不得自行生成。
+- `assess_patient_treatment` 只接收 `pid`，走 `POST /patients/{pid}/treatment-assessments`；服务端从 `core_*` 患者镜像组装快照和当前治疗措施。
 - 单个工具结果超过 24000 字符会明确要求缩小查询范围，不把截断引文当完整证据。异常不输出底层连接串、凭据和患者 SQL 参数。
 - 使用本地流式事件展示过程；禁用本轮 LangSmith 托管追踪，即使宿主环境已全局启用。查询所得事实仍会发送给配置的模型服务供回答使用。
 
@@ -91,6 +96,7 @@ curl -N http://127.0.0.1:8200/chat/stream \
 | `find_patients` | 按诊断、来源、档位分页检索 |
 | `patient_evidence` | 患者判定、风险、安全、建议、监测或照护链 |
 | `simulate_patient_course` | 确定性条件推演（若 X 则 Y）+ 推导树；只读、内存计算 |
+| `assess_patient_treatment` | 按患者镜像评估当前治疗措施、证据与缺口 |
 | `inspect_fact_schema` | 两库可查表、列、类型与注释 |
 | `query_patient_facts` | 两库受控事实查询与分页 |
 
@@ -111,6 +117,71 @@ curl -N http://127.0.0.1:8200/chat/stream \
 - 取消请求向模型流传播；已开始的同步 DMO/SQL 工作可能继续到各自超时。HTTP/数据库超时限制后台工作。
 
 服务默认绑定 127.0.0.1，面向本地使用；当前没有用户认证、患者级授权、生产审计持久化或多租户隔离，不能直接作为公开医疗数据服务部署。
+
+## 排查问题（日志）
+
+日志只配置 `agent.*` 这一棵 logger 子树，不碰 root；输出到 **stderr**，所以
+`--json` 的事件流仍可直接管道给 `jq`。
+
+### 关键：日志是异常真因的唯一出口
+
+harness 有三处刻意的异常吞噬 —— 它们都是为了不把内部细节、DSN、密钥漏给模型或
+浏览器，**不该取消**，但代价是原始异常在那里就没了：
+
+| 位置 | 对外只剩 | 日志事件 |
+| --- | --- | --- |
+| `runtime.tool_boundary` | `{"error": "XxxError", "hint": "工具失败…"}` | `tool.exception` + 完整 traceback |
+| `runtime.AgentHarness.stream` | `error_message()` 的固定中文文案 | `run.exception` + 完整 traceback |
+| `api.get_runtime`（`from None` 断链） | HTTP 503 | `runtime.build_failed` + 完整 traceback |
+
+所以「界面上只看到一句『工具失败』」时，答案一定在日志里，不在事件流里。
+
+### run_id 串起全链路
+
+日志里的 `run_id` 与 SSE 事件里的 `run_id` **是同一个**。用户报错时让他给出
+事件中的 `run_id`，就能还原这一轮的服务端全过程：
+
+```bash
+grep 7eb6dddb logs/agent.log
+```
+
+### 事件名（按点号分层，便于 grep）
+
+| 前缀 | 事件 |
+| --- | --- |
+| `run.*` | `start` / `end` / `exception` / `cancelled` —— 一轮的耗时、模型与工具调用次数 |
+| `model.*` | `start` / `end` —— 第几次调用、选了哪些工具、finish_reason、token 用量 |
+| `tool.*` | `start` / `end` / `exception` —— 工具名、耗时、成功与否 |
+| `dmo.*` | `request` / `response` / `server_error` / `transport_error` / `result_too_large` |
+| `sql.*` | `query` / `catalog` / `connection_error` —— 表、行数、耗时；**零行记 WARNING** |
+| `http.*` | `chat` / `chat_disconnected` —— 含浏览器中途断开 |
+| `runtime.*` / `settings.*` / `app.*` | 初始化：连的哪个端点、哪个模型、密钥指纹 |
+
+几条常用查法：
+
+```bash
+dmo-agent --log-level DEBUG "P90018 的诊断依据" 2>debug.log
+grep -E "exception|_error" debug.log        # 只看真因
+grep "rows=0" debug.log                     # 查到零行的 SQL（最常见的静默错误）
+grep -E "elapsed_ms=[0-9]{4,}" debug.log    # 超过 1 秒的慢调用
+AGENT_LOG_FORMAT=json dmo-agent --serve 2>&1 | jq -c 'select(.level!="DEBUG")'
+```
+
+### 患者数据：默认不记
+
+工具参数与返回里全是 patientid、检验值、诊断结论。**默认只记形状**：工具名、
+耗时、行数、状态码、参数名、`_shape()` 概括的返回结构。要看真实内容必须显式开：
+
+```bash
+dmo-agent --log-payload "…"      # 或 AGENT_LOG_PAYLOAD=1
+```
+
+开启时会打一条 WARNING 提醒。只在本地排查用；`logs/` 与 `*.log` 已进 `.gitignore`。
+密钥永不入日志：`settings.loaded` 只记长度与后 4 位，DSN 在 `sql.connection_error`
+里被整条排除。
+
+注意 `runtime.stream` 里 `tracing_context(enabled=False)` 明确关掉了 LangSmith —— 患者
+链路不外发是刻意决定，因此**本地日志是唯一的观测手段**。
 
 ## 验证
 

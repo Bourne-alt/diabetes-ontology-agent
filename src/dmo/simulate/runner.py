@@ -66,6 +66,15 @@ def simulate(
 
     delta = engine.diff(before, after)
     version = graph_version()
+    derivation = tree.build(ds_after, after, hyps)
+    sources = []
+    def collect_sources(nodes):
+        for node in nodes:
+            for citation in node.get("sources", []):
+                if citation not in sources:
+                    sources.append(citation)
+            collect_sources(node.get("children", []))
+    collect_sources(derivation)
 
     return {
         "patientId": pid,
@@ -86,7 +95,8 @@ def simulate(
         "unchanged": not delta,
         "before": _summary(before),
         "after": _summary(after),
-        "derivationTree": tree.build(ds_after, after, hyps),
+        "derivationTree": derivation,
+        "sources": sources,
         "hypotheticalNote": HYPOTHETICAL_NOTE,
         "disclaimer": DISCLAIMER,
     }

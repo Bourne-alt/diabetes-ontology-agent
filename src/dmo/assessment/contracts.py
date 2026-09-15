@@ -17,6 +17,10 @@ LABELS = {
 
 
 class AssessmentEvent(Event):
+    event_time_known: bool = True
+    fact_origin: str | None = None
+    source_table: str | None = None
+    source_pk: str | None = None
     text: str | None = Field(default=None, max_length=6000)
     metric: str | None = Field(default=None, max_length=100)
     unit: str | None = Field(default=None, max_length=80)
@@ -36,6 +40,7 @@ class AssessmentEvent(Event):
 
 
 class AssessmentSnapshot(StrictModel):
+    patient_context: dict[str, str] = Field(default_factory=dict)
     clinical_as_of: AwareDatetime
     knowledge_cutoff: AwareDatetime
     events: list[AssessmentEvent] = Field(max_length=1000)
@@ -78,7 +83,7 @@ class TreatmentAssessmentRequest(StrictModel):
     mode: Literal["prospective", "follow_up"] = "prospective"
     baseline_snapshot: AssessmentSnapshot
     follow_up_snapshot: AssessmentSnapshot | None = None
-    interventions: list[Intervention] = Field(min_length=1, max_length=10)
+    interventions: list[Intervention] = Field(default_factory=list, max_length=10)
     assessment_domains: list[Domain] = Field(default_factory=lambda: list(DOMAINS), min_length=1)
     composer: Literal["auto", "template", "llm"] = "auto"
     knowledge_mode: Literal["current", "historical"] = "current"

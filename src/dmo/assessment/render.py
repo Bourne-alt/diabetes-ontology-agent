@@ -20,6 +20,11 @@ def render(report: dict) -> str:
         "本地资料已核验原文位置，但未验证其为最新适用临床指南。",
         "",
     ]
+    context = report["snapshot_refs"]["baseline"].get("patient_context", {})
+    if context:
+        lines.extend(["患者：" + plain(context.get("patient_id", "未知")), ""])
+        if context.get("fact_origin") == "demo-cohort":
+            lines.extend(["本报告使用合成患者数据。", ""])
     if report["generation_metadata"]["items"]:
         lines.extend(["## 综合说明", ""])
         for item in report["generation_metadata"]["items"]:
@@ -70,7 +75,7 @@ def render(report: dict) -> str:
                 [
                     f"来源：{item['source']}；记录：{plain(item['event_id'])}。",
                     (
-                        f"发生：{item['event_time']}；可见：{item['available_at']}；"
+                        f"发生：{item['event_time'] if item.get('event_time_known', True) else '未知（时间字段为镜像读取时点占位）'}；可见：{item['available_at']}；"
                         f"入库：{item['ingested_at']}。"
                     ),
                     "",
@@ -80,7 +85,7 @@ def render(report: dict) -> str:
             lines.extend(["治疗措施输入：" + plain(item["code"] or "未明确"), ""])
     if report["demo_appendix"]:
         lines.extend(
-            ["## 初始化数值演示附件", "", "仅验证计算流程，不作为报告正文或临床结论的依据。", ""]
+            ["## 初始化数值推演附件", "", "仅验证计算流程，不作为报告正文或临床结论的依据。", ""]
         )
         for result in report["demo_appendix"]:
             lines.append(plain(result))

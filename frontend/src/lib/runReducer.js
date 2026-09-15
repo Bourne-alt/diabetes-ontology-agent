@@ -141,6 +141,9 @@ function applyEvent(state, evt, at) {
       );
     }
 
+    case 'assessment_report':
+      return withEvent({...state, bag: harvest(evt.report, 'assess_patient_treatment', cloneBag(state.bag))}, evt, '已取得评估执行记录，可回放每一步', false, at);
+
     case 'answer':
       return withEvent({ ...state, answer: asText(evt.text) }, evt, '最终回答，整段替换增量区', false, at);
 

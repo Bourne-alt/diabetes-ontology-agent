@@ -1,5 +1,6 @@
 """Bounded, structured SELECTs. The model never supplies executable SQL."""
 
+import logging
 from contextlib import contextmanager
 from typing import Literal
 
@@ -9,6 +10,10 @@ from psycopg.rows import dict_row
 
 from dmo.config import ONTO_SCHEMA, UPSTREAM_SCHEMA, Config
 from dmo.db.etl import SPECS
+
+from .logs import get_logger, log_event, log_exception, log_payload_enabled, timer
+
+log = get_logger("database")
 
 Database = Literal["original", "ontology"]
 ORIGINAL = {spec.upstream: spec.columns for spec in SPECS}
@@ -62,16 +67,23 @@ class FactStore:
         if database not in ("original", "ontology"):
             raise ValueError("database 必须是 original 或 ontology")
         dsn = self.cfg.upstream_dsn if database == "original" else self.cfg.onto_dsn
-        with psycopg.connect(
-            dsn,
-            connect_timeout=5,
-            row_factory=dict_row,
-            options="-c default_transaction_read_only=on -c statement_timeout=10000 "
-            "-c lock_timeout=2000 -c idle_in_transaction_session_timeout=15000",
-        ) as conn:
-            # Set on the transaction as well, regardless of DSN options.
-            conn.execute("SET TRANSACTION READ ONLY")
-            yield conn
+        try:
+            with psycopg.connect(
+                dsn,
+                connect_timeout=5,
+                row_factory=dict_row,
+                options="-c default_transaction_read_only=on -c statement_timeout=10000 "
+                "-c lock_timeout=2000 -c idle_in_transaction_session_timeout=15000",
+            ) as conn:
+                # Set on the transaction as well, regardless of DSN options.
+                conn.execute("SET TRANSACTION READ ONLY")
+                yield conn
+        except psycopg.Error as exc:
+            # DSN 含口令，永远不入日志 —— 只记是哪个库、什么错。
+            # statement_timeout / 连不上 / 只读违例都从这里看得到。
+            log_exception(log, "sql.connection_error", exc, database=database,
+                          sqlstate=getattr(exc, "sqlstate", None))
+            raise
 
     def catalog(self, database: Database, table: str | None = None):
         schema = UPSTREAM_SCHEMA if database == "original" else ONTO_SCHEMA
@@ -95,6 +107,8 @@ class FactStore:
             ).fetchall()
         if database == "original":
             rows = [r for r in rows if r["column_name"] in ORIGINAL[r["table_name"]]]
+        log_event(log, logging.DEBUG, "sql.catalog", database=database, schema=schema,
+                  table=table, columns=len(rows))
         return {"database": database, "schema": schema, "columns": rows}
 
     def query(
@@ -135,8 +149,24 @@ class FactStore:
             where=sql.SQL(" AND ").join(conditions),
             order=sql.SQL(", ").join(map(sql.Identifier, selected)),
         )
-        with self.connection(database) as conn:
+        with self.connection(database) as conn, timer() as elapsed:
             rows = conn.execute(statement, [*values, limit + 1, offset]).fetchall()
+        # 查出零行是这个 agent 最常见的「看着没报错但结论不对」，必须能一眼看见。
+        # 筛选值含 patientid 等患者数据，默认只记列名。
+        log_event(
+            log,
+            logging.INFO if rows else logging.WARNING,
+            "sql.query",
+            database=database,
+            schema=card["schema"],
+            table=table,
+            filters=filters if log_payload_enabled() else sorted(filters),
+            columns=len(selected),
+            rows=len(rows[:limit]),
+            limit=limit,
+            offset=offset,
+            elapsed_ms=elapsed.ms,
+        )
         raw = database == "original" or table.startswith("stg_")
         return {
             "database": database,

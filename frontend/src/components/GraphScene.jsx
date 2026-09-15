@@ -3,6 +3,33 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
 import { KIND } from '../lib/knowledgeGraph.js';
+import { toolLabel } from '../lib/toolLabels.js';
+
+function NodeSummary({ node, onClose, cardRef }) {
+  const d = node.detail || {};
+  const value = d.value ?? d.result_value ?? d.data?.value;
+  const unit = d.unit ?? d.result_unit ?? d.data?.unit;
+  const units = {percent:'%', 'mg-per-dL':'mg/dL', 'mmol-per-L':'mmol/L', 'mg-per-g':'mg/g'};
+  const date = d.event_time ?? d.collected_at ?? d.data?.event_time;
+  const summary = d.statement || d.description || d.definition || d.text || d.quote || d.exact_quote;
+  const names = {A1C:'糖化血红蛋白', FPG:'空腹血糖', UACR:'尿白蛋白／肌酐比', EGFR:'估算肾小球滤过率', ALT:'谷丙转氨酶', CHOL:'总胆固醇', BMI:'身体质量指数'};
+  const title = names[node.label] ? `${names[node.label]}（${node.label}）`
+    : node.kind==='rule' && d.rule_id===node.label ? (d.kind==='data_gap'?'需要补充的资料':'评估结论') : node.label;
+  const unverified = [d.trust,d.trust_level,d.value_trust].some(v=>['Unverified','unverified'].includes(v));
+  return <section ref={cardRef} className="graph-node-popover" aria-label="节点详情" aria-live="polite" style={{'--node-accent':KIND[node.kind]?.color}}>
+    <header><span>{KIND[node.kind]?.label}</span><button type="button" onClick={onClose} aria-label="关闭节点详情">×</button></header>
+    <h3>{title}</h3>
+    {value !== undefined && value !== null && <p className="graph-node-value">{String(value)} <small>{units[unit] || unit || ''}</small></p>}
+    {summary && <p className="graph-node-summary">{String(summary)}</p>}
+    {date && <p className="graph-node-meta">记录时间：{String(date).slice(0,10)}</p>}
+    {(d.fact_origin==='demo-cohort'||d.origin==='demo-cohort') && <span className="graph-node-tag">合成数据</span>}
+    {node.scenario && <p className="graph-node-warning">假设情景，尚未实际发生</p>}
+    {unverified && <p className="graph-node-warning">结果尚未核实，不能据此判断</p>}
+    {d.kind==='data_gap' && <p className="graph-node-warning">资料不足，需要补充后再判断</p>}
+    {!summary && value == null && <p className="graph-node-meta">{node.kind==='patient'?'此节点汇集该患者的检查与记录。':'本次返回未提供更多说明。'}</p>}
+    <footer>来源：{d.source_file?.split('/').at(-1) || toolLabel(node.tool)}</footer>
+  </section>;
+}
 
 // Local deterministic layout. Coordinates carry no clinical meaning.
 function position(index, count, kind) {
@@ -12,8 +39,10 @@ function position(index, count, kind) {
   const theta = index * Math.PI * (3 - Math.sqrt(5));
   return new THREE.Vector3(Math.cos(theta) * r * 2.75, y * 2.15, Math.sin(theta) * r * 2.4);
 }
-export default function GraphScene({ graph, paused, selected, onSelect }) {
+export default function GraphScene({ graph, paused, selected, onSelect, onClose }) {
   const host = useRef(null), runtime = useRef(null), callback = useRef(onSelect);
+  const card = useRef(null), connector = useRef(null);
+  const node = graph.nodes.find(n => n.id === selected);
   const [unavailable, setUnavailable] = useState(false);
   useEffect(() => { callback.current = onSelect; }, [onSelect]);
   useEffect(() => {
@@ -61,7 +90,7 @@ export default function GraphScene({ graph, paused, selected, onSelect }) {
       camera.aspect = width/height; camera.updateProjectionMatrix();
     };
     const observer = new ResizeObserver(resize); observer.observe(el); resize();
-    const instance = { scene, group, controls, renderer, particles: [], paused: false, visible: true, selection: null };
+    const instance = { scene, group, camera, controls, renderer, particles: [], paused: false, visible: true, selection: null };
     runtime.current = instance;
     const intersection = new IntersectionObserver(([entry]) => { instance.visible = entry.isIntersecting; });
     intersection.observe(el);
@@ -83,6 +112,24 @@ export default function GraphScene({ graph, paused, selected, onSelect }) {
       for (const particle of instance.particles) {
         particle.mesh.visible = animate;
         if (animate) particle.mesh.position.lerpVectors(particle.from, particle.to, (time*.00018+particle.offset)%1);
+      }
+      const activeMesh = group.children.find(child => child.userData.nodeId === instance.selection);
+      if (card.current && activeMesh) {
+        const point = activeMesh.getWorldPosition(new THREE.Vector3()).project(camera);
+        const width = el.clientWidth, height = el.clientHeight;
+        const x = (point.x+1)*width/2, y = (1-point.y)*height/2;
+        const visible = point.z>=-1 && point.z<=1 && x>=0 && x<=width && y>=0 && y<=height;
+        card.current.style.visibility = visible ? 'visible' : 'hidden';
+        const w = card.current.offsetWidth, h = card.current.offsetHeight;
+        const left = Math.max(8, Math.min(width-w-8, x+w+24<width ? x+24 : x-w-24));
+        const top = Math.max(8, Math.min(height-h-54, y-h/2));
+        card.current.style.transform = `translate(${left}px, ${top}px)`;
+        if (connector.current) {
+          connector.current.style.visibility = visible ? 'visible' : 'hidden';
+          connector.current.setAttribute('x1',x); connector.current.setAttribute('y1',y);
+          connector.current.setAttribute('x2',Math.max(left,Math.min(left+w,x)));
+          connector.current.setAttribute('y2',Math.max(top+8,Math.min(top+h-8,y)));
+        }
       }
       renderer.render(scene, camera); labels.render(scene, camera);
     };
@@ -143,7 +190,29 @@ export default function GraphScene({ graph, paused, selected, onSelect }) {
   }, [graph]);
   useEffect(() => { if (runtime.current) runtime.current.paused = paused; }, [paused]);
   useEffect(() => { if (runtime.current) runtime.current.selection = selected; }, [selected]);
-  return <div className="graph-stage" ref={host} role="img" aria-label={`三维证据图，${graph.nodes.length}个节点，${graph.edges.length}条关系。可在下方按钮中选择节点。`}>
+  function zoom(factor) {
+    const r = runtime.current;
+    if (!r) return;
+    const offset = r.camera.position.clone().sub(r.controls.target);
+    offset.setLength(THREE.MathUtils.clamp(offset.length() * factor, r.controls.minDistance, r.controls.maxDistance));
+    r.camera.position.copy(r.controls.target).add(offset);
+    r.controls.update();
+  }
+  function resetView() {
+    const r = runtime.current;
+    if (!r) return;
+    r.controls.target.set(0, 0, 0);
+    r.camera.position.set(0, 1, 10.5);
+    r.controls.update();
+  }
+  return <div className="graph-viewport">
+    <div className="graph-stage" ref={host} role="img" aria-label={`三维证据图，${graph.nodes.length}个节点，${graph.edges.length}条关系。可在下方按钮中选择节点。`} />
+    <div className="graph-view-controls" role="group" aria-label="图谱视图控制">
+      <button type="button" aria-label="放大图谱" title="放大" disabled={unavailable} onClick={() => zoom(.8)}>＋</button>
+      <button type="button" aria-label="缩小图谱" title="缩小" disabled={unavailable} onClick={() => zoom(1.25)}>−</button>
+      <button type="button" disabled={unavailable} onClick={resetView}>重置视角</button>
+    </div>
+    {node && <><svg className="graph-popover-connector" aria-hidden="true"><line ref={connector}/></svg><NodeSummary node={node} cardRef={card} onClose={onClose}/></>}
     {unavailable && <div className="graph-fallback">此浏览器暂不支持 3D，请使用下方节点列表查看相同证据。</div>}
   </div>;
 }

@@ -14,6 +14,7 @@ from .evidence import KnowledgeStore
 from .render import render
 from .rules import ClaimBuilder, evaluate_actions, evaluate_state, fact_id
 from .snapshot import build_state, digest
+from .trace import ExecutionTrace
 from .validators import validate_claim_references
 
 VERSION = "treatment-assessment-v1"
@@ -25,11 +26,18 @@ def assess(
     *,
     knowledge: KnowledgeStore | None = None,
     client: ModelClient | None = None,
+    trace: ExecutionTrace | None = None,
 ) -> dict:
+    trace = trace or ExecutionTrace()
     baseline = build_state(patient_id, request.baseline_snapshot)
     follow = (
         build_state(patient_id, request.follow_up_snapshot) if request.follow_up_snapshot else None
     )
+    trace.record("snapshot", "筛选时点有效记录", "检查患者隔离、修订、发布截点与撤回状态。", {
+        "input_count": len(request.baseline_snapshot.events), "visible_count": len(baseline.events),
+        "excluded": list(baseline.excluded), "snapshot_hash": baseline.fingerprint,
+        "clinical_as_of": request.baseline_snapshot.clinical_as_of.isoformat(),
+    })
     knowledge = knowledge or KnowledgeStore()
     # No source publication/availability history is available in current corpus.
     # Historical mode still reports facts/deltas but never applies current knowledge to the past.
@@ -40,6 +48,10 @@ def assess(
         knowledge.evidence = {}
         knowledge.issues = [*knowledge.issues, "HISTORICAL_KNOWLEDGE_VERSION_UNAVAILABLE"]
     builder = ClaimBuilder()
+    trace.record("knowledge", "加载本地知识与出处", "读取本体规则和原文文件；保留缺失来源及版本。", {
+        "knowledge_version": knowledge.version, "ontology_sha256": ONTOLOGY_SHA256,
+        "triple_count": len(knowledge.graph), "files": knowledge.files, "issues": knowledge.issues,
+    })
     evidence = {}
     mapped = []
     states = [("baseline", baseline)] + ([("follow_up", follow)] if follow else [])
@@ -51,6 +63,7 @@ def assess(
             "knowledge_cutoff": state.snapshot.knowledge_cutoff.isoformat(),
             "excluded": list(state.excluded),
             "source_coverage": state.snapshot.source_coverage,
+            "patient_context": state.snapshot.patient_context,
         }
         for e in state.events:
             key = fact_id(scope, e)
@@ -93,6 +106,9 @@ def assess(
             "kind": "intervention",
             **action.model_dump(mode="json"),
         }
+    trace.record("ontology_map", "映射本体实体", "事件映射为检验、用药或临床观察，并建立证据编号。", {
+        "entities": mapped,
+    })
     b_latest = evaluate_state(baseline, "baseline", request, knowledge, builder)
     if follow:
         f_latest = evaluate_state(follow, "follow_up", request, knowledge, builder)
@@ -133,9 +149,26 @@ def assess(
                 scope="follow_up",
                 missing=["comparable_follow_up_measurement"],
             )
+    trace.record("state_rules", "逐项评估检查结果", "按时间窗口、单位、人群和可信度筛选；冲突结果暂停判断。", {
+        "max_fact_age_days": request.max_fact_age_days, "claims": list(builder.claims),
+        "selected_measurements": [e.model_dump(mode="json") for e in b_latest.values()],
+    })
+    action_start = len(builder.claims)
     evaluate_actions(
         follow or baseline, "follow_up" if follow else "baseline", request, knowledge, builder
     )
+    if not request.interventions:
+        builder.add(
+            "safety",
+            "data_gap",
+            "患者镜像中没有当前治疗措施，无法进行措施特异性评估。",
+            missing=["current_intervention"],
+            severity="review",
+        )
+    trace.record("treatment_rules", "关联治疗措施与条件规则", "检查药物知识覆盖、已确认条件及联合措施缺口。", {
+        "claims": builder.claims[action_start:],
+        "interventions": [a.model_dump(mode="json") for a in request.interventions],
+    })
     extraction = {"status": "disabled", "findings": []}
     if request.extract_pacs and request.composer != "template":
         from .pacs import extract
@@ -170,12 +203,26 @@ def assess(
     # Safety is always retained even when a caller narrows other assessment domains.
     domains = list(dict.fromkeys([*request.assessment_domains, "safety"]))
     claims = [c for c in builder.claims if c["domain"] in domains]
+    trace.record("coverage", "检查六个维度的缺口", "缺少资料不视为正常，未命中规则不代表安全。", {
+        "domains": [{"domain": d, "status": domain_status(d, claims)} for d in domains],
+        "gaps": [c for c in claims if c["kind"] == "data_gap"],
+    })
     evidence.update(knowledge.evidence)
     validate_claim_references(claims, evidence)
+    trace.record("validate", "核验结论与证据引用", "每条结论的引用必须存在于证据索引。", {
+        "claim_count": len(claims), "evidence_count": len(evidence),
+        "references": [{"claim_id": c["claim_id"], "evidence_ids": c["evidence_ids"]} for c in claims],
+        "knowledge_evidence": list(knowledge.evidence.values()),
+    })
     generation = compose(
         claims, evidence, mode=request.composer, client=client, allow_pacs=request.extract_pacs
     )
     generation["pacs_extraction"] = extraction
+    trace.record("compose", "组织报告内容", "记录实际生成器与校验结果。", {
+        "composer": generation["composer"], "attempts": generation["attempts"],
+        "fallback_reason": generation.get("fallback_reason"),
+        "machine_learning_prediction_executed": False,
+    })
     gaps = [c for c in claims if c["kind"] == "data_gap"]
     report = {
         "report_id": "",
@@ -226,6 +273,11 @@ def assess(
     report["rendered_markdown"] = render(report)
     report["report_id"] = "TA-" + digest(report)[:32]
     report["generated_at"] = datetime.now(UTC).isoformat()
+    trace.record("report", "生成完整报告", "输出结构化结论、来源和可保存的 Markdown。", {
+        "report_id": report["report_id"], "status": report["status"],
+        "claim_count": len(claims), "gap_count": len(gaps),
+    })
+    report["execution_trace"] = trace.export()
     return report
 
 

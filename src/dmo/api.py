@@ -23,7 +23,6 @@ from typing import Any
 from fastapi import FastAPI, HTTPException, Query
 
 from . import config as config_mod
-from .assessment.contracts import TreatmentAssessmentRequest
 from .forecast.contracts import ForecastRequest
 from .query import hybrid, templates
 
@@ -586,21 +585,29 @@ def forecast_patient(pid: str, body: ForecastRequest) -> dict[str, Any]:
 
 
 @app.post("/patients/{pid}/treatment-assessments")
-def treatment_assessment(pid: str, body: TreatmentAssessmentRequest) -> dict[str, Any]:
-    """Evidence-backed multidomain report; optional LLM with validated template fallback."""
+def treatment_assessment(pid: str) -> dict[str, Any]:
+    """Build a patient mirror by ``pid`` and return an evidence-backed report."""
     import os
     from pathlib import Path
 
+    from psycopg import OperationalError
+    from pydantic import ValidationError
+
+    from .assessment.mirror import build_request
     from .assessment.service import assess
     from .assessment.storage import archive
+    from .assessment.trace import ExecutionTrace
 
-    # Validate caller identity/timeline outside internal knowledge/composition errors.
-    snapshots = [body.baseline_snapshot]
-    if body.follow_up_snapshot:
-        snapshots.append(body.follow_up_snapshot)
-    if any(e.patient_id != pid for snapshot in snapshots for e in snapshot.events):
-        raise HTTPException(422, "snapshot contains a different patient")
-    report = assess(pid, body)
+    trace = ExecutionTrace()
+    try:
+        request = build_request(_cfg(), pid, trace=trace)
+    except KeyError:
+        raise HTTPException(404, f"core_patient 里没有 {pid}") from None
+    except OperationalError:
+        raise HTTPException(503, "患者镜像数据库暂不可用") from None
+    except ValidationError:
+        raise HTTPException(422, "患者镜像数据不满足评估契约，请核查记录格式和数量") from None
+    report = assess(pid, request, trace=trace)
     directory = os.environ.get("DMO_ASSESSMENT_REPORT_DIR")
     if directory:
         try:
@@ -611,3 +618,22 @@ def treatment_assessment(pid: str, body: TreatmentAssessmentRequest) -> dict[str
     else:
         report["archive_status"] = "disabled"
     return report
+
+
+@app.get("/demo/treatment-scenarios")
+def treatment_scenarios() -> dict[str, Any]:
+    from .assessment.demo import catalog
+
+    return {"scenarios": catalog(), "notice": "所有场景均为合成数据，需先运行 seed_treatment_demo.py。"}
+
+
+@app.post("/patients/{pid}/prediction-demo")
+def prediction_demo(pid: str) -> dict[str, Any]:
+    from psycopg import OperationalError
+
+    from .assessment.prediction_demo import run
+
+    try:
+        return run(_cfg(), pid)
+    except OperationalError:
+        raise HTTPException(503, "合成患者数据库暂不可用") from None

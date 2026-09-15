@@ -1,18 +1,17 @@
 # 治疗措施综合评估接口
 
-`POST /patients/{pid}/treatment-assessments` 返回患者多维度状态、治疗相关证据、信息缺口和完整 Markdown 报告。无需训练模型；核心规则及模板路径不依赖大模型、PostgreSQL 或 GraphDB。
+`POST /patients/{pid}/treatment-assessments` 按患者编号查询 PostgreSQL 规范镜像，返回多维度状态、治疗相关证据、信息缺口和完整 Markdown 报告。接口使用本地规则及模板，不依赖 GraphDB 或外部模型。
 
 ## 调用与报告样例
 
 ```bash
-curl -X POST http://localhost:8100/patients/SYNTHETIC/treatment-assessments \
-  -H 'Content-Type: application/json' \
-  --data-binary @docs/treatment-assessment-example.json
+curl -X POST http://localhost:8100/patients/P90002/treatment-assessments
 ```
 
-示例是合成患者，包括 A1C、FPG、UACR、既往 CKD 诊断、影像报告以及拟开始的 metformin。它不是实际用药建议。示例默认 `composer=template`，不产生外部模型费用。
+接口只接收路径参数 `pid`。服务端从 `core_patient`、`core_lab_result`、
+`core_observation`、`core_diagnosis` 和 `core_medication_use` 组装患者镜像，调用方不再提交快照。
 
-直接生成 JSON 和 Markdown 文件：
+原有离线脚本继续支持显式快照，可生成合成示例的 JSON 和 Markdown 文件：
 
 ```bash
 python scripts/run_treatment_assessment.py \
@@ -20,21 +19,24 @@ python scripts/run_treatment_assessment.py \
   --composer template --out outputs/treatment-assessments
 ```
 
-改为 `--composer llm` 或请求中设置 `composer=auto/llm` 使用所配置的大模型。接口返回 `rendered_markdown`，可直接保存为 `.md`；`claims` 和 `evidence` 是其结构化来源。
+离线脚本可用 `--composer llm` 使用所配置的大模型。HTTP 接口只需 `pid`，不接受这些离线配置。接口返回 `rendered_markdown`，可直接保存为 `.md`；`claims` 和 `evidence` 是其结构化来源。
 
-## 输入语义
+## 内部镜像语义
 
 | 字段 | 含义 |
 | --- | --- |
-| mode | prospective：措施实施前评估；follow_up：治疗后随访 |
-| baseline_snapshot | 预测起点、当时知识截点、完整事件历史；不接收患者 ID 代替快照 |
-| follow_up_snapshot | 随访模式必填；必须晚于基线，提供该时点完整历史视图 |
-| interventions | 药品/措施编码、操作、开始时间、计划/实际实施状态、来源事件 |
+| mode | 当前固定为 prospective，评估镜像中的当前措施 |
+| baseline_snapshot | 服务端按 `pid` 从规范患者表组装 |
+| interventions | 从 Active 且未过期、未在未来开始的用药组装继续措施的条件评估；OnHold 不视为继续用药；无当前措施时返回明确资料缺口 |
 | assessment_domains | 糖代谢、肾脏、心血管、肝脏、安全性、生活方式；安全性始终保留 |
-| knowledge_mode | current 使用本地当前知识；historical 目前缺少历史知识版本，只保留患者事实和可比变化并报告缺口 |
-| composer | template 全离线；auto/llm 调用模型，失败或不合格则回退模板 |
-| extract_pacs | 默认 false；true 时允许向配置的模型发送经基础去标识处理的 PACS 文本，提取有原文片段的候选发现 |
-| include_demo_appendix | 默认 false；初始化 forecast 数值仅作为独立演示附件，永不进入临床结论 |
+| knowledge_mode | current，使用本地当前知识 |
+| composer | template；agent 使用此报告组织回答 |
+| extract_pacs / include_demo_appendix | 均为 false |
+
+镜像没有 PACS、历史修订、发布和实际给药信息，缺口记录在 `source_coverage`。
+无时区的库内时间按 `DMO_PATIENT_TIMEZONE` 解释（默认 `Asia/Taipei`）。缺少发生时间的记录
+以镜像读取时间占位并标记 `event_time_known=false`，不参与时序判断。
+下面的显式事件、随访及模型配置仅用于离线脚本/内部评估服务。
 
 事件来源支持 `lis/pacs/emr/medication`。`event_time/available_at/ingested_at` 必须带时区。按截点选当时已知的最高修订版，再处理撤回、初步报告和未来事件，不能先取数据库全局最新版。
 

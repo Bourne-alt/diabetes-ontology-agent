@@ -30,14 +30,22 @@ SELECT ?a WHERE { ?a dmo:supportsDiagnosis <%s> }
 
 _THRESHOLD_Q = """
 PREFIX dmo: <https://example.org/dmo#>
-SELECT ?tid ?lo ?loOp ?up ?upOp ?unit ?confirm ?quote ?sha WHERE {
+SELECT ?tid ?lo ?loOp ?up ?upOp ?unit ?confirm ?quote ?sha ?role ?sourceId ?localFile ?locator WHERE {
   <%s> dmo:appliesThreshold ?th .
   ?th dmo:thresholdId ?tid ; dmo:boundUnit ?unit ;
       dmo:lowerOperator ?loOp ; dmo:upperOperator ?upOp .
   OPTIONAL { ?th dmo:lowerBound ?lo }
   OPTIONAL { ?th dmo:upperBound ?up }
   OPTIONAL { ?th dmo:confirmationRequired ?confirm }
-  OPTIONAL { ?th dmo:thresholdCitesPassage ?p . ?p dmo:quote ?quote ; dmo:contentHash ?sha }
+  OPTIONAL {
+    VALUES ?citationPredicate { dmo:thresholdCitesPassage dmo:confirmationCitesPassage }
+    ?th ?citationPredicate ?p . ?p dmo:quote ?quote ; dmo:contentHash ?sha .
+    BIND(IF(?citationPredicate = dmo:confirmationCitesPassage, "confirmation", "threshold") AS ?role)
+    OPTIONAL { ?p dmo:locator ?locator }
+    OPTIONAL { ?src dmo:hasPassage ?p .
+               OPTIONAL { ?src dmo:sourceId ?sourceId }
+               OPTIONAL { ?src dmo:localFile ?localFile } }
+  }
 }
 """
 
@@ -66,9 +74,19 @@ def _threshold_node(ds: Dataset, assessment_iri: str) -> dict[str, Any] | None:
                 "interval": interval(r.lo, str(r.loOp), r.up, str(r.upOp), str(r.unit)),
                 "confirmationRequired": bool(r.confirm),
                 "sources": sources,
+                "confirmationPolicy": (
+                    "原文通常建议第二次检查确认；不同日期、同项检验且落入同一阈值区间，"
+                    "是本项目 30-diagnosis-from-assessment.rq 的规则实现，不是该原文的逐字要求。"
+                    if bool(r.confirm) else None
+                ),
             }
         if r.quote is not None:
-            entry = {"quote": str(r.quote), "sha256": str(r.sha or "")}
+            entry = {"quote": str(r.quote), "sha256": str(r.sha or ""),
+                     "sourceId": str(r.sourceId or ""), "localFile": str(r.localFile or ""),
+                     "locator": str(r.locator or ""), "citationRole": str(r.role),
+                     "supports": str(r.tid) + (" · 确认要求" if str(r.role) == "confirmation" else " · 数值阈值")}
+            if str(r.role) == "confirmation":
+                entry["interpretation"] = node["confirmationPolicy"]
             if entry not in sources:
                 sources.append(entry)
     if node is not None and not sources:

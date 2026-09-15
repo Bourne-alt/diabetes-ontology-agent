@@ -85,6 +85,19 @@ def test_real_langchain_tool_loop():
     assert [e["seq"] for e in events] == list(range(1, len(events) + 1))
 
 
+def test_completed_todo_does_not_erase_explanation_before_final_closing_text():
+    explanation = '如果新增检查成立，按当前规则从暂时无法确认变为已确认；风险仍然资料不足。'
+    model = ScriptedModel(responses=[
+        AIMessage(content=explanation, tool_calls=[{'name': 'write_todos', 'args': {
+            'todos': [{'content': '对比推演结果', 'status': 'completed'}]}, 'id': 'done1', 'type': 'tool_call'}]),
+        AIMessage(content='推演已完成，结论已在上方呈现。'),
+    ])
+    events = run(collect(AgentHarness(build_agent(SETTINGS, model=model, backend=DmoBackend(), facts=FactStore(CFG)), SETTINGS)))
+    final = next(e['text'] for e in events if e['type'] == 'answer')
+    assert explanation in final
+    assert events[-1]['status'] == 'completed'
+
+
 def test_model_budget_is_failure_not_success():
     settings = AgentSettings(api_key="unused", max_model_calls=1)
     model = ScriptedModel(
@@ -684,3 +697,78 @@ def test_simulate_tool_rejects_incomplete_assumption():
     assert {"unit", "date"} <= missing
     assert called == []  # 残缺请求根本没有发出
 
+
+def test_treatment_assessment_tool_posts_pid_only():
+    from fastapi import FastAPI
+
+    app = FastAPI()
+    seen = {}
+
+    @app.post("/patients/{pid}/treatment-assessments")
+    def assessment(pid: str):
+        seen["pid"] = pid
+        return {"report_id": "TA-test", "claims": []}
+
+    tools = {t.name: t for t in build_tools(DmoBackend(app), FactStore(CFG))}
+    result = run(tools["assess_patient_treatment"].ainvoke({"pid": "P90002"}))
+
+    assert seen == {"pid": "P90002"}
+    assert result["ok"] is True
+    assert tools["assess_patient_treatment"].args == {"pid": {"title": "Pid", "type": "string"}}
+
+
+def test_treatment_tool_preserves_claim_evidence_within_context_budget():
+    from fastapi import FastAPI
+
+    app = FastAPI()
+    @app.post("/patients/{pid}/treatment-assessments")
+    def assessment(pid: str):
+        return {"report_id": "TA-test", "rendered_markdown": "x" * 25000,
+                "mapped_entities": [{"duplicate": "x" * 25000}],
+                "claims": [{"claim_id": "C1", "evidence_ids": ["E1"]}],
+                "evidence": [{"evidence_id": "E1", "exact_quote": "preserve"},
+                             {"evidence_id": "UNUSED"}]}
+
+    result = run(DmoBackend(app).request("/patients/P1/treatment-assessments", body={}))
+    assert result["ok"]
+    assert result["data"]["claims"][0]["evidence_ids"] == ["E1"]
+    assert result["data"]["evidence"] == [{"evidence_id": "E1", "exact_quote": "preserve"}]
+
+
+def test_assessment_observer_keeps_full_trace_and_evidence_defaults_are_lossless():
+    from fastapi import FastAPI
+    app = FastAPI()
+    evidence = [{"evidence_id": f"F{i}", "kind": "patient_fact", "value_trust": "verified",
+                 "fact_origin": "demo-cohort", "value": i} for i in range(3)]
+    report = {"execution_trace": {"steps": [{"key": "read"}]},
+              "claims": [{"evidence_ids": ["F0", "F1", "F2"]}], "evidence": evidence}
+    @app.post('/patients/{pid}/treatment-assessments')
+    def assessment(pid: str):
+        return report
+    seen = []
+    async def observe(value):
+        seen.append(value)
+    result = run(DmoBackend(app).request('/patients/P1/treatment-assessments', body={}, assessment_observer=observe))
+    assert seen[0] == report
+    data = result['data']
+    assert 'execution_trace' not in data
+    restored = [{**data['evidence_defaults_by_kind'].get(e['kind'], {}), **e} for e in data['evidence']]
+    assert restored == evidence
+
+
+def test_agent_stream_emits_assessment_report_before_compact_tool_result():
+    from fastapi import FastAPI
+    app = FastAPI()
+    @app.post('/patients/{pid}/treatment-assessments')
+    def assessment(pid: str):
+        return {'report_id': 'TA1', 'claims': [], 'execution_trace': {'steps': [{'key': 'read'}]}}
+    model = ScriptedModel(responses=[AIMessage(content='', tool_calls=[{
+        'name': 'assess_patient_treatment', 'args': {'pid': 'P91001'}, 'id': 'a1', 'type': 'tool_call',
+    }]), AIMessage(content='评估已完成。')])
+    events = run(collect(AgentHarness(build_agent(SETTINGS, model=model, backend=DmoBackend(app), facts=FactStore(CFG)), SETTINGS)))
+    report_event = next(e for e in events if e['type'] == 'assessment_report')
+    end = next(e for e in events if e['type'] == 'tool_end')
+    assert report_event['report']['execution_trace']['steps'][0]['key'] == 'read'
+    assert report_event['seq'] < end['seq']
+    assert 'execution_trace' not in end['result']['data']
+    assert events[-1]['status'] == 'completed'

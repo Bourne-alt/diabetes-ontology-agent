@@ -52,5 +52,6 @@ def recent(state: PatientState, age_days: int) -> list[AssessmentEvent]:
     return [
         e
         for e in state.events
-        if (state.snapshot.clinical_as_of - e.event_time).total_seconds() <= age_days * 86400
+        if e.event_time_known
+        and (state.snapshot.clinical_as_of - e.event_time).total_seconds() <= age_days * 86400
     ]

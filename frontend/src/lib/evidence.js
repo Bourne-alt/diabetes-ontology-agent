@@ -55,11 +55,28 @@ export function harvest(result, tool, bag, depth = 0) {
     return bag;
   }
 
-  // 逐字出处：quote + 完整 sha256
-  if (typeof result.quote === 'string' && typeof result.sha256 === 'string') {
-    once(bag, bag.quotes, `q:${result.sha256}`, {
-      quote: result.quote,
-      sha256: result.sha256,
+  if (result.report_id && Array.isArray(result.evidence) && Array.isArray(result.claims)) {
+    const used = new Set(result.claims.flatMap(c => c.evidence_ids || []));
+    for (const entry of result.evidence) {
+      const item = {...result.evidence_defaults_by_kind?.[entry.kind], ...entry};
+      if (item.kind === 'knowledge' && used.has(item.evidence_id)) {
+        harvest({...item, supports: result.claims.filter(c => c.evidence_ids?.includes(item.evidence_id)).map(c=>c.statement).join('\n')}, tool, bag);
+      }
+    }
+    return bag;
+  }
+
+  // 两种接口分别使用 quote / exact_quote，来源和原文均直接取自返回体。
+  const quote = result.exact_quote ?? result.quote;
+  if (typeof quote === 'string' && quote.trim()) {
+    const source = result.source_file ?? result.localFile ?? result.sourceId ?? result.source_id ?? '';
+    once(bag, bag.quotes, `q:${source}:${quote}:${asText(result.supports ?? result.citedBy)}`, {
+      quote,
+      document: result.document_title ?? result.sourceTitle ?? source,
+      sourceFile: result.source_file ?? result.localFile ?? null,
+      locator: result.locator ?? null,
+      interpretation: result.interpretation ?? null,
+      sha256: result.content_hash ?? result.contentHash ?? result.sha256 ?? null,
       supports: asText(result.supports ?? result.citedBy) || null,
       tool,
     });
@@ -136,7 +153,8 @@ export function harvest(result, tool, bag, depth = 0) {
     }
   }
 
-  for (const value of Object.values(result)) {
+  for (const [key, value] of Object.entries(result)) {
+    if (key === 'execution_trace') continue;
     if (value && typeof value === 'object') harvest(value, tool, bag, depth + 1);
   }
   return bag;

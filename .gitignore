@@ -19,3 +19,7 @@ outputs/
 .codex-ppt-build/
 output-codex/
 node_modules/
+
+# Agent 运行日志：可能含患者数据，绝不进版本库。
+logs/
+*.log

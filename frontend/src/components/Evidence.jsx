@@ -1,4 +1,3 @@
-import { bagSize } from '../lib/evidence.js';
 import { asCompact, asText, asTextOrNull } from '../lib/text.js';
 import Section from './Section.jsx';
 
@@ -26,7 +25,7 @@ function Meta({ pairs }) {
   );
 }
 
-function Item({ kind, id, via, trust, body, quote, meta, caveat }) {
+function Item({ kind, id, via, trust, body, meta, caveat }) {
   return (
     <div className="ev__item" data-trust={trust ?? undefined}>
       <span className="ev__bar" />
@@ -36,7 +35,6 @@ function Item({ kind, id, via, trust, body, quote, meta, caveat }) {
           {asTextOrNull(id) && <span className="ev__id">{asText(id)}</span>}
           {asTextOrNull(via) && <span className="ev__via">{asText(via)}</span>}
         </div>
-        {asTextOrNull(quote) && <div className="ev__quote">{asText(quote)}</div>}
         {asTextOrNull(body) && <div className="ev__text">{asText(body)}</div>}
         {meta}
         {asTextOrNull(caveat) && <div className="ev__caveat">{asText(caveat)}</div>}
@@ -46,13 +44,13 @@ function Item({ kind, id, via, trust, body, quote, meta, caveat }) {
 }
 
 export default function Evidence({ bag }) {
-  const total = bagSize(bag);
+  const total = bag.inferred.length + bag.asserted.length;
   if (total === 0 && bag.patients.length === 0 && bag.notices.length === 0) return null;
 
   return (
     <Section defaultOpen={false}
       title={<>
-        <h2>查看原始证据与出处</h2>
+        <h2>检查记录与规则详情</h2>
         <span className="lbl">{total ? `${total} 条` : ''}</span>
       </>}
     >
@@ -100,17 +98,6 @@ export default function Evidence({ bag }) {
               />
             );
           })}
-
-          {bag.quotes.map((q) => (
-            <Item
-              key={`q:${q.sha256}`}
-              kind="quote"
-              id={q.supports}
-              via={q.tool}
-              quote={q.quote}
-              meta={<Meta pairs={[['sha256', q.sha256], ['supports', q.supports]]} />}
-            />
-          ))}
 
           {bag.asserted.map((a) => {
             const converted = a.sourceValue !== null && a.sourceValue !== undefined;

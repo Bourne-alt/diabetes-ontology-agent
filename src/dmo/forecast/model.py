@@ -14,4 +14,11 @@ class InitializedResponseModel:
         return cls(random.Random(seed).uniform(-0.1, 0.1))
 
     def predict(self, baseline: float, elapsed_days: float) -> float:
-        return baseline * (1 + self.coefficient * (1 - math.exp(-max(0, elapsed_days) / 14)))
+        return self.components(baseline, elapsed_days)["value"]
+
+    def components(self, baseline: float, elapsed_days: float) -> dict:
+        elapsed = max(0, elapsed_days)
+        decay = math.exp(-elapsed / 14)
+        response = self.coefficient * (1 - decay)
+        return {"elapsed_days": elapsed, "decay": decay, "response": response,
+                "multiplier": 1 + response, "value": baseline * (1 + response)}

@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import logging
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -9,8 +10,11 @@ from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
+from .logs import get_logger, log_event, log_exception, setup_logging
 from .runtime import AgentHarness, build_serving_agent
 from .settings import AgentSettings
+
+log = get_logger("api")
 
 # 前端是 frontend/ 下的 Vite + React 工程，这里只托管它的构建产物 frontend/dist。
 # 未构建（或装成包、目录缺失）时回落到包内单文件页面，服务本身照常可用。
@@ -51,9 +55,14 @@ def create_app(harness: AgentHarness | None = None):
                 try:
                     settings = AgentSettings.load()
                     built = AgentHarness(build_serving_agent(settings), settings)
-                except Exception:  # noqa: BLE001 -- do not expose configuration secrets
+                except Exception as exc:  # noqa: BLE001 -- do not expose configuration secrets
+                    # `from None` 是刻意的：异常链里可能带着 DSN 与密钥，不能进 HTTP 响应。
+                    # 代价是客户端只剩一句 503 —— 所以真因必须在这里落盘，否则无从查起。
+                    log_exception(log, "runtime.build_failed", exc)
                     # 不缓存失败：配置修好后下一次请求应该能重新构建。
                     raise HTTPException(503, "Agent 初始化失败，请检查模型与数据库配置。") from None
+                log_event(log, logging.INFO, "runtime.built", model=settings.model,
+                          base_url=settings.base_url, run_timeout=settings.run_timeout)
                 runtime_slot["runtime"] = built
         return runtime_slot["runtime"]
 
@@ -66,14 +75,23 @@ def create_app(harness: AgentHarness | None = None):
         if not body.message.strip():
             raise HTTPException(422, "message 不能为空白")
         runtime = await get_runtime()
+        # 消息正文可能含患者姓名/ID，入口只记规模与是否续接已有会话。
+        log_event(log, logging.INFO, "http.chat", message_chars=len(body.message),
+                  resumed=body.conversation_id is not None)
 
         async def events():
-            async for event in runtime.stream(body.message, body.conversation_id):
-                yield (
-                    f"id: {event['seq']}\nevent: {event['type']}\ndata: "
-                    + json.dumps(event, ensure_ascii=False, default=str)
-                    + "\n\n"
-                )
+            try:
+                async for event in runtime.stream(body.message, body.conversation_id):
+                    yield (
+                        f"id: {event['seq']}\nevent: {event['type']}\ndata: "
+                        + json.dumps(event, ensure_ascii=False, default=str)
+                        + "\n\n"
+                    )
+            except asyncio.CancelledError:
+                # 浏览器关页面/断网时 SSE 生成器被取消。不记的话，
+                # 服务端只表现为「这次查询没有 done 事件」，看着像卡死。
+                log_event(log, logging.WARNING, "http.chat_disconnected")
+                raise
 
         return StreamingResponse(
             events(),
@@ -83,6 +101,17 @@ def create_app(harness: AgentHarness | None = None):
                 "X-Accel-Buffering": "no",
             },
         )
+
+    # The demo UI uses the exact DMO implementations, with no model call or seed writes.
+    from dmo.api import prediction_demo, treatment_assessment, treatment_scenarios
+
+    app.add_api_route("/demo/treatment-scenarios", treatment_scenarios, methods=["GET"])
+    app.add_api_route("/patients/{pid}/treatment-assessments", treatment_assessment, methods=["POST"])
+    app.add_api_route("/patients/{pid}/prediction-demo", prediction_demo, methods=["POST"])
+
+    setup_logging()
+    log_event(log, logging.INFO, "app.created", frontend="dist"
+              if (FRONTEND_DIST / "index.html").is_file() else "packaged")
 
     # 挂在最后：上面的路由先匹配，剩下的路径（/assets/*）才落到构建产物。
     if (FRONTEND_DIST / "index.html").is_file():

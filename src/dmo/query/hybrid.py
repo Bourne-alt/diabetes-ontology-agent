@@ -256,7 +256,14 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
             })
             if r.get("quote"):
                 sources.append({"quote": r["quote"], "sha256": r.get("sha256", ""),
-                                "supports": r.get("thresholdId", "")})
+                                "sourceId": r.get("sourceId"), "localFile": r.get("localFile"),
+                                "locator": r.get("locator"),
+                                "citationRole": r.get("citationRole"),
+                                "interpretation": (
+                                    "原文通常建议第二次检查确认；不同日期、同项检查是项目规则的实现条件。"
+                                    if r.get("citationRole") == "confirmation" else None),
+                                "supports": r.get("thresholdId", "") + (
+                                    " · 确认要求" if r.get("citationRole") == "confirmation" else " · 数值阈值")})
         for r in _sparql(cfg, "diagnosis_evidence", [pid]):
             # verificationStatus 是强结论（Provisional/Confirmed），却一直没带
             # 任何规则号或支撑链 —— 而 diagnosis_evidence 模板本来就 SELECT 了
@@ -351,6 +358,12 @@ def patient_bundle(cfg: Config, pid: str, *, sections: tuple[str, ...] = ()) -> 
         return uniq
 
     uniq = _dedup(sources)
+    # Multiple citation roles can produce multiple SPARQL rows for one assessment.
+    unique_inferred = []
+    for item in inferred:
+        if item not in unique_inferred:
+            unique_inferred.append(item)
+    inferred = unique_inferred
     unverifiable = _dedup(unverifiable)
 
     return {

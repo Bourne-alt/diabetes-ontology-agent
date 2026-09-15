@@ -2537,7 +2537,7 @@
     "/patients/{pid}/treatment-assessments": {
       "post": {
         "summary": "Treatment Assessment",
-        "description": "按时序快照、治疗措施和本地可核验出处生成多维度综合报告。支持随访比较、可选大模型综合和模板降级，不修改患者事实。",
+        "description": "按 pid 从规范患者表组装镜像，以本地可核验出处生成当前治疗措施的多维度综合报告。",
         "operationId": "treatment_assessment_patients__pid__treatment_assessments_post",
         "parameters": [
           {
@@ -2548,130 +2548,10 @@
               "type": "string",
               "title": "Pid"
             },
-            "description": "必须与基线、随访快照一致的患者标识。",
-            "example": "SYNTHETIC"
+            "description": "用于组装内部患者镜像的患者标识。",
+            "example": "P90002"
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TreatmentAssessmentRequest"
-              },
-              "example": {
-                "mode": "prospective",
-                "composer": "template",
-                "knowledge_mode": "current",
-                "baseline_snapshot": {
-                  "clinical_as_of": "2026-09-13T10:00:00+08:00",
-                  "knowledge_cutoff": "2026-09-13T10:00:00+08:00",
-                  "source_coverage": {
-                    "lis": "合成数据：近期检查",
-                    "pacs": "合成数据：一份报告",
-                    "emr": "合成病史",
-                    "medication": "未提供既往给药记录"
-                  },
-                  "events": [
-                    {
-                      "event_id": "SYN-A1C",
-                      "record_id": "SYN-A1C",
-                      "revision": 1,
-                      "patient_id": "SYNTHETIC",
-                      "source": "lis",
-                      "domain": "glycemic",
-                      "event_time": "2026-09-12T08:00:00+08:00",
-                      "available_at": "2026-09-12T10:00:00+08:00",
-                      "ingested_at": "2026-09-12T10:05:00+08:00",
-                      "metric": "A1C",
-                      "value": 8.0,
-                      "unit": "percent",
-                      "context": "routine",
-                      "population_context": "NonPregnant",
-                      "value_trust": "verified"
-                    },
-                    {
-                      "event_id": "SYN-FPG",
-                      "record_id": "SYN-FPG",
-                      "revision": 1,
-                      "patient_id": "SYNTHETIC",
-                      "source": "lis",
-                      "domain": "glycemic",
-                      "event_time": "2026-09-12T08:00:00+08:00",
-                      "available_at": "2026-09-12T10:00:00+08:00",
-                      "ingested_at": "2026-09-12T10:05:00+08:00",
-                      "metric": "FPG",
-                      "value": 9.0,
-                      "unit": "mmol/L",
-                      "context": "fasting",
-                      "population_context": "NonPregnant",
-                      "value_trust": "verified"
-                    },
-                    {
-                      "event_id": "SYN-UACR",
-                      "record_id": "SYN-UACR",
-                      "revision": 1,
-                      "patient_id": "SYNTHETIC",
-                      "source": "lis",
-                      "domain": "renal",
-                      "event_time": "2026-09-12T08:00:00+08:00",
-                      "available_at": "2026-09-12T10:00:00+08:00",
-                      "ingested_at": "2026-09-12T10:05:00+08:00",
-                      "metric": "UACR",
-                      "value": 45.0,
-                      "unit": "mg/g",
-                      "context": "routine",
-                      "population_context": "NonPregnant",
-                      "value_trust": "verified"
-                    },
-                    {
-                      "event_id": "SYN-CKD",
-                      "record_id": "SYN-CKD",
-                      "revision": 1,
-                      "patient_id": "SYNTHETIC",
-                      "source": "emr",
-                      "domain": "renal",
-                      "event_time": "2026-09-10T08:00:00+08:00",
-                      "available_at": "2026-09-10T08:00:00+08:00",
-                      "ingested_at": "2026-09-10T08:05:00+08:00",
-                      "concept_code": "CKD",
-                      "verification": "confirmed",
-                      "assertion": "present",
-                      "clinical_status": "active",
-                      "text": "合成场景：既往慢性肾脏病诊断，当前仍活动。"
-                    },
-                    {
-                      "event_id": "SYN-PACS",
-                      "record_id": "SYN-PACS",
-                      "revision": 1,
-                      "patient_id": "SYNTHETIC",
-                      "source": "pacs",
-                      "domain": "cardiovascular",
-                      "event_time": "2026-09-10T08:00:00+08:00",
-                      "available_at": "2026-09-10T10:00:00+08:00",
-                      "ingested_at": "2026-09-10T10:05:00+08:00",
-                      "assertion": "uncertain",
-                      "text": "合成影像报告：未见明显心脏扩大，局部改变性质待定。"
-                    }
-                  ]
-                },
-                "interventions": [
-                  {
-                    "action_id": "START-METFORMIN",
-                    "kind": "medication",
-                    "operation": "start",
-                    "code": "metformin",
-                    "start_at": "2026-09-13T10:00:00+08:00",
-                    "execution_status": "planned"
-                  }
-                ],
-                "include_demo_appendix": false,
-                "extract_pacs": false
-              }
-            }
-          },
-          "description": "基线及可选随访快照、治疗措施、评估维度和报告生成方式。"
-        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2694,12 +2574,145 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "患者镜像数据库暂不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "tags": [
           "Patients"
         ],
-        "x-test-example-title": "有依据的治疗措施综合评估（合成患者、模板模式）"
+        "x-test-example-title": "按患者镜像生成治疗措施综合评估"
+      }
+    },
+    "/demo/treatment-scenarios": {
+      "get": {
+        "summary": "Treatment Scenarios",
+        "operationId": "treatment_scenarios_demo_treatment_scenarios_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Treatment Scenarios Demo Treatment Scenarios Get"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Demo"
+        ],
+        "description": "列出八个合成患者评估场景及观察点；患者数据需用播种脚本加载。",
+        "x-test-example-title": "列出合成患者评估演示场景"
+      }
+    },
+    "/patients/{pid}/prediction-demo": {
+      "post": {
+        "summary": "Prediction Demo",
+        "operationId": "prediction_demo_patients__pid__prediction_demo_post",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            },
+            "description": "已播种的合成演示患者标识，仅允许 P91001–P91008。",
+            "example": "P91001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Prediction Demo Patients  Pid  Prediction Demo Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务拒绝或请求不满足执行条件。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "患者、模板或资源不存在。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "GraphDB 暂时不可用。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patients"
+        ],
+        "description": "仅对本模块合成患者执行独立、机器学习模型的数值模型演示，返回输入换算和逐步计算记录。不是机器学习训练或临床疗效预测。",
+        "x-test-example-title": "独立运行机器学习模型数值演示"
       }
     }
   },
@@ -2753,273 +2766,6 @@
           "start_at"
         ],
         "title": "Action"
-      },
-      "AssessmentEvent": {
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Event Id"
-          },
-          "patient_id": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Patient Id"
-          },
-          "source": {
-            "type": "string",
-            "enum": [
-              "lis",
-              "pacs",
-              "emr",
-              "medication"
-            ],
-            "title": "Source"
-          },
-          "record_id": {
-            "type": "string",
-            "minLength": 1,
-            "title": "Record Id"
-          },
-          "revision": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Revision"
-          },
-          "event_time": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Event Time"
-          },
-          "available_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Available At"
-          },
-          "ingested_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Ingested At"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "final",
-              "preliminary",
-              "retracted"
-            ],
-            "title": "Status",
-            "default": "final"
-          },
-          "metric": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 100
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metric"
-          },
-          "value": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Value"
-          },
-          "unit": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 80
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Unit"
-          },
-          "text": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 6000
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Text"
-          },
-          "domain": {
-            "type": "string",
-            "enum": [
-              "glycemic",
-              "renal",
-              "cardiovascular",
-              "hepatic",
-              "safety",
-              "lifestyle"
-            ],
-            "title": "Domain",
-            "default": "glycemic"
-          },
-          "context": {
-            "type": "string",
-            "maxLength": 100,
-            "title": "Context",
-            "default": "unspecified"
-          },
-          "population_context": {
-            "type": "string",
-            "enum": [
-              "NonPregnant",
-              "Pregnant",
-              "unknown"
-            ],
-            "title": "Population Context",
-            "default": "unknown"
-          },
-          "concept_code": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 150
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Concept Code"
-          },
-          "verification": {
-            "type": "string",
-            "enum": [
-              "confirmed",
-              "provisional",
-              "unknown"
-            ],
-            "title": "Verification",
-            "default": "unknown"
-          },
-          "assertion": {
-            "type": "string",
-            "enum": [
-              "present",
-              "absent",
-              "uncertain"
-            ],
-            "title": "Assertion",
-            "default": "uncertain"
-          },
-          "clinical_status": {
-            "type": "string",
-            "enum": [
-              "active",
-              "resolved",
-              "unknown"
-            ],
-            "title": "Clinical Status",
-            "default": "unknown"
-          },
-          "value_trust": {
-            "type": "string",
-            "enum": [
-              "verified",
-              "unverified"
-            ],
-            "title": "Value Trust",
-            "default": "unverified"
-          },
-          "action_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Action Id"
-          },
-          "execution_status": {
-            "type": "string",
-            "enum": [
-              "planned",
-              "ordered",
-              "administered",
-              "self_reported",
-              "unknown"
-            ],
-            "title": "Execution Status",
-            "default": "unknown"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "event_id",
-          "patient_id",
-          "source",
-          "record_id",
-          "revision",
-          "event_time",
-          "available_at",
-          "ingested_at"
-        ],
-        "title": "AssessmentEvent"
-      },
-      "AssessmentSnapshot": {
-        "properties": {
-          "clinical_as_of": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Clinical As Of"
-          },
-          "knowledge_cutoff": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Knowledge Cutoff"
-          },
-          "events": {
-            "items": {
-              "$ref": "#/components/schemas/AssessmentEvent"
-            },
-            "type": "array",
-            "maxItems": 1000,
-            "title": "Events"
-          },
-          "source_coverage": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "propertyNames": {
-              "enum": [
-                "lis",
-                "pacs",
-                "emr",
-                "medication"
-              ]
-            },
-            "type": "object",
-            "title": "Source Coverage"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "clinical_as_of",
-          "knowledge_cutoff",
-          "events"
-        ],
-        "title": "AssessmentSnapshot"
       },
       "Event": {
         "properties": {
@@ -3183,108 +2929,6 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
-      "Intervention": {
-        "properties": {
-          "action_id": {
-            "type": "string",
-            "maxLength": 80,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9._-]+$",
-            "title": "Action Id"
-          },
-          "kind": {
-            "type": "string",
-            "enum": [
-              "medication",
-              "lifestyle",
-              "device",
-              "other"
-            ],
-            "title": "Kind",
-            "default": "medication"
-          },
-          "operation": {
-            "type": "string",
-            "enum": [
-              "start",
-              "continue",
-              "stop",
-              "change"
-            ],
-            "title": "Operation",
-            "default": "start"
-          },
-          "code": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 150,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Code"
-          },
-          "previous_code": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 150
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Previous Code"
-          },
-          "start_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Start At"
-          },
-          "execution_status": {
-            "type": "string",
-            "enum": [
-              "planned",
-              "ordered",
-              "administered",
-              "self_reported",
-              "unknown"
-            ],
-            "title": "Execution Status",
-            "default": "planned"
-          },
-          "supporting_event_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "maxItems": 30,
-            "title": "Supporting Event Ids"
-          },
-          "regimen_reference": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Regimen Reference"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "action_id",
-          "start_at"
-        ],
-        "title": "Intervention"
-      },
       "Snapshot": {
         "properties": {
           "clinical_as_of": {
@@ -3349,106 +2993,6 @@
         "additionalProperties": false,
         "type": "object",
         "title": "Target"
-      },
-      "TreatmentAssessmentRequest": {
-        "properties": {
-          "mode": {
-            "type": "string",
-            "enum": [
-              "prospective",
-              "follow_up"
-            ],
-            "title": "Mode",
-            "default": "prospective"
-          },
-          "baseline_snapshot": {
-            "$ref": "#/components/schemas/AssessmentSnapshot"
-          },
-          "follow_up_snapshot": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AssessmentSnapshot"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "interventions": {
-            "items": {
-              "$ref": "#/components/schemas/Intervention"
-            },
-            "type": "array",
-            "maxItems": 10,
-            "minItems": 1,
-            "title": "Interventions"
-          },
-          "assessment_domains": {
-            "items": {
-              "type": "string",
-              "enum": [
-                "glycemic",
-                "renal",
-                "cardiovascular",
-                "hepatic",
-                "safety",
-                "lifestyle"
-              ]
-            },
-            "type": "array",
-            "minItems": 1,
-            "title": "Assessment Domains"
-          },
-          "composer": {
-            "type": "string",
-            "enum": [
-              "auto",
-              "template",
-              "llm"
-            ],
-            "title": "Composer",
-            "default": "auto"
-          },
-          "knowledge_mode": {
-            "type": "string",
-            "enum": [
-              "current",
-              "historical"
-            ],
-            "title": "Knowledge Mode",
-            "default": "current"
-          },
-          "max_fact_age_days": {
-            "type": "integer",
-            "maximum": 365.0,
-            "minimum": 1.0,
-            "title": "Max Fact Age Days",
-            "default": 90
-          },
-          "include_demo_appendix": {
-            "type": "boolean",
-            "title": "Include Demo Appendix",
-            "default": false
-          },
-          "extract_pacs": {
-            "type": "boolean",
-            "title": "Extract Pacs",
-            "default": false
-          },
-          "language": {
-            "type": "string",
-            "const": "zh-CN",
-            "title": "Language",
-            "default": "zh-CN"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "baseline_snapshot",
-          "interventions"
-        ],
-        "title": "TreatmentAssessmentRequest"
       },
       "ValidationError": {
         "properties": {

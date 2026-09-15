@@ -1,7 +1,9 @@
 import argparse
 import asyncio
 import json
+import os
 
+from .logs import setup_logging
 from .runtime import AgentHarness, build_agent
 from .settings import AgentSettings
 
@@ -12,7 +14,26 @@ def main():
     parser.add_argument("--serve", action="store_true", help="启动本地网页及 SSE API")
     parser.add_argument("--port", type=int, default=8200)
     parser.add_argument("--json", action="store_true", help="输出完整 NDJSON 事件")
+    parser.add_argument(
+        "--log-level",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        help="日志级别（默认 INFO，或 .env 的 AGENT_LOG_LEVEL）。排查问题用 DEBUG。",
+    )
+    parser.add_argument("--log-file", help="同时写入该文件，10MB×5 轮转。")
+    parser.add_argument(
+        "--log-payload",
+        action="store_true",
+        help="日志中记录工具参数与返回内容。⚠️ 含患者数据，仅限本地排查。",
+    )
     args = parser.parse_args()
+    # 命令行优先于 .env。日志走 stderr，不干扰 stdout 上的事件流（--json 可直接管道给 jq）。
+    if args.log_level:
+        os.environ["AGENT_LOG_LEVEL"] = args.log_level
+    if args.log_file:
+        os.environ["AGENT_LOG_FILE"] = args.log_file
+    if args.log_payload:
+        os.environ["AGENT_LOG_PAYLOAD"] = "1"
+    setup_logging(force=True)
     if args.serve:
         import uvicorn
 

@@ -310,6 +310,19 @@ dmosp:GLUCOSE-EMERGENCY-Q a dmo:SourcePassage ;
     dmo:contentHash "6d9151b4a2ae45a59b7c00efbf25ae5704309c558d6ecb6388c23ee734a0f520" .
 
 # 片段归属到来源文件
+dmosp:DIABETES-CONFIRMATION-Q a dmo:SourcePassage ;
+    dmo:passageId "DIABETES-CONFIRMATION-Q" ;
+    dmo:locator "What test results tell me if I have diabetes or prediabetes? · paragraph 1" ;
+    dmo:quote "Usually, your doctor will use a second test to confirm you have diabetes." ;
+    dmo:contentHash "05a2ed40cb253ea0ffb9bef3a8af63cdba66f1303a0d81bb5a03fbd45410d1d5" .
+
+dmo:confirmationCitesPassage a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> ;
+    rdfs:label "确认要求的原文依据" ;
+    rdfs:comment "与阈值数值的出处分开；原文通常建议第二次检查，不等同于项目的不同日期、同项检验实现。" .
+
+dmosrc:niddk-tests-diagnosis dmo:hasPassage dmosp:DIABETES-CONFIRMATION-Q .
+dmoth:A1C-DIABETES dmo:confirmationCitesPassage dmosp:DIABETES-CONFIRMATION-Q .
+
 dmosrc:niddk-tests-diagnosis dmo:hasPassage
     dmosp:A1C-NORMAL-Q, dmosp:A1C-PREDIABETES-Q, dmosp:A1C-DIABETES-Q,
     dmosp:FPG-NORMAL-Q, dmosp:FPG-PREDIABETES-Q, dmosp:FPG-DIABETES-Q,

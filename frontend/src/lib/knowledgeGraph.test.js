@@ -5,6 +5,16 @@ import { splitAnswer } from './answerSections.js';
 
 const iri = (name) => `https://example.test/${name}`;
 const evt = (data, seq=1, tool='explore_concept') => ({type:'tool_end',seq,call_id:`c${seq}`,tool,ok:true,result:{ok:true,data}});
+test('assessment custom events expose real evidence without projecting execution metadata', () => {
+  const report={report_id:'TA1',snapshot_refs:{baseline:{patient_context:{patient_id:'P1'}}},
+    evidence:[{evidence_id:'F1',kind:'patient_fact',metric:'A1C',value:7.8}],
+    claims:[{claim_id:'C1',rule_id:'R1',evidence_ids:['F1']}],
+    execution_trace:{steps:[{details:{iri:iri('not-a-fact')}}]}};
+  const graph=graphFromEvents([{type:'assessment_report',seq:2,report}]);
+  assert.equal(graph.nodes.length,3);assert.equal(graph.edges.length,2);
+  assert.equal(graph.nodes.find(n=>n.ref==='TA1:F1').detail.value,7.8);
+  assert.equal(graphFromEvents([{type:'assessment_report',seq:2,report}],1).nodes.length,0);
+});
 test('only explicit relations become edges; narrative and failed tools are ignored', () => {
   const concept = evt({concepts:[{iri:iri('a'),label:'概念 A'},{iri:iri('b'),label:'概念 B'}]});
   const graph = graphFromEvents([concept, {type:'answer',text:'A 导致 B'}, {...evt({iri:iri('bad')}),ok:false}]);

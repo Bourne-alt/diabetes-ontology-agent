@@ -65,7 +65,7 @@ WHERE {
   OPTIONAL { ?test dmo:hasThreshold ?iri .
              OPTIONAL { ?test dmo:labTestCode ?testCode }
              OPTIONAL { ?test rdfs:label ?testLabel } }
-  OPTIONAL { ?iri dmo:thresholdCitesPassage ?psg . ?psg dmo:passageId ?psgId }
+  OPTIONAL { ?iri (dmo:thresholdCitesPassage|dmo:confirmationCitesPassage) ?psg . ?psg dmo:passageId ?psgId }
   OPTIONAL { ?iri dmo:thresholdCitedFrom ?src . ?src dmo:sourceId ?sourceId }
 }
 """

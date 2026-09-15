@@ -23,13 +23,14 @@ export function graphFromEvents(events, through = Infinity) {
   let clipped = false;
   for (const event of events) {
     const raw = event.raw ?? event;
-    if (raw.seq > through || raw.type !== 'tool_end' || raw.ok !== true) continue;
-    const payload = raw.result?.data ?? raw.result;
+    const assessment = raw.type === 'assessment_report';
+    if (raw.seq > through || (!assessment && (raw.type !== 'tool_end' || raw.ok !== true))) continue;
+    const payload = assessment ? raw.report : raw.result?.data ?? raw.result;
     if (!payload || typeof payload !== 'object' || payload.ok === false) continue;
     // Conditional results must never merge into the actual-patient graph.
     const scenario = raw.tool === 'simulate_patient_course';
     const scope = scenario ? `scenario:${raw.call_id}:` : '';
-    const provenance = { tool: raw.tool, callId: raw.call_id, seq: raw.seq, scenario };
+    const provenance = { tool: raw.tool || (assessment ? 'assess_patient_treatment' : ''), callId: raw.call_id, seq: raw.seq, scenario };
     function add(id, label, kind = 'concept', detail = {}) {
       if (!id || typeof id !== 'string') return null;
       const key = scope + id;
@@ -49,6 +50,23 @@ export function graphFromEvents(events, through = Infinity) {
     function walk(o, path = 'data', depth = 0) {
       if (!o || typeof o !== 'object' || depth > 12) return;
       if (Array.isArray(o)) { o.forEach((v, i) => walk(v, `${path}.${i}`, depth + 1)); return; }
+      if (o.report_id && o.claims && o.evidence) {
+        const patient = o.snapshot_refs?.baseline?.patient_context;
+        const p = patient?.patient_id ? add(`patient:${patient.patient_id}`, `患者 ${patient.patient_id}`, 'patient', patient) : null;
+        const ids = new Map();
+        for (const rawItem of o.evidence) {
+          const item = {...o.evidence_defaults_by_kind?.[rawItem.kind], ...rawItem};
+          const id = add(`${o.report_id}:${item.evidence_id}`, item.metric || item.concept_code || item.code || item.source_id || item.evidence_id,
+            item.kind === 'knowledge' ? 'evidence' : 'fact', item);
+          ids.set(item.evidence_id, id);
+          if (item.kind === 'patient_fact') link(p, id, '患者评估记录');
+        }
+        for (const claim of o.claims) {
+          const id = add(`${o.report_id}:${claim.claim_id}`, claim.rule_id || (claim.kind === 'data_gap' ? '资料缺口' : '评估记录'), 'rule', claim);
+          for (const ref of claim.evidence_ids) link(ids.get(ref), id, '支持此项记录');
+        }
+        return;
+      }
       // Explicit patient bundle membership: API association, not a fabricated RDF predicate.
       if (o.patient?.patientid) {
         const p = add(`patient:${o.patient.patientid}`, `患者 ${o.patient.patientid}`, 'patient', o.patient);
@@ -108,7 +126,7 @@ export function graphFromEvents(events, through = Infinity) {
       }
       if (o.truncated || o.frontierTruncated) notices.add('工具返回了部分图数据，未展示完整本体。');
       for (const [k, v] of Object.entries(o)) {
-        if (['nextHops', 'outgoing', 'incoming', 'neighbors', 'path', 'brokenLinks'].includes(k)) continue;
+        if (['nextHops', 'outgoing', 'incoming', 'neighbors', 'path', 'brokenLinks', 'execution_trace'].includes(k)) continue;
         if (v && typeof v === 'object') walk(v, `${path}.${k}`, depth + 1);
       }
     }

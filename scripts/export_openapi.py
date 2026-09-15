@@ -24,6 +24,8 @@ HTTP_EXAMPLES_OUTPUT = ROOT / "docs" / "api-examples.http"
 # Every public operation has one executable happy-path request. Values come
 # from the deterministic demo cohort, ontology seed, and regression tests.
 REQUEST_EXAMPLES: dict[tuple[str, str], dict[str, Any]] = {
+    ("get", "/demo/treatment-scenarios"): {"title": "列出合成患者评估演示场景"},
+    ("post", "/patients/{pid}/prediction-demo"): {"title": "独立运行机器学习模型数值演示", "path": {"pid": "P91001"}},
     ("get", "/"): {"title": "服务入口"},
     ("get", "/health"): {"title": "检查两侧依赖与数据量"},
     ("get", "/patients"): {
@@ -182,16 +184,16 @@ REQUEST_EXAMPLES: dict[tuple[str, str], dict[str, Any]] = {
         "body": json.loads((ROOT / "docs/forecast-example.json").read_text()),
     },
     ("post", "/patients/{pid}/treatment-assessments"): {
-        "title": "有依据的治疗措施综合评估（合成患者、模板模式）",
-        "path": {"pid": "SYNTHETIC"},
-        "body": json.loads((ROOT / "docs/treatment-assessment-example.json").read_text()),
+        "title": "按患者镜像生成治疗措施综合评估",
+        "path": {"pid": "P90002"},
     },
 }
 
 
 PARAMETER_DESCRIPTIONS: dict[tuple[str, str], str] = {
     ("/patients/{pid}/forecasts", "pid"): "必须与内联快照中所有事件一致的患者标识。",
-    ("/patients/{pid}/treatment-assessments", "pid"): "必须与基线、随访快照一致的患者标识。",
+    ("/patients/{pid}/treatment-assessments", "pid"): "用于组装内部患者镜像的患者标识。",
+    ("/patients/{pid}/prediction-demo", "pid"): "已播种的合成演示患者标识，仅允许 P91001–P91008。",
     ("/patients", "icd10"): "按 ICD-10 外部诊断编码前缀筛选，例如 E11。可不传。",
     ("/patients", "origin"): (
         "按事实来源筛选：ehr-legacy 为真实上游数据，derived 为规则推导数据，"
@@ -260,7 +262,6 @@ PARAMETER_DESCRIPTIONS: dict[tuple[str, str], str] = {
 
 REQUEST_BODY_DESCRIPTIONS = {
     ("post", "/patients/{pid}/forecasts"): "内联时序快照、拟实施用药和初始化模拟目标。",
-    ("post", "/patients/{pid}/treatment-assessments"): "基线及可选随访快照、治疗措施、评估维度和报告生成方式。",
     ("post", "/simulate"): "患者编号和假设检验事实；适用于只能配置静态 URL 的调用方。",
     ("post", "/patients/{pid}/simulate"): "要注入内存沙箱的假设检验事实列表。",
     ("post", "/query/{template}"): "非空患者业务编号数组；模板不会执行无患者约束的全库扫描。",
@@ -517,8 +518,10 @@ SUMMARIES = {
 #
 # 有值即覆盖运行时 docstring 生成的 description；docstring 面向读代码的人，这里面向模型。
 DESCRIPTIONS: dict[tuple[str, str], str] = {
+    ("get", "/demo/treatment-scenarios"): "列出八个合成患者评估场景及观察点；患者数据需用播种脚本加载。",
+    ("post", "/patients/{pid}/prediction-demo"): "仅对本模块合成患者执行独立、机器学习模型的数值模型演示，返回输入换算和逐步计算记录。不是机器学习训练或临床疗效预测。",
     ("post", "/patients/{pid}/forecasts"): "从内联时序快照生成未经训练模型的单指标演示数值。结果不代表临床疗效。",
-    ("post", "/patients/{pid}/treatment-assessments"): "按时序快照、治疗措施和本地可核验出处生成多维度综合报告。支持随访比较、可选大模型综合和模板降级，不修改患者事实。",
+    ("post", "/patients/{pid}/treatment-assessments"): "按 pid 从规范患者表组装镜像，以本地可核验出处生成当前治疗措施的多维度综合报告。",
     ("get", "/"): (
         "服务入口导航：服务名、版本和关键端点。\n\n"
         "【不要用于】查两侧依赖是否连通（用「检查 PostgreSQL 与 GraphDB 连通性」）；"
@@ -785,11 +788,12 @@ def build_schema() -> dict[str, Any]:
     schema["paths"]["/simulate"]["post"]["tags"] = ["Simulation"]
     schema["paths"]["/patients/{pid}/simulate"]["post"]["tags"] = ["Simulation"]
 
-    for route in ("/patients/{pid}/forecasts", "/patients/{pid}/treatment-assessments"):
-        operation = schema["paths"][route]["post"]
-        # Inline snapshot services don't look up a patient or depend on GraphDB.
-        for status in ("400", "404", "503"):
-            operation["responses"].pop(status, None)
+    operation = schema["paths"]["/patients/{pid}/forecasts"]["post"]
+    # Forecast remains an inline snapshot service and does not look up a patient.
+    for status in ("400", "404", "503"):
+        operation["responses"].pop(status, None)
+    assessment = schema["paths"]["/patients/{pid}/treatment-assessments"]["post"]
+    assessment["responses"]["503"]["description"] = "患者镜像数据库暂不可用。"
 
     schema["paths"]["/simulate"]["post"]["requestBody"] = _request_ref("StaticSimulationRequest")
     schema["paths"]["/patients/{pid}/simulate"]["post"]["requestBody"] = _request_ref(

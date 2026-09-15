@@ -66,7 +66,8 @@ def load(cfg: Config) -> int:
                                                       reversed(SPECS), strict=True):
             keys = [r[cols.index(pk)] for r in rows]
             conn.execute(
-                f"DELETE FROM diabetes.{table} WHERE {pk} <> ALL(%s)", (keys or [""],)
+                f"DELETE FROM diabetes.{table} WHERE {pk} <> ALL(%s) "
+                "AND demo_scenario NOT LIKE 'TA-DEMO-%%'", (keys or [""],)
             )
 
         for (table, pk, rows), (fname, _, _, cols) in zip(loaded, SPECS, strict=True):

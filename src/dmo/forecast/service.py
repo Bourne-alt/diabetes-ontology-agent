@@ -23,7 +23,7 @@ NOTICE = (
 )
 
 
-def forecast(patient_id: str, request: ForecastRequest) -> dict:
+def forecast(patient_id: str, request: ForecastRequest, *, trace=None) -> dict:
     snap = request.snapshot
     if any(e.patient_id != patient_id for e in snap.events):
         raise HTTPException(422, "snapshot contains a different patient")
@@ -120,7 +120,7 @@ def forecast(patient_id: str, request: ForecastRequest) -> dict:
         return out
     if request.action.operation != "start":
         out["status"] = "unsupported_scenario"
-        reasons.append({"code": "UNSUPPORTED_ACTION", "statement": "当前演示仅支持 start。"})
+        reasons.append({"code": "UNSUPPORTED_ACTION", "statement": "当前推演仅支持 start。"})
         return out
     candidates = [
         e
@@ -163,12 +163,19 @@ def forecast(patient_id: str, request: ForecastRequest) -> dict:
         }
     )
     offset = (request.action.start_at - snap.clinical_as_of).total_seconds() / 86400
+    if trace is not None:
+        trace.record("initialization", "初始化数值模型", "基线通过检查后初始化随机系数；没有训练或药物特异参数。", {
+            "trained": False, "seed": request.seed, "coefficient": coefficient,
+            "baseline": out["baseline"], "explanations": list(reasons),
+        })
     for h in sorted(request.target.horizons_days):
         elapsed = max(0.0, h - offset)
-        value = model.predict(baseline.value, elapsed)
+        calculation = model.components(baseline.value, elapsed)
+        value = calculation["value"]
         out["predictions"].append(
             {
                 "horizon_days": h,
+                "calculation": calculation,
                 "predicted_at": (snap.clinical_as_of + timedelta(days=h)).isoformat(),
                 "metric": request.target.metric,
                 "unit": request.target.unit,
@@ -180,4 +187,6 @@ def forecast(patient_id: str, request: ForecastRequest) -> dict:
                 "estimated_treatment_effect": None,
             }
         )
+        if trace is not None:
+            trace.record("horizon_" + str(h), f"计算第 {h} 天", "实际执行的指数响应算式与中间数值。", out["predictions"][-1])
     return out

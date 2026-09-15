@@ -316,18 +316,130 @@ def test_archive_can_be_replayed_without_llm(knowledge, tmp_path):
 
 
 def test_new_route_and_old_routes_remain_separate(monkeypatch, knowledge):
-    from dmo.assessment import service
+    from dmo.assessment import mirror, service
 
     monkeypatch.setattr(service, "KnowledgeStore", lambda: knowledge)
+    monkeypatch.setattr(
+        mirror, "build_request", lambda cfg, pid, **kwargs: TreatmentAssessmentRequest.model_validate(sample())
+    )
     with TestClient(app) as client:
-        response = client.post("/patients/SYNTHETIC/treatment-assessments", json=sample())
+        response = client.post("/patients/SYNTHETIC/treatment-assessments")
         assert response.status_code == 200, response.text
         assert response.json()["claims"]
-        assert (
-            client.post("/patients/OTHER/treatment-assessments", json=sample()).status_code == 422
-        )
     routes = app.openapi()["paths"]
     assert "/simulate" in routes and "/patients/{pid}/forecasts" in routes
+
+
+def test_patient_mirror_builds_snapshot_and_current_treatment(monkeypatch):
+    from datetime import UTC, datetime
+
+    from dmo.assessment import mirror
+
+    class Connection:
+        def fetchone(self, query, params):
+            assert params == ("P1",)
+            return {"patientid": "P1", "fact_origin": "demo-cohort", "projected_at": None}
+
+        def fetchall(self, query, params):
+            assert params == ("P1",)
+            if "core_lab_result" in query:
+                return [
+                    {
+                        "lab_result_id": "L1",
+                        "lab_test_code": "A1C",
+                        "result_value": 7.2,
+                        "result_unit": "percent",
+                        "collected_at": datetime(2026, 9, 1, 8, tzinfo=UTC),
+                        "trust_level": "Curated",
+                    }
+                ]
+            if "core_observation" in query:
+                return []
+            if "core_diagnosis" in query:
+                return [
+                    {
+                        "diagnosis_id": "D1",
+                        "diagnosis_kind": "Complication",
+                        "clinical_status": "Active",
+                        "verification_status": "Confirmed",
+                        "external_code": None,
+                        "type_iri": None,
+                        "complication_iri": "https://example.org/dmo/id/CKD",
+                        "diagnosed_date": None,
+                    }
+                ]
+            return [
+                {
+                    "medication_use_id": "P1|M1",
+                    "medication_iri": "https://example.org/dmo/id/medication/metformin",
+                    "medication_name": "二甲双胍",
+                    "start_date": None,
+                    "end_date": None,
+                    "status": "Active",
+                }
+            ]
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return None
+
+    monkeypatch.setattr(mirror, "onto_conn", lambda cfg: Connection())
+    request = mirror.build_request(object(), "P1")
+    events = {e.record_id: e for e in request.baseline_snapshot.events}
+
+    assert request.mode == "prospective"
+    assert events["L1"].event_time == datetime(2026, 9, 1, 8, tzinfo=UTC)
+    assert events["L1"].value_trust == "verified"
+    assert events["diagnosis:D1"].concept_code == "CKD"
+    assert not events["diagnosis:D1"].event_time_known
+    assert request.interventions[0].code == "metformin"
+    assert "|" not in request.interventions[0].action_id
+
+
+def test_missing_mirror_patient_returns_404(monkeypatch):
+    from dmo.assessment import mirror
+
+    def missing(cfg, pid, **kwargs):
+        raise KeyError(pid)
+
+    monkeypatch.setattr(mirror, "build_request", missing)
+    with TestClient(app) as client:
+        assert client.post("/patients/MISSING/treatment-assessments").status_code == 404
+    operation = app.openapi()["paths"]["/patients/{pid}/treatment-assessments"]["post"]
+    assert "requestBody" not in operation
+
+
+def test_unknown_event_time_cannot_trigger_recent_threshold(knowledge):
+    body = sample()
+    body["baseline_snapshot"]["events"][0]["event_time_known"] = False
+    report = run(body, knowledge)
+    assert not any(c["rule_id"] == "TEST-A1C" for c in report["claims"])
+    assert any("event_time" in c["missing_premises"] for c in report["claims"])
+
+
+def test_missing_treatment_is_a_gap_not_an_invented_action(knowledge):
+    body = sample()
+    body["interventions"] = []
+    report = run(body, knowledge)
+    assert report["interventions"] == []
+    assert any("current_intervention" in c["missing_premises"] for c in report["claims"])
+
+
+def test_mirror_population_ignores_future_unverified_and_conflicting_records():
+    from datetime import UTC, datetime, timedelta
+
+    from dmo.assessment.mirror import _population_context
+
+    now = datetime(2026, 9, 1, tzinfo=UTC)
+    row = {"observation_type": "PregnancyStatus", "observed_at": now,
+           "trust_level": "Curated", "status": "Final", "value_text": None,
+           "value_decimal": 0}
+    assert _population_context([row], now) == "NonPregnant"
+    assert _population_context([{**row, "observed_at": now + timedelta(days=1)}], now) == "unknown"
+    assert _population_context([{**row, "trust_level": "Unverified"}], now) == "unknown"
+    assert _population_context([row, {**row, "value_decimal": 1}], now) == "unknown"
 
 
 def test_pacs_extraction_restores_omitted_negation(knowledge):

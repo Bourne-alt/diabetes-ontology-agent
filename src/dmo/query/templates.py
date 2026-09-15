@@ -93,7 +93,7 @@ register(_t(
 SELECT ?pid ?conclusion ?ruleId ?ruleVersion ?context ?thresholdId
        ?lo ?loOp ?up ?upOp ?boundUnit ?confirm
        ?resultValue ?resultUnit ?sourceValue ?sourceUnit ?collectedAt
-       ?quote ?sha256 ?caveat ?resultId
+       ?quote ?sha256 ?caveat ?resultId ?sourceId ?localFile ?locator ?citationRole
 WHERE {
   {{patients}}
   GRAPH ?pg { ?pat dmo:patientId ?pid }
@@ -108,8 +108,14 @@ WHERE {
                  dmo:confirmationRequired ?confirm .
              OPTIONAL { ?th dmo:lowerBound ?lo }
              OPTIONAL { ?th dmo:upperBound ?up }
-             OPTIONAL { ?th dmo:thresholdCitesPassage ?psg .
-                        ?psg dmo:quote ?quote ; dmo:contentHash ?sha256 } }
+             OPTIONAL { VALUES ?citationPredicate { dmo:thresholdCitesPassage dmo:confirmationCitesPassage }
+                        ?th ?citationPredicate ?psg .
+                        BIND(IF(?citationPredicate = dmo:confirmationCitesPassage, "confirmation", "threshold") AS ?citationRole)
+                        ?psg dmo:quote ?quote ; dmo:contentHash ?sha256 .
+                        OPTIONAL { ?psg dmo:locator ?locator }
+                        OPTIONAL { ?src dmo:hasPassage ?psg .
+                                   OPTIONAL { ?src dmo:sourceId ?sourceId }
+                                   OPTIONAL { ?src dmo:localFile ?localFile } } } }
   GRAPH ?pg { ?res dmo:labResultId ?resultId ;
                    dmo:resultValue ?resultValue ; dmo:resultUnit ?resultUnit .
               OPTIONAL { ?res dmo:sourceValue ?sourceValue }

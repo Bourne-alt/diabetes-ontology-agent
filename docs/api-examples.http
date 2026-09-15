@@ -6,47 +6,57 @@
 @baseUrl = http://124.223.18.44:8100
 
 ###
-# 01. 服务入口
+# 01. 列出合成患者评估演示场景
+GET {{baseUrl}}/demo/treatment-scenarios
+Accept: application/json
+
+###
+# 02. 独立运行机器学习模型数值演示
+POST {{baseUrl}}/patients/P91001/prediction-demo
+Accept: application/json
+
+###
+# 03. 服务入口
 GET {{baseUrl}}/
 Accept: application/json
 
 ###
-# 02. 检查两侧依赖与数据量
+# 04. 检查两侧依赖与数据量
 GET {{baseUrl}}/health
 Accept: application/json
 
 ###
-# 03. 检索 E11 患者并返回前两条
+# 05. 检索 E11 患者并返回前两条
 GET {{baseUrl}}/patients?icd10=E11&page=1&size=2
 Accept: application/json
 
 ###
-# 04. 查询 P90002 的照护链
+# 06. 查询 P90002 的照护链
 GET {{baseUrl}}/patients/P90002/care-chain
 Accept: application/json
 
 ###
-# 05. 查询单次 A1C 7.4% 的阈值判定
+# 07. 查询单次 A1C 7.4% 的阈值判定
 GET {{baseUrl}}/patients/P90002/assessment
 Accept: application/json
 
 ###
-# 06. 查询有多个可改变风险因子的患者
+# 08. 查询有多个可改变风险因子的患者
 GET {{baseUrl}}/patients/P90020/risk
 Accept: application/json
 
 ###
-# 07. 查询 ESRD 加恩格列净的绝对禁忌信号
+# 09. 查询 ESRD 加恩格列净的绝对禁忌信号
 GET {{baseUrl}}/patients/P90008/safety
 Accept: application/json
 
 ###
-# 08. 查询 P90002 的全景数据返回体
+# 10. 查询 P90002 的全景数据返回体
 GET {{baseUrl}}/patients/P90002
 Accept: application/json
 
 ###
-# 09. 通过静态路径执行确定性复测推演
+# 11. 通过静态路径执行确定性复测推演
 POST {{baseUrl}}/simulate
 Accept: application/json
 Content-Type: application/json
@@ -64,7 +74,7 @@ Content-Type: application/json
 }
 
 ###
-# 10. 通过患者路径执行确定性复测推演
+# 12. 通过患者路径执行确定性复测推演
 POST {{baseUrl}}/patients/P90002/simulate
 Accept: application/json
 Content-Type: application/json
@@ -81,27 +91,27 @@ Content-Type: application/json
 }
 
 ###
-# 11. 查询 E11 合并 DKD 患者命中的指南推荐
+# 13. 查询 E11 合并 DKD 患者命中的指南推荐
 GET {{baseUrl}}/patients/P90023/recommendations
 Accept: application/json
 
 ###
-# 12. 查询监测齐全患者的下次检验到期日
+# 14. 查询监测齐全患者的下次检验到期日
 GET {{baseUrl}}/patients/P90024/monitoring-due
 Accept: application/json
 
 ###
-# 13. 对照 A1C 复查频率的四档指南说法
+# 15. 对照 A1C 复查频率的四档指南说法
 GET {{baseUrl}}/guidelines/divergence?term=A1C&limit=5
 Accept: application/json
 
 ###
-# 14. 列出查询模板白名单
+# 16. 列出查询模板白名单
 GET {{baseUrl}}/query/templates
 Accept: application/json
 
 ###
-# 15. 运行照护链模板
+# 17. 运行照护链模板
 POST {{baseUrl}}/query/care_chain
 Accept: application/json
 Content-Type: application/json
@@ -111,47 +121,47 @@ Content-Type: application/json
 ]
 
 ###
-# 16. 获取智能体能力清单
+# 18. 获取智能体能力清单
 GET {{baseUrl}}/agent/manifest
 Accept: application/json
 
 ###
-# 17. 把中文表面形式解析为准确 IRI
+# 19. 把中文表面形式解析为准确 IRI
 GET {{baseUrl}}/graph/concepts?q=%E7%B3%96%E5%8C%96%E8%A1%80%E7%BA%A2%E8%9B%8B%E7%99%BD&kind=LabTest&limit=5
 Accept: application/json
 
 ###
-# 18. 查看 A1C 糖尿病阈值节点
+# 20. 查看 A1C 糖尿病阈值节点
 GET {{baseUrl}}/graph/node?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fthreshold%2FA1C-DIABETES
 Accept: application/json
 
 ###
-# 19. 展开阈值指向的逐字出处
+# 21. 展开阈值指向的逐字出处
 GET {{baseUrl}}/graph/neighbors?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fthreshold%2FA1C-DIABETES&predicate=https%3A%2F%2Fexample.org%2Fdmo%23thresholdCitesPassage&direction=out&limit=10
 Accept: application/json
 
 ###
-# 20. 查看 CKD 的上位概念与推理边
+# 22. 查看 CKD 的上位概念与推理边
 GET {{baseUrl}}/graph/taxonomy?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FCKD&direction=up&depth=2
 Accept: application/json
 
 ###
-# 21. 查找检验结果到指南出处的支撑路径
+# 23. 查找检验结果到指南出处的支撑路径
 GET {{baseUrl}}/graph/path?from=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FlabResult%2FL90002-A1C&to=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2FsourcePassage%2FA1C-DIABETES-Q&maxHops=4
 Accept: application/json
 
 ###
-# 22. 获取 SQL 列到 RDF 谓词的桥接表
+# 24. 获取 SQL 列到 RDF 谓词的桥接表
 GET {{baseUrl}}/graph/schema?section=bridge
 Accept: application/json
 
 ###
-# 23. 追踪 P90002 的 A1C 评估至指南原文和 SQL 行
+# 25. 追踪 P90002 的 A1C 评估至指南原文和 SQL 行
 GET {{baseUrl}}/graph/provenance?iri=https%3A%2F%2Fexample.org%2Fdmo%2Fid%2Fassessment%2F72d5c0144bdb81cd7d6bc88dd20f121742f9f9bd
 Accept: application/json
 
 ###
-# 24. 执行通过 guard 的只读阈值查询
+# 26. 执行通过 guard 的只读阈值查询
 POST {{baseUrl}}/graph/sparql
 Accept: application/json
 Content-Type: application/json
@@ -161,22 +171,22 @@ Content-Type: application/json
 }
 
 ###
-# 25. 查询 A1C 糖尿病阈值引用的出处
+# 27. 查询 A1C 糖尿病阈值引用的出处
 GET {{baseUrl}}/graph/passages?citedBy=A1C-DIABETES-NONPREG&limit=10
 Accept: application/json
 
 ###
-# 26. 列出不参与 tier 计分的风险规则
+# 28. 列出不参与 tier 计分的风险规则
 GET {{baseUrl}}/graph/rules?kind=risk&countsInTier=False&limit=20
 Accept: application/json
 
 ###
-# 27. 查看 A1C 糖尿病阈值规则及出处
+# 29. 查看 A1C 糖尿病阈值规则及出处
 GET {{baseUrl}}/graph/rules/A1C-DIABETES-NONPREG
 Accept: application/json
 
 ###
-# 28. 裁决单次 A1C 是否足以确诊
+# 30. 裁决单次 A1C 是否足以确诊
 POST {{baseUrl}}/adjudicate/claim
 Accept: application/json
 Content-Type: application/json
@@ -194,12 +204,12 @@ Content-Type: application/json
 }
 
 ###
-# 29. 查询系统可裁决范围
+# 31. 查询系统可裁决范围
 GET {{baseUrl}}/adjudicate/scope
 Accept: application/json
 
 ###
-# 30. 核对真实 A1C 逐字引文及哈希
+# 32. 核对真实 A1C 逐字引文及哈希
 POST {{baseUrl}}/adjudicate/citations
 Accept: application/json
 Content-Type: application/json
@@ -215,22 +225,22 @@ Content-Type: application/json
 }
 
 ###
-# 31. 列出所有未映射与不可用术语
+# 33. 列出所有未映射与不可用术语
 GET {{baseUrl}}/terms/unmapped
 Accept: application/json
 
 ###
-# 32. 解释糖化血红蛋白为何不可用于上游判定
+# 34. 解释糖化血红蛋白为何不可用于上游判定
 GET {{baseUrl}}/terms/explain?term=%E7%B3%96%E5%8C%96%E8%A1%80%E7%BA%A2%E8%9B%8B%E7%99%BD
 Accept: application/json
 
 ###
-# 33. 比较尿蛋白的字符串匹配与本体结果
+# 35. 比较尿蛋白的字符串匹配与本体结果
 GET {{baseUrl}}/demo/compare?term=%E5%B0%BF%E8%9B%8B%E7%99%BD
 Accept: application/json
 
 ###
-# 34. 初始化模型的单指标演示预测
+# 36. 初始化模型的单指标演示预测
 POST {{baseUrl}}/patients/P1/forecasts
 Accept: application/json
 Content-Type: application/json
@@ -262,117 +272,6 @@ Content-Type: application/json
 }
 
 ###
-# 35. 有依据的治疗措施综合评估（合成患者、模板模式）
-POST {{baseUrl}}/patients/SYNTHETIC/treatment-assessments
+# 37. 按患者镜像生成治疗措施综合评估
+POST {{baseUrl}}/patients/P90002/treatment-assessments
 Accept: application/json
-Content-Type: application/json
-
-{
-  "mode": "prospective",
-  "composer": "template",
-  "knowledge_mode": "current",
-  "baseline_snapshot": {
-    "clinical_as_of": "2026-09-13T10:00:00+08:00",
-    "knowledge_cutoff": "2026-09-13T10:00:00+08:00",
-    "source_coverage": {
-      "lis": "合成数据：近期检查",
-      "pacs": "合成数据：一份报告",
-      "emr": "合成病史",
-      "medication": "未提供既往给药记录"
-    },
-    "events": [
-      {
-        "event_id": "SYN-A1C",
-        "record_id": "SYN-A1C",
-        "revision": 1,
-        "patient_id": "SYNTHETIC",
-        "source": "lis",
-        "domain": "glycemic",
-        "event_time": "2026-09-12T08:00:00+08:00",
-        "available_at": "2026-09-12T10:00:00+08:00",
-        "ingested_at": "2026-09-12T10:05:00+08:00",
-        "metric": "A1C",
-        "value": 8.0,
-        "unit": "percent",
-        "context": "routine",
-        "population_context": "NonPregnant",
-        "value_trust": "verified"
-      },
-      {
-        "event_id": "SYN-FPG",
-        "record_id": "SYN-FPG",
-        "revision": 1,
-        "patient_id": "SYNTHETIC",
-        "source": "lis",
-        "domain": "glycemic",
-        "event_time": "2026-09-12T08:00:00+08:00",
-        "available_at": "2026-09-12T10:00:00+08:00",
-        "ingested_at": "2026-09-12T10:05:00+08:00",
-        "metric": "FPG",
-        "value": 9.0,
-        "unit": "mmol/L",
-        "context": "fasting",
-        "population_context": "NonPregnant",
-        "value_trust": "verified"
-      },
-      {
-        "event_id": "SYN-UACR",
-        "record_id": "SYN-UACR",
-        "revision": 1,
-        "patient_id": "SYNTHETIC",
-        "source": "lis",
-        "domain": "renal",
-        "event_time": "2026-09-12T08:00:00+08:00",
-        "available_at": "2026-09-12T10:00:00+08:00",
-        "ingested_at": "2026-09-12T10:05:00+08:00",
-        "metric": "UACR",
-        "value": 45.0,
-        "unit": "mg/g",
-        "context": "routine",
-        "population_context": "NonPregnant",
-        "value_trust": "verified"
-      },
-      {
-        "event_id": "SYN-CKD",
-        "record_id": "SYN-CKD",
-        "revision": 1,
-        "patient_id": "SYNTHETIC",
-        "source": "emr",
-        "domain": "renal",
-        "event_time": "2026-09-10T08:00:00+08:00",
-        "available_at": "2026-09-10T08:00:00+08:00",
-        "ingested_at": "2026-09-10T08:05:00+08:00",
-        "concept_code": "CKD",
-        "verification": "confirmed",
-        "assertion": "present",
-        "clinical_status": "active",
-        "text": "合成场景：既往慢性肾脏病诊断，当前仍活动。"
-      },
-      {
-        "event_id": "SYN-PACS",
-        "record_id": "SYN-PACS",
-        "revision": 1,
-        "patient_id": "SYNTHETIC",
-        "source": "pacs",
-        "domain": "cardiovascular",
-        "event_time": "2026-09-10T08:00:00+08:00",
-        "available_at": "2026-09-10T10:00:00+08:00",
-        "ingested_at": "2026-09-10T10:05:00+08:00",
-        "assertion": "uncertain",
-        "text": "合成影像报告：未见明显心脏扩大，局部改变性质待定。"
-      }
-    ]
-  },
-  "interventions": [
-    {
-      "action_id": "START-METFORMIN",
-      "kind": "medication",
-      "operation": "start",
-      "code": "metformin",
-      "start_at": "2026-09-13T10:00:00+08:00",
-      "execution_status": "planned"
-    }
-  ],
-  "include_demo_appendix": false,
-  "extract_pacs": false
-}

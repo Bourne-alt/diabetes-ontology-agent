@@ -111,7 +111,12 @@ def evaluate_state(
                 "value_trust": e.value_trust,
             },
         )
-        if e not in events:
+        if not e.event_time_known:
+            builder.add(
+                e.domain, "data_gap", "记录缺少发生时间，仅保留原始事实，不参与时序判断。",
+                refs=[fact_id(scope, e)], scope=scope, missing=["event_time"],
+            )
+        elif e not in events:
             builder.add(
                 e.domain,
                 "data_gap",

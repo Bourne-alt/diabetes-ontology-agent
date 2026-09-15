@@ -10,6 +10,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      '/demo': { target: AGENT_ORIGIN, changeOrigin: true },
+      '/patients': { target: AGENT_ORIGIN, changeOrigin: true },
       '/chat': {
         target: AGENT_ORIGIN,
         changeOrigin: true,
