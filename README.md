@@ -133,4 +133,4 @@ uv sync --extra agent
 uv run --extra agent dmo-agent --serve
 ```
 
-访问 `http://127.0.0.1:8200`；配置、执行边界与事件协议见 [Agent 使用说明](src/agent/README.md)。
+访问 `http://127.0.0.1:8200`。页面用通俗中文组织结论，并将成功工具查询得到的本体节点、患者事实、规则和证据显示为可交互、可回放的 3D 图谱；原始执行事件仍可在技术日志中查看。配置、执行边界与事件协议见 [Agent 使用说明](src/agent/README.md)。

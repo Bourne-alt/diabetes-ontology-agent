@@ -50,9 +50,9 @@ export default function Evidence({ bag }) {
   if (total === 0 && bag.patients.length === 0 && bag.notices.length === 0) return null;
 
   return (
-    <Section
+    <Section defaultOpen={false}
       title={<>
-        <h2>证据链与出处</h2>
+        <h2>查看原始证据与出处</h2>
         <span className="lbl">{total ? `${total} 条` : ''}</span>
       </>}
     >

@@ -4,14 +4,14 @@ import { useAgentRun } from './lib/useAgentRun.js';
 import TopBar from './components/TopBar.jsx';
 import Composer from './components/Composer.jsx';
 import Thread from './components/Thread.jsx';
-import Trace from './components/Trace.jsx';
+import KnowledgePanel from './components/KnowledgePanel.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 const SAMPLES = [
-  { text: 'P90002 的糖化血红蛋白判定依据是什么？给出规则号、版本与逐字出处。', route: 'patient_evidence · search_passages' },
-  { text: '如果 P90002 在 2026-02-20 再测一次 A1C 是 7.9%，结论会怎么变？', route: 'simulate_patient_course' },
-  { text: '为什么「糖尿病足」查不到映射？', route: 'explain_term' },
-  { text: 'ICD-10 为 E11 的 ehr-legacy 患者有多少，按风险档位分页列出前 10 个。', route: 'find_patients' },
+  { text: '请用容易理解的话，解释演示患者 P90002 的糖化血红蛋白检查结果。', route: '了解检查结果与依据' },
+  { text: '如果 P90002 在 2026-02-20 再测一次 A1C 是 7.9%，结论会怎么变？', route: '了解假设成立后的变化' },
+  { text: '为什么「糖尿病足」查不到映射？', route: '了解知识库的覆盖范围' },
+  { text: 'ICD-10 为 E11 的 ehr-legacy 患者有多少，按风险档位分页列出前 10 个。', route: '查看患者记录' },
 ];
 
 export default function App() {
@@ -97,8 +97,8 @@ export default function App() {
           />
         </main>
 
-        <ErrorBoundary label="执行轨迹渲染失败">
-          <Trace events={run.events} />
+        <ErrorBoundary label="知识图谱渲染失败">
+          <KnowledgePanel key={run.runId ?? "idle"} run={run} />
         </ErrorBoundary>
       </div>
     </div>

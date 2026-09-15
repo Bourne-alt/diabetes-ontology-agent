@@ -6,10 +6,10 @@ function Empty({ samples, onPick }) {
   return (
     <div className="thread__empty">
       <Mark size={34} />
-      <h2>在下方输入用户的问题</h2>
+      <h2>把复杂的检查结果，讲清楚。</h2>
       <p>
-        同一会话内模型看得到之前几轮，可以直接追问；换新会话即清空，两个会话之间不共享任何内容。
-        回答与证据链按本轮工具实际返回的内容显示，取不到就不显示。
+        先说清楚结论，再告诉你依据和还不确定的地方。
+        你可以继续追问；右侧图谱会逐步呈现实际查到的资料与联系。
       </p>
       <div className="samples">
         {samples.map((s) => (

@@ -11,7 +11,7 @@ uv sync --extra agent
 uv run --extra agent dmo-agent --serve
 ```
 
-访问 http://127.0.0.1:8200 。页面逐步显示待办清单、模型阶段、工具参数、结果和回答，支持停止查询。DMO API 在进程内调用，不需要另启 8100 服务。
+访问 http://127.0.0.1:8200 。页面逐步显示待办清单、通俗回答、查询阶段和证据，支持停止查询。右侧“知识图谱”把成功工具结果中的真实节点和关系投影为可旋转、缩放、暂停及按事件回放的 3D 动画；“技术日志”保留原始工具参数和结果。DMO API 在进程内调用，不需要另启 8100 服务。
 
 页面来自仓库根目录的 `frontend/`（Vite + React）。本模块只托管构建产物 `frontend/dist`；未构建时回落到包内的 `src/agent/index.html` 单文件页面，服务本身照常可用。
 
@@ -20,7 +20,7 @@ cd frontend && npm install && npm run build   # 产物进 frontend/dist，然后
 cd frontend && npm run dev                    # 开发期：Vite 在 5173，把 /chat 代理到 8200
 ```
 
-`AGENT_ORIGIN` 可改代理目标（默认 `http://127.0.0.1:8200`）。前端只消费本文「流式契约」一节的事件：`todo_update` 整体替换清单，工具事件按 `call_id` 配对而非按到达顺序，缺 `done` 判本轮作废。证据区只渲染 `tool_end` 结果里实际存在的 `sources` / `inferredFacts` / `assertedFacts` / `unmapped` 等字段，取不到就不显示。
+`AGENT_ORIGIN` 可改代理目标（默认 `http://127.0.0.1:8200`）。前端只消费本文「流式契约」一节的事件：`todo_update` 整体替换清单，工具事件按 `call_id` 配对而非按到达顺序，缺 `done` 判本轮作废。证据区只渲染 `tool_end` 结果里实际存在的 `sources` / `inferredFacts` / `assertedFacts` / `unmapped` 等字段，取不到就不显示。3D 图同样只读取 `tool_end(ok=true)` 的结构化结果，不从模型回答猜测关系；模拟结果使用独立命名空间，并在界面明确标成“假设推演”。图中位置只为方便观察，不表达医学距离、因果强度或风险大小。
 
 CLI（每行一个 JSON 事件）：
 
@@ -116,6 +116,7 @@ curl -N http://127.0.0.1:8200/chat/stream \
 
 ```bash
 uv run --extra agent --extra dev pytest tests/test_agent.py -q
+cd frontend && npm test && npm run build
 ```
 
 离线测试覆盖真实 LangChain 工具循环、预算终止、SQL 参数化与白名单、只读连接、SSE、推理字段过滤、超时和异常脱敏。数据库与模型连通性需要在配置完备的环境额外验证。

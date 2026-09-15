@@ -2,7 +2,7 @@ import { Check } from './Icons.jsx';
 import Section from './Section.jsx';
 import { asText } from '../lib/text.js';
 
-const LABEL = { pending: 'pending', in_progress: 'in progress', completed: 'completed' };
+const LABEL = { pending: '待处理', in_progress: '进行中', completed: '已完成' };
 
 export default function TodoList({ todos, seq, planning }) {
   if (todos.length === 0 && !planning) return null;
@@ -28,7 +28,7 @@ export default function TodoList({ todos, seq, planning }) {
     <Section
       title={<>
         <span className="lbl">待办清单</span>
-        <span className="chip chip--indigo">{seq ? `todo_update · seq ${seq}` : 'todo_update'}</span>
+        <span className="chip chip--indigo">本轮查询计划</span>
       </>}
       right={<>
         <span className="todos__pct">{pct}%</span>

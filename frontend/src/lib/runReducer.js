@@ -3,6 +3,7 @@
 
 import { cloneBag, createBag, harvest } from './evidence.js';
 import { asText } from './text.js';
+import { toolLabel } from './toolLabels.js';
 
 // 与 AgentSettings 的默认值保持一致（src/agent/settings.py）。
 // 服务端目前没有在事件里公开预算上限；改了那边记得同步这里。
@@ -126,7 +127,7 @@ function applyEvent(state, evt, at) {
           ...state,
           toolCalls: state.toolCalls + 1,
           phase: 'running',
-          statusText: `正在调用 ${asText(evt.tool) || '工具'}`,
+          statusText: toolLabel(evt.tool),
         },
         evt, asText(evt.tool), false, at,
       );

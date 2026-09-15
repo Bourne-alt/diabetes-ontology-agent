@@ -320,7 +320,9 @@ print("\n最终回答：\n" + result)
 5. 收到 `done` 或连接中断后恢复提交按钮；没有正常终止事件时展示“已中断”。
 6. 点击停止时调用 `controller.abort()`。停止后不保证还能收到 `done`。
 
-可直接参考仓库已有实现：[src/agent/index.html](../src/agent/index.html)。该页面使用 `textContent` 展示模型和工具内容；若改用 Markdown 渲染，应对生成的 HTML 做安全处理。
+生产前端实现位于 [frontend/src](../frontend/src)，未构建时才回落到 [src/agent/index.html](../src/agent/index.html)。React 前端使用受限 Markdown 渲染（忽略原始 HTML、过滤不安全链接），并把技术细节折叠在通俗结论之后。
+
+“知识图谱”视图是 SSE 事件的客户端投影，并非新增的服务端事件类型。它只接受 `tool_end(ok=true)` 的结构化结果，以 `seq` 为时间轴支持回放；失败调用和模型自然语言不会生成节点或边。前端应保留节点的工具名、`call_id`、`seq`、来源、演示数据和推演标记。布局坐标仅用于展示，不能解释为因果关系、相似度、证据强度或风险数值。“技术日志”仍应允许用户查看原始事件。
 
 ## 8. 内部工具与数据来源
 
@@ -339,6 +341,7 @@ print("\n最终回答：\n" + result)
 | `explain_term` | 映射与不可用原因 | 术语层 |
 | `find_patients` | 按诊断、来源、档位分页 | 本体关系库；默认 ehr-legacy |
 | `patient_evidence` | 判定、风险、安全、建议、监测、照护链 | DMO 融合查询 |
+| `simulate_patient_course` | 使用用户明确给出的数值、单位与日期做只读条件推演 | DMO 内存推演；结果不是患者已发生事实 |
 | `inspect_fact_schema` | 可查表、列、类型、注释 | 两个 PostgreSQL 库 |
 | `query_patient_facts` | 受控等值筛选与分页查询 | 两个 PostgreSQL 库 |
 
@@ -383,4 +386,6 @@ print("\n最终回答：\n" + result)
 | [src/agent/tools.py](../src/agent/tools.py) | 工具名称、参数与 API 映射 |
 | [src/agent/database.py](../src/agent/database.py) | 事实查询白名单、参数化 SQL、只读与分页 |
 | [src/agent/settings.py](../src/agent/settings.py) | 模型配置与默认执行限制 |
+| [frontend/src/components/KnowledgePanel.jsx](../frontend/src/components/KnowledgePanel.jsx) | 3D 图谱、事件回放、节点出处与技术日志入口 |
+| [frontend/src/lib/knowledgeGraph.js](../frontend/src/lib/knowledgeGraph.js) | 从成功工具结果生成有来源标记的图数据 |
 | [tests/test_agent.py](../tests/test_agent.py) | 工具循环、SSE 与错误边界测试 |
