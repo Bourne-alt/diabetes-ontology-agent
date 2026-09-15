@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin:0; }
+    a { color:#34477a; } a:hover { color:#22305a; }
+    .t * { box-sizing:border-box; }
+    .t { width:1020px; min-height:1620px; padding:34px 36px 40px; color:#1c1a17;
+         font:13px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC",system-ui,sans-serif;
+         background:#f0f1f7;
+         background-image:
+           radial-gradient(ellipse 78% 55% at 16% 5%,  rgba(52,71,122,.085), transparent 64%),
+           radial-gradient(ellipse 62% 40% at 88% 28%, rgba(74,124,116,.055), transparent 64%),
+           radial-gradient(ellipse 58% 40% at 58% 94%, rgba(163,86,42,.045), transparent 64%),
+           linear-gradient(rgba(28,26,23,.030) 1px, transparent 1px),
+           linear-gradient(90deg, rgba(28,26,23,.030) 1px, transparent 1px);
+         background-size:100% 100%,100% 100%,100% 100%,38px 38px,38px 38px; }
+    .t h1 { margin:0 0 5px; font:600 25px/1.25 "Newsreader","Songti SC",Georgia,serif; }
+    .t .lead { margin:0 0 24px; font-size:12.5px; line-height:1.75; color:#555047; max-width:700px; }
+    .t h2 { margin:0 0 6px; font:600 16px/1.3 "Newsreader","Songti SC",Georgia,serif; }
+    .t h2 em { font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:11px;
+               color:#6e6759; letter-spacing:.06em; margin-left:9px; }
+    .t .note { margin:0 0 14px; font-size:11.5px; line-height:1.7; color:#555047; }
+    .sec { border-radius:12px; padding:20px 22px; margin-bottom:16px;
+           background:rgba(255,255,255,.60); border:1px solid rgba(28,26,23,.08);
+           -webkit-backdrop-filter:blur(22px) saturate(1.5); backdrop-filter:blur(22px) saturate(1.5); }
+    code { font-family:"IBM Plex Mono",monospace; font-size:10.5px; background:rgba(28,26,23,.055);
+           padding:1px 5px; border-radius:4px; color:#413d36; }
+    table { width:100%; border-collapse:collapse; }
+    th { text-align:left; font:500 10px "IBM Plex Mono",monospace; letter-spacing:.11em;
+         text-transform:uppercase; color:#6e6759; padding:0 8px 8px 0;
+         border-bottom:1px solid rgba(28,26,23,.14); }
+    td { padding:10px 8px 10px 0; border-bottom:1px solid rgba(28,26,23,.07);
+         vertical-align:top; font-size:11.5px; line-height:1.65; color:#413d36; }
+    tr:last-child td { border-bottom:0; }
+    td b { color:#1c1a17; }
+    .n { font:11px "IBM Plex Mono",monospace; color:#6e6759; white-space:nowrap; }
+    .tok { font:500 11px "IBM Plex Mono",monospace; color:#34477a; white-space:nowrap; }
+    .arrow { color:#bdb5a5; font-family:"IBM Plex Mono",monospace; text-align:center; }
+    .keep { font:500 9.5px "IBM Plex Mono",monospace; padding:2px 6px; border-radius:3px;
+            background:rgba(52,71,122,.09); color:#34477a; border:1px solid rgba(52,71,122,.26); }
+    .chg { font:500 9.5px "IBM Plex Mono",monospace; padding:2px 6px; border-radius:3px;
+           background:rgba(163,86,42,.1); color:#8a4620; border:1px solid rgba(163,86,42,.28); }
+    .sws { display:flex; gap:3px; flex-wrap:wrap; }
+    .sws i { width:13px; height:13px; border-radius:3px; display:block; border:1px solid rgba(28,26,23,.14); }
+    .warn { display:flex; gap:12px; border-radius:9px; padding:13px 15px; margin-top:14px;
+            background:rgba(163,86,42,.08); border:1px solid rgba(163,86,42,.26); }
+    .warn span:first-child { flex:none; width:3px; border-radius:2px; background:#a3562a; align-self:stretch; }
+    .warn p { margin:0; font-size:11.5px; line-height:1.75; color:#413d36; }
+    .warn b { color:#8a4620; }
+    .info { display:flex; gap:12px; border-radius:9px; padding:13px 15px; margin-top:14px;
+            background:rgba(52,71,122,.08); border:1px solid rgba(52,71,122,.24); }
+    .info span:first-child { flex:none; width:3px; border-radius:2px; background:#34477a; align-self:stretch; }
+    .info p { margin:0; font-size:11.5px; line-height:1.75; color:#413d36; }
+    .info b { color:#22305a; }
+    .bgdemo { height:70px; border-radius:9px; border:1px solid rgba(28,26,23,.1); margin-bottom:12px;
+              background:#f0f1f7;
+              background-image:
+                radial-gradient(ellipse 78% 62% at 16% 20%, rgba(52,71,122,.085), transparent 64%),
+                radial-gradient(ellipse 62% 55% at 88% 45%, rgba(74,124,116,.055), transparent 64%),
+                radial-gradient(ellipse 58% 55% at 58% 88%, rgba(163,86,42,.045), transparent 64%),
+                linear-gradient(rgba(28,26,23,.030) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(28,26,23,.030) 1px, transparent 1px);
+              background-size:100% 100%,100% 100%,100% 100%,38px 38px,38px 38px; }
+  </style>
+</helmet>
+
+<div class="t">
+  <h1>迁移映射表</h1>
+  <p class="lead">浅色调下，<b>文字阶和语义色基本可以原样留用</b>——真正要换的是「面」：纸底变成背景层，白卡片变成三层玻璃。这比深色方案省掉一大块工作。</p>
+
+  <div class="sec">
+    <h2>一 · 新增：背景层<em>唯一的新概念</em></h2>
+    <p class="note">原纸底 <code>#f6f3ed</code> 是纯色，半透明压上去只会变灰块。换成浅底 + 三团低饱和光晕 + 网格，跨度 <b>1.27:1</b>。</p>
+    <div class="bgdemo"></div>
+    <table>
+      <tr><th style="width:168px">项</th><th style="width:196px">值</th><th>说明</th></tr>
+      <tr><td><span class="tok">--bg</span></td><td class="n">#f0f1f7</td>
+        <td>比原纸底更中性微冷，好托住白玻璃。暖象牙底会让白玻璃显得发黄</td></tr>
+      <tr><td>三团光晕</td><td class="n">.085 / .055 / .045</td>
+        <td>墨蓝左上、墨绿右上、赭石下方。<b>alpha 只有深色版的五分之一</b>——浅底上稍重就脏</td></tr>
+      <tr><td>网格</td><td class="n">rgba(28,26,23,.030) · 38px</td>
+        <td><b>玻璃感的来源。</b>模糊需要底层有高频细节才能被看见，纯渐变底下模糊前后没差别</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2>二 · 文字阶<em>几乎原样保留</em></h2>
+    <table>
+      <tr><th style="width:196px">token</th><th style="width:88px">动作</th><th style="width:110px">三层玻璃上</th><th>说明</th></tr>
+      <tr><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#1c1a17"></i></span> <span class="tok">--ink</span> <span class="n">#1c1a17</span></td>
+        <td><span class="keep">不变</span></td><td class="n">15.1–16.8:1</td><td>标题、结论正文</td></tr>
+      <tr><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#413d36"></i></span> <span class="tok">--ink-2</span> <span class="n">#413d36</span></td>
+        <td><span class="keep">不变</span></td><td class="n">9.4–10.4:1</td><td>次级正文、证据标识</td></tr>
+      <tr><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#555047"></i></span> <span class="tok">--ink-3</span> <span class="n">#555047</span></td>
+        <td><span class="keep">不变</span></td><td class="n">7.0–7.7:1</td><td>说明文字</td></tr>
+      <tr><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#6e6759"></i></span> <span class="tok">--muted</span> <span class="n">#7b7468 → #6e6759</span></td>
+        <td><span class="chg">加深</span></td><td class="n">4.88–5.42:1</td><td>旧值在玻璃上压线，加深后稳过 AA</td></tr>
+      <tr><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#8a8271"></i></span> <span class="tok">--faint</span> <span class="n">#a39b8c → #8a8271</span></td>
+        <td><span class="chg">降级</span></td><td class="n">3.32:1</td><td><b>仅 ≥16px 或图标</b>，不得放小字</td></tr>
+      <tr><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#bdb5a5"></i></span> <span class="tok">--ghost</span> <span class="n">#bdb5a5</span></td>
+        <td><span class="chg">禁文字</span></td><td class="n">1.66:1</td><td>只做描边与占位符</td></tr>
+    </table>
+    <div class="info"><span></span><p>这两处（<code>--muted</code> 加深、<code>--faint</code> 降级）<b>和主题无关</b>——原纸质版就该改，现在一并做掉。连带 <code>.evt__seq</code>、<code>.counter</code>、<code>.composer__hint</code> 这些用了 --faint/--ghost 的地方要改为 --muted。</p></div>
+  </div>
+
+  <div class="sec">
+    <h2>三 · 语义色<em>只有一处需要动</em></h2>
+    <table>
+      <tr><th style="width:118px">语义</th><th style="width:150px">值</th><th style="width:88px">动作</th><th style="width:92px">L1 上</th><th>覆盖的旧颜色</th></tr>
+      <tr><td>可核验</td><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#34477a"></i></span> <span class="tok">--indigo</span></td>
+        <td><span class="keep">不变</span></td><td class="n">8.26:1</td><td>右栏青绿强调 15 种全归这里</td></tr>
+      <tr><td>未核实</td><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#a3562a"></i></span> <span class="tok">--terra</span></td>
+        <td><span class="keep">不变</span></td><td class="n">4.91:1</td><td>含右栏琥珀警示 8 种。<b>文字改用 --terra-d</b></td></tr>
+      <tr><td>执行失败</td><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#8e3b34"></i></span> <span class="tok">--crimson</span></td>
+        <td><span class="keep">不变</span></td><td class="n">6.81:1</td><td>含 <code>.step-dot.failed #c2867c</code></td></tr>
+      <tr><td>判断规则</td><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#6e4a6b"></i></span> <span class="tok">--plum</span></td>
+        <td><span class="keep">不变</span></td><td class="n">6.74:1</td><td>图谱节点与芯片</td></tr>
+      <tr><td>检查与记录</td><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#3f6a63"></i></span> <span class="tok">--moss</span> <span class="n">#3f6a63</span></td>
+        <td><span class="chg">加深</span></td><td class="n">5.57:1</td><td>原拟 <code>#4a7c74</code> 只有 4.35:1，压线不过</td></tr>
+      <tr><td>本体概念</td><td><span class="sws" style="display:inline-flex;vertical-align:-2px"><i style="background:#5c6f5a"></i></span> <span class="tok">--olive</span> <span class="n">#5c6f5a</span></td>
+        <td><span class="keep">新增</span></td><td class="n">4.96:1</td><td>图谱节点与芯片</td></tr>
+    </table>
+    <div class="info"><span></span><p><b>浅色调省下的一整块工作：</b>这套语义色就是打印时要用的那套，不需要屏幕/打印两套并存。深色方案里必须维护「深底提亮版 + 浅底打印版」两份。</p></div>
+    <div class="info"><span></span><p><b>图谱窗也改成浅色后，全站语义色只剩这一套。</b>先前深色窗需要单独维护一组提亮版（<code>#8fa5e8 #5fb8aa #8fb589 #b98fb5 #e0995c</code>），现在图谱节点、纸面芯片、图例、打印全部共用上表。窗内只按深度做 ≤20% 的雾化，色相不变。</p></div>
+  </div>
+
+  <div class="sec">
+    <h2>四 · 面、线、影<em>这才是主要改动</em></h2>
+    <table>
+      <tr><th style="width:196px">原</th><th style="width:34px"></th><th style="width:186px">玻璃版</th><th>说明</th></tr>
+      <tr><td><span class="n">--paper #f6f3ed</span></td><td class="arrow">→</td>
+        <td><span class="tok">--bg</span> + 光晕 + 网格</td><td>见第一节</td></tr>
+      <tr><td><span class="n">--surface #ffffff</span><br><span class="n">--surface-2 #fcfaf6</span></td><td class="arrow">→</td>
+        <td class="n">L1 .60 / L2 .74 / L3 .90</td>
+        <td>按容器／卡片／关键块三选一。<b>不再有「白底」这个概念</b></td></tr>
+      <tr><td><span class="n">--line / --line-2 / --hair</span></td><td class="arrow">→</td>
+        <td class="n">rgba(28,26,23,.08/.11/.14)</td>
+        <td>描边改为深色半透明，三档对应三层</td></tr>
+      <tr><td><span class="n">--indigo-soft #edf0f7</span><br><span class="n">--terra-soft #fbf0e6</span></td><td class="arrow">→</td>
+        <td class="n">rgba(52,71,122,.10)<br>rgba(163,86,42,.10)</td>
+        <td>改为语义色低透明度叠加，这样在任何玻璃层上都成立</td></tr>
+      <tr><td><span class="n">--shadow</span>（单档）</td><td class="arrow">→</td>
+        <td class="n">三档 + 白色内高光</td>
+        <td><b>阴影是浅色玻璃的分层主力</b>（落差 1.30:1，深色版只有 1.08）。L1 无影、L2 中、L3 强，配 <code>0 1px 0 rgba(255,255,255,.7) inset</code> 模拟上缘反光</td></tr>
+      <tr><td>圆角 6 / 8 / 10px</td><td class="arrow">→</td>
+        <td class="n">8 / 9 / 12px</td><td>玻璃需要略大圆角承托，仍不用胶囊形</td></tr>
+      <tr><td><span class="n">saturate</span>（无）</td><td class="arrow">→</td>
+        <td class="n">saturate(1.5)</td>
+        <td>白色叠加会冲淡底色，不提饱和度光晕透上来就是一片灰。比深色版的 1.35 更高</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2>五 · 工作量对账<em>三个方案横向比</em></h2>
+    <table>
+      <tr><th style="width:186px"></th><th style="width:150px">只收编右栏</th><th style="width:150px">深色玻璃</th><th>浅色玻璃（本版）</th></tr>
+      <tr><td><b>改动范围</b></td><td>styles.css 497 行后</td><td class="n">全部 623 行</td><td class="n">全部 623 行</td></tr>
+      <tr><td><b>文字阶</b></td><td>改 2 个 token</td><td class="n">6 级重定义为 5 级</td><td><b>改 2 个 token</b>（同左）</td></tr>
+      <tr><td><b>语义色</b></td><td>不变</td><td class="n">6 色全部提亮 + 维护打印版</td><td><b>只加深 1 色</b></td></tr>
+      <tr><td><b>新增机制</b></td><td>无</td><td class="n">背景层、三层玻璃、降级、打印</td><td class="n">背景层、三层玻璃、降级、打印</td></tr>
+      <tr><td><b>打印样式</b></td><td>不需要</td><td class="n">需换回整套浅底色</td><td><b>去模糊去阴影即可</b></td></tr>
+      <tr><td><b>估计工时</b></td><td>约 1.5 天</td><td class="n">约 4–5 天</td><td><b>约 3 天</b></td></tr>
+    </table>
+    <div class="warn"><span></span><p><b>时间紧的话可以只做 P0：</b>背景层 + L1 容器玻璃（顶栏、面板背板、输入框），约 1 天。视觉上已经八成是玻璃，卡片和关键块先沿用不透明白底——因为浅色版的 L2/L3 本来就接近白色，中间态不违和。这是浅色调相对深色的又一个好处。</p></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

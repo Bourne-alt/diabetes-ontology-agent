@@ -3,12 +3,14 @@
 const uri = (v) => typeof v === 'string' && /^(https?:\/\/|urn:|dmo:)/.test(v);
 const text = (v) => typeof v === 'string' ? v : '';
 const tail = (v) => text(v).split(/[/#]/).pop() || text(v);
+// 浅底版语义色：图谱节点、纸面芯片、图例、打印共用这一套。
+// 原先那组（#5b9fc7 等）是为深色舞台选的，在浅窗 #eaecf4 上只有 2.3–3.1:1。
 export const KIND = {
-  patient: { label: '患者', color: '#5b9fc7' },
-  fact: { label: '检查与记录', color: '#58b8b1' },
-  concept: { label: '本体概念', color: '#729d85' },
-  rule: { label: '判断规则', color: '#9f8bc3' },
-  evidence: { label: '指南出处', color: '#d8a064' },
+  patient: { label: '患者', color: '#34477a' },
+  fact: { label: '检查与记录', color: '#3f6a63' },
+  concept: { label: '本体概念', color: '#5c6f5a' },
+  rule: { label: '判断规则', color: '#6e4a6b' },
+  evidence: { label: '指南出处', color: '#a3562a' },
 };
 function kindOf(kind = '') {
   if (/Patient/i.test(kind)) return 'patient';

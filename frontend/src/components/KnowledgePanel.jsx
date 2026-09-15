@@ -44,7 +44,7 @@ export default function KnowledgePanel({ run }) {
     <Suspense fallback={<div className="graph-loading">正在准备三维视图…</div>}><GraphScene graph={graph} paused={paused} selected={selected} onSelect={selectNode} onClose={()=>setSelected(null)}/></Suspense>
     {!graph.nodes.length && <p className="graph-empty">查询返回概念、规则或记录后，节点会在这里出现。<br/>没有查到的关系不会被补画。</p>}
     <div className="graph-legend">{Object.entries(KIND).map(([k,v])=><span key={k}><i style={{background:v.color}}/>{v.label}</span>)}</div>
-    <p className="graph-help">拖动旋转 · 滚轮或按钮缩放 · 点击节点查看详情<br/>颜色区分资料类型；位置和动画不代表风险高低。</p>
+    <p className="graph-help">拖动旋转 · 滚轮或按钮缩放 · 点击节点查看详情<br/><b>离地高度＝推导层级</b>：贴近地面的是这位患者的实测数据，越高越接近判断所依据的指南原文。颜色区分资料类型，水平位置无含义。</p>
     <div className="graph-node-list" aria-label="选择证据节点">{graph.nodes.map(n=><button key={n.id} aria-pressed={n.id===selected} onClick={()=>selectNode(n.id)} style={{'--node-color':KIND[n.kind].color}}>{n.scenario?'假设 · ':''}{n.label}</button>)}</div>
   </div>;
   return <aside className="knowledge-panel">

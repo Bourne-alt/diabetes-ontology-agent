@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color:#34477a; } a:hover { color:#22305a; }
+    .u * { box-sizing: border-box; }
+    .u {
+      --bg:#f0f1f7;
+      /* 三层白玻璃：L1 唯一带 backdrop-filter */
+      --g1:rgba(255,255,255,.60); --g1-line:rgba(28,26,23,.08);
+      --g2:rgba(255,255,255,.74); --g2-line:rgba(28,26,23,.11);
+      --g3:rgba(255,255,255,.90); --g3-line:rgba(28,26,23,.14);
+      /* 阴影是浅色玻璃的分层主力（落差 1.30:1，深色版只有 1.08） */
+      --sh2:0 1px 0 rgba(255,255,255,.7) inset, 0 8px 22px -12px rgba(28,26,23,.22);
+      --sh3:0 1px 0 rgba(255,255,255,.85) inset, 0 14px 32px -16px rgba(28,26,23,.30);
+      --ink:#1c1a17; --ink-2:#413d36; --ink-3:#555047;
+      --muted:#6e6759; --faint:#8a8271; --ghost:#bdb5a5;
+      --ind:#34477a; --ind-d:#22305a; --ind-dim:rgba(52,71,122,.10); --ind-line:rgba(52,71,122,.26);
+      --ter:#a3562a; --ter-d:#8a4620; --ter-dim:rgba(163,86,42,.10); --ter-line:rgba(163,86,42,.28);
+      --crim:#8e3b34; --plum:#6e4a6b; --moss:#3f6a63; --olive:#5c6f5a;
+      /* 深色观察窗：浅色面上的机器视图，这个对比是有意的 */
+      --win:#161d33; --win-ink:#f2f4f9; --win-ink-2:#ccd2e0; --win-ink-3:#a8b0c4;
+      --n-pat:#8fa5e8; --n-fact:#5fb8aa; --n-con:#8fb589; --n-rule:#b98fb5; --n-src:#e0995c;
+      --serif:"Newsreader","Songti SC","STSong",Georgia,serif;
+      --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+      --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+      width:1440px; height:900px; display:flex; flex-direction:column;
+      color:var(--ink); font:14px/1.65 var(--sans); overflow:hidden;
+      background:var(--bg);
+      background-image:
+        radial-gradient(ellipse 78% 55% at 16% 6%,  rgba(52,71,122,.085), transparent 64%),
+        radial-gradient(ellipse 62% 42% at 88% 26%, rgba(74,124,116,.055), transparent 64%),
+        radial-gradient(ellipse 58% 42% at 60% 96%, rgba(163,86,42,.045), transparent 64%),
+        linear-gradient(rgba(28,26,23,.030) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28,26,23,.030) 1px, transparent 1px);
+      background-size:100% 100%,100% 100%,100% 100%,38px 38px,38px 38px;
+    }
+    .u .lbl { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+    .u .mono { font-family:var(--mono); }
+    .grow { flex-grow:1; }
+
+    .l1 { background:var(--g1); border:1px solid var(--g1-line);
+          -webkit-backdrop-filter:blur(22px) saturate(1.5); backdrop-filter:blur(22px) saturate(1.5); }
+    .l2 { background:var(--g2); border:1px solid var(--g2-line); box-shadow:var(--sh2); }
+    .l3 { background:var(--g3); border:1px solid var(--g3-line); box-shadow:var(--sh3); }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+      .l1 { background:#f7f8fb; }
+    }
+
+    .top { flex:none; display:flex; align-items:center; gap:20px; height:72px; padding:0 30px;
+           border-width:0 0 1px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .brand h1 { margin:0; font:600 20px/1.25 var(--serif); }
+    .chip { font-family:var(--mono); font-size:11px; border-radius:5px; padding:5px 10px; white-space:nowrap;
+            color:var(--muted); background:rgba(255,255,255,.6); border:1px solid rgba(28,26,23,.1); }
+    .chip.ind { color:var(--ind); background:var(--ind-dim); border-color:var(--ind-line); }
+    .vr { width:1px; height:26px; background:rgba(28,26,23,.1); flex:none; }
+    .status { display:flex; align-items:center; gap:8px; }
+    .sdotb { width:7px; height:7px; border-radius:50%; background:var(--ind); flex:none;
+             box-shadow:0 0 0 3px rgba(52,71,122,.14); }
+    .status span:last-child { font-size:12.5px; color:var(--ink-2); white-space:nowrap; }
+    .body { flex-grow:1; display:flex; min-height:0; }
+
+    .main { flex-grow:1; min-width:0; display:flex; flex-direction:column; overflow:hidden; }
+    .thread { flex-grow:1; min-height:0; padding:24px 28px; display:flex; flex-direction:column; gap:15px; overflow:hidden; }
+    .thread > * { flex-shrink:0; }
+    .turnmark { display:flex; align-items:center; gap:14px; }
+    .turnmark i { flex-grow:1; height:1px; background:rgba(28,26,23,.09); display:block; }
+    .userrow { display:flex; justify-content:flex-end; }
+    .bubble { max-width:76%; padding:13px 17px; border-radius:12px 12px 3px 12px;
+              background:rgba(52,71,122,.09); border:1px solid var(--ind-line);
+              font:400 16px/1.7 var(--serif); color:var(--ink); box-shadow:var(--sh2); }
+    .agentrow { display:flex; gap:13px; align-items:flex-start; }
+    .avatar { flex:none; width:30px; height:30px; border-radius:50%; margin-top:2px;
+              background:rgba(255,255,255,.8); border:1px solid rgba(28,26,23,.12);
+              display:flex; align-items:center; justify-content:center; }
+    .stack { flex-grow:1; min-width:0; display:flex; flex-direction:column; gap:13px; }
+    .card { border-radius:12px; }
+    .card .hd { display:flex; align-items:center; gap:10px; padding:13px 20px; min-height:48px;
+                border-bottom:1px solid rgba(28,26,23,.07); }
+    .card .hd h2 { margin:0; font:600 18px/1.3 var(--serif); }
+    .card .bd { padding:16px 20px 18px; }
+
+    .verdict { display:flex; gap:14px; padding:15px 17px; border-radius:9px; }
+    .vbar { flex:none; width:3px; border-radius:2px; background:var(--ind); align-self:stretch; }
+    .vtext { font:400 15px/1.8 var(--serif); text-wrap:pretty; }
+    .evitem { display:flex; gap:14px; padding:13px 15px; border-radius:9px; margin-top:10px; }
+    .ebar { flex:none; width:3px; border-radius:2px; background:var(--ind); align-self:stretch; }
+    .evitem.warn { background:rgba(255,252,248,.92); border-color:var(--ter-line); }
+    .evitem.warn .ebar { background:var(--ter); }
+    .ehd { display:flex; align-items:center; gap:9px; margin-bottom:6px; }
+    .eid { font-family:var(--mono); font-size:11.5px; color:var(--ink-2); }
+    .evia { font-family:var(--mono); font-size:10.5px; color:var(--muted); margin-left:auto; }
+    .equote { font:400 15px/1.85 var(--serif); border-left:2px solid var(--ind-line);
+              padding-left:12px; margin:6px 0 8px; }
+    .evitem.warn .equote { border-left-color:var(--ter-line); }
+    .emeta { font-family:var(--mono); font-size:10.5px; line-height:1.7; color:var(--muted); }
+    .emeta b { color:var(--ink-2); font-weight:500; }
+    .warntag { font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--ter-d);
+               border:1px solid var(--ter-line); background:var(--ter-dim); border-radius:4px; padding:2px 6px; }
+
+    .composer { flex:none; padding:13px 28px 16px; border-width:1px 0 0; }
+    .ta { min-height:48px; font:400 17px/1.7 var(--serif); color:var(--faint); }
+    .cfoot { display:flex; align-items:center; gap:11px; margin-top:10px; padding-top:11px;
+             border-top:1px solid rgba(28,26,23,.08); }
+    .btn { min-height:44px; padding:0 24px; border-radius:8px; font-size:13.5px; font-weight:500;
+           display:flex; align-items:center; border:0; background:var(--ind); color:#fff;
+           box-shadow:0 1px 0 rgba(255,255,255,.25) inset, 0 8px 18px -10px rgba(52,71,122,.7); }
+    .btn.ghost { border:1px solid rgba(28,26,23,.14); background:rgba(255,255,255,.55);
+                 color:var(--muted); padding:0 20px; box-shadow:none; }
+    .hint { font-size:11.5px; color:var(--muted); }
+
+    .panel { flex:none; width:610px; display:flex; flex-direction:column; min-height:0;
+             border-width:0 0 0 1px; }
+    .phead { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:20px 22px 14px; }
+    .phead h2 { margin:4px 0 0; font:600 19px/1.4 var(--serif); }
+    .badge { border:1px solid var(--ind-line); background:var(--ind-dim); border-radius:5px;
+             padding:5px 10px; font-family:var(--mono); font-size:11px; color:var(--ind); white-space:nowrap; }
+    .ptabs { display:flex; gap:2px; padding:0 22px; border-bottom:1px solid rgba(28,26,23,.09); }
+    .ptab { min-height:44px; padding:0 14px; border:0; background:transparent; font-size:12.5px;
+            color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-1px;
+            display:flex; align-items:center; }
+    .ptab.on { color:var(--ink); border-bottom-color:var(--ind); }
+    .pbody { flex:1; min-height:0; padding:18px 22px 20px; display:flex; flex-direction:column; gap:14px; overflow:hidden; }
+    .pbody > * { flex-shrink:0; }
+    .stages { display:flex; list-style:none; padding:0; margin:0; justify-content:space-between; gap:6px; }
+    .stages li { font-size:11px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+    .stages li i { display:grid; place-items:center; width:23px; height:23px; border-radius:50%;
+                   background:rgba(255,255,255,.7); border:1px solid rgba(28,26,23,.1);
+                   font:11px var(--mono); font-style:normal; color:var(--muted); }
+    .stages li.on { color:var(--ind); }
+    .stages li.on i { background:var(--ind-dim); border-color:var(--ind-line); color:var(--ind); }
+
+    .gcard { border-radius:12px; overflow:hidden; }
+    .gwin { position:relative; height:276px; background:#eaecf4;
+            box-shadow:inset 0 2px 15px rgba(28,26,23,.10), inset 0 0 0 1px rgba(28,26,23,.05); }
+    /* 浅窗内的玻璃条：白玻璃 α=.78——压在最深的患者节点上，深字仍有 12:1 */
+    .gglass { position:absolute; left:0; right:0; z-index:2; background:rgba(255,255,255,.78);
+              -webkit-backdrop-filter:blur(14px) saturate(1.5); backdrop-filter:blur(14px) saturate(1.5); }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+      .gglass { background:#f2f3f8; }
+    }
+    .gtop { top:0; display:flex; justify-content:space-between; align-items:center; gap:8px;
+            padding:0 13px; height:46px; border-bottom:1px solid rgba(28,26,23,.09); }
+    .gtop strong { font:500 12px var(--mono); color:var(--ink-2); }
+    .gbtns { display:flex; gap:7px; }
+    .gbtn { border:1px solid rgba(28,26,23,.16); background:rgba(255,255,255,.72);
+            border-radius:7px; min-height:32px; padding:0 12px; font-size:11.5px;
+            color:var(--ink-2); display:flex; align-items:center; }
+    .glegend { bottom:0; display:flex; justify-content:center; gap:15px; flex-wrap:wrap;
+               padding:10px 12px; font-size:11px; color:var(--ink-3);
+               border-top:1px solid rgba(28,26,23,.09); }
+    .glegend span { display:flex; align-items:center; gap:5px; }
+    .glegend i { width:7px; height:7px; border-radius:50%; }
+    .axis { position:absolute; left:12px; top:52px; bottom:44px; z-index:1; width:96px;
+            font:10.5px var(--mono); color:var(--ink-3); pointer-events:none; }
+    .axis div { position:absolute; left:0; }
+    .axis .cap { font-size:9.5px; color:var(--muted); letter-spacing:.1em; }
+    .ghelp { font-size:11px; line-height:1.7; color:var(--ink-3); padding:11px 14px; margin:0;
+             background:rgba(255,255,255,.55); border-top:1px solid rgba(28,26,23,.07); }
+    .ghelp b { color:var(--ink-2); font-weight:500; }
+    .gnodes { display:flex; gap:6px; flex-wrap:wrap; padding:11px 14px;
+              background:rgba(255,255,255,.55); border-top:1px solid rgba(28,26,23,.07); }
+    .gnode { border:1px solid rgba(28,26,23,.12); border-left:3px solid var(--ind);
+             border-radius:6px; padding:0 9px; min-height:32px; font-size:11.5px;
+             background:rgba(255,255,255,.8); color:var(--ink-3); display:flex; align-items:center; }
+    .prog h3 { font:600 14px/1.4 var(--serif); color:var(--ink-2); margin:0 0 11px; }
+    .step { display:flex; gap:10px; margin:10px 0; }
+    .pdot { width:7px; height:7px; flex:none; border-radius:50%; margin-top:6px; background:var(--ind); }
+    .pdot.wait { background:var(--ter); }
+    .step strong { font-weight:500; color:var(--ink-2); font-size:12.5px; }
+    .step p { margin:3px 0 0; font-size:11.5px; color:var(--muted); line-height:1.6; }
+  </style>
+</helmet>
+
+<div class="u">
+  <div class="top l1">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34477a" stroke-width="1.6">
+        <circle cx="12" cy="12" r="9"/><path d="M12 7v10M7.5 12h9"/>
+      </svg>
+      <div>
+        <h1>糖尿病本体 · 证据工作台</h1>
+        <div class="lbl">Ontology Evidence Console</div>
+      </div>
+    </div>
+    <div class="grow"></div>
+    <span class="chip">claude-opus-5</span>
+    <span class="chip ind">会话 a3f91c2e…</span>
+    <div class="vr"></div>
+    <div class="status"><span class="sdotb"></span><span>已完成 · 引用 4 条，缺口 1 处</span></div>
+  </div>
+
+  <div class="body">
+    <div class="main">
+      <div class="thread">
+        <div class="turnmark">
+          <span class="lbl">第 1 轮</span><i></i><span class="lbl">run_id 8c41a2…9f0d</span>
+        </div>
+        <div class="userrow">
+          <div class="bubble">请用容易理解的话，解释合成患者 P90002 的糖化血红蛋白检查结果。</div>
+        </div>
+        <div class="agentrow">
+          <span class="avatar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34477a" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v10M7.5 12h9"/>
+            </svg>
+          </span>
+          <div class="stack">
+            <div class="card l2">
+              <div class="hd"><h2>结论</h2></div>
+              <div class="bd" style="padding-top:14px">
+                <div class="verdict l3">
+                  <span class="vbar"></span>
+                  <div class="vtext">P90002 在 2026-01-14 的糖化血红蛋白为 8.2%，高于指南建议的 7.0% 控制目标。这一条来自实验室记录，可核验；但该患者近三个月没有复查记录，所以「是否持续偏高」这一点无法下结论。</div>
+                </div>
+              </div>
+            </div>
+            <div class="card l2">
+              <div class="hd"><h2>依据</h2><div class="grow"></div><span class="lbl">4 条 · 1 条未核实</span></div>
+              <div class="bd" style="padding-top:6px">
+                <div class="evitem l3">
+                  <span class="ebar"></span>
+                  <div style="flex-grow:1; min-width:0">
+                    <div class="ehd"><span class="eid">LabResult:P90002-A1C-0114</span><span class="evia">via sql_query</span></div>
+                    <div class="equote">HbA1c 8.2 %（参考区间 4.0–6.0），采集于 2026-01-14，来源 ehr-legacy。</div>
+                    <div class="emeta"><b>表</b> lab_results · <b>行</b> 41822 · <b>取回</b> 128 ms</div>
+                  </div>
+                </div>
+                <div class="evitem l3 warn">
+                  <span class="ebar"></span>
+                  <div style="flex-grow:1; min-width:0">
+                    <div class="ehd"><span class="eid">Passage:ADA-2025-S6.4</span>
+                      <span class="warntag">未核实</span><span class="evia">via sparql_select</span></div>
+                    <div class="equote">多数非妊娠成年人的合理 A1C 目标为低于 7.0%。</div>
+                    <div class="emeta"><b>状态</b> 未核实原文页码 · <b>不能</b>据此判定个体目标值</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="composer l1">
+        <div class="ta">输入用户的问题。首轮请写明患者编号，同一会话内可以直接追问。</div>
+        <div class="cfoot">
+          <span class="btn">开始查询</span>
+          <span class="btn ghost">停止</span>
+          <span class="btn ghost">新会话</span>
+          <span class="hint">⌘/Ctrl + Enter 发送</span>
+          <div class="grow"></div>
+          <span class="mono" style="font-size:11px; color:var(--muted)">0 / 2000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel l1">
+      <div class="phead">
+        <div><div class="lbl">让依据看得见</div><h2>这次回答，如何得出？</h2></div>
+        <span class="badge">本轮证据</span>
+      </div>
+      <div class="ptabs">
+        <span class="ptab on">知识图谱</span><span class="ptab">评估过程</span><span class="ptab">技术日志</span>
+      </div>
+      <div class="pbody">
+        <ol class="stages">
+          <li><i>1</i>查看资料</li><li><i>2</i>连接知识</li>
+          <li class="on"><i>3</i>核对依据</li><li><i>4</i>解释结果</li>
+        </ol>
+
+        <div class="gcard l2">
+          <div class="gwin">
+            <div class="axis">
+              <div style="top:-4px"><span class="cap">高</span> 指南原文</div>
+              <div style="top:30px">判断规则</div>
+              <div style="top:63px">本体概念</div>
+              <div style="top:97px">实测数据</div>
+              <div style="top:133px"><span class="cap">低</span> 这位患者</div>
+            </div>
+            <svg width="610" height="276" viewBox="0 0 610 276" style="position:absolute;inset:0">
+              <!-- 透视地面：近疏远密，给出高度参照 -->
+              <g stroke="#d8dce8" stroke-width="1" fill="none">
+                <path d="M130 242H595M156 224H573M180 208H553M199 195H536M215 184H522M226 176H512M235 170H505"/>
+                <path d="M130 242L235 170M208 242L280 170M285 242L325 170M363 242L370 170M440 242L415 170M518 242L460 170M595 242L505 170"/>
+              </g>
+              <!-- 地面投影：越远越小越淡，这是浅底上的深度线索 -->
+              <g>
+                <ellipse cx="295" cy="176" rx="7"    ry="2.2" fill="#dcdde5"/>
+                <ellipse cx="445" cy="176" rx="7"    ry="2.2" fill="#dcdde5"/>
+                <ellipse cx="370" cy="184" rx="8.5"  ry="2.6" fill="#d7d9e0"/>
+                <ellipse cx="285" cy="195" rx="10"   ry="3"   fill="#d3d5dc"/>
+                <ellipse cx="455" cy="195" rx="10"   ry="3"   fill="#d3d5dc"/>
+                <ellipse cx="370" cy="210" rx="11.5" ry="3.5" fill="#cdcfd5"/>
+                <ellipse cx="370" cy="228" rx="13"   ry="4"   fill="#c9cad1"/>
+              </g>
+              <!-- 高度垂线：让「悬得多高」可量 -->
+              <g stroke="rgba(28,26,23,.20)" stroke-width="1" stroke-dasharray="2 3">
+                <path d="M295 68V176M445 68V176M370 96V184M285 127V195M455 127V195M370 161V210M370 197V228"/>
+              </g>
+              <!-- 推导关系 -->
+              <g stroke="rgba(28,26,23,.24)" stroke-width="1.2" fill="none">
+                <path d="M370 197L370 161M370 161L285 127M370 161L455 127M285 127L370 96M455 127L370 96M370 96L295 68M370 96L445 68"/>
+              </g>
+              <!-- 节点：实心，近大远小，雾 ≤20% -->
+              <g font-family="-apple-system,PingFang SC,sans-serif" font-size="11" text-anchor="middle" fill="#413d36">
+                <circle cx="295" cy="68"  r="6.5" fill="#b17452"/><text x="295" y="55">ADA 2025 §6.4</text>
+                <circle cx="445" cy="68"  r="6.5" fill="#b17452"/><text x="445" y="55">NICE NG28</text>
+                <circle cx="370" cy="96"  r="7.5" fill="#816280"/><text x="370" y="83">控制目标规则</text>
+                <circle cx="285" cy="127" r="8.5" fill="#6a7c69"/><text x="285" y="113">糖化血红蛋白</text>
+                <circle cx="455" cy="127" r="8.5" fill="#6a7c69"/><text x="455" y="113">血糖控制</text>
+                <circle cx="370" cy="161" r="10"  fill="#48706a"/><text x="370" y="147">A1C 8.2%</text>
+                <circle cx="370" cy="197" r="11"  fill="#34477a"/>
+                <text x="370" y="182" font-size="12" fill="#1c1a17">P90002</text>
+              </g>
+            </svg>
+            <div class="gglass gtop">
+              <strong>12 个节点 · 15 条关系</strong>
+              <div class="gbtns"><span class="gbtn">暂停动画</span><span class="gbtn">展开大图</span></div>
+            </div>
+            <div class="gglass glegend">
+              <span><i style="background:#34477a"></i>患者</span>
+              <span><i style="background:#3f6a63"></i>检查与记录</span>
+              <span><i style="background:#5c6f5a"></i>本体概念</span>
+              <span><i style="background:#6e4a6b"></i>判断规则</span>
+              <span><i style="background:#a3562a"></i>指南出处</span>
+            </div>
+          </div>
+          <p class="ghelp">拖动旋转 · 滚轮或按钮缩放 · 点击节点查看详情<br>
+            <b>离地高度＝推导层级</b>：贴近地面的是这位患者的实测数据，越高越接近判断所依据的指南原文。虚线与地面光斑标出各节点的高度，水平位置无含义。</p>
+          <div class="gnodes">
+            <span class="gnode">P90002</span>
+            <span class="gnode" style="border-left-color:#3f6a63">A1C 8.2%</span>
+            <span class="gnode" style="border-left-color:#a3562a">ADA 2025 §6.4</span>
+          </div>
+        </div>
+
+        <div class="prog">
+          <h3>正在做什么</h3>
+          <div class="step"><span class="pdot"></span>
+            <div><strong>查询患者检验记录</strong><p>已返回结果，可展开技术日志核查。</p></div></div>
+          <div class="step"><span class="pdot"></span>
+            <div><strong>检索指南条目</strong><p>已返回结果，可展开技术日志核查。</p></div></div>
+          <div class="step"><span class="pdot wait"></span>
+            <div><strong>核对原文页码</strong><p>这一步未完成，不能当作「没有问题」。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

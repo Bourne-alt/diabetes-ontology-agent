@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin:0; }
+    a { color:#aebbf0; } a:hover { color:#cdd6f7; }
+    .s * { box-sizing:border-box; }
+    .s { width:1020px; min-height:2340px; padding:34px 36px 40px; color:#1c1a17;
+         font:13px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC",system-ui,sans-serif;
+         background:#f0f1f7;
+         background-image:
+           radial-gradient(ellipse 78% 55% at 16% 5%,  rgba(52,71,122,.085), transparent 64%),
+           radial-gradient(ellipse 62% 40% at 88% 28%, rgba(74,124,116,.055), transparent 64%),
+           radial-gradient(ellipse 58% 40% at 58% 94%, rgba(163,86,42,.045), transparent 64%),
+           linear-gradient(rgba(28,26,23,.030) 1px, transparent 1px),
+           linear-gradient(90deg, rgba(28,26,23,.030) 1px, transparent 1px);
+         background-size:100% 100%,100% 100%,100% 100%,38px 38px,38px 38px; }
+    .s h1 { margin:0 0 5px; font:600 25px/1.25 "Newsreader","Songti SC",Georgia,serif; }
+    .s .lead { margin:0 0 24px; font-size:12.5px; line-height:1.75; color:#555047; max-width:700px; }
+    .s h2 { margin:0 0 6px; font:600 16px/1.3 "Newsreader","Songti SC",Georgia,serif; }
+    .s h2 em { font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:11px;
+               color:#6e6759; letter-spacing:.06em; margin-left:9px; }
+    .s .note { margin:0 0 14px; font-size:11.5px; line-height:1.7; color:#555047; }
+    .sec { border-radius:12px; padding:20px 22px; margin-bottom:16px;
+           background:rgba(255,255,255,.60); border:1px solid rgba(28,26,23,.08);
+           -webkit-backdrop-filter:blur(22px) saturate(1.5); backdrop-filter:blur(22px) saturate(1.5); }
+    code { font-family:"IBM Plex Mono",monospace; font-size:10.5px; background:rgba(28,26,23,.055);
+           padding:1px 5px; border-radius:4px; color:#413d36; }
+    table { width:100%; border-collapse:collapse; }
+    th { text-align:left; font:500 10px "IBM Plex Mono",monospace; letter-spacing:.11em;
+         text-transform:uppercase; color:#6e6759; padding:0 8px 8px 0;
+         border-bottom:1px solid rgba(28,26,23,.14); }
+    td { padding:10px 8px 10px 0; border-bottom:1px solid rgba(28,26,23,.07);
+         vertical-align:middle; font-size:11.5px; line-height:1.65; color:#413d36; }
+    tr:last-child td { border-bottom:0; }
+    td b { color:#1c1a17; }
+    .n { font:11px "IBM Plex Mono",monospace; color:#6e6759; white-space:nowrap; }
+    .tok { font:500 11px "IBM Plex Mono",monospace; color:#34477a; white-space:nowrap; }
+    .arrow { color:#bdb5a5; font-family:"IBM Plex Mono",monospace; text-align:center; }
+    .ok { color:#34477a; font-weight:600; } .no { color:#8e3b34; font-weight:600; }
+    .ck { flex:none; width:15px; height:15px; border-radius:4px; margin-top:1px;
+          border:1px solid rgba(28,26,23,.25); background:rgba(255,255,255,.7); }
+
+    .scale { display:flex; align-items:flex-end; gap:22px; padding:14px 0 6px; }
+    .bar { text-align:center; }
+    .bar .box { border-radius:8px; display:flex; align-items:center; justify-content:center;
+                font:11px "IBM Plex Mono",monospace; }
+    .bar .cap { font-size:10.5px; color:#555047; margin-top:7px; line-height:1.5; }
+    .bar .cap b { display:block; font-size:11px; color:#1c1a17; }
+
+    .prio { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid rgba(28,26,23,.08); }
+    .prio:last-child { border-bottom:0; }
+    .pnum { flex:none; width:46px; height:22px; border-radius:4px; font:600 10px/22px "IBM Plex Mono",monospace;
+            text-align:center; letter-spacing:.07em; }
+    .p0 { background:rgba(142,59,52,.09); color:#8e3b34; border:1px solid rgba(142,59,52,.28); }
+    .p1 { background:rgba(163,86,42,.1); color:#8a4620; border:1px solid rgba(163,86,42,.28); }
+    .p2 { background:rgba(52,71,122,.09); color:#34477a; border:1px solid rgba(52,71,122,.26); }
+    .prio div { min-width:0; }
+    .prio b.ti { display:block; font-size:12.5px; margin-bottom:4px; color:#1c1a17; }
+    .prio p { margin:0; font-size:11.5px; line-height:1.7; color:#413d36; }
+    .prio p + p { margin-top:6px; }
+    .warn { display:flex; gap:12px; border-radius:9px; padding:13px 15px; margin-top:14px;
+            background:rgba(163,86,42,.08); border:1px solid rgba(163,86,42,.26); }
+    .warn span:first-child { flex:none; width:3px; border-radius:2px; background:#e0995c; align-self:stretch; }
+    .warn p { margin:0; font-size:11.5px; line-height:1.75; color:#413d36; }
+    .warn b { color:#8a4620; }
+  </style>
+</helmet>
+
+<div class="s">
+  <h1>尺寸与验收</h1>
+  <p class="lead">控件尺寸那部分不受换肤影响，仍然适用。玻璃相关的是第三节——十二条，改完逐条打勾。浅色版和深色版最大的差别在<b>分层手段</b>：深色靠描边内高光，浅色靠阴影。</p>
+
+  <div class="sec">
+    <h2>一 · 控件高度<em>与主题无关，原样保留</em></h2>
+    <div class="scale">
+      <div class="bar">
+        <div class="box" style="width:96px; height:25px; background:rgba(142,59,52,.08); border:1px solid rgba(142,59,52,.32); color:#8e3b34">25px</div>
+        <div class="cap"><b class="no">现状</b><code>.graph-topline button</code></div>
+      </div>
+      <div class="bar">
+        <div class="box" style="width:96px; height:32px; background:rgba(255,255,255,.75); border:1px solid rgba(28,26,23,.16); color:#413d36">32px</div>
+        <div class="cap"><b class="ok">图谱窗密集区</b>窗内顶栏、节点芯片</div>
+      </div>
+      <div class="bar">
+        <div class="box" style="width:96px; height:44px; background:#34477a; border:0; color:#fff">44px</div>
+        <div class="cap"><b class="ok">标准 / 移动端</b>主操作、标签页、列表行</div>
+      </div>
+    </div>
+    <table style="margin-top:12px">
+      <tr><th style="width:250px">选择器</th><th style="width:78px">现状</th><th style="width:34px"></th><th style="width:78px">目标</th><th>备注</th></tr>
+      <tr><td><code>.graph-topline button</code></td><td class="n no">≈25px</td><td class="arrow">→</td><td class="n ok">32px</td><td>620px 断点内升 44</td></tr>
+      <tr><td><code>.graph-node-list button</code></td><td class="n no">≈23px</td><td class="arrow">→</td><td class="n ok">32px</td><td>同上</td></tr>
+      <tr><td><code>.graph-replay button</code></td><td class="n no">≈25px</td><td class="arrow">→</td><td class="n ok">32px</td><td>同上</td></tr>
+      <tr><td><code>.knowledge-tabs button</code></td><td class="n">≈39px</td><td class="arrow">→</td><td class="n ok">44px</td><td>与左栏标签页对齐</td></tr>
+      <tr><td><code>.graph-node-popover header button</code></td><td class="n">30px</td><td class="arrow">→</td><td class="n ok">44px</td><td>关闭按钮，误触代价高</td></tr>
+      <tr><td><code>.assessment-controls button</code></td><td class="n no">≈33px</td><td class="arrow">→</td><td class="n ok">44px</td><td>主操作，不属密集区</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2>二 · 圆角与字号<em>玻璃质感需要略大圆角承托</em></h2>
+    <table>
+      <tr><th style="width:250px">项</th><th style="width:88px">现状</th><th style="width:34px"></th><th style="width:88px">玻璃版</th><th>说明</th></tr>
+      <tr><td>L1 容器</td><td class="n">—</td><td class="arrow">→</td><td class="n ok">0（贴边）</td><td>顶栏、面板背板贴视口边，不倒角</td></tr>
+      <tr><td>L2 卡片</td><td class="n">10px</td><td class="arrow">→</td><td class="n ok">12px</td><td>结论卡、依据卡、图谱卡</td></tr>
+      <tr><td>L3 关键块</td><td class="n">8px</td><td class="arrow">→</td><td class="n ok">9px</td><td>结论条、证据条目</td></tr>
+      <tr><td>按钮</td><td class="n">6px</td><td class="arrow">→</td><td class="n ok">8px</td><td>仍不用胶囊形</td></tr>
+      <tr><td>标签 / 芯片</td><td class="n no">3px 与 20px 混用</td><td class="arrow">→</td><td class="n ok">5px</td><td>统一，消除原来两种标签语言</td></tr>
+      <tr><td>最小字号</td><td class="n no">10px ×6 处</td><td class="arrow">→</td><td class="n ok">11px</td><td>10px 一律上调</td></tr>
+      <tr><td>正文行高</td><td class="n no">1.5–1.9 混用</td><td class="arrow">→</td><td class="n ok">1.65 / 1.8</td><td>UI 文字 1.65，衬线正文 1.8</td></tr>
+      <tr><td>正文字体</td><td class="n no">serif / sans 混用</td><td class="arrow">→</td><td class="n ok">var(--serif)</td><td><code>.answer__body.markdown</code> 必须改回衬线，与非 markdown 分支一致</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2>三 · 玻璃验收<em>十二条，逐条打勾</em></h2>
+    <table>
+      <tr><th style="width:38px"></th><th style="width:196px">项</th><th style="width:158px">要求</th><th>验收方式</th></tr>
+      <tr><td><span class="ck"></span></td><td>背景层</td><td class="n ok">底色 + 3 光晕 + 网格</td>
+        <td>去掉网格层截图对比——如果模糊前后看不出差别，说明玻璃没生效</td></tr>
+      <tr><td><span class="ck"></span></td><td>模糊层数量</td><td class="n ok">≤ 5 个</td>
+        <td>DevTools 搜 <code>backdrop-filter</code>，超过 5 个就是嵌套了</td></tr>
+      <tr><td><span class="ck"></span></td><td>禁止嵌套</td><td class="n ok">仅 L1 带 filter</td>
+        <td>L2/L3 不得有 <code>backdrop-filter</code>；边缘出现脏环就是嵌套了</td></tr>
+      <tr><td><span class="ck"></span></td><td>层级可辨</td><td class="n ok">阴影三档 + 描边</td>
+        <td><b>灰度截图</b>下三层仍要分得出来——只靠透明度分不出（1.052 / 1.056:1，比深色版还平）。<b>浅色版阴影是主力</b></td></tr>
+      <tr><td><span class="ck"></span></td><td>关键块不透明度</td><td class="n ok">L3 = .90</td>
+        <td>未核实警示块不得低于 .90；透明度在这里是警示强度</td></tr>
+      <tr><td><span class="ck"></span></td><td>图谱窗内玻璃</td><td class="n ok">白玻璃 .78</td>
+        <td>把图谱拖到最深的患者节点压在玻璃条下的位置截图，深字仍须清晰（α=.62 时次级文字掉到 4.08，不够）</td></tr>
+      <tr><td><span class="ck"></span></td><td>三维深度雾</td><td class="n ok">≤ 20%</td>
+        <td>最远层节点仍须 ≥3:1。24% 时最弱的掉到 2.97——<b>浅底上雾是向亮处融合，稍重就消失</b></td></tr>
+      <tr><td><span class="ck"></span></td><td>三维深度线索</td><td class="n ok">投影 + 近大远小</td>
+        <td>节点<b>不得加 glow</b>——发光在浅底上等于变淡，反而后退。深度靠地面投影（rx 13→7）与半径（11→6.5）</td></tr>
+      <tr><td><span class="ck"></span></td><td>窗体凹陷</td><td class="n ok">inset 阴影</td>
+        <td>窗底与页面背景仅差 1.046:1，必须靠内阴影分出窗体轮廓</td></tr>
+      <tr><td><span class="ck"></span></td><td>动画时降级</td><td class="n ok">换不透明底</td>
+        <td>未 <code>paused</code> 时深窗玻璃改不透明；低端机实测帧率</td></tr>
+      <tr><td><span class="ck"></span></td><td>不支持时降级</td><td class="n ok">不透明，非半透明</td>
+        <td><code>@supports not (backdrop-filter)</code> 必须退到实色</td></tr>
+      <tr><td><span class="ck"></span></td><td>系统偏好</td><td class="n ok">reduced-transparency</td>
+        <td>开启后全部转不透明；<code>reduced-motion</code> 规则保留</td></tr>
+      <tr><td><span class="ck"></span></td><td>打印样式表</td><td class="n ok">去模糊去阴影</td>
+        <td><b>实际打印一页证据</b>。浅色版语义色<b>不用换</b>，图谱窗隐藏即可</td></tr>
+      <tr><td><span class="ck"></span></td><td>文字阶</td><td class="n ok">最低 4.88:1</td>
+        <td><code>--muted</code> 需加深至 <code>#6e6759</code>；<code>--faint</code> 仅 ≥16px；<code>--ghost</code> 不得承载文字</td></tr>
+      <tr><td><span class="ck"></span></td><td>纵轴语义</td><td class="n ok">按 KIND 分层</td>
+        <td>节点不再按数组下标排布；界面说明同步改掉「位置不代表风险高低」</td></tr>
+    </table>
+    <div class="warn"><span></span><p><b>第四条是最容易漏的。</b>把界面截图转成灰度看一眼——如果结论卡、证据卡、警示块在灰度下糊成一片，说明层级全靠颜色在撑，色觉障碍用户会完全分不出「已核验」和「未核实」。这在医疗工具里不是可用性问题，是安全问题。</p></div>
+  </div>
+
+  <div class="sec">
+    <h2>四 · 落地顺序<em>全站换肤，和只收编右栏差一个量级</em></h2>
+    <div class="prio">
+      <span class="pnum p0">P0</span>
+      <div><b class="ti">背景层 + L1 容器玻璃</b>
+      <p>底色、三团光晕、38px 网格，加顶栏／面板背板／输入框三处 L1。<b>约 1 天。</b></p>
+      <p>做完这一步视觉上已经八成是玻璃。时间紧可以就停在这里——浅色版的 L2/L3 本来就接近白色，卡片先沿用不透明白底不违和。</p></div>
+    </div>
+    <div class="prio">
+      <span class="pnum p1">P1</span>
+      <div><b class="ti">L2 / L3 分层与阴影体系</b>
+      <p>卡片与关键块的玻璃层，加阴影三档、描边三档、语义色条。<b>约 1 天。</b>验收看灰度截图那条——<b>浅色版三层亮度差只有 1.05，全靠阴影撑</b>。</p></div>
+    </div>
+    <div class="prio">
+      <span class="pnum p1">P1</span>
+      <div><b class="ti">面与线的替换</b>
+      <p>右栏 133 种硬编码按迁移表归并，<code>--muted</code> 加深、<code>--faint</code> 降级、<code>--moss</code> 加深，<code>.answer__body.markdown</code> 改回衬线。<b>约半天。</b></p>
+      <p>文字阶和语义色基本留用，这块比深色方案省下约 1.5 天。</p></div>
+    </div>
+    <div class="prio">
+      <span class="pnum p1">P1</span>
+      <div><b class="ti">让节点坐标承载信息</b>
+      <p><code>GraphScene.jsx:35</code> 的 <code>position(index, count, kind)</code> 现在按<b>数组下标</b>排螺旋，所以代码里才写着 <code>Coordinates carry no clinical meaning</code>。改成按 <code>kind</code> 分层：纵轴自下而上是 患者 → 实测数据 → 本体概念 → 判断规则 → 指南原文。<b>半天，改一个函数。</b></p>
+      <p>换玻璃是观感，这条才决定 3D 值不值那 43% 屏宽——改完「这个球说明什么」才有答案。</p></div>
+    </div>
+    <div class="prio">
+      <span class="pnum p2">P2</span>
+      <div><b class="ti">降级与打印</b>
+      <p><code>@supports</code>、<code>prefers-reduced-transparency</code>、<code>@media print</code> 三套分支。<b>约半天。</b></p>
+      <p>浅色版打印简单得多：去模糊去阴影、背景转纯白即可，语义色不用换。但别当可选项——这是医疗工具，证据页要能打出来归档。</p></div>
+    </div>
+    <div class="warn"><span></span><p><b>合计约 3 天</b>——比深色方案省约 1.5 天，省在文字阶和语义色基本留用、打印样式不用维护第二套。如果演示在即，P0 停手（约 1 天）是个合理的中间态。</p></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

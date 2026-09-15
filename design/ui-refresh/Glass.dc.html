@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin:0; }
+    a { color:#34477a; } a:hover { color:#22305a; }
+    .g * { box-sizing:border-box; }
+    .g { width:1020px; min-height:2280px; padding:34px 36px 40px; color:#1c1a17;
+         font:13px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC",system-ui,sans-serif;
+         background:#f0f1f7;
+         background-image:
+           radial-gradient(ellipse 78% 55% at 16% 5%,  rgba(52,71,122,.085), transparent 64%),
+           radial-gradient(ellipse 62% 40% at 88% 28%, rgba(74,124,116,.055), transparent 64%),
+           radial-gradient(ellipse 58% 40% at 58% 94%, rgba(163,86,42,.045), transparent 64%),
+           linear-gradient(rgba(28,26,23,.030) 1px, transparent 1px),
+           linear-gradient(90deg, rgba(28,26,23,.030) 1px, transparent 1px);
+         background-size:100% 100%,100% 100%,100% 100%,38px 38px,38px 38px; }
+    .g h1 { margin:0 0 5px; font:600 25px/1.25 "Newsreader","Songti SC",Georgia,serif; }
+    .g .lead { margin:0 0 24px; font-size:12.5px; line-height:1.75; color:#555047; max-width:700px; }
+    .g h2 { margin:0 0 6px; font:600 16px/1.3 "Newsreader","Songti SC",Georgia,serif; }
+    .g h2 em { font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:11px;
+               color:#6e6759; letter-spacing:.06em; margin-left:9px; }
+    .g .note { margin:0 0 14px; font-size:11.5px; line-height:1.7; color:#555047; }
+    .sec { border-radius:12px; padding:20px 22px; margin-bottom:16px;
+           background:rgba(255,255,255,.60); border:1px solid rgba(28,26,23,.08);
+           -webkit-backdrop-filter:blur(22px) saturate(1.5); backdrop-filter:blur(22px) saturate(1.5); }
+    code { font-family:"IBM Plex Mono",monospace; font-size:10.5px; background:rgba(28,26,23,.055);
+           padding:1px 5px; border-radius:4px; color:#413d36; }
+    .n { font:11px "IBM Plex Mono",monospace; color:#6e6759; white-space:nowrap; }
+    .ok { color:#34477a; font-weight:600; } .no { color:#8e3b34; font-weight:600; }
+    table { width:100%; border-collapse:collapse; }
+    th { text-align:left; font:500 10px "IBM Plex Mono",monospace; letter-spacing:.11em;
+         text-transform:uppercase; color:#6e6759; padding:0 8px 8px 0;
+         border-bottom:1px solid rgba(28,26,23,.14); }
+    td { padding:10px 8px 10px 0; border-bottom:1px solid rgba(28,26,23,.07);
+         vertical-align:top; font-size:11.5px; line-height:1.65; color:#413d36; }
+    tr:last-child td { border-bottom:0; }
+    td b { color:#1c1a17; }
+
+    .layers { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:4px; }
+    .ly { border-radius:10px; padding:15px 16px; min-height:126px; }
+    .ly h3 { margin:0 0 3px; font:500 12.5px/1.4 -apple-system,"PingFang SC",sans-serif; }
+    .ly .v { font:11px "IBM Plex Mono",monospace; color:#6e6759; margin-bottom:9px; }
+    .ly p { margin:0; font-size:11px; line-height:1.7; color:#413d36; }
+    .L1 { background:rgba(255,255,255,.60); border:1px solid rgba(28,26,23,.08); }
+    .L2 { background:rgba(255,255,255,.74); border:1px solid rgba(28,26,23,.11);
+          box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 8px 22px -12px rgba(28,26,23,.22); }
+    .L3 { background:rgba(255,255,255,.90); border:1px solid rgba(28,26,23,.14);
+          box-shadow:0 1px 0 rgba(255,255,255,.85) inset, 0 14px 32px -16px rgba(28,26,23,.30); }
+
+    .cmp { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .cmpbox { border-radius:10px; padding:15px; background:rgba(255,255,255,.35);
+              border:1px solid rgba(28,26,23,.07); }
+    .cmpbox > .cap { font:500 11px "IBM Plex Mono",monospace; margin-bottom:11px; display:block; }
+    .flat1,.flat2,.flat3 { border-radius:8px; padding:11px 13px; font-size:11.5px; color:#413d36;
+                           border:1px solid transparent; }
+    .flat1 { background:rgba(255,255,255,.60); }
+    .flat2 { background:rgba(255,255,255,.74); margin-top:8px; }
+    .flat3 { background:rgba(255,255,255,.90); margin-top:8px; }
+    .rich1 { border-radius:8px; padding:11px 13px; font-size:11.5px; color:#413d36;
+             background:rgba(255,255,255,.60); border:1px solid rgba(28,26,23,.08); }
+    .rich2 { border-radius:8px; padding:11px 13px; font-size:11.5px; color:#413d36; margin-top:8px;
+             background:rgba(255,255,255,.74); border:1px solid rgba(28,26,23,.11);
+             box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 8px 22px -12px rgba(28,26,23,.22); }
+    .rich3 { border-radius:8px; padding:11px 13px; font-size:11.5px; color:#413d36; margin-top:8px;
+             background:rgba(255,255,255,.90); border:1px solid rgba(28,26,23,.14);
+             border-left:3px solid #34477a;
+             box-shadow:0 1px 0 rgba(255,255,255,.85) inset, 0 14px 32px -16px rgba(28,26,23,.30); }
+
+    .vb { display:flex; gap:10px; align-items:flex-start; margin-top:12px; font-size:11.5px;
+          line-height:1.7; color:#413d36; }
+    .vt { flex:none; width:58px; font:600 10px/1.9 "IBM Plex Mono",monospace; letter-spacing:.07em;
+          text-align:center; border-radius:4px; }
+    .vt.no { background:rgba(142,59,52,.09); color:#8e3b34; border:1px solid rgba(142,59,52,.28); }
+    .vt.yes { background:rgba(52,71,122,.09); color:#34477a; border:1px solid rgba(52,71,122,.26); }
+
+    pre { margin:11px 0 0; padding:13px 15px; background:rgba(255,255,255,.7);
+          border:1px solid rgba(28,26,23,.09); border-radius:8px;
+          font:400 10.5px/1.85 "IBM Plex Mono",monospace; color:#413d36;
+          white-space:pre-wrap; overflow-wrap:anywhere; }
+    pre .c { color:#8a8271; } pre .k { color:#34477a; }
+
+    .ramp { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; }
+    .sw { border-radius:8px; overflow:hidden; border:1px solid rgba(28,26,23,.1); }
+    .sw .bar { height:40px; }
+    .sw .m { padding:8px 9px 9px; background:rgba(255,255,255,.75); }
+    .sw .nm { font:500 10.5px "IBM Plex Mono",monospace; color:#1c1a17; }
+    .sw .hx { font:10px "IBM Plex Mono",monospace; color:#6e6759; margin-top:2px; }
+    .sw .cr { font:10px "IBM Plex Mono",monospace; color:#34477a; margin-top:3px; }
+    .bgdemo { height:70px; border-radius:9px; border:1px solid rgba(28,26,23,.1); margin-bottom:12px;
+              background:#f0f1f7;
+              background-image:
+                radial-gradient(ellipse 78% 62% at 16% 20%, rgba(52,71,122,.085), transparent 64%),
+                radial-gradient(ellipse 62% 55% at 88% 45%, rgba(74,124,116,.055), transparent 64%),
+                radial-gradient(ellipse 58% 55% at 58% 88%, rgba(163,86,42,.045), transparent 64%),
+                linear-gradient(rgba(28,26,23,.030) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(28,26,23,.030) 1px, transparent 1px);
+              background-size:100% 100%,100% 100%,100% 100%,38px 38px,38px 38px; }
+  </style>
+</helmet>
+
+<div class="g">
+  <h1>浅色玻璃体系</h1>
+  <p class="lead">浅色调下玻璃仍然成立，但分层方式和深色版是反的：<b>深色版靠描边和内高光，浅色版靠阴影。</b>实测投影落差浅底 1.30:1、深底只有 1.08:1。第七节讲三维窗——那里的立体感来源同样和深色版完全不同。</p>
+
+  <div class="sec">
+    <h2>一 · 背景层<em>浅色也不能是纯色</em></h2>
+    <p class="note">原来的纸底 <code>#f6f3ed</code> 是纯色，半透明压上去只会变灰块。新背景是浅底 + 三团低饱和光晕 + 38px 网格，跨度控制在 <b>1.27:1</b>——足够让模糊可见，又不至于让玻璃在不同位置明暗不一。</p>
+    <div class="bgdemo"></div>
+    <table>
+      <tr><th style="width:150px">层</th><th style="width:186px">值</th><th>说明</th></tr>
+      <tr><td><span class="n">--bg</span></td><td class="n">#f0f1f7</td><td>底色，微冷。比原纸底更中性，好托住白玻璃</td></tr>
+      <tr><td>光晕 · 墨蓝</td><td class="n">rgba(52,71,122,.085)</td><td>左上。alpha 只有深色版的五分之一——浅底上稍重就脏</td></tr>
+      <tr><td>光晕 · 墨绿</td><td class="n">rgba(74,124,116,.055)</td><td>右上</td></tr>
+      <tr><td>光晕 · 赭石</td><td class="n">rgba(163,86,42,.045)</td><td>下方，呼应警示语义</td></tr>
+      <tr><td>网格</td><td class="n">rgba(28,26,23,.030)</td><td>38px。<b>玻璃感的来源</b>——模糊需要底层有高频细节才能被看见</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2>二 · 三层白玻璃<em>越关键越实</em></h2>
+    <div class="layers">
+      <div class="ly L1"><h3>L1 · 容器</h3><div class="v">rgba(255,255,255,.60)</div>
+        <p>顶栏、面板背板、输入框。<b>唯一带 backdrop-filter 的一层。</b></p></div>
+      <div class="ly L2"><h3>L2 · 卡片</h3><div class="v">rgba(255,255,255,.74)</div>
+        <p>结论卡、依据卡、图谱卡、气泡。透出 L1 已模糊好的结果。</p></div>
+      <div class="ly L3"><h3>L3 · 关键块</h3><div class="v">rgba(255,255,255,.90)</div>
+        <p>结论条、证据条目、警示块。<b>接近不透明——这是语义。</b></p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>三 · 层级靠阴影，不靠透明度<em>浅色版比深色版更平</em></h2>
+    <p class="note">两栏用完全相同的三层不透明度。左边只有透明度，右边加了阴影、描边和语义色条。</p>
+    <div class="cmp">
+      <div class="cmpbox"><span class="cap no">只靠透明度 · 分不出层</span>
+        <div class="flat1">L1 容器 .60</div><div class="flat2">L2 卡片 .74</div><div class="flat3">L3 关键块 .90</div></div>
+      <div class="cmpbox"><span class="cap ok">加阴影 + 描边 + 色条</span>
+        <div class="rich1">L1 容器 .60</div><div class="rich2">L2 卡片 .74</div><div class="rich3">L3 关键块 .90 · 结论</div></div>
+    </div>
+    <div class="vb"><span class="vt no">实测</span>
+      <div>三层合成色 <code>#efeff1</code> <code>#f4f5f6</code> <code>#fbfbfc</code>——L1/L2 <span class="no">1.052:1</span>，L2/L3 <span class="no">1.056:1</span>。比深色版（1.066 / 1.082）还要平。</div></div>
+    <div class="vb"><span class="vt yes">对策</span>
+      <div><b>阴影是浅色版的主力</b>：L1 无阴影、L2 中、L3 强。再加描边三档（.08 / .11 / .14，深色半透明）和 3px 语义色条。
+      内高光用白色 <code>inset</code>，模拟玻璃上缘的反光。</div></div>
+  </div>
+
+  <div class="sec">
+    <h2>四 · 禁止嵌套 backdrop-filter<em>与深色版同</em></h2>
+    <table>
+      <tr><th style="width:150px">层</th><th style="width:190px">背景</th><th>模糊</th></tr>
+      <tr><td><b>L1 容器</b></td><td class="n">rgba(255,255,255,.60)</td>
+        <td><code>backdrop-filter: blur(22px) saturate(1.5)</code> —— 只有这一层</td></tr>
+      <tr><td><b>L2 / L3</b></td><td class="n">rgba(255,255,255,.74 / .90)</td>
+        <td class="no">不设 backdrop-filter，透出 L1 已模糊好的结果</td></tr>
+      <tr><td><b>图谱窗内玻璃</b></td><td class="n">rgba(255,255,255,.78)</td>
+        <td>例外：它在 3D canvas 之上，自己模糊。仍是<b>白玻璃</b>——α 从 .60 提到 .78，因为底下会滚过实心节点</td></tr>
+    </table>
+    <div class="vb"><span class="vt yes">饱和度</span>
+      <div>浅色玻璃的 <code>saturate()</code> 要比深色版高（1.5 对 1.35）。白色叠加会冲淡底下的颜色，不提饱和度，背景光晕透上来就是一片灰。</div></div>
+  </div>
+
+  <div class="sec">
+    <h2>五 · 文字与语义色<em>回到浅底版，与打印样式天然统一</em></h2>
+    <div class="ramp">
+      <div class="sw"><div class="bar" style="background:#1c1a17"></div>
+        <div class="m"><div class="nm">--ink</div><div class="hx">#1c1a17</div><div class="cr">15.12:1</div></div></div>
+      <div class="sw"><div class="bar" style="background:#413d36"></div>
+        <div class="m"><div class="nm">--ink-2</div><div class="hx">#413d36</div><div class="cr">9.40:1</div></div></div>
+      <div class="sw"><div class="bar" style="background:#555047"></div>
+        <div class="m"><div class="nm">--ink-3</div><div class="hx">#555047</div><div class="cr">6.97:1</div></div></div>
+      <div class="sw"><div class="bar" style="background:#6e6759"></div>
+        <div class="m"><div class="nm">--muted</div><div class="hx">#6e6759</div><div class="cr">4.88:1</div></div></div>
+      <div class="sw"><div class="bar" style="background:#8a8271"></div>
+        <div class="m"><div class="nm">--faint</div><div class="hx">#8a8271</div><div class="cr" style="color:#6e6759">3.32 · 仅 ≥16px</div></div></div>
+    </div>
+    <table style="margin-top:16px">
+      <tr><th style="width:118px">语义</th><th style="width:106px">色值</th><th style="width:92px">L1 上最低</th><th>说明</th></tr>
+      <tr><td>可核验</td><td class="n">#34477a</td><td class="n ok">8.26:1</td><td>结论色条、主按钮、选中态</td></tr>
+      <tr><td>未核实</td><td class="n">#a3562a</td><td class="n ok">4.91:1</td><td>色块与色条用它；<b>文字用 #8a4620</b>（6.46:1）更稳</td></tr>
+      <tr><td>执行失败</td><td class="n">#8e3b34</td><td class="n ok">6.81:1</td><td>失败事件、超限计量</td></tr>
+      <tr><td>判断规则</td><td class="n">#6e4a6b</td><td class="n ok">6.74:1</td><td>规则标签</td></tr>
+      <tr><td>检查与记录</td><td class="n">#3f6a63</td><td class="n ok">5.57:1</td><td><b>已加深</b>——原 <code>#4a7c74</code> 只有 4.35:1，压线不过</td></tr>
+      <tr><td>本体概念</td><td class="n">#5c6f5a</td><td class="n ok">4.96:1</td><td>概念标签</td></tr>
+    </table>
+    <div class="vb"><span class="vt yes">好处</span>
+      <div>浅色版的语义色就是打印时要用的那套，<b>不需要屏幕/打印两套并存</b>——这是浅色调相对深色版省下的一整块工作。</div></div>
+  </div>
+
+  <div class="sec">
+    <h2>六 · 性能、降级与打印</h2>
+    <table>
+      <tr><th style="width:150px">项</th><th>做法</th></tr>
+      <tr><td><b>模糊层数量</b></td>
+        <td>全页 <code>backdrop-filter</code> ≤ <b>5 个</b>：顶栏、面板背板、输入框、深窗顶栏、深窗图例。其余纯半透明。</td></tr>
+      <tr><td><b>别叠在动画上</b></td>
+        <td>深窗玻璃压着旋转的 three.js canvas，每帧重新模糊。<b>动画运行时换不透明底，<code>paused</code> 时恢复</b>。</td></tr>
+      <tr><td><b>滚动容器</b></td>
+        <td>玻璃层不要放在滚动容器<b>内部</b>；给滚动容器加 <code>will-change: transform</code>。</td></tr>
+      <tr><td><b>降级</b></td>
+        <td><code>@supports not (backdrop-filter)</code> 与 <code>prefers-reduced-transparency</code> 都退到<b>不透明</b>。</td></tr>
+      <tr><td><b>打印</b></td>
+        <td>比深色版简单得多：去掉模糊与阴影，背景转纯白即可，<b>语义色不用换</b>。深窗仍需隐藏——3D 打印无意义。</td></tr>
+    </table>
+    <pre>@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .l1 { background: #f7f8fb; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .l1,.l2,.l3 { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .l1 { background:#f7f8fb; } .l2 { background:#fbfbfd; } .l3 { background:#fff; }
+}
+@media print {
+  .u { background:#fff !important; background-image:none !important; }
+  .l1,.l2,.l3 { background:#fff !important; box-shadow:none !important;
+                backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+                border-color:#d6cdbd !important; }
+  .gwin { display:none; }  <span class="c">/* 3D 窗打印无意义 */</span>
+}</pre>
+  </div>
+  <div class="sec">
+    <h2>七 · 浅色三维窗<em>立体感来源和深色版完全不同</em></h2>
+    <p class="note">深色 3D 靠发光、高光、向暗处的深度雾。<b>这三样在浅底上全部失效</b>——发光等于把节点变淡，反而往后退。浅色 3D 的深度必须换一套来源。</p>
+    <table>
+      <tr><th style="width:150px">深度线索</th><th style="width:186px">参数</th><th>说明</th></tr>
+      <tr><td><b>地面投影</b></td><td class="n">rx 13→7, α .16→.07</td>
+        <td><b>浅色 3D 的主力。</b>每个节点在透视地面上留一个椭圆光斑，越远越小越淡。落差 1.39:1（近）到 1.15:1（远）</td></tr>
+      <tr><td><b>近大远小</b></td><td class="n">r 11px → 6.5px</td>
+        <td>比值 1.69，透视感足够又不失控</td></tr>
+      <tr><td><b>高度垂线</b></td><td class="n">虚线 2 3, α .20</td>
+        <td>从节点连到它的地面光斑，让「悬得多高」可量——这条同时承担语义</td></tr>
+      <tr><td><b>透视地面网格</b></td><td class="n">#d8dce8, 近疏远密</td>
+        <td>梯形网格给出基准面。没有它，投影会被读成「另一个节点」</td></tr>
+      <tr><td><b>深度雾</b></td><td class="n">≤ 20%</td>
+        <td class="no">上限只有 20%，不是深色版那种 40%+</td></tr>
+    </table>
+    <div class="vb"><span class="vt no">实测</span>
+      <div>雾 24% 时最弱的节点掉到 <span class="no">2.97:1</span>，28% 时 2.77:1——低于图形元素所需的 3:1。
+      <b>浅底上雾是向亮处融合，稍重节点就「消失」</b>，和深色版向暗处融合的直觉正好相反。</div></div>
+    <div class="vb"><span class="vt yes">节点</span>
+      <div>一律<b>实心填充，不加 glow</b>。五色按层雾化后仍在 3.18–7.65:1：
+      <code>#34477a</code> 患者（0% 雾）· <code>#48706a</code> 实测（5%）· <code>#6a7c69</code> 概念（10%）·
+      <code>#816280</code> 规则（15%）· <code>#b17452</code> 出处（20%）。</div></div>
+    <div class="vb"><span class="vt yes">窗体</span>
+      <div>窗底 <code>#eaecf4</code> 与页面背景只差 <span class="no">1.046:1</span>，单靠底色分不出窗——
+      靠 <code>inset 0 2px 15px rgba(28,26,23,.10)</code> 做出凹陷感，像嵌在面板上的一块观察窗。</div></div>
+    <div class="vb"><span class="vt yes">简化</span>
+      <div>窗改浅色之后，<b>全站语义色只剩一套</b>——原先深窗要单独维护一组提亮版（<code>#8fa5e8</code> 等五色），
+      现在图谱、芯片、图例、打印全部共用同一套浅底色。这是这次改动省下的实际维护成本。</div></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

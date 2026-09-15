@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
 import { KIND } from '../lib/knowledgeGraph.js';
 import { toolLabel } from '../lib/toolLabels.js';
+import { GROUND_Y, position, layerRanks } from '../lib/graphLayout.js';
 
 function NodeSummary({ node, onClose, cardRef }) {
   const d = node.detail || {};
@@ -31,14 +32,6 @@ function NodeSummary({ node, onClose, cardRef }) {
   </section>;
 }
 
-// Local deterministic layout. Coordinates carry no clinical meaning.
-function position(index, count, kind) {
-  if (kind === 'patient' && index === 0) return new THREE.Vector3(0, 0, 0);
-  const y = 1 - 2 * (index + .5) / Math.max(count, 1);
-  const r = Math.sqrt(1 - y * y);
-  const theta = index * Math.PI * (3 - Math.sqrt(5));
-  return new THREE.Vector3(Math.cos(theta) * r * 2.75, y * 2.15, Math.sin(theta) * r * 2.4);
-}
 export default function GraphScene({ graph, paused, selected, onSelect, onClose }) {
   const host = useRef(null), runtime = useRef(null), callback = useRef(onSelect);
   const card = useRef(null), connector = useRef(null);
@@ -51,10 +44,10 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
     catch { setUnavailable(true); return; }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0xf7fbfd, 0);
+    renderer.setClearColor(0xeaecf4, 0);  // alpha 0：底色由 .graph-stage 的 --win 给
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, .1, 80);
-    camera.position.set(0, 1, 10.5);
+    camera.position.set(0, 1.7, 10.8);
     const labels = new CSS2DRenderer();
     labels.domElement.className = 'graph-labels';
     labels.domElement.style.pointerEvents = 'none';
@@ -63,15 +56,14 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     controls.enableDamping = true; controls.enablePan = false;
     controls.minDistance = 5; controls.maxDistance = 16;
     controls.autoRotateSpeed = .5;
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x8b9eb5, 3));
-    const light = new THREE.DirectionalLight(0xffffff, 4); light.position.set(3, 5, 4); scene.add(light);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xc8cdda, 1.7));
+    const light = new THREE.DirectionalLight(0xffffff, 1.9); light.position.set(3, 5, 4); scene.add(light);
     const group = new THREE.Group(); scene.add(group);
-    const rings = new THREE.Group(); scene.add(rings);
-    for (let i = 0; i < 3; i++) {
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(3.35, .006, 6, 100),
-        new THREE.MeshBasicMaterial({ color: 0xbccfda, transparent: true, opacity: .22 }));
-      ring.rotation.set(i * .7, i * .8, .2); rings.add(ring);
-    }
+    // 地面网格给出高度基准面。没有它，节点的地面光斑会被读成「另一个节点」。
+    const ground = new THREE.GridHelper(9.5, 14, 0xb9c0d2, 0xd2d7e4);
+    ground.position.y = GROUND_Y;
+    ground.material.transparent = true; ground.material.opacity = .6;
+    scene.add(ground);
     const ray = new THREE.Raycaster();
     let pointerStart = null;
     const down = (event) => { pointerStart = [event.clientX, event.clientY]; };
@@ -103,7 +95,10 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
         if (child.userData.nodeId) {
           const active = child.userData.nodeId === instance.selection;
           child.scale.setScalar(active ? 1.35 : 1);
-          child.material.emissiveIntensity = active ? .5 : .1;
+          // 浅底上发光等于把节点变淡、反而后退，所以静息态自发光为 0。
+          if (child.material.emissiveIntensity !== undefined) {
+            child.material.emissiveIntensity = active ? .28 : 0;
+          }
           if (child.userData.label) {
             child.userData.label.style.opacity = active || child.userData.prominent ? '1' : '0';
           }
@@ -158,16 +153,30 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     }
     r.particles = [];
     const positions = new Map();
-    graph.nodes.forEach((node, i) => {
-      const at = position(i, graph.nodes.length, node.kind); positions.set(node.id, at);
+    layerRanks(graph.nodes).forEach(({ node, rank, countInLayer }, i) => {
+      const at = position(rank, countInLayer, node.kind); positions.set(node.id, at);
       const color = KIND[node.kind]?.color || KIND.concept.color;
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(node.kind === 'patient' ? .31 : .20, 24, 18),
-        new THREE.MeshPhysicalMaterial({ color, metalness: .12, roughness: .25, clearcoat: .9, emissive: color, emissiveIntensity: .1 }));
+      const radius = node.kind === 'patient' ? .31 : .20;
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(radius, 24, 18),
+        new THREE.MeshPhysicalMaterial({ color, metalness: .05, roughness: .42, clearcoat: .6, clearcoatRoughness: .3, emissive: color, emissiveIntensity: 0 }));
       mesh.position.copy(at); mesh.userData.nodeId = node.id;
+
+      // 地面光斑与高度虚线：浅底上的深度线索，同时让「悬得多高」可量。
+      const spot = new THREE.Mesh(new THREE.CircleGeometry(radius * 1.35, 20),
+        new THREE.MeshBasicMaterial({ color: 0x1c1a17, transparent: true, opacity: .14, depthWrite: false }));
+      spot.rotation.x = -Math.PI / 2;
+      spot.position.set(at.x, GROUND_Y + .012, at.z);
+      r.group.add(spot);
+
+      const stem = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints([at, new THREE.Vector3(at.x, GROUND_Y, at.z)]),
+        new THREE.LineDashedMaterial({ color: 0x1c1a17, transparent: true, opacity: .18, dashSize: .09, gapSize: .07 }));
+      stem.computeLineDistances();
+      r.group.add(stem);
       const label = document.createElement('span'); label.className = 'graph-node-label';
       label.textContent = `${node.scenario ? '假设 · ' : ''}${node.label.length > 20 ? node.label.slice(0,18)+'…' : node.label}`;
       label.setAttribute('aria-hidden', 'true');
-      const prominent = i < 4 || node.kind === 'patient' || node.kind === 'rule' || node.scenario;
+      const prominent = i < 5 || node.kind === 'patient' || node.kind === 'rule' || node.scenario;
       label.style.opacity = prominent ? '1' : '0';
       mesh.userData.label = label;
       mesh.userData.prominent = prominent;
@@ -178,13 +187,13 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
       const from = positions.get(edge.from), to = positions.get(edge.to);
       if (!from || !to) return;
       const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([from, to]),
-        new THREE.LineBasicMaterial({ color: edge.scenario ? 0xb5a2cd : 0x9abcc9, transparent: true, opacity: .55 }));
+        new THREE.LineBasicMaterial({ color: edge.scenario ? 0x6e4a6b : 0x555047, transparent: true, opacity: .3 }));
       r.group.add(line);
       // Small arrow gives direction; particles show traversal, not causal strength.
       const direction = new THREE.Vector3().subVectors(to, from).normalize();
-      const arrow = new THREE.Mesh(new THREE.ConeGeometry(.045, .13, 8), new THREE.MeshBasicMaterial({ color: 0x8faaba }));
+      const arrow = new THREE.Mesh(new THREE.ConeGeometry(.045, .13, 8), new THREE.MeshBasicMaterial({ color: 0x6e6759 }));
       arrow.position.lerpVectors(from, to, .7); arrow.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction); r.group.add(arrow);
-      const particle = new THREE.Mesh(new THREE.SphereGeometry(.045, 8, 6), new THREE.MeshBasicMaterial({ color: 0x69b9cc }));
+      const particle = new THREE.Mesh(new THREE.SphereGeometry(.045, 8, 6), new THREE.MeshBasicMaterial({ color: 0x34477a }));
       r.group.add(particle); r.particles.push({ mesh: particle, from, to, offset: (i*.17)%1 });
     });
   }, [graph]);
@@ -202,11 +211,11 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     const r = runtime.current;
     if (!r) return;
     r.controls.target.set(0, 0, 0);
-    r.camera.position.set(0, 1, 10.5);
+    r.camera.position.set(0, 1.7, 10.8);
     r.controls.update();
   }
   return <div className="graph-viewport">
-    <div className="graph-stage" ref={host} role="img" aria-label={`三维证据图，${graph.nodes.length}个节点，${graph.edges.length}条关系。可在下方按钮中选择节点。`} />
+    <div className="graph-stage" ref={host} role="img" aria-label={`三维证据图，${graph.nodes.length}个节点，${graph.edges.length}条关系。节点按推导层级分层：底层为该患者的实测数据，顶层为依据的指南原文。可在下方按钮中选择节点。`} />
     <div className="graph-view-controls" role="group" aria-label="图谱视图控制">
       <button type="button" aria-label="放大图谱" title="放大" disabled={unavailable} onClick={() => zoom(.8)}>＋</button>
       <button type="button" aria-label="缩小图谱" title="缩小" disabled={unavailable} onClick={() => zoom(1.25)}>−</button>
