@@ -28,7 +28,7 @@ export default function TopBar({
       <div className="brand">
         <Mark />
         <div>
-          <h1>糖尿病本体 · 证据工作台</h1>
+          <h1>本体智能体</h1>
           <div className="lbl sub">Ontology Evidence Console</div>
         </div>
       </div>

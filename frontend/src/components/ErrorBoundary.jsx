@@ -14,7 +14,7 @@ export default class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     // 留在控制台供排查：这里通常是某个字段的真实形状与预期不符。
-    console.error('[证据工作台] 渲染失败', error, info?.componentStack);
+    console.error('[本体智能体] 渲染失败', error, info?.componentStack);
   }
 
   render() {
