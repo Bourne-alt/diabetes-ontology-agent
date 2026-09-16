@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
 import { KIND } from '../lib/knowledgeGraph.js';
 import { toolLabel } from '../lib/toolLabels.js';
@@ -52,10 +52,13 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     labels.domElement.className = 'graph-labels';
     labels.domElement.style.pointerEvents = 'none';
     el.append(renderer.domElement, labels.domElement);
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; controls.enablePan = false;
+    // Trackball rotates the camera's up vector too, so vertical drags can cross both poles.
+    const controls = new TrackballControls(camera, renderer.domElement);
+    controls.staticMoving = true; controls.noPan = true;
     controls.minDistance = 5; controls.maxDistance = 16;
-    controls.autoRotateSpeed = .5;
+    let interacting = false;
+    controls.addEventListener('start', () => { interacting = true; });
+    controls.addEventListener('end', () => { interacting = false; });
     scene.add(new THREE.HemisphereLight(0xffffff, 0xc8cdda, 1.7));
     const light = new THREE.DirectionalLight(0xffffff, 1.9); light.position.set(3, 5, 4); scene.add(light);
     const group = new THREE.Group(); scene.add(group);
@@ -80,6 +83,7 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
       const width = Math.max(el.clientWidth, 1), height = Math.max(el.clientHeight, 1);
       renderer.setSize(width, height); labels.setSize(width, height);
       camera.aspect = width/height; camera.updateProjectionMatrix();
+      controls.handleResize();
     };
     const observer = new ResizeObserver(resize); observer.observe(el); resize();
     const instance = { scene, group, camera, controls, renderer, particles: [], paused: false, visible: true, selection: null };
@@ -87,10 +91,19 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     const intersection = new IntersectionObserver(([entry]) => { instance.visible = entry.isIntersecting; });
     intersection.observe(el);
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let lastTime = null;
+    const orbitOffset = new THREE.Vector3();
     const tick = (time) => {
+      const elapsed = lastTime === null ? 0 : Math.min((time - lastTime) / 1000, .05);
+      lastTime = time;
       if (!instance.visible || document.hidden) return;
       const animate = !instance.paused && !reduce.matches;
-      controls.autoRotate = animate; controls.update();
+      if (animate && !interacting) {
+        orbitOffset.copy(camera.position).sub(controls.target);
+        orbitOffset.applyAxisAngle(camera.up, -Math.PI / 60 * elapsed);
+        camera.position.copy(controls.target).add(orbitOffset);
+      }
+      controls.update();
       for (const child of group.children) {
         if (child.userData.nodeId) {
           const active = child.userData.nodeId === instance.selection;
@@ -210,9 +223,7 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
   function resetView() {
     const r = runtime.current;
     if (!r) return;
-    r.controls.target.set(0, 0, 0);
-    r.camera.position.set(0, 1.7, 10.8);
-    r.controls.update();
+    r.controls.reset();
   }
   return <div className="graph-viewport">
     <div className="graph-stage" ref={host} role="img" aria-label={`三维证据图，${graph.nodes.length}个节点，${graph.edges.length}条关系。节点按推导层级分层：底层为该患者的实测数据，顶层为依据的指南原文。可在下方按钮中选择节点。`} />

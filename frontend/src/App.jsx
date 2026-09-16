@@ -32,7 +32,7 @@ export default function App() {
   // 旧轮次留在屏幕上；服务端的上下文由 conversation_id 维持，两者是各自独立的。
   const [history, setHistory] = useState([]);
 
-  const { run, start, stop, newSession, conversationId, busy } = useAgentRun();
+  const { run, start, stop, newSession, busy } = useAgentRun();
 
   const threadRef = useRef(null);
   const stickRef = useRef(true);
@@ -74,13 +74,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <TopBar
-        phase={run.phase}
-        statusText={run.statusText}
-        modelCalls={run.modelCalls}
-        toolCalls={run.toolCalls}
-        conversationId={conversationId}
-      />
+      <TopBar />
 
       <div className="body">
         <main className="main">

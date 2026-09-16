@@ -589,6 +589,8 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .knowledge-tabs {display:flex;padding:0 24px;border-bottom:1px solid var(--line);gap:24px}
 .knowledge-tabs button {border:0;border-bottom:2px solid transparent;background:none;min-height:44px;padding:0 2px;color:var(--muted);font-size:12.5px}
 .knowledge-tabs button[aria-selected=true] {color:var(--ink-3);border-bottom-color:var(--indigo)}
+.knowledge-title {padding:0 24px;border-bottom:1px solid var(--line)}
+.knowledge-title h2 {margin:0;min-height:44px;display:flex;align-items:center;font-size:12.5px;font-weight:500;color:var(--ink-3)}
 .knowledge-content {padding:20px 22px 28px;min-height:0;flex:1}
 .reasoning-stages {display:flex;list-style:none;gap:6px;padding:0;margin:0 0 22px;justify-content:space-between}
 .reasoning-stages li {font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
@@ -638,7 +640,23 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .graph-legend {position:absolute;top:calc(var(--stage-h) - 40px);left:0;right:0;z-index:3;display:flex;justify-content:center;gap:15px;flex-wrap:wrap;padding:10px 12px;font-size:11px;color:var(--ink-3);background:var(--win-glass);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);border-top:1px solid var(--line)}
 .graph-legend span {display:flex;align-items:center;gap:5px}.graph-legend i {width:7px;height:7px;border-radius:50%}
 .graph-help {text-align:center;color:var(--muted);font-size:11px;line-height:1.7;padding:0 10px 12px;margin:6px 0 0}
-.graph-empty {position:absolute;left:15%;right:15%;top:34%;text-align:center;font-size:13px;line-height:1.9;color:var(--muted);pointer-events:none}
+/* Mount only when evidence arrives; animate once without covering the conversation. */
+.knowledge-panel {animation:knowledge-reveal 260ms ease-out}
+@keyframes knowledge-reveal {
+  from {width:0;min-width:0;opacity:0;transform:translateX(12px)}
+}
+@keyframes knowledge-reveal-mobile {
+  from {opacity:0;transform:translateY(8px)}
+}
+@media(max-width:1180px) {
+  .knowledge-panel {animation-name:knowledge-reveal-mobile}
+}
+@media(prefers-reduced-motion:reduce) {
+  .knowledge-panel {animation:none}
+}
+.graph-placeholder {padding:18px;border:1px dashed var(--line-2);border-radius:14px;background:var(--g2);font-size:13px;line-height:1.8;color:var(--muted)}
+.graph-placeholder p {margin:0}
+.graph-placeholder button {margin-top:12px;border:1px solid var(--line-2);border-radius:7px;background:var(--g2);color:var(--ink-2);padding:8px 12px;cursor:pointer}
 .graph-loading,.graph-fallback {height:350px;display:grid;align-content:center;text-align:center;padding:24px;color:var(--muted);font-size:13px}
 .graph-replay {display:flex;align-items:center;gap:9px;font-size:11px;color:var(--muted);margin-top:14px}.graph-replay input {width:100%;min-width:0;accent-color:var(--indigo)}.graph-replay label {white-space:nowrap}
 .graph-node-list {display:flex;gap:6px;flex-wrap:wrap;max-height:110px;overflow:auto;padding:12px 0}
