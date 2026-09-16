@@ -3,7 +3,7 @@ import { graphFromEvents, KIND } from '../lib/knowledgeGraph.js';
 import { groupCalls } from '../lib/groupCalls.js';
 const GraphScene = lazy(() => import('./GraphScene.jsx'));
 
-export default function KnowledgePanel({ run }) {
+export default function KnowledgePanel({ run, history }) {
   const [paused, setPaused] = useState(false);
   const [selected, setSelected] = useState(null);
   const [replay, setReplay] = useState(null);
@@ -22,17 +22,30 @@ export default function KnowledgePanel({ run }) {
     setSelected(id);
     setPaused(true);
   }
-  const liveGraph = useMemo(() => graphFromEvents(run.events), [run.events]);
-  const graph = useMemo(() => replay === null ? liveGraph : graphFromEvents(run.events, replay), [run.events, replay, liveGraph]);
-  const calls = useMemo(() => groupCalls(run.events), [run.events]);
-  const lastSeq = run.events.at(-1)?.seq ?? 0;
+  const currentGraph = useMemo(() => graphFromEvents(run.events), [run.events]);
+  const previous = useMemo(() => {
+    for (let i = history.length - 1; i >= 0; i--) {
+      const graph = graphFromEvents(history[i].run.events);
+      if (graph.nodes.length) return { run: history[i].run, graph };
+    }
+    return null;
+  }, [history]);
+  const showingPrevious = currentGraph.nodes.length === 0 && previous !== null;
+  const displayRun = showingPrevious ? previous.run : run;
+  const liveGraph = showingPrevious ? previous.graph : currentGraph;
+  // Replay positions belong to their source run, never to a later run's sequence.
+  const replaySeq = replay?.startedAt === displayRun.startedAt ? replay.seq : null;
+  const graph = useMemo(() => replaySeq === null ? liveGraph : graphFromEvents(displayRun.events, replaySeq), [displayRun.events, replaySeq, liveGraph]);
+  const calls = useMemo(() => groupCalls(displayRun.events), [displayRun.events]);
+  useEffect(() => { setSelected(null); }, [displayRun.startedAt]);
+  const lastSeq = displayRun.events.at(-1)?.seq ?? 0;
   const current = calls.at(-1);
-  const stage = run.answer !== null ? 3 : !current ? 0
+  const stage = displayRun.answer !== null ? 3 : !current ? 0
     : /rule|passage|path|simulat|evidence/.test(current.tool) ? 2
     : /concept|term/.test(current.tool) ? 1 : 0;
   const hasGraph = graph.nodes.length > 0;
   // Keep the panel mounted when replaying an earlier point with no nodes.
-  // A new run remounts this component, so it stays hidden until that run has evidence.
+  // Keep earlier evidence visible between turns; starting a new conversation unmounts the panel.
   if (liveGraph.nodes.length === 0) return null;
 
   const graphCard = !hasGraph ? <div className="graph-placeholder" role="status">
@@ -52,12 +65,15 @@ export default function KnowledgePanel({ run }) {
     <dialog ref={dialog} className="graph-dialog" aria-label="知识图谱大图" onCancel={closeExpanded} onClose={()=>setExpanded(false)}>
       {expanded && graphCard}
     </dialog>
-    <header className="knowledge-title"><h2>知识图谱</h2></header>
+    <header className="knowledge-title"><h2>本体图谱</h2></header>
     <div className="knowledge-content scroll">
+      {showingPrevious && <p className="graph-notice" role="status">{['connecting', 'running'].includes(run.phase)
+        ? '暂时显示此前图谱，新证据到达后自动更新。'
+        : '本轮无新增图谱证据，保留此前图谱。'}</p>}
       {hasGraph && <ol className="reasoning-stages">{['查看资料','连接知识','核对依据','解释结果'].map((label,i)=><li key={label} aria-current={stage===i?'step':undefined}><span>{i+1}</span>{label}</li>)}</ol>}
       {!expanded && graphCard}
-      {(graph.nodes.length>0 || replay!==null) && <>
-        <div className="graph-replay"><label htmlFor="graph-replay">回看查询过程</label><input id="graph-replay" type="range" min="0" max={lastSeq} value={replay ?? lastSeq} onChange={e=>setReplay(Number(e.target.value))}/><button onClick={()=>setReplay(null)}>{replay===null?'实时':'回到实时'}</button></div>
+      {(graph.nodes.length>0 || replaySeq!==null) && <>
+        <div className="graph-replay"><label htmlFor="graph-replay">回看查询过程</label><input id="graph-replay" type="range" min="0" max={lastSeq} value={replaySeq ?? lastSeq} onChange={e=>setReplay({ startedAt: displayRun.startedAt, seq: Number(e.target.value) })}/><button onClick={()=>setReplay(null)}>{replaySeq===null?(showingPrevious?'此前图谱':'实时'):'回到最新'}</button></div>
       </>}
       {graph.notices.map(n=><p className="graph-notice" key={n}>{n}</p>)}
       {graph.clipped && <p className="graph-notice">为保证流畅，仅展示最多 70 个节点和 120 条关系；其余结果保留在聊天中的工具调用记录中。</p>}

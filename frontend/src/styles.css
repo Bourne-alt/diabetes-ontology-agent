@@ -217,6 +217,13 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
    单轮独立执行 —— 新一轮清空上一轮，每轮顶部标出 run_id 与「不含上一轮上下文」。 */
 .main { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
 
+/* Keep standalone chat readable; restore the flexible column when the graph appears. */
+.body:not(:has(> .knowledge-panel)) > .main {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
 .thread {
   flex-grow: 1; min-height: 0;
   padding: 26px 32px 28px;
@@ -256,10 +263,21 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .thread__empty {
   flex-grow: 1;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; text-align: center; padding: 40px 20px;
+  gap: 14px; text-align: center; padding: 32px 20px 48px;
 }
-.thread__empty h2 { margin: 0; font: 600 20px/1.4 var(--serif); color: var(--ink-2); }
-.thread__empty p { margin: 0; max-width: 420px; font-size: 13px; line-height: 1.8; color: var(--muted); text-wrap: pretty; }
+.thread__empty h2 { margin: 0; font: 600 clamp(25px, 3vw, 38px)/1.4 var(--sans); letter-spacing: .04em; color: #244d68; text-wrap: balance; }
+.thread__empty p { margin: 0; max-width: 420px; font-size: 13px; line-height: 1.8; letter-spacing: .12em; color: #678798; text-wrap: pretty; }
+.welcome-art { position: relative; width: clamp(220px, 25vw, 300px); max-width: 100%; margin-bottom: 0; }
+.welcome-art__scene { display: block; width: 100%; height: auto; overflow: visible; }
+.welcome-art__sphere { transform-origin: 627px 608px; animation: welcome-spin 40s linear infinite; }
+@keyframes welcome-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-art__sphere { animation: none; }
+}
+@media (min-width: 1181px) and (max-height: 760px) { .thread__empty { padding-block: 12px; gap: 10px; } }
 
 .card {
   background: var(--g2);
@@ -303,7 +321,13 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
   font: 400 17px/1.7 var(--serif);
 }
 .composer textarea:focus { outline: none; }
-.composer textarea::placeholder { color: var(--muted); }
+.composer textarea::placeholder {
+  color: #7f909c;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 1;
+}
 
 .composer__foot {
   display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
@@ -590,7 +614,7 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .knowledge-tabs button {border:0;border-bottom:2px solid transparent;background:none;min-height:44px;padding:0 2px;color:var(--muted);font-size:12.5px}
 .knowledge-tabs button[aria-selected=true] {color:var(--ink-3);border-bottom-color:var(--indigo)}
 .knowledge-title {padding:0 24px;border-bottom:1px solid var(--line)}
-.knowledge-title h2 {margin:0;min-height:44px;display:flex;align-items:center;font-size:12.5px;font-weight:500;color:var(--ink-3)}
+.knowledge-title h2 {margin:0;min-height:56px;display:flex;align-items:center;font-size:20px;font-weight:600;line-height:1.4;color:var(--ink)}
 .knowledge-content {padding:20px 22px 28px;min-height:0;flex:1}
 .reasoning-stages {display:flex;list-style:none;gap:6px;padding:0;margin:0 0 22px;justify-content:space-between}
 .reasoning-stages li {font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
@@ -601,8 +625,8 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .graph-topline strong {font-weight:500}.graph-topline button,.graph-replay button {border:1px solid var(--line-2);background:rgba(255,255,255,.72);border-radius:7px;min-height:32px;padding:0 12px;font-size:11.5px;color:var(--ink-2);white-space:nowrap}
 .graph-stage {height:var(--stage-h);position:relative;overflow:hidden;touch-action:none;background:var(--win);box-shadow:var(--win-inset)}.graph-stage canvas {display:block;cursor:grab}.graph-stage canvas:active {cursor:grabbing}
 .graph-viewport {position:relative}
-.citation-panel {margin:16px 0;padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow-wrap:anywhere}
-.citation-panel>h3 {margin:0 0 14px;font-size:16px;color:var(--ink-3)}.citation-panel>h3 small {font-size:11px;font-weight:400;color:var(--muted);margin-left:8px}
+.citation-panel {margin:16px 0;border:1px solid var(--line);border-radius:12px;background:#fff;overflow-wrap:anywhere}
+.citation-count {font-size:11px;font-weight:400;color:var(--muted)}
 .citation-card+.citation-card {margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
 .citation-card header {display:flex;align-items:baseline;gap:9px;font-size:13px;color:var(--ink-2)}.citation-card header>span {font-size:11px;color:var(--muted)}
 .citation-label {font-size:11px;color:var(--muted);margin:12px 0 6px}.citation-card blockquote {margin:0;padding:12px 14px;border-left:3px solid var(--indigo);background:var(--indigo-soft);white-space:pre-wrap;font-size:13px;line-height:1.7;max-height:260px;overflow:auto}
@@ -761,6 +785,7 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 
 /* Tool events belong to the conversation turn that produced them. */
 .trace.trace--inline { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.trace--inline > .sect__body { padding: 0; }
 .trace--inline .trace__body { max-height: 460px; overflow: auto; }
 .trace--inline .trace__foot { display: none; }
 .trace--inline .call__head { cursor: pointer; flex-wrap: wrap; }
@@ -770,3 +795,5 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 
 .composer__models { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px; font-size:12px; color:var(--muted); }
 .composer__models select { max-width:100%; min-height:36px; padding:6px 10px; border:1px solid var(--line); border-radius:8px; color:var(--ink); background:var(--g1); }
+
+@media (max-height: 760px) { .welcome-art { width: 210px; } }

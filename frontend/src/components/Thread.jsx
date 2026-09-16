@@ -1,30 +1,29 @@
-import { Mark } from './Icons.jsx';
+import { useId } from 'react';
 import Turn from './Turn.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
-function Empty({ samples, onPick }) {
+function Empty() {
+  const id = useId();
   return (
     <div className="thread__empty">
-      <Mark size={34} />
-      <h2>把复杂的检查结果，讲清楚。</h2>
-      <p>
-        先说清楚结论，再告诉你依据和还不确定的地方。
-        你可以继续追问；右侧图谱会逐步呈现实际查到的资料与联系。
-      </p>
-      <div className="samples">
-        {samples.map((s) => (
-          <button key={s.text} type="button" className="sample" onClick={() => onPick(s.text)}>
-            <span className="sample__text">{s.text}</span>
-            <span className="sample__route">{s.route}</span>
-          </button>
-        ))}
+      <div className="welcome-art" aria-hidden="true">
+        <svg className="welcome-art__scene" viewBox="0 0 1254 1254" fill="none">
+          <defs>
+            <clipPath id={`${id}-sphere`}><ellipse cx="627" cy="608" rx="496" ry="491" /></clipPath>
+          </defs>
+          <g className="welcome-art__sphere">
+            <image href="/welcome/sphere.png" width="1254" height="1254" clipPath={`url(#${id}-sphere)`} />
+          </g>
+        </svg>
       </div>
+      <h2>世界是一张图</h2>
+      <p>患者分析 · 本体关联 · 证据追溯</p>
     </div>
   );
 }
 
-export default function Thread({ history, asked, run, busy, samples, onPick }) {
-  if (history.length === 0 && !asked) return <Empty samples={samples} onPick={onPick} />;
+export default function Thread({ history, asked, run, busy }) {
+  if (history.length === 0 && !asked) return <Empty />;
 
   return (
     <>

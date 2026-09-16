@@ -19,8 +19,7 @@ export default function Composer({
           {!models.includes(selectedModel) && <option value={selectedModel}>{selectedModel || '读取配置中…'}</option>}
           {models.map(model => <option key={model} value={model}>{model}</option>)}
         </select>
-        <span>{actualModel ? `本轮使用：${actualModel}` : '默认读取服务端配置'}</span>
-        <span>切换模型将开启新会话</span>
+        {actualModel && <span>本轮使用：{actualModel}</span>}
         {modelError && <span role="alert">{modelError}</span>}
       </div>
       <label className="lbl hidden" htmlFor="message">查询内容</label>
@@ -34,7 +33,7 @@ export default function Composer({
         onKeyDown={(e) => {
           if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') submit(e);
         }}
-        placeholder="输入用户的问题。首轮请写明患者编号，同一会话内可以直接追问。"
+        placeholder="请输入问题"
       />
       <div className="composer__foot">
         <button className="btn btn--primary" type="submit" disabled={busy || !value.trim() || !selectedModel || Boolean(modelError)}>开始查询</button>

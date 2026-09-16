@@ -360,7 +360,8 @@ class AgentHarness:
                     async for item in self.graph.astream_events(
                         {"messages": [{"role": "user", "content": message}]},
                         config={
-                            "recursion_limit": 60,
+                            # Middleware nodes also consume steps; allow the model budget to finish.
+                            "recursion_limit": 200,
                             # LangGraph 的键就叫 thread_id，对外的名字是 conversation_id。
                             "configurable": {"thread_id": conversation_id},
                         },

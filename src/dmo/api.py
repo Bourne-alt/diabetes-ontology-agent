@@ -24,6 +24,7 @@ from fastapi import FastAPI, HTTPException, Query
 
 from . import config as config_mod
 from .forecast.contracts import ForecastRequest
+from .graph.client import GraphDBError
 from .query import hybrid, templates
 
 app = FastAPI(
@@ -50,7 +51,7 @@ def root() -> dict[str, Any]:
     }
 
 
-@app.exception_handler(Exception)
+@app.exception_handler(GraphDBError)
 def _graphdb_unavailable(request, exc):
     """GraphDB 连不上时给 503，不给 500 + 堆栈。
 
@@ -60,14 +61,10 @@ def _graphdb_unavailable(request, exc):
     """
     from fastapi.responses import JSONResponse
 
-    from .graph.client import GraphDBError
-
-    if isinstance(exc, GraphDBError):
-        return JSONResponse(status_code=503, content={
-            "detail": f"GraphDB 暂时不可用：{str(exc)[:300]}",
-            "hint": "检查 DMO_GRAPHDB_ENDPOINT（只填根地址，不带 /repositories）"
-                    "与仓库是否在跑；GET /health 会同时探两库。"})
-    raise exc
+    return JSONResponse(status_code=503, content={
+        "code": "graphdb_unavailable",
+        "detail": f"GraphDB 暂时不可用：{str(exc)[:300]}",
+        "hint": "图数据库暂时不可用，请稍后重试；这不表示没有相关数据。"})
 
 
 @app.get("/health")

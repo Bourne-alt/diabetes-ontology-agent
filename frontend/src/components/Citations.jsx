@@ -1,6 +1,11 @@
+import Section from './Section.jsx';
+
 export default function Citations({ quotes }) {
-  return <section className="citation-panel" aria-label="引用依据">
-    <h3>引用依据 <small>{quotes.length} 条</small></h3>
+  return <Section
+    className="citation-panel"
+    title={<span className="lbl">引用依据</span>}
+    right={<span className="citation-count">{quotes.length} 条</span>}
+  >
     {!quotes.length && <p>本次结果未提供可展示的文档引用。</p>}
     {quotes.map((q,i)=><article className="citation-card" key={`${q.document}:${q.sha256}:${i}`}>
       <header><span>{i+1}</span><strong>{q.document ? q.document.split(/[\\/]/).at(-1) : '文档名未提供'}</strong></header>
@@ -12,5 +17,5 @@ export default function Citations({ quotes }) {
         {q.sourceFile&&<p>文件：{q.sourceFile}</p>}{q.locator&&<p>位置：{q.locator}</p>}{q.sha256&&<p>内容哈希：{q.sha256}</p>}
       </details>}
     </article>)}
-  </section>;
+  </Section>;
 }

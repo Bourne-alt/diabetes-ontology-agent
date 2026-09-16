@@ -3,7 +3,6 @@ import Trace from './Trace.jsx';
 import Alert from './Alert.jsx';
 import TodoList from './TodoList.jsx';
 import Answer from './Answer.jsx';
-import Evidence from './Evidence.jsx';
 import Citations from './Citations.jsx';
 import { bagSize } from '../lib/evidence.js';
 
@@ -46,7 +45,6 @@ export default function Turn({ index, asked, run, live }) {
           <Trace events={run.events} phase={run.phase} />
           <Answer draft={run.draft} answer={run.answer} />
           {run.bag.quotes.length > 0 && <Citations quotes={run.bag.quotes}/>}
-          <Evidence bag={run.bag} />
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ function omitRedundantHeadings() {
   return (tree) => {
     const textOf = (node) => node.value ?? (node.children ?? []).map(textOf).join('');
     tree.children = tree.children.filter((node) =>
-      node.type !== 'heading' || !/^(给你的解答|简单说)[：:]?$/.test(textOf(node).trim())
+      node.type !== 'heading' || !/^(给你的解答|简单说|为什么)[：:]?$/.test(textOf(node).trim())
     );
   };
 }

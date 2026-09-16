@@ -127,6 +127,32 @@ def test_model_budget_is_failure_not_success():
     assert not any(e["type"] == "answer" for e in events)
 
 
+@pytest.mark.parametrize("reserve_final_call", [True, False])
+def test_graph_steps_allow_default_model_budget_to_finish_or_stop(reserve_final_call):
+    tool_rounds = SETTINGS.max_model_calls - int(reserve_final_call)
+    model = ScriptedModel(responses=[
+        AIMessage(content="", tool_calls=[{
+            "name": "report_plan",
+            "args": {"steps": ["离线验证"]},
+            "id": f"plan-{i}",
+            "type": "tool_call",
+        }])
+        for i in range(tool_rounds)
+    ] + [AIMessage(content="验证完成。")])
+    events = run(collect(AgentHarness(
+        build_agent(SETTINGS, model=model, backend=DmoBackend(), facts=FactStore(CFG)),
+        SETTINGS,
+    )))
+    assert model.position == SETTINGS.max_model_calls
+    if reserve_final_call:
+        assert events[-1]["status"] == "completed"
+        assert events[-2]["text"] == "验证完成。"
+    else:
+        assert events[-1]["status"] == "failed"
+        assert events[-2]["code"] == "ModelCallLimitExceededError"
+        assert not any(e["type"] == "answer" for e in events)
+
+
 class FakeCursor:
     def fetchall(self):
         return [{"patientid": "demo", "fact_origin": "demo-cohort"}] * 3

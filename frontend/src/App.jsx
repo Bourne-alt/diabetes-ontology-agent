@@ -7,14 +7,6 @@ import Thread from './components/Thread.jsx';
 import KnowledgePanel from './components/KnowledgePanel.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 
-const SAMPLES = [
-  { text: '预测患者 P91001 未来 7、14、28 天的血糖情况', route: '查看预测演示的计算过程' },
-  { text: '请用容易理解的话，解释合成患者 P90002 的糖化血红蛋白检查结果。', route: '了解检查结果与依据' },
-  { text: '如果 P90002 在 2026-02-20 再测一次 A1C 是 7.9%，结论会怎么变？', route: '了解假设成立后的变化' },
-  { text: '为什么「糖尿病足」查不到映射？', route: '了解知识库的覆盖范围' },
-  { text: 'ICD-10 为 E11 的 ehr-legacy 患者有多少，按风险档位分页列出前 10 个。', route: '查看患者记录' },
-];
-
 export default function App() {
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState('');
@@ -43,11 +35,6 @@ export default function App() {
     const node = threadRef.current;
     if (node && stickRef.current) node.scrollTop = node.scrollHeight;
   });
-
-  function pickSample(text) {
-    setMessage(text);
-    inputRef.current?.focus();
-  }
 
   function resetSession() {
     newSession();
@@ -85,8 +72,6 @@ export default function App() {
                 asked={asked}
                 run={run}
                 busy={busy}
-                samples={SAMPLES}
-                onPick={pickSample}
               />
             </ErrorBoundary>
           </div>
@@ -108,7 +93,7 @@ export default function App() {
         </main>
 
         <ErrorBoundary label="知识图谱渲染失败">
-          <KnowledgePanel key={run.runId ?? "idle"} run={run} />
+          {asked !== null && <KnowledgePanel run={run} history={history} />}
         </ErrorBoundary>
       </div>
     </div>

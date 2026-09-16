@@ -61,6 +61,8 @@ curl -N http://127.0.0.1:8200/chat/stream \
 
 两个数据库和 GraphDB 继续由 `dmo.config` 加载。Schema 在进程启动时确定，修改后需重启。现有 DMO 部分查询固定使用 diabetes，因此部署应保持本项目提供的 schema。
 
+GraphDB 请求直连 `DMO_GRAPHDB_ENDPOINT`，不使用系统或环境 HTTP 代理；模型 API 的网络配置不受影响。只读 SPARQL 查询遇到 502/503/504 或连接故障时最多重试两次，退避 0.25、0.5 秒，每次使用剩余超时预算；写入不自动重试。持续失败时 API 返回 503 和 `graphdb_unavailable`，Agent 将其作为工具失败处理，不解释成查无数据。
+
 ## Harness 边界
 
 - 多轮会话按 `conversation_id` 隔离，状态存在图的 checkpointer 里（`build_serving_agent` 挂 `InMemorySaver`）。同一会话内模型看得到之前几轮的消息、工具结果与待办清单；不同会话之间不共享任何内容。对外一律叫 `conversation_id`，LangGraph 内部的键仍是 `configurable.thread_id`，只在提交 config 时映射一次。CLI 与测试走 `build_agent`，不挂 checkpointer，保持单轮无记忆。

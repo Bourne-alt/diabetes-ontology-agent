@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import Section from './Section.jsx';
 import { formatMs } from '../lib/runReducer.js';
 import { groupCalls } from '../lib/groupCalls.js';
 import { toolLabel } from '../lib/toolLabels.js';
@@ -72,16 +73,11 @@ export default function Trace({ events, phase }) {
   if (calls.length === 0) return null;
 
   return (
-    <section className="trace trace--inline" aria-label="tools">
-      <div className="trace__head">
-        <div className="trace__title">
-          <h2>tools</h2>
-          <div className="spacer" />
-          <span className="trace__count">{calls.length} 次调用</span>
-        </div>
-
-      </div>
-
+    <Section
+      className="trace trace--inline"
+      title={<span className="lbl">tools</span>}
+      right={<span className="trace__count">{calls.length} 次调用</span>}
+    >
       <div className="trace__body scroll">
         <Grouped calls={calls} phase={phase} />
       </div>
@@ -96,6 +92,6 @@ export default function Trace({ events, phase }) {
           <span>工具失败是执行问题，不是查无数据。</span>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

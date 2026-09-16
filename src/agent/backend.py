@@ -59,6 +59,18 @@ class DmoBackend:
             # RuntimeError 之后正文就没了 —— DMO 内部 500 的真因只有这里能看到。
             log_event(log, logging.ERROR, "dmo.server_error", method=method, path=path,
                       status=response.status_code, body=response.text[:1000])
+            if response.status_code == 503:
+                try:
+                    error = response.json()
+                except ValueError:
+                    error = None
+                if isinstance(error, dict) and error.get("code") == "graphdb_unavailable":
+                    return {
+                        "ok": False,
+                        "error": "graphdb_unavailable",
+                        "source": path,
+                        "hint": "图数据库暂时不可用，请稍后重试；这不表示没有相关数据。",
+                    }
             raise RuntimeError("DMO 依赖暂不可用")
         try:
             payload = response.json()

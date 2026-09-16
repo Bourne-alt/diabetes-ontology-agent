@@ -5,6 +5,7 @@ import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer
 import { KIND } from '../lib/knowledgeGraph.js';
 import { toolLabel } from '../lib/toolLabels.js';
 import { GROUND_Y, position, layerRanks } from '../lib/graphLayout.js';
+import { MIN_GRAPH_DISTANCE, MAX_GRAPH_DISTANCE, zoomDistance, wheelZoomFactor, smoothZoomDistance } from '../lib/graphZoom.js';
 
 function NodeSummary({ node, onClose, cardRef }) {
   const d = node.detail || {};
@@ -39,6 +40,16 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
   const [unavailable, setUnavailable] = useState(false);
   useEffect(() => { callback.current = onSelect; }, [onSelect]);
   useEffect(() => {
+    if (!node) return;
+    const dismissOutside = (event) => {
+      if (card.current && !card.current.contains(event.target)) onClose();
+    };
+    // Close before canvas controls handle the event so another node can open
+    // its own details on pointerup without losing the new selection.
+    document.addEventListener('pointerdown', dismissOutside, true);
+    return () => document.removeEventListener('pointerdown', dismissOutside, true);
+  }, [node, onClose]);
+  useEffect(() => {
     const el = host.current;
     let renderer;
     try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
@@ -55,9 +66,9 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     // Trackball rotates the camera's up vector too, so vertical drags can cross both poles.
     const controls = new TrackballControls(camera, renderer.domElement);
     controls.staticMoving = true; controls.noPan = true;
-    controls.minDistance = 5; controls.maxDistance = 16;
+    controls.minDistance = MIN_GRAPH_DISTANCE; controls.maxDistance = MAX_GRAPH_DISTANCE;
     let interacting = false;
-    controls.addEventListener('start', () => { interacting = true; });
+    controls.addEventListener('start', () => { interacting = true; instance.zoomTarget = null; });
     controls.addEventListener('end', () => { interacting = false; });
     scene.add(new THREE.HemisphereLight(0xffffff, 0xc8cdda, 1.7));
     const light = new THREE.DirectionalLight(0xffffff, 1.9); light.position.set(3, 5, 4); scene.add(light);
@@ -86,7 +97,18 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
       controls.handleResize();
     };
     const observer = new ResizeObserver(resize); observer.observe(el); resize();
-    const instance = { scene, group, camera, controls, renderer, particles: [], paused: false, visible: true, selection: null };
+    const instance = { scene, group, camera, controls, renderer, particles: [], paused: false, visible: true, selection: null, zoomTarget: null };
+    instance.zoomBy = (factor) => {
+      const distance = instance.zoomTarget ?? camera.position.distanceTo(controls.target);
+      instance.zoomTarget = zoomDistance(distance, factor);
+    };
+    const wheel = (event) => {
+      event.preventDefault();
+      // Replace only Trackball's wheel handling; preserve drag and touch gestures.
+      event.stopImmediatePropagation();
+      instance.zoomBy(wheelZoomFactor(event.deltaY, event.deltaMode, event.ctrlKey));
+    };
+    renderer.domElement.addEventListener('wheel', wheel, { passive: false, capture: true });
     runtime.current = instance;
     const intersection = new IntersectionObserver(([entry]) => { instance.visible = entry.isIntersecting; });
     intersection.observe(el);
@@ -98,12 +120,19 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
       lastTime = time;
       if (!instance.visible || document.hidden) return;
       const animate = !instance.paused && !reduce.matches;
-      if (animate && !interacting) {
+      if (animate && !interacting && instance.zoomTarget === null) {
         orbitOffset.copy(camera.position).sub(controls.target);
         orbitOffset.applyAxisAngle(camera.up, -Math.PI / 60 * elapsed);
         camera.position.copy(controls.target).add(orbitOffset);
       }
       controls.update();
+      if (instance.zoomTarget !== null) {
+        orbitOffset.copy(camera.position).sub(controls.target);
+        const distance = reduce.matches ? instance.zoomTarget
+          : smoothZoomDistance(orbitOffset.length(), instance.zoomTarget, elapsed);
+        camera.position.copy(controls.target).add(orbitOffset.setLength(distance));
+        if (distance === instance.zoomTarget) instance.zoomTarget = null;
+      }
       for (const child of group.children) {
         if (child.userData.nodeId) {
           const active = child.userData.nodeId === instance.selection;
@@ -145,6 +174,7 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
     const lost = (e) => { e.preventDefault(); setUnavailable(true); renderer.setAnimationLoop(null); };
     renderer.domElement.addEventListener('webglcontextlost', lost);
     return () => {
+      renderer.domElement.removeEventListener('wheel', wheel, true);
       renderer.setAnimationLoop(null); observer.disconnect(); intersection.disconnect(); controls.dispose();
       scene.traverse(o => { o.geometry?.dispose(); if (o.material) o.material.dispose(); });
       renderer.dispose(); runtime.current = null; el.replaceChildren();
@@ -215,14 +245,12 @@ export default function GraphScene({ graph, paused, selected, onSelect, onClose 
   function zoom(factor) {
     const r = runtime.current;
     if (!r) return;
-    const offset = r.camera.position.clone().sub(r.controls.target);
-    offset.setLength(THREE.MathUtils.clamp(offset.length() * factor, r.controls.minDistance, r.controls.maxDistance));
-    r.camera.position.copy(r.controls.target).add(offset);
-    r.controls.update();
+    r.zoomBy(factor);
   }
   function resetView() {
     const r = runtime.current;
     if (!r) return;
+    r.zoomTarget = null;
     r.controls.reset();
   }
   return <div className="graph-viewport">

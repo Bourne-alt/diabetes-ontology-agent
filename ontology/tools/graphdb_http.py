@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """GraphDB HTTP 原语 —— 构建层（load_graphdb.py）与同步层（src/dmo/graph/）共用。
 
-从 load_graphdb.py 抽出来的，行为逐字不变，只加了两个参数：
-
-  * `timeout` —— 原来写死 120s。患者图同步一次几十个图，需要更短的超时快速失败。
-  * `drop_graph()` —— 新增。`dmo sync --prune` 要删已登记但 SQL 中已不存在的患者图。
+所有请求直连配置端点，避免系统代理影响数据库连接。
+只读 SPARQL 查询对临时故障做有界重试，各次使用剩余 timeout；写入不重试。
+`drop_graph()` 供 `dmo sync --prune` 删除已登记但 SQL 中已不存在的患者图。
 
 **只用标准库**，不引入 httpx —— 构建层零额外依赖的约定延续到这里。
 
@@ -14,12 +13,18 @@
 
 from __future__ import annotations
 
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from http.client import RemoteDisconnected
 from pathlib import Path
 
 DEFAULT_TIMEOUT = 120
+
+
+class GraphDBTransportError(SystemExit):
+    """Transport failure, compatible with the build scripts' exit handling."""
 
 
 def request(
@@ -32,12 +37,17 @@ def request(
 ) -> tuple[int, str]:
     req = urllib.request.Request(url, data=data, method=method, headers=headers or {})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
+        # GraphDB is an explicitly configured database endpoint. Do not route it
+        # through macOS/system HTTP proxies (model API clients are unaffected).
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        with opener.open(req, timeout=timeout) as r:
             return r.status, r.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
         return e.code, e.read().decode("utf-8", "replace")
-    except urllib.error.URLError as e:
-        raise SystemExit(f"连不上 GraphDB（{url}）：{e.reason}\n先确认 GraphDB Desktop 在跑。")
+    except (urllib.error.URLError, TimeoutError, ConnectionError, RemoteDisconnected) as e:
+        raise GraphDBTransportError(
+            f"GraphDB 请求失败（{url}）：{getattr(e, 'reason', e)}"
+        ) from e
 
 
 def repo_exists(endpoint: str, repo_id: str, *, timeout: int = DEFAULT_TIMEOUT) -> bool:
@@ -144,16 +154,28 @@ def sparql(
 ) -> str:
     url = f"{endpoint}/repositories/{repo_id}"
     data = urllib.parse.urlencode({"query": query}).encode()
-    code, body = request(
-        "POST",
-        url,
-        data=data,
-        headers={"Accept": accept, "Content-Type": "application/x-www-form-urlencoded"},
-        timeout=timeout,
-    )
-    if code != 200:
-        raise SystemExit(f"SPARQL 失败 HTTP {code}：{body[:400]}")
-    return body
+    # This endpoint submits read queries via `query`, never SPARQL updates.
+    # Retry only transient failures; all attempts share the configured timeout.
+    deadline = time.monotonic() + timeout
+    for attempt in range(3):
+        try:
+            code, body = request(
+                "POST", url, data=data,
+                headers={"Accept": accept, "Content-Type": "application/x-www-form-urlencoded"},
+                timeout=max(.001, deadline - time.monotonic()),
+            )
+        except GraphDBTransportError as exc:
+            failure = exc
+        else:
+            if code == 200:
+                return body
+            failure = SystemExit(f"SPARQL 失败 HTTP {code}：{body[:400]}")
+            if code not in (502, 503, 504):
+                raise failure
+        delay = .25 * (2 ** attempt)
+        if attempt == 2 or deadline - time.monotonic() <= delay:
+            raise failure
+        time.sleep(delay)
 
 
 def merge(paths: list[Path], root: Path | None = None) -> str:

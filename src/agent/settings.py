@@ -30,8 +30,8 @@ class AgentSettings:
     model: str = "glm-5.2"
     model_timeout: float = 60
     run_timeout: float = 180
-    max_model_calls: int = 12
-    max_tool_calls: int = 24
+    max_model_calls: int = 30
+    max_tool_calls: int = 30
     max_result_chars: int = 24000
 
     @classmethod
