@@ -12,10 +12,9 @@ function shortId(id) {
   return id.length > 12 ? `${id.slice(0, 6)}…${id.slice(-4)}` : id;
 }
 
-export default function Turn({ index, asked, run, live, busy }) {
-  const planning = live && busy && run.toolCalls > 0;
+export default function Turn({ index, asked, run, live }) {
   const hasContent =
-    run.alert || run.todos.length > 0 || planning || run.draft || run.answer !== null
+    run.alert || run.todos.length > 0 || run.toolCalls > 0 || run.draft || run.answer !== null
     || bagSize(run.bag) > 0 || run.bag.gaps.length > 0;
 
   return (
@@ -43,7 +42,7 @@ export default function Turn({ index, asked, run, live, busy }) {
             </div>
           )}
           <Alert alert={run.alert} />
-          <TodoList todos={run.todos} seq={run.todoSeq} planning={planning} />
+          <TodoList todos={run.todos} />
           <Trace events={run.events} phase={run.phase} />
           <Answer draft={run.draft} answer={run.answer} />
           {run.bag.quotes.length > 0 && <Citations quotes={run.bag.quotes}/>}

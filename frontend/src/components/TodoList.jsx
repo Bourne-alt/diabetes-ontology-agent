@@ -4,19 +4,8 @@ import { asText } from '../lib/text.js';
 
 const LABEL = { pending: '待处理', in_progress: '进行中', completed: '已完成' };
 
-export default function TodoList({ todos, seq, planning }) {
-  if (todos.length === 0 && !planning) return null;
-
-  if (todos.length === 0) {
-    return (
-      <Section title={<span className="lbl">待办清单</span>}>
-        <div className="todos__empty">
-          <span className="pulse" style={{ width: 7, height: 7, borderRadius: '50%', background: '#34477a', display: 'inline-block' }} />
-          正在生成计划…
-        </div>
-      </Section>
-    );
-  }
+export default function TodoList({ todos }) {
+  if (todos.length === 0) return null;
 
   const done = todos.filter((t) => t.status === 'completed').length;
   const pct = Math.round((done / todos.length) * 100);

@@ -21,16 +21,7 @@ function shortId(id) {
   return text.length > 12 ? `${text.slice(0, 6)}…${text.slice(-4)}` : text;
 }
 
-function Grouped({ events, phase }) {
-  const calls = useMemo(() => groupCalls(events), [events]);
-
-  if (calls.length === 0) {
-    return (
-      <div className="empty">
-        本轮尚未收到工具调用记录。
-      </div>
-    );
-  }
+function Grouped({ calls, phase }) {
 
   return (
     <>
@@ -78,6 +69,7 @@ function Grouped({ events, phase }) {
 
 export default function Trace({ events, phase }) {
   const calls = useMemo(() => groupCalls(events), [events]);
+  if (calls.length === 0) return null;
 
   return (
     <section className="trace trace--inline" aria-label="tools">
@@ -91,9 +83,7 @@ export default function Trace({ events, phase }) {
       </div>
 
       <div className="trace__body scroll">
-        {events.length === 0
-          ? <div className="empty">尚未收到工具调用事件。</div>
-          : <Grouped events={events} phase={phase} />}
+        <Grouped calls={calls} phase={phase} />
       </div>
 
       <div className="trace__foot">
