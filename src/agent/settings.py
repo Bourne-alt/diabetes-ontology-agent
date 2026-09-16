@@ -9,6 +9,17 @@ from dmo.config import ENV_FILE, _get, _parse_env_file
 
 from .logs import get_logger, log_event
 
+AVAILABLE_MODELS = ("qwen3.8-max", "kimi-k3", "zai-org/GLM-5.2")
+
+def resolve_model(model: str, base_url: str) -> str:
+    host = urlsplit(base_url).hostname or ""
+    if host == "api.siliconflow.cn" and model.lower() == "glm-5.2":
+        return "zai-org/GLM-5.2"
+    if (host == "dashscope.aliyuncs.com" or host.endswith(".aliyuncs.com") and host.startswith("dashscope")) and model == "zai-org/GLM-5.2":
+        return "glm-5.2"
+    return model
+
+
 log = get_logger("settings")
 
 
@@ -35,9 +46,7 @@ class AgentSettings:
             raise ValueError("缺少 OPENAI_API_KEY，请在环境或 .env 中配置。")
         base_url = get("OPENAI_BASE_URL", cls.base_url).rstrip("/")
         model = get("OPENAI_MODEL_TEXT", cls.model)
-        # SiliconFlow's /models advertises the qualified ID, not the short alias.
-        if urlsplit(base_url).hostname == "api.siliconflow.cn" and model.lower() == "glm-5.2":
-            model = "zai-org/GLM-5.2"
+        model = resolve_model(model, base_url)
         settings = cls(
             api_key=key,
             base_url=base_url,

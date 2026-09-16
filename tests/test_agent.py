@@ -805,3 +805,72 @@ def test_prediction_demo_tool_calls_real_endpoint_and_streams_result():
     assert start['call_id'] == end['call_id']
     assert end['ok'] is True
     assert end['result']['data']['predictions'] == [{'day': 7}, {'day': 14}, {'day': 28}]
+
+
+def test_model_selection_config_refresh_and_shared_credentials(monkeypatch):
+    import agent.api as api_module
+    from dataclasses import replace
+    from agent.settings import AVAILABLE_MODELS
+
+    configured = [replace(SETTINGS, model='qwen3.8-max')]
+    builds = []
+    monkeypatch.setattr(AgentSettings, 'load', classmethod(lambda cls: configured[0]))
+
+    def build(settings):
+        builds.append(settings)
+        return build_agent(settings, model=ScriptedModel(responses=[AIMessage(content='ok')]),
+                           backend=DmoBackend(), facts=FactStore(CFG))
+
+    monkeypatch.setattr(api_module, 'build_serving_agent', build)
+
+    async def exercise():
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=create_app()), base_url='http://test') as client:
+            config = (await client.get('/chat/models')).json()
+            assert config == {'models': list(AVAILABLE_MODELS), 'default_model': 'qwen3.8-max'}
+            assert 'api_key' not in config and 'base_url' not in config
+            for model in AVAILABLE_MODELS:
+                response = await client.post('/chat/stream', json={'message': '你好', 'model': model})
+                assert sse_frames(response)[0]['model'] == model
+            await client.post('/chat/stream', json={'message': '你好', 'model': AVAILABLE_MODELS[0]})
+            assert len(builds) == 3
+            configured[0] = replace(configured[0], model='kimi-k3')
+            assert (await client.get('/chat/models')).json()['default_model'] == 'kimi-k3'
+            response = await client.post('/chat/stream', json={'message': '你好'})
+            assert sse_frames(response)[0]['model'] == 'kimi-k3'
+            invalid = await client.post('/chat/stream', json={'message': '你好', 'model': 'unknown'})
+            assert invalid.status_code == 422
+    run(exercise())
+    assert all(s.api_key == SETTINGS.api_key and s.base_url == SETTINGS.base_url for s in builds)
+
+
+@pytest.mark.parametrize("body", [
+    {"code": 20012, "message": "Model does not exist. Please check it carefully."},
+    {"error": {"code": "model_not_found", "message": "Unavailable model"}},
+])
+def test_missing_provider_model_has_actionable_safe_error(body):
+    from agent.runtime import error_message
+
+    class MissingModel(Exception):
+        status_code = 400
+
+    exc = MissingModel("private provider details")
+    exc.body = body
+    message = error_message(exc)
+    assert "当前 API 服务商不支持所选模型" in message
+    assert "OPENAI_BASE_URL" in message
+    assert "private provider details" not in message
+
+
+
+def test_bailian_glm_alias_and_product_activation_error():
+    from agent.settings import resolve_model
+    from agent.runtime import error_message
+    assert resolve_model('zai-org/GLM-5.2', 'https://dashscope.aliyuncs.com/compatible-mode/v1') == 'glm-5.2'
+    assert resolve_model('glm-5.2', 'https://api.siliconflow.cn/v1') == 'zai-org/GLM-5.2'
+    assert resolve_model('kimi-k3', 'https://dashscope.aliyuncs.com/compatible-mode/v1') == 'kimi-k3'
+
+    class NotActivated(Exception):
+        status_code = 400
+        body = {'code': 'invalid_parameter_error', 'message': 'The product is not activated, please confirm that you have activated products and try again after activation.'}
+
+    assert '尚未开通' in error_message(NotActivated())

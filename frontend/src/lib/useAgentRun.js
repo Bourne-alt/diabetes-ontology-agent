@@ -9,7 +9,7 @@ export function useAgentRun() {
   const abortRef = useRef(null);
   const conversationRef = useRef(null);
 
-  const start = useCallback(async (message) => {
+  const start = useCallback(async (message, model) => {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
@@ -19,6 +19,7 @@ export function useAgentRun() {
     try {
       await runQuery({
         message,
+        model,
         conversationId: conversationRef.current,
         signal: controller.signal,
         onEvent: (evt) => {

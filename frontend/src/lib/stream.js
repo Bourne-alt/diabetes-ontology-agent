@@ -11,13 +11,13 @@ export const CHAT_ENDPOINT = '/chat/stream';
 
 export class StreamAborted extends Error {}
 
-export async function runQuery({ message, conversationId, signal, onEvent }) {
+export async function runQuery({ message, model, conversationId, signal, onEvent }) {
   const response = await fetch(CHAT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     // 省略 conversation_id 即开新会话，服务端生成并在 run_start 里回传。
     body: JSON.stringify(
-      conversationId ? { message, conversation_id: conversationId } : { message },
+      { message, ...(model ? { model } : {}), ...(conversationId ? { conversation_id: conversationId } : {}) },
     ),
     signal,
   });

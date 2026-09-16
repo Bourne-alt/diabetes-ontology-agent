@@ -3,6 +3,8 @@
 import asyncio
 import json
 import logging
+from dataclasses import replace
+from typing import Literal
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -12,7 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from .logs import get_logger, log_event, log_exception, setup_logging
 from .runtime import AgentHarness, build_serving_agent
-from .settings import AgentSettings
+from .settings import AgentSettings, AVAILABLE_MODELS, resolve_model
 
 log = get_logger("api")
 
@@ -33,6 +35,7 @@ class ChatRequest(BaseModel):
     # 让多轮上下文无声丢失 —— 那种失败非常难查。
     model_config = ConfigDict(extra="forbid")
 
+    model: Literal["qwen3.8-max", "kimi-k3", "zai-org/GLM-5.2", "glm-5.2"] | None = None
     message: str = Field(min_length=1, max_length=12000)
     # 会话标识。省略即开新会话，服务端生成并在 run_start 事件里回传。
     conversation_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]{1,64}$")
@@ -44,27 +47,34 @@ def create_app(harness: AgentHarness | None = None):
     # 会话状态存在 harness 持有的 checkpointer 里，所以 harness 必须是进程级单例。
     # 早先这段建在请求处理函数内：conversation_id 每次都落到一个全新的 checkpointer 上，
     # 客户端带回来的会话永远是空的 —— 多轮上下文就是这么丢的。
-    runtime_slot: dict[str, AgentHarness | None] = {"runtime": harness}
+    runtimes: dict[str, AgentHarness] = {}
     build_lock = asyncio.Lock()
 
-    async def get_runtime() -> AgentHarness:
-        if runtime_slot["runtime"] is not None:
-            return runtime_slot["runtime"]
+    @app.get("/chat/models")
+    async def models():
+        settings = AgentSettings.load()
+        return {"models": list(AVAILABLE_MODELS), "default_model": settings.model}
+
+    async def get_runtime(model: str | None = None) -> AgentHarness:
+        if harness is not None:
+            return harness
         async with build_lock:
-            if runtime_slot["runtime"] is None:
-                try:
-                    settings = AgentSettings.load()
-                    built = AgentHarness(build_serving_agent(settings), settings)
-                except Exception as exc:  # noqa: BLE001 -- do not expose configuration secrets
-                    # `from None` 是刻意的：异常链里可能带着 DSN 与密钥，不能进 HTTP 响应。
-                    # 代价是客户端只剩一句 503 —— 所以真因必须在这里落盘，否则无从查起。
-                    log_exception(log, "runtime.build_failed", exc)
-                    # 不缓存失败：配置修好后下一次请求应该能重新构建。
-                    raise HTTPException(503, "Agent 初始化失败，请检查模型与数据库配置。") from None
-                log_event(log, logging.INFO, "runtime.built", model=settings.model,
-                          base_url=settings.base_url, run_timeout=settings.run_timeout)
-                runtime_slot["runtime"] = built
-        return runtime_slot["runtime"]
+            try:
+                # Re-read configuration, so a changed default is not stuck in a singleton.
+                settings = AgentSettings.load()
+                if model is not None:
+                    settings = replace(settings, model=resolve_model(model, settings.base_url))
+                current = runtimes.get(settings.model)
+                if current is not None and current.settings == settings:
+                    return current
+                built = AgentHarness(build_serving_agent(settings), settings)
+            except Exception as exc:
+                log_exception(log, "runtime.build_failed", exc)
+                raise HTTPException(503, "Agent 初始化失败，请检查模型与数据库配置。") from None
+            runtimes[settings.model] = built
+            log_event(log, logging.INFO, "runtime.built", model=settings.model,
+                      base_url=settings.base_url, run_timeout=settings.run_timeout)
+            return built
 
     @app.get("/", response_class=HTMLResponse)
     def index():
@@ -74,7 +84,7 @@ def create_app(harness: AgentHarness | None = None):
     async def chat(body: ChatRequest):
         if not body.message.strip():
             raise HTTPException(422, "message 不能为空白")
-        runtime = await get_runtime()
+        runtime = await get_runtime(body.model)
         # 消息正文可能含患者姓名/ID，入口只记规模与是否续接已有会话。
         log_event(log, logging.INFO, "http.chat", message_chars=len(body.message),
                   resumed=body.conversation_id is not None)

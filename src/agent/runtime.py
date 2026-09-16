@@ -95,6 +95,21 @@ def _shape(value, _depth: int = 0):
 
 def error_message(exc: Exception) -> str:
     status = getattr(exc, "status_code", None)
+    body = getattr(exc, "body", None)
+    error = body.get("error", body) if isinstance(body, dict) else {}
+    code = error.get("code") if isinstance(error, dict) else None
+    if status in (400, 404) and (
+        str(code) in {"20012", "model_not_found"}
+        or "model does not exist" in str(exc).lower()
+        or "model_not_found" in str(exc).lower()
+    ):
+        return (
+            "当前 API 服务商不支持所选模型，或此账号未获该模型访问权限。"
+            "请核对该服务商的模型 ID、OPENAI_BASE_URL 和对应的 OPENAI_API_KEY；"
+            "其他平台文档中的模型名称不能直接用于当前服务。"
+        )
+    if status == 400 and isinstance(error, dict) and "product is not activated" in str(error.get("message", "")).lower():
+        return "当前百炼账号尚未开通所选模型。请在百炼控制台开通该模型服务后重试，或选择其他已开通的模型。"
     if status == 402:
         return "模型服务账号余额不足（HTTP 402），请充值后重试。"
     if status in (401, 403):

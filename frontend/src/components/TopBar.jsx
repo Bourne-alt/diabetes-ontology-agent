@@ -21,7 +21,7 @@ function shortConversation(id) {
 }
 
 export default function TopBar({
-  model, phase, statusText, modelCalls, toolCalls, conversationId,
+  phase, statusText, modelCalls, toolCalls, conversationId,
 }) {
   return (
     <header className="topbar">
@@ -35,7 +35,6 @@ export default function TopBar({
 
       <div className="spacer" />
 
-      <span className="chip chip--neutral">{model ?? '等待查询'}</span>
       {conversationId && (
         <span className="chip chip--indigo">会话 {shortConversation(conversationId)}</span>
       )}

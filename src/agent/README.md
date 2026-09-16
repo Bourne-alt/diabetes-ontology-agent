@@ -196,3 +196,12 @@ cd frontend && npm test && npm run build
 设计依据：[LangChain overview](https://docs.langchain.com/oss/python/langchain/overview)、[streaming](https://docs.langchain.com/oss/python/langchain/streaming)、[middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in)。采用稳定的 `astream_events(version="v2")` 适配为项目自己的事件协议。
 
 修改 `tools.py` 或 `prompt.py` 后必须重启 Agent 服务：工具列表和系统提示随进程内智能体缓存，前端热更新不会刷新后端。预测演示可直接输入“选择 P91001，运行预测演示，查看 7、14、28 天的计算过程”。
+
+### 统一百炼配置
+
+三个可选模型统一使用 `.env` 中的 `OPENAI_BASE_URL` 和 `OPENAI_API_KEY`。
+地址为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，密钥使用百炼平台密钥。
+同名配置只能保留一项：后面的重复项会覆盖前面的值。配置保存后下次请求重新读取。
+
+百炼调用 GLM 时，界面选项 `zai-org/GLM-5.2` 映射为实际 API ID `glm-5.2`；
+聊天中的本轮模型信息展示实际 ID。Kimi 若返回 `The product is not activated`，需先在百炼账号中开通对应产品。

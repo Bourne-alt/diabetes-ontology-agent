@@ -8,7 +8,7 @@ import KnowledgePanel from './components/KnowledgePanel.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 const SAMPLES = [
-  { text: '选择 P91001，运行预测演示，查看 7、14、28 天的计算过程。', route: '查看预测演示的计算过程' },
+  { text: '预测患者 P91001 未来 7、14、28 天的血糖情况', route: '查看预测演示的计算过程' },
   { text: '请用容易理解的话，解释合成患者 P90002 的糖化血红蛋白检查结果。', route: '了解检查结果与依据' },
   { text: '如果 P90002 在 2026-02-20 再测一次 A1C 是 7.9%，结论会怎么变？', route: '了解假设成立后的变化' },
   { text: '为什么「糖尿病足」查不到映射？', route: '了解知识库的覆盖范围' },
@@ -16,6 +16,17 @@ const SAMPLES = [
 ];
 
 export default function App() {
+  const [models, setModels] = useState([]);
+  const [selectedModel, setSelectedModel] = useState('');
+  const [modelError, setModelError] = useState('');
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/chat/models', { signal: controller.signal })
+      .then(response => { if (!response.ok) throw new Error('无法读取模型配置'); return response.json(); })
+      .then(data => { setModels(data.models); setSelectedModel(data.default_model); })
+      .catch(error => { if (error.name !== 'AbortError') setModelError(error.message); });
+    return () => controller.abort();
+  }, []);
   const [message, setMessage] = useState('');
   const [asked, setAsked] = useState(null);
   // 旧轮次留在屏幕上；服务端的上下文由 conversation_id 维持，两者是各自独立的。
@@ -53,7 +64,7 @@ export default function App() {
     setAsked(text);
     setMessage('');
     stickRef.current = true;
-    start(text);
+    start(text, selectedModel);
   }
 
   function onScroll(event) {
@@ -64,7 +75,6 @@ export default function App() {
   return (
     <div className="app">
       <TopBar
-        model={run.model}
         phase={run.phase}
         statusText={run.statusText}
         modelCalls={run.modelCalls}
@@ -87,6 +97,11 @@ export default function App() {
             </ErrorBoundary>
           </div>
           <Composer
+            models={models}
+            selectedModel={selectedModel}
+            actualModel={asked !== null ? run.model : null}
+            modelError={modelError}
+            onModelChange={(model) => { resetSession(); setSelectedModel(model); }}
             inputRef={inputRef}
             value={message}
             onChange={setMessage}

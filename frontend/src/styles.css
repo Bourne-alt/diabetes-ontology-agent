@@ -749,3 +749,6 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .trace--inline .call__tool { overflow-wrap: anywhere; font-family: inherit; }
 .trace--inline .call__tool small { display: block; color: var(--muted); font-family: var(--mono); }
 .trace--inline .call__body pre { max-height: 280px; overflow: auto; }
+
+.composer__models { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px; font-size:12px; color:var(--muted); }
+.composer__models select { max-width:100%; min-height:36px; padding:6px 10px; border:1px solid var(--line); border-radius:8px; color:var(--ink); background:var(--g1); }
