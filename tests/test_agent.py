@@ -772,3 +772,36 @@ def test_agent_stream_emits_assessment_report_before_compact_tool_result():
     assert report_event['seq'] < end['seq']
     assert 'execution_trace' not in end['result']['data']
     assert events[-1]['status'] == 'completed'
+
+
+def test_prediction_demo_tool_calls_real_endpoint_and_streams_result():
+    from fastapi import FastAPI
+
+    app = FastAPI()
+    received = []
+
+    @app.post('/patients/{pid}/prediction-demo')
+    def prediction(pid: str):
+        received.append(pid)
+        return {'predictions': [{'day': 7}, {'day': 14}, {'day': 28}]}
+
+    model = ScriptedModel(responses=[
+        AIMessage(content='', tool_calls=[{
+            'name': 'run_prediction_demo', 'args': {'pid': 'P91001'},
+            'id': 'prediction-1', 'type': 'tool_call',
+        }]),
+        AIMessage(content='预测演示已返回计算结果。'),
+    ])
+    harness = AgentHarness(build_agent(SETTINGS, model=model, backend=DmoBackend(app), facts=FactStore(CFG)), SETTINGS)
+
+    async def request_demo():
+        return [event async for event in harness.stream('运行 P91001 的预测演示')]
+
+    events = run(request_demo())
+    assert received == ['P91001']
+    start = next(e for e in events if e['type'] == 'tool_start')
+    end = next(e for e in events if e['type'] == 'tool_end')
+    assert start['tool'] == 'run_prediction_demo'
+    assert start['call_id'] == end['call_id']
+    assert end['ok'] is True
+    assert end['result']['data']['predictions'] == [{'day': 7}, {'day': 14}, {'day': 28}]

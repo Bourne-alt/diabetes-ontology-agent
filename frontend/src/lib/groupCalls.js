@@ -48,3 +48,14 @@ export function groupCalls(events) {
 
   return order.map((key) => byKey.get(key));
 }
+
+export function callStatus(call, phase) {
+  if (call.orphan) return { state: 'fail', badge: '记录不完整' };
+  if (call.done) return call.ok
+    ? { state: 'ok', badge: '成功' }
+    : { state: 'fail', badge: '失败' };
+  if (['done', 'failed', 'stopped'].includes(phase)) {
+    return { state: 'fail', badge: '未收到结果' };
+  }
+  return { state: 'running', badge: '进行中' };
+}

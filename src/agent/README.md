@@ -96,6 +96,7 @@ curl -N http://127.0.0.1:8200/chat/stream \
 | `find_patients` | 按诊断、来源、档位分页检索 |
 | `patient_evidence` | 患者判定、风险、安全、建议、监测或照护链 |
 | `simulate_patient_course` | 确定性条件推演（若 X 则 Y）+ 推导树；只读、内存计算 |
+| `run_prediction_demo` | 按合成患者编号执行预测演示，返回 7/14/28 天计算过程 |
 | `assess_patient_treatment` | 按患者镜像评估当前治疗措施、证据与缺口 |
 | `inspect_fact_schema` | 两库可查表、列、类型与注释 |
 | `query_patient_facts` | 两库受控事实查询与分页 |
@@ -193,3 +194,5 @@ cd frontend && npm test && npm run build
 离线测试覆盖真实 LangChain 工具循环、预算终止、SQL 参数化与白名单、只读连接、SSE、推理字段过滤、超时和异常脱敏。数据库与模型连通性需要在配置完备的环境额外验证。
 
 设计依据：[LangChain overview](https://docs.langchain.com/oss/python/langchain/overview)、[streaming](https://docs.langchain.com/oss/python/langchain/streaming)、[middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in)。采用稳定的 `astream_events(version="v2")` 适配为项目自己的事件协议。
+
+修改 `tools.py` 或 `prompt.py` 后必须重启 Agent 服务：工具列表和系统提示随进程内智能体缓存，前端热更新不会刷新后端。预测演示可直接输入“选择 P91001，运行预测演示，查看 7、14、28 天的计算过程”。

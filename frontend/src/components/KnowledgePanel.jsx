@@ -1,8 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { graphFromEvents, KIND } from '../lib/knowledgeGraph.js';
 import { groupCalls } from '../lib/groupCalls.js';
-import { toolLabel } from '../lib/toolLabels.js';
-import Trace from './Trace.jsx';
 import AssessmentDemo from './AssessmentDemo.jsx';
 const GraphScene = lazy(() => import('./GraphScene.jsx'));
 
@@ -55,20 +53,16 @@ export default function KnowledgePanel({ run }) {
     <div className="knowledge-tabs" role="tablist" aria-label="过程展示">
       <button role="tab" aria-selected={tab==='graph'} onClick={()=>setTab('graph')}>知识图谱</button>
       <button role="tab" aria-selected={tab==='assessment'} onClick={()=>setTab('assessment')}>评估过程</button>
-      <button role="tab" aria-selected={tab==='log'} onClick={()=>setTab('log')}>技术日志</button>
     </div>
-    {tab === 'log' ? <Trace events={run.events}/> : tab === 'assessment' ? <AssessmentDemo agentReport={agentReport}/> : <div className="knowledge-content scroll">
+    {tab === 'assessment' ? <AssessmentDemo agentReport={agentReport}/> : <div className="knowledge-content scroll">
       <ol className="reasoning-stages">{['查看资料','连接知识','核对依据','解释结果'].map((label,i)=><li key={label} aria-current={stage===i?'step':undefined}><span>{i+1}</span>{label}</li>)}</ol>
       {!expanded && graphCard}
       {(graph.nodes.length>0 || replay!==null) && <>
         <div className="graph-replay"><label htmlFor="graph-replay">回看查询过程</label><input id="graph-replay" type="range" min="0" max={lastSeq} value={replay ?? lastSeq} onChange={e=>setReplay(Number(e.target.value))}/><button onClick={()=>setReplay(null)}>{replay===null?'实时':'回到实时'}</button></div>
       </>}
       {graph.notices.map(n=><p className="graph-notice" key={n}>{n}</p>)}
-      {graph.clipped && <p className="graph-notice">为保证流畅，仅展示最多 70 个节点和 120 条关系；其余结果保留在技术日志中。</p>}
-      <section className="human-progress"><h3>正在做什么</h3>
-        {!calls.length && <p>先提出一个问题，我们会展示查阅了哪些资料。</p>}
-        {calls.slice(-6).map((c,i)=><div className="human-step" key={c.callId??i}><span className={`step-dot ${c.done?(c.ok?'ok':'failed'):'working'}`}/><div><strong>{toolLabel(c.tool)}</strong><p>{c.done?(c.ok?'已返回结果，可展开技术日志核查。':'这一步未完成，不能当作“没有问题”。'):(['failed','stopped','done'].includes(run.phase)?'未收到完整结果。':'正在等待资料返回…')}</p></div></div>)}
-      </section>
+      {graph.clipped && <p className="graph-notice">为保证流畅，仅展示最多 70 个节点和 120 条关系；其余结果保留在聊天中的工具调用记录中。</p>}
+
     </div>}
   </aside>;
 }

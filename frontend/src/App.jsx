@@ -8,6 +8,7 @@ import KnowledgePanel from './components/KnowledgePanel.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 const SAMPLES = [
+  { text: '选择 P91001，运行预测演示，查看 7、14、28 天的计算过程。', route: '查看预测演示的计算过程' },
   { text: '请用容易理解的话，解释合成患者 P90002 的糖化血红蛋白检查结果。', route: '了解检查结果与依据' },
   { text: '如果 P90002 在 2026-02-20 再测一次 A1C 是 7.9%，结论会怎么变？', route: '了解假设成立后的变化' },
   { text: '为什么「糖尿病足」查不到映射？', route: '了解知识库的覆盖范围' },

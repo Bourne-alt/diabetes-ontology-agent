@@ -34,7 +34,7 @@ export default function AssessmentDemo({ agentReport }) {
     <header><span className="eyebrow">合成患者 · 场景分析</span><h3>看见评估中的每一步</h3><p>选择场景执行接口，再按真实记录播放。评估与数值推演分别运行。</p></header>
     <label className="assessment-scenario-label">合成患者<select value={pid} disabled={busy} onChange={e=>{setPid(e.target.value);setReport(null);setError('');}}>{scenarios.map(s=><option key={s.pid} value={s.pid}>{s.pid} · {s.title}</option>)}</select></label>
     {scenario && <div className="assessment-scenario"><p>{scenario.focus}</p><small>设计观察点：{scenario.expected}</small></div>}
-    <div className="assessment-controls"><button disabled={busy||!scenarios.length} onClick={()=>run('treatment-assessments')}>运行患者评估</button><button disabled={busy||!scenarios.length} onClick={()=>run('prediction-demo')}>运行数值推演（机器学习模型）</button>{busy&&<button onClick={()=>{request.current?.abort();setBusy(false);}}>取消等待</button>}</div>
+    <div className="assessment-controls"><button disabled={busy||!scenarios.length} onClick={()=>run('treatment-assessments')}>运行患者评估</button><button disabled={busy||!scenarios.length} onClick={()=>run('prediction-demo')}>运行预测演示</button>{busy&&<button onClick={()=>{request.current?.abort();setBusy(false);}}>取消等待</button>}</div>
     {busy&&<p role="status" className="assessment-running">正在执行接口，完成后展示实际中间结果…</p>}
     {error&&<p role="alert" className="node-caution">{error}</p>}
     {report&&<><div className="assessment-result-meta"><strong>{report.snapshot_refs?.baseline?.patient_context?.patient_id||pid}</strong><span>{report.prediction_kind==='untrained_demo'?'模型数值推演':'规则与证据评估'}</span><span>{report.status==='partial'?'存在资料缺口':report.status}</span></div><AssessmentPlayback key={report.report_id||report.run_hash} report={report}/></>}

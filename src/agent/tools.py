@@ -173,6 +173,17 @@ def build_tools(backend: DmoBackend, facts: FactStore):
         )
 
     @tool
+    async def run_prediction_demo(pid: str):
+        """运行合成患者的预测演示，返回 7/14/28 天数值及计算过程。
+
+        用户说“预测演示”或“数值推演”即可调用，无需额外限定词。
+        仅支持本模块合成患者；结果是演示算法输出，不是实际疗效预测。
+        """
+        return await backend.request(
+            f"/patients/{quote(pid, safe='')}/prediction-demo", body={}
+        )
+
+    @tool
     async def inspect_fact_schema(database: Database, table: str | None = None):
         """读取 original 原始库或 ontology 本体关系库的可查表、列、类型与注释。"""
         return await asyncio.to_thread(facts.catalog, database, table)
@@ -209,6 +220,7 @@ def build_tools(backend: DmoBackend, facts: FactStore):
         patient_evidence,
         simulate_patient_course,
         assess_patient_treatment,
+        run_prediction_demo,
         inspect_fact_schema,
         query_patient_facts,
     ]

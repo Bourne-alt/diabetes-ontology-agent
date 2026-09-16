@@ -1,0 +1,17 @@
+{
+  "name": "本体智能体 · Ontology Evidence Console",
+  "short_name": "本体智能体",
+  "description": "糖尿病本体证据控制台：结论逐条溯源，证据不足时明说不足。",
+  "lang": "zh-CN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#dceef9",
+  "theme_color": "#dceef9",
+  "icons": [
+    { "src": "/icon-any-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-any-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

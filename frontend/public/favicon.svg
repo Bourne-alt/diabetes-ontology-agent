@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="本体智能体">
+<title>本体智能体</title>
+<!-- 断链：两节点两边已核验(墨蓝/白)，第三节点是断口环、第三条边只走了一半(赭石)。
+     对应 styles.css 的规则：墨蓝 = 可核验，赭石 = 不可信或未排除。 -->
+<style>
+.bg{fill:#22305a}.s{stroke:#fff}.f{fill:#fff}.g{stroke:#e5a877}
+@media (prefers-color-scheme:dark){.bg{fill:#eef3fb}.s{stroke:#22305a}.f{fill:#22305a}.g{stroke:#a3562a}}
+</style>
+<rect class="bg" width="64" height="64" rx="15"/>
+<g fill="none" stroke-linecap="round" stroke-width="5.6">
+<path class="s" d="M32 16 14.5 48"/>
+<path class="s" d="M14.5 48H40.5"/>
+<path class="g" d="M32 16 41.6 33.6"/>
+<path class="g" stroke-width="4.4" d="M52.65 42.66A6.2 6.2 0 1 1 43.3 47.95"/>
+</g>
+<circle class="f" cx="32" cy="16" r="6.2"/>
+<circle class="f" cx="14.5" cy="48" r="6.2"/>
+</svg>

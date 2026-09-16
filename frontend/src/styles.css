@@ -740,3 +740,12 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 
   a[href]::after { content: ""; }
 }
+
+/* Tool events belong to the conversation turn that produced them. */
+.trace.trace--inline { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.trace--inline .trace__body { max-height: 460px; overflow: auto; }
+.trace--inline .trace__foot { display: none; }
+.trace--inline .call__head { cursor: pointer; flex-wrap: wrap; }
+.trace--inline .call__tool { overflow-wrap: anywhere; font-family: inherit; }
+.trace--inline .call__tool small { display: block; color: var(--muted); font-family: var(--mono); }
+.trace--inline .call__body pre { max-height: 280px; overflow: auto; }
