@@ -267,7 +267,7 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 }
 .thread__empty h2 { margin: 0; font: 600 clamp(25px, 3vw, 38px)/1.4 var(--sans); letter-spacing: .04em; color: #244d68; text-wrap: balance; }
 .thread__empty p { margin: 0; max-width: 420px; font-size: 13px; line-height: 1.8; letter-spacing: .12em; color: #678798; text-wrap: pretty; }
-.welcome-art { position: relative; width: clamp(220px, 25vw, 300px); max-width: 100%; margin-bottom: 0; }
+.welcome-art { position: relative; width: clamp(165px, 18.75vw, 225px); max-width: 100%; margin-bottom: 0; }
 .welcome-art__scene { display: block; width: 100%; height: auto; overflow: visible; }
 .welcome-art__sphere { transform-origin: 627px 608px; animation: welcome-spin 40s linear infinite; }
 @keyframes welcome-spin {
@@ -796,4 +796,4 @@ a:hover { color: var(--indigo-d); text-decoration: underline; }
 .composer__models { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px; font-size:12px; color:var(--muted); }
 .composer__models select { max-width:100%; min-height:36px; padding:6px 10px; border:1px solid var(--line); border-radius:8px; color:var(--ink); background:var(--g1); }
 
-@media (max-height: 760px) { .welcome-art { width: 210px; } }
+@media (max-height: 760px) { .welcome-art { width: 157.5px; } }
